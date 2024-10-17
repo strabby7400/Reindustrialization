@@ -1,0 +1,55 @@
+# type: Pump
+category: liquid
+
+requirements: [
+  item-chem-lead/30
+  item-chem-graphite/20
+  item-chem-tin-bronze/40
+  item-chem-steel/40
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: bliq-pump-motor-pump
+  objectives: []
+}
+researchCostMultiplier: 0.1
+
+scaledHealth: 40.0
+armor: 0.0
+size: 2
+hasItems: false
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 30.0
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 0
+envDisabled: 20
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawPumpLiquid
+    }
+    {
+      type: DrawFade
+      suffix: "-fade"
+    }
+  ]
+}
+ambientSound: se-amb-piston-pump
+ambientSoundVolume: 0.2
+
+pumpAmount: 0.25
+consumeTime: 300.0
+consumes: {
+  power: 1.5
+}

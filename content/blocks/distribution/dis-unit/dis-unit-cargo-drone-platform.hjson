@@ -1,0 +1,47 @@
+type: UnitCargoLoader
+category: distribution
+
+requirements: [
+  item-chem-lead/40
+  item-chem-graphite/40
+  item-chem-brass/80
+  item-chem-tin-bronze/60
+  item-chem-steel/80
+  ilitem-misc-ids-exciter-rod/4
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: dis-brd-conveyor-bridge
+  objectives: []
+}
+researchCostMultiplier: 0.1
+
+scaledHealth: 60.0
+armor: 12.0
+size: 4
+hasItems: true
+itemCapacity: 240
+hasLiquids: true
+liquidCapacity: 5.0
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 0
+envDisabled: 22
+
+squareSprite: false
+polyStroke: 1.5
+polyRadius: 12.0
+polySides: 3
+polyRotateSpeed: 1.5
+polyColor: ffd37f
+
+unitType: unit-spec-cargo-drone
+buildTime: 1800.0
+
+consumes: {
+  power: 3.66666667
+  liquid: ileffc-effc-ids/0.01666667
+}

@@ -1,0 +1,4 @@
+type: TallBlock
+
+rotationRand: 360.0
+shadowAlpha: 0.37

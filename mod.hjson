@@ -1,0 +1,32 @@
+name: reind
+displayName: Reindustrialization
+subtitle: "0.0.9g: GitHub Test"
+
+description:
+"I have seen too many mods with fictional contents bearing random names from reality, and somehow I have been working on this mod.
+
+Reind is a mod about serious chemistry (or not), with JSON codes for most contents and JS codes for new mechanisms. Materials and production methods here are mostly based on what they are in reality, but simplified for gameplay.
+Knowledge of chemistry may be required. This mod is also inspired by GTNH, a hardcore Minecraft mod pack about industry (well that's kind of magic I have to say).
+
+Currently done mechanisms (not all):
+- Pollution, caused by terrain and mostly, factories.
+- Heat damage, to blocks and units.
+- Conduit corrosion, caused by corrosive fluids.
+- Boiler explosion, which is similiar to that in GTNH.
+- Trees, where units can hide, even for a spoder.
+
+Still WIP and there are tons of ideas not implemented yet. Do not launch to any numbered sectors!
+
+Contents: MaboroshiX
+Sprites: MaboroshiX
+Scripts: MaboroshiX
+Ideas: MaboroshiX
+
+rednificsdnaaidepikiwybderewop"
+
+author: MaboroshiX
+minGameVersion: 146
+dependencies: [
+  multi-crafter
+]
+version: 0.0.9g

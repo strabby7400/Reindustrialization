@@ -1,0 +1,43 @@
+# type: Battery
+category: power
+
+requirements: [
+  item-chem-copper/3
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: min-flr-mechanical-drill
+  objectives: []
+}
+researchCostMultiplier: 1.0
+
+scaledHealth: 40.0
+armor: 0.0
+size: 1
+hasItems: false
+itemCapacity: 20
+hasLiquids: false
+liquidCapacity: 5.0
+hasPower: true
+connectedPower: false
+conductivePower: true
+fogRadius: -1
+rotate: true
+solid: false
+underBullets: true
+
+envRequired: 0
+envDisabled: 20
+
+schematicPriority: -15
+
+squareSprite: true
+drawer: [
+  {
+    type: DrawDefault
+  }
+]
+
+emptyLightColor: 00000000
+fullLightColor: 00000000

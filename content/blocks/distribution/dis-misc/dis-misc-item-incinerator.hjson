@@ -1,0 +1,73 @@
+# type: ItemIncinerator
+category: distribution
+
+requirements: [
+  item-chem-graphite/10
+  item-prod-brick-clay/20
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: dis-misc-overflow-gate
+  objectives: []
+}
+researchCostMultiplier: 0.3
+
+scaledHealth: 40.0
+armor: 0.0
+size: 2
+hasItems: true
+hasLiquids: false
+liquidCapacity: 5.0
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 0
+envDisabled: 22
+
+squareSprite: false
+effect: {
+  type: MultiEffect
+  effects: [
+    {
+      type: ParticleEffect
+      interp: pow5Out
+      lifetime: 180.0
+      particles: 4
+      colorFrom: ffffffc0
+      colorTo: ffffff00
+      length: 16.0
+      sizeFrom: 0.0
+      sizeTo: 4.0
+      strokeFrom: 2.0
+      strokeTo: 0.0
+      lenFrom: 4.0
+      lenTo: 2.0
+    }
+    {
+      type: ParticleEffect
+      region: reind-efr-diamond
+      interp: pow10Out
+      lifetime: 180.0
+      particles: 2
+      colorFrom: ffc999ff
+      colorTo: ffc999ff
+      length: 18.0
+      sizeFrom: 3.0
+      sizeTo: 0.0
+      sizeInterp: sine
+      strokeFrom: 1.0
+      strokeTo: 0.0
+      lenFrom: 4.0
+      lenTo: 2.0
+    }
+  ]
+}
+effectChance: 0.25
+ambientSound: smelter
+ambientSoundVolume: 0.2
+
+consumes: {
+  power: 0.66666667
+}

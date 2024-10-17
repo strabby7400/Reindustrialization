@@ -1,0 +1,31 @@
+# type: ArmoredConveyor
+category: distribution
+
+requirements: [
+  item-bio-timber/3
+  item-chem-graphite/2
+  item-chem-steel/1
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: dis-conv-primitive-conveyor
+  objectives: []
+}
+researchCostMultiplier: 1.2
+
+scaledHealth: 60.0
+armor: 12.0
+size: 1
+hasItems: true
+hasPower: false
+fogRadius: -1
+rotate: true
+
+envRequired: 1
+envDisabled: 22
+
+speed: 0.0675
+displayedSpeed: 9.0
+
+bridgeReplacement: dis-brd-conveyor-bridge

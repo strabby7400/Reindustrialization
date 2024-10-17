@@ -1,0 +1,29 @@
+# type: ParticleWeather
+
+duration: 60.0
+opacityMultiplier: 0.2
+
+status: none
+statusDuration: 120.0
+statusAir: true
+statusGround: true
+
+particleRegion: reind-efr-shadow
+color: ffffff
+sizeMin: 240.0
+sizeMax: 720.0
+density: 16000.0
+minAlpha: 0.025
+maxAlpha: 0.145
+sinSclMin: 60.0
+sinSclMax: 120.0
+sinMagMin: 2.5
+sinMagMax: 16.0
+force: 0.0
+baseSpeed: 8.0
+noiseScale: 2200.0
+noiseColor: 000000
+drawNoise: true
+drawParticles: true
+useWindVector: true
+randomParticleRotation: false

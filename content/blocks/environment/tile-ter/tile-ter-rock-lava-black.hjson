@@ -1,0 +1,11 @@
+type: Floor
+variants: 2
+
+wall: tile-ter-rock-lava-black-wall
+
+itemDrop: item-ore-rock-shard-lava
+playerUnmineable: true
+
+attributes: {
+  attr-rock-lava: 1.35
+}

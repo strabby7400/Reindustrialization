@@ -1,0 +1,23 @@
+hidden: false
+hiddenOnPlanets: [
+  erekir
+  serpulo
+]
+
+research: {
+  parent: gas-chem-sulfur-dioxide
+  objectives: []
+}
+
+explosiveness: 0.0
+flammability: 0.8
+radioactivity: 0.0
+charge: 0.0
+
+hardness: 0
+lowPriority: false
+
+buildable: false
+cost: 1.0
+
+color: e4e2cd

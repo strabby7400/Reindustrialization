@@ -1,0 +1,12 @@
+type: Floor
+variants: 2
+
+wall: tile-ter-rock-evaporite-white-wall
+
+itemDrop: item-ore-rock-shard-evaporite
+playerUnmineable: true
+
+
+attributes: {
+  attr-rock-evaporite: 1.35
+}

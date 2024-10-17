@@ -1,0 +1,49 @@
+# type: HeatConductor
+category: crafting
+
+requirements: [
+  item-chem-copper/15
+  item-chem-graphite/5
+  item-chem-steel/5
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: fac-heat-heat-conductor-plate
+  objectives: []
+}
+researchCostMultiplier: 1.0
+
+scaledHealth: 60.0
+armor: 12.0
+size: 1
+hasItems: false
+itemCapacity: 20
+hasLiquids: false
+liquidCapacity: 5.0
+outputsLiquid: false
+hasPower: false
+fogRadius: -1
+rotate: true
+solid: false
+underBullets: true
+
+envRequired: 0
+envDisabled: 22
+
+squareSprite: true
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawHeatOutput
+      drawGlow: true
+    }
+  ]
+}
+
+visualMaxHeat: 50.0
+splitHeat: true

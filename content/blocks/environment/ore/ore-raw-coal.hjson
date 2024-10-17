@@ -1,0 +1,5 @@
+type: OreBlock
+variants: 2
+
+itemDrop: item-ore-raw-coal
+wallOre: false

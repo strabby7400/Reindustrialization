@@ -1,0 +1,14 @@
+research: {
+  parent: cam-001-shelter-cave
+  objectives: [
+    {
+      type: SectorComplete
+      preset: cam-001-shelter-cave
+    }
+  ]
+}
+
+planet: pla-ter-aerth
+sector: 93
+difficulty: 1
+captureWave: 1

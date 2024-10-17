@@ -1,0 +1,23 @@
+hidden: false
+
+research: {
+  parent: liq-ore-water
+  objectives: []
+}
+
+flammability: 0.0
+temperature: 0.5
+heatCapacity: 0.4
+viscosity: 0.5
+explosiveness: 0.0
+
+coolant: false
+capPuddles: true
+boilPoint: 2.0
+
+color: 2965a3
+lightColor: 00000000
+
+effect: wet
+
+incinerable: false

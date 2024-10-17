@@ -1,0 +1,127 @@
+# type: MassDriver
+category: distribution
+outlineRadius: 2
+outlineColor: 373a4d
+
+requirements: [
+  item-chem-graphite/80
+  item-chem-brass/80
+  item-chem-tin-bronze/35
+  item-chem-steel/70
+  item-ore-magnetite/40
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: dis-brd-conveyor-bridge
+  objectives: []
+}
+researchCostMultiplier: 0.25
+
+scaledHealth: 60.0
+armor: 12.0
+size: 2
+hasItems: true
+itemCapacity: 60
+hasLiquids: false
+liquidCapacity: 5.0
+hasPower: true
+fogRadius: 3
+rotate: false
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+
+range: 720.0
+rotateSpeed: 0.6
+translation: 7.0
+minDistribute: 45
+knockback: 2.0
+reload: 300.0
+shake: 6.0
+
+consumes: {
+  power: 1.5
+}
+
+bulletSpeed: 8.0
+bulletLifetime: 90.0
+shootEffect: {
+  type: MultiEffect
+  effects: [
+    shootBigColor
+    {
+      # ShootSmog
+      type: ParticleEffect
+      interp: pow10Out
+      lifetime: 900.0
+      particles: 48
+      colorFrom: 8b8b8b80
+      colorTo: 8b8b8b00
+      length: 48.0
+      cone: 20.0
+      sizeFrom: 2.0
+      sizeTo: 10.0
+      sizeInterp: pow2Out
+      strokeFrom: 2.0
+      strokeTo: 1.0
+      lenFrom: 4.0
+      lenTo: 2.0
+    }
+    {
+      # ShootImpactWave
+      type: MultiEffect
+      effects: [
+        {
+          type: WaveEffect
+          lifetime: 60.0
+          sides: -1
+          colorFrom: 202020ff
+          colorTo: 20202000
+          sizeFrom: 0.0
+          sizeTo: 96.0
+          strokeFrom: 8.0
+          strokeTo: 8.0
+        }
+        {
+          type: WaveEffect
+          lifetime: 75.0
+          sides: -1
+          colorFrom: 202020ff
+          colorTo: 20202000
+          sizeFrom: 0.0
+          sizeTo: 96.0
+          strokeFrom: 8.0
+          strokeTo: 8.0
+        }
+      ]
+    }
+  ]
+}
+smokeEffect: shootBigSmoke2
+receiveEffect: {
+  type: MultiEffect
+  effects: [
+    mineSmall
+    {
+      # ReceiveParticles
+      type: ParticleEffect
+      interp: reverse
+      lifetime: 60.0
+      particles: 12
+      colorFrom: ffd37fff
+      colorTo: ffd37fff
+      length: 18.0
+      sizeFrom: 1.2
+      sizeTo: 0.0
+      sizeInterp: pow5In
+      strokeFrom: 2.0
+      strokeTo: 1.0
+      lenFrom: 4.0
+      lenTo: 2.0
+    }
+  ]
+}
+shootSound: se-shot-mass-driver

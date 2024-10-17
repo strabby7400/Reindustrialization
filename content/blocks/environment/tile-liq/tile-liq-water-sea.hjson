@@ -1,0 +1,23 @@
+type: Floor
+variants: 0
+
+cacheLayer: water
+albedo: 0.5
+
+drownTime: 150.0
+isLiquid: true
+shallow: false
+
+liquidDrop: liq-ore-water-sea
+liquidMultiplier: 1.0
+
+speedMultiplier: 0.5
+dragMultiplier: 1.0
+damageTaken: 0.0
+
+status: wet
+statusDuration: 120.0
+
+attributes: {
+  attr-floor-water-sea: 1.5
+}

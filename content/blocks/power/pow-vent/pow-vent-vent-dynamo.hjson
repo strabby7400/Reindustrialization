@@ -1,0 +1,99 @@
+type: ThermalGenerator
+category: power
+
+requirements: [
+  item-chem-copper/70
+  item-chem-lead/30
+  item-ore-magnetite/20
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: pow-wire-cable-copper
+  objectives: []
+}
+researchCostMultiplier: 0.1
+
+scaledHealth: 40.0
+armor: 0.0
+size: 3
+hasItems: false
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 30.0
+outputsLiquid: true
+hasPower: true
+fogRadius: 3
+rotate: false
+group: liquids
+
+envRequired: 0
+envDisabled: 20
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawParticles
+      color: 7898ba
+      alpha: 0.2
+      particles: 12
+      particleLife: 45.0
+      particleRad: 10.0
+      particleSize: 0.2
+      rotateScl: 8.0
+      reverse: true
+    }
+    {
+      type: DrawBlurSpin
+      suffix: "-rotator"
+      rotateSpeed: 9.7
+      blurThresh: 0.5
+    }
+    {
+      type: DrawBlurSpin
+      suffix: "-rotator"
+      rotateSpeed: 8.1
+      blurThresh: 0.5
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: gas-misc-steam
+      padding: 1.5
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+generateEffect: {
+  #PowerSurge
+  type: ParticleEffect
+  lifetime: 30.0
+  particles: 3
+  colorFrom: f8c266ff
+  colorTo: f8c266ff
+  length: 8.0
+  sizeFrom: 1.2
+  sizeTo: 0.0
+  sizeInterp: pow5In
+  strokeFrom: 1.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+effectChance: 0.01
+ambientSound: se-amb-turbine
+ambientSoundVolume: 0.4
+
+powerProduction: 0.64814815
+attribute: attr-vent-steam
+outputLiquid: gas-misc-steam/0.05555556
+displayEfficiencyScale: 0.11111111
+displayEfficiency: false
+minEfficiency: 8.9999

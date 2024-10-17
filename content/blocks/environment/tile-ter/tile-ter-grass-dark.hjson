@@ -1,0 +1,8 @@
+type: Floor
+variants: 2
+
+wall: tile-ter-grass-dark-wall
+
+attributes: {
+  attr-rock-sedimentary-biological: 1.0
+}

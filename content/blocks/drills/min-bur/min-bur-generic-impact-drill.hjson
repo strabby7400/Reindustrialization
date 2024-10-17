@@ -1,0 +1,118 @@
+category: production
+type: BurstDrill
+
+requirements: [
+  item-chem-copper/40
+  item-chem-lead/20
+  item-chem-brass/20
+  item-chem-mangalloy/15
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: min-flr-pneumatic-drill
+  objectives: []
+}
+researchCostMultiplier: 0.4
+
+scaledHealth: 60.0
+armor: 12.0
+size: 2
+hasItems: true
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 5.0
+hasPower: true
+fogRadius: 4
+rotate: false
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+drillEffect: {
+  type: MultiEffect
+  effects: [
+    {
+      # ImpactWave(2)
+      type: MultiEffect
+      effects: [
+        {
+          type: WaveEffect
+          lifetime: 30.0
+          sides: -1
+          colorFrom: 202020ff
+          colorTo: 20202000
+          sizeFrom: 0.0
+          sizeTo: 48.0
+          strokeFrom: 8.0
+          strokeTo: 8.0
+        }
+        {
+          type: WaveEffect
+          lifetime: 40.0
+          sides: -1
+          colorFrom: 202020ff
+          colorTo: 20202000
+          sizeFrom: 0.0
+          sizeTo: 48.0
+          strokeFrom: 8.0
+          strokeTo: 8.0
+        }
+      ]
+    }
+    {
+      # DrillImpact(2)
+      type: ParticleEffect
+      region: reind-efr-diamond
+      interp: pow10Out
+      lifetime: 240.0
+      particles: 5
+      colorFrom: ffffffff
+      colorTo: ffffffff
+      length: 12.0
+      sizeFrom: 4.0
+      sizeTo: 0.0
+      sizeInterp: sine
+      strokeFrom: 1.0
+      strokeTo: 0.0
+      lenFrom: 4.0
+      lenTo: 2.0
+    }
+    {
+      # GasReleaseCraftLarge(2)
+      type: ParticleEffect
+      interp: pow5Out
+      lifetime: 300.0
+      particles: 5
+      colorFrom: ffffffc0
+      colorTo: ffffff00
+      length: 24.0
+      sizeFrom: 0.0
+      sizeTo: 6.0
+      strokeFrom: 2.0
+      strokeTo: 0.0
+      lenFrom: 4.0
+      lenTo: 2.0
+    }
+  ]
+}
+shake: 1.0
+invertedTime: 120.0
+arrowSpacing: 1.5
+arrowOffset: 0.0
+arrows: 4
+drillSound: se-craft-drill-impact
+drillSoundVolume: 0.3
+drillSoundPitchRand: 0.05
+
+tier: 8
+drillTime: 120.0
+blockedItem: item-ore-sand
+
+consumes: {
+  power: 0.83333333
+  liquids: [
+    liq-ore-water/0.25
+  ]
+}

@@ -1,0 +1,30 @@
+type: SteamVent
+variants: 0
+
+parent: tile-ter-sandstone
+blendGroup: tile-ter-sandstone
+
+effect: {
+  # Effect: GasReleaseVent
+  type: ParticleEffect
+  interp: pow3In
+  lifetime: 240.0
+  particles: 3
+  colorFrom: a4ba7880
+  colorTo: a4ba7800
+  length: 28.0
+  sizeFrom: 0.0
+  sizeTo: 6.0
+  sizeInterp: pow2In
+  strokeFrom: 2.0
+  strokeTo: 1.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+effectColor: ffffff
+effectSpacing: 160.0
+
+attributes: {
+  attr-vent-sulfur-dioxide: 1.0
+  attr-rock-sedimentary-clastic: 1.0
+}

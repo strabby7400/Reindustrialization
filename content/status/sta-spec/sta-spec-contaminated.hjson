@@ -1,0 +1,9 @@
+damage: 0.5
+damageMultiplier: 0.65
+healthMultiplier: 0.65
+speedMultiplier: 0.65
+reloadMultiplier: 0.65
+buildSpeedMultiplier: 0.65
+dragMultiplier: 1.0
+
+color: ffffff

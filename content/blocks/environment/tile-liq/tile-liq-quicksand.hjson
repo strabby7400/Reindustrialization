@@ -1,0 +1,8 @@
+type: Floor
+variants: 0
+
+blendGroup: tile-ter-sand
+
+drownTime: 480.0
+isLiquid: true
+shallow: false

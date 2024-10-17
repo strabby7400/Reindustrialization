@@ -1,0 +1,18 @@
+type: SteamVent
+variants: 0
+
+parent: tile-ter-rock-sedimentary-biological-grey
+blendGroup: tile-ter-rock-sedimentary-biological-grey
+
+effect: none
+
+itemDrop: item-ore-limestone
+playerUnmineable: true
+
+speedMultiplier: 0.65
+dragMultiplier: 1.2
+damageTaken: 0.0
+
+attributes: {
+  attr-rock-sedimentary-biological: 1.5
+}

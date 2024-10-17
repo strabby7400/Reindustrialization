@@ -1,0 +1,41 @@
+# type: StackConveyor
+category: distribution
+
+requirements: [
+  item-bio-timber/9
+  item-chem-graphite/5
+  item-chem-brass/3
+  item-chem-steel/3
+]
+buildCostMultiplier: 3.0
+
+research: {
+  parent: dis-conv-improved-conveyor
+  objectives: []
+}
+researchCostMultiplier: 1.2
+
+scaledHealth: 80.0
+armor: 24.0
+size: 1
+hasItems: true
+itemCapacity: 100
+hasPower: true
+conductivePower: true
+connectedPower: false
+fogRadius: -1
+rotate: true
+
+envRequired: 1
+envDisabled: 22
+
+speed: 0.025
+recharge: 5.0
+
+glowColor: 8ca9e8
+glowAlpha: 0.8
+baseEfficiency: 0.0
+
+consumes: {
+  power: 0.03333333
+}

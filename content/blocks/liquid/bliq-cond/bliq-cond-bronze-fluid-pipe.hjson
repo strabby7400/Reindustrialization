@@ -1,0 +1,37 @@
+# type: Conduit
+category: liquid
+
+requirements: [
+  item-chem-tin-bronze/2
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: min-flr-mechanical-drill
+  objectives: []
+}
+researchCostMultiplier: 2.0
+
+scaledHealth: 60.0
+armor: 12.0
+size: 1
+hasItems: false
+hasLiquids: true
+liquidCapacity: 25.0
+liquidPressure: 1.05
+outputsLiquid: true
+hasPower: false
+fogRadius: -1
+rotate: true
+solid: false
+underBullets: true
+
+envRequired: 0
+envDisabled: 22
+
+timerFlow: 1
+botColor: 565666
+padCorners: true
+leaks: true
+
+junctionReplacement: bliq-misc-fluid-junction

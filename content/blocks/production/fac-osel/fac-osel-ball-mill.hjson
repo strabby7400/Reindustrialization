@@ -1,0 +1,110 @@
+type: multicraft.MultiCrafter
+category: crafting
+
+requirements: [
+  item-chem-lead/30
+  item-chem-brass/40
+  item-chem-steel/40
+  item-chem-mangalloy/40
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: fac-osel-jaw-crusher
+  objectives: []
+}
+researchCostMultiplier: 0.25
+
+scaledHealth: 80.0
+armor: 24.0
+size: 3
+hasItems: true
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 5.0
+outputsLiquid: false
+ignoreLiquidFullness: false
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawRegion
+      suffix: "-over-shade"
+    }
+    {
+      type: DrawRegion
+      suffix: "-over"
+    }
+    {
+      type: DrawFrames
+      frames: 6
+      interval: 10.0
+      sine: false
+    }
+    {
+      type: DrawFade
+      suffix: "-fade"
+    }
+  ]
+}
+craftEffect: none
+updateEffect: none
+updateEffectChance: 0.02
+ambientSound: se-amb-crusher
+ambientSoundVolume: 0.2
+
+menu: simple
+recipes: [
+  ## Special
+    # Sandstone
+    {
+      craftTime: 360.0
+      icon: reind-item-int-chunks-sandstone
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-int-chunks-sandstone/6
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-ore-sand/9
+        ]
+      }
+    }
+
+  ## Dust
+    # Raw Coal
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-raw-coal
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-raw-coal/6
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-raw-coal/6
+        ]
+      }
+    }
+]

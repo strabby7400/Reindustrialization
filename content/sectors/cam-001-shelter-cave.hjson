@@ -1,0 +1,10 @@
+alwaysUnlocked: true
+research: {
+  parent: eff-core-ash
+  objectives: []
+}
+
+planet: pla-ter-aerth
+sector: 0
+difficulty: 1
+captureWave: 1

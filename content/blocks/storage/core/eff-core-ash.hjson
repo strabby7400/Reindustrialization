@@ -1,0 +1,35 @@
+# type: CoreBlock
+category: effect
+
+requirements: [
+  item-chem-copper/1500
+  item-chem-lead/1500
+]
+buildCostMultiplier: 1.0
+
+alwaysUnlocked: true
+research: {
+  planet: pla-ter-aerth
+  root: true
+  name: Aerth
+  requiresUnlock: false
+}
+scaledHealth: 120.0
+armor: 0.0
+size: 2
+hasItems: true
+itemCapacity: 2500
+hasLiquids: true
+liquidCapacity: 5.0
+outputsLiquid: false
+fogRadius: -1
+
+envRequired: 0
+envDisabled: 22
+
+unitCapModifier: 3
+
+isFirstTier: true
+requiresCoreZone: true
+incinerateNonBuildable: true
+unitType: unit-core-c1-expedition-i

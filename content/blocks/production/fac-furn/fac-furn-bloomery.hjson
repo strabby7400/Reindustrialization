@@ -1,0 +1,276 @@
+type: multicraft.MultiCrafter
+category: crafting
+
+requirements: [
+  item-chem-copper/60
+  item-chem-graphite/30
+  item-ore-clay/100
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: fac-furn-kiln
+  objectives: []
+}
+researchCostMultiplier: 0.1
+
+scaledHealth: 40.0
+armor: 0.0
+size: 2
+hasItems: true
+itemCapacity: 100
+hasLiquids: false
+liquidCapacity: 5.0
+outputsLiquid: false
+ignoreLiquidFullness: false
+hasPower: false
+fogRadius: -1
+rotate: false
+
+envRequired: 129
+envDisabled: 22
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawFlame
+      flameColor: ffc999
+      lightRadius: 20.0
+      lightAlpha: 0.65
+      lightSinScl: 6.0
+      lightSinMag: 4.0
+      flameRadius: 2.5
+      flameRadiusIn: 1.0
+      flameRadiusScl: 5.0
+      flameRadiusMag: 1.5
+      flameRadiusInMag: 1.0
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawGlowRegion
+      color: ff3838
+      suffix: "-glow"
+    }
+    {
+      type: DrawParticles
+      color: 606060
+      alpha: 1.0
+      particles: 3
+      particleLife: 40.0
+      particleRad: 6.0
+      particleSize: 2.0
+      rotateScl: 8.0
+      reverse: true
+    }
+    {
+      type: DrawParticles
+      color: 303030
+      alpha: 1.0
+      particles: 3
+      particleLife: 60.0
+      particleRad: 6.5
+      particleSize: 1.5
+      rotateScl: 14.0
+      reverse: true
+    }
+  ]
+}
+craftEffect: {
+  # GasReleaseCraftSmall
+  type: ParticleEffect
+  interp: pow2Out
+  lifetime: 120.0
+  particles: 12
+  colorFrom: ffffff40
+  colorTo: ffffff00
+  length: 10.0
+  sizeFrom: 0.0
+  sizeTo: 3.0
+  sizeInterp: pow5Out
+  strokeFrom: 2.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+updateEffect: {
+  # FurnaceCrack(2)
+  type: ParticleEffect
+  region: reind-efr-diamond
+  interp: pow10Out
+  lifetime: 180.0
+  particles: 2
+  colorFrom: ffc999ff
+  colorTo: ffc999ff
+  length: 18.0
+  sizeFrom: 3.0
+  sizeTo: 0.0
+  sizeInterp: sine
+  strokeFrom: 1.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+updateEffectChance: 0.01
+ambientSound: smelter
+ambientSoundVolume: 0.2
+
+menu: simple
+recipes: [
+  ## Steelmaking
+    # Wrought Iron
+    {
+      craftTime: 480.0
+      icon: reind-item-chem-wrought-iron
+      input: {
+        items: [
+          reind-item-chem-pig-iron/16
+          reind-item-bio-charcoal/8
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-wrought-iron/16
+        ]
+      }
+    }
+
+    # Steel
+    {
+      craftTime: 480.0
+      icon: reind-item-chem-steel
+      input: {
+        items: [
+          reind-item-chem-wrought-iron/8
+          reind-item-bio-charcoal/16
+          reind-item-ore-limestone/12
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-steel/8
+          reind-item-was-slag/8
+        ]
+      }
+    }
+
+    # Mangalloy (Hematite-Pyrolusite)
+    {
+      craftTime: 480.0
+      icon: reind-icon-mangalloy-pyrolusite
+      input: {
+        items: [
+          reind-item-ore-hematite/16
+          reind-item-ore-pyrolusite/8
+          reind-item-bio-charcoal/16
+          reind-item-chem-graphite/8
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-mangalloy/8
+          reind-item-was-slag/16
+        ]
+      }
+    }
+
+    # Mangalloy (Magnetite-Psilomelane)
+    {
+      craftTime: 480.0
+      icon: reind-icon-mangalloy-psilomelane
+      input: {
+        items: [
+          reind-item-ore-magnetite/16
+          reind-item-ore-psilomelane/8
+          reind-item-bio-charcoal/16
+          reind-item-chem-graphite/8
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-mangalloy/8
+          reind-item-was-slag/16
+        ]
+      }
+    }
+
+  ## Smelting
+    # Iron - Hematite
+    {
+      craftTime: 480.0
+      icon: reind-item-ore-hematite
+      input: {
+        items: [
+          reind-item-ore-hematite/32
+          reind-item-bio-charcoal/16
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-pig-iron/16
+          reind-item-was-slag/8
+        ]
+      }
+    }
+
+    # Iron - Magnetite
+    {
+      craftTime: 480.0
+      icon: reind-item-ore-magnetite
+      input: {
+        items: [
+          reind-item-ore-magnetite/24
+          reind-item-bio-charcoal/16
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-pig-iron/16
+          reind-item-was-slag/16
+        ]
+      }
+    }
+
+    # Iron - Limonite
+    {
+      craftTime: 480.0
+      icon: reind-item-ore-limonite
+      input: {
+        items: [
+          reind-item-ore-limonite/40
+          reind-item-bio-charcoal/16
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-pig-iron/8
+          reind-item-was-slag/20
+        ]
+      }
+    }
+
+    # Iron - Pyrite
+    {
+      craftTime: 480.0
+      icon: reind-item-ore-pyrite
+      input: {
+        items: [
+          reind-item-ore-pyrite/40
+          reind-item-bio-charcoal/16
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-pig-iron/16
+          reind-item-was-slag/12
+        ]
+      }
+    }
+]

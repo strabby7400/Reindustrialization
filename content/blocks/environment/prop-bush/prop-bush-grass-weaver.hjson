@@ -1,0 +1,11 @@
+type: SeaBush
+customShadow: true
+
+breakable: false
+alwaysReplace: false
+replaceable: false
+solid: true
+
+lobesMin: 3
+lobesMax: 5
+botAngle: 120.0

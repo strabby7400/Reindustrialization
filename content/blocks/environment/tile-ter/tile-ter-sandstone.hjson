@@ -1,0 +1,11 @@
+type: Floor
+variants: 2
+
+wall: tile-ter-sandstone-wall
+
+itemDrop: item-ore-sandstone
+playerUnmineable: true
+
+attributes: {
+  attr-rock-sedimentary-clastic: 1.0
+}

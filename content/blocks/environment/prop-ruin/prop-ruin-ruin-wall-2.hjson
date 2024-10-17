@@ -1,0 +1,13 @@
+category: defense
+type: Wall
+buildVisibility: editorOnly
+hasShadow: false
+drawTeamOverlay: false
+destructible: true
+breakable: false
+rebuildable: false
+targetable: false
+
+scaledHealth: 400.0
+armor: 24.0
+size: 2

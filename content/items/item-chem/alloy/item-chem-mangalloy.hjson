@@ -1,0 +1,23 @@
+hidden: false
+hiddenOnPlanets: [
+  erekir
+  serpulo
+]
+
+research: {
+  parent: item-chem-steel
+  objectives: []
+}
+
+explosiveness: 0.0
+flammability: 0.0
+radioactivity: 0.0
+charge: 0.0
+
+hardness: 0
+lowPriority: false
+
+buildable: true
+cost: 2.0
+
+color: ccc6d2

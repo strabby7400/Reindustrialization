@@ -1,0 +1,11 @@
+type: Floor
+variants: 2
+
+wall: tile-ter-rock-sedimentary-biological-grey-wall
+
+itemDrop: item-ore-rock-shard-sedimentary-biological
+playerUnmineable: true
+
+attributes: {
+  attr-rock-sedimentary-biological: 1.5
+}

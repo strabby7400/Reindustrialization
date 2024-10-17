@@ -1,0 +1,44 @@
+# type: BufferedItemBridge
+category: distribution
+
+requirements: [
+  item-chem-copper/25
+  item-chem-graphite/5
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: dis-conv-primitive-conveyor
+  objectives: []
+}
+researchCostMultiplier: 0.2
+
+scaledHealth: 60.0
+armor: 12.0
+size: 1
+hasItems: true
+hasLiquids: false
+hasPower: false
+fogRadius: -1
+rotate: false
+
+envRequired: 0
+envDisabled: 20
+
+squareSprite: false
+
+timerCheckMoved: 1
+range: 7
+transportTime: 2.0
+fadeIn: false
+moveArrows: false
+pulse: false
+arrowSpacing: 6.0
+arrowOffset: 2.0
+arrowPeriod: 0.4
+arrowTimeScl: 6.2
+bridgeWidth: 8.0
+
+timerAccept: 2
+speed: 74.0
+bufferCapacity: 18

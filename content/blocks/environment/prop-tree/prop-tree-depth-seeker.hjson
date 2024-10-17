@@ -1,0 +1,6 @@
+# type: TreeBlock
+
+attributes: {
+  attr-tree: 0.25
+  attr-tree-hard: 1.35
+}

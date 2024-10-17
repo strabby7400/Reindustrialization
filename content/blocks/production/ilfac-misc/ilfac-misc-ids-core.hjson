@@ -1,0 +1,64 @@
+type: GenericCrafter
+category: crafting
+
+requirements: [
+  item-chem-lead/30
+  item-chem-graphite/20
+  item-chem-brass/15
+  item-chem-steel/15
+  ilitem-misc-ids-exciter-rod/1
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: eff-core-ash
+  objectives: []
+}
+researchCostMultiplier: 0.1
+
+scaledHealth: 60.0
+armor: 12.0
+size: 1
+hasItems: false
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 5.0
+outputsLiquid: true
+ignoreLiquidFullness: true
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 0
+envDisabled: 20
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawFade
+      suffix: "-fade"
+    }
+  ]
+}
+craftEffect: none
+updateEffect: none
+updateEffectChance: 0.02
+ambientSound: se-amb-hum
+ambientSoundVolume: 0.1
+
+craftTime: 60.0
+consumes: {
+  power: 1.33333333
+}
+outputLiquids: [
+  ileffc-effc-ids/0.06666667
+]

@@ -1,0 +1,9 @@
+type: Floor
+variants: 0
+
+itemDrop: item-ore-salt
+playerUnmineable: false
+
+attributes: {
+  attr-rock-evaporite: 1.0
+}

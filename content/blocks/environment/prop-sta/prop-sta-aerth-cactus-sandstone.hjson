@@ -1,0 +1,10 @@
+type: SteamVent
+variants: 2
+
+solid: true
+placeableOn: false
+
+parent: tile-ter-sandstone
+blendGroup: tile-ter-sandstone
+
+effect: none

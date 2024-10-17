@@ -1,0 +1,11 @@
+type: Floor
+variants: 2
+
+wall: tile-ter-rock-plutonic-red-wall
+
+itemDrop: item-ore-rock-shard-plutonic
+playerUnmineable: true
+
+attributes: {
+  attr-rock-plutonic: 1.35
+}

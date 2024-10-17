@@ -1,0 +1,336 @@
+type: GenericCrafter
+category: crafting
+
+requirements: [
+  item-chem-copper/120
+  item-chem-lead/60
+  item-chem-graphite/40
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: fac-bio-carbonization-kiln
+  objectives: []
+}
+researchCostMultiplier: 0.1
+
+scaledHealth: 40.0
+armor: 0.0
+size: 4
+hasItems: true
+itemCapacity: 80
+hasLiquids: true
+liquidCapacity: 120.0
+outputsLiquid: true
+ignoreLiquidFullness: false
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawParticles
+      color: b8d3e0
+      alpha: 0.6
+      particles: 48
+      particleLife: 30.0
+      particleRad: 14.0
+      particleSize: 1.0
+      rotateScl: 8.0
+      reverse: false
+    }
+    {
+      type: DrawRegion
+      suffix: "-rotator"
+      spinSprite: true
+      rotateSpeed: 6.0
+      rotation: 45.0
+    }
+    {
+      type: DrawParticles
+      color: e2bfac
+      alpha: 1.0
+      particles: 36
+      particleLife: 60.0
+      particleRad: 13.0
+      particleSize: 2.0
+      rotateScl: 4.0
+      reverse: true
+    }
+    {
+      type: DrawRegion
+      suffix: "-rotator"
+      spinSprite: true
+      rotateSpeed: 6.0
+    }
+    {
+      type: DrawParticles
+      color: b8d3e0
+      alpha: 0.6
+      particles: 48
+      particleLife: 30.0
+      particleRad: 14.0
+      particleSize: 1.0
+      rotateScl: 8.0
+      reverse: true
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: gas-int-dusty-gas-air-sawdust
+      padding: 1.5
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawRegion
+      suffix: "-lid"
+    }
+    {
+      type: DrawGlowRegion
+      color: ff3838
+      suffix: "-glow"
+    }
+  ]
+}
+craftEffect: {
+  type: MultiEffect
+  effects: [
+    {
+      type: RadialEffect
+      amount: 4
+      rotationSpacing: 90.0
+      rotationOffset: 53.0
+      lengthOffset: 16.5
+      effect: {
+        type: MultiEffect
+        effects: [
+          {
+            type: ParticleEffect
+            startDelay: 0.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+          {
+            type: ParticleEffect
+            startDelay: 30.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+          {
+            type: ParticleEffect
+            startDelay: 60.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+          {
+            type: ParticleEffect
+            startDelay: 90.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+          {
+            type: ParticleEffect
+            startDelay: 120.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+        ]
+      }
+    }
+    {
+      type: RadialEffect
+      amount: 4
+      rotationSpacing: 90.0
+      rotationOffset: 37.0
+      lengthOffset: 16.5
+      effect: {
+        type: MultiEffect
+        effects: [
+          {
+            type: ParticleEffect
+            startDelay: 0.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+          {
+            type: ParticleEffect
+            startDelay: 30.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+          {
+            type: ParticleEffect
+            startDelay: 60.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+          {
+            type: ParticleEffect
+            startDelay: 90.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+          {
+            type: ParticleEffect
+            startDelay: 120.0
+            interp: pow5Out
+            lifetime: 210.0
+            particles: 1
+            colorFrom: ffffffc0
+            colorTo: ffffff00
+            length: 1.5
+            sizeFrom: 0.0
+            sizeTo: 3.0
+            strokeFrom: 2.0
+            strokeTo: 0.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+        ]
+      }
+    }
+  ]
+}
+updateEffect: {
+  #SawmillCrack
+  type: ParticleEffect
+  region: reind-efr-urchin
+  interp: pow10Out
+  lifetime: 180.0
+  particles: 5
+  colorFrom: e2bfacff
+  colorTo: e2bfacff
+  length: 12.0
+  sizeFrom: 3.0
+  sizeTo: 0.0
+  sizeInterp: sine
+  strokeFrom: 1.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+updateEffectChance: 0.02
+ambientSound: se-amb-saw
+ambientSoundVolume: 0.5
+
+craftTime: 480.0
+consumes: {
+  power: 1.83333333
+  items: {
+    items: [
+      item-bio-log/24
+    ]
+  }
+  liquids: {
+    liquids: [
+      gas-misc-air-clean/0.2
+    ]
+  }
+}
+outputItems: [
+  item-bio-timber/24
+]
+outputLiquids: [
+  gas-int-dusty-gas-air-sawdust/0.2
+]

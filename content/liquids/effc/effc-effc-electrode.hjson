@@ -1,0 +1,17 @@
+hidden: false
+
+flammability: 0.0
+temperature: 0.5
+heatCapacity: 0.5
+viscosity: 0.5
+explosiveness: 0.0
+
+coolant: false
+
+color: acaec3
+lightColor: 00000000
+
+gas: true
+gasColor: 000000
+
+incinerable: false

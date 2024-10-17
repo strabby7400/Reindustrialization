@@ -1,0 +1,40 @@
+# type: PowerNode
+category: power
+
+requirements: [
+  item-chem-lead/20
+  item-chem-tin-bronze/30
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: pow-wire-wire-relay-copper
+  objectives: []
+}
+researchCostMultiplier: 0.2
+
+scaledHealth: 40.0
+armor: 0.0
+size: 1
+hasItems: false
+itemCapacity: 20
+hasLiquids: false
+liquidCapacity: 5.0
+hasPower: true
+connectedPower: false
+consumesPower: true
+fogRadius: -1
+rotate: false
+solid: true
+underBullets: false
+
+envRequired: 0
+envDisabled: 20
+
+laserRange: 14.0
+maxNodes: 4
+autolink: false
+drawRange: true
+laserScale: 0.2
+laserColor1: 000000
+laserColor2: 000000

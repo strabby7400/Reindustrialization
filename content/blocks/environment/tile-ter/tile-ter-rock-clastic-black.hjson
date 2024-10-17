@@ -1,0 +1,11 @@
+type: Floor
+variants: 2
+
+wall: tile-ter-rock-clastic-black-wall
+
+itemDrop: item-ore-rock-shard-clastic
+playerUnmineable: true
+
+attributes: {
+  attr-rock-clastic: 1.25
+}

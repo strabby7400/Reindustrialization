@@ -1,0 +1,32 @@
+# type: DuctRouter
+category: distribution
+
+requirements: [
+  item-bio-timber/20
+  item-chem-copper/12
+  item-chem-graphite/6
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: dis-misc-router
+  objectives: []
+}
+researchCostMultiplier: 0.4
+
+scaledHealth: 40.0
+armor: 0.0
+size: 1
+hasItems: true
+hasPower: false
+fogRadius: -1
+rotate: true
+
+envRequired: 0
+envDisabled: 22
+
+squareSprite: false
+
+speed: 6.7
+
+configurable: false

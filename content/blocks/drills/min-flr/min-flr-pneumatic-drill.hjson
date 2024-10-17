@@ -1,0 +1,74 @@
+type: Drill
+category: production
+
+requirements: [
+  item-bio-timber/25
+  item-chem-graphite/10
+  item-chem-brass/10
+  item-chem-tin-bronze/15
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: min-flr-mechanical-drill
+  objectives: []
+}
+researchCostMultiplier: 0.3
+
+scaledHealth: 60.0
+armor: 12.0
+size: 2
+hasItems: true
+itemCapacity: 10
+hasLiquids: true
+liquidCapacity: 5.0
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+drillEffect: none
+drillEffectChance: 1.0
+rotateSpeed: 2.5
+updateEffect: {
+  # DrillCrack
+  type: ParticleEffect
+  region: reind-efr-diamond
+  interp: pow10Out
+  lifetime: 180.0
+  particles: 3
+  colorFrom: ffffffff
+  colorTo: ffffffff
+  length: 18.0
+  sizeFrom: 4.0
+  sizeTo: 0.0
+  sizeInterp: sine
+  strokeFrom: 1.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+updateEffectChance: 0.005
+ambientSound: se-amb-drill
+ambientSoundVolume: 0.15
+
+drawRim: true
+
+hardnessDrillMultiplier: 20.0
+tier: 5
+drillTime: 300.0
+blockedItem: item-ore-sand
+liquidBoostIntensity: 1.36
+
+consumes: {
+  power: 0.5
+  liquid: {
+    liquid: gas-misc-air
+    amount: 0.05
+    optional: true
+    booster: true
+  }
+}

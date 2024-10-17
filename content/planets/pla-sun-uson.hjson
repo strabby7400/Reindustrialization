@@ -1,0 +1,29 @@
+accessible: false
+visible: true
+
+mesh: {
+  type: SunMesh
+  divisions: 3.0
+  octaves: 4.0
+  persistence: 0.6
+  scl: 1.0
+  pow: 1.0
+  mag: 0.5
+  colorScale: 1.0
+  colors: [
+    e94d4d
+    f7bda8
+  ]
+}
+
+radius: 12.0
+hasAtmosphere: false
+bloom: true
+orbitSpacing: 8.0
+solarSystem: pla-sun-uson
+parent: sun
+orbitRadius: 12000
+drawOrbit: false
+tidalLock: true
+iconColor: ffffff
+icon: commandRally

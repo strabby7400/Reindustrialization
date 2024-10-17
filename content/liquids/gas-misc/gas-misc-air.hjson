@@ -1,0 +1,22 @@
+hidden: false
+
+research: {
+  parent: gas-misc-steam
+  objectives: []
+}
+
+flammability: 0.0
+temperature: 0.45
+heatCapacity: 0.5
+viscosity: 0.5
+explosiveness: 0.0
+
+coolant: true
+
+color: b8d3e0
+lightColor: 00000000
+
+gas: true
+gasColor: bfbfbf
+
+incinerable: false

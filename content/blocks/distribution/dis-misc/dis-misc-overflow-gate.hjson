@@ -1,0 +1,30 @@
+# type: OverflowGate
+category: distribution
+
+requirements: [
+  item-chem-copper/6
+  item-chem-brass/2
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: dis-misc-router
+  objectives: []
+}
+researchCostMultiplier: 0.5
+
+scaledHealth: 40.0
+armor: 0.0
+size: 1
+hasItems: true
+hasPower: false
+fogRadius: -1
+rotate: false
+
+envRequired: 0
+envDisabled: 22
+
+squareSprite: false
+
+speed: 1.0
+invert: false

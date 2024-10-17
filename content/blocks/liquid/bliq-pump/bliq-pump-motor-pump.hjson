@@ -1,0 +1,84 @@
+type: GenericCrafter
+category: liquid
+
+requirements: [
+  item-chem-lead/40
+  item-chem-tin-bronze/40
+  item-chem-steel/70
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: bliq-misc-fluid-junction
+  objectives: []
+}
+researchCostMultiplier: 0.1
+
+scaledHealth: 40.0
+armor: 0.0
+size: 1
+hasItems: false
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 5.0
+outputsLiquid: true
+ignoreLiquidFullness: false
+hasPower: true
+fogRadius: -1
+rotate: true
+
+envRequired: 0
+envDisabled: 22
+
+squareSprite: true
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawRegion
+      suffix: "-shade"
+      buildingRotate: true
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawRegion
+      suffix: "-side"
+    }
+  ]
+}
+craftEffect: {
+  # MotorPump
+  type: ParticleEffect
+  interp: pow5Out
+  lifetime: 150.0
+  particles: 1
+  colorFrom: ffffffc0
+  colorTo: ffffff00
+  length: 6.0
+  sizeFrom: 0.0
+  sizeTo: 1.2
+  strokeFrom: 2.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+updateEffect: none
+updateEffectChance: 0.02
+ambientSound: se-amb-hum
+ambientSoundVolume: 0.1
+
+craftTime: 20.0
+consumes: {
+  power: 0.41666667
+}
+outputLiquids: [
+  effc-effc-pump/0.01666667
+]
+
+liquidOutputDirections: [0]

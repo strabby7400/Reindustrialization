@@ -1,0 +1,23 @@
+hidden: false
+hiddenOnPlanets: [
+  erekir
+  serpulo
+]
+
+research: {
+  parent: item-ore-gypsum
+  objectives: []
+}
+
+explosiveness: 0.0
+flammability: 0.0
+radioactivity: 0.0
+charge: 0.0
+
+hardness: 0
+lowPriority: true
+
+buildable: false
+cost: 1.0
+
+color: ded0ba

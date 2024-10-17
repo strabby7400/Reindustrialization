@@ -1,0 +1,23 @@
+hidden: false
+
+research: {
+  parent: item-bio-timber
+  objectives: []
+}
+
+flammability: 0.2
+temperature: 0.5
+heatCapacity: 0.4
+viscosity: 0.9
+explosiveness: 0.0
+
+coolant: false
+capPuddles: true
+boilPoint: 2.0
+
+color: c9cec0
+lightColor: 00000000
+
+# effect: sta-liq-sticky
+
+incinerable: false

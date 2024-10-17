@@ -1,0 +1,24 @@
+type: Wall
+category: effect
+
+requirements: [
+  item-bio-timber/1
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: eff-flr-floor-wooden-a
+  objectives: []
+}
+researchCostMultiplier: 1.0
+
+scaledHealth: 80.0
+armor: 0.0
+size: 1
+solid: false
+underBullets: true
+
+envRequired: 0
+envDisabled: 16
+
+schematicPriority: 10

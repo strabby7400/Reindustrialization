@@ -1,0 +1,98 @@
+type: ConsumeGenerator
+category: power
+
+requirements: [
+  item-chem-lead/40
+  item-chem-brass/20
+  item-chem-tin-bronze/40
+  item-ore-magnetite/80
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: pow-vent-vent-dynamo
+  objectives: []
+}
+researchCostMultiplier: 0.25
+
+scaledHealth: 40.0
+armor: 0.0
+size: 2
+hasItems: false
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 5.0
+outputsLiquid: false
+hasPower: true
+fogRadius: 3
+rotate: false
+
+envRequired: 0
+envDisabled: 20
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawCultivator
+      plantColor: 7898ba
+      plantColorLight: 00000000
+      bottomColor: 7898ba
+      bubbles: 0
+    }
+    {
+      type: DrawRegion
+      suffix: "-rotator"
+      spinSprite: true
+      rotateSpeed: 9.0
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+generateEffect: {
+  #PowerSurge
+  type: ParticleEffect
+  lifetime: 30.0
+  particles: 3
+  colorFrom: f8c266ff
+  colorTo: f8c266ff
+  length: 8.0
+  sizeFrom: 1.2
+  sizeTo: 0.0
+  sizeInterp: pow5In
+  strokeFrom: 1.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+effectChance: 0.01
+ambientSound: se-amb-turbine
+ambientSoundVolume: 0.15
+
+powerProduction: 14.16666667
+itemDuration: 120.0
+outputLiquid: null
+
+explodeOnFull: false
+explosionMinWarmup: 0.0
+explosionShake: 6.0
+explosionShakeDuration: 30.0
+explosionRadius: 0
+explosionDamage: 0
+explodeEffect: none
+explodeSound: none
+explosionPuddles: 10
+explosionPuddleRange: 16.0
+explosionPuddleAmount: 100.0
+explosionPuddleLiquid: liq-ore-water
+
+consumes: {
+  liquid: effc-effc-steam/0.03333333
+}

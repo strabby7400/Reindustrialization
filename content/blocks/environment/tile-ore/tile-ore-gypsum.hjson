@@ -1,0 +1,11 @@
+type: Floor
+variants: 2
+
+wall: tile-ore-gypsum-wall
+
+itemDrop: item-ore-gypsum
+playerUnmineable: false
+
+attributes: {
+  attr-rock-evaporite: 0.75
+}

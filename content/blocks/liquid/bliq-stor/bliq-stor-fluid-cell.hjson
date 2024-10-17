@@ -1,0 +1,35 @@
+# type: LiquidRouter
+category: liquid
+
+requirements: [
+  item-chem-graphite/5
+  item-chem-tin-bronze/15
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: bliq-brd-fluid-pipe-bridge
+  objectives: []
+}
+researchCostMultiplier: 0.3
+
+scaledHealth: 60.0
+armor: 12.0
+size: 1
+hasItems: false
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 120.0
+liquidPressure: 1.1
+outputsLiquid: true
+hasPower: false
+fogRadius: -1
+rotate: false
+solid: false
+
+envRequired: 0
+envDisabled: 16
+
+squareSprite: false
+
+liquidPadding: 1.5

@@ -1,0 +1,23 @@
+hidden: false
+hiddenOnPlanets: [
+  erekir
+  serpulo
+]
+
+research: {
+  parent: item-bio-timber
+  objectives: []
+}
+
+explosiveness: 0.0
+flammability: 0.75
+radioactivity: 0.0
+charge: 0.0
+
+hardness: 1
+lowPriority: false
+
+buildable: false
+cost: 1.0
+
+color: a5998d
