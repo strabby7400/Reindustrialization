@@ -247,7 +247,21 @@
     });
     unitCore_expeditionI.constructor = () => extend(LegsUnit, {});
     exports.unitCore_expeditionI = unitCore_expeditionI;
-    db_ability.abiAdd_lightningArcGenerator(unitCore_expeditionI, 42.0, 0.015, 3, Pal.techBlue, 0.2);
+    db_ability.abiAdd_lightningArcGenerator(unitCore_expeditionI, 42.0, 0.015, 3, Pal.techBlue, 0.3);
+
+
+    const unitCore_expeditionII = extend(UnitType, "unit-core-c2-expedition-ii", {
+      update(unit) {
+        this.super$update(unit);
+        update_extra(this, unit);
+      },
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    unitCore_expeditionII.constructor = () => extend(PayloadUnit, {});
+    exports.unitCore_expeditionII = unitCore_expeditionII;
 
 
     /* unit-spec */

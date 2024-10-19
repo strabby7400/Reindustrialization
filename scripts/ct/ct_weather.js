@@ -53,6 +53,15 @@
     exports.weaPart_steamFlow = weaPart_steamFlow;
 
 
+    const weaPart_flyingLeaves = extend(ParticleWeather, "wea-part-flying-leaves", {
+      update(state) {
+        this.super$update(state);
+        update_extra(this, state);
+      },
+    });
+    exports.weaPart_flyingLeaves = weaPart_flyingLeaves;
+
+
     const weaPart_carnage = extend(ParticleWeather, "wea-part-carnage", {
       update(state) {
         this.super$update(state);

@@ -14,14 +14,15 @@ research: {
   name: Aerth
   requiresUnlock: false
 }
-scaledHealth: 120.0
+
+scaledHealth: 200.0
 armor: 0.0
 size: 2
 hasItems: true
 itemCapacity: 2500
 hasLiquids: true
 liquidCapacity: 5.0
-outputsLiquid: false
+outputsLiquid: true
 fogRadius: -1
 
 envRequired: 0
@@ -31,5 +32,5 @@ unitCapModifier: 3
 
 isFirstTier: true
 requiresCoreZone: true
-incinerateNonBuildable: true
+incinerateNonBuildable: false
 unitType: unit-core-c1-expedition-i

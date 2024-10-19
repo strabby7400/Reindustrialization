@@ -15,7 +15,7 @@ hitSize: 17.0
 range: 360.0
 lightRadius: -1.0
 fogRadius: 8.0
-itemCapacity: 80
+itemCapacity: 160
 flying: false
 lowAltitude: false
 
@@ -52,7 +52,7 @@ groundLayer: 74.0
 
 buildSpeed: 1.0
 mineTier: 7
-mineSpeed: 15.0
+mineSpeed: 18.0
 mineWalls: true
 mineFloor: true
 mineHardnessScaling: true
@@ -309,7 +309,7 @@ weapons: [
         collidesAir: false
         collidesGround: true
         damage: 41.0
-        buildingDamageMultiplier: 0.2
+        buildingDamageMultiplier: 0.3
         status: shocked
       }
     }

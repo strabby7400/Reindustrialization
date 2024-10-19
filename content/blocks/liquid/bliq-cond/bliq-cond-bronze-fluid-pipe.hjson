@@ -27,7 +27,7 @@ solid: false
 underBullets: true
 
 envRequired: 0
-envDisabled: 22
+envDisabled: 18
 
 timerFlow: 1
 botColor: 565666

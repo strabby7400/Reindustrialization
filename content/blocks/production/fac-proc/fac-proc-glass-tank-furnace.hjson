@@ -3,7 +3,7 @@ category: crafting
 
 requirements: [
   item-chem-brass/80
-  item-prod-brick-clay/120
+  item-prod-brick-zircon/100
   item-prod-brick-magnesia/140
   item-chem-steel/80
 ]

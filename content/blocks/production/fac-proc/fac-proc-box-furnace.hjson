@@ -1,0 +1,153 @@
+type: multicraft.MultiCrafter
+category: crafting
+
+requirements: [
+  item-chem-copper/120
+  item-chem-graphite/45
+  item-prod-brick-clay/60
+  item-prod-brick-high-alumina/100
+  item-chem-steel/70
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: fac-proc-glass-tank-furnace
+  objectives: []
+}
+researchCostMultiplier: 0.1
+
+scaledHealth: 60.0
+armor: 12.0
+size: 3
+hasItems: true
+itemCapacity: 60
+hasLiquids: false
+liquidCapacity: 5.0
+outputsLiquid: false
+ignoreLiquidFullness: false
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawFlame
+      flameColor: ffc999
+      lightRadius: 20.0
+      lightAlpha: 0.65
+      lightSinScl: 6.0
+      lightSinMag: 4.0
+      flameRadius: 2.5
+      flameRadiusIn: 1.0
+      flameRadiusScl: 5.0
+      flameRadiusMag: 1.5
+      flameRadiusInMag: 1.0
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawHeatInput
+      suffix: "-heat"
+    }
+    {
+      type: multicraft.DrawHeatRegion
+      color: ff3838
+      suffix: "-glow"
+    }
+  ]
+}
+craftEffect: {
+  # GasReleaseCraftSmall
+  type: ParticleEffect
+  interp: pow2Out
+  lifetime: 120.0
+  particles: 12
+  colorFrom: ffffff40
+  colorTo: ffffff00
+  length: 10.0
+  sizeFrom: 0.0
+  sizeTo: 3.0
+  sizeInterp: pow5Out
+  strokeFrom: 2.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+updateEffect: {
+  # FurnaceCrack(2)
+  type: ParticleEffect
+  region: reind-efr-diamond
+  interp: pow10Out
+  lifetime: 180.0
+  particles: 2
+  colorFrom: ffc999ff
+  colorTo: ffc999ff
+  length: 18.0
+  sizeFrom: 3.0
+  sizeTo: 0.0
+  sizeInterp: sine
+  strokeFrom: 1.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+updateEffectChance: 0.01
+ambientSound: se-amb-furnace
+ambientSoundVolume: 0.4
+
+menu: simple
+recipes: [
+  ## Annealing
+    # Glass Pane
+    {
+      craftTime: 600.0
+      icon: reind-item-int-glass-pane
+      input: {
+        power: 1.5
+        items: [
+          reind-item-int-glass-pane-unannealed/20
+        ]
+        fluids: [
+          reind-gas-misc-air/0.2
+        ]
+        heat: 10
+      }
+      output: {
+        items: [
+          reind-item-int-glass-pane/20
+        ]
+      }
+    }
+
+    # Glass Tube
+    {
+      craftTime: 600.0
+      icon: reind-item-int-glass-tube
+      input: {
+        power: 1.5
+        items: [
+          reind-item-int-glass-tube-unannealed/20
+        ]
+        fluids: [
+          reind-gas-misc-air/0.2
+        ]
+        heat: 10
+      }
+      output: {
+        items: [
+          reind-item-int-glass-tube/20
+        ]
+      }
+    }
+]

@@ -3,8 +3,8 @@ category: production
 
 requirements: [
   item-bio-timber/25
-  item-chem-graphite/10
-  item-chem-brass/10
+  item-chem-graphite/20
+  item-chem-brass/20
   item-chem-tin-bronze/15
 ]
 buildCostMultiplier: 2.0

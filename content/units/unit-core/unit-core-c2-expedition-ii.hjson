@@ -1,0 +1,210 @@
+type: flying
+outlines: true
+outlineRadius: 2
+outlineColor: 373a4d
+
+alwaysUnlocked: true
+
+health: 1220.0
+armor: 24.0
+speed: 4.22
+accel: 0.02
+rotateSpeed: 1.18
+drag: 0.02
+hitSize: 20.0
+range: 304.0
+lightRadius: -1.0
+fogRadius: 0.0
+itemCapacity: 80
+flying: true
+lowAltitude: true
+
+payloadCapacity: 576.0
+
+envRequired: 0
+envDisabled: 22
+
+loopSound: se-loop-helicopter
+loopSoundVolume: 0.25
+
+singleTarget: false
+targetAir: false
+targetGround: true
+omniMovement: false
+faceTarget: false
+
+engineOffset: 0.0
+engineSize: 0.0
+
+buildSpeed: 2.0
+mineTier: 5
+mineSpeed: 10.0
+mineWalls: true
+mineFloor: true
+mineHardnessScaling: true
+
+coreUnitDock: true
+isEnemy: false
+defaultController: BuilderAI
+
+parts: [
+  {
+    type: HoverPart
+    layerOffset: -0.0002
+    under: true
+    mirror: false
+    radius: 6.0
+    x: 0.0
+    y: -6.0
+    rotation: 0.0
+    phase: 60.0
+    stroke: 1.5
+    minStroke: 0.12
+    circles: 2
+    sides: 6
+    color: 8ca9e8
+  }
+  {
+    type: HoverPart
+    layerOffset: -0.00015
+    under: true
+    mirror: false
+    radius: 5.0
+    x: 0.0
+    y: -6.0
+    rotation: 0.0
+    phase: 90.0
+    stroke: 1.5
+    minStroke: 0.12
+    circles: 2
+    sides: 6
+    color: d1efff
+  }
+]
+
+weapons: [
+  {
+    name: unit-core-c2-expedition-ii-rotator-blur
+    display: false
+    controllable: false
+    aiControllable: false
+    x: 11.5
+    y: 9.5
+    top: false
+    layerOffset: 0.0001
+    rotate: true
+    mirror: false
+  }
+  {
+    name: unit-core-c2-expedition-ii-rotator-blur
+    display: false
+    controllable: false
+    aiControllable: false
+    x: -11.5
+    y: 9.5
+    top: false
+    layerOffset: 0.0001
+    rotate: true
+    mirror: false
+  }
+  {
+    name: unit-core-c2-expedition-ii-rotator-blur
+    display: false
+    controllable: false
+    aiControllable: false
+    x: 11.0
+    y: -9.0
+    top: false
+    layerOffset: 0.0001
+    rotate: true
+    mirror: false
+  }
+  {
+    name: unit-core-c2-expedition-ii-rotator-blur
+    display: false
+    controllable: false
+    aiControllable: false
+    x: -11.0
+    y: -9.0
+    top: false
+    layerOffset: 0.0001
+    rotate: true
+    mirror: false
+  }
+  {
+    name: unit-core-c2-expedition-ii-gun
+    x: 0.0
+    y: 0.0
+    top: false
+    layerOffset: -0.0003
+    rotate: true
+    rotateSpeed: 2.5
+    baseRotation: 0.0
+    rotationLimit: 180.0
+    mirror: false
+    shootX: 0.0
+    shootY: 14.0
+    shootSound: se-shot-light
+    ejectEffect: casing1
+    recoil: 1.5
+    shake: 0.0
+    reload: 3.0
+    inaccuracy: 1.0
+    shoot: {
+      type: ShootPattern
+      shots: 1
+    }
+    shootCone: 4.0
+    heatColor: ff3838
+    cooldownTime: 60.0
+    bullet: {
+      type: BasicBulletType
+      sprite: reind-bul-bullet1
+      frontColor: ffffff
+      backColor: feb380
+      hitColor: feb380
+      width: 4.0
+      height: 8.0
+      shootEffect: {
+        type: MultiEffect
+        effects: [
+          shootSmallColor
+            {
+            # ShootSmogMachineGun
+            type: ParticleEffect
+            followParent: false
+            interp: pow10Out
+            lifetime: 300.0
+            particles: 3
+            colorFrom: 8b8b8b80
+            colorTo: 8b8b8b00
+            length: 24.0
+            cone: 20.0
+            sizeFrom: 2.0
+            sizeTo: 8.0
+            sizeInterp: pow2Out
+            strokeFrom: 2.0
+            strokeTo: 1.0
+            lenFrom: 4.0
+            lenTo: 2.0
+          }
+        ]
+      }
+      smokeEffect: shootSmallSmoke
+      hitEffect: hitBulletSmall
+      despawnEffect: hitBulletSmall
+      lifetime: 30.4
+      speed: 10.0
+      damage: 26.0
+      hitSize: 6.0
+      despawnHit: true
+      collides: true
+      collidesAir: false
+      collidesGround: true
+      buildingDamageMultiplier: 0.3
+      pierce: true
+      pierceCap: 3
+      pierceBuilding: false
+    }
+  }
+]

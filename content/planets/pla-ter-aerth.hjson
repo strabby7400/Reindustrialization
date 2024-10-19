@@ -108,7 +108,7 @@ updateLighting: true
 sectorSize: 3
 sectorSeed: 514
 startSector: 0
-defaultCore: eff-core-ash
+defaultCore: reind-eff-core-ash
 launchCapacityMultiplier: 1.0
 allowLaunchToNumbered: true
 allowLaunchSchematics: true
@@ -116,8 +116,8 @@ allowLaunchLoadout: true
 launchMusic: launch
 launchCandidates: []
 prebuildBase: true
-allowWaves: true
+allowWaves: false
 allowWaveSimulation: true
-clearSectorOnLost: false
+clearSectorOnLose: true
 enemyBuildSpeedMultiplier: 1.0
 enemyCoreSpawnReplace: false

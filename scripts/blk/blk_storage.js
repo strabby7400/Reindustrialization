@@ -95,6 +95,111 @@
   // End
 
 
+  // Start: Specific Function (Core: Ember)
+    function setStats_coreEmber(obj) {
+      obj.stats.add(Stat.damage, 300.0);
+      obj.stats.add(Stat.range, 192.0 / Vars.tilesize, StatUnit.blocks);
+      obj.stats.add(Stat.reload, 60.0 / 40.0, StatUnit.perSecond);
+    };
+
+    function drawPlace_coreEmber(obj, tx, ty, rotation, valid) {
+      Drawf.dashCircle(tx * Vars.tilesize + obj.offset, ty * Vars.tilesize + obj.offset, 192.0, Pal.accent);
+    };
+
+    const effect_coreEmberWave1 = extend(WaveEffect, {
+      lifetime: 20.0,
+      sides: -1,
+      colorFrom: Color.valueOf("202020ff"),
+      colorTo: Color.valueOf("20202000"),
+      sizeFrom: 0.0,
+      sizeTo: 192.0,
+      strokeFrom: 8.0,
+      strokeTo: 8.0,
+    });
+
+    const effect_coreEmberWave2 = extend(WaveEffect, {
+      lifetime: 30.0,
+      sides: -1,
+      colorFrom: Color.valueOf("202020ff"),
+      colorTo: Color.valueOf("20202000"),
+      sizeFrom: 0.0,
+      sizeTo: 192.0,
+      strokeFrom: 8.0,
+      strokeTo: 8.0,
+    });
+
+    const effect_coreEmberWave3 = extend(WaveEffect, {
+      lifetime: 40.0,
+      sides: -1,
+      colorFrom: Color.valueOf("202020ff"),
+      colorTo: Color.valueOf("20202000"),
+      sizeFrom: 0.0,
+      sizeTo: 192.0,
+      strokeFrom: 8.0,
+      strokeTo: 8.0,
+    });
+
+    const effect_coreEmberWave4 = extend(WaveEffect, {
+      lifetime: 50.0,
+      sides: -1,
+      colorFrom: Color.valueOf("202020ff"),
+      colorTo: Color.valueOf("20202000"),
+      sizeFrom: 0.0,
+      sizeTo: 192.0,
+      strokeFrom: 8.0,
+      strokeTo: 8.0,
+    });
+
+    const effect_coreEmberImpact = new MultiEffect(
+      effect_coreEmberWave1,
+      effect_coreEmberWave2,
+      effect_coreEmberWave3,
+      effect_coreEmberWave4,
+    );
+
+    function updateTile_coreEmber(obj) {
+      if((obj.reloadCounter += Time.delta) >= 40.0) {
+        obj.targets.clear();
+        Groups.bullet.intersect(obj.x - 192.0, obj.y - 192.0, 192.0 * 2, 192.0 * 2, bul => {
+          if(bul.team != obj.team && bul.type.hittable) {
+            obj.targets.add(bul);
+          };
+        });
+        if(obj.targets.size > 0) {
+          obj.heat = 1.0;
+          obj.reloadCounter = 0.0;
+          Fx.pointShockwave.at(obj.x, obj.y, 192.0, Pal.accent);
+          effect_coreEmberImpact.at(obj.x, obj.y, 0.0);
+          Core.assets.get("sounds/se-craft-drill-impact.ogg").at(obj);
+          Effect.shake(2.0, 2.0, obj);
+          var dmg = Math.min(160.0, 160.0 * 20.0 / obj.targets.size);
+          for(let i = 0; i < obj.targets.size; i++) {
+            var target = obj.targets.get(i);
+            if(target.damage > dmg) {
+              target.damage -= dmg;
+            } else {
+              target.remove();
+            };
+            Fx.hitSquaresColor.at(target.x, target.y, Pal.accent);
+          };
+          if(obj.team == Vars.state.rules.defaultTeam) {
+            Events.fire(Trigger.shockwaveTowerUse);
+          };
+        };
+      };
+      obj.heat = Mathf.clamp(obj.heat - Time.delta / 80.0);
+    };
+
+    function draw_coreEmber(obj) {
+      Drawf.additive(obj.heatRegion, Color.valueOf("ff3838"), obj.heat, obj.x, obj.y, 0.0, Layer.blockAdditive);
+    };
+
+    function drawSelect_coreEmber(obj) {
+      Drawf.dashCircle(obj.x, obj.y, 192.0, Pal.accent);
+    };
+  // End
+
+
 /*
     ==================================================
     Part: Application
@@ -147,6 +252,44 @@
       },
     });
     exports.effCore_ash = effCore_ash;
+
+
+    const effCore_ember = extend(CoreBlock, "eff-core-ember", {
+      // Override
+      setStats() {
+        this.super$setStats();
+        setStats_coreEmber(this);
+        setStats_extra(this);
+      },
+      // Override
+      drawPlace(x, y, rotation, valid){
+        this.super$drawPlace(x, y, rotation, valid);
+        drawPlace_coreEmber(this, x, y, rotation, valid);
+      },
+    });
+    effCore_ember.buildType = () => extend(CoreBlock.CoreBuild, effCore_ember, {
+      heat: 0.0,
+      heatRegion: Core.atlas.find("reind-eff-core-ember-heat"),
+      reloadCounter: Mathf.random(40.0),
+      targets: new Seq(),
+      // Override
+      updateTile() {
+        this.super$updateTile();
+        updateTile_coreEmber(this);
+        updateTile_extra(this);
+      },
+      // Override
+      draw() {
+        this.super$draw();
+        draw_coreEmber(this);
+      },
+      // Override
+      drawSelect() {
+        this.super$drawSelect();
+        drawSelect_coreEmber(this);
+      },
+    });
+    exports.effCore_ash = effCore_ember;
   // End
 
 

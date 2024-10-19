@@ -33,9 +33,9 @@ rotateSpeed: 18.0
 ambientSound: cutter
 ambientSoundVolume: 0.2
 
-drillTime: 90.0
+drillTime: 60.0
 attribute: attr-tree
 output: item-bio-log
 consumes: {
-  power: 0.25
+  power: 0.33333333
 }

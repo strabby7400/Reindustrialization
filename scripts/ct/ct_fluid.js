@@ -49,18 +49,18 @@
     function update_shortCircuit(obj, puddle) {
       if(!db_fluid.liquidConductive.contains(obj.name.toString())) return;
 
-      // Liquid spreads to batteries around it
+      // Liquid spreads to batteries or resistence components around it
       for(let i = -1; i <= 1; i++) {
         for(let j = -1; j <= 1; j++) {
           var t = puddle.tile.nearby(i, j);
-          if(t != null && t.build != null && t.build instanceof Battery.BatteryBuild && t.build.power.status > 0.0 && (!db_power.waterProof.contains(t.build.block))) {
+          if(t != null && t.build != null && (t.build instanceof Battery.BatteryBuild || t.build.block.name.includes("resistence")) && t.build.power.status > 0.0 && (!db_power.waterProof.contains(t.build.block.name))) {
             Puddles.deposit(t, obj, Time.delta * 0.06);
           };
         };
       };
 
       // Liquid damages building when on it
-      if(puddle.tile.build != null && puddle.tile.build instanceof Battery.BatteryBuild && puddle.tile.build.power.status > 0.0 && !db_power.waterProof.contains(puddle.tile.build.block)) {
+      if(puddle.tile.build != null && (puddle.tile.build instanceof Battery.BatteryBuild || puddle.tile.build.block.name.includes("resistence")) && puddle.tile.build.power.status > 0.0 && !db_power.waterProof.contains(puddle.tile.build.block.name)) {
         puddle.tile.build.damage(Time.delta * 0.2);
         if(Mathf.chance(Time.delta * 0.08)) {
           effect_shortCircuit.at(puddle.tile.x * Vars.tilesize, puddle.tile.y * Vars.tilesize, Mathf.random() * 360.0);

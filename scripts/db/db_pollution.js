@@ -6,6 +6,8 @@ exports.pollutionCrafter = list_pollutionCrafter;
 
 const list_pollutionUnit = new Seq([
   "reind-unit-core-c1-expedition-i", 1200.0,
+  "reind-unit-core-c2-expedition-ii", 1200.0,
+  "reind-unit-spec-cargo-drone", 1200.0,
 ]);
 exports.pollutionUnit = list_pollutionUnit;
 
@@ -62,6 +64,7 @@ const list_pollutionBuild = new Seq([
   "reind-min-flr-pneumatic-drill", 6.0 / 4.0,
   "reind-min-flr-steam-drill", 13.5 / 9.0,
   "reind-min-flr-sand-excavator", 27.0 / 9.0,
+  "reind-min-wall-pneumatic-wall-drill", 5.0 / 4.0,
   // fac (dec)
   "reind-fac-air-air-collector", -1.5,
   "reind-fac-air-air-filter", -16.0 / 4.0,
@@ -71,7 +74,7 @@ const list_pollutionBuild = new Seq([
   "reind-fac-furn-colossal-kiln", 48.0 / 16.0,
   "reind-fac-furn-kiln", 10.0 / 4.0,
   "reind-fac-heat-combustion-heater", 18.0 / 4.0,
-  "reind-fac-misc-multi-functional-crafter", 8.0 / 16.0,
+  "reind-fac-proc-box-furnace", 24.0 / 9.0,
   "reind-fac-proc-glass-tank-furnace", 24.0 / 16.0,
   "reind-fac-sep-cyclone-separator", 2.0 / 4.0,
 ]);

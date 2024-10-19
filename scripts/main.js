@@ -1,6 +1,6 @@
 // Require clusters
-require("cfg/cfg_hidden");
 require("cfg/cfg_item");
+require("cfg/cfg_planet");
 require("cfg/cfg_sector");
 require("blk/blk_boiler");
 require("blk/blk_distribution");

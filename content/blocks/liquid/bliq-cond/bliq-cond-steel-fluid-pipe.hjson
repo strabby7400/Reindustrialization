@@ -7,10 +7,10 @@ requirements: [
 buildCostMultiplier: 10.0
 
 research: {
-  parent: bliq-cond-bronze-fluid-pipe
+  parent: bliq-cond-wooden-fluid-pipe
   objectives: []
 }
-researchCostMultiplier: 2.0
+researchCostMultiplier: 5.0
 
 scaledHealth: 80.0
 armor: 24.0
@@ -27,7 +27,7 @@ solid: false
 underBullets: true
 
 envRequired: 0
-envDisabled: 22
+envDisabled: 18
 
 timerFlow: 1
 botColor: 565666

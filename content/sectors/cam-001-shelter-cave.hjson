@@ -8,3 +8,7 @@ planet: pla-ter-aerth
 sector: 0
 difficulty: 1
 captureWave: 1
+
+overrideLaunchDefaults: true
+allowLaunchSchematics: true
+allowLaunchLoadout: false

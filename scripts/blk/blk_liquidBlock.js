@@ -59,7 +59,7 @@
       var list1 = db_fluid.corrosionPower;
       var damage = 0;
       for(let i = 0; i < list1.size - 1; i++) {
-        if(liq != null && liq.name.toString() == list1.get(i)) {
+        if(liq != null && liq.name == list1.get(i)) {
           damage = list1.get(i + 1);
         };
       };
@@ -67,15 +67,15 @@
       var list2 = db_fluid.corrosionResistence;
       var damageScl1 = 1.0
       for(let i = 0; i < list2.size - 1; i++) {
-        if(obj.block.name.toString() == list2.get(i)) {
+        if(obj.block.name == list2.get(i)) {
           damageScl1 = list2.get(i + 1);
         }
       };
       var list3 = db_fluid.corrosionResistenceMultipliers;
       var damageScl2 = 1.0
-      if(list3.contains(obj.block)) {
+      if(list3.contains(obj.block.name)) {
         for(let i = 0; i < list3.size - 2; i++) {
-          if(obj.block.name.toString() == list3.get(i) && liq.name.toString() == list3.get(i + 1)) {
+          if(obj.block.name == list3.get(i) && liq.name == list3.get(i + 1)) {
             damageScl2 = list3.get(i + 2);
           };
         };
@@ -163,28 +163,95 @@
     });
 
 
+    const effect_heatMelt = extend(ParticleEffect, {
+      lifetime: 40.0,
+      particles: 4,
+      colorFrom: Color.valueOf("ffffffc0"),
+      colorTo: Color.valueOf("ffffff00"),
+      length: 12.0,
+      sizeFrom: 0.0,
+      sizeTo: 3.0,
+      strokeFrom: 2.0,
+      strokeTo: 0.0,
+      lenFrom: 4.0,
+      lenTo: 2.0,
+    });
+
+
     function update_heatLevel(obj) {
       var liq = obj.liquids.current();
       var amount = obj.liquids.get(liq);
+      var cap = obj.block.liquidCapacity;
       var list1 = db_heat.heatLevel;
       var list2 = db_heat.heatResistence;
-      var heatLevel = 0;
-      for(let i = 0; i <= list1.size - 1; i++) {
-        if(liq.name.toString() == list1.get(i)) {
-          heatLevel = list1.get(i + 1);
+      var heat;
+      if(liq != null && amount > 0.01) {
+        var heatLevel = 0.0;
+        for(let i = 0; i <= list1.size - 1; i++) {
+          if(liq.name.toString() == list1.get(i)) {
+            heatLevel = list1.get(i + 1);
+          };
         };
+        heat = heatLevel * (amount / cap + 0.5) * (Math.round(cap / 200.0) * 0.1 + 1);
+      } else {
+        heat = 0.0;
       };
-      var heat = amount / 5.0 * heatLevel;
+
+      // Heat transfer
+      if(heat != 0.0) {
+        obj.liqHeat += Time.delta * (heat - obj.liqHeat) / 90.0;
+      } else {
+        obj.liqHeat = 0.0;
+      };
+
+      // Damage processing
       var heatResistence = 0;
       for(let i = 0; i <= list2.size - 1; i++) {
-        if(obj.block.name.toString() == list2.get(i)) {
+        if(obj.block.name == list2.get(i)) {
           heatResistence = list2.get(i + 1);
         };
       };
-      if(heat > heatResistence) {
-        obj.damage(Time.delta * 0.5);
+      if(obj.liqHeat >= heatResistence) {
+        if(Mathf.chance(Time.delta * 0.16)) {
+          effect_heatMelt.at(obj.x, obj.y, Mathf.random(360.0))
+        };
+        obj.damage(Time.delta * 0.2 * obj.liqHeat / heatResistence);
       };
-    }
+    };
+
+
+    function draw_heatLevel(obj) {
+      var size = obj.block.size;
+      var reg;
+      switch(size) {
+        case 1 :
+          reg = Core.atlas.find("reind-blk-general-heat-1x");
+          break;
+        case 2 :
+          reg = Core.atlas.find("reind-blk-general-heat-2x");
+          break;
+        case 3 :
+          reg = Core.atlas.find("reind-blk-general-heat-3x");
+          break;
+        default:
+          reg = Core.atlas.find("reind-blk-general-heat-1x");
+      };
+      var heatResistence = 1000.0;
+      var list = db_heat.heatResistence;
+      for(let i = 0; i <= list.size - 1; i++) {
+        if(obj.block.name == list.get(i)) {
+          heatResistence = list.get(i + 1);
+        };
+      };
+      var alpha = Math.min(obj.liqHeat / (heatResistence * 1.5), 1.0);
+      Drawf.additive(reg, Color.valueOf("ff3838"), alpha, obj.x, obj.y, 0.0, Layer.blockAdditive);
+    };
+
+
+    function drawSelect_heatLevel(obj) {
+      if(obj.liqHeat == 0) return;
+      obj.block.drawPlaceText(Core.bundle.get("reindTerms.fluidHeat.name") + ": " + Strings.autoFixed(obj.liqHeat, 2), obj.tile.x, obj.tile.y, true);
+    };
   // End
 
 
@@ -206,6 +273,16 @@
       update_effc(obj);
       update_heatLevel(obj);
     };
+
+
+    function draw_extra(obj) {
+      draw_heatLevel(obj);
+    };
+
+
+    function drawSelect_extra(obj) {
+      drawSelect_heatLevel(obj);
+    };
   // End
 
 
@@ -218,12 +295,45 @@
       },
     });
     bliqCond_bronzeFluidPipe.buildType = () => extend(Conduit.ConduitBuild, bliqCond_bronzeFluidPipe, {
+      liqHeat: 0.0,
       updateTile() {
         this.super$updateTile();
         updateTile_extra(this);
       },
+      draw() {
+        this.super$draw();
+        draw_extra(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        drawSelect_extra(this);
+      },
     });
     exports.bliqCond_bronzeFluidPipe = bliqCond_bronzeFluidPipe;
+
+
+    const bliqCond_woodenFluidPipe = extend(Conduit, "bliq-cond-wooden-fluid-pipe", {
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    bliqCond_woodenFluidPipe.buildType = () => extend(Conduit.ConduitBuild, bliqCond_woodenFluidPipe, {
+      liqHeat: 0.0,
+      updateTile() {
+        this.super$updateTile();
+        updateTile_extra(this);
+      },
+      draw() {
+        this.super$draw();
+        draw_extra(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        drawSelect_extra(this);
+      },
+    });
+    exports.bliqCond_woodenFluidPipe = bliqCond_woodenFluidPipe;
 
 
     const bliqCond_steelFluidPipe = extend(ArmoredConduit, "bliq-cond-steel-fluid-pipe", {
@@ -233,12 +343,45 @@
       },
     });
     bliqCond_steelFluidPipe.buildType = () => extend(ArmoredConduit.ArmoredConduitBuild, bliqCond_steelFluidPipe, {
+      liqHeat: 0.0,
       updateTile() {
         this.super$updateTile();
         updateTile_extra(this);
       },
+      draw() {
+        this.super$draw();
+        draw_extra(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        drawSelect_extra(this);
+      },
     });
     exports.bliqCond_steelFluidPipe = bliqCond_steelFluidPipe;
+
+
+    const bliqCond_temperedGlassFluidPipe = extend(Conduit, "bliq-cond-tempered-glass-fluid-pipe", {
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    bliqCond_temperedGlassFluidPipe.buildType = () => extend(Conduit.ConduitBuild, bliqCond_temperedGlassFluidPipe, {
+      liqHeat: 0.0,
+      updateTile() {
+        this.super$updateTile();
+        updateTile_extra(this);
+      },
+      draw() {
+        this.super$draw();
+        draw_extra(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        drawSelect_extra(this);
+      },
+    });
+    exports.bliqCond_temperedGlassFluidPipe = bliqCond_temperedGlassFluidPipe;
 
 
     /* bliq-brd */
@@ -249,9 +392,18 @@
       },
     });
     bliqBrd_fluidPipeBridge.buildType = () => extend(LiquidBridge.LiquidBridgeBuild, bliqBrd_fluidPipeBridge, {
+      liqHeat: 0.0,
       updateTile() {
         this.super$updateTile();
         updateTile_extra(this);
+      },
+      draw() {
+        this.super$draw();
+        draw_extra(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        drawSelect_extra(this);
       },
     });
     exports.bliqBrd_fluidPipeBridge = bliqBrd_fluidPipeBridge;
@@ -265,9 +417,18 @@
       },
     });
     bliqStor_fluidCell.buildType = () => extend(LiquidRouter.LiquidRouterBuild, bliqStor_fluidCell, {
+      liqHeat: 0.0,
       updateTile() {
         this.super$updateTile();
         updateTile_extra(this);
+      },
+      draw() {
+        this.super$draw();
+        draw_extra(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        drawSelect_extra(this);
       },
     });
     exports.bliqStor_fluidCell = bliqStor_fluidCell;
@@ -280,9 +441,18 @@
       },
     });
     bliqStor_steelFluidCylinder.buildType = () => extend(LiquidRouter.LiquidRouterBuild, bliqStor_steelFluidCylinder, {
+      liqHeat: 0.0,
       updateTile() {
         this.super$updateTile();
         updateTile_extra(this);
+      },
+      draw() {
+        this.super$draw();
+        draw_extra(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        drawSelect_extra(this);
       },
     });
     exports.bliqStor_steelFluidCylinder = bliqStor_steelFluidCylinder;
@@ -296,9 +466,18 @@
       },
     });
     bliqPump_pistonFluidPump.buildType = () => extend(Pump.PumpBuild, bliqPump_pistonFluidPump, {
+      liqHeat: 0.0,
       updateTile() {
         this.super$updateTile();
         updateTile_extra(this);
+      },
+      draw() {
+        this.super$draw();
+        draw_extra(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        drawSelect_extra(this);
       },
     });
     exports.bliqPump_pistonFluidPump = bliqPump_pistonFluidPump;

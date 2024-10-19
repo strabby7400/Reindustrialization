@@ -1,0 +1,65 @@
+type: BeamDrill
+category: production
+
+requirements: [
+  item-bio-timber/50
+  item-chem-lead/30
+  item-chem-brass/25
+  item-chem-steel/15
+]
+buildCostMultiplier: 6.0
+
+research: {
+  parent: min-flr-pneumatic-drill
+  objectives: []
+}
+researchCostMultiplier: 0.25
+
+scaledHealth: 40.0
+armor: 0.0
+size: 2
+hasItems: true
+itemCapacity: 10
+hasLiquids: true
+liquidCapacity: 5.0
+hasPower: true
+fogRadius: -1
+rotate: true
+drawArrow: true
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+laserWidth: 0.0
+glowColor: 000000
+glowIntensity: 0.0
+pulseIntensity: 0.0
+glowScl: 3.0
+sparkColor: 8ca9e8
+sparks: 12
+sparkRange: 4.0
+sparkLife: 15.0
+sparkRecurrence: 2.0
+sparkSpread: 50.0
+sparkSize: 1.0
+heatColor: 8ca9e8
+boostHeatColor: 8ca9e8
+heatPulse: 0.2
+heatPulseScl: 6.0
+ambientSound: se-amb-drill
+ambientSoundVolume: 0.15
+
+drillTime: 180.0
+range: 1
+tier: 5
+optionalBoostIntensity: 2.25
+consumes: {
+  power: 0.5
+  liquid: {
+    liquid: gas-misc-air
+    amount: 0.05
+    optional: true
+    booster: true
+  }
+}

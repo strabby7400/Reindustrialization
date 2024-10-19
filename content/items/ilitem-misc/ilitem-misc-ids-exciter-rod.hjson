@@ -19,6 +19,6 @@ hardness: 0
 lowPriority: false
 
 buildable: true
-cost: 1.0
+cost: 10.0
 
 color: ffd37f

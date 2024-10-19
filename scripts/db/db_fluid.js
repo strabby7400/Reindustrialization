@@ -25,6 +25,8 @@ const list_corrosionResistence = new Seq([
   "reind-bliq-brd-fluid-pipe-bridge", 2.2,
   "reind-bliq-cond-bronze-fluid-pipe", 1.0,
   "reind-bliq-cond-steel-fluid-pipe", 1.3,
+  "reind-bliq-cond-tempered-glass-fluid-pipe", 16.0,
+  "reind-bliq-cond-wooden-fluid-pipe", 0.2,
   "reind-bliq-pump-piston-fluid-pump", 1.5,
   "reind-bliq-stor-fluid-cell", 1.8,
   "reind-bliq-stor-steel-fluid-cylinder", 1.3,
@@ -35,17 +37,21 @@ exports.corrosionResistence = list_corrosionResistence;
 const list_corrosionResistenceMultipliers = new Seq([
   "reind-bliq-cond-bronze-fluid-pipe", "reind-gas-chem-ammonia", 0.02,
   "reind-bliq-cond-bronze-fluid-pipe", "reind-gas-chem-chlorine", 0.05,
+
   "reind-bliq-cond-steel-fluid-pipe", "reind-liq-ore-brine", 0.2,
   "reind-bliq-cond-steel-fluid-pipe", "reind-liq-ore-water-sea", 0.3,
   "reind-bliq-cond-steel-fluid-pipe", "reind-liq-int-brine-purified", 0.2,
+
   "reind-bliq-pump-piston-fluid-pump", "reind-liq-ore-brine", 0.2,
   "reind-bliq-pump-piston-fluid-pump", "reind-liq-ore-water-sea", 0.3,
   "reind-bliq-pump-piston-fluid-pump", "reind-liq-int-brine-purified", 0.2,
+
   "reind-bliq-stor-steel-fluid-cylinder", "reind-liq-ore-brine", 0.2,
   "reind-bliq-stor-steel-fluid-cylinder", "reind-liq-ore-water-sea", 0.3,
   "reind-bliq-stor-steel-fluid-cylinder", "reind-liq-int-brine-purified", 0.2,
 ]);
 exports.corrosionResistenceMultipliers = list_corrosionResistenceMultipliers;
+
 
 const list_effc = new Seq([
   "reind-effc-cond-pressure",
