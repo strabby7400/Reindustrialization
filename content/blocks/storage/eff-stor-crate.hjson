@@ -10,7 +10,7 @@ research: {
   parent: dis-brd-conveyor-bridge
   objectives: []
 }
-researchCostMultiplier: 0.1
+researchCostMultiplier: 0.25
 
 scaledHealth: 40.0
 armor: 0.0

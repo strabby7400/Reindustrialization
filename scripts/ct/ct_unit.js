@@ -99,7 +99,9 @@
                   z = list1.get(k + 1);
                 };
               };
-              if(z > 76.0) {
+
+              // Over 80.0 implies not enough leaves
+              if(z > 76.0 && z < 80.0) {
                 unit.apply(ct_status.staSpec_hiddenWell, 60.0);
               };
             };
@@ -179,7 +181,7 @@
 
 
   // Start: Rotor
-    /* For helicopter & done units */
+    /* For helicopter & drone units */
     const effect_rotor = extend(WaveEffect, {
       layer: Layer.floor + 0.0001,
       lifetime: 15.0,
@@ -278,6 +280,21 @@
     unitSpec_cargoDrone.constructor = () => extend(BuildingTetherPayloadUnit, {});
     exports.unitSpec_cargoDrone = unitSpec_cargoDrone;
     db_ai.aiAdd_cargoAi(unitSpec_cargoDrone);
+
+
+    /* unit-inf*/
+    const unitInf_ast1_74ka = extend(UnitType, "unit-inf-ast1-74ka", {
+      update(unit) {
+        this.super$update(unit);
+        update_extra(this, unit);
+      },
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    unitInf_ast1_74ka.constructor = () => extend(MechUnit, {});
+    exports.unitInf_ast1_74ka = unitInf_ast1_74ka;
   // End
 
 

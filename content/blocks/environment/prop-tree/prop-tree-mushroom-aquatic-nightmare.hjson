@@ -1,0 +1,10 @@
+# type: TreeBlock
+
+emitLight: true
+lightRadius: 160.0
+lightColor: b8cae061
+
+attributes: {
+  attr-mushroom: 0.2
+  attr-mushroom-hard: 1.0
+}

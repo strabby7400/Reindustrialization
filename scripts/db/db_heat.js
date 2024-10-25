@@ -1,5 +1,6 @@
 // For fluids
 const list_heatLevel = new Seq([
+  "reind-gas-chem-sulfur-dioxide", 160.0,
   "reind-gas-chem-sulfur-trioxide", 400.0,
   "reind-gas-misc-steam", 100.0,
   "reind-liq-int-glass-melt", 1300.0,

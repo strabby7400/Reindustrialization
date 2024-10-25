@@ -179,7 +179,7 @@ recipes: [
 
     # Coal
     {
-      craftTime: 180.0
+      craftTime: 90.0
       icon: reind-item-chem-coal
       input: {
         items: [
@@ -188,6 +188,21 @@ recipes: [
       }
       output: {
         heat: 6.0
+      }
+    }
+
+  ## Heat: 8
+    # Coke
+    {
+      craftTime: 90.0
+      icon: reind-item-chem-coke
+      input: {
+        items: [
+          reind-item-chem-coke/1
+        ]
+      }
+      output: {
+        heat: 8.0
       }
     }
 ]

@@ -2,9 +2,9 @@
 category: distribution
 
 requirements: [
-  item-bio-timber/20
-  item-chem-brass/30
-  item-chem-steel/10
+  item-bio-timber/60
+  item-chem-brass/50
+  item-chem-steel/30
 ]
 buildCostMultiplier: 2.0
 
@@ -30,5 +30,5 @@ envDisabled: 22
 squareSprite: false
 
 regionRotated1: 1
-speed: 6.7
+speed: 6.0
 allowCoreUnload: true

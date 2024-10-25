@@ -49,6 +49,7 @@ drawer: {
       type: DrawGlowRegion
       color: ffffff
       alpha: 1.0
+      glowScale: 10.0
       glowIntensity: 0.0
       layer: 31.01
       suffix: "-halo-glow"
@@ -59,6 +60,9 @@ drawer: {
     {
       type: DrawGlowRegion
       color: ffffff
+      alpha: 0.75
+      glowScale: 20.0
+      glowIntensity: 0.75
       suffix: "-halo"
       rotate: true
       rotateSpeed: 0.6
@@ -87,7 +91,7 @@ effect: {
 effectChance: 0.003
 
 range: 27
-healPercent: 0.001
+healPercent: 0.0006
 optionalMultiplier: 100.0
 optionalUseTime: 150.0
 

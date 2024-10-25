@@ -13,7 +13,9 @@ const list_treeLayer = new Seq([
   "reind-prop-tree-umbrella", 79.3,
   "reind-prop-tree-zenith", 79.7,
   // Bro can't tell the difference between mushroom and tree
+  "reind-prop-tree-mushroom-aquatic-nightmare", 79.71,
   "reind-prop-tree-mushroom-blue-spark", 77.6,
+  "reind-prop-tree-mushroom-parasitic-antenna", 80.1,
   "reind-prop-tree-mushroom-worm", 77.8,
 ]);
 exports.treeLayer = list_treeLayer;

@@ -117,7 +117,7 @@ recipes: [
 
     # Active Carbon
     {
-      craftTime: 300.0
+      craftTime: 1500.0
       icon: reind-icon-gas-filtering-active-carbon
       input: {
         items: [

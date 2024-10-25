@@ -1,0 +1,161 @@
+type: multicraft.MultiCrafter
+category: crafting
+
+requirements: [
+  item-prod-tempered-glass-pane/20
+  item-prod-tempered-glass-tube/10
+  item-chem-graphite/30
+  item-chem-brass/20
+  item-chem-steel/30
+  item-chem-stainless-steel/15
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: fac-furn-bloomery
+  objectives: []
+}
+researchCostMultiplier: 0.2
+
+scaledHealth: 60.0
+armor: 12.0
+size: 2
+hasItems: true
+itemCapacity: 30
+hasLiquids: true
+liquidCapacity: 90.0
+outputsLiquid: true
+ignoreLiquidFullness: false
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawCultivator
+      plantColor: 7898ba
+      plantColorLight: 00000000
+      bottomColor: 7898ba
+      bubbles: 0
+    }
+    {
+      type: DrawBubbles
+      color: 7898ba
+      amount: 36
+      sides: 16
+      strokeMin: 0.2
+      spread: 6.0
+      timeScl: 10.0
+      recurrence: 6.0
+      radius: 1.0
+      fill: false
+    }
+    {
+      type: DrawParticles
+      color: 7898ba
+      alpha: 0.6
+      particles: 8
+      particleLife: 40.0
+      particleRad: 6.0
+      particleSize: 1.0
+      rotateScl: 4.0
+      reverse: true
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: gas-misc-steam
+      padding: 1.5
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawRegion
+      suffix: "-gloss"
+    }
+    {
+      type: DrawGlowRegion
+      color: ff3838
+      suffix: "-glow"
+    }
+  ]
+}
+craftEffect: none
+updateEffect: none
+updateEffectChance: 0.01
+ambientSound: se-amb-bubble
+ambientSoundVolume: 0.2
+
+menu: simple
+recipes: [
+  ## Water
+    # Brine => Salt
+    {
+      craftTime: 600.0
+      icon: reind-liq-ore-brine
+      input: {
+        power: 1.16666667
+        fluids: [
+          reind-liq-ore-brine/0.1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-ore-salt/10
+        ]
+        fluids: [
+          reind-gas-misc-steam/0.1
+        ]
+      }
+    }
+
+    # Brine (Purified) => Sodium Chloride
+    {
+      craftTime: 600.0
+      icon: reind-liq-int-brine-purified
+      input: {
+        power: 1.16666667
+        fluids: [
+          reind-liq-int-brine-purified/0.1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-sodium-chloride/10
+        ]
+        fluids: [
+          reind-gas-misc-steam/0.1
+        ]
+      }
+    }
+
+    # Sodium Hydroxide
+    {
+      craftTime: 600.0
+      icon: reind-liq-int-solution-sodium-hydroxide
+      input: {
+        power: 1.16666667
+        fluids: [
+          reind-liq-int-solution-sodium-hydroxide/0.1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-sodium-hydroxide/10
+        ]
+        fluids: [
+          reind-gas-misc-steam/0.1
+        ]
+      }
+    }
+]

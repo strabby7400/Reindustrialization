@@ -20,30 +20,67 @@ we_heavyRain.always = true;
 
 
 // Weather presets
-const wp_aerthStorm = new Seq([
-  we_steamFlow,
-  we_heavyRain,
-  we_fogBlack,
-]);
+var wp_aerthStorm;
+var wp_aerthStormLeaves;
+var wp_aerthStormCarnage;
 
-const wp_aerthStormLeaves = new Seq([
-  we_steamFlow,
-  we_heavyRain,
-  we_flyingLeaves,
-  we_fogBlack,
-]);
+var low_detail = false;
+const wp_ldm = function(ldm) {
+  low_detail = ldm;
+};
+exports.wp_ldm = wp_ldm;
 
-const wp_aerthStormCarnage = new Seq([
-  we_steamFlow,
-  we_heavyRain,
-  we_carnage,
-  we_fogRed,
-]);
+function wp_update(ldm) {
+  if(ldm) {
+    wp_aerthStorm = new Seq([
+      we_heavyRain,
+    ]);
+
+    wp_aerthStormLeaves = new Seq([
+      we_heavyRain,
+      we_flyingLeaves,
+    ]);
+
+    wp_aerthStormCarnage = new Seq([
+      we_heavyRain,
+      we_carnage,
+    ]);
+  } else {
+    wp_aerthStorm = new Seq([
+      we_steamFlow,
+      we_heavyRain,
+      we_fogBlack,
+    ]);
+
+    wp_aerthStormLeaves = new Seq([
+      we_steamFlow,
+      we_heavyRain,
+      we_flyingLeaves,
+      we_fogBlack,
+    ]);
+
+    wp_aerthStormCarnage = new Seq([
+      we_steamFlow,
+      we_heavyRain,
+      we_carnage,
+      we_fogRed,
+    ]);
+  };
+};
 
 
 // Lock sector states
+var wp_needUpdate = false;
 Events.run(Trigger.update, () => {
-    if(Vars.state.sector != null) {
+    if(Vars.state.sector == null) {
+      wp_needUpdate = true;
+    };
+    if(Vars.state.sector != null && wp_needUpdate) {
+      wp_update(low_detail);
+      Groups.weather.clear();
+      wp_needUpdate = false;
+    };
+    if(Vars.state.sector != null && Mathf.chance(0.1)) {
       var id = Vars.state.sector.id;
       switch(id) {
         case 0 :

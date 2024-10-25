@@ -198,6 +198,24 @@
       },
     });
     exports.propTreeMushroom_worm = propTreeMushroom_worm;
+
+
+    const propTreeMushroom_aquaticNightmare = extend(TreeBlock, "prop-tree-mushroom-aquatic-nightmare", {
+      // Override
+      drawBase(tile) {
+        drawBase_extra(this, tile);
+      },
+    });
+    exports.propTreeMushroom_aquaticNightmare = propTreeMushroom_aquaticNightmare;
+
+
+    const propTreeMushroom_parasiticAntenna = extend(TreeBlock, "prop-tree-mushroom-parasitic-antenna", {
+      // Override
+      drawBase(tile) {
+        drawBase_extra(this, tile);
+      },
+    });
+    exports.propTreeMushroom_parasiticAntenna = propTreeMushroom_parasiticAntenna;
   // End
 
 

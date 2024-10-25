@@ -1,18 +1,22 @@
 name: reind
 displayName: Reindustrialization
-subtitle: "0.0.9h: Hot Transparent Stuff"
+subtitle: "0.0.9i: Getting Complex"
 
 description:
 "I have seen too many mods with fictional contents bearing random names from reality, and somehow I have been working on this mod.
 
 Reind is that type of mod focused on real chemical engineeing and more. Recipes are mostly based on their counterparts in real life, but simplified for gameplay.
-The mod is also inspired by GTNH, a hardcore Minecraft tech mod pack.
+Besides contents, I've spent a lot of time building up new mechanisms, which is done through JS codes.
 
-Still WIP and there are tons of ideas not implemented yet. Do not launch to any numbered sectors!
+Only one planet added for now, which has its own tech tree and style to play. Instead of tower defense, you'll focus on the production part and occasionally, fight with units.
+The mod is also kind of inspired by GTNH, an extremely hardcore Minecraft tech mod pack. You won't probably capture the first sector in 3 hours if you are not skilled.
+
+Reind is still WIP. Do not launch to any numbered sectors!
 
 Contents: MaboroshiX
 Sprites: MaboroshiX
 Scripts: MaboroshiX
+Music: MaboroshiX
 Ideas: MaboroshiX
 
 rednificsdnaaidepikiwybderewop"
@@ -23,4 +27,4 @@ dependencies: [
   multi-crafter
 ]
 repo: HuanXefh/Reindustrialization
-version: 0.0.9h
+version: 0.0.9i

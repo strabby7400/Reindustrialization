@@ -47,6 +47,8 @@ coreUnitDock: true
 isEnemy: false
 defaultController: BuilderAI
 
+shootWarmupSpeed: 0.1
+smoothReloadSpeed: 0.15
 parts: [
   {
     type: HoverPart

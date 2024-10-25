@@ -178,6 +178,10 @@
         this.super$setStats();
         setStats_extra(this);
       },
+      // Icon fix
+      icons: function() {
+        return [Core.atlas.find(this.name + "-icon")];
+      },
     });
     powStm_steamBoiler.buildType = () => extend(HeatCrafter.HeatCrafterBuild, powStm_steamBoiler, {
       tag1: false,

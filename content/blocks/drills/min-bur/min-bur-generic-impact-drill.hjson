@@ -80,7 +80,7 @@ drillEffect: {
       lenTo: 2.0
     }
     {
-      # GasReleaseCraftLarge(2)
+      # GasReleaseImpact
       type: ParticleEffect
       interp: pow5Out
       lifetime: 300.0

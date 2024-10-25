@@ -390,12 +390,29 @@ recipes: [
       input: {
         items: [
           reind-item-ore-clay/4
-          reind-item-bio-charcoal/3
+          reind-item-bio-charcoal/2
         ]
       }
       output: {
         items: [
           reind-item-prod-brick-clay/2
+        ]
+      }
+    }
+
+    # High-alumina Brick
+    {
+      craftTime: 120.0
+      icon: reind-item-prod-brick-high-alumina
+      input: {
+        items: [
+          reind-item-int-blend-brick-high-alumina/2
+          reind-item-bio-charcoal/2
+        ]
+      }
+      output: {
+        items: [
+          reind-item-prod-brick-high-alumina/2
         ]
       }
     }
@@ -407,7 +424,7 @@ recipes: [
       input: {
         items: [
           reind-item-int-chunks-dolomite/4
-          reind-item-bio-charcoal/3
+          reind-item-bio-charcoal/2
         ]
       }
       output: {
@@ -423,8 +440,9 @@ recipes: [
       icon: reind-item-prod-brick-zircon
       input: {
         items: [
-          reind-item-ore-zircon/4
-          reind-item-bio-charcoal/3
+          reind-item-ore-zircon/2
+          reind-item-ore-clay/2
+          reind-item-bio-charcoal/2
         ]
       }
       output: {

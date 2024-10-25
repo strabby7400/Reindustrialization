@@ -75,9 +75,28 @@ recipes: [
     }
 
   ## Dusty Gas
+    # Air / Bauxite
+    {
+      craftTime: 240.0
+      icon: reind-gas-int-dusty-gas-air-bauxite
+      input: {
+        fluids: [
+          reind-gas-int-dusty-gas-air-bauxite/0.1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-deironized-bauxite/1
+        ]
+        fluids: [
+          reind-gas-misc-air/0.05
+        ]
+      }
+    }
+
     # Air / Raw Coal
     {
-      craftTime: 60.0
+      craftTime: 240.0
       icon: reind-gas-int-dusty-gas-air-raw-coal
       input: {
         fluids: [
@@ -86,7 +105,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-int-dust-raw-coal/1
+          reind-item-chem-coal/1
         ]
         fluids: [
           reind-gas-misc-air/0.05

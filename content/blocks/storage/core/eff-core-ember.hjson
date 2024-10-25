@@ -11,9 +11,14 @@ buildCostMultiplier: 1.0
 
 research: {
   parent: eff-core-ash
+  requirements: [
+    item-chem-copper/6000
+    item-chem-lead/6000
+    item-chem-graphite/4800
+    item-chem-steel/600
+  ]
   objectives: []
 }
-researchCostMultiplier: 0.15
 
 scaledHealth: 280.0
 armor: 12.0

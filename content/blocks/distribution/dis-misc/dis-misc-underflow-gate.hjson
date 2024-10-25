@@ -2,7 +2,7 @@
 category: distribution
 
 requirements: [
-  item-chem-copper/5
+  item-chem-copper/6
   item-chem-brass/2
 ]
 buildCostMultiplier: 2.0

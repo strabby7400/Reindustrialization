@@ -52,7 +52,7 @@ drawer: {
 craftEffect: none
 updateEffect: none
 updateEffectChance: 0.02
-ambientSound: se-amb-hum
+ambientSound: se-amb-hum-ids
 ambientSoundVolume: 0.1
 
 craftTime: 60.0

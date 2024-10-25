@@ -18,21 +18,21 @@ function getPollution(tx, ty) {
     for(let j = -r; j <= r; j++) {
       var t = Vars.world.tile(tx, ty).nearby(i, j);
       if(t != null) {
-        // Check Floor
+        // Check floor
         for(let k = 0; k < db_pollution.floor.size - 1; k++) {
           if(t.floor() != null && t.floor().name == db_pollution.floor.get(k)) {
             pollution += db_pollution.floor.get(k + 1);
           };
         };
 
-        // Check Block
+        // Check block
         for(let k = 0; k < db_pollution.block.size - 1; k++) {
           if(t.block() != null && t.block().name == db_pollution.block.get(k)) {
             pollution += db_pollution.block.get(k + 1);
           };
         };
 
-        // Check Building
+        // Check building
         for(let k = 0; k < db_pollution.build.size - 1; k++) {
           if(t.build != null && t.build.status().toString() == "active" && t.build.block.name == db_pollution.build.get(k)) {
             pollution += db_pollution.build.get(k + 1);

@@ -98,6 +98,27 @@ recipes: [
       }
     }
 
+    # High-alumina Brick
+    {
+      craftTime: 60.0
+      icon: reind-item-int-blend-brick-high-alumina
+      input: {
+        power: 0.5
+        items: [
+          reind-item-int-dust-deironized-bauxite/2
+          reind-item-ore-clay/2
+        ]
+        fluids: [
+          reind-effc-effc-lifting/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-blend-brick-high-alumina/2
+        ]
+      }
+    }
+
   ## Product
     # Cement
     {

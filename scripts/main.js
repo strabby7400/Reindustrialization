@@ -1,7 +1,7 @@
 // Require clusters
 require("cfg/cfg_item");
 require("cfg/cfg_planet");
-require("cfg/cfg_sector");
+const cfg_sector = require("cfg/cfg_sector");
 require("blk/blk_boiler");
 require("blk/blk_distribution");
 require("blk/blk_heatBlock");
@@ -21,6 +21,7 @@ require("module/module_pollution");
 
 function dialogSet_welcome() {
   Sounds.wave.play();
+
   var dialog = new BaseDialog("@reind-welcome.name");
 
   // Adding contents
@@ -28,22 +29,28 @@ function dialogSet_welcome() {
   dialog.cont.row();
   dialog.cont.add("\n\n").row();
   dialog.cont.row();
-  dialog.cont.add("@reind-welcome.details").row();
-  dialog.cont.row();
-  dialog.cont.add("\n\n").row();
-  dialog.cont.row();
 
   // Button: OK
   dialog.cont.button("@ok", run(() => {
     Sounds.door.play();
+    cfg_sector.wp_ldm(false);
     dialog.hide();
-  })).size(100, 50);
+  })).size(150, 50);
+  dialog.cont.row();
+
+  // Button: No Particles
+  dialog.cont.button("@reind-no-particles.name", run(() => {
+    Sounds.shootSmite.play();
+    cfg_sector.wp_ldm(true);
+    dialog.hide();
+  })).size(150, 50);
+  dialog.cont.row();
 
   // Done
   dialog.show();
 };
 
 
-Events.run(ClientLoadEvent, () => {
+Events.run(MusicRegisterEvent, () => {
   dialogSet_welcome();
 });

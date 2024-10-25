@@ -1,0 +1,6 @@
+# type: TreeBlock
+
+attributes: {
+  attr-mushroom: 0.4
+  attr-mushroom-hard: 1.4
+}

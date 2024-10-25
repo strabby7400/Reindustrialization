@@ -27,4 +27,4 @@ envDisabled: 22
 
 squareSprite: false
 
-staleTimeDuration: 360.0
+staleTimeDuration: 60.0

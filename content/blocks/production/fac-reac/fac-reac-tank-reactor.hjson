@@ -1,0 +1,120 @@
+type: multicraft.MultiCrafter
+category: crafting
+
+requirements: [
+  item-chem-lead/40
+  item-prod-tempered-glass-pane/30
+  item-chem-tin-bronze/60
+  item-chem-steel/80
+  item-chem-stainless-steel/30
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: fac-sep-cyclone-separator
+  objectives: []
+}
+researchCostMultiplier: 0.2
+
+scaledHealth: 80.0
+armor: 24.0
+size: 3
+hasItems: true
+itemCapacity: 60
+hasLiquids: true
+liquidCapacity: 30.0
+outputsLiquid: true
+ignoreLiquidFullness: false
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawCultivator
+      plantColor: 7898ba
+      plantColorLight: 00000000
+      bottomColor: 7898ba
+      bubbles: 0
+    }
+    {
+      type: DrawRegion
+      suffix: "-rotator"
+      spinSprite: true
+      rotateSpeed: 9.5
+    }
+    {
+      type: DrawRegion
+      suffix: "-rotator1"
+      spinSprite: true
+      rotateSpeed: 4.0
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawRegion
+      suffix: "-gloss"
+    }
+    {
+      type: DrawFade
+      suffix: "-fade"
+    }
+  ]
+}
+craftEffect: {
+  # GasReleaseCraftSmall
+  type: ParticleEffect
+  interp: pow2Out
+  lifetime: 120.0
+  particles: 12
+  colorFrom: ffffff40
+  colorTo: ffffff00
+  length: 10.0
+  sizeFrom: 0.0
+  sizeTo: 3.0
+  sizeInterp: pow5Out
+  strokeFrom: 2.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+updateEffect: none
+updateEffectChance: 0.02
+ambientSound: se-amb-hum
+ambientSoundVolume: 0.3
+
+menu: simple
+recipes: [
+  ## Water
+    # Lime + Trona
+    {
+      craftTime: 600.0
+      icon: reind-liq-int-solution-suspension-lime-sodium-hydroxide
+      input: {
+        power: 1.5
+        items: [
+          reind-item-chem-lime/20
+          reind-item-ore-trona/20
+        ]
+        fluids: [
+          reind-liq-ore-water/0.2
+        ]
+      }
+      output: {
+        fluids: [
+          reind-liq-int-solution-suspension-lime-sodium-hydroxide/0.2
+        ]
+      }
+    }
+]

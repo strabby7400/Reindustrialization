@@ -1,0 +1,103 @@
+type: multicraft.MultiCrafter
+category: crafting
+
+requirements: [
+  item-chem-copper/110
+  item-chem-lead/60
+  item-chem-brass/30
+  item-chem-steel/40
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: fac-osel-vibration-screen
+  objectives: []
+}
+researchCostMultiplier: 0.3
+
+scaledHealth: 60.0
+armor: 12.0
+size: 2
+hasItems: true
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 5.0
+outputsLiquid: true
+ignoreLiquidFullness: false
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawFade
+      suffix: "-fade"
+    }
+  ]
+}
+craftEffect: none
+updateEffect: none
+updateEffectChance: 0.02
+ambientSound: se-amb-hum
+ambientSoundVolume: 0.1
+
+menu: simple
+recipes: [
+  ## Ore Selection
+    # Bauxite
+    {
+      craftTime: 240.0
+      icon: reind-item-int-dust-bauxite
+      input: {
+        power: 0.5
+        items: [
+          reind-item-int-dust-bauxite/4
+        ]
+        fluids: [
+          reind-gas-misc-air/0.1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-deironized-bauxite/3
+          reind-item-was-gangue/1
+        ]
+        fluids: [
+          reind-gas-int-dusty-gas-air-bauxite/0.1
+        ]
+      }
+    }
+
+    # Raw Coal
+    {
+      craftTime: 240.0
+      icon: reind-item-int-dust-raw-coal
+      input: {
+        power: 0.5
+        items: [
+          reind-item-int-dust-raw-coal/4
+        ]
+        fluids: [
+          reind-gas-misc-air/0.1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-coal/3
+          reind-item-was-gangue/1
+        ]
+        fluids: [
+          reind-gas-int-dusty-gas-air-raw-coal/0.1
+        ]
+      }
+    }
+]

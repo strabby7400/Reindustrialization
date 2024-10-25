@@ -1,0 +1,113 @@
+type: multicraft.MultiCrafter
+category: crafting
+
+requirements: [
+  item-chem-copper/40
+  item-prod-tempered-glass-pane/50
+  item-chem-graphite/50
+  item-chem-steel/30
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: fac-heat-combustion-heater
+  objectives: []
+}
+researchCostMultiplier: 0.25
+
+scaledHealth: 60.0
+armor: 12.0
+size: 2
+hasItems: false
+itemCapacity: 20
+hasLiquids: true
+liquidCapacity: 30.0
+outputsLiquid: true
+ignoreLiquidFullness: false
+hasPower: true
+fogRadius: -1
+rotate: false
+
+envRequired: 1
+envDisabled: 18
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawLiquidTile
+      drawLiquid: liq-ore-water
+      padding: 1.5
+    }
+    {
+      type: DrawParticles
+      color: 7898ba
+      alpha: 0.6
+      particles: 32
+      particleLife: 30.0
+      particleRad: 6.0
+      particleSize: 1.0
+      rotateScl: 8.0
+      reverse: false
+    }
+    {
+      type: DrawRegion
+      suffix: "-internal"
+    }
+    {
+      type: DrawRegion
+      suffix: "-rotator"
+      spinSprite: true
+      rotateSpeed: 4.0
+    }
+    {
+      type: DrawParticles
+      color: 7898ba
+      alpha: 0.6
+      particles: 32
+      particleLife: 30.0
+      particleRad: 6.0
+      particleSize: 1.0
+      rotateScl: 8.0
+      reverse: true
+    }
+    {
+      type: DrawDefault
+    }
+    {
+      type: DrawRegion
+      suffix: "-gloss"
+    }
+  ]
+}
+craftEffect: none
+updateEffect: none
+updateEffectChance: 0.02
+ambientSound: se-amb-hum
+ambientSoundVolume: 0.1
+
+menu: simple
+recipes: [
+  ## Default: Water
+    # Spontaneous
+    {
+      craftTime: 60.0
+      icon: reind-liq-ore-water
+      input: {
+        power: 0.66666667
+        fluids: [
+          reind-gas-misc-steam/0.1
+        ]
+      }
+      output: {
+        fluids: [
+          reind-liq-ore-water/0.1
+        ]
+      }
+    }
+]

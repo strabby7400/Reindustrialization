@@ -2,9 +2,9 @@
 category: distribution
 
 requirements: [
-  item-bio-timber/20
-  item-chem-copper/12
-  item-chem-graphite/6
+  item-bio-timber/30
+  item-chem-copper/18
+  item-chem-graphite/12
 ]
 buildCostMultiplier: 2.0
 
@@ -12,7 +12,7 @@ research: {
   parent: dis-misc-router
   objectives: []
 }
-researchCostMultiplier: 0.4
+researchCostMultiplier: 0.3
 
 scaledHealth: 40.0
 armor: 0.0
@@ -27,6 +27,6 @@ envDisabled: 22
 
 squareSprite: false
 
-speed: 6.7
+speed: 6.0
 
 configurable: false

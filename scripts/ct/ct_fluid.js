@@ -233,6 +233,32 @@
     exports.liqInt_glassMelt = liqInt_glassMelt;
 
 
+    const liqInt_solutionSodiumHydroxide = extend(Liquid, "liq-int-solution-sodium-hydroxide", {
+      update(puddle) {
+        this.super$update(puddle);
+        update_extra(this, puddle);
+      },
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    exports.liqInt_solutionSodiumHydroxide = liqInt_solutionSodiumHydroxide;
+
+
+    const liqInt_solutionSuspensionLimeSodiumHydroxide = extend(Liquid, "liq-int-solution-suspension-lime-sodium-hydroxide", {
+      update(puddle) {
+        this.super$update(puddle);
+        update_extra(this, puddle);
+      },
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    exports.liqInt_solutionSuspensionLimeSodiumHydroxide = liqInt_solutionSuspensionLimeSodiumHydroxide;
+
+
     /* gas-chem */
     const gasChem_ammonia = extend(Liquid, "gas-chem-ammonia", {
       update(puddle) {
@@ -245,6 +271,19 @@
       },
     });
     exports.gasChem_ammonia = gasChem_ammonia;
+
+
+    const gasChem_carbonDioxide = extend(Liquid, "gas-chem-carbon-dioxide", {
+      update(puddle) {
+        this.super$update(puddle);
+        update_extra(this, puddle);
+      },
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    exports.gasChem_carbonDioxide = gasChem_carbonDioxide;
 
 
     const gasChem_chlorine = extend(Liquid, "gas-chem-chlorine", {

@@ -1,0 +1,9 @@
+type: Floor
+variants: 2
+
+itemDrop: item-ore-bauxite
+playerUnmineable: true
+
+attributes: {
+  attr-rock-sedimentary-clastic: 1.0
+}
