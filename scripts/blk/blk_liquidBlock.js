@@ -192,7 +192,7 @@
             heatLevel = list1.get(i + 1);
           };
         };
-        heat = heatLevel * (amount / cap + 0.5) * (Math.round(cap / 200.0) * 0.1 + 1);
+        heat = heatLevel * (amount / cap * 0.75 + 0.75) * (cap / 300.0 * 0.15 + 0.75);
       } else {
         heat = 0.0;
       };

@@ -239,7 +239,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/11
+          reind-item-virt-bit/44
         ]
       }
     }
@@ -345,7 +345,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/142
+          reind-item-virt-bit/71
         ]
       }
     }
@@ -387,7 +387,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/312
+          reind-item-virt-bit/94
         ]
       }
     }
@@ -408,7 +408,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/156
+          reind-item-virt-bit/78
         ]
       }
     }
@@ -429,7 +429,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/16
+          reind-item-virt-bit/24
         ]
       }
     }
@@ -492,7 +492,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/14
+          reind-item-virt-bit/21
         ]
       }
     }
@@ -513,7 +513,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/202
+          reind-item-virt-bit/101
         ]
       }
     }
@@ -534,7 +534,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/289
+          reind-item-virt-bit/145
         ]
       }
     }
@@ -576,7 +576,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/122
+          reind-item-virt-bit/92
         ]
       }
     }
@@ -597,7 +597,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/14
+          reind-item-virt-bit/21
         ]
       }
     }
@@ -639,7 +639,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/107
+          reind-item-virt-bit/80
         ]
       }
     }
@@ -681,7 +681,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/10
+          reind-item-virt-bit/6
         ]
       }
     }
@@ -702,7 +702,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/432
+          reind-item-virt-bit/108
         ]
       }
     }
@@ -723,7 +723,7 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-virt-bit/350
+          reind-item-virt-bit/88
         ]
       }
     }

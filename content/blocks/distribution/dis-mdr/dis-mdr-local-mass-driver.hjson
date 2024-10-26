@@ -4,25 +4,25 @@ outlineRadius: 2
 outlineColor: 373a4d
 
 requirements: [
-  item-chem-graphite/80
-  item-chem-brass/80
-  item-chem-tin-bronze/35
-  item-chem-steel/70
-  item-ore-magnetite/40
+  item-bio-timber/60
+  item-chem-tin-bronze/20
+  item-chem-steel/30
+  item-chem-mangalloy/20
+  item-ore-magnetite/20
 ]
 buildCostMultiplier: 2.0
 
 research: {
-  parent: dis-brd-conveyor-bridge
+  parent: dis-mdr-standard-mass-driver
   objectives: []
 }
-researchCostMultiplier: 0.25
+researchCostMultiplier: 0.3
 
 scaledHealth: 60.0
 armor: 12.0
-size: 2
+size: 1
 hasItems: true
-itemCapacity: 90
+itemCapacity: 40
 hasLiquids: false
 liquidCapacity: 5.0
 hasPower: true
@@ -34,36 +34,36 @@ envDisabled: 22
 
 squareSprite: false
 
-range: 720.0
-rotateSpeed: 0.6
-translation: 7.0
-minDistribute: 45
-knockback: 2.0
+range: 100.0
+rotateSpeed: 1.8
+translation: 3.0
+minDistribute: 20
+knockback: 1.0
 reload: 300.0
-shake: 6.0
+shake: 2.0
 
 consumes: {
-  power: 1.5
+  power: 0.5
 }
 
 bulletSpeed: 8.0
-bulletLifetime: 90.0
+bulletLifetime: 12.5
 shootEffect: {
   type: MultiEffect
   effects: [
-    shootBigColor
+    shootSmallColor
     {
-      # ShootSmog
+      # ShootSmogSmall
       type: ParticleEffect
       interp: pow10Out
       lifetime: 900.0
-      particles: 48
+      particles: 24
       colorFrom: 8b8b8b80
       colorTo: 8b8b8b00
-      length: 48.0
+      length: 28.0
       cone: 20.0
       sizeFrom: 2.0
-      sizeTo: 10.0
+      sizeTo: 6.0
       sizeInterp: pow2Out
       strokeFrom: 2.0
       strokeTo: 1.0
@@ -71,49 +71,49 @@ shootEffect: {
       lenTo: 2.0
     }
     {
-      # ShootImpactWave
+      # ShootImpactWaveSmall
       type: MultiEffect
       effects: [
         {
           type: WaveEffect
-          lifetime: 60.0
+          lifetime: 50.0
           sides: -1
           colorFrom: 202020ff
           colorTo: 20202000
           sizeFrom: 0.0
-          sizeTo: 96.0
-          strokeFrom: 8.0
-          strokeTo: 8.0
+          sizeTo: 54.0
+          strokeFrom: 4.0
+          strokeTo: 4.0
         }
         {
           type: WaveEffect
-          lifetime: 75.0
+          lifetime: 65.0
           sides: -1
           colorFrom: 202020ff
           colorTo: 20202000
           sizeFrom: 0.0
-          sizeTo: 96.0
-          strokeFrom: 8.0
-          strokeTo: 8.0
+          sizeTo: 54.0
+          strokeFrom: 4.0
+          strokeTo: 4.0
         }
       ]
     }
   ]
 }
-smokeEffect: shootBigSmoke2
+smokeEffect: shootSmallSmoke
 receiveEffect: {
   type: MultiEffect
   effects: [
     mineSmall
     {
-      # ReceiveParticles
+      # ReceiveParticlesSmall
       type: ParticleEffect
       interp: reverse
       lifetime: 60.0
-      particles: 12
+      particles: 6
       colorFrom: ffd37fff
       colorTo: ffd37fff
-      length: 18.0
+      length: 12.0
       sizeFrom: 1.2
       sizeTo: 0.0
       sizeInterp: pow5In
@@ -124,4 +124,4 @@ receiveEffect: {
     }
   ]
 }
-shootSound: se-shot-mass-driver
+shootSound: se-shot-mass-driver2

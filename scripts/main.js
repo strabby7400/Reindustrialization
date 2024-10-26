@@ -19,6 +19,20 @@ require("ct/ct_weather");
 require("module/module_pollution");
 
 
+const list_tips = new Seq();
+let i = 1;
+while(Core.bundle.has("reindTips-" + i + ".name")) {
+  list_tips.add(Core.bundle.get("reindTips-" + i + ".name"));
+  i++
+};
+
+
+function tips_getRandom() {
+  var id = Math.round(Mathf.random(list_tips.size - 1));
+  return list_tips.get(id);
+};
+
+
 function dialogSet_welcome() {
   Sounds.wave.play();
 
@@ -26,6 +40,9 @@ function dialogSet_welcome() {
 
   // Adding contents
   dialog.cont.add("@reind-welcome.description").row();
+  dialog.cont.row();
+  dialog.cont.add("\n\n").row();
+  dialog.cont.add("[orange]" + tips_getRandom() + "[white]").row();
   dialog.cont.row();
   dialog.cont.add("\n\n").row();
   dialog.cont.row();

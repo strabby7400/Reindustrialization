@@ -347,6 +347,25 @@
       disMdr_standardMassDriver,
       480,
     );
+
+
+    const disMdr_localMassDriver = extend(MassDriver, "dis-mdr-local-mass-driver", {
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    disMdr_localMassDriver.buildType = () => extend(MassDriver.MassDriverBuild, disMdr_localMassDriver, {
+      updateTile() {
+        this.super$updateTile();
+        updateTile_extra(this);
+      },
+    });
+    exports.disMdr_localMassDriver = disMdr_localMassDriver;
+    modify_massDriver(
+      disMdr_localMassDriver,
+      90,
+    );
   // End
 
 
