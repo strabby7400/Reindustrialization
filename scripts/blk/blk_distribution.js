@@ -40,7 +40,7 @@
           obj.damage(Time.delta * 666666.0);
           effect_itemVirt.at(obj.x, obj.y, 0.0);
           var ui1 = new UI();
-          ui1.showInfoFade("@info.reind-virt-no-conveyor.name", 2.0);
+          ui1.showInfoFade(Core.bundle.get("info.reind-info-virt-no-conveyor.name"), 2.0);
         };
       };
     };
@@ -51,7 +51,7 @@
     const stat_exposed = new Stat("reind-exposed-to-air.name", StatCat.function);
 
 
-    function setStats_exposed(obj) {
+    function modifyStats_exposed(obj) {
         obj.stats.add(stat_exposed, true);
     };
 
@@ -61,7 +61,7 @@
       for(let i = 0; i < list_transportExposed.size; i++) {
         var target = Vars.content.block(list_transportExposed.get(i));
         if(target != null) {
-          setStats_exposed(target);
+          modifyStats_exposed(target);
         };
       };
     });
@@ -106,7 +106,7 @@
 
     function drawLight_itemIncinerator(obj) {
       var color = Color.valueOf("ffc999");
-      var lightRadius = 40.0;
+      var lightRadius = 48.0;
       var lightAlpha = 0.65;
       var lightSinScl = 10.0;
       var lightSinMag = 5.0;
@@ -180,6 +180,9 @@
       },
     });
     exports.disConv_multiPortConveyor = disConv_multiPortConveyor;
+    Events.run(ClientLoadEvent, () => {
+      disConv_multiPortConveyor.unloadable = true;
+    });
 
 
     /* dis-brd */
@@ -196,6 +199,10 @@
       },
     });
     exports.disBrd_conveyorBridge = disBrd_conveyorBridge;
+    Events.run(ClientLoadEvent, () => {
+      disBrd_conveyorBridge.unloadable = true;
+      disBrd_conveyorBridge.allowConfigInventory = true;
+    });
 
 
     /* dis-misc */
@@ -316,12 +323,12 @@
         this.super$updateTile();
         updateTile_extra(this);
       },
-      // Override
+      // Specific
       draw() {
         this.super$draw();
         draw_itemIncinerator(this);
       },
-      // Override
+      // Specific
       drawLight() {
         drawLight_itemIncinerator(this);
       },

@@ -1,0 +1,23 @@
+hidden: false
+
+research: {
+  parent: liq-chem-sulfurous-acid
+  objectives: []
+}
+
+flammability: 0.0
+temperature: 0.5
+heatCapacity: 0.4
+viscosity: 0.65
+explosiveness: 0.0
+
+coolant: false
+capPuddles: true
+boilPoint: 2.0
+
+color: 80ba78
+lightColor: 00000000
+
+effect: sta-liq-acid-iii
+
+incinerable: false

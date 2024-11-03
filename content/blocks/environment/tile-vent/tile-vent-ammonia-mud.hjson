@@ -25,5 +25,6 @@ effectColor: ffffff
 effectSpacing: 160.0
 
 attributes: {
+  attr-env-heat: 0.3
   attr-vent-ammonia: 1.0
 }

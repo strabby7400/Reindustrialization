@@ -1,0 +1,12 @@
+type: Floor
+variants: 0
+
+wall: tile-ore-gypsum-wall
+
+itemDrop: item-ore-barite
+playerUnmineable: true
+
+attributes: {
+  attr-rock-evaporite: 0.65
+  attr-rock-sedimentary-biological: 0.65
+}

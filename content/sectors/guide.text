@@ -1,0 +1,26 @@
+This document will guide you how to set up a production-based sector.
+
+Step 1:
+    In map rules, enable waves and set ending wave to 2.
+    Set enemy spawn point radius to 0, you don't need that anyway.
+
+Step 2:
+    Go to wave editor, delete all the generated waves.
+    Add one new with simply 0 units per wave.
+
+Step 3:
+    Go to edit-in-game, build one world processor with following commands:
+      0 | Set Rule: currentWaveTime = 1
+      1 | Get Flag: finish = flag "finish"
+      2 | Jump -> 0: if finish not true
+      3 | Set Rule: currentWaveTime = 0
+      4 | Wait: 8 sec
+    I recommend setting its team to the enemy team, so that player can't check it.
+
+Step 4:
+    Go to map objectives, set it up.
+    Check the last objective, set flagsAdded to "finish".
+
+Note:
+    By setting ending wave to 1 and enabling waves in world processors, you can reach it too.
+    However, enemy AI are replaced with commandAI if Vars.state.rules.waves is false, which means that they won't search for your core.

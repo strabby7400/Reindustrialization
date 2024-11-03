@@ -93,7 +93,7 @@ effectChance: 0.003
 range: 27
 healPercent: 0.0006
 optionalMultiplier: 100.0
-optionalUseTime: 150.0
+optionalUseTime: 300.0
 
 consumes: {
   power: 1.16666667

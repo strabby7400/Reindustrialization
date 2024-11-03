@@ -41,10 +41,9 @@ drawer: {
     {
       type: DrawRegion
       suffix: "-shade"
-      buildingRotate: true
     }
     {
-      type: DrawDefault
+      type: DrawRegion
     }
     {
       type: DrawRegion

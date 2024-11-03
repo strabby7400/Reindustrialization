@@ -8,11 +8,50 @@
 */
 
 
+  // Start: Import
+    const db_power = require("db/db_power");
+  // End
+
+
+  // Start: Voltage
+    const stat_voltageTier = new Stat("reind-stat-voltage-tier.name", StatCat.function);
+
+
+    function modifyStats_voltageTier(obj, param) {
+      var result;
+      switch(param) {
+        case "LV" :
+          result = "@reindTerms.voltageLV.name";
+          break;
+        case "HV" :
+          result = "@reindTerms.voltageHV.name";
+          break;
+      };
+      obj.stats.add(stat_voltageTier, result);
+    };
+
+
+    Events.run(ClientLoadEvent, () => {
+      Vars.content.blocks().each(b => {
+        if(b.name.includes("reind-") && b.hasPower) {
+          var param;
+          if(db_power.tierHV.contains(b.name)) {
+            param = "HV";
+          } else {
+            param = "LV";
+          };
+          modifyStats_voltageTier(b, param);
+        };
+      });
+    });
+  // End
+
+
   // Start: Modify
     function modify_powerBlock(obj, powerUse, powerCapacity) {
       Events.run(ClientLoadEvent, () => {
         obj.consumePower(powerUse);
-        obj.stats.add(Stat.powerUse, Mathf.round(powerUse * 60.0), StatUnit.perSecond);
+        obj.stats.add(Stat.powerUse, powerUse * 60.0, StatUnit.perSecond);
         if(powerCapacity > 0) {
           obj.consumePowerBuffered(powerCapacity);
         };
@@ -59,7 +98,7 @@
       },
     });
     exports.powWire_cableCopper = powWire_cableCopper;
-    modify_powerBlock(powWire_cableCopper, 1.0 / 60.0, 0.0);
+    modify_powerBlock(powWire_cableCopper, 2.25 / 60.0, 0.0);
 
 
     const powWire_wireRelayCopper = extend(BeamNode, "pow-wire-wire-relay-copper", {
@@ -75,7 +114,7 @@
       },
     });
     exports.powWire_wireRelayCopper = powWire_wireRelayCopper;
-    modify_powerBlock(powWire_wireRelayCopper, 12.0 / 60.0, 0.0);
+    modify_powerBlock(powWire_wireRelayCopper, 30.0 / 60.0, 0.0);
 
 
     const powWire_wireNodeCopper = extend(PowerNode, "pow-wire-wire-node-copper", {
@@ -91,7 +130,7 @@
       },
     });
     exports.powWire_wireNodeCopper = powWire_wireNodeCopper;
-    modify_powerBlock(powWire_wireNodeCopper, 36.0 / 60.0, 0.0);
+    modify_powerBlock(powWire_wireNodeCopper, 65.0 / 60.0, 0.0);
   // End
 
 

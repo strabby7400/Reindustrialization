@@ -6,7 +6,7 @@ requirements: [
   item-prod-tempered-glass-pane/30
   item-chem-tin-bronze/60
   item-chem-steel/80
-  item-chem-stainless-steel/30
+  item-chem-stainless-steel/60
 ]
 buildCostMultiplier: 2.0
 
@@ -96,8 +96,16 @@ ambientSoundVolume: 0.3
 
 menu: simple
 recipes: [
-  ## Water
-    # Lime + Trona
+
+
+/*
+    ==================================================
+    Part: Water
+    ==================================================
+*/
+
+
+  // Ing: Lime, Trona
     {
       craftTime: 600.0
       icon: reind-liq-int-solution-suspension-lime-sodium-hydroxide
@@ -117,4 +125,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

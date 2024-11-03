@@ -2,8 +2,8 @@
 category: distribution
 
 requirements: [
-  item-chem-graphite/10
-  item-prod-brick-clay/20
+  item-chem-graphite/40
+  item-prod-brick-clay/30
 ]
 buildCostMultiplier: 2.0
 

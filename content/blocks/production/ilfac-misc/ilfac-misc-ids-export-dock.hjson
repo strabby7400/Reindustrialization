@@ -1,5 +1,5 @@
 type: multicraft.MultiCrafter
-category: crafting
+category: effect
 
 requirements: [
   item-chem-lead/70
@@ -222,8 +222,19 @@ ambientSoundVolume: 0.25
 
 menu: simple
 recipes: [
-  ## Solid
-    # Building - Cement
+
+
+// Warning: Really long recipe list!
+
+
+/*
+    ==================================================
+    Part: Solid
+    ==================================================
+*/
+
+
+  // Building: Cement
     {
       craftTime: 1800.0
       icon: reind-item-buil-cement
@@ -244,7 +255,8 @@ recipes: [
       }
     }
 
-    # Chemical - Lime
+
+  // Chemical: Lime
     {
       craftTime: 1800.0
       icon: reind-item-chem-lime
@@ -266,7 +278,7 @@ recipes: [
     }
 
 
-    # Ore - Bauxite
+  // Ore: Bauxite
     {
       craftTime: 1800.0
       icon: reind-item-ore-bauxite
@@ -286,6 +298,29 @@ recipes: [
         ]
       }
     }
+
+
+  // Ore: Chromite
+    {
+      craftTime: 1800.0
+      icon: reind-item-ore-chromite
+      input: {
+        power: 7.33333333
+        items: [
+          reind-item-ore-chromite/1000
+        ]
+        fluids: [
+          reind-ileffc-effc-ids/0.01666667
+          reind-effc-effc-core/0.03333333
+        ]
+      }
+      output: {
+        items: [
+          reind-item-virt-bit/68
+        ]
+      }
+    }
+
 
     # Ore - Clay
     {
@@ -308,7 +343,7 @@ recipes: [
       }
     }
 
-    # Ore - Crude Borax
+  // Ore: Crude Borax
     {
       craftTime: 1800.0
       icon: reind-item-ore-crude-borax
@@ -329,7 +364,8 @@ recipes: [
       }
     }
 
-    # Ore - Crude Graphite
+
+  // Ore: Crude Graphite
     {
       craftTime: 1800.0
       icon: reind-item-ore-crude-graphite
@@ -350,7 +386,8 @@ recipes: [
       }
     }
 
-    # Ore - Crude Sulfur
+
+  // Ore: Crude Sulfur
     {
       craftTime: 1800.0
       icon: reind-item-ore-crude-sulfur
@@ -371,7 +408,8 @@ recipes: [
       }
     }
 
-    # Ore - Galena
+
+  // Ore: Galena
     {
       craftTime: 1800.0
       icon: reind-item-ore-galena
@@ -392,7 +430,8 @@ recipes: [
       }
     }
 
-    # Ore - Gypsum
+
+  // Ore: Gypsum
     {
       craftTime: 1800.0
       icon: reind-item-ore-gypsum
@@ -413,7 +452,8 @@ recipes: [
       }
     }
 
-    # Ore - Hematite
+
+  // Ore: Hematite
     {
       craftTime: 1800.0
       icon: reind-item-ore-hematite
@@ -434,7 +474,8 @@ recipes: [
       }
     }
 
-    # Ore - Lignite
+
+  // Ore: Lignite
     {
       craftTime: 1800.0
       icon: reind-item-ore-lignite
@@ -455,7 +496,8 @@ recipes: [
       }
     }
 
-    # Ore - Limonite
+
+  // Ore: Limonite
     {
       craftTime: 1800.0
       icon: reind-item-ore-limonite
@@ -476,7 +518,8 @@ recipes: [
       }
     }
 
-    # Ore - Magnetite
+
+  // Ore: Magnetite
     {
       craftTime: 1800.0
       icon: reind-item-ore-magnetite
@@ -497,7 +540,8 @@ recipes: [
       }
     }
 
-    # Ore - Malachite
+
+  // Ore: Malachite
     {
       craftTime: 1800.0
       icon: reind-item-ore-malachite
@@ -518,7 +562,8 @@ recipes: [
       }
     }
 
-    # Ore - Native Copper
+
+  // Ore: Native Copper
     {
       craftTime: 1800.0
       icon: reind-item-ore-native-copper
@@ -539,7 +584,8 @@ recipes: [
       }
     }
 
-    # Ore - Peat
+
+  // Ore: Peat
     {
       craftTime: 1800.0
       icon: reind-item-ore-peat
@@ -560,7 +606,8 @@ recipes: [
       }
     }
 
-    # Ore - Psilomelane
+
+  // Ore: Psilomelane
     {
       craftTime: 1800.0
       icon: reind-item-ore-psilomelane
@@ -581,7 +628,8 @@ recipes: [
       }
     }
 
-    # Ore - Pumice
+
+  // Ore: Pumice
     {
       craftTime: 1800.0
       icon: reind-item-ore-pumice
@@ -602,7 +650,8 @@ recipes: [
       }
     }
 
-    # Ore - Pyrite
+
+  // Ore: Pyrite
     {
       craftTime: 1800.0
       icon: reind-item-ore-pyrite
@@ -623,7 +672,7 @@ recipes: [
       }
     }
 
-    # Ore - Pyrolusite
+  // Ore: Pyrolusite
     {
       craftTime: 1800.0
       icon: reind-item-ore-pyrolusite
@@ -644,7 +693,8 @@ recipes: [
       }
     }
 
-    # Ore - Raw Coal
+
+  // Ore: Raw Coal
     {
       craftTime: 1800.0
       icon: reind-item-ore-raw-coal
@@ -665,7 +715,8 @@ recipes: [
       }
     }
 
-    # Ore - Sand
+
+  // Ore: Sand
     {
       craftTime: 1800.0
       icon: reind-item-ore-sand
@@ -686,7 +737,8 @@ recipes: [
       }
     }
 
-    # Ore - Sphalerite
+
+  // Ore: Sphalerite
     {
       craftTime: 1800.0
       icon: reind-item-ore-sphalerite
@@ -707,7 +759,8 @@ recipes: [
       }
     }
 
-    # Ore - Zircon
+
+  // Ore: Zircon
     {
       craftTime: 1800.0
       icon: reind-item-ore-zircon
@@ -728,8 +781,59 @@ recipes: [
       }
     }
 
-  ## Liquid
-    # Raw - Brine
+
+  // Product: Tempered Glass Pane
+    {
+      craftTime: 1800.0
+      icon: reind-item-prod-tempered-glass-pane
+      input: {
+        power: 7.33333333
+        items: [
+          reind-item-prod-tempered-glass-pane/1000
+        ]
+        fluids: [
+          reind-ileffc-effc-ids/0.01666667
+          reind-effc-effc-core/0.03333333
+        ]
+      }
+      output: {
+        items: [
+          reind-item-virt-bit/178
+        ]
+      }
+    }
+
+
+  // Product: Tempered Glass Tube
+    {
+      craftTime: 1800.0
+      icon: reind-item-prod-tempered-glass-tube
+      input: {
+        power: 7.33333333
+        items: [
+          reind-item-prod-tempered-glass-tube/1000
+        ]
+        fluids: [
+          reind-ileffc-effc-ids/0.01666667
+          reind-effc-effc-core/0.03333333
+        ]
+      }
+      output: {
+        items: [
+          reind-item-virt-bit/178
+        ]
+      }
+    }
+
+
+/*
+    ==================================================
+    Part: Liquid
+    ==================================================
+*/
+
+
+  // Raw: Brine
     {
       craftTime: 1800.0
       icon: reind-liq-ore-brine
@@ -748,7 +852,7 @@ recipes: [
       }
     }
 
-    # Raw - Latex
+  // Raw: Latex
     {
       craftTime: 1800.0
       icon: reind-liq-bio-latex
@@ -766,4 +870,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

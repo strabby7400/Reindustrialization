@@ -13,6 +13,7 @@ rotateSpeed: 2.75
 drag: 0.1
 hitSize: 17.0
 range: 360.0
+aimDst: 360.0
 lightRadius: -1.0
 fogRadius: 8.0
 itemCapacity: 160
@@ -71,8 +72,6 @@ abilities: [
   }
 ]
 
-shootWarmupSpeed: 0.1
-smoothReloadSpeed: 0.15
 parts: [
   {
     type: RegionPart

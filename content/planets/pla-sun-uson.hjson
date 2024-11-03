@@ -16,7 +16,7 @@ mesh: {
   ]
 }
 
-radius: 12.0
+radius: 24.0
 hasAtmosphere: false
 bloom: true
 orbitSpacing: 8.0

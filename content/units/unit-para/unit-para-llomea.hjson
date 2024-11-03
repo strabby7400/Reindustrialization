@@ -1,0 +1,160 @@
+type: legs
+outlines: true
+outlineRadius: 2
+outlineColor: 4d3737
+
+alwaysUnlocked: true
+
+drawCell: false
+createWreck: false
+createScorch: false
+deathExplosionEffect: {
+  # ParasiteDeathExplosion
+  type: ParticleEffect
+  region: reind-efr-shadow-white
+  interp: pow5Out
+  lifetime: 480.0
+  particles: 8
+  colorFrom: ff000010
+  colorTo: ff000000
+  length: 42.0
+  sizeFrom: 0.0
+  sizeTo: 16.0
+  strokeFrom: 1.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+deathSound: se-spec-parasite-explosion
+
+health: 420.0
+armor: 0.0
+speed: 1.08
+accel: 0.1
+rotateSpeed: 3.1
+drag: 0.1
+hitSize: 7.0
+range: 48.0
+aimDst: 48.0
+lightRadius: -1.0
+fogRadius: 8.0
+itemCapacity: 0
+flying: false
+lowAltitude: false
+
+envRequired: 1
+envDisabled: 22
+
+singleTarget: false
+targetAir: true
+targetGround: true
+omniMovement: true
+faceTarget: true
+drownTimeMultiplier: 0.75
+
+legCount: 6
+legLength: 16.0
+legStraightness: 0.32
+stepShake: 0.0
+rippleScale: 1.2
+lockLegBase: true
+legContinuousMove: true
+legExtension: -1.0
+legBaseOffset: 2.1
+legMaxLength: 1.0
+legMinLength: 0.7
+legLengthScl: 1.0
+legForwardScl: 1.4
+legGroupSize: 3
+legMoveSpace: 1.15
+allowLegStep: true
+hovering: false
+legPhysicsLayer: false
+
+shadowElevation: 0.06
+groundLayer: 60.0
+
+abilities: [
+  {
+    type: RegenAbility
+    percentAmount: 0.0005
+    amount: 0.0
+  }
+  {
+    type: LiquidExplodeAbility
+    liquid: liq-misc-carnage-plasma
+    amount: 36.0
+    radAmountScale: 1.5
+    radScale: 2.5
+    noiseMag: 6.0
+    noiseScl: 6.0
+  }
+]
+
+immunities: [
+  sta-spec-parasite
+]
+
+weapons: [
+  {
+    name: "unit-para-llomea-heart"
+    display: false
+    controllable: false
+    aiControllable: false
+    x: 0.0
+    y: -8.0
+    top: false
+    layerOffset: -0.0001
+    rotate: false
+    mirror: false
+    recoil: -1.0
+    reload: 40.0
+    bullet: {
+      type: BasicBulletType
+      maxRange: 1.0
+    }
+  }
+  {
+    x: 0
+    y: 0
+    rotate: false
+    mirror: false
+    shootSound: none
+    reload: 60.0
+    shoot: {
+      type: ShootPattern
+      shots: 1
+    }
+    shootCone: 180.0
+    shootOnDeath: true
+    bullet: {
+      type: ExplosionBulletType
+      maxRange: 48.0
+      despawnEffect: {
+        type: WaveEffect
+        lifetime: 30.0,
+        sides: -1,
+        colorFrom: ff7f7fff,
+        colorTo: ff7f7fff,
+        sizeFrom: 0.0,
+        sizeTo: 48.0,
+        strokeFrom: 4.0,
+        strokeTo: 0.0,
+      }
+      despawnSound: se-shot-explosion
+      splashDamage: 172.0
+      splashDamageRadius: 48.0
+      scaledSplashDamage: true
+      splashDamagePierce: false
+      despawnHit: true
+      despawnShake: 8.0
+      collides: false
+      collidesAir: true
+      collidesGround: true
+      knockback: 8.0
+      impact: false
+      status: sta-spec-parasite
+      statusDuration: 1800.0
+    }
+  }
+]

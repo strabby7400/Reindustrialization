@@ -53,8 +53,48 @@ ambientSoundVolume: 0.2
 
 menu: simple
 recipes: [
-  ## Blend
-    # Cement (Sand)
+
+
+/*
+    ==================================================
+    Part: Special
+    ==================================================
+*/
+
+
+  // Cement
+    {
+      craftTime: 60.0
+      icon: reind-item-buil-cement
+      input: {
+        power: 0.5
+        items: [
+          reind-item-int-blend-roasted-cement/2
+          reind-item-int-chunks-gypsum/1
+        ]
+        fluids: [
+          reind-effc-effc-lifting/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-buil-cement/2
+        ]
+      }
+    }
+
+
+/*
+    ==================================================
+    Part: Blend
+    ==================================================
+*/
+
+
+  /* Some of the recipes are valid for other mixers */
+
+
+  // Cement: Sand
     {
       craftTime: 60.0
       icon: reind-icon-blend-cement-sand
@@ -76,7 +116,8 @@ recipes: [
       }
     }
 
-    # Cement (Slag)
+
+  // Cement: Slag
     {
       craftTime: 60.0
       icon: reind-icon-blend-cement-slag
@@ -98,7 +139,11 @@ recipes: [
       }
     }
 
-    # High-alumina Brick
+
+  /* Firebrick region */
+
+
+  // High-alumina Brick
     {
       craftTime: 60.0
       icon: reind-item-int-blend-brick-high-alumina
@@ -119,16 +164,17 @@ recipes: [
       }
     }
 
-  ## Product
-    # Cement
+
+  // Zirconia Mullite Brick
     {
       craftTime: 60.0
-      icon: reind-item-buil-cement
+      icon: reind-item-int-blend-brick-zirconia-mullite
       input: {
         power: 0.5
         items: [
-          reind-item-int-blend-roasted-cement/2
-          reind-item-int-chunks-gypsum/1
+          reind-item-chem-zircon-sand/2
+          reind-item-ore-clay/2
+          reind-item-chem-lime/1
         ]
         fluids: [
           reind-effc-effc-lifting/0.01666667
@@ -136,8 +182,10 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-buil-cement/2
+          reind-item-int-blend-brick-zirconia-mullite/2
         ]
       }
     }
+
+
 ]

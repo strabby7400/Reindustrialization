@@ -14,7 +14,7 @@ sizeMin: 400.0
 sizeMax: 1000.0
 density: 12000.0
 minAlpha: 0.004
-maxAlpha: 0.018
+maxAlpha: 0.02
 sinSclMin: 60.0
 sinSclMax: 120.0
 sinMagMin: 2.5

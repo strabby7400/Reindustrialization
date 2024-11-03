@@ -76,7 +76,7 @@ effectChance: 0.01
 ambientSound: se-amb-turbine
 ambientSoundVolume: 0.15
 
-powerProduction: 14.16666667
+powerProduction: 15.0
 itemDuration: 120.0
 outputLiquid: null
 

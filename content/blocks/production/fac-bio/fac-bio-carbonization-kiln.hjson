@@ -104,8 +104,16 @@ ambientSoundVolume: 0.4
 
 menu: simple
 recipes: [
-  ## Charcoal
-    # Log
+
+
+/*
+    ==================================================
+    Part: Charcoal
+    ==================================================
+*/
+
+
+  // Log
     {
       craftTime: 600.0
       icon: reind-item-bio-log
@@ -122,7 +130,8 @@ recipes: [
       }
     }
 
-    # Timber
+
+  // Timber
     {
       craftTime: 600.0
       icon: reind-item-bio-timber
@@ -139,8 +148,30 @@ recipes: [
       }
     }
 
-  ## Active Carbon
-    # Intermediate (I/Active Carbon)
 
-    # Intermediate (II/Active Carbon)
+  // Hypha Rod
+    {
+      craftTime: 600.0
+      icon: reind-item-bio-hypha-rod
+      input: {
+        items: [
+          reind-item-bio-hypha-rod/30
+        ]
+      }
+      output: {
+        items: [
+          reind-item-bio-charcoal/20
+        ]
+        heat: 6.0
+      }
+    }
+
+
+/*
+    ==================================================
+    Part: Active Carbon
+    ==================================================
+*/
+
+
 ]

@@ -9,26 +9,23 @@
 
 
   // Start: Import
-    const db_blk_manualGenerator = require("db/db_blk_manualGenerator");
+    const db_block = require("db/db_block");
   // End
 
 
   // Start: Manual Generator
-    function setStats_manualGenerator(obj, param) {
+    function modifyStats_manualGenerator(obj, param) {
       obj.stats.add(Stat.range, param, StatUnit.blocks);
     };
 
 
     Events.run(ClientLoadEvent, () => {
-      const list_manualGenerator = db_blk_manualGenerator.manualGenerator;
+      const list_manualGenerator = db_block.manualGenerator;
       for(let i = 0; i < list_manualGenerator.size - 1; i++) {
         if(typeof list_manualGenerator.get(i) == "string") {
           var target = Vars.content.block(list_manualGenerator.get(i));
           if(target != null) {
-            setStats_manualGenerator(
-              target,
-              list_manualGenerator.get(i + 1),
-            );
+            modifyStats_manualGenerator(target,list_manualGenerator.get(i + 1));
           };
         };
       };
@@ -43,7 +40,7 @@
       for(let i = 0; i < Groups.player.size(); i++) {
         var p = Groups.player.index(i);
         var pu = p.unit();
-        if(pu != null) {
+        if(pu != null && pu.canBuild()) {
           var px_temp = pu.tileX();
           var py_temp = pu.tileY();
           var dsqr_temp = Math.pow(px_temp - tx, 2) + Math.pow(py_temp - ty, 2);
@@ -55,7 +52,7 @@
         };
       };
       if(px != null && py != null) {
-        var list = db_blk_manualGenerator.manualGenerator;
+        var list = db_block.manualGenerator;
         var radius = 8.0;
         for(let i = 0; i < list.size - 1; i++) {
           if(obj.name == list.get(i)) {
@@ -86,7 +83,7 @@
       for(let i = 0; i < Groups.player.size(); i++) {
         var p = Groups.player.index(i);
         var pu = p.unit();
-        if(pu != null) {
+        if(pu != null && pu.canBuild()) {
           var px_temp = pu.x;
           var py_temp = pu.y;
           var dsqr_temp = Math.pow(px_temp - x, 2) + Math.pow(py_temp - y, 2);
@@ -99,7 +96,7 @@
         };
       };
       if(px != null && py != null && target != null) {
-        var list = db_blk_manualGenerator.manualGenerator;
+        var list = db_block.manualGenerator;
         var radius = 8.0;
         for(let i = 0; i < list.size - 1; i++) {
           if(obj.name == list.get(i)) {
@@ -108,7 +105,7 @@
         };
         if(dsqr <= Math.pow(radius * Vars.tilesize, 2)) {
           var alpha = 1 - dsqr / Math.pow(radius * Vars.tilesize, 2);
-          if(Mathf.chance(Time.delta * 0.02 * alpha)) {
+          if(!Vars.state.paused && Mathf.chance(Time.delta * 0.02 * alpha)) {
             var effect_playerEfficiency = extend(ParticleEffect, {
               region: "reind-efr-triangle",
               interp: Interp.pow2Out,

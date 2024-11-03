@@ -1,12 +1,12 @@
 type: GenericCrafter
-category: crafting
+category: effect
 
 requirements: [
   item-chem-lead/30
   item-chem-graphite/20
   item-chem-brass/15
   item-chem-steel/15
-  ilitem-misc-ids-exciter-rod/1
+  ilitem-misc-ids-exciter-rod/3
 ]
 buildCostMultiplier: 2.0
 

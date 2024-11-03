@@ -66,8 +66,17 @@ ambientSoundVolume: 0.2
 
 menu: simple
 recipes: [
-  ## Special
-    # Sandstone
+
+
+/*
+    ==================================================
+    Part: Special
+    ==================================================
+*/
+
+
+  // Sandstone
+    /* Watz da point? */
     {
       craftTime: 360.0
       icon: reind-item-int-chunks-sandstone
@@ -87,8 +96,36 @@ recipes: [
       }
     }
 
-  ## Dust
-    # Bauxite
+
+  // Sandstone
+    {
+      craftTime: 360.0
+      icon: reind-item-int-chunks-zircon
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-int-chunks-zircon/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-zircon-sand/12
+        ]
+      }
+    }
+
+
+/*
+    ==================================================
+    Part: Dust
+    ==================================================
+*/
+
+
+  // Bauxite
     {
       craftTime: 360.0
       icon: reind-item-ore-bauxite
@@ -108,7 +145,8 @@ recipes: [
       }
     }
 
-    # Raw Coal
+
+  // Raw Coal
     {
       craftTime: 360.0
       icon: reind-item-ore-raw-coal
@@ -127,4 +165,199 @@ recipes: [
         ]
       }
     }
+
+
+  // Sand
+    /* Not fine enough */
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-sand
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-sand/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-sand/12
+        ]
+      }
+    }
+
+
+  /* Rock dust region */
+
+
+  // Clastic
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-rock-shard-clastic
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-rock-shard-clastic/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-rock-clastic/12
+        ]
+      }
+    }
+
+
+  // Evaporite
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-rock-shard-evaporite
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-rock-shard-evaporite/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-rock-evaporite/12
+        ]
+      }
+    }
+
+
+  // Hypabyssal
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-rock-shard-hypabyssal
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-rock-shard-hypabyssal/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-rock-hypabyssal/12
+        ]
+      }
+    }
+
+
+  // Lava
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-rock-shard-lava
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-rock-shard-lava/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-rock-lava/12
+        ]
+      }
+    }
+
+
+  // Metamorphic
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-rock-shard-metamorphic
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-rock-shard-metamorphic/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-rock-metamorphic/12
+        ]
+      }
+    }
+
+
+  // Plutonic
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-rock-shard-plutonic
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-rock-shard-plutonic/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-rock-plutonic/12
+        ]
+      }
+    }
+
+
+  // Biological Sedimentary
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-rock-shard-sedimentary-biological
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-rock-shard-sedimentary-biological/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-rock-sedimentary-biological/12
+        ]
+      }
+    }
+
+
+  // Clastic Sedimentary
+    {
+      craftTime: 360.0
+      icon: reind-item-ore-rock-shard-sedimentary-clastic
+      input: {
+        power: 0.83333333
+        items: [
+          reind-item-ore-rock-shard-sedimentary-clastic/12
+        ]
+        fluids: [
+          reind-effc-effc-ball-impact-i/0.01666667
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-rock-sedimentary-clastic/12
+        ]
+      }
+    }
+
+
 ]

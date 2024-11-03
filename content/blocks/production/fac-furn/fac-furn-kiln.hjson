@@ -17,10 +17,10 @@ armor: 0.0
 size: 2
 hasItems: true
 itemCapacity: 80
-hasLiquids: false
-liquidCapacity: 5.0
-outputsLiquid: false
-ignoreLiquidFullness: false
+hasLiquids: true
+liquidCapacity: 30.0
+outputsLiquid: true
+ignoreLiquidFullness: true
 hasPower: false
 fogRadius: -1
 rotate: false
@@ -104,8 +104,19 @@ ambientSoundVolume: 0.2
 
 menu: simple
 recipes: [
-  ## Survival Mode
-    # Copper
+
+
+/*
+    ==================================================
+    Part: Batch
+    ==================================================
+*/
+
+
+  /* Only meant to be used at the start */
+
+
+  // Copper
     {
       craftTime: 6000.0
       icon: reind-item-chem-copper
@@ -122,7 +133,8 @@ recipes: [
       }
     }
 
-    # Graphite
+
+  // Graphite
     {
       craftTime: 6000.0
       icon: reind-item-chem-graphite
@@ -139,7 +151,8 @@ recipes: [
       }
     }
 
-    # Lead
+
+  // Lead
     {
       craftTime: 6000.0
       icon: reind-item-chem-lead
@@ -156,7 +169,8 @@ recipes: [
       }
     }
 
-    # Tin
+
+  // Tin
     {
       craftTime: 6000.0
       icon: reind-item-chem-tin
@@ -173,7 +187,8 @@ recipes: [
       }
     }
 
-    # Zinc
+
+  //Zinc
     {
       craftTime: 6000.0
       icon: reind-item-chem-zinc
@@ -190,8 +205,18 @@ recipes: [
       }
     }
 
-  ## Smelting Mode
-    # Copper - Azurite
+
+/*
+    ==================================================
+    Part: Smelting
+    ==================================================
+*/
+
+
+  /* Complex ores like chalcopyrite are not included here */
+
+
+  // Copper: Azurite
     {
       craftTime: 120.0
       icon: reind-item-ore-azurite
@@ -208,7 +233,8 @@ recipes: [
       }
     }
 
-    # Copper - Cuprite
+
+  // Copper: Cuprite
     {
       craftTime: 120.0
       icon: reind-item-ore-cuprite
@@ -225,7 +251,8 @@ recipes: [
       }
     }
 
-    # Copper - Malachite
+
+  // Copper: Malachite
     {
       craftTime: 120.0
       icon: reind-item-ore-malachite
@@ -242,7 +269,8 @@ recipes: [
       }
     }
 
-    # Copper - Native Copper
+
+  // Copper: Native Copper
     {
       craftTime: 120.0
       icon: reind-item-ore-native-copper
@@ -259,7 +287,8 @@ recipes: [
       }
     }
 
-    # Graphite - Crude Graphite
+
+  // Graphite: Crude Graphite
     {
       craftTime: 120.0
       icon: reind-item-ore-crude-graphite
@@ -276,7 +305,8 @@ recipes: [
       }
     }
 
-    # Lead - Galena
+
+  // Lead: Galena
     {
       craftTime: 120.0
       icon: reind-item-ore-galena
@@ -293,7 +323,8 @@ recipes: [
       }
     }
 
-    # Tin - Cassiterite
+
+  // Tin: Cassiterite
     {
       craftTime: 120.0
       icon: reind-item-ore-cassiterite
@@ -310,7 +341,8 @@ recipes: [
       }
     }
 
-    # Zinc - Sphalerite
+
+  // Zinc: Sphalerite
     {
       craftTime: 120.0
       icon: reind-item-ore-sphalerite
@@ -327,8 +359,15 @@ recipes: [
       }
     }
 
-  ## Alloy
-    # Copper Alloy - Brass
+
+/*
+    ==================================================
+    Part: Batch
+    ==================================================
+*/
+
+
+  // Copper: Brass
     {
       craftTime: 120.0
       icon: reind-item-chem-brass
@@ -346,7 +385,8 @@ recipes: [
       }
     }
 
-    # Copper Alloy - Tin Bronze
+
+  // Copper: Tin Bronze
     {
       craftTime: 120.0
       icon: reind-item-chem-tin-bronze
@@ -364,7 +404,8 @@ recipes: [
       }
     }
 
-    # Lead Alloy - Solder
+
+  // Lead: Solder
     {
       craftTime: 120.0
       icon: reind-item-chem-solder
@@ -382,8 +423,15 @@ recipes: [
       }
     }
 
-  ## Firebricks
-    # Clay Brick
+
+/*
+    ==================================================
+    Part: Brick
+    ==================================================
+*/
+
+
+  // Clay
     {
       craftTime: 120.0
       icon: reind-item-prod-brick-clay
@@ -400,7 +448,9 @@ recipes: [
       }
     }
 
-    # High-alumina Brick
+
+  // High-alumina
+    /* Very complex */
     {
       craftTime: 120.0
       icon: reind-item-prod-brick-high-alumina
@@ -417,7 +467,8 @@ recipes: [
       }
     }
 
-    # Magnesia Brick
+
+  // Magnesia
     {
       craftTime: 120.0
       icon: reind-item-prod-brick-magnesia
@@ -434,44 +485,33 @@ recipes: [
       }
     }
 
-    # Zircon Brick
+
+  // Zirconia Mullite
     {
       craftTime: 120.0
-      icon: reind-item-prod-brick-zircon
+      icon: reind-item-prod-brick-zirconia-mullite
       input: {
         items: [
-          reind-item-ore-zircon/2
-          reind-item-ore-clay/2
+          reind-item-int-blend-brick-zirconia-mullite/2
           reind-item-bio-charcoal/2
         ]
       }
       output: {
         items: [
-          reind-item-prod-brick-zircon/2
+          reind-item-prod-brick-zirconia-mullite/2
         ]
       }
     }
 
-  ## Special 1
-    # Lime
-    {
-      craftTime: 120.0
-      icon: reind-item-ore-limestone
-      input: {
-        items: [
-          reind-item-ore-limestone/4
-          reind-item-bio-charcoal/2
-        ]
-      }
-      output: {
-        items: [
-          reind-item-chem-lime/2
-        ]
-      }
-    }
 
-  ## Special 2
-    # Blend (Cement)
+/*
+    ==================================================
+    Part: Roasting
+    ==================================================
+*/
+
+
+  // Blend (Cement)
     {
       craftTime: 120.0
       icon: reind-item-int-blend-cement
@@ -487,4 +527,27 @@ recipes: [
         ]
       }
     }
+
+
+  // Limestone
+    {
+      craftTime: 120.0
+      icon: reind-item-ore-limestone
+      input: {
+        items: [
+          reind-item-ore-limestone/4
+          reind-item-bio-charcoal/2
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-lime/2
+        ]
+        fluids: [
+          reind-gas-chem-carbon-dioxide/0.1
+        ]
+      }
+    }
+
+
 ]

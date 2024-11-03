@@ -13,6 +13,7 @@ rotateSpeed: 1.18
 drag: 0.02
 hitSize: 20.0
 range: 304.0
+aimDst: 304.0
 lightRadius: -1.0
 fogRadius: 0.0
 itemCapacity: 80
@@ -47,8 +48,6 @@ coreUnitDock: true
 isEnemy: false
 defaultController: BuilderAI
 
-shootWarmupSpeed: 0.1
-smoothReloadSpeed: 0.15
 parts: [
   {
     type: HoverPart
@@ -96,6 +95,10 @@ weapons: [
     layerOffset: 0.0001
     rotate: true
     mirror: false
+    bullet: {
+      type: BasicBulletType
+      maxRange: 1.0
+    }
   }
   {
     name: unit-core-c2-expedition-ii-rotator-blur
@@ -108,6 +111,10 @@ weapons: [
     layerOffset: 0.0001
     rotate: true
     mirror: false
+    bullet: {
+      type: BasicBulletType
+      maxRange: 1.0
+    }
   }
   {
     name: unit-core-c2-expedition-ii-rotator-blur
@@ -120,6 +127,10 @@ weapons: [
     layerOffset: 0.0001
     rotate: true
     mirror: false
+    bullet: {
+      type: BasicBulletType
+      maxRange: 1.0
+    }
   }
   {
     name: unit-core-c2-expedition-ii-rotator-blur
@@ -132,6 +143,10 @@ weapons: [
     layerOffset: 0.0001
     rotate: true
     mirror: false
+    bullet: {
+      type: BasicBulletType
+      maxRange: 1.0
+    }
   }
   {
     name: unit-core-c2-expedition-ii-gun
@@ -195,6 +210,9 @@ weapons: [
       smokeEffect: shootSmallSmoke
       hitEffect: hitBulletSmall
       despawnEffect: hitBulletSmall
+      trailColor: ffffff10
+      trailLength: 6
+      trailWidth: 2.0
       lifetime: 30.4
       speed: 10.0
       damage: 26.0

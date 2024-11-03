@@ -108,10 +108,34 @@ ambientSoundVolume: 0.1
 
 menu: simple
 recipes: [
-  ## Gas Product
-    # Carbon Dioxide - Coke
 
-    # Sulfur Dioxide - Sulfur
+
+/*
+    ==================================================
+    Part: Gas
+    ==================================================
+*/
+
+
+  // Carbon Dioxide: Coke
+    {
+      craftTime: 60.0
+      icon: reind-item-chem-coke
+      input: {
+        power: 0.25
+        items: [
+          reind-item-chem-coke/1
+        ]
+      }
+      output: {
+        fluids: [
+          reind-gas-chem-carbon-dioxide/0.1
+        ]
+      }
+    }
+
+
+  // Sulfur Dioxide: Sulfur
     {
       craftTime: 60.0
       icon: reind-item-chem-sulfur
@@ -123,13 +147,20 @@ recipes: [
       }
       output: {
         fluids: [
-          reind-gas-chem-sulfur-dioxide/0.05
+          reind-gas-chem-sulfur-dioxide/0.1
         ]
       }
     }
 
-  ## Solid Product
-    # Wood Ash - Log
+
+/*
+    ==================================================
+    Part: Gas
+    ==================================================
+*/
+
+
+  // Wood Ash: Log
     {
       craftTime: 90.0
       icon: reind-icon-wood-ash-log
@@ -146,7 +177,8 @@ recipes: [
       }
     }
 
-    # Wood Ash - Timber
+
+  // Wood Ash: Timber
     {
       craftTime: 60.0
       icon: reind-icon-wood-ash-timber
@@ -162,4 +194,24 @@ recipes: [
         ]
       }
     }
+
+
+  // Wood Ash: Sawdust
+    {
+      craftTime: 60.0
+      icon: reind-icon-wood-ash-sawdust
+      input: {
+        power: 0.25
+        items: [
+          reind-item-bio-sawdust/1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-bio-wood-ash/1
+        ]
+      }
+    }
+
+
 ]

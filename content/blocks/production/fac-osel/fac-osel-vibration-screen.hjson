@@ -54,8 +54,16 @@ ambientSoundVolume: 0.1
 
 menu: simple
 recipes: [
-  ## Special
-    # Aggregate
+
+
+/*
+    ==================================================
+    Part: Special
+    ==================================================
+*/
+
+
+  // Aggregate
     {
       craftTime: 240.0
       icon: reind-item-int-chunks-aggregate
@@ -72,4 +80,5 @@ recipes: [
         ]
       }
     }
+
 ]

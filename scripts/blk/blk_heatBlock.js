@@ -17,17 +17,19 @@
     const stat_heatSafeLimit = new Stat("reind-heat-safe-limit.name", StatCat.function);
 
 
-    function setStats_heatDamage(obj, param) {
+    function modifyStats_heatDamage(obj, param) {
       obj.stats.add(stat_heatSafeLimit, param, StatUnit.heatUnits);
     };
+
+
     Events.run(ClientLoadEvent, () => {
       const list_heatSafeLimit = db_heat.heatSafeLimit;
       for(let i = 0; i <= list_heatSafeLimit.size - 1; i++) {
         if(typeof list_heatSafeLimit.get(i) == "string") {
-          setStats_heatDamage(
-            Vars.content.block(list_heatSafeLimit.get(i)),
-            list_heatSafeLimit.get(i + 1),
-          );
+          var target = Vars.content.block(list_heatSafeLimit.get(i));
+          if(target != null) {
+            modifyStats_heatDamage(target, list_heatSafeLimit.get(i + 1));
+          };
         };
       };
     });
@@ -42,7 +44,7 @@
           limit = list.get(i + 1);
         };
       };
-      
+
       // Deal damage
       if(obj.heat != null && obj.heat > limit) {
         obj.damage(Time.delta * (obj.heat - limit) / 240.0);

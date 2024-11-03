@@ -18,7 +18,7 @@
     const stat_allowedInConduits = new Stat("reind-stat-allowed-in-conduits.name", StatCat.function);
 
 
-    function setStats_effc(obj) {
+    function modifyStats_effc(obj) {
       obj.stats.add(stat_allowedInConduits, false);
     };
 
@@ -28,7 +28,7 @@
       for(let i = 0; i < list_effc.size; i++) {
         var target = Vars.content.liquid(list_effc.get(i));
         if(target != null) {
-          setStats_effc(target);
+          modifyStats_effc(target);
         };
       };
     });

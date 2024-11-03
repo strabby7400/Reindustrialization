@@ -1,0 +1,28 @@
+# type: CellLiquid
+hidden: false
+
+research: {
+  parent: item-bio-hypha-rod
+  objectives: []
+}
+
+flammability: 0.8
+temperature: 0.6
+heatCapacity: 0.4
+viscosity: 0.8
+explosiveness: 0.0
+
+coolant: false
+capPuddles: true
+boilPoint: 2.0
+
+color: cc3333
+lightColor: 00000000
+
+effect: sta-spec-parasite
+
+incinerable: false
+
+colorFrom: ff7f7f
+colorTo: b35656
+cells: 12

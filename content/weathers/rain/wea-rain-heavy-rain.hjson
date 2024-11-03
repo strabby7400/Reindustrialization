@@ -12,7 +12,7 @@ statusAir: true
 statusGround: true
 
 attrs: {
-  attr-weather-rain: 1.0
+  attr-env-rain: 1.0
 }
 
 density: 300.0

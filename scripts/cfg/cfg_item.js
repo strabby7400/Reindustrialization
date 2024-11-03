@@ -7,19 +7,24 @@ const db_item = require("db/db_item");
 const stat_allowedInConveyors = new Stat("reind-allowed-in-conveyors.name", StatCat.function);
 
 
-function setStats_itemVirt(obj) {
+function modifyStats_itemVirt(obj) {
   obj.stats.add(stat_allowedInConveyors, false);
 };
 
 
 Events.run(ClientLoadEvent, () => {
-    const list_itemVirt = db_item.itemVirt;
-    for(let i = 0; i < list_itemVirt.size; i++) {
-      var target = Vars.content.item(list_itemVirt.get(i));
-      if(target != null) {
-        setStats_itemVirt(target);
-      };
+  const list_itemVirt = db_item.itemVirt;
+  for(let i = 0; i < list_itemVirt.size; i++) {
+    var target = Vars.content.item(list_itemVirt.get(i));
+    if(target != null) {
+      modifyStats_itemVirt(target);
     };
+  };
+});
 
-    Log.info("reind:cfg_item.js loaded.");
+
+
+
+Events.run(ClientLoadEvent, () => {
+  Log.info("reind:cfg_item.js loaded.");
 });

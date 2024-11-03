@@ -105,36 +105,19 @@ ambientSoundVolume: 0.1
 
 menu: simple
 recipes: [
-  ## Heat: 4
-    # Timber
-    {
-      craftTime: 120.0
-      icon: reind-item-bio-timber
-      input: {
-        items: [
-          reind-item-bio-timber/1
-        ]
-      }
-      output: {
-        heat: 4.0
-      }
-    }
 
-    # Peat
-    {
-      craftTime: 90.0
-      icon: reind-item-ore-peat
-      input: {
-        items: [
-          reind-item-ore-peat/1
-        ]
-      }
-      output: {
-        heat: 4.0
-      }
-    }
 
-    # Lignite
+/*
+    ==================================================
+    Part: 4 Heat
+    ==================================================
+*/
+
+
+  /* You can't burn logs due to balance reasons */
+
+
+  // Lignite
     {
       craftTime: 120.0
       icon: reind-item-ore-lignite
@@ -148,7 +131,42 @@ recipes: [
       }
     }
 
-    # Sawdust
+
+  // Peat
+    {
+      craftTime: 90.0
+      icon: reind-item-ore-peat
+      input: {
+        items: [
+          reind-item-ore-peat/1
+        ]
+      }
+      output: {
+        heat: 4.0
+      }
+    }
+
+
+  // Raw Coal
+    /* I don't think it's good */
+    {
+      craftTime: 120.0
+      icon: reind-item-ore-raw-coal
+      input: {
+        items: [
+          reind-item-ore-raw-coal/1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-was-gangue/1
+        ]
+        heat: 4.0
+      }
+    }
+
+
+  // Sawdust
     {
       craftTime: 60.0
       icon: reind-item-bio-sawdust
@@ -162,8 +180,30 @@ recipes: [
       }
     }
 
-  ## Heat: 6
-    # Charcoal
+
+  // Timber
+    {
+      craftTime: 120.0
+      icon: reind-item-bio-timber
+      input: {
+        items: [
+          reind-item-bio-timber/1
+        ]
+      }
+      output: {
+        heat: 4.0
+      }
+    }
+
+
+/*
+    ==================================================
+    Part: 6 Heat
+    ==================================================
+*/
+
+
+  // Charcoal
     {
       craftTime: 120.0
       icon: reind-item-bio-charcoal
@@ -177,7 +217,8 @@ recipes: [
       }
     }
 
-    # Coal
+
+  // Coal
     {
       craftTime: 90.0
       icon: reind-item-chem-coal
@@ -191,8 +232,15 @@ recipes: [
       }
     }
 
-  ## Heat: 8
-    # Coke
+
+/*
+    ==================================================
+    Part: 8 Heat
+    ==================================================
+*/
+
+
+  // Coke
     {
       craftTime: 90.0
       icon: reind-item-chem-coke
@@ -205,4 +253,6 @@ recipes: [
         heat: 8.0
       }
     }
+
+
 ]

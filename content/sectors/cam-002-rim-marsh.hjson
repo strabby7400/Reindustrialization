@@ -1,6 +1,7 @@
 research: {
   parent: cam-001-shelter-cave
   requirements: [
+    item-chem-brass/600
     item-chem-steel/600
   ]
   objectives: [
@@ -14,4 +15,4 @@ research: {
 planet: pla-ter-aerth
 sector: 93
 difficulty: 1
-captureWave: 1
+captureWave: 2

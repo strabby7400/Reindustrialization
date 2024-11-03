@@ -128,20 +128,31 @@ ambientSoundVolume: 0.15
 
 menu: simple
 recipes: [
-  # Coal
-  {
-    craftTime: 360.0
-    icon: reind-item-chem-coal
-    input: {
-      power: 1.0
-      items: [
-        reind-item-chem-coal/12
-      ]
+
+
+/*
+    ==================================================
+    Part: Coking
+    ==================================================
+*/
+
+
+  // Coal
+    {
+      craftTime: 360.0
+      icon: reind-item-chem-coal
+      input: {
+        power: 1.0
+        items: [
+          reind-item-chem-coal/12
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-coke/9
+        ]
+      }
     }
-    output: {
-      items: [
-        reind-item-chem-coke/9
-      ]
-    }
-  }
+
+
 ]

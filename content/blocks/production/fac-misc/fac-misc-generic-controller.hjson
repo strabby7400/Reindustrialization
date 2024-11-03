@@ -115,8 +115,16 @@ ambientSoundVolume: 0.2
 
 menu: simple
 recipes: [
-  ## fac-furn
-    # Electrical Roasting Furnace
+
+
+/*
+    ==================================================
+    Part: Furnace
+    ==================================================
+*/
+
+
+  // Electrical Roasting Furnace
     {
       craftTime: 240.0
       icon: reind-effc-spec-electrical-roasting-furnace
@@ -135,5 +143,7 @@ recipes: [
         ]
       }
     }
+
+
 ]
 fluidOutputDirections: [0]

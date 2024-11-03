@@ -57,8 +57,16 @@ ambientSoundVolume: 0.1
 
 menu: simple
 recipes: [
-  ## Effc
-    # Dust Removal Efficiency
+
+
+/*
+    ==================================================
+    Part: Special
+    ==================================================
+*/
+
+
+  // Dust Removal Efficiency
     {
       craftTime: 60.0
       icon: reind-effc-effc-dust-removal
@@ -74,8 +82,15 @@ recipes: [
       }
     }
 
-  ## Dusty Gas
-    # Air / Bauxite
+
+/*
+    ==================================================
+    Part: Dusty Gas
+    ==================================================
+*/
+
+
+  // Air: Bauxite
     {
       craftTime: 240.0
       icon: reind-gas-int-dusty-gas-air-bauxite
@@ -94,7 +109,8 @@ recipes: [
       }
     }
 
-    # Air / Raw Coal
+
+  // Air: Raw Coal
     {
       craftTime: 240.0
       icon: reind-gas-int-dusty-gas-air-raw-coal
@@ -113,7 +129,8 @@ recipes: [
       }
     }
 
-    # Air / Sawdust
+
+  // Air: Sawdust
     {
       craftTime: 60.0
       icon: reind-gas-int-dusty-gas-air-sawdust
@@ -131,4 +148,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

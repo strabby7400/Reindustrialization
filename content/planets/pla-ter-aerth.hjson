@@ -55,7 +55,6 @@ cloudMesh: {
       thresh: 0.4
     }
   ]
-
 }
 generator: {
   min: 1
@@ -88,8 +87,7 @@ icon: planet
 iconColor: 6b8462
 radius: 1.4
 drawOrbit: true
-totalRadius: 80.0
-orbitSpacing: 36.0
+orbitRadius: 54.0
 orbitTime: 510720
 rotateTime: 1920
 tidalLock: false
@@ -101,7 +99,7 @@ minZoom: 0.5
 
 defaultEnv: 225
 defaultAttributes: {
-  attr-oxygen: 1.0
+  attr-env-oxygen: 1.0
 }
 updateLighting: true
 

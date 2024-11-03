@@ -22,7 +22,7 @@ sinSclMin: 96.0
 sinSclMax: 256.0
 sinMagMin: 32.0
 sinMagMax: 64.0
-force: 0.22
+force: 0.0
 baseSpeed: 24.0
 noiseScale: 2200.0
 noiseColor: 000000

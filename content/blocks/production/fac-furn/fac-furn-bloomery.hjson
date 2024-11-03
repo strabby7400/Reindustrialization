@@ -124,8 +124,16 @@ ambientSoundVolume: 0.2
 
 menu: simple
 recipes: [
-  ## Steelmaking
-    # Wrought Iron
+
+
+/*
+    ==================================================
+    Part: Steelmaking
+    ==================================================
+*/
+
+
+  // Wrought Iron
     {
       craftTime: 480.0
       icon: reind-item-chem-wrought-iron
@@ -142,10 +150,11 @@ recipes: [
       }
     }
 
-    # Steel
+
+  // Steel: Wrought Iron
     {
       craftTime: 480.0
-      icon: reind-item-chem-steel
+      icon: reind-icon-steel-wrought-iron
       input: {
         items: [
           reind-item-chem-wrought-iron/8
@@ -161,7 +170,28 @@ recipes: [
       }
     }
 
-    # Mangalloy (Hematite-Pyrolusite)
+
+  // Steel: Scrap Steel
+    {
+      craftTime: 480.0
+      icon: reind-icon-steel-scrap-steel
+      input: {
+        items: [
+          reind-item-was-scrap-steel/16
+          reind-item-bio-charcoal/16
+          reind-item-ore-limestone/8
+        ]
+      }
+      output: {
+        items: [
+          reind-item-chem-steel/8
+          reind-item-was-slag/4
+        ]
+      }
+    }
+
+
+  // Mangalloy: Pyrolusite, Hematite
     {
       craftTime: 480.0
       icon: reind-icon-mangalloy-pyrolusite
@@ -181,7 +211,8 @@ recipes: [
       }
     }
 
-    # Mangalloy (Magnetite-Psilomelane)
+
+  // Mangalloy: Psilomelane, Magnetite
     {
       craftTime: 480.0
       icon: reind-icon-mangalloy-psilomelane
@@ -201,8 +232,15 @@ recipes: [
       }
     }
 
-  ## Smelting
-    # Iron - Hematite
+
+/*
+    ==================================================
+    Part: Smelting
+    ==================================================
+*/
+
+
+  // Iron: Hematite
     {
       craftTime: 480.0
       icon: reind-item-ore-hematite
@@ -220,7 +258,8 @@ recipes: [
       }
     }
 
-    # Iron - Magnetite
+
+  // Iron: Magnetite
     {
       craftTime: 480.0
       icon: reind-item-ore-magnetite
@@ -238,7 +277,8 @@ recipes: [
       }
     }
 
-    # Iron - Limonite
+
+  // Iron: Limonite
     {
       craftTime: 480.0
       icon: reind-item-ore-limonite
@@ -256,7 +296,8 @@ recipes: [
       }
     }
 
-    # Iron - Pyrite
+
+  // Iron: Pyrite
     {
       craftTime: 480.0
       icon: reind-item-ore-pyrite
@@ -273,4 +314,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

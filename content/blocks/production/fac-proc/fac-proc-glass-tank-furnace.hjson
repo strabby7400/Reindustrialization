@@ -3,9 +3,10 @@ category: crafting
 
 requirements: [
   item-chem-brass/80
-  item-prod-brick-zircon/100
+  item-prod-brick-zirconia-mullite/160
   item-prod-brick-magnesia/140
   item-chem-steel/80
+  item-buil-cement/80
 ]
 buildCostMultiplier: 2.0
 
@@ -105,15 +106,23 @@ ambientSoundVolume: 0.4
 
 menu: simple
 recipes: [
-  ## Glass
-    # Trona
+
+
+/*
+    ==================================================
+    Part: Regular Glass
+    ==================================================
+*/
+
+
+  // Trona: None
     {
       craftTime: 300.0
-      icon: reind-liq-int-glass-melt
+      icon: reind-item-ore-trona
       input: {
         power: 1.83333333
         items: [
-          reind-item-ore-sand/20
+          reind-item-chem-silica-sand/20
           reind-item-chem-lime/10
           reind-item-ore-trona/10
           reind-item-chem-tin/5
@@ -127,20 +136,21 @@ recipes: [
       }
     }
 
-    # Trona (Borax)
+
+  // Trona: Borax
     {
       craftTime: 300.0
-      icon: reind-item-chem-borax
+      icon: reind-icon-trona-borax
       input: {
         power: 1.16666667
         items: [
-          reind-item-ore-sand/20
+          reind-item-chem-silica-sand/20
           reind-item-chem-lime/10
           reind-item-ore-trona/10
           reind-item-chem-tin/5
           reind-item-chem-borax/5
         ]
-        heat: 12
+        heat: 10
       }
       output: {
         fluids: [
@@ -149,7 +159,50 @@ recipes: [
       }
     }
 
-    # Sodium Carbonate
 
-    # Sodium Carbonate (Borax)
+  // Sodium Carbonate: None
+    {
+      craftTime: 300.0
+      icon: reind-item-chem-sodium-carbonate
+      input: {
+        power: 1.83333333
+        items: [
+          reind-item-chem-silica-sand/20
+          reind-item-chem-lime/10
+          reind-item-chem-sodium-carbonate/5
+          reind-item-chem-tin/5
+        ]
+        heat: 30
+      }
+      output: {
+        fluids: [
+          reind-liq-int-glass-melt/0.4
+        ]
+      }
+    }
+
+
+  // Sodium Carbonate: Borax
+    {
+      craftTime: 300.0
+      icon: reind-icon-sodium-carbonate-borax
+      input: {
+        power: 1.83333333
+        items: [
+          reind-item-chem-silica-sand/20
+          reind-item-chem-lime/10
+          reind-item-chem-sodium-carbonate/5
+          reind-item-chem-tin/5
+          reind-item-chem-borax/5
+        ]
+        heat: 10
+      }
+      output: {
+        fluids: [
+          reind-liq-int-glass-melt/0.4
+        ]
+      }
+    }
+
+
 ]

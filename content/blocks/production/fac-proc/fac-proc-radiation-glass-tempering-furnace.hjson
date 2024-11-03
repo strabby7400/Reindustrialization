@@ -7,6 +7,7 @@ requirements: [
   item-prod-brick-clay/80
   item-prod-brick-high-alumina/140
   item-chem-steel/110
+  item-buil-cement/90
 ]
 buildCostMultiplier: 2.0
 
@@ -62,8 +63,16 @@ ambientSoundVolume: 0.2
 
 menu: simple
 recipes: [
-  ## Tempering
-    # Glass Pane
+
+
+/*
+    ==================================================
+    Part: Regular Glass
+    ==================================================
+*/
+
+
+  // Pane
     {
       craftTime: 120.0
       icon: reind-item-prod-tempered-glass-pane
@@ -81,7 +90,8 @@ recipes: [
       }
     }
 
-    # Glass Tube
+
+  // Tube
     {
       craftTime: 120.0
       icon: reind-item-prod-tempered-glass-tube
@@ -98,4 +108,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

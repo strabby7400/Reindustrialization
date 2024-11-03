@@ -93,8 +93,16 @@ ambientSoundVolume: 0.1
 
 menu: simple
 recipes: [
-  ## Default: Water
-    # Spontaneous
+
+
+/*
+    ==================================================
+    Part: Condensation
+    ==================================================
+*/
+
+
+  // Water: None
     {
       craftTime: 60.0
       icon: reind-liq-ore-water
@@ -110,4 +118,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

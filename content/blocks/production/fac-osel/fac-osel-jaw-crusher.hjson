@@ -62,112 +62,17 @@ ambientSoundVolume: 0.2
 
 menu: simple
 recipes: [
-  ## Rocks
-    # Dolomite
-    {
-      craftTime: 60.0
-      icon: reind-item-ore-dolomite
-      input: {
-        power: 0.33333333
-        items: [
-          reind-item-ore-dolomite/1
-        ]
-      }
-      output: {
-        items: [
-          reind-item-int-chunks-dolomite/1
-        ]
-      }
-    }
 
-    # Limestone
-    {
-      craftTime: 60.0
-      icon: reind-item-ore-limestone
-      input: {
-        power: 0.33333333
-        items: [
-          reind-item-ore-limestone/1
-        ]
-      }
-      output: {
-        items: [
-          reind-item-int-chunks-limestone/1
-        ]
-      }
-    }
 
-    # Pumice (1)
-    {
-      craftTime: 60.0
-      icon: reind-icon-pumice-coarse-aggregate
-      input: {
-        power: 0.33333333
-        items: [
-          reind-item-ore-pumice/1
-        ]
-      }
-      output: {
-        items: [
-          reind-item-buil-coarse-aggregate/1
-        ]
-      }
-    }
+/*
+    ==================================================
+    Part: Special
+    ==================================================
+*/
 
-    # Pumice (2)
-    {
-      craftTime: 60.0
-      icon: reind-icon-pumice-fine-aggregate
-      input: {
-        power: 1.33333333
-        items: [
-          reind-item-ore-pumice/1
-        ]
-      }
-      output: {
-        items: [
-          reind-item-buil-fine-aggregate/1
-        ]
-      }
-    }
 
-    # Sandstone
-    {
-      craftTime: 60.0
-      icon: reind-item-ore-sandstone
-      input: {
-        power: 0.33333333
-        items: [
-          reind-item-ore-sandstone/1
-        ]
-      }
-      output: {
-        items: [
-          reind-item-int-chunks-sandstone/1
-        ]
-      }
-    }
-
-  ## Ores
-    # Gypsum
-    {
-      craftTime: 60.0
-      icon: reind-item-ore-gypsum
-      input: {
-        power: 0.33333333
-        items: [
-          reind-item-ore-gypsum/1
-        ]
-      }
-      output: {
-        items: [
-          reind-item-int-chunks-gypsum/1
-        ]
-      }
-    }
-
-  ## Special
-    # Coarse Aggregate
+  // Coarse Aggregate
+    /* In case you need the other */
     {
       craftTime: 60.0
       icon: reind-item-buil-coarse-aggregate
@@ -184,8 +89,152 @@ recipes: [
       }
     }
 
-  ## Rock Shards
-    # Plutonic
+
+  // Pumice: Coarse Aggregate
+    {
+      craftTime: 60.0
+      icon: reind-icon-pumice-coarse-aggregate
+      input: {
+        power: 0.33333333
+        items: [
+          reind-item-ore-pumice/1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-buil-coarse-aggregate/1
+        ]
+      }
+    }
+
+
+  // Pumice: Fine Aggregate
+    {
+      craftTime: 60.0
+      icon: reind-icon-pumice-fine-aggregate
+      input: {
+        power: 1.33333333
+        items: [
+          reind-item-ore-pumice/1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-buil-fine-aggregate/1
+        ]
+      }
+    }
+
+
+
+/*
+    ==================================================
+    Part: Chunks
+    ==================================================
+*/
+
+
+  // Dolomite
+    {
+      craftTime: 60.0
+      icon: reind-item-ore-dolomite
+      input: {
+        power: 0.33333333
+        items: [
+          reind-item-ore-dolomite/1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-chunks-dolomite/1
+        ]
+      }
+    }
+
+
+  // Gypsum
+    {
+      craftTime: 60.0
+      icon: reind-item-ore-gypsum
+      input: {
+        power: 0.33333333
+        items: [
+          reind-item-ore-gypsum/1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-chunks-gypsum/1
+        ]
+      }
+    }
+
+
+  // Limestone
+    {
+      craftTime: 60.0
+      icon: reind-item-ore-limestone
+      input: {
+        power: 0.33333333
+        items: [
+          reind-item-ore-limestone/1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-chunks-limestone/1
+        ]
+      }
+    }
+
+
+  // Sandstone
+    {
+      craftTime: 60.0
+      icon: reind-item-ore-sandstone
+      input: {
+        power: 0.33333333
+        items: [
+          reind-item-ore-sandstone/1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-chunks-sandstone/1
+        ]
+      }
+    }
+
+
+  // Zircon
+    {
+      craftTime: 60.0
+      icon: reind-item-ore-zircon
+      input: {
+        power: 0.66666667
+        items: [
+          reind-item-ore-zircon/1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-chunks-zircon/1
+        ]
+      }
+    }
+
+
+/*
+    ==================================================
+    Part: Shards
+    ==================================================
+*/
+
+
+  /* Rock shards here can be crushed for aggregate */
+
+
+  // Plutonic
     {
       craftTime: 60.0
       icon: reind-item-ore-rock-shard-plutonic
@@ -202,7 +251,8 @@ recipes: [
       }
     }
 
-    # Hypabyssal
+
+  // Hypabyssal
     {
       craftTime: 60.0
       icon: reind-item-ore-rock-shard-hypabyssal
@@ -219,7 +269,8 @@ recipes: [
       }
     }
 
-    # Lava
+
+  // Lava
     {
       craftTime: 60.0
       icon: reind-item-ore-rock-shard-lava
@@ -236,7 +287,8 @@ recipes: [
       }
     }
 
-    # Clastic
+
+  // Clastic
     {
       craftTime: 60.0
       icon: reind-item-ore-rock-shard-clastic
@@ -253,7 +305,8 @@ recipes: [
       }
     }
 
-    # Sedimentary Clastic
+
+  // Sedimentary Clastic
     {
       craftTime: 60.0
       icon: reind-item-ore-rock-shard-sedimentary-clastic
@@ -269,4 +322,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

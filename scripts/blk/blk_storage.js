@@ -32,19 +32,18 @@
     });
 
 
-    function update_itemVirt(obj) {
-      // Only core can store virtual items
+    function updateTile_itemVirt(obj) {
+      // Only cores can store virtual items
       if(obj.block instanceof CoreBlock) return;
 
       const list = db_item.itemVirt;
       for(let i = 0; i < list.size; i++) {
         var target = Vars.content.item(list.get(i));
-        if(target == null) return;
         if(obj.items.get(target) > 0) {
           obj.damage(Time.delta * 666666.0);
           effect_itemVirt.at(obj.x, obj.y, 0.0);
           var ui1 = new UI();
-          ui1.showInfoFade("@info.reind-virt-no-conveyor.name", 2.0);
+          ui1.showInfoFade(Core.bundle.get("info.reind-info-virt-no-conveyor.name"), 2.0);
         };
       };
     };
@@ -58,7 +57,7 @@
     const effc = ct_effc.effcEffc_core;
 
 
-    function setStats_coreEffc(obj, param) {
+    function modifyStats_coreEffc(obj, param) {
       obj.stats.add(statCoreEffc, param, StatUnit.perSecond);
     };
 
@@ -69,10 +68,7 @@
         if(typeof list_coreEffc.get(i) == "string") {
           var target = Vars.content.block(list_coreEffc.get(i));
           if(target != null) {
-            setStats_coreEffc(
-              target,
-              list_coreEffc.get(i + 1),
-            );
+            modifyStats_coreEffc(target, list_coreEffc.get(i + 1));
           };
         };
       };
@@ -102,9 +98,11 @@
       obj.stats.add(Stat.reload, 60.0 / 40.0, StatUnit.perSecond);
     };
 
+
     function drawPlace_coreEmber(obj, tx, ty, rotation, valid) {
       Drawf.dashCircle(tx * Vars.tilesize + obj.offset, ty * Vars.tilesize + obj.offset, 192.0, Pal.accent);
     };
+
 
     const effect_coreEmberWave1 = extend(WaveEffect, {
       lifetime: 20.0,
@@ -116,7 +114,6 @@
       strokeFrom: 8.0,
       strokeTo: 8.0,
     });
-
     const effect_coreEmberWave2 = extend(WaveEffect, {
       lifetime: 30.0,
       sides: -1,
@@ -127,7 +124,6 @@
       strokeFrom: 8.0,
       strokeTo: 8.0,
     });
-
     const effect_coreEmberWave3 = extend(WaveEffect, {
       lifetime: 40.0,
       sides: -1,
@@ -138,7 +134,6 @@
       strokeFrom: 8.0,
       strokeTo: 8.0,
     });
-
     const effect_coreEmberWave4 = extend(WaveEffect, {
       lifetime: 50.0,
       sides: -1,
@@ -149,13 +144,13 @@
       strokeFrom: 8.0,
       strokeTo: 8.0,
     });
-
     const effect_coreEmberImpact = new MultiEffect(
       effect_coreEmberWave1,
       effect_coreEmberWave2,
       effect_coreEmberWave3,
       effect_coreEmberWave4,
     );
+
 
     function updateTile_coreEmber(obj) {
       if((obj.reloadCounter += Time.delta) >= 40.0) {
@@ -190,9 +185,11 @@
       obj.heat = Mathf.clamp(obj.heat - Time.delta / 80.0);
     };
 
+
     function draw_coreEmber(obj) {
       Drawf.additive(obj.heatRegion, Color.valueOf("ff3838"), obj.heat, obj.x, obj.y, 0.0, Layer.blockAdditive);
     };
+
 
     function drawSelect_coreEmber(obj) {
       Drawf.dashCircle(obj.x, obj.y, 192.0, Pal.accent);
@@ -214,7 +211,7 @@
 
 
     function updateTile_extra(obj) {
-      update_itemVirt(obj);
+      updateTile_itemVirt(obj);
       updateTile_coreEffc(obj);
     };
   // End
@@ -255,13 +252,13 @@
 
 
     const effCore_ember = extend(CoreBlock, "eff-core-ember", {
-      // Override
+      // Specific
       setStats() {
         this.super$setStats();
         setStats_coreEmber(this);
         setStats_extra(this);
       },
-      // Override
+      // Specific
       drawPlace(x, y, rotation, valid){
         this.super$drawPlace(x, y, rotation, valid);
         drawPlace_coreEmber(this, x, y, rotation, valid);
@@ -272,18 +269,18 @@
       heatRegion: Core.atlas.find("reind-eff-core-ember-heat"),
       reloadCounter: Mathf.random(40.0),
       targets: new Seq(),
-      // Override
+      // Specific
       updateTile() {
         this.super$updateTile();
         updateTile_coreEmber(this);
         updateTile_extra(this);
       },
-      // Override
+      // Specific
       draw() {
         this.super$draw();
         draw_coreEmber(this);
       },
-      // Override
+      // Specific
       drawSelect() {
         this.super$drawSelect();
         drawSelect_coreEmber(this);

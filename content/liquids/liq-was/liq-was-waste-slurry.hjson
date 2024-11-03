@@ -1,0 +1,23 @@
+hidden: false
+
+research: {
+  parent: liq-was-waste-water
+  objectives: []
+}
+
+flammability: 0.0
+temperature: 0.5
+heatCapacity: 0.4
+viscosity: 0.8
+explosiveness: 0.0
+
+coolant: false
+capPuddles: false
+boilPoint: 2.0
+
+color: 898a70
+lightColor: 00000000
+
+effect: sta-liq-slurry-slowed
+
+incinerable: false

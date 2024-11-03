@@ -1,11 +1,24 @@
-const list_nonRobots = new Seq([
-  "latum",
-  "renale",
-]);
-exports.nonRobots = list_nonRobots;
+// Checked on 11-2-2024
 
 
-const list_robotOnlyStatus = new Seq([
-  "reind-sta-liq-brine-corrosion",
-]);
-exports.robotOnlyStatus = list_robotOnlyStatus;
+/*
+    ==================================================
+    Part: List
+    ==================================================
+*/
+
+
+  // Start: Non-robots
+    const list_nonRobots = new Seq([
+      "latum",
+      "renale",
+      "reind-unit-para-llomea",
+    ]);
+    exports.nonRobots = list_nonRobots;
+
+
+    const list_botOnly = new Seq([
+      "reind-sta-liq-brine-corrosion",
+    ]);
+    exports.botOnly = list_botOnly;
+  // End

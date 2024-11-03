@@ -1,0 +1,91 @@
+# type: ThermalGenerator
+category: power
+
+requirements: [
+  item-chem-lead/70
+  item-chem-brass/40
+  item-chem-tin-bronze/60
+  item-chem-steel/20
+  item-chem-stainless-steel/30
+  item-ore-magnetite/50
+]
+buildCostMultiplier: 2.0
+
+research: {
+  parent: pow-gen-lodestone-turbine-generator
+  objectives: []
+}
+researchCostMultiplier: 0.25
+
+scaledHealth: 80.0
+armor: 24.0
+size: 3
+hasItems: false
+itemCapacity: 20
+hasLiquids: false
+liquidCapacity: 5.0
+outputsLiquid: false
+hasPower: true
+fogRadius: 3
+rotate: false
+
+floating: true
+placeableLiquid: true
+
+envRequired: 1
+envDisabled: 22
+
+squareSprite: false
+drawer: {
+  type: DrawMulti
+  drawers: [
+    {
+      type: DrawRegion
+      suffix: "-bottom"
+    }
+    {
+      type: DrawCultivator
+      plantColor: 70b6ff
+      plantColorLight: 00000000
+      bottomColor: 70b6ff
+      bubbles: 0
+    }
+    {
+      type: DrawRegion
+      suffix: "-rotator"
+      spinSprite: true
+      rotateSpeed: 6.0
+    }
+    {
+      type: DrawDefault
+    }
+  ]
+}
+generateEffect: {
+  #PowerSurge
+  type: ParticleEffect
+  lifetime: 30.0
+  particles: 3
+  colorFrom: f8c266ff
+  colorTo: f8c266ff
+  length: 8.0
+  sizeFrom: 1.2
+  sizeTo: 0.0
+  sizeInterp: pow5In
+  strokeFrom: 1.0
+  strokeTo: 0.0
+  lenFrom: 4.0
+  lenTo: 2.0
+}
+effectChance: 0.01
+ambientSound: se-amb-turbine
+ambientSoundVolume: 0.25
+
+noUpdateDisabled: false
+
+powerProduction: 0.37037037
+attribute: attr-floor-tide
+outputLiquid: null
+displayEfficiencyScale: 0.11111111
+displayEfficiency: false
+minEfficiency: 0.0001

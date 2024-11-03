@@ -17,9 +17,11 @@
   // Start: Corrosion
     const stat_corrosionResistence = new Stat("reind-stat-corrosion-resistence.name", StatCat.function);
     const stat_vulnerableTo = new Stat("reind-stat-vulnerable-to.name", StatCat.function);
+    const stat_resistentTo = new Stat("reind-stat-resistent-to.name", StatCat.function);
+    const stat_parentFluid = new Stat("reind-stat-parent-fluid.name", StatCat.function);
 
 
-    function setStats_corrosion(obj, param) {
+    function modifyStats_corrosion(obj, param) {
       obj.stats.add(stat_corrosionResistence, param);
     };
 
@@ -30,10 +32,7 @@
         if(typeof list_corrosionResistence.get(i) == "string") {
           var target = Vars.content.block(list_corrosionResistence.get(i));
           if(target != null) {
-            setStats_corrosion(
-              target,
-              list_corrosionResistence.get(i + 1),
-            );
+            modifyStats_corrosion(target,list_corrosionResistence.get(i + 1));
           };
         };
       };
@@ -41,17 +40,78 @@
 
 
     function setStats_vulnerableTo(obj) {
-      var name = obj.name.toString();
+      var name = obj.name;
       var list = db_fluid.corrosionResistenceMultipliers;
       if(!list.contains(name)) return;
-      var liqList = new Seq();
+      var liqList1 = new Seq();
+      var liqList2 = new Seq();
       for(let i = 0; i < list.size - 2; i++) {
         if(name == list.get(i)) {
-          liqList.add(Vars.content.liquid(list.get(i + 1)));
+          if(!list.get(i + 1).includes("reind-liq-int") && !list.get(i + 1).includes("reind-gas-int")) {
+            if(list.get(i + 2) < 1.0) {
+              liqList1.add(Vars.content.liquid(list.get(i + 1)));
+            } else {
+              liqList2.add(Vars.content.liquid(list.get(i + 1)));
+            };
+          };
         };
       };
-      obj.stats.add(stat_vulnerableTo, StatValues.content(liqList.sort()));
+      if(liqList1.size > 0) {
+        obj.stats.add(stat_vulnerableTo, StatValues.content(liqList1.sort()));
+      };
+      if(liqList2.size > 0) {
+        obj.stats.add(stat_resistentTo, StatValues.content(liqList2.sort()));
+      };
     };
+
+
+    function modifyStats_parentFluid(obj, param) {
+      obj.stats.add(stat_parentFluid, param);
+    };
+
+
+    Events.run(ClientLoadEvent, () => {
+      const synonym_brine = db_fluid.synonym_brine;
+      const synonym_lye = db_fluid.synonym_lye;
+      const synonym_acidic = db_fluid.synonym_acidic;
+      const synonym_slurry = db_fluid.synonym_slurry;
+      const synonym_molten = db_fluid.synonym_molten;
+
+      for(let i = 0; i < synonym_brine.size; i++) {
+        var target = Vars.content.liquid(synonym_brine.get(i));
+        if(target != null) {
+          modifyStats_parentFluid(target, Core.bundle.get("reindTerms.brine.name"));
+        };
+      };
+
+      for(let i = 0; i < synonym_lye.size; i++) {
+        var target = Vars.content.liquid(synonym_lye.get(i));
+        if(target != null) {
+          modifyStats_parentFluid(target, Core.bundle.get("reindTerms.basicSolution.name"));
+        };
+      };
+
+      /*for(let i = 0; i < synonym_acidic.size; i++) {
+        var target = Vars.content.liquid(synonym_acidic.get(i));
+        if(target != null) {
+          modifyStats_parentFluid(target, Core.bundle.get("reindTerms.acidicSolution.name"));
+        };
+      };*/
+
+      for(let i = 0; i < synonym_slurry.size; i++) {
+        var target = Vars.content.liquid(synonym_slurry.get(i));
+        if(target != null) {
+          modifyStats_parentFluid(target, Core.bundle.get("reindTerms.slurry.name"));
+        };
+      };
+
+      for(let i = 0; i < synonym_molten.size; i++) {
+        var target = Vars.content.liquid(synonym_molten.get(i));
+        if(target != null) {
+          modifyStats_parentFluid(target, Core.bundle.get("reindTerms.melt.name"));
+        };
+      };
+    });
 
 
     function update_corrosion(obj) {
@@ -133,7 +193,7 @@
       obj.damage(Time.delta * 666666.0);
       effect_effc.at(obj.x, obj.y, 0.0);
       var ui1 = new UI();
-      ui1.showInfoFade("@info.reind-effc-no-conduit.name", 2.0);
+      ui1.showInfoFade(Core.bundle.get("info.reind-info-effc-no-conduit.name"), 2.0);
     };
   // End
 
@@ -142,7 +202,7 @@
     const stat_heatResistence = new Stat("reind-stat-heat-resistence.name", StatCat.function);
 
 
-    function setStats_heatResistence(obj, param) {
+    function modifyStats_heatResistence(obj, param) {
       obj.stats.add(stat_heatResistence, param);
     };
 
@@ -153,10 +213,7 @@
         if(typeof list_heatResistence.get(i) == "string") {
           var target = Vars.content.block(list_heatResistence.get(i));
           if(target != null) {
-            setStats_heatResistence(
-              target,
-              list_heatResistence.get(i + 1),
-            );
+            modifyStats_heatResistence(target,list_heatResistence.get(i + 1));
           };
         };
       };
@@ -255,6 +312,82 @@
   // End
 
 
+  // Start: Sticky
+    const stat_sticky = new Stat("reind-stat-sticky.name", StatCat.function);
+    const stat_vulnerableToClogging = new Stat("reind-stat-vulnerable-to-clogging.name", StatCat.function);
+
+
+    function modifyStats_sticky(obj) {
+      obj.stats.add(stat_sticky, true);
+    };
+
+
+    function modifyStats_clogging(obj) {
+      obj.stats.add(stat_vulnerableToClogging, true);
+    };
+
+
+    Events.run(ClientLoadEvent, () => {
+      const list_liquidSticky = db_fluid.liquidSticky;
+      const list_stickySensitive = db_fluid.stickySensitive;
+
+      // Fluid
+      for(let i = 0; i < list_liquidSticky.size; i++) {
+        var target = Vars.content.liquid(list_liquidSticky.get(i));
+        if(target != null) {
+          modifyStats_sticky(target);
+        };
+      };
+
+      // Block
+      for(let i = 0; i < list_stickySensitive.size; i++) {
+        var target = Vars.content.block(list_stickySensitive.get(i));
+        if(target != null) {
+          modifyStats_clogging(target);
+        };
+      };
+    });
+
+
+    function update_sticky(obj) {
+      if(!db_fluid.stickySensitive.contains(obj.block.name)) return;
+
+      var liq = obj.liquids.current();
+      if(!db_fluid.liquidSticky.contains(liq.name)) return;
+
+      if(obj.liquids.get(liq) > 0.0001) {
+        for(let i = 0; i < 9; i++) {
+          var cx = obj.x + obj.block.offset;
+          var cy = obj.y + obj.block.offset;
+          var off_x = Mathf.random(obj.block.size / 2.0 * Vars.tilesize);
+          var off_y = Mathf.random(obj.block.size / 2.0 * Vars.tilesize);
+          if(Mathf.chance(0.5)) off_x *= -1;
+          if(Mathf.chance(0.5)) off_y *= -1;
+
+          var effect_clogging = extend(ParticleEffect, {
+            lifetime: 1200.0,
+            particles: 1,
+            colorFrom: liq.color,
+            colorTo: Color.valueOf("00000000"),
+            length: 0.0,
+            sizeFrom: 0.0,
+            sizeTo: 1.2,
+            sizeInterp: Interp.pow10Out,
+            strokeFrom: 8.0,
+            strokeTo: 0.0,
+            lenFrom: 8.0,
+            lenTo: 0.0,
+          });
+
+          effect_clogging.at(cx + off_x, cy + off_y, Mathf.random(360.0));
+        };
+
+        obj.enabled = false;
+      };
+    };
+  // End
+
+
 /*
     ==================================================
     Part: Application
@@ -272,6 +405,7 @@
       update_corrosion(obj);
       update_effc(obj);
       update_heatLevel(obj);
+      update_sticky(obj);
     };
 
 

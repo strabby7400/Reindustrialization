@@ -1,7 +1,7 @@
 hidden: false
 
 research: {
-  parent: gas-chem-sulfur-dioxide
+  parent: liq-chem-sulfurous-acid
   objectives: []
 }
 

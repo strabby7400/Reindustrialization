@@ -40,5 +40,5 @@ arrowTimeScl: 6.2
 bridgeWidth: 8.0
 
 timerAccept: 2
-speed: 74.0
-bufferCapacity: 18
+speed: 75.0
+bufferCapacity: 25

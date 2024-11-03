@@ -3,10 +3,10 @@
 duration: 900.0
 opacityMultiplier: 0.2
 
-status: none
-statusDuration: 120.0
+status: sta-spec-parasite
+statusDuration: 1800.0
 statusAir: true
-statusGround: true
+statusGround: false
 
 particleRegion: reind-efr-carnage
 color: ffffff

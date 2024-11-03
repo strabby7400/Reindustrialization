@@ -1,0 +1,60 @@
+mesh: {
+  type: MultiMesh
+  meshes: [
+    {
+      type: NoiseMesh
+      seed: 12568888
+      divisions: 5
+      color1: 353531
+      color2: 242423
+      radius: 0.442
+      octaves: 1.2
+      persistence: 0.6
+      scale: 0.65
+      mag: 0.0
+    }
+  ]
+}
+generator: {
+  min: 1
+  max: 1
+  octaves: 2.0
+  persistence: 0.4
+  scale: 30.0
+  mag: 0.4
+  thresh: 1.0
+  foct: 3.0
+  fmag: 0.5
+  fscl: 50.0
+  fper: 0.6
+  radMin: 600.0
+  radMax: 600.0
+  stoneChance: 0.0
+  iceChance: 0.5
+  carbonChance: 1.0
+  berylChance: 0.0
+  ferricChance: 0.0
+}
+
+visible: true
+accessible: false
+parent: pla-ter-aerth
+solarSystem: pla-sun-uson
+
+icon: planet
+iconColor: 505049
+radius: 0.45
+drawOrbit: true
+orbitRadius: 4.45
+orbitTime: 12000
+rotateTime: 980
+tidalLock: true
+hasAtmosphere: false
+atmosphereColor: 000000
+atmosphereRadIn: 0.4
+atmosphereRadOut: 0.6
+minZoom: 0.75
+
+defaultEnv: 67
+defaultAttributes: {}
+updateLighting: true

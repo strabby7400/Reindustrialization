@@ -9,6 +9,8 @@
 
 
   // Start: Import
+    const ct_unit = require("ct/ct_unit");
+    const db_fluid = require("db/db_fluid");
     const db_status = require("db/db_status");
   // End
 
@@ -17,12 +19,12 @@
     const stat_affectsNonRobots = new Stat("reind-stat-affects-non-robots.name", StatCat.function);
 
 
-    function setStats_nonRobots(obj) {
+    function modifyStats_nonRobots(obj) {
       obj.stats.add(stat_affectsNonRobots, false);
     };
 
 
-    function immuneAdd_nonRobots(obj) {
+    function modifyImmunities_nonRobots(obj) {
       const list = db_status.nonRobots;
       for(let i = 0; i < list.size; i++) {
         var unit = Vars.content.unit(list.get(i));
@@ -34,15 +36,85 @@
 
 
     Events.run(ClientLoadEvent, () => {
-      const list_robotOnlyStatus = db_status.robotOnlyStatus;
-      for(let i = 0; i < list_robotOnlyStatus.size; i++) {
-        var target = Vars.content.statusEffect(list_robotOnlyStatus.get(i));
+      const list_botOnly = db_status.botOnly;
+      for(let i = 0; i < list_botOnly.size; i++) {
+        var target = Vars.content.statusEffect(list_botOnly.get(i));
         if(target != null) {
-          setStats_nonRobots(target);
-          immuneAdd_nonRobots(target);
+          modifyStats_nonRobots(target);
+          modifyImmunities_nonRobots(target);
         };
       };
     });
+  // End
+
+
+  // Start: Parasite
+    const effect_parasiteWave = extend(WaveEffect, {
+      layer: Layer.effect + 0.01,
+      lifetime: 30.0,
+      sides: -1,
+      colorFrom: Color.valueOf("ff7f7fff"),
+      colorTo: Color.valueOf("ff7f7fff"),
+      sizeFrom: 0.0,
+      sizeTo: 48.0,
+      strokeFrom: 4.0,
+      strokeTo: 0.0,
+    });
+    const effect_parasiteMist = extend(ParticleEffect, {
+      layer: Layer.effect + 0.015,
+      region: "reind-efr-shadow-white",
+      interp: Interp.pow10Out,
+      lifetime: 600.0,
+      particles: 64,
+      colorFrom: Color.valueOf("ff7f7fff"),
+      colorTo: Color.valueOf("ff7f7f00"),
+      length: 96.0,
+      sizeFrom: 6.0,
+      sizeTo: 24.0,
+      strokeFrom: 2.0,
+      strokeTo: 0.0,
+      lenFrom: 4.0,
+      lenTo: 2.0,
+    });
+    const effect_parasiteExplosion = new MultiEffect(
+      effect_parasiteWave,
+      effect_parasiteMist,
+    );
+
+
+    function update_parasite(obj, unit) {
+      var t = Vars.world.tile(unit.tileX(), unit.tileY());
+      if(t != null && t.floor() != null && t.floor().liquidDrop != null && db_fluid.liquidAqueous.contains(t.floor().liquidDrop.name)) {
+        var damage = 40.0 + unit.maxHealth * 0.004;
+        if(Mathf.chance(Time.delta * 0.02)) {
+          unit.damage(Time.delta * damage);
+        };
+      };
+
+      if(unit.health / unit.maxHealth < 0.01) {
+        unit.damage(Time.delta * unit.maxHealth * 0.015);
+      };
+
+      if(!unit.dead) return;
+      var target = ct_unit.unitPara_llomea;
+      var amountCap = 4;
+      var offset = 8.0;
+      var off_x;
+      var off_y;
+
+      var amount = Math.max(Math.round(Mathf.random(amountCap)), 1);
+      unit.unapply(obj);
+      effect_parasiteExplosion.at(unit.x, unit.y);
+      Core.assets.get("sounds/se-spec-parasite-explosion.ogg").at(unit);
+
+      for(let i = 0; i < amount; i++) {
+        off_x = Mathf.random(offset);
+        off_y = Mathf.random(offset);
+        if(Mathf.chance(0.5)) off_x *= -1;
+        if(Mathf.chance(0.5)) off_y *= -1;
+        target.spawn(Vars.state.rules.waveTeam, unit.x + off_x, unit.y + off_y);
+      };
+    };
   // End
 
 
@@ -91,6 +163,19 @@
       },
     });
     exports.staLiq_wasteCorrosion = staLiq_wasteCorrosion;
+
+
+    const staLiq_slurrySlowed = extend(StatusEffect, "sta-liq-slurry-slowed", {
+      update(unit, time) {
+        this.super$update(unit, time);
+        update_extra(this, unit, time);
+      },
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    exports.staLiq_slurrySlowed = staLiq_slurrySlowed;
 
 
     const staLiq_base = extend(StatusEffect, "sta-liq-base", {
@@ -333,6 +418,21 @@
       },
     });
     exports.staSpec_contaminatedMildly = staSpec_contaminatedMildly;
+
+
+    const staSpec_parasite = extend(StatusEffect, "sta-spec-parasite", {
+      // Specific
+      update(unit, time) {
+        this.super$update(unit, time);
+        update_parasite(this, unit);
+        update_extra(this, unit, time);
+      },
+      setStats() {
+        this.super$setStats();
+        setStats_extra(this);
+      },
+    });
+    exports.staSpec_parasite = staSpec_parasite;
   // End
 
 

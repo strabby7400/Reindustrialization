@@ -1,5 +1,5 @@
 type: multicraft.MultiCrafter
-category: crafting
+category: effect
 
 requirements: [
   item-chem-lead/80
@@ -222,8 +222,19 @@ ambientSoundVolume: 0.25
 
 menu: simple
 recipes: [
-  ## Solid
-    # Building - Cement
+
+
+// Warning: Really long recipe list!
+
+
+/*
+    ==================================================
+    Part: Solid
+    ==================================================
+*/
+
+
+  // Building: Cement
     {
       craftTime: 1800.0
       icon: reind-item-buil-cement
@@ -244,7 +255,8 @@ recipes: [
       }
     }
 
-    # Carbon - Active Carbon
+
+  // Carbon: Active Carbon
     {
       craftTime: 1800.0
       icon: reind-item-chem-active-carbon
@@ -265,7 +277,8 @@ recipes: [
       }
     }
 
-    # Carbon - Coal
+
+  // Carbon: Coal
     {
       craftTime: 1800.0
       icon: reind-item-chem-coal
@@ -286,7 +299,8 @@ recipes: [
       }
     }
 
-    # Carbon - Coke
+
+  // Carbon: Coke
     {
       craftTime: 1800.0
       icon: reind-item-chem-coke
@@ -307,7 +321,8 @@ recipes: [
       }
     }
 
-    # Carbon - Graphite
+
+  // Carbon: Graphite
     {
       craftTime: 1800.0
       icon: reind-item-chem-graphite
@@ -328,7 +343,8 @@ recipes: [
       }
     }
 
-    # Chemical - Borax
+
+  // Chemical: Borax
     {
       craftTime: 1800.0
       icon: reind-item-chem-borax
@@ -344,12 +360,13 @@ recipes: [
       }
       output: {
         items: [
-          reind-item-chem-copper/120
+          reind-item-chem-borax/120
         ]
       }
     }
 
-    # Chemical - Lime
+
+  // Chemical: Lime
     {
       craftTime: 1800.0
       icon: reind-item-chem-lime
@@ -370,7 +387,8 @@ recipes: [
       }
     }
 
-    # Chemical - Sulfur
+
+  // Chemical: Sulfur
     {
       craftTime: 1800.0
       icon: reind-item-chem-sulfur
@@ -391,7 +409,8 @@ recipes: [
       }
     }
 
-    # Metal - Copper
+
+  // Metal: Copper
     {
       craftTime: 1800.0
       icon: reind-item-chem-copper
@@ -412,7 +431,8 @@ recipes: [
       }
     }
 
-    # Metal - Lead
+
+  // Metal: Lead
     {
       craftTime: 1800.0
       icon: reind-item-chem-lead
@@ -433,7 +453,8 @@ recipes: [
       }
     }
 
-    # Metal - Pig Iron
+
+  // Metal: Pig Iron
     {
       craftTime: 1800.0
       icon: reind-item-chem-pig-iron
@@ -454,7 +475,9 @@ recipes: [
       }
     }
 
-    # Metal - Stainless Steel
+
+  // Metal: Stainless Steel
+    /* Hard to produce yet cheap to buy */
     {
       craftTime: 1800.0
       icon: reind-item-chem-stainless-steel
@@ -475,7 +498,8 @@ recipes: [
       }
     }
 
-    # Metal - Steel
+
+  // Metal: Steel
     {
       craftTime: 1800.0
       icon: reind-item-chem-steel
@@ -496,7 +520,8 @@ recipes: [
       }
     }
 
-    # Metal - Zinc
+
+  // Metal: Zinc
     {
       craftTime: 1800.0
       icon: reind-item-chem-zinc
@@ -517,8 +542,83 @@ recipes: [
       }
     }
 
-  ## Liquid
-    # Raw - Water
+
+  // Product: Printed Circuit Board (T1)
+    {
+      craftTime: 1800.0
+      icon: reind-item-prod-printed-circuit-board-t1
+      input: {
+        power: 7.33333333
+        items: [
+          reind-item-virt-kilobit/7
+          reind-item-virt-bit/200
+        ]
+        fluids: [
+          reind-ileffc-effc-ids/0.01666667
+          reind-effc-effc-core/0.03333333
+        ]
+      }
+      output: {
+        items: [
+          reind-item-prod-printed-circuit-board-t1/120
+        ]
+      }
+    }
+
+
+  // Product: Tempered Glass Pane
+    {
+      craftTime: 1800.0
+      icon: reind-item-prod-tempered-glass-pane
+      input: {
+        power: 7.33333333
+        items: [
+          reind-item-virt-bit/53
+        ]
+        fluids: [
+          reind-ileffc-effc-ids/0.01666667
+          reind-effc-effc-core/0.03333333
+        ]
+      }
+      output: {
+        items: [
+          reind-item-prod-tempered-glass-pane/120
+        ]
+      }
+    }
+
+
+  // Product: Tempered Glass Tube
+    {
+      craftTime: 1800.0
+      icon: reind-item-prod-tempered-glass-tube
+      input: {
+        power: 7.33333333
+        items: [
+          reind-item-virt-bit/53
+        ]
+        fluids: [
+          reind-ileffc-effc-ids/0.01666667
+          reind-effc-effc-core/0.03333333
+        ]
+      }
+      output: {
+        items: [
+          reind-item-prod-tempered-glass-tube/120
+        ]
+      }
+    }
+
+
+/*
+    ==================================================
+    Part: Liquid
+    ==================================================
+*/
+
+
+  // Raw: Water
+    /* Is there any need to buy water? */
     {
       craftTime: 1800.0
       icon: reind-liq-ore-water
@@ -538,4 +638,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

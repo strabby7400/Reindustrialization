@@ -106,8 +106,16 @@ ambientSoundVolume: 0.4
 
 menu: simple
 recipes: [
-  ## Survival Mode
-    # Copper
+
+
+/*
+    ==================================================
+    Part: Batch
+    ==================================================
+*/
+
+
+  // Copper
     {
       craftTime: 40200.0
       icon: reind-item-chem-copper
@@ -125,7 +133,8 @@ recipes: [
       }
     }
 
-    # Graphite
+
+  // Graphite
     {
       craftTime: 40200.0
       icon: reind-item-chem-graphite
@@ -143,7 +152,8 @@ recipes: [
       }
     }
 
-    # Lead
+
+  // Lead
     {
       craftTime: 40200.0
       icon: reind-item-chem-lead
@@ -161,7 +171,8 @@ recipes: [
       }
     }
 
-    # Tin
+
+  // Tin
     {
       craftTime: 40200.0
       icon: reind-item-chem-tin
@@ -179,7 +190,8 @@ recipes: [
       }
     }
 
-    # Zinc
+
+  // Zinc
     {
       craftTime: 40200.0
       icon: reind-item-chem-zinc
@@ -196,4 +208,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

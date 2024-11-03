@@ -44,13 +44,48 @@ mechSideSway: 0.8
 mechFrontSway: 0.4
 mechStepParticles: false
 
+parts: [
+  {
+    type: HoverPart
+    layerOffset: -0.0001
+    under: true
+    mirror: false
+    radius: 6.0
+    x: 0.0
+    y: -4.0
+    rotation: 0.0
+    phase: 60.0
+    stroke: 1.5
+    minStroke: 0.12
+    circles: 2
+    sides: 6
+    color: 8ca9e8
+  }
+  {
+    type: HoverPart
+    layerOffset: -0.00012
+    under: true
+    mirror: false
+    radius: 5.0
+    x: 0.0
+    y: -4.0
+    rotation: 0.0
+    phase: 90.0
+    stroke: 1.5
+    minStroke: 0.12
+    circles: 2
+    sides: 6
+    color: d1efff
+  }
+]
+
 weapons: [
   {
     name: unit-inf-ast1-74ka-gun
     x: 11.0
-    y: 0.0
+    y: 3.0
     top: false
-    layerOffset: -0.0001
+    layerOffset: -0.0002
     rotate: false
     baseRotation: 0.0
     mirror: false
@@ -70,7 +105,7 @@ weapons: [
     }
     shootCone: 4.0
     heatColor: ff3838
-    cooldownTime: 35.0
+    cooldownTime: 52.5
     bullet: {
       type: BasicBulletType
       sprite: reind-bul-bullet2
@@ -127,22 +162,22 @@ weapons: [
   }
   {
     name: unit-inf-ast1-74ka-launcher
-    x: -13.0
+    x: -11.5
     y: 0.0
-    top: false
-    layerOffset: -0.0001
+    top: true
+    layerOffset: 0.0001
     rotate: true
     rotateSpeed: 0.78
-    baseRotation: 0.0
-    rotationLimit: 90.0
+    baseRotation: 15.0
+    rotationLimit: 45.0
     mirror: false
     shootX: 0.0
-    shootY: 4.0
+    shootY: 6.0
     shootSound: se-shot-launcher
     ejectEffect: none
-    recoil: 1.0
-    shake: 4.0
-    reload: 600.0
+    recoil: 3.0
+    shake: 8.0
+    reload: 540.0
     inaccuracy: 8.0
     shoot: {
       type: ShootPattern
@@ -350,8 +385,8 @@ weapons: [
       splashDamagePierce: false
       hitSize: 6.0
       despawnHit: true
-      hitShake: 4.0
-      despawnShake: 4.0
+      hitShake: 8.0
+      despawnShake: 8.0
       collides: false
       collidesAir: false
       collidesGround: true

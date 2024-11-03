@@ -98,8 +98,16 @@ ambientSoundVolume: 0.2
 
 menu: simple
 recipes: [
-  ## Gas Filtering Efficiency
-    # Charcoal
+
+
+/*
+    ==================================================
+    Part: Efficiency
+    ==================================================
+*/
+
+
+  // Gas Filtering: Charcoal
     {
       craftTime: 120.0
       icon: reind-icon-gas-filtering-charcoal
@@ -115,7 +123,8 @@ recipes: [
       }
     }
 
-    # Active Carbon
+
+  // Gas Filtering: Active Carbon
     {
       craftTime: 1500.0
       icon: reind-icon-gas-filtering-active-carbon
@@ -131,8 +140,8 @@ recipes: [
       }
     }
 
-  ## Ball Impact Efficiency
-    # Steel Ball
+
+  // Ball Impact I: Steel
     {
       craftTime: 960.0
       icon: reind-icon-ball-impact-i-ball-steel
@@ -148,8 +157,8 @@ recipes: [
       }
     }
 
-  ## Electrode Efficiency
-    # Graphite Electrode
+
+  // Electrode: Graphite
     {
       craftTime: 1800.0
       icon: reind-icon-electrode-electrode-graphite
@@ -164,5 +173,7 @@ recipes: [
         ]
       }
     }
+
+
 ]
 fluidOutputDirections: [0]

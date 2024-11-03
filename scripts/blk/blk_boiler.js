@@ -9,7 +9,7 @@
 
 
   // Start: Import
-    const db_blk_boiler = require("db/db_blk_boiler");
+    const db_block = require("db/db_block");
   // End
 
 
@@ -30,7 +30,6 @@
       strokeFrom: 8.0,
       strokeTo: 8.0,
     });
-
     const effect_boilerExplosionWave2 = extend(WaveEffect, {
       lifetime: 75.0,
       sides: -1,
@@ -41,13 +40,11 @@
       strokeFrom: 8.0,
       strokeTo: 8.0,
     });
-
     const effect_boilerExplosionWave = new MultiEffect(
       effect_boilerExplosionWave1,
       effect_boilerExplosionWave2,
       new WrapEffect(Fx.titanSmoke, Color.valueOf("cce4ff")),
     );
-
     const effect_boilerCriticalCrack = extend(ParticleEffect, {
       region: "reind-efr-diamond",
       lifetime: 30.0,
@@ -63,7 +60,6 @@
       lenFrom: 4.0,
       lenTo: 2.0,
     });
-
     const bullet_boilerExplosion = extend(ExplosionBulletType, {
       despawnEffect: effect_boilerExplosionWave,
       collides: true,
@@ -76,7 +72,7 @@
     });
 
 
-    function setStats_boiler(obj, liq1, liq2, crhp) {
+    function modifyStats_boiler(obj, liq1, liq2, crhp) {
       obj.stats.add(stat_canExplode, true);
       obj.stats.add(stat_crucialInput, liq1);
       obj.stats.add(stat_crucialOutput, liq2);
@@ -85,7 +81,7 @@
 
 
     Events.run(ClientLoadEvent, () => {
-      const list_boiler = db_blk_boiler.boiler;
+      const list_boiler = db_block.boiler;
       for(let i = 0; i < list_boiler.size - 3; i++) {
         if(typeof list_boiler.get(i) == "string" && typeof list_boiler.get(i + 1) == "string" && typeof list_boiler.get(i + 2) == "string") {
           var target = Vars.content.block(list_boiler.get(i));
@@ -93,14 +89,14 @@
           var liq2 = Vars.content.liquid(list_boiler.get(i + 2));
           var crhp = list_boiler.get(i + 3);
           if(target != null && liq1 != null && liq2 != null && crhp > 0) {
-            setStats_boiler(target, liq1, liq2, crhp);
+            modifyStats_boiler(target, liq1, liq2, crhp);
           };
         };
       };
     });
 
 
-    function damageBoiler(obj, crhp) {
+    function damage_boiler(obj, crhp) {
       obj.damage(Time.delta * 0.75);
       if(Mathf.chance(Time.delta * 0.2)) {
         effect_boilerCriticalCrack.at(obj.x, obj.y, Mathf.random() * 360.0);
@@ -117,7 +113,7 @@
       var liq1 = "water";
       var liq2 = "slag";
       var crhp = 0.0001;
-      var list = db_blk_boiler.boiler;
+      var list = db_block.boiler;
       for(let i = 0; i < list.size - 3; i++) {
         if(obj.block.name.toString() == list.get(i)) {
           liq1 = Vars.content.liquid(list.get(i + 1));
@@ -136,7 +132,7 @@
 
       // Input when dangerous
       if(amount1 >= 1.0 && obj.tag1 && obj.heat > 0) {
-        damageBoiler(obj, crhp);
+        damage_boiler(obj, crhp);
       };
 
       // Cancel dangerous
@@ -146,7 +142,7 @@
 
       // No output
       if(amount2 > obj.block.liquidCapacity / 2 && obj.heat > 0) {
-        damageBoiler(obj, crhp);
+        damage_boiler(obj, crhp);
       };
     };
   // End

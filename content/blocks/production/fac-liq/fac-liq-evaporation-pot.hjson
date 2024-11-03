@@ -21,7 +21,7 @@ scaledHealth: 60.0
 armor: 12.0
 size: 2
 hasItems: true
-itemCapacity: 30
+itemCapacity: 60
 hasLiquids: true
 liquidCapacity: 90.0
 outputsLiquid: true
@@ -98,8 +98,47 @@ ambientSoundVolume: 0.2
 
 menu: simple
 recipes: [
-  ## Water
-    # Brine => Salt
+
+
+/*
+    ==================================================
+    Part: Concentration
+    ==================================================
+*/
+
+
+  /* Evaporates part of the solvent */
+
+
+  // Sodium Chloride: Brine
+    {
+      craftTime: 600.0
+      icon: reind-liq-int-solution-suspension-crude-sodium-chloride
+      input: {
+        power: 1.16666667
+        fluids: [
+          reind-liq-ore-brine/0.4
+        ]
+      }
+      output: {
+        fluids: [
+          reind-liq-int-solution-suspension-crude-sodium-chloride/0.1
+        ]
+      }
+    }
+
+
+/*
+    ==================================================
+    Part: Evaporation
+    ==================================================
+*/
+
+
+  /* Heats the solution until all liquid is gone */
+
+
+  // Salt: Brine
     {
       craftTime: 600.0
       icon: reind-liq-ore-brine
@@ -119,7 +158,9 @@ recipes: [
       }
     }
 
-    # Brine (Purified) => Sodium Chloride
+
+  // Sodium Chloride: Purified Brine
+    /* Why do this? */
     {
       craftTime: 600.0
       icon: reind-liq-int-brine-purified
@@ -139,7 +180,8 @@ recipes: [
       }
     }
 
-    # Sodium Hydroxide
+
+  // Sodium Hydroxide: Solution (Sodium Hydroxide)
     {
       craftTime: 600.0
       icon: reind-liq-int-solution-sodium-hydroxide
@@ -158,4 +200,34 @@ recipes: [
         ]
       }
     }
+
+
+/*
+    ==================================================
+    Part: Recrystalization
+    ==================================================
+*/
+
+
+  // Sodium Chloride: Crude Sodium Chloride
+    {
+      craftTime: 600.0
+      icon: reind-item-int-crude-sodium-chloride
+      input: {
+        power: 1.16666667
+        items: [
+          reind-item-int-crude-sodium-chloride/20
+        ]
+        fluids: [
+          reind-liq-ore-water/0.1
+        ]
+      }
+      output: {
+        fluids: [
+          reind-liq-int-solution-hot-sodium-chloride/0.1
+        ]
+      }
+    }
+
+
 ]

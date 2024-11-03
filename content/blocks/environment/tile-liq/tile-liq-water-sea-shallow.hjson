@@ -19,5 +19,6 @@ status: wet
 statusDuration: 120.0
 
 attributes: {
+  attr-floor-tide: 0.5
   attr-floor-water-sea: 1.0
 }

@@ -1,6 +1,6 @@
 name: reind
 displayName: Reindustrialization
-subtitle: "0.0.9i: Getting Complex"
+subtitle: "0.0.9j: Sticky Slurry"
 
 description:
 "I have seen too many mods with fictional contents bearing random names from reality, and somehow I have been working on this mod.
@@ -26,4 +26,4 @@ dependencies: [
   multi-crafter
 ]
 repo: HuanXefh/Reindustrialization
-version: 0.0.9i
+version: 0.0.9j

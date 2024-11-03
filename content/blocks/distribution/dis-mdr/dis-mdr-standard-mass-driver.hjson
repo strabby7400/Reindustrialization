@@ -5,10 +5,10 @@ outlineColor: 373a4d
 
 requirements: [
   item-chem-graphite/80
-  item-chem-brass/80
-  item-chem-tin-bronze/35
-  item-chem-steel/70
-  item-ore-magnetite/40
+  item-chem-brass/110
+  item-chem-tin-bronze/45
+  item-chem-steel/90
+  item-ore-magnetite/60
 ]
 buildCostMultiplier: 2.0
 

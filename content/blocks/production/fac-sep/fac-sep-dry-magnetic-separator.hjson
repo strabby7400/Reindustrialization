@@ -52,8 +52,16 @@ ambientSoundVolume: 0.1
 
 menu: simple
 recipes: [
-  ## Ore Selection
-    # Bauxite
+
+
+/*
+    ==================================================
+    Part: Dust
+    ==================================================
+*/
+
+
+  // Bauxite
     {
       craftTime: 240.0
       icon: reind-item-int-dust-bauxite
@@ -77,7 +85,8 @@ recipes: [
       }
     }
 
-    # Raw Coal
+
+  // Raw Coal
     {
       craftTime: 240.0
       icon: reind-item-int-dust-raw-coal
@@ -100,4 +109,28 @@ recipes: [
         ]
       }
     }
+
+
+  // Sand
+    {
+      craftTime: 240.0
+      icon: reind-item-int-dust-sand
+      input: {
+        power: 0.5
+        items: [
+          reind-item-int-dust-sand/4
+        ]
+        fluids: [
+          reind-gas-misc-air/0.1
+        ]
+      }
+      output: {
+        items: [
+          reind-item-int-dust-deironized-sand/4
+          reind-item-was-dust/1
+        ]
+      }
+    }
+
+
 ]

@@ -1,0 +1,23 @@
+hidden: false
+
+research: {
+  parent: gas-chem-sulfur-dioxide
+  objectives: []
+}
+
+flammability: 0.0
+temperature: 0.5
+heatCapacity: 0.4
+viscosity: 0.65
+explosiveness: 0.0
+
+coolant: false
+capPuddles: true
+boilPoint: 2.0
+
+color: a4ba78
+lightColor: 00000000
+
+effect: sta-liq-acid-ii
+
+incinerable: false

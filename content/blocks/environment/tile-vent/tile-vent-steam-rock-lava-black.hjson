@@ -25,6 +25,7 @@ effectColor: ffffff
 effectSpacing: 80.0
 
 attributes: {
+  attr-env-heat: 0.3
   attr-vent-steam: 1.0
   attr-rock-lava: 1.35
 }

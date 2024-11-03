@@ -25,6 +25,7 @@ effectColor: ffffff
 effectSpacing: 160.0
 
 attributes: {
+  attr-env-heat: 0.3
   attr-vent-sulfur-dioxide: 1.0
   attr-rock-sedimentary-clastic: 1.0
 }

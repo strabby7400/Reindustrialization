@@ -91,7 +91,7 @@ effectChance: 0.01
 ambientSound: se-amb-turbine
 ambientSoundVolume: 0.4
 
-powerProduction: 0.64814815
+powerProduction: 0.74074074
 attribute: attr-vent-steam
 outputLiquid: gas-misc-steam/0.05555556
 displayEfficiencyScale: 0.11111111

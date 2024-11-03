@@ -207,8 +207,16 @@ ambientSoundVolume: 0.5
 
 menu: simple
 recipes: [
-  ## Ball (For Ball Mill)
-    # Steel Ball
+
+
+/*
+    ==================================================
+    Part: Regular
+    ==================================================
+*/
+
+
+  // Ball: Steel
     {
       craftTime: 300.0
       icon: reind-item-prod-ball-steel
@@ -228,8 +236,8 @@ recipes: [
       }
     }
 
-  ## Electrode
-    # Graphite Electrode
+
+  // Electrode: Graphite
     {
       craftTime: 300.0
       icon: reind-item-prod-electrode-graphite
@@ -249,8 +257,8 @@ recipes: [
       }
     }
 
-  ## Packing
-    # Steel Pall Ring
+
+  // Pall Ring: Steel
     {
       craftTime: 300.0
       icon: reind-item-prod-pall-ring-steel
@@ -269,4 +277,6 @@ recipes: [
         ]
       }
     }
+
+
 ]

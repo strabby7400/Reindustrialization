@@ -19,5 +19,5 @@ status: melting
 statusDuration: 1200.0
 
 attributes: {
-  heat: 0.75
+  attr-env-heat: 2.5
 }
