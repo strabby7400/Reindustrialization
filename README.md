@@ -1,11 +1,15 @@
-# Reindustrialization
+<h1> Reindustrialization </h1>
 
-<br>I've seen too many contents bearing names from real life, with no relation to what they actually are. Somehow I began working on this mod to bring the concepts I've learned to Mindustry.
+<br>
+<p> It seems that most Mindustry mods choose to focus on fictional materials and effect bombing, even when real names like iron are given to the contents. If there are raw ores to be smelted, at most time, you just get a simple smelter. </p>
+<p> Is there a mod about realistic engineering? I don't know much about it, but I'm familiar with chemistry. That idea finally leads me to the mod. </p>
 
-<br>![Reindustrialization](https://github.com/HuanXefh/Reindustrialization/blob/main/icon.png)
+<br>
+<p> Reind is a mod about chemical engineering in real life, although it's not always following it. Instead of mining copper from ores, you need a few steps to refine the ores. A kiln is enough for most early-stage ores, however, you will need to learn more processes, they are essential for advanced materials like titanium and tungsten, which are not available from carbothermal reaction. </p>
+<p> Reind is not a java mod, nor a simple json mod. I have added new mechanics to make the mod differ from vanilla game with javascript. This mod has a planet for campgain, everything including terrain blocks (except core zone) are mod-based. Due to the complexity of the maps, sector generator is unavailable and you should never launch to a numbered sector. </p>
+<p> Unlike most mods, there will be no tower defense contents. When there's no enemy, you have to produce something to capture a sector. When the hordes arrive, you have to defend your core with only units. </p>
 
-<br>Reind is not meant to be a typical mod focused on tower defense, instead there will be a hell amount of recipes based on real industrial processes.
-<br>There are enemies. Instead of building towers, you have your units. This mod also adds some simple mechanisms, including pollution and corrosion. Theoretically nothing in vanilla campaign is changed.
-
-<br>Reind is still imcomplete, I'm solely adding more contents to it.
-<br>Important: Don't launch to numbered sectors!
+<br>
+<p> Reind is heavily inspired by GTNH, a hardcore Minecraft modpack. You don't really need to complete vanilla compaigns since everything is new, but experience in building schematics is crucial, you know, in a mod with a hell amount of factories (and recipes). </p>
+<p> I'm solely working on the mod. It's expected to be WIP for a really long time. </p>
+<p> Due to an overhaul of the mod in version 0.1.0, saves from 0.0.9 will be broken. For compaign sectors, you will need to abandon the sectors from 0.0.9 for new contents. </p>
