@@ -1,0 +1,23 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: TreeBlock
+  clipSize: 88.0
+
+
+/*
+  ========================================
+  Section: Resource
+  ========================================
+*/
+
+
+  attributes: {
+    reind-attr-env-carnage: 0.2
+    reind-attr-fungi: 0.6
+    reind-attr-fungi-hard: 0.6
+  }

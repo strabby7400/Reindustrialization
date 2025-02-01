@@ -1,0 +1,49 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Floor
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  speedMultiplier: 0.9
+  dragMultiplier: 1.0
+  damageTaken: 0.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  variants: 2
+  walkEffect: none
+  walkSound: se-step-sand
+  walkSoundVolume: 0.1
+  walkSoundPitchMin: 0.95
+  walkSoundPitchMax: 1.05
+
+
+/*
+  ========================================
+  Section: Resource
+  ========================================
+*/
+
+
+  itemDrop: item-ore-sand
+  playerUnmineable: true
+  attributes: {
+    reind-attr-rock-clastic-sedimentary: 0.75
+  }

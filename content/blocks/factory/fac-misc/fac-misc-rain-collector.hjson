@@ -1,0 +1,139 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: AttributeCrafter
+  category: crafting
+  requirements: [
+    item-bio-timber/80
+    item-chem-copper/50
+    item-chem-graphite/20
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-furn-kiln
+    objectives: []
+  }
+  researchCostMultiplier: 0.2
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 3
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 120.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawLiquidTile
+        drawLiquid: liq-ore-water
+        padding: 1.5
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: none
+  ambientSoundVolume: 0.1
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: true
+  ignoreLiquidFullness: true
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 60.0
+  consumes: {}
+  outputLiquids: [
+    liq-ore-water/0.083333
+  ]
+
+
+/*
+  ========================================
+  Section: I/O (Attribute)
+  ========================================
+*/
+
+
+  attribute: reind-attr-env-rain
+  baseEfficiency: 0.0
+  boostScale: 1.0
+  maxBoost: 2.0
+  minEfficiency: 0.0
+  displayEfficiencyScale: 1.0
+  displayEfficiency: false
+  scaleLiquidConsumption: false

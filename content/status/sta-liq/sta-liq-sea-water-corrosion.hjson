@@ -1,0 +1,77 @@
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  damage: 0.0
+  damageMultiplier: 0.9
+  healthMultiplier: 0.85
+  speedMultiplier: 1.0
+  reloadMultiplier: 1.0
+  buildSpeedMultiplier: 1.0
+  dragMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: ffffff
+  effect: {
+
+
+    /* effect_status_seaWaterCorrosion */
+
+
+    // Part: Meta
+      type: ParticleEffect
+      interp: linear
+      lifetime: 120.0
+      startDelay: 0.0
+    // End
+
+
+    // Part: Visual
+      region: circle
+      layer: 110.0
+      particles: 3
+      followParent: true
+      rotWithParent: false
+      useRotation: true
+      colorFrom: 70b6ff
+      colorTo: 70b6ff
+      lightScl: 2.0
+      lightOpacity: 0.0
+    // End
+
+
+    // Part: Angle & Length
+      baseRotation: 0.0
+      offset: 180.0
+      cone: 45.0
+      spin: 0.0
+      randLength: true
+      length: 3.5
+      baseLength: 0.0
+    // End
+
+
+    // Part: Size & Stroke & Len
+      line: false
+      sizeInterp: pow5In
+      sizeFrom: 0.6
+      sizeTo: 0.0
+      strokeFrom: 0.0
+      strokeTo: 0.0
+      lenFrom: 0.0
+      lenTo: 0.0
+    // End
+
+
+  }
+  effectChance: 0.06

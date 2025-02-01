@@ -1,5 +1,0 @@
-type: Floor
-variants: 0
-
-itemDrop: item-ore-malachite
-playerUnmineable: false

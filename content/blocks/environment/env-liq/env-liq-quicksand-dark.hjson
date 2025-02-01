@@ -1,0 +1,38 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Floor
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  speedMultiplier: 1.0
+  dragMultiplier: 1.0
+  damageTaken: 0.0
+  isLiquid: true
+  shallow: false
+  drownTime: 300.0
+  status: sta-spec-quicksand
+  statusDuration: 60.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  variants: 0
+  cacheLayer: normal
+  albedo: 0.5
+  blendGroup: env-flr-sand-dark

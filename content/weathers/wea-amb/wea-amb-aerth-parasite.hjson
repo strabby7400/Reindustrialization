@@ -1,0 +1,48 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Weather
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  duration: 60.0
+  status: wet
+  statusDuration: 120.0
+  statusAir: true
+  statusGround: true
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  sound: se-pla-aerth-parasite
+  soundVol: 0.8
+  soundVolMin: 0.3
+  soundVolOscMag: 0.5
+  soundVolOscScl: 20.0
+
+
+/*
+  ========================================
+  Section: Resource
+  ========================================
+*/
+
+
+  attrs: {
+    reind-attr-env-rain: 1.0
+  }

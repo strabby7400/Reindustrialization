@@ -1,0 +1,580 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: legs
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  alwaysUnlocked: true
+  research: {
+    parent: eff-core-ash
+    objectives: []
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  health: 880.0
+  armor: 20.0
+  hitSize: 17.0
+  speed: 1.42
+  rotateSpeed: 2.8
+  accel: 0.1
+  drag: 0.1
+  itemCapacity: 320
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+  fogRadius: 8.0
+  lightRadius: -1.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  outlines: true
+  outlineRadius: 2
+  outlineColor: 373a4d
+  groundLayer: 72.0
+  shadowElevation: 0.12
+  stepShake: 0.0
+  rippleScale: 1.2
+  parts: [
+
+
+    {
+      type: RegionPart
+      suffix: "-blade"
+      layerOffset: -0.00005
+      under: true
+      mirror: true
+      x: 0.0
+      y: 2.0
+      rotation: 0.0
+      progress: reload
+      moveX: -12.0
+      moveY: 0.0
+      moveRot: 20.0
+      growProgress: reload
+      growX: 0.0
+      growY: -0.4
+    }
+
+
+    {
+      type: RegionPart
+      suffix: "-blade"
+      layerOffset: -0.00006
+      under: true
+      mirror: true
+      x: 0.0
+      y: 0.0
+      rotation: 0.0
+      progress: reload
+      moveX: -10.5
+      moveY: 0.0
+      moveRot: 40.0
+      growProgress: reload
+      growX: 0.0
+      growY: -0.4
+    }
+
+
+    {
+      type: RegionPart
+      suffix: "-blade"
+      layerOffset: -0.00007
+      under: true
+      mirror: true
+      x: 0.0
+      y: -2.0
+      rotation: 0.0
+      progress: reload
+      moveX: -8.0
+      moveY: 0.0
+      moveRot: 60.0
+      growProgress: reload
+      growX: 0.0
+      growY: -0.4
+    }
+
+
+    {
+      type: HoverPart
+      layerOffset: -0.0001
+      under: true
+      mirror: false
+      radius: 6.0
+      x: 0.0
+      y: -9.0
+      rotation: 0.0
+      phase: 60.0
+      circles: 2
+      sides: 6
+      color: 8ca9e8
+      stroke: 1.5
+      minStroke: 0.12
+    }
+
+
+    {
+      type: HoverPart
+      layerOffset: -0.00011
+      under: true
+      mirror: false
+      radius: 5.0
+      x: 0.0
+      y: -9.0
+      rotation: 0.0
+      phase: 90.0
+      circles: 2
+      sides: 6
+      color: d1efff
+      stroke: 1.5
+      minStroke: 0.12
+    }
+
+
+  ]
+
+
+/*
+  ========================================
+  Section: Visual (Leg)
+  ========================================
+*/
+
+
+  legCount: 4
+  lockLegBase: true
+  legLength: 14.0
+  legMaxLength: 1.25
+  legMinLength: 0.8
+  legLengthScl: 1.0
+  legExtension: -1.0
+  legBaseOffset: 5.2
+  legPairOffset: 0.0
+  legContinuousMove: true
+  legStraightness: 0.15
+  baseLegStraightness: -1.8
+  legStraightLength: 1.0
+  legForwardScl: 1.2
+  legGroupSize: 2
+  legMoveSpace: 1.6
+  allowLegStep: true
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  flying: false
+  hovering: false
+  lowAltitude: true
+  legPhysicsLayer: false
+  canDrown: true
+  drownTimeMultiplier: 1.0
+  omniMovement: true
+  strafePenalty: 0.5
+  baseRotateSpeed: 2.8
+  abilities: [
+
+
+    {
+      type: RepairFieldAbility
+      amount: 24.0
+      reload: 120.0
+      range: 64.0
+    }
+
+
+  ]
+
+
+/*
+  ========================================
+  Section: Specific (Build)
+  ========================================
+*/
+
+
+  buildRange: 240.0
+  buildSpeed: 1.0
+  buildBeamOffset: 4.0
+
+
+/*
+  ========================================
+  Section: Specific (Mine)
+  ========================================
+*/
+
+
+  mineRange: 96.0
+  mineTier: 7
+  mineSpeed: 24.0
+  mineHardnessScaling: true
+  mineFloor: true
+  mineWalls: true
+  mineSound: minebeam
+  mineSoundVolume: 0.6
+
+
+/*
+  ========================================
+  Section: Specific (Control)
+  ========================================
+*/
+
+
+  useUnitCap: true
+  coreUnitDock: true
+  isEnemy: false
+  playerControllable: true
+  logicControllable: false
+  defaultController: BuilderAI
+
+
+/*
+  ========================================
+  Section: Attack
+  ========================================
+*/
+
+
+  legSplashDamage: 0.0
+  legSplashRange: 8.0
+  range: 360.0
+  aimDst: 360.0
+  singleTarget: false
+  targetAir: false
+  targetGround: true
+  faceTarget: true
+  circleTarget: false
+  weapons: [
+
+
+    {
+
+      /* <---------------- meta ----------------> */
+
+      name: unit-core-expedition-i-warper
+      display: true
+      controllable: true
+      aiControllable: true
+      useAttackRange: false
+
+      /* <---------------- properties ----------------> */
+
+      top: false
+      mirror: false
+      alternate: true
+      x: 0.0
+      y: 0.0
+      rotate: false
+      baseRotation: 0.0
+      rotationLimit: 361.0
+      rotateSpeed: 1.0
+
+      /* <---------------- visual ----------------> */
+
+      layerOffset: -0.0001
+      shootX: 0.0
+      shootY: 0.0
+      ejectEffect: none
+      shake: 0.0
+      recoil: 1.5
+      recoils: -1
+      heatColor: feb380
+      cooldownTime: 20.0
+      shootSound: spark
+      chargeSound: none
+
+      /* <---------------- attack ----------------> */
+
+      noAttack: true
+      xRand: 0.0
+      velocityRnd: 0.0
+      minShootVelocity: -1.0
+      reload: 150.0
+      inaccuracy: 0.0
+      shoot: {
+        type: ShootPattern
+        shots: 1
+        shotDelay: 0.0
+        firstShotDelay: 0.0
+      }
+      shootCone: 0.5
+      shootOnDeath: false
+      shootStatus: none
+      shootStatusDuration: 120.0
+      minWarmup: 0.8
+
+      /* <---------------- bullet ----------------> */
+
+      bullet: {
+
+        # Mark: expeditionWarper
+
+        /* <---------------- meta ----------------> */
+
+        type: BasicBulletType
+        instantDisappear: true
+        despawnHit: true
+
+        /* <---------------- properties ----------------> */
+
+        lifetime: 1.0
+        speed: 0.0
+        damage: 1.0
+        buildingDamageMultiplier: 1.0
+        hitSize: 4.0
+        collides: false
+        collidesAir: false
+        collidesGround: true
+
+        /* <---------------- visual ----------------> */
+
+        sprite: bullet
+        layer: 74.0
+        lightRadius: -1.0
+        lightOpacity: 0.0
+        hitShake: 0.0
+        despawnShake: 0.0
+        shootEffect: {
+          type: MultiEffect
+          effects: [
+
+
+            {
+
+              /* <---------------- meta ----------------> */
+
+              type: WaveEffect
+              interp: linear
+              lifetime: 40.0
+              startDelay: 0.0
+
+              /* <---------------- visual ----------------> */
+
+              layer: 69.0
+              sides: -1
+              followParent: false
+              rotWithParent: false
+              colorFrom: 8ca9e8
+              colorTo: 8ca9e8
+              lightScl: 2.0
+              lightOpacity: 0.65
+
+              /* <---------------- angle & size & stroke ----------------> */
+
+              baseRotation: 0.0
+              rotation: 0.0
+              sizeFrom: 0.0
+              sizeTo: 48.0
+              strokeFrom: 6.0
+              strokeTo: 0.0
+
+            }
+
+
+            {
+
+              /* <---------------- meta ----------------> */
+
+              type: ParticleEffect
+              interp: pow5Out
+              lifetime: 180.0
+              startDelay: 0.0
+
+              /* <---------------- visual ----------------> */
+
+              region: reind-efr-cross
+              layer: 110.0
+              particles: 48
+              followParent: false
+              rotWithParent: false
+              useRotation: true
+              colorFrom: 8ca9e8
+              colorTo: 8ca9e8
+              lightScl: 1.0
+              lightOpacity: 0.65
+
+              /* <---------------- angle & length ----------------> */
+
+              baseRotation: 0.0
+              offset: 0.0
+              cone: 1.5
+              spin: 6.0
+              randLength: true
+              length: 120.0
+              baseLength: 260.0
+
+              /* <---------------- size & stroke & len ----------------> */
+
+              line: false
+              sizeInterp: pow3Out
+              sizeFrom: 24.0
+              sizeTo: 0.0
+              strokeFrom: 0.0
+              strokeTo: 0.0
+              lenFrom: 0.0
+              lenTo: 0.0
+
+            }
+
+
+            {
+
+              /* <---------------- meta ----------------> */
+
+              type: ParticleEffect
+              interp: pow5Out
+              lifetime: 240.0
+              startDelay: 0.0
+
+              /* <---------------- visual ----------------> */
+
+              region: reind-efr-cross
+              layer: 110.0
+              particles: 48
+              followParent: false
+              rotWithParent: false
+              useRotation: true
+              colorFrom: d1efff
+              colorTo: d1efff
+              lightScl: 1.0
+              lightOpacity: 0.65
+
+              /* <---------------- angle & length ----------------> */
+
+              baseRotation: 0.0
+              offset: 0.0
+              cone: 1.5
+              spin: 6.0
+              randLength: true
+              length: 180.0
+              baseLength: 200.0
+
+              /* <---------------- size & stroke & len ----------------> */
+
+              line: false
+              sizeInterp: pow3Out
+              sizeFrom: 24.0
+              sizeTo: 0.0
+              strokeFrom: 0.0
+              strokeTo: 0.0
+              lenFrom: 0.0
+              lenTo: 0.0
+
+            }
+
+
+          ]
+        }
+        smokeEffect: none
+        chargeEffect: none
+        hitEffect: none
+        despawnEffect: none
+        hitSound: none
+        despawnSound: none
+
+        /* <---------------- specific (fragment) ----------------> */
+
+        fragBullets: 11
+        fragOnHit: true
+        fragOnAbsorb: true
+        fragRandomSpread: 360.0
+        fragSpread: 0.0
+        fragAngle: 0.0
+        fragVelocityMin: 0.2
+        fragVelocityMax: 1.0
+        fragLifeMin: 1.0
+        fragLifeMax: 1.0
+        fragBullet: {
+
+          # Mark: expeditionWarperFrag
+
+          /* <---------------- meta ----------------> */
+
+          type: LightningBulletType
+
+          /* <---------------- properties ----------------> */
+
+          lifetime: 1.0
+          damage: 18.0
+          buildingDamageMultiplier: 1.0
+          hitSize: 4.0
+          collides: true
+          collidesAir: false
+          collidesGround: true
+
+          /* <---------------- visual ----------------> */
+
+          layer: 74.0
+          lightRadius: -1.0
+          lightOpacity: 0.65
+          hitShake: 0.0
+          despawnShake: 0.0
+          shootEffect: none
+          smokeEffect: none
+          chargeEffect: none
+          hitEffect: none
+          despawnEffect: none
+          hitSound: none
+          despawnSound: none
+
+          /* <---------------- specific (lightning) ----------------> */
+
+          lightningColor: 8ca9e8
+          lightningLength: 6
+          lightningLengthRand: 3
+
+          /* <---------------- specific (status) ----------------> */
+
+          status: shocked
+
+        }
+
+        /* <---------------- specific (knockback) ----------------> */
+
+        knockback: 0.0
+        impact: true
+        recoil: -35.0
+
+      }
+
+    }
+
+
+  ]

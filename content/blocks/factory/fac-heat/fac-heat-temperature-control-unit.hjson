@@ -1,0 +1,176 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: multicraft.MultiCrafter
+  category: crafting
+  requirements: [
+    item-chem-copper/60
+    item-chem-lead/40
+    item-chem-graphite/40
+    item-chem-steel/40
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-misc-core-crafter
+    objectives: []
+  }
+  researchCostMultiplier: 0.25
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 24.0
+  size: 2
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawParticles
+        color: bfbfbf
+        alpha: 0.6
+        particles: 5
+        particleLife: 90.0
+        particleRad: 6.0
+        particleSize: 1.5
+        rotateScl: 3.0
+        reverse: true
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.15
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: true
+  ignoreLiquidFullness: true
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  menu: simple
+  recipes: [
+
+
+    /*
+      ========================================
+      Section: Efficiency
+      ========================================
+    */
+
+
+      // Temperature Control : Water
+      {
+        craftTime: 60.0
+        icon: reind-liq-ore-water
+        input: {
+          power: 0.33333333
+          fluids: [
+            reind-liq-ore-water/0.1
+            reind-effc-effc-pump/0.01666667
+          ]
+        }
+        output: {
+          fluids: [
+            reind-effc-effc-temperature-control/0.01666667
+            reind-gas-misc-steam/0.1
+          ]
+        }
+      }
+
+
+      // Temperature Control : Air
+      {
+        craftTime: 60.0
+        icon: reind-gas-misc-air
+        input: {
+          power: 0.33333333
+          fluids: [
+            reind-gas-misc-air/0.2
+            reind-effc-cond-pressure/0.01666667
+          ]
+        }
+        output: {
+          fluids: [
+            reind-effc-effc-temperature-control/0.01666667
+          ]
+        }
+      }
+
+
+  ]

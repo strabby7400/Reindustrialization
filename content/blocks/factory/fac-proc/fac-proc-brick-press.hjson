@@ -1,0 +1,239 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: multicraft.MultiCrafter
+  category: crafting
+  requirements: [
+    item-chem-graphite/60
+    item-chem-brass/85
+    item-chem-tin-bronze/85
+    item-chem-steel/60
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-misc-generic-inlet
+    objectives: []
+  }
+  researchCostMultiplier: 0.2
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 3
+  hasItems: true
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 30.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawFlame
+        flameColor: ffc999
+        flameRadius: 0.0
+        flameRadiusIn: 0.0
+        flameRadiusScl: 0.0
+        flameRadiusMag: 0.0
+        flameRadiusInMag: 0.0
+        lightRadius: 48.0
+        lightAlpha: 0.65
+        lightSinScl: 16.0
+        lightSinMag: 6.0
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-rotator"
+        spinSprite: true
+        rotateSpeed: 1.0
+      }
+
+
+      {
+        type: DrawPistons
+        suffix: "-piston"
+        sides: 4
+        sinMag: 2.0
+        sinScl: 12.0
+        sinOffset: 60.0
+        sideOffset: 0.0
+        lenOffset: -1.0
+        horiOffset: 0.0
+        angleOffset: 0.0
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.15
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: true
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  menu: simple
+  recipes: [
+
+
+    /*
+      ========================================
+      Section: Brick
+      ========================================
+    */
+
+
+      // Clay Brick
+      {
+        craftTime: 120.0
+        icon: reind-item-int-brick-clay-unbaked
+        input: {
+          power: 1.16666667
+          items: [
+            reind-item-ore-clay/8
+          ]
+          fluids: [
+            reind-liq-ore-water/0.15
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-brick-clay-unbaked/4
+          ]
+          fluids: [
+            reind-liq-was-waste-slurry/0.15
+          ]
+        }
+      }
+
+
+      // High-Alumina Brick
+      {
+        craftTime: 120.0
+        icon: reind-item-int-brick-high-alumina-unbaked
+        input: {
+          power: 1.16666667
+          items: [
+            reind-item-int-blend-brick-high-alumina/4
+          ]
+          fluids: [
+            reind-liq-ore-water/0.15
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-brick-high-alumina-unbaked/4
+          ]
+          fluids: [
+            reind-liq-was-waste-slurry/0.15
+          ]
+        }
+      }
+
+
+      // Magnesia Brick
+      {
+        craftTime: 120.0
+        icon: reind-item-int-brick-magnesia-unbaked
+        input: {
+          power: 1.16666667
+          items: [
+            reind-item-int-blend-brick-magnesia/4
+          ]
+          fluids: [
+            reind-liq-ore-water/0.15
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-brick-magnesia-unbaked/4
+          ]
+          fluids: [
+            reind-liq-was-waste-slurry/0.15
+          ]
+        }
+      }
+
+
+  ]

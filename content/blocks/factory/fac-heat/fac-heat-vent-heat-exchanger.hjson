@@ -1,0 +1,222 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: AttributeCrafter
+  category: crafting
+  requirements: [
+    item-chem-copper/120
+    item-buil-tempered-glass/40
+    item-chem-graphite/70
+    item-chem-tin-bronze/70
+    item-chem-steel/60
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-heat-furnace-heater
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 3
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 300.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawLiquidTile
+        drawLiquid: liq-ore-water
+        padding: 1.5
+      }
+
+
+      {
+        type: DrawRegion
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-gloss"
+      }
+
+
+      {
+        type: DrawSideRegion
+      }
+
+
+      {
+        type: DrawFade
+        suffix: "-fade"
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-heat"
+        rotate: true
+      }
+
+
+    ]
+  }
+  craftEffect: {
+
+    # Template: _craftGas
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow2Out
+    lifetime: 120.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: reind-efr-shadow-white
+    layer: 86.0
+    particles: 12
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffffff40
+    colorTo: ffffff00
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 24.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: pow5Out
+    sizeFrom: 2.0
+    sizeTo: 7.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-furnace
+  ambientSoundVolume: 0.3
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  outputsLiquid: true
+  ignoreLiquidFullness: true
+  liquidOutputDirections: [0, 2]
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 90.0
+  consumes: {
+    power: 2.0
+  }
+  outputLiquids: [
+    effc-cond-heat/0.13333333
+    liq-ore-water/0.25
+  ]
+
+
+/*
+  ========================================
+  Section: I/O (Attribute)
+  ========================================
+*/
+
+
+  attribute: reind-attr-vent-steam
+  baseEfficiency: 0.0
+  boostScale: 0.11111111
+  maxBoost: 1.0
+  minEfficiency: 8.9999
+  displayEfficiencyScale: 1.0
+  displayEfficiency: false
+  scaleLiquidConsumption: false

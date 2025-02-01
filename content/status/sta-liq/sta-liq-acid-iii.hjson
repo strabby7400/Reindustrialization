@@ -1,46 +1,77 @@
-damage: 1.0
-damageMultiplier: 0.8
-healthMultiplier: 0.8
-speedMultiplier: 1.0
-reloadMultiplier: 1.0
-buildSpeedMultiplier: 1.0
-dragMultiplier: 1.0
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
 
-color: ffffff
-effect: {
-  # BasicCorrosion
-  type: ParticleEffect
-  lifetime: 120.0
-  particles: 3
-  colorFrom: 80ba78ff
-  colorTo: 80ba78ff
-  length: 3.0
-  cone: 45.0
-  offset: 180.0
-  sizeFrom: 0.6
-  sizeTo: 0.0
-  sizeInterp: pow5In
-  strokeFrom: 1.0
-  strokeTo: 0.0
-  lenFrom: 4.0
-  lenTo: 2.0
-}
-effectChance: 0.02
-applyEffect: {
-  # BasicCorrosion
-  type: ParticleEffect
-  lifetime: 120.0
-  particles: 3
-  colorFrom: 80ba78ff
-  colorTo: 80ba78ff
-  length: 3.0
-  cone: 45.0
-  offset: 180.0
-  sizeFrom: 0.6
-  sizeTo: 0.0
-  sizeInterp: pow5In
-  strokeFrom: 1.0
-  strokeTo: 0.0
-  lenFrom: 4.0
-  lenTo: 2.0
-}
+
+  damage: 1.0
+  damageMultiplier: 0.8
+  healthMultiplier: 0.8
+  speedMultiplier: 1.0
+  reloadMultiplier: 1.0
+  buildSpeedMultiplier: 1.0
+  dragMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: ffffff
+  effect: {
+
+
+    /* effect_status_acid */
+
+
+    // Part: Meta
+      type: ParticleEffect
+      interp: linear
+      lifetime: 120.0
+      startDelay: 0.0
+    // End
+
+
+    // Part: Visual
+      region: circle
+      layer: 110.0
+      particles: 3
+      followParent: true
+      rotWithParent: false
+      useRotation: true
+      colorFrom: 80ba78
+      colorTo: 80ba78
+      lightScl: 2.0
+      lightOpacity: 0.0
+    // End
+
+
+    // Part: Angle & Length
+      baseRotation: 0.0
+      offset: 180.0
+      cone: 45.0
+      spin: 0.0
+      randLength: true
+      length: 3.5
+      baseLength: 0.0
+    // End
+
+
+    // Part: Size & Troke & Len
+      line: false
+      sizeInterp: pow5In
+      sizeFrom: 0.6
+      sizeTo: 0.0
+      strokeFrom: 0.0
+      strokeTo: 0.0
+      lenFrom: 0.0
+      lenTo: 0.0
+    // End
+
+
+  }
+  effectChance: 0.035

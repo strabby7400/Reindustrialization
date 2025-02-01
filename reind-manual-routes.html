@@ -1,0 +1,1742 @@
+<a name="page-top"></a>
+
+<head>
+  <title> Reind: Production Routes </title>
+  <style media="screen">
+
+
+    /*
+      ========================================
+      Part: Main
+      ========================================
+    */
+
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+
+      body {
+          background-image: url("sprites/doc/bg.png");
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+
+          font-family: "Times New Roman", Times, serif;
+          color: #ffffff;
+          text-shadow: 2px 0px 2px #000000, 0px 2px 2px #000000, 0px -2px 2px #000000, -2px 0px 2px #000000;
+
+          padding: 24px 48px;
+
+      }
+
+
+      hr {
+        box-shadow: 2px 0px 2px #000000, 0px 2px 2px #000000, 0px -2px 2px #000000, -2px 0px 2px #000000;
+      }
+
+
+      h1.title {
+        font-size: 32px;
+        text-align: center;
+      }
+
+
+      p.note {
+        font-style: italic;
+        color: #808080;
+        padding-left: 32px;
+      }
+
+
+      p.end {
+        text-align: right;
+        padding-right: 48px;
+      }
+
+
+      span.fami {
+        color: #cbd97f;
+      }
+
+
+      span.fami::before {
+        content: "*";
+      }
+
+
+      span.fami::after {
+        content: "*";
+      }
+
+
+      span.marked {
+        color: #f15454;
+      }
+
+
+      img {
+        filter: drop-shadow(2px 2px 12px #000000);
+        vertical-align: middle;
+      }
+
+
+    /*
+      ========================================
+      Part: Menu
+      ========================================
+    */
+
+
+      ul.menu {
+        column-count: 3;
+        column-gap: 64px;
+        list-style-type: none;
+      }
+
+
+      ul.menu > li {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+
+      ul.menu > hr {
+        border: 1px dashed gray;
+        opacity: 0.5;
+      }
+
+
+      ul.menu > li > a {
+        color: #808080;
+        padding-left: 6px;
+      }
+
+
+    /*
+      ========================================
+      Part: Term
+      ========================================
+    */
+
+
+      div.term {
+        border: 1px solid gray;
+        border-radius: 24px;
+        box-shadow: 2px 0px 2px #000000, 0px 2px 2px #000000, 0px -2px 2px #000000, -2px 0px 2px #000000;
+        background: #00000040;
+        padding: 32px;
+      }
+
+
+      h1.term {
+        border-bottom: 1px solid gray;
+        border-left: 6px solid gray;
+        font-size: 20px;
+        padding-bottom: 4px;
+        padding-left: 12px;
+      }
+
+
+    /*
+      ========================================
+      Part: Route
+      ========================================
+    */
+
+
+      h2.route {
+        font-size: 18px;
+      }
+
+
+      h2.route::before {
+        content: "■";
+        padding-right: 4px;
+      }
+
+
+    /*
+      ========================================
+      Part: Table
+      ========================================
+    */
+
+
+      table {
+        border: 1px solid gray;
+        border-collapse: collapse;
+        box-shadow: 2px 0px 2px #000000, 0px 2px 2px #000000, 0px -2px 2px #000000, -2px 0px 2px #000000;
+        font-size: 16px;
+      }
+
+
+      th {
+        border: 1px solid gray;
+        box-shadow: 2px 0px 2px #000000, 0px 2px 2px #000000, 0px -2px 2px #000000, -2px 0px 2px #000000;
+        padding: 8px;
+      }
+
+
+      td {
+        border: 1px solid gray;
+        box-shadow: 2px 0px 2px #000000, 0px 2px 2px #000000, 0px -2px 2px #000000, -2px 0px 2px #000000;
+        padding: 8px;
+      }
+
+
+      tr.alter > td {
+        color: #808080;
+      }
+
+
+      tr.opt > td {
+        color: #fed37f;
+      }
+
+
+    /*
+      ========================================
+      Part: Icon
+      ========================================
+    */
+
+
+      img.icon {
+        width: 16px;
+        height: 16px;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+
+
+      img.target {
+        width: 48px;
+        height: 48px;
+        margin-top: 16px;
+        margin-left: 32px;
+      }
+
+
+      img.opt {
+        animation: anm_shrink 1.75s infinite;
+        animation-timing-function: linear;
+      }
+
+
+      img.alter {
+        animation: anm_mergeLeft 1.25s infinite;
+        animation-timing-function: ease-out;
+      }
+
+
+    /*
+      ========================================
+      Part: Overlay
+      ========================================
+    */
+
+
+      img.toTop {
+        z-index: 10;
+        cursor: pointer;
+        opacity: 0.3;
+        position: fixed;
+        bottom: 96px;
+        right: 24px;
+      }
+
+
+      img.toTop:hover {
+        opacity: 1.0;
+      }
+
+
+      img.toTop:active {
+        transform: scale(0.8);
+      }
+
+
+      img.toBottom {
+        z-index: 10;
+        cursor: pointer;
+        opacity: 0.3;
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+      }
+
+
+      img.toBottom:hover {
+        opacity: 1.0;
+      }
+
+
+      img.toBottom:active {
+        transform: scale(0.8);
+      }
+
+
+      img.author {
+        z-index: 10;
+        cursor: pointer;
+        width: 72px;
+        height: 72px;
+        position: fixed;
+        top: 4px;
+        right: 12px;
+      }
+
+
+      img.author:hover {
+        transform: scale(1.2);
+        transition: 0.5s;
+      }
+
+
+      img.author:active {
+        transform: scale(1.0);
+      }
+
+
+    /*
+      ========================================
+      Part: Animation
+      ========================================
+    */
+
+
+      @keyframes anm_shrink {
+
+        0% {
+          transform: scale(1.0);
+          opacity: 0.7;
+        }
+
+        50% {
+          transform: scale(0.75);
+          opacity: 1.0;
+        }
+
+        100% {
+          transform: scale(1.0);
+          opacity: 0.7;
+        }
+
+      }
+
+
+      @keyframes anm_mergeLeft {
+
+        0% {
+          transform: translateX(0%);
+          opacity: 1.0;
+        }
+
+        15% {
+          transform: translateX(0%);
+          opacity: 0.8;
+        }
+
+        50% {
+          transform: translateX(-20%);
+          opacity: 0.5;
+        }
+
+        85% {
+          transform: translateX(0%);
+          opacity: 0.8;
+        }
+
+        100% {
+          transform: translateX(0%);
+          opacity: 1.0;
+        }
+
+      }
+
+
+  </style>
+</head>
+
+
+<!--
+  ========================================
+  Section: Overlay
+  ========================================
+-->
+
+
+  <!-- Quick Scroll -->
+  <a href="#page-top"><img src="sprites/doc/arrow-up.png", class="toTop", draggable="false"></a>
+  <a href="#page-bottom"><img src="sprites/doc/arrow-down.png", class="toBottom", draggable="false"></a>
+
+  <!-- Repo -->
+  <a href="https://github.com/HuanXefh/Reindustrialization"><img src="sprites/doc/author.png", title="Visit the repo on GitHub", class="author", draggable="false"></a>
+
+
+<body>
+
+
+<!--
+  ========================================
+  Section: Head
+  ========================================
+-->
+
+
+  <h1 class="title"> Reind: Production Routes </h1>
+  <br>
+  <p> This document contains steps involved in most routes. Products are listed in alphabetical order. </p>
+  <p> If a row is colored to <span style="color: #fed37f;">#fed37f</span>, the step is optional. </p>
+  <p> If a row is colored to <span style="color: #808080;">#808080</span>, the step is alternative to the previous step. </p>
+  <p> If the name of a factory is colored to <span style="color: #cbd97f;">#cbd97f</span>, it represents a factory family (there multiple factories available to carry out the same step). </p>
+  <br>
+
+  <hr><br>
+
+
+<!--
+  ========================================
+  Section: Menu
+  ========================================
+-->
+
+
+  <p> List of products: </p>
+  <ul class="menu">
+
+
+    <p> A- </p>
+
+      <li><a href="#aggregate">
+        <img src="sprites/items/item-buil/item-buil-coarse-aggregate.png", class="icon">
+        Aggregate
+      </a></li>
+
+    <hr>
+
+
+    <p> B- </p>
+
+      <li><a href="#brass">
+        <img src="sprites/items/item-chem/alloy/item-chem-brass.png", class="icon">
+        Brass
+      </a></li>
+
+    <hr>
+
+
+    <p> C- </p>
+
+      <li><a href="#cement">
+        <img src="sprites/items/item-buil/item-buil-cement.png", class="icon">
+        Cement
+      </a></li>
+
+      <li><a href="#charcoal">
+        <img src="sprites/items/item-bio/item-bio-charcoal.png", class="icon">
+        Charcoal
+      </a></li>
+
+      <li><a href="#clay-brick">
+        <img src="sprites/items/item-buil/item-buil-brick-clay.png", class="icon">
+        Clay Brick
+      </a></li>
+
+      <li><a href="#coal">
+        <img src="sprites/items/item-chem/elementary/item-chem-coal.png", class="icon">
+        Coal
+      </a></li>
+
+      <li><a href="#coke">
+        <img src="sprites/items/item-chem/elementary/item-chem-coke.png", class="icon">
+        Coke
+      </a></li>
+
+      <li><a href="#copper">
+        <img src="sprites/items/item-chem/elementary/item-chem-copper.png", class="icon">
+        Copper
+      </a></li>
+
+    <hr>
+
+
+    <p> D- </p>
+    <hr>
+
+
+    <p> E- </p>
+    <hr>
+
+
+    <p> F- </p>
+    <hr>
+
+    <p> G- </p>
+
+      <li><a href="#graphite">
+        <img src="sprites/items/item-chem/elementary/item-chem-graphite.png", class="icon">
+        Graphite
+      </a></li>
+
+    <hr>
+
+
+    <p> H- </p>
+
+      <li><a href="#high-alumina-brick">
+        <img src="sprites/items/item-buil/item-buil-brick-high-alumina.png", class="icon">
+        High-Alumina Brick
+      </a></li>
+
+    <hr>
+
+
+    <p> I- </p>
+    <hr>
+
+
+    <p> J- </p>
+    <hr>
+
+
+    <p> K- </p>
+    <hr>
+
+
+    <p> L- </p>
+
+      <li><a href="#lead">
+        <img src="sprites/items/item-chem/elementary/item-chem-lead.png", class="icon">
+        Lead
+      </a></li>
+
+      <li><a href="#lime">
+        <img src="sprites/items/item-chem/inorganic/calcium/item-chem-lime.png", class="icon">
+        Lime
+      </a></li>
+
+    <hr>
+
+
+    <p> M- </p>
+
+      <li><a href="#magnesia-brick">
+        <img src="sprites/items/item-buil/item-buil-brick-magnesia.png", class="icon">
+        Magnesia Brick
+      </a></li>
+
+      <li><a href="#magnesia-sand">
+        <img src="sprites/items/item-chem/inorganic/magnesium/item-chem-magnesia-sand.png", class="icon">
+        Magnesia Sand
+      </a></li>
+
+      <li><a href="#mangalloy">
+        <img src="sprites/items/item-chem/alloy/item-chem-mangalloy.png", class="icon">
+        Mangalloy
+      </a></li>
+
+    <hr>
+
+    <p> N- </p>
+    <hr>
+
+
+    <p> O- </p>
+    <hr>
+
+
+    <p> P- </p>
+    <hr>
+
+
+    <p> Q- </p>
+    <hr>
+
+
+    <p> R- </p>
+    <hr>
+
+
+    <p> S- </p>
+
+      <li><a href="#semicoke">
+        <img src="sprites/items/item-chem/elementary/item-chem-semicoke.png", class="icon">
+        Semicoke
+      </a></li>
+
+      <li><a href="#solder">
+        <img src="sprites/items/item-chem/alloy/item-chem-solder.png", class="icon">
+        Solder
+      </a></li>
+
+      <li><a href="#steel">
+        <img src="sprites/items/item-chem/alloy/item-chem-steel.png", class="icon">
+        Steel
+      </a></li>
+
+    <hr>
+
+
+    <p> T- </p>
+
+      <li><a href="#tempered-glass">
+        <img src="sprites/items/item-buil/item-buil-tempered-glass.png", class="icon">
+        Tempered Glass
+      </a></li>
+
+      <li><a href="#timber">
+        <img src="sprites/items/item-bio/item-bio-timber.png", class="icon">
+        Timber
+      </a></li>
+
+      <li><a href="#tin">
+        <img src="sprites/items/item-chem/elementary/item-chem-tin.png", class="icon">
+        Tin
+      </a></li>
+
+      <li><a href="#tin-bronze">
+        <img src="sprites/items/item-chem/alloy/item-chem-tin-bronze.png", class="icon">
+        Tin Bronze
+      </a></li>
+
+    <hr>
+
+
+    <p> U- </p>
+    <hr>
+
+
+    <p> V- </p>
+    <hr>
+
+
+    <p> W- </p>
+    <hr>
+
+
+    <p> X- </p>
+    <hr>
+
+
+    <p> Y- </p>
+    <hr>
+
+
+    <p> Z- </p>
+
+      <li><a href="#zinc">
+        <img src="sprites/items/item-chem/elementary/item-chem-zinc.png", class="icon">
+        Zinc
+      </a></li>
+
+    <hr>
+
+
+  </ul><br><br>
+
+  <hr><br><br><br><br>
+
+
+<!--
+  ========================================
+  Section: Routes
+  ========================================
+-->
+
+
+  <!-- ========================================
+    Target: Aggregate
+  ======================================== -->
+
+  <a name="aggregate"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Aggregate </h1>
+      <img src="sprites/items/item-buil/item-buil-coarse-aggregate.png", title="Coarse Aggregate", class="target">
+      <img src="sprites/items/item-buil/item-buil-fine-aggregate.png", title="Fine Aggregate", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Rock Shard] -->
+      <h2 class="route"> Rock Shard </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-rock-shard-plutonic.png", title="Rock Shard (Plutonic)", class="">
+      <img src="sprites/items/item-was/item-was-gangue.png", title="Gangue", class="opt">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Jaw Crusher </td>
+          <td> Rock Shard (Plutonic) </td>
+          <td> Chunks (Aggregate) </td>
+          <td> Multiple inputs: any valid rock shards, and <span class="marked">Gangue</span>. </td>
+        </tr>
+
+        <tr>
+          <td> Jaw Crusher </td>
+          <td> Chunks (Aggregate) </td>
+          <td> Coarse Aggregate </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> Jaw Crusher </td>
+          <td> Coarse Aggregate </td>
+          <td> Fine Aggregate </td>
+          <td>  </td>
+        </tr>
+
+        <tr class="opt">
+          <td> <span class="fami">Ball Mill</span> </td>
+          <td> Chunks (Aggregate) </td>
+          <td> Fine Aggregate </td>
+          <td> Skips <span class="marked">Coarse Aggregate</span>. </td>
+        </tr>
+      </table>
+      <br><br><p class="note"> Invalid rock types: evaporite, metamorphic, biological sedimentary. </p><br>
+    <!-- End -->
+
+    <!-- Start: Route[Pumice] -->
+      <h2 class="route"> Pumice </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-pumice.png", title="Pumice", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Jaw Crusher </td>
+          <td> Pumice </td>
+          <td> Coarse Aggregate </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> Jaw Crusher </td>
+          <td> Pumice </td>
+          <td> Fine Aggregate </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Brass
+  ======================================== -->
+
+  <a name="brass"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Brass </h1>
+      <img src="sprites/items/item-chem/alloy/item-chem-brass.png", title="Brass", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Furnace] -->
+      <h2 class="route"> Furnace </h2>
+      <br>
+      <img src="sprites/items/item-chem/elementary/item-chem-copper.png", title="Copper", class="">
+      <img src="sprites/items/item-chem/elementary/item-chem-zinc.png", title="Zinc", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Induction Furnace</span> </td>
+          <td> Copper, <br> Zinc </td>
+          <td> Brass </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Cement
+  ======================================== -->
+
+  <a name="cement"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Cement </h1>
+      <img src="sprites/items/item-buil/item-buil-cement.png", title="Cement", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-limestone.png", title="Limestone", class="">
+      <img src="sprites/items/item-ore/item-ore-sand.png", title="Sand", class="">
+      <img src="sprites/items/item-was/item-was-slag.png", title="Slag", class="alter">
+      <img src="sprites/items/item-ore/item-ore-clay.png", title="Clay", class="">
+      <img src="sprites/items/item-ore/item-ore-gypsum.png", title="Gypsum", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Jaw Crusher</span> </td>
+          <td> Limestone </td>
+          <td> Chunks (Limestone) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">V-Mixer</span> </td>
+          <td> Chunks (Limestone), <br> Sand / Slag, <br> Clay </td>
+          <td> Blend (Cement) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Shaft Kiln</span> </td>
+          <td> Blend (Cement) </td>
+          <td> Blend (Roasted : Cement) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Jaw Crusher</span> </td>
+          <td> Gypsum </td>
+          <td> Chunks (Gypsum) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">V-Mixer</span> </td>
+          <td> Blend(Roasted : Cement), <br> Chunks (Gypsum) </td>
+          <td> Cement </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Charcoal
+  ======================================== -->
+
+  <a name="charcoal"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Charcoal </h1>
+      <img src="sprites/items/item-bio/item-bio-charcoal.png", title="Charcoal", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-bio/item-bio-log.png", title="Log", class="">
+      <img src="sprites/items/item-bio/item-bio-hypha-rod.png", title="Hypha Rod", class="alter">
+      <img src="sprites/items/item-bio/item-bio-timber.png", title="Timber", class="alter">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Carbonization Kiln </td>
+          <td> Log / Hypha Rod / Timber </td>
+          <td> Charcoal </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Clay Brick
+  ======================================== -->
+
+  <a name="clay-brick"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Clay Brick </h1>
+      <img src="sprites/items/item-buil/item-buil-brick-clay.png", title="Clay Brick", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-clay.png", title="Clay", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Brick Press</span> </td>
+          <td> Clay </td>
+          <td> Clay Brick (Unbaked) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Primitive Brick Kiln</span> </td>
+          <td> Clay Brick (Unbaked) </td>
+          <td> Clay Brick </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Coal
+  ======================================== -->
+
+  <a name="coal"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Coal </h1>
+      <img src="sprites/items/item-chem/elementary/item-chem-coal.png", title="Coal", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Ore Selection] -->
+      <h2 class="route"> Ore Selection </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-raw-coal.png", title="Raw Coal", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Ball Mill</span> </td>
+          <td> Raw Coal </td>
+          <td> Dust (Raw Coal) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> Dry Magnetic Separator </td>
+          <td> Dust (Raw Coal) </td>
+          <td> Coal </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Coke
+  ======================================== -->
+
+  <a name="coke"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Coke </h1>
+      <img src="sprites/items/item-chem/elementary/item-chem-coke.png", title="Coke", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Coking] -->
+      <h2 class="route"> Coking </h2>
+      <br>
+      <img src="sprites/items/item-chem/elementary/item-chem-coal.png", title="Coal", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Primitive Coke Oven</span> </td>
+          <td> Coal </td>
+          <td> Coke </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Copper
+  ======================================== -->
+
+  <a name="copper"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Copper </h1>
+      <img src="sprites/items/item-chem/elementary/item-chem-copper.png", title="Copper", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-native-copper.png", title="Native Copper", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Kiln </td>
+          <td> Native Copper </td>
+          <td> Copper </td>
+          <td> Multiple inputs: most copper ores. </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Graphite
+  ======================================== -->
+
+  <a name="graphite"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Graphite </h1>
+      <img src="sprites/items/item-chem/elementary/item-chem-graphite.png", title="Graphite", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-crude-graphite.png", title="Crude Graphite", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Kiln </td>
+          <td> Crude Graphite </td>
+          <td> Graphite </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: High-Alumina Brick
+  ======================================== -->
+
+  <a name="high-alumina-brick"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> High-Alumina Brick </h1>
+      <img src="sprites/items/item-buil/item-buil-brick-high-alumina.png", title="High-Alumina Brick", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-bauxite.png", title="bauxite", class="">
+      <img src="sprites/items/item-ore/item-ore-clay.png", title="clay", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Ball Mill</span> </td>
+          <td> Bauxite </td>
+          <td> Dust (Bauxite) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> Dry Magnetic Separator </td>
+          <td> Dust (Bauxite) </td>
+          <td> Dust (P1 : Bauxite) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> Ball Mill </td>
+          <td> Dust (P1 : Bauxite), <br> Clay </td>
+          <td> Blend (High-Alumina Brick) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Brick Press</span> </td>
+          <td> Blend (High-Alumina Brick) </td>
+          <td> High-Alumina Brick (Unbaked) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Primitive Brick Kiln</span> </td>
+          <td> High-Alumina Brick (Unbaked) </td>
+          <td> High-Alumina Brick </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Lead
+  ======================================== -->
+
+  <a name="lead"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Lead </h1>
+      <img src="sprites/items/item-chem/elementary/item-chem-lead.png", title="Lead", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-galena.png", title="Galena", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Kiln </td>
+          <td> Galena </td>
+          <td> Lead </td>
+          <td> Multiple inputs: most lead ores. </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Lime
+  ======================================== -->
+
+  <a name="lime"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Lime </h1>
+      <img src="sprites/items/item-chem/inorganic/calcium/item-chem-lime.png", title="Lime", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-limestone.png", title="Limestone", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Jaw Crusher</span> </td>
+          <td> Limestone </td>
+          <td> Chunks (Limestone) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Shaft Kiln</span> </td>
+          <td> Chunks (Limestone) </td>
+          <td> Lime </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Magnesia Brick
+  ======================================== -->
+
+  <a name="magnesia-brick"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Magnesia Brick </h1>
+      <img src="sprites/items/item-buil/item-buil-brick-magnesia.png", title="Magnesia Brick", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-chem/inorganic/magnesium/item-chem-magnesia-sand.png", title="Magnesia Sand", class="">
+      <img src="sprites/items/item-ore/item-ore-clay.png", title="Clay", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Ball Mill </td>
+          <td> Magnesia Sand, <br> Clay </td>
+          <td> Blend (Magnesia Brick) </td>
+          <td>  </td>
+        </tr>
+
+
+        <tr>
+          <td> <span class="fami">Brick Press</span> </td>
+          <td> Blend (Magnesia Brick) </td>
+          <td> Magnesia Brick (Unbaked) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Primitive Brick Kiln</span> </td>
+          <td> Magnesia Brick (Unbaked) </td>
+          <td> Magnesia Brick </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Magnesia Sand
+  ======================================== -->
+
+  <a name="magnesia-sand"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Magnesia Sand </h1>
+      <img src="sprites/items/item-chem/inorganic/magnesium/item-chem-magnesia-sand.png", title="Magnesia Sand", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-dolomite.png", title="Dolomite", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Jaw Crusher</span> </td>
+          <td> Dolomite </td>
+          <td> Chunks (Dolomite) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Shaft Kiln</span> </td>
+          <td> Chunks (Dolomite) </td>
+          <td> Magnesia Sand </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Mangalloy
+  ======================================== -->
+
+  <a name="mangalloy"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Mangalloy </h1>
+      <img src="sprites/items/item-chem/alloy/item-chem-mangalloy.png", title="Mangalloy", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Bloomery] -->
+      <h2 class="route"> Bloomery </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-pyrolusite.png", title="Pyrolusite", class="">
+      <img src="sprites/items/item-ore/item-ore-hematite.png", title="Hematite", class="">
+      <img src="sprites/items/item-chem/elementary/item-chem-graphite.png", title="Graphite", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Bloomery </td>
+          <td> Pyrolusite, <br> Hematite, <br> Graphite </td>
+          <td> Mangalloy </td>
+          <td> Type of iron ore depends on manganese ore. </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Semicoke
+  ======================================== -->
+
+  <a name="semicoke"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Semicoke </h1>
+      <img src="sprites/items/item-chem/elementary/item-chem-semicoke.png", title="Semicoke", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Coking] -->
+      <h2 class="route"> Coking </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-lignite.png", title="Lignite", class="">
+      <img src="sprites/items/item-ore/item-ore-peat.png", title="Peat", class="alter">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Primitive Coke Oven</span> </td>
+          <td> Lignite / Peat </td>
+          <td> Semicoke </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Solder
+  ======================================== -->
+
+  <a name="solder"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Solder </h1>
+      <img src="sprites/items/item-chem/alloy/item-chem-solder.png", title="Solder", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Furnace] -->
+      <h2 class="route"> Furnace </h2>
+      <br>
+      <img src="sprites/items/item-chem/elementary/item-chem-lead.png", title="Lead", class="">
+      <img src="sprites/items/item-chem/elementary/item-chem-tin.png", title="Tin", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Condition </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Induction Furnace</span> </td>
+          <td> Lead, <br> Tin </td>
+          <td> Solder </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Steel
+  ======================================== -->
+
+  <a name="steel"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Steel </h1>
+      <img src="sprites/items/item-chem/alloy/item-chem-steel.png", title="Steel", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Bloomery] -->
+      <h2 class="route"> Bloomery </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-hematite.png", title="Hematite", class="">
+      <img src="sprites/items/item-ore/item-ore-limestone.png", title="Limestone", class="">
+      <img src="sprites/items/item-was/item-was-scrap-steel.png", title="Scrap Steel", class="opt">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Bloomery </td>
+          <td> Hematite </td>
+          <td> Pig Iron </td>
+          <td> Multiple inputs: most iron ores. </td>
+        </tr>
+
+        <tr>
+          <td> Bloomery </td>
+          <td> Pig Iron </td>
+          <td> Wrought Iron </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> Bloomery </td>
+          <td> Wrought Iron, <br> Limestone </td>
+          <td> Steel </td>
+          <td>  </td>
+        </tr>
+
+        <tr class="opt">
+          <td> Bloomery </td>
+          <td> Scrap Steel, <br> Limestone </td>
+          <td> Steel </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Tempered Glass
+  ======================================== -->
+
+  <a name="tempered-glass"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Tempered Glass </h1>
+      <img src="sprites/items/item-buil/item-buil-tempered-glass.png", title="Tempered Glass", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Melt] -->
+      <h2 class="route"> Melt </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-sand.png", title="Sand", class="">
+      <img src="sprites/items/item-chem/inorganic/calcium/item-chem-lime.png", title="Lime", class="">
+      <img src="sprites/items/item-ore/item-ore-trona.png", title="Trona", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Primitive Glass Kiln </td>
+          <td> Sand, <br> Lime, <br> Trona </td>
+          <td> Melt (Glass) </td>
+          <td>  </td>
+        </tr>
+
+        <tr>
+          <td> Core Crafter </td>
+          <td> Melt (Glass) </td>
+          <td> Tempered Glass </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Timber
+  ======================================== -->
+
+  <a name="timber"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Timber </h1>
+      <img src="sprites/items/item-bio/item-bio-timber.png", title="Timber", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Log] -->
+      <h2 class="route"> Log </h2>
+      <br>
+      <img src="sprites/items/item-bio/item-bio-log.png", title="Log", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Core Crafter </td>
+          <td> Log </td>
+          <td> Timber </td>
+          <td> Too slow. </td>
+        </tr>
+
+        <tr class="alter">
+          <td> Sawmill </td>
+          <td> Log </td>
+          <td> Timber </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Tin
+  ======================================== -->
+
+  <a name="tin"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Tin </h1>
+      <img src="sprites/items/item-chem/elementary/item-chem-tin.png", title="Tin", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-cassiterite.png", title="Cassiterite", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Kiln </td>
+          <td> Cassiterite </td>
+          <td> Tin </td>
+          <td> Multiple inputs: most tin ores. </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Tin Bronze
+  ======================================== -->
+
+  <a name="tin-bronze"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Tin Bronze </h1>
+      <img src="sprites/items/item-chem/alloy/item-chem-tin-bronze.png", title="Tin Bronze", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Furnace] -->
+      <h2 class="route"> Furnace </h2>
+      <br>
+      <img src="sprites/items/item-chem/elementary/item-chem-copper.png", title="Copper", class="">
+      <img src="sprites/items/item-chem/elementary/item-chem-tin.png", title="Tin", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> <span class="fami">Induction Furnace</span> </td>
+          <td> Copper, <br> Tin </td>
+          <td> Tin Bronze </td>
+          <td>  </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+  <!-- ========================================
+    Target: Zinc
+  ======================================== -->
+
+  <a name="zinc"></a>
+  <div class="term">
+
+    <!-- Start: Target -->
+      <h1 class="term"> Zinc </h1>
+      <img src="sprites/items/item-chem/elementary/item-chem-zinc.png", title="Zinc", class="target">
+      <br><br>
+    <!-- End -->
+
+    <!-- Start: Route[Kiln] -->
+      <h2 class="route"> Kiln </h2>
+      <br>
+      <img src="sprites/items/item-ore/item-ore-sphalerite.png", title="Sphalerite", class="">
+      <br><br><br>
+      <table>
+        <tr>
+          <th> Block </th>
+          <th> Raw </th>
+          <th> Yield </th>
+          <th> Note </th>
+        </tr>
+
+        <tr>
+          <td> Kiln </td>
+          <td> Sphalerite </td>
+          <td> Zinc </td>
+          <td> Multiple inputs: most zinc ores. </td>
+        </tr>
+      </table>
+    <!-- End -->
+
+  </div>
+
+
+<!--
+  ========================================
+  Section: End
+  ========================================
+-->
+
+
+<br><br><hr>
+<p class="end"><i> Version: v25011901 </i></p>
+
+
+</body>
+<a name="page-bottom"></a>

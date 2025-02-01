@@ -1,0 +1,726 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: multicraft.MultiCrafter
+  category: crafting
+  requirements: [
+    item-chem-copper/65
+    item-chem-graphite/90
+    item-chem-steel/45
+    item-buil-brick-clay/100
+    item-buil-brick-magnesia/60
+    item-buil-cement/45
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-furn-colossal-kiln
+    objectives: []
+  }
+  researchCostMultiplier: 0.2
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 3
+  hasItems: true
+  itemCapacity: 50
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 129
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawFlame
+        flameColor: ffc999
+        flameRadius: 2.5
+        flameRadiusIn: 1.5
+        flameRadiusScl: 5.0
+        flameRadiusMag: 2.0
+        flameRadiusInMag: 1.0
+        lightRadius: 48.0
+        lightAlpha: 0.65
+        lightSinScl: 16.0
+        lightSinMag: 6.0
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+    ]
+  }
+  craftEffect: {
+
+    # Template: _craftGasLarge
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow2Out
+    lifetime: 480.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: reind-efr-shadow-white
+    layer: 86.0
+    particles: 18
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffffff40
+    colorTo: ffffff00
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 64.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: pow5Out
+    sizeFrom: 2.0
+    sizeTo: 14.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffect: {
+
+    # Template: _crackLarge
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow2Out
+    lifetime: 120.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: "reind-efr-diamond"
+    layer: 69.0
+    particles: 2
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffc999
+    colorTo: ffc999
+    lightScl: 2.0
+    lightOpacity: 0.65
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 24.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: sine
+    sizeFrom: 4.5
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffectChance: 0.01
+  ambientSound: se-amb-furnace
+  ambientSoundVolume: 0.3
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: false
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  menu: simple
+  recipes: [
+
+
+    /*
+      ========================================
+      Section: Sintering
+      ========================================
+    */
+
+
+      // Sand
+      {
+        craftTime: 600.0
+        icon: reind-item-int-dust-sand
+        input: {
+          power: 0.83333333
+          items: [
+            reind-item-int-dust-sand/20
+          ]
+          fluids: [
+            reind-effc-cond-heat/0.13333333
+            reind-effc-effc-temperature-control/0.01666667
+            reind-effc-effc-smoke-exhaust/0.03333333
+          ]
+        }
+        output: {
+          items: [
+            reind-item-ore-sand/20
+          ]
+        }
+      }
+
+
+      /* Ore */
+
+
+        /* Aluminum */
+
+
+        // Bauxite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-bauxite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-bauxite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-bauxite/20
+            ]
+          }
+        }
+
+
+        /* Chromium */
+
+
+        // Chromite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-chromite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-chromite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-chromite/20
+            ]
+          }
+        }
+
+
+        /* Copper */
+
+
+        // Azurite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-azurite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-azurite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-azurite/20
+            ]
+          }
+        }
+
+
+        // Cuprite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-cuprite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-cuprite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-cuprite/20
+            ]
+          }
+        }
+
+
+        // Malachite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-malachite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-malachite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-malachite/20
+            ]
+          }
+        }
+
+
+
+        // Native Copper
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-native-copper
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-native-copper/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-native-copper/20
+            ]
+          }
+        }
+
+
+        /* Iron */
+
+
+        // Hematite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-hematite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-hematite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-hematite/20
+            ]
+          }
+        }
+
+
+        // Limonite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-limonite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-limonite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-limonite/20
+            ]
+          }
+        }
+
+
+        // Magnetite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-magnetite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-magnetite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-magnetite/20
+            ]
+          }
+        }
+
+
+        // Pyrite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-pyrite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-pyrite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-pyrite/20
+            ]
+          }
+        }
+
+
+        /* Lead */
+
+
+        // Anglesite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-anglesite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-anglesite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-anglesite/20
+            ]
+          }
+        }
+
+
+        // Galena
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-galena
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-galena/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-galena/20
+            ]
+          }
+        }
+
+
+        /* Manganese */
+
+
+        // Psilomelane
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-psilomelane
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-psilomelane/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-psilomelane/20
+            ]
+          }
+        }
+
+
+        // Pyrolusite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-pyrolusite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-pyrolusite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-pyrolusite/20
+            ]
+          }
+        }
+
+
+        /* Tin */
+
+
+        // Cassiterite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-cassiterite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-cassiterite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-cassiterite/20
+            ]
+          }
+        }
+
+
+        /* Titanium */
+
+
+        // Ilmenite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-ilmenite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-ilmenite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-ilmenite/20
+            ]
+          }
+        }
+
+
+        // Rutile
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-rutile
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-rutile/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-rutile/20
+            ]
+          }
+        }
+
+
+        /* Zinc */
+
+
+        // Smithsonite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-smithsonite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-smithsonite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-smithsonite/20
+            ]
+          }
+        }
+
+
+        // Sphalerite
+        {
+          craftTime: 600.0
+          icon: reind-item-int-dust-sphalerite
+          input: {
+            power: 0.83333333
+            items: [
+              reind-item-int-dust-sphalerite/20
+            ]
+            fluids: [
+              reind-effc-cond-heat/0.13333333
+              reind-effc-effc-temperature-control/0.01666667
+              reind-effc-effc-smoke-exhaust/0.03333333
+            ]
+          }
+          output: {
+            items: [
+              reind-item-ore-sphalerite/20
+            ]
+          }
+        }
+
+
+  ]

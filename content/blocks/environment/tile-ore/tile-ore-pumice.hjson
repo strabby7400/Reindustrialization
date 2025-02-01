@@ -1,9 +1,0 @@
-type: Floor
-variants: 2
-
-itemDrop: item-ore-pumice
-playerUnmineable: false
-
-attributes: {
-  attr-rock-lava: 0.9
-}

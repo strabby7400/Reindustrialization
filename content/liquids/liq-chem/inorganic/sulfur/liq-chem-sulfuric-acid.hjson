@@ -1,23 +1,50 @@
-hidden: false
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
 
-research: {
-  parent: liq-chem-sulfurous-acid
-  objectives: []
-}
 
-flammability: 0.0
-temperature: 0.5
-heatCapacity: 0.4
-viscosity: 0.65
-explosiveness: 0.0
+  research: {
+    parent: liq-chem-sulfurous-acid
+    objectives: []
+  }
 
-coolant: false
-capPuddles: true
-boilPoint: 2.0
 
-color: 80ba78
-lightColor: 00000000
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
 
-effect: sta-liq-acid-iii
 
-incinerable: false
+  explosiveness: 0.0
+  flammability: 0.0
+  temperature: 0.5
+  heatCapacity: 0.4
+  viscosity: 0.5
+  boilPoint: 2.0
+  effect: sta-liq-acid-iii
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: 80ba78
+  lightColor: 00000000
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  incinerable: false
+  coolant: false
+  capPuddles: true

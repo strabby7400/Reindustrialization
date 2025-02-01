@@ -1,0 +1,52 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Floor
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  speedMultiplier: 0.05
+  dragMultiplier: 1.0
+  damageTaken: 1.0
+  isLiquid: true
+  shallow: false
+  drownTime: 300.0
+  status: melting
+  statusDuration: 300.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  variants: 0
+  cacheLayer: slag
+  albedo: 0.5
+  emitLight: true
+  lightRadius: 40.0
+  lightColor: faae7560
+
+
+/*
+  ========================================
+  Section: Resource
+  ========================================
+*/
+
+
+  attributes: {
+    reind-attr-env-heat: 1.0
+  }

@@ -1,127 +1,299 @@
-# type: MassDriver
-category: distribution
-outlineRadius: 2
-outlineColor: 373a4d
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
 
-requirements: [
-  item-chem-graphite/80
-  item-chem-brass/110
-  item-chem-tin-bronze/45
-  item-chem-steel/90
-  item-ore-magnetite/60
-]
-buildCostMultiplier: 2.0
 
-research: {
-  parent: dis-brd-conveyor-bridge
-  objectives: []
-}
-researchCostMultiplier: 0.25
-
-scaledHealth: 60.0
-armor: 12.0
-size: 2
-hasItems: true
-itemCapacity: 90
-hasLiquids: false
-liquidCapacity: 5.0
-hasPower: true
-fogRadius: 3
-rotate: false
-
-envRequired: 1
-envDisabled: 22
-
-squareSprite: false
-
-range: 720.0
-rotateSpeed: 0.6
-translation: 7.0
-minDistribute: 45
-knockback: 2.0
-reload: 300.0
-shake: 6.0
-
-consumes: {
-  power: 1.5
-}
-
-bulletSpeed: 8.0
-bulletLifetime: 90.0
-shootEffect: {
-  type: MultiEffect
-  effects: [
-    shootBigColor
-    {
-      # ShootSmog
-      type: ParticleEffect
-      interp: pow10Out
-      lifetime: 900.0
-      particles: 48
-      colorFrom: 8b8b8b80
-      colorTo: 8b8b8b00
-      length: 48.0
-      cone: 20.0
-      sizeFrom: 2.0
-      sizeTo: 10.0
-      sizeInterp: pow2Out
-      strokeFrom: 2.0
-      strokeTo: 1.0
-      lenFrom: 4.0
-      lenTo: 2.0
-    }
-    {
-      # ShootImpactWave
-      type: MultiEffect
-      effects: [
-        {
-          type: WaveEffect
-          lifetime: 60.0
-          sides: -1
-          colorFrom: 202020ff
-          colorTo: 20202000
-          sizeFrom: 0.0
-          sizeTo: 96.0
-          strokeFrom: 8.0
-          strokeTo: 8.0
-        }
-        {
-          type: WaveEffect
-          lifetime: 75.0
-          sides: -1
-          colorFrom: 202020ff
-          colorTo: 20202000
-          sizeFrom: 0.0
-          sizeTo: 96.0
-          strokeFrom: 8.0
-          strokeTo: 8.0
-        }
-      ]
-    }
+  # type: MassDriver
+  category: distribution
+  requirements: [
+    item-bio-timber/160
+    item-chem-lead/120
+    item-chem-tin-bronze/85
+    item-chem-steel/85
+    item-ore-magnetite/110
   ]
-}
-smokeEffect: shootBigSmoke2
-receiveEffect: {
-  type: MultiEffect
-  effects: [
-    mineSmall
-    {
-      # ReceiveParticles
-      type: ParticleEffect
-      interp: reverse
-      lifetime: 60.0
-      particles: 12
-      colorFrom: ffd37fff
-      colorTo: ffd37fff
-      length: 18.0
-      sizeFrom: 1.2
-      sizeTo: 0.0
-      sizeInterp: pow5In
-      strokeFrom: 2.0
-      strokeTo: 1.0
-      lenFrom: 4.0
-      lenTo: 2.0
-    }
-  ]
-}
-shootSound: se-shot-mass-driver
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: dis-mdr-local-mass-driver
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
+  hasItems: true
+  itemCapacity: 90
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+  fogRadius: 3
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  outlineRadius: 2
+  outlineColor: 373a4d
+  translation: 3.0
+  shake: 6.0
+  shootEffect: {
+    type: MultiEffect
+    effects: [
+
+
+      shootBigColor
+
+
+      {
+
+        # Template: _mdrSmogLarge
+
+        /* <---------------- meta ----------------> */
+
+        type: ParticleEffect
+        interp: pow10Out
+        lifetime: 900.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: reind-efr-shadow-white
+        layer: 86.0
+        particles: 28
+        followParent: true
+        rotWithParent: false
+        useRotation: true
+        colorFrom: ffffff60
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 0.0
+        offset: 0.0
+        cone: 20.0
+        spin: 0.0
+        randLength: true
+        length: 48.0
+        baseLength: 0.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: pow2Out
+        sizeFrom: 4.0
+        sizeTo: 20.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
+
+
+      {
+
+        # Template: _impact
+        # Order: 1
+
+        /* <---------------- meta ----------------> */
+
+        type: WaveEffect
+        interp: linear
+        lifetime: 40.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        layer: 15.0
+        sides: -1
+        followParent: true
+        rotWithParent: false
+        colorFrom: ffffff30
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & size & stroke ----------------> */
+
+        baseRotation: 0.0
+        rotation: 0.0
+        sizeFrom: 0.0
+        sizeTo: 76.0
+        strokeFrom: 6.0
+        strokeTo: 4.0
+
+      }
+
+
+      {
+
+        # Template: _impact
+        # Order: 2
+
+        /* <---------------- meta ----------------> */
+
+        type: WaveEffect
+        interp: linear
+        lifetime: 50.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        layer: 15.0
+        sides: -1
+        followParent: true
+        rotWithParent: false
+        colorFrom: ffffff30
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & size & stroke ----------------> */
+
+        baseRotation: 0.0
+        rotation: 0.0
+        sizeFrom: 0.0
+        sizeTo: 76.0
+        strokeFrom: 6.0
+        strokeTo: 4.0
+
+      }
+
+
+    ]
+  }
+  smokeEffect: shootBigSmoke2
+  receiveEffect: {
+    type: MultiEffect
+    effects: [
+
+
+      mineSmall
+
+
+      {
+
+        # Template: _mdrReceive
+
+        /* <---------------- meta ----------------> */
+
+        type: ParticleEffect
+        interp: reverse
+        lifetime: 60.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: reind-efr-item
+        layer: 69.0
+        particles: 3
+        followParent: true
+        rotWithParent: false
+        useRotation: true
+        colorFrom: ffffff
+        colorTo: ffffff
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 0.0
+        offset: 0.0
+        cone: 180.0
+        spin: 0.0
+        randLength: true
+        length: 12.0
+        baseLength: 0.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: linear
+        sizeFrom: 4.0
+        sizeTo: 0.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
+
+
+    ]
+  }
+  shootSound: se-shot-mass-driver
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  range: 720.0
+  rotateSpeed: 0.6
+  knockback: 2.5
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  minDistribute: 45
+  reload: 300.0
+  consumes: {
+    power: 1.5
+  }
+
+
+/*
+  ========================================
+  Section: Attack
+  ========================================
+*/
+
+
+  bulletSpeed: 8.0
+  bulletLifetime: 90.0

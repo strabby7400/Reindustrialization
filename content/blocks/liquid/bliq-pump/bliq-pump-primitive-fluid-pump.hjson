@@ -1,0 +1,102 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Pump
+  category: liquid
+  requirements: [
+    item-chem-copper/20
+    item-chem-graphite/10
+    item-chem-tin-bronze/5
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: bliq-cond-wooden-fluid-pipe
+    objectives: []
+  }
+  researchCostMultiplier: 0.1
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 1
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 20
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawPumpLiquid
+      }
+
+
+      {
+        type: DrawFade
+        suffix: "-fade"
+      }
+
+
+    ]
+  }
+  ambientSound: se-amb-piston-pump
+  ambientSoundVolume: 0.05
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  pumpAmount: 0.1

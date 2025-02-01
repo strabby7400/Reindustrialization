@@ -1,0 +1,82 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: SteamVent
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  variants: 0
+  parent: env-flr-dirt
+  blendGroup: env-flr-dirt
+  effect: {
+
+    # Template: _ventGasRelase
+
+    /* <---------------- meta ----------------> */
+
+    type: ParticleEffect
+    interp: pow2Out
+    lifetime: 160.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: reind-efr-shadow-white
+    layer: 69.0
+    particles: 1
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ccffee
+    colorTo: ccffee00
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 8.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: sine
+    sizeFrom: 0.0
+    sizeTo: 8.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  effectColor: ffffff
+  effectSpacing: 15.0
+
+
+/*
+  ========================================
+  Section: Resource
+  ========================================
+*/
+
+
+  attributes: {
+    reind-attr-env-heat: 0.3
+    reind-attr-rock-biological-sedimentary: 0.75
+    reind-attr-vent-ammonia: 1.0
+  }

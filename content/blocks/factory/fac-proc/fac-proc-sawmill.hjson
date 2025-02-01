@@ -1,0 +1,232 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: crafting
+  requirements: [
+    item-chem-copper/140
+    item-chem-lead/60
+    item-chem-graphite/40
+    item-chem-brass/30
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: min-harv-lumberjack
+    objectives: []
+  }
+  researchCostMultiplier: 0.1
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 4
+  hasItems: true
+  itemCapacity: 80
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawParticles
+        color: b8d3e0
+        alpha: 0.6
+        particles: 48
+        particleLife: 30.0
+        particleRad: 14.0
+        particleSize: 1.0
+        rotateScl: 8.0
+        reverse: false
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-rotator"
+        spinSprite: true
+        rotateSpeed: 6.0
+        rotation: 45.0
+      }
+
+
+      {
+        type: DrawParticles
+        color: e2bfac
+        alpha: 1.0
+        particles: 36
+        particleLife: 60.0
+        particleRad: 13.0
+        particleSize: 2.0
+        rotateScl: 4.0
+        reverse: true
+      }
+
+
+      {
+        type: DrawParticles
+        color: b8d3e0
+        alpha: 0.6
+        particles: 48
+        particleLife: 30.0
+        particleRad: 14.0
+        particleSize: 1.0
+        rotateScl: 8.0
+        reverse: true
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-lid"
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: {
+
+    # Template: _sawmillCrack
+
+    /* <---------------- meta ----------------> */
+
+    type: ParticleEffect
+    interp: pow10Out
+    lifetime: 180.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: reind-efr-urchin
+    layer: 69.0
+    particles: 5
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: e2bfac
+    colorTo: e2bfac
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 12.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: sine
+    sizeFrom: 3.0
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffectChance: 0.02
+  ambientSound: se-amb-saw
+  ambientSoundVolume: 0.5
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: false
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 300.0
+  consumes: {
+    power: 1.83333333
+    items: [
+      item-bio-log/30
+    ]
+    liquids: [
+      effc-effc-dust-recycling/0.03333333
+      gas-int-air-clean/0.2
+    ]
+  }
+  outputItems: [
+    item-bio-timber/20
+    item-bio-sawdust/10
+  ]

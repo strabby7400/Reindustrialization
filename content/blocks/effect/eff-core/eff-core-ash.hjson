@@ -1,0 +1,82 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: CoreBlock
+  category: effect
+  requirements: [
+    item-chem-copper/1500
+    item-chem-lead/1500
+  ]
+  buildCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  alwaysUnlocked: true
+  research: {
+    planet: pla-ter-aerth
+    root: true
+    name: Aerth
+    requiresUnlock: false
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 420.0
+  armor: 8.0
+  size: 2
+  hasItems: true
+  itemCapacity: 2500
+  hasLiquids: true
+  liquidCapacity: 5.0
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: true
+  unitCapModifier: 2        /* NOTE: Yet another attempt to ban kamikaze. */
+  isFirstTier: true
+  requiresCoreZone: true
+  incinerateNonBuildable: false
+  unitType: unit-core-expedition-i

@@ -1,0 +1,36 @@
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  explosiveness: 1.0
+  flammability: 0.0
+  temperature: 0.5
+  heatCapacity: 0.5
+  viscosity: 0.5
+  gas: true
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: b8d3e0
+  lightColor: 00000000
+  gasColor: 000000
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  incinerable: false
+  coolant: false

@@ -1,0 +1,190 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: multicraft.MultiCrafter
+  category: crafting
+  requirements: [
+    item-chem-brass/20
+    item-chem-tin-bronze/40
+    item-chem-steel/45
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-misc-core-crafter
+    objectives: []
+  }
+  researchCostMultiplier: 0.25
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
+  hasItems: true
+  itemCapacity: 60
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawFrames
+        frames: 10
+        interval: 7.5
+        sine: false
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.1
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: false
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  menu: simple
+  recipes: [
+
+
+    /*
+      ========================================
+      Section: Specific
+      ========================================
+    */
+
+
+      // Cement
+      {
+        craftTime: 600.0
+        icon: reind-item-buil-cement
+        input: {
+          power: 0.83333333
+          items: [
+            reind-item-int-blend-roasted-cement/10
+            reind-item-int-chunks-gypsum/15
+          ]
+        }
+        output: {
+          items: [
+            reind-item-buil-cement/10
+          ]
+        }
+      }
+
+
+    /*
+      ========================================
+      Section: Blend
+      ========================================
+    */
+
+
+      // Blend (Cement) : Sand
+      {
+        craftTime: 600.0
+        icon: reind-icon-blend-cement-sand
+        input: {
+          power: 0.83333333
+          items: [
+            reind-item-int-chunks-limestone/15
+            reind-item-ore-sand/20
+            reind-item-ore-clay/10
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-blend-cement/10
+          ]
+        }
+      }
+
+
+      // Blend (Cement) : Slag
+      {
+        craftTime: 600.0
+        icon: reind-icon-blend-cement-slag
+        input: {
+          power: 0.83333333
+          items: [
+            reind-item-int-chunks-limestone/15
+            reind-item-was-slag/20
+            reind-item-ore-clay/10
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-blend-cement/10
+          ]
+        }
+      }
+
+
+  ]

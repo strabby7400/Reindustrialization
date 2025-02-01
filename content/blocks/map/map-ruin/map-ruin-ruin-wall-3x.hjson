@@ -1,0 +1,63 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Wall
+  category: defense
+  buildVisibility: editorOnly
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 360.0
+  armor: 8.0
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: false
+  size: 3
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  hasShadow: false
+  drawTeamOverlay: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  destructible: true
+  breakable: false
+  rebuildable: false
+  targetable: false

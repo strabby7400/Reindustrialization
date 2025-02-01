@@ -1,0 +1,50 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Floor
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  speedMultiplier: 0.85
+  dragMultiplier: 1.0
+  damageTaken: 0.0
+  status: muddy
+  statusDuration: 120.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  variants: 4
+  walkEffect: none
+  walkSound: se-step-mud
+  walkSoundVolume: 0.1
+  walkSoundPitchMin: 0.95
+  walkSoundPitchMax: 1.05
+
+
+/*
+  ========================================
+  Section: Resource
+  ========================================
+*/
+
+
+  attributes: {
+    reind-attr-env-growth: 1.0
+    reind-attr-rock-biological-sedimentary: 0.75
+  }

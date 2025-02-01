@@ -1,23 +1,50 @@
-hidden: false
-hiddenOnPlanets: [
-  erekir
-  serpulo
-]
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
 
-research: {
-  parent: item-chem-sodium-chloride
-  objectives: []
-}
 
-explosiveness: 0.0
-flammability: 0.0
-radioactivity: 0.0
-charge: 0.0
+  research: {
+    parent: item-chem-sodium-chloride
+    objectives: []
+  }
 
-hardness: 0
-lowPriority: false
 
-buildable: false
-cost: 1.0
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
 
-color: d0d0c8
+
+  explosiveness: 0.0
+  flammability: 0.0
+  radioactivity: 0.0
+  charge: 0.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: d0d0c8
+  frames: 0
+  transitionFrames: 0
+  frameTime: 5.0
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  hardness: 0
+  lowPriority: false
+  buildable: false
+  cost: 1.0

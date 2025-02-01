@@ -1,0 +1,120 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: BeamDrill
+  category: production
+  requirements: [
+    item-bio-timber/40
+    item-chem-lead/30
+    item-chem-graphite/30
+    item-chem-brass/20
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: min-dril-pneumatic-drill
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
+  hasItems: true
+  itemCapacity: 10
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+  fogRadius: 4
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawArrow: true
+  laserWidth: 0.0
+  glowColor: 000000
+  glowIntensity: 0.0
+  pulseIntensity: 0.0
+  glowScl: 3.0
+  sparkColor: 8ca9e8
+  sparks: 12
+  sparkRange: 4.0
+  sparkLife: 15.0
+  sparkRecurrence: 2.0
+  sparkSpread: 50.0
+  sparkSize: 1.0
+  heatColor: 8ca9e8
+  boostHeatColor: 8ca9e8
+  heatPulse: 0.2
+  heatPulseScl: 6.0
+  ambientSound: se-amb-drill
+  ambientSoundVolume: 0.2
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  tier: 5
+  range: 1
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  drillTime: 180.0
+  optionalBoostIntensity: 3.0
+  consumes: {
+    power: 0.5
+    liquid: {
+      liquid: gas-misc-air
+      amount: 0.1
+      optional: true
+      booster: true
+    }
+  }

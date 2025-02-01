@@ -1,0 +1,102 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Radar
+  category: defense
+  requirements: [
+    item-bio-timber/100
+    item-chem-lead/60
+    item-chem-brass/40
+    item-chem-steel/30
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: def-wall-wooden-barricade
+    objectives: []
+  }
+  researchCostMultiplier: 0.1
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 20
+  fogRadius: 32
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  outlineRadius: 2
+  outlineColor: 373a4d
+  rotateSpeed: 0.0
+  glowColor: 8ca9e8
+  glowScl: 6.0
+  glowMag: 0.6
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.15
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  discoveryTime: 10800.0
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  consumes: {
+    power: 1.25
+    liquids: [
+      liq-ore-water/0.15
+    ]
+  }

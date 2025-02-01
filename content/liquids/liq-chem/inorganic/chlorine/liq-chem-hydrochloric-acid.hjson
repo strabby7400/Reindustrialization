@@ -1,23 +1,50 @@
-hidden: false
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
 
-research: {
-  parent: gas-chem-chlorine
-  objectives: []
-}
 
-flammability: 0.0
-temperature: 0.5
-heatCapacity: 0.4
-viscosity: 0.5
-explosiveness: 0.0
+  research: {
+    parent: gas-chem-chlorine
+    objectives: []
+  }
 
-coolant: false
-capPuddles: true
-boilPoint: 2.0
 
-color: fffccc
-lightColor: 00000000
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
 
-effect: sta-liq-acid-iii
 
-incinerable: false
+  explosiveness: 0.0
+  flammability: 0.0
+  temperature: 0.5
+  heatCapacity: 0.4
+  viscosity: 0.5
+  boilPoint: 2.0
+  effect: sta-liq-acid-iii
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: fffccc
+  lightColor: 00000000
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  incinerable: false
+  coolant: false
+  capPuddles: true

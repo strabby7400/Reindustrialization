@@ -1,0 +1,286 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: multicraft.MultiCrafter
+  category: crafting
+  requirements: [
+    item-chem-copper/30
+    item-chem-graphite/20
+    item-ore-clay/50
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-furn-carbonization-kiln
+    objectives: []
+  }
+  researchCostMultiplier: 0.05
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 2
+  hasItems: true
+  itemCapacity: 40
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 129
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawFlame
+        flameColor: ffc999
+        flameRadius: 2.5
+        flameRadiusIn: 1.5
+        flameRadiusScl: 5.0
+        flameRadiusMag: 2.0
+        flameRadiusInMag: 1.0
+        lightRadius: 48.0
+        lightAlpha: 0.65
+        lightSinScl: 16.0
+        lightSinMag: 6.0
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+    ]
+  }
+  craftEffect: {
+
+    # Template: _craftGas
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow2Out
+    lifetime: 120.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: reind-efr-shadow-white
+    layer: 86.0
+    particles: 12
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffffff40
+    colorTo: ffffff00
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 24.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: pow5Out
+    sizeFrom: 2.0
+    sizeTo: 7.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffect: {
+
+    # Template: _crack
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow2Out
+    lifetime: 60.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: "reind-efr-diamond"
+    layer: 69.0
+    particles: 2
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffc999
+    colorTo: ffc999
+    lightScl: 2.0
+    lightOpacity: 0.65
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 18.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: sine
+    sizeFrom: 3.0
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffectChance: 0.01
+  ambientSound: se-amb-furnace
+  ambientSoundVolume: 0.1
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: false
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  menu: simple
+  recipes: [
+
+
+    /*
+      ========================================
+      Section: Brick
+      ========================================
+    */
+
+
+      // Clay Brick
+      {
+        craftTime: 600.0
+        icon: reind-item-buil-brick-clay
+        input: {
+          items: [
+            reind-item-int-brick-clay-unbaked/10
+            reind-item-bio-charcoal/15
+          ]
+        }
+        output: {
+          items: [
+            reind-item-buil-brick-clay/10
+          ]
+        }
+      }
+
+
+      // High-Alumina Brick
+      {
+        craftTime: 600.0
+        icon: reind-item-buil-brick-high-alumina
+        input: {
+          items: [
+            reind-item-int-brick-high-alumina-unbaked/10
+            reind-item-bio-charcoal/15
+          ]
+        }
+        output: {
+          items: [
+            reind-item-buil-brick-high-alumina/10
+          ]
+        }
+      }
+
+
+      // Magnesia Brick
+      {
+        craftTime: 600.0
+        icon: reind-item-buil-brick-magnesia
+        input: {
+          items: [
+            reind-item-int-brick-magnesia-unbaked/10
+            reind-item-bio-charcoal/15
+          ]
+        }
+        output: {
+          items: [
+            reind-item-buil-brick-magnesia/10
+          ]
+        }
+      }
+
+
+  ]

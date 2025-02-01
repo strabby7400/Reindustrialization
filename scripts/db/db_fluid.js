@@ -1,239 +1,412 @@
-// Checked on 10-31-2024
-
-
 /*
-    ==================================================
-    Part: List
-    ==================================================
+  ========================================
+  Section: Definition
+  ========================================
 */
 
 
-  // Start: Synonyms
-    /* Just for convenience, had enough from setting up those intermediates */
-    const synonym_brine = new Seq([
-      "reind-liq-int-brine-purified",
-
-      "reind-liq-int-solution-hot-sodium-chloride",
-
-      "reind-liq-int-solution-suspension-sodium-chloride",
-      "reind-liq-int-solution-suspension-crude-sodium-chloride",
-    ]);
-    exports.synonym_brine = synonym_brine;
-
-
-    const synonym_lye = new Seq([
-      "reind-liq-int-solution-sodium-hydroxide",
-
-      "reind-liq-int-solution-suspension-lime-sodium-hydroxide",
-    ]);
-    exports.synonym_lye = synonym_lye;
-
-
-    const synonym_acidic = new Seq([
-
-    ]);
-    exports.synonym_acidic = synonym_acidic;
-
-
-    const synonym_slurry = new Seq([
-      "reind-liq-int-slurry-deironized-sand",
-      "reind-liq-int-slurry-silica-sand",
-
-      "reind-liq-int-slurry-thickened-silica-sand",
-    ]);
-    exports.synonym_slurry = synonym_slurry;
-
-
-    const synonym_molten = new Seq([
-      "reind-liq-int-glass-melt",
-    ]);
-    exports.synonym_molten = synonym_molten;
-
-
-    const synonym_aqueous = new Seq([
-
-    ]);
-    synonym_aqueous.addAll(synonym_brine);
-    synonym_aqueous.addAll(synonym_lye);
-    synonym_aqueous.addAll(synonym_acidic);
-    synonym_aqueous.addAll(synonym_slurry);
-    exports.synonym_aqueous = synonym_aqueous;
-
-
-    const synonym_sticky = new Seq([
-
-    ]);
-    synonym_sticky.addAll(synonym_slurry);
-    synonym_sticky.addAll(synonym_molten);
-    exports.synonym_sticky = synonym_sticky;
-
-
-    function synonymWrite(target, list) {
-      for(let i = 0; i < list.size; i++) {
-        target.add(list.get(i));
-      };
-    };
-
-
-    function synonymWrite2(target, list, param) {
-      for(let i = 0; i < list.size; i++) {
-        target.add(new Seq([
-          list.get(i),
-          param,
-        ]));
-      };
-    };
-
-
-    function synonymWrite3(target, list, param, name) {
-      for(let i = 0; i < list.size; i++) {
-        target.add(new Seq([
-          name,
-          list.get(i),
-          param,
-        ]));
-      };
-    };
+  // Part: Import
+    const mdl_database = require("reind/mdl/mdl_database");
   // End
 
 
-  // Start: Aqueous Liquid
-    /* Carnage can spread to these */
-    const list_liquidAqueous = new Seq([
+  // Part: Group
+    /* Primary */
+    const group_brine = new Seq([
       "reind-liq-ore-brine",
-      "reind-liq-ore-water",
-      "reind-liq-ore-water-sea",
+      "reind-liq-ore-sea-water",
 
+      "reind-liq-int-brine-purified",
+    ]);
+    exports.group_brine = group_brine;
+
+
+    /* Primary */
+    const group_basicAq = new Seq([
+      "reind-liq-was-waste-water-basic",
+    ]);
+    exports.group_basicAq = group_basicAq;
+
+
+    /* Primary */
+    const group_acidicAq = new Seq([
       "reind-liq-chem-hydrochloric-acid",
       "reind-liq-chem-sulfuric-acid",
       "reind-liq-chem-sulfurous-acid",
 
+      "reind-liq-was-waste-water-acidic",
+    ]);
+    exports.group_acidicAq = group_acidicAq;
+
+
+    /* Primary */
+    const group_basicOil = new Seq([
+
+    ]);
+    exports.group_basicOil = group_basicOil;
+
+
+    /* Primary */
+    const group_acidicOil = new Seq([
+
+    ]);
+    exports.group_acidicOil = group_acidicOil;
+
+
+    /* Primary */
+    const group_basicSub = new Seq([
+
+    ]);
+    exports.group_basicSub = group_basicSub;
+
+
+    /* Primary */
+    const group_acidicSub = new Seq([
+      "reind-liq-chem-sulfuric-acid-conc",
+      "reind-liq-chem-sulfuric-acid-fuming",
+    ]);
+    exports.group_acidicSub = group_acidicSub;
+
+
+    /* Primary */
+    const group_basicGas = new Seq([
+      "reind-gas-chem-ammonia",
+    ]);
+    exports.group_basicGas = group_basicGas;
+
+
+    /* Primary */
+    const group_acidicGas = new Seq([
+      "reind-gas-chem-chlorine",
+
+      "reind-gas-chem-hydrogen-sulfide",
+      "reind-gas-chem-sulfur-dioxide",
+      "reind-gas-chem-sulfur-trioxide",
+    ]);
+    exports.group_acidicGas = group_acidicGas;
+
+
+    /* Primary */
+    const group_slurry = new Seq([
+      "reind-liq-was-waste-slurry",
+    ]);
+    exports.group_slurry = group_slurry;
+
+
+    /* Functional */
+    const group_aqueous = new Seq([
+      "reind-liq-ore-water",
+
       "reind-liq-was-waste-water",
-      "reind-liq-was-waste-slurry",
+
+      "reind-gas-misc-steam",
     ]);
-    synonymWrite(list_liquidAqueous, synonym_aqueous);
-    exports.liquidAqueous = list_liquidAqueous;
+    group_aqueous.addAll(group_brine);
+    group_aqueous.addAll(group_basicAq);
+    group_aqueous.addAll(group_acidicAq);
+    group_aqueous.addAll(group_slurry);
+    exports.group_aqueous = group_aqueous;
+
+
+    /* Primary */
+    const group_melt = new Seq([
+
+    ]);
+    exports.group_melt = group_melt;
+
+
+    /* Primary */
+    const group_stickyMelt = new Seq([
+      "reind-liq-int-melt-glass",
+    ]);
+    exports.group_stickyMelt = group_stickyMelt;
+
+
+    /* Functional */
+    const group_conductive = new Seq([
+
+    ]);
+    group_conductive.addAll(group_aqueous);
+    group_conductive.addAll(group_melt);
+    group_conductive.addAll(group_stickyMelt);
+    exports.group_conductive = group_conductive;
   // End
 
 
-  // Start: Conductive Liquid
-    const list_liquidConductive = new Seq([
-      "reind-liq-misc-carnage-plasma",
+  // Part: Tag
+    const tag_ammoniacal = new Seq([
+      "reind-gas-chem-ammonia",
     ]);
-    list_liquidConductive.addAll(list_liquidAqueous);
-    synonymWrite(list_liquidConductive, synonym_molten);
-    exports.liquidConductive = list_liquidConductive;
+    exports.tag_ammoniacal = tag_ammoniacal;
+
+
+    const tag_chloric = new Seq([
+      "reind-gas-chem-chlorine",
+    ]);
+    exports.tag_chloric = tag_chloric;
+
+
+    const tag_fluoric = new Seq([
+
+    ]);
+    exports.tag_fluoric = tag_fluoric;
+
+
+    const tag_oil = new Seq([
+
+    ]);
+    exports.tag_oil = tag_oil;
+
+
+    const tag_oxidative = new Seq([
+      "reind-liq-chem-sulfuric-acid-conc",
+      "reind-liq-chem-sulfuric-acid-fuming",
+
+      "reind-gas-chem-ozone",
+      "reind-gas-chem-sulfur-trioxide",
+    ]);
+    exports.tag_oxidative = tag_oxidative;
   // End
 
 
-  // Start: Sticky Liquid
-    const list_liquidSticky = new Seq([
-      "reind-liq-bio-latex",
+/*
+  ========================================
+  Section: List
+  ========================================
+*/
 
-      "reind-liq-misc-carnage-plasma",
 
-      "reind-liq-was-waste-slurry",
+  // Part: Corrosion
+    const list_baseCorrosion = new Seq([
+      "brine", 1.0,
+      "basicAq", 1.35,
+      "acidicAq", 1.35,
+      "basicOil", 1.2,
+      "acidicOil", 1.2,
+      "basicSub", 1.25,
+      "acidicSub", 1.25,
+      "basicGas", 1.7,
+      "acidicGas", 1.7,
     ]);
-    synonymWrite(list_liquidSticky, synonym_sticky);
-    exports.liquidSticky = list_liquidSticky;
+    exports.baseCorrosion = list_baseCorrosion;
 
 
-    const list_stickySensitive = new Seq([
-      "reind-bliq-cond-tempered-glass-fluid-pipe",
-      "reind-bliq-cond-wooden-fluid-pipe",
+    const list_specificCorrosion = new Seq([
+      "reind-liq-ore-sea-water", 0.7,
+
+      "reind-liq-chem-hydrochloric-acid", 1.7,
+
+      "reind-liq-chem-sulfuric-acid", 1.7,
+      "reind-liq-chem-sulfuric-acid-conc", 1.35,
+      "reind-liq-chem-sulfuric-acid-fuming", 2.1,
+      "reind-liq-chem-sulfurous-acid", 1.5,
+
+      "reind-gas-chem-ammonia", 0.3,
+
+      "reind-gas-chem-sulfur-trioxide", 2.0,
     ]);
-    exports.stickySensitive = list_stickySensitive;
+    exports.specificCorrosion = list_specificCorrosion;
+
+
+    const list_corrosionScale = new Seq([
+      "wood", "basicAq", 5.0,
+      "wood", "acidicAq", 5.0,
+      "wood", "basicOil", 7.0,
+      "wood", "acidicOil", 7.0,
+      "wood", "aicidicSub", 5.0,
+      "wood", "basicSub", 5.0,
+      "wood", "basicGas", 5.0,
+      "wood", "acidicGas", 5.0,
+
+      "steel", "brine", 4.0,
+      "steel", "acidicAq", 1.5,
+      "steel", "acidicOil", 1.5,
+      "steel", "acidicSub", 1.5,
+      "steel", "acidicGas", 2.0,
+
+      "stainlessSteel", "brine", 4.0,
+    ]);
+    exports.corrosionScale = list_corrosionScale;
+
+
+    const list_specificCorrosionScale = new Seq([
+      "wood", "oxidative", 12.0,
+
+      "copper", "ammoniacal", 4.0,
+      "copper", "chloric", 4.0,
+
+      "glass", "fluoric", 9.0,
+    ]);
+    exports.specificCorrosionScale = list_specificCorrosionScale;
   // End
 
 
-  // Start: Corrosion
-    const list_corrosionPower = new Seq([
-      // name, power
-      "reind-gas-chem-ammonia", 0.002,
-      "reind-gas-chem-chlorine", 0.03,
-      "reind-gas-chem-sulfur-dioxide", 0.06,
-      "reind-gas-chem-sulfur-trioxide", 0.08,
+  // Part: Heat
+    const list_fluidHeat = new Seq([
+      "reind-liq-int-melt-glass", 1250.0,
 
-      "reind-liq-ore-brine", 0.004,
-      "reind-liq-ore-water-sea", 0.002,
+      "reind-liq-chem-sulfuric-acid-fuming", 350.0,
 
-      "reind-liq-chem-hydrochloric-acid", 0.08,
-      "reind-liq-chem-sulfuric-acid", 0.08,
-      "reind-liq-chem-sulfuric-acid-conc", 0.16,
-      "reind-liq-chem-sulfuric-acid-fuming", 0.24,
-      "reind-liq-chem-sulfurous-acid", 0.06,
+      "reind-gas-misc-steam", 100.0,
 
-      "reind-liq-was-waste-water", 0.02,
+      "reind-gas-chem-sulfur-trioxide", 350.0,
     ]);
-    synonymWrite2(list_corrosionPower, synonym_brine, 0.004);
-    synonymWrite2(list_corrosionPower, synonym_lye, 0.02);
-    synonymWrite2(list_corrosionPower, synonym_acidic, 0.06);
-    exports.corrosionPower = list_corrosionPower;
-
-
-    const list_corrosionResistence = new Seq([
-      // name, resistence
-      "reind-bliq-brd-fluid-pipe-bridge", 1.0,
-      "reind-bliq-cond-bronze-fluid-pipe", 0.6,
-      "reind-bliq-cond-steel-fluid-pipe", 1.0,
-      "reind-bliq-cond-tempered-glass-fluid-pipe", 15.0,
-      "reind-bliq-cond-wooden-fluid-pipe", 0.2,
-      "reind-bliq-pump-piston-fluid-pump", 1.0,
-      "reind-bliq-stor-fluid-cell", 1.0,
-      "reind-bliq-stor-steel-fluid-cylinder", 1.0,
-    ]);
-    exports.corrosionResistence = list_corrosionResistence;
-
-
-    const list_corrosionResistenceMultipliers = new Seq([
-      // name, liq name, multiplier
-      "reind-bliq-cond-bronze-fluid-pipe", "reind-gas-chem-ammonia", 0.01,
-      "reind-bliq-cond-bronze-fluid-pipe", "reind-gas-chem-chlorine", 0.05,
-      "reind-bliq-cond-bronze-fluid-pipe", "reind-liq-chem-hydrochloric-acid", 40.0,
-      "reind-bliq-cond-bronze-fluid-pipe", "reind-liq-chem-sulfurous-acid", 30.0,
-      "reind-bliq-cond-bronze-fluid-pipe", "reind-liq-chem-sulfuric-acid", 40.0,
-
-      "reind-bliq-cond-steel-fluid-pipe", "reind-liq-ore-brine", 0.06,
-      "reind-bliq-cond-steel-fluid-pipe", "reind-liq-ore-water-sea", 0.1,
-
-      "reind-bliq-pump-piston-fluid-pump", "reind-liq-ore-brine", 0.06,
-      "reind-bliq-pump-piston-fluid-pump", "reind-liq-ore-water-sea", 0.1,
-
-      "reind-bliq-stor-steel-fluid-cylinder", "reind-liq-ore-brine", 0.06,
-      "reind-bliq-stor-steel-fluid-cylinder", "reind-liq-ore-water-sea", 0.1,
-    ]);
-    synonymWrite3(list_corrosionResistenceMultipliers, synonym_acidic, 30.0, "reind-bliq-cond-bronze-fluid-pipe");
-    synonymWrite3(list_corrosionResistenceMultipliers, synonym_brine, 0.06, "reind-bliq-cond-steel-fluid-pipe");
-    synonymWrite3(list_corrosionResistenceMultipliers, synonym_brine, 0.06, "reind-bliq-pump-piston-fluid-pump");
-    synonymWrite3(list_corrosionResistenceMultipliers, synonym_brine, 0.06, "reind-bliq-stor-steel-fluid-cylinder");
-    exports.corrosionResistenceMultipliers = list_corrosionResistenceMultipliers;
+    exports.fluidHeat = list_fluidHeat;
   // End
 
 
-  // Start: Efficiency
-    const list_effc = new Seq([
-      "reind-effc-cond-pressure",
-      "reind-effc-cond-pressure-ii",
-      "reind-effc-cond-pressure-iii",
+  // Part: Flow
+    const list_density = new Seq([
 
-      "reind-effc-effc-ball-impact-i",
-      "reind-effc-effc-ball-impact-ii",
-      "reind-effc-effc-calculation",
-      "reind-effc-effc-core",
-      "reind-effc-effc-dust-removal",
-      "reind-effc-effc-electrode",
-      "reind-effc-effc-gas-filtering",
-      "reind-effc-effc-lifting",
-      "reind-effc-effc-pump",
-      "reind-effc-effc-smoke-exhaust",
-      "reind-effc-effc-steam",
+      /* ========================================
+        Section: liq-ore
+      ======================================== */
 
-      "reind-effc-spec-electrical-roasting-furnace",
-      "reind-effc-spec-industrial-blast-furnace",
+      "reind-liq-ore-brine", 1.05,
+      "reind-liq-ore-sea-water", 1.02,
 
-      "reind-effc-spec-structure-link-filter-press",
+      /* ========================================
+        Section: liq-chem[elementary]
+      ======================================== */
 
-      "reind-ileffc-effc-ids",
+
+      /* ========================================
+        Section: liq-chem[inorganic]
+      ======================================== */
+
+      /* chlorine */
+      "reind-liq-chem-hydrochloric-acid", 1.0,
+
+      /* sulfur */
+      "reind-liq-chem-sulfuric-acid", 1.0,
+      "reind-liq-chem-sulfuric-acid-conc", 1.83,
+      "reind-liq-chem-sulfuric-acid-fuming", 1.83,
+      "reind-liq-chem-sulfurous-acid", 1.03,
+
+      /* ========================================
+        Section: liq-int
+      ======================================== */
+
+      /* melt */
+      "reind-liq-int-melt-glass", 2.25,
+
+      /* ========================================
+        Section: gas-misc
+      ======================================== */
+
+      "reind-gas-misc-steam", 0.0006,
+
+      /* ========================================
+        Section: gas-chem[elementary]
+      ======================================== */
+
+      "reind-gas-chem-chlorine", 0.00321,
+      "reind-gas-chem-hydrogen", 0.000089,
+      "reind-gas-chem-nitrogen", 0.00125,
+      "reind-gas-chem-oxygen", 0.001429,
+      "reind-gas-chem-ozone", 0.00146,
+
+      /* ========================================
+        Section: gas-chem[inorganic]
+      ======================================== */
+
+      /* carbon */
+      "reind-gas-chem-carbon-dioxide", 0.001976,
+
+      /* nitrogen */
+      "reind-gas-chem-ammonia", 0.000771,
+
+      /* sulfur */
+      "reind-gas-chem-hydrogen-sulfide", 0.00154,
+      "reind-gas-chem-sulfur-dioxide", 0.0029275,
+      "reind-gas-chem-sulfur-trioxide", 0.00197,
+
     ]);
-    exports.effc = list_effc;
+    exports.density = list_density;
+
+
+    const list_viscosity = new Seq([
+
+      /* ========================================
+        Section: liq-ore
+      ======================================== */
+
+      "reind-liq-ore-water", 0.98,
+
+      /* ========================================
+        Section: liq-waste
+      ======================================== */
+
+      "reind-liq-was-pitch", 2800.0,
+      "reind-liq-was-waste-slurry", 100.0,
+
+      /* ========================================
+        Section: liq-chem[elementary]
+      ======================================== */
+
+
+      /* ========================================
+        Section: liq-chem[inorganic]
+      ======================================== */
+
+      /* chlorine */
+      "reind-liq-chem-hydrochloric-acid", 1.9,
+
+      /* sulfur */
+      "reind-liq-chem-sulfuric-acid-conc", 21.0,
+      "reind-liq-chem-sulfuric-acid-fuming", 21.0,
+
+      /* ========================================
+        Section: gas-chem[elementary]
+      ======================================== */
+
+
+      /* ========================================
+        Section: gas-chem[inorganic]
+      ======================================== */
+
+    ]);
+    exports.viscosity = list_viscosity;
+  // End
+
+
+  // Part: Efficiency
+    const list_effcWhitelist = new Seq([
+
+    ]);
+    exports.effcWhitelist = list_effcWhitelist;
+  // End
+
+
+  // Part: Attribute
+    const list_ventMap = new Seq([
+      "reind-attr-vent-ammonia", "reind-gas-chem-ammonia",
+      "reind-attr-vent-sour-gas", "reind-gas-ore-sour-gas",
+      "reind-attr-vent-steam", "reind-gas-misc-steam",
+      "reind-attr-vent-sulfur-dioxide", "reind-gas-chem-sulfur-dioxide",
+      "reind-attr-underwater-vent-hydrogen-sulfide", "reind-gas-chem-hydrogen-sulfide",
+    ]);
+    exports.ventMap = list_ventMap;
+  // End
+
+
+  // Part: Intermediate
+    /* NOTE: Sets stat for target products. */
+    const list_intermediateMap = new Seq([
+
+      /* ========================================
+        Section: Melt
+      ======================================== */
+
+      "reind-liq-int-melt-glass", "reind-item-buil-tempered-glass",
+
+      /* ========================================
+        Section: Misc
+      ======================================== */
+
+      "reind-liq-int-brine-purified", "reind-item-chem-sodium-hydroxide",
+      "reind-liq-int-brine-purified", "reind-item-chem-sodium-bicarbonate",
+
+    ]);
+    exports.intermediateMap = list_intermediateMap;
   // End

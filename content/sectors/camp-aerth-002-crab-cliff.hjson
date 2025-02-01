@@ -1,0 +1,44 @@
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: camp-aerth-001-sector-alpha
+    requirements: [
+      item-chem-steel/1200
+    ]
+    objectives: [
+      {
+        type: SectorComplete
+        preset: camp-aerth-001-sector-alpha
+      }
+    ]
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  planet: pla-ter-aerth
+  sector: 94
+  difficulty: 1
+
+
+/*
+  ========================================
+  Section: Gameplay
+  ========================================
+*/
+
+
+  captureWave: 2
+  overrideLaunchDefaults: true
+  allowLaunchSchematics: true
+  allowLaunchLoadout: true

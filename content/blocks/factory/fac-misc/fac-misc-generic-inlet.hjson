@@ -1,0 +1,300 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: multicraft.MultiCrafter
+  category: crafting
+  requirements: [
+    item-chem-copper/30
+    item-chem-graphite/20
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-misc-core-crafter
+    objectives: []
+  }
+  researchCostMultiplier: 0.1
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 1
+  hasItems: true
+  itemCapacity: 10
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 16
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawArrow: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-dir"
+        buildingRotate: true
+      }
+
+
+    ]
+  }
+  craftEffect: {
+    type: MultiEffect
+    effects: [
+
+
+      {
+
+        # Template: _iconFade
+
+        /* <---------------- meta ----------------> */
+
+        type: ParticleEffect
+        interp: linear
+        lifetime: 90.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: reind-efr-blk-fac-misc-generic-inlet
+        layer: 69.0
+        particles: 1
+        followParent: true
+        rotWithParent: false
+        useRotation: true
+        colorFrom: f8c266
+        colorTo: f8c26600
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 0.0
+        offset: 0.0
+        cone: 180.0
+        spin: 0.0
+        randLength: true
+        length: 0.0
+        baseLength: 0.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: linear
+        sizeFrom: 4.0
+        sizeTo: 4.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
+
+
+      {
+
+        # Template: _pulseRect
+        # Order: 1
+
+        /* <---------------- meta ----------------> */
+
+        type: WaveEffect
+        interp: linear
+        lifetime: 30.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        layer: 69.0
+        sides: 4
+        followParent: true
+        rotWithParent: false
+        colorFrom: f8c266
+        colorTo: f8c266
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & size & stroke ----------------> */
+
+        baseRotation: 0.0
+        rotation: 45.0
+        sizeFrom: 0.0
+        sizeTo: 5.65685425
+        strokeFrom: 3.0
+        strokeTo: 0.0
+
+      }
+
+
+      {
+
+        # Template: _pulseRect
+        # Order: 2
+
+        /* <---------------- meta ----------------> */
+
+        type: WaveEffect
+        interp: linear
+        lifetime: 30.0
+        startDelay: 15.0
+
+        /* <---------------- visual ----------------> */
+
+        layer: 69.0
+        sides: 4
+        followParent: true
+        rotWithParent: false
+        colorFrom: f8c266
+        colorTo: f8c266
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & size & stroke ----------------> */
+
+        baseRotation: 0.0
+        rotation: 45.0
+        sizeFrom: 0.0
+        sizeTo: 5.65685425
+        strokeFrom: 2.0
+        strokeTo: 0.0
+
+      }
+
+
+    ]
+  }
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.1
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  outputsLiquid: true
+  ignoreLiquidFullness: false
+  fluidOutputDirections: [0]
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  menu: simple
+  recipes: [
+
+
+    /*
+      ========================================
+      Section: Efficiency
+      ========================================
+    */
+
+
+      // Ball Impact : Steel
+      {
+        craftTime: 1200.0
+        icon: reind-icon-effc-ball-impact-ball-steel
+        input: {
+          items: [
+            reind-item-cons-ball-steel/1
+          ]
+        }
+        output: {
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+      }
+
+
+      // Gas Filter : Charcoal
+      {
+        craftTime: 240.0
+        icon: reind-icon-effc-gas-filter-charcoal
+        input: {
+          items: [
+            reind-item-bio-charcoal/1
+          ]
+        }
+        output: {
+          fluids: [
+            reind-effc-effc-gas-filter/0.01666667
+          ]
+        }
+      }
+
+
+      // Gas Filter : Active Carbon
+      {
+        craftTime: 2400.0
+        icon: reind-icon-effc-gas-filter-active-carbon
+        input: {
+          items: [
+            reind-item-chem-active-carbon/1
+          ]
+        }
+        output: {
+          fluids: [
+            reind-effc-effc-gas-filter/0.01666667
+          ]
+        }
+      }
+
+
+  ]

@@ -1,29 +1,72 @@
-accessible: false
-visible: true
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
 
-mesh: {
-  type: SunMesh
-  divisions: 3.0
-  octaves: 4.0
-  persistence: 0.6
-  scl: 1.0
-  pow: 1.0
-  mag: 0.5
-  colorScale: 1.0
-  colors: [
-    e94d4d
-    f7bda8
-  ]
-}
 
-radius: 24.0
-hasAtmosphere: false
-bloom: true
-orbitSpacing: 8.0
-solarSystem: pla-sun-uson
-parent: sun
-orbitRadius: 12000
-drawOrbit: false
-tidalLock: true
-iconColor: ffffff
-icon: commandRally
+  icon: commandRally
+  iconColor: ffffff
+
+
+/*
+  ========================================
+  Section: Universe
+  ========================================
+*/
+
+
+  solarSystem: pla-sun-uson
+  parent: sun
+  drawOrbit: false
+  orbitRadius: 1220.0
+  orbitTime: 18220.0
+  rotateTime: 3660.0
+  tidalLock: true
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  visible: true
+  radius: 6.0
+  hasAtmosphere: has
+  atmosphereColor: feb380
+  atmosphereRadIn: 0.0
+  atmosphereRadOut: 1.0
+  bloom: true
+  mesh: {
+    type: SunMesh
+    planet: pla-sun-uson
+    divisions: 5
+    colorScale: 1.2
+    colors: [
+      febd90
+      feb380
+      fea467
+    ]
+    octaves: 3.0
+    persistence: 6.0
+    scl: 1.2
+    pow: 1.2
+    mag: 1.2
+  }
+
+
+/*
+  ========================================
+  Section: Gameplay
+  ========================================
+*/
+
+
+  accessible: false
+  defaultEnv: 16
+  defaultAttributes: {
+    reind-attr-env-heat: 50.0
+  }
+  updateLighting: false

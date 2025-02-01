@@ -1,0 +1,79 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: LiquidRouter
+  category: liquid
+  requirements: [
+    item-chem-graphite/10
+    item-chem-tin-bronze/20
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: bliq-aux-fluid-junction
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 1
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 90.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  liquidPadding: 1.5
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  solid: false
+  underBullets: true
+  liquidPressure: 1.15

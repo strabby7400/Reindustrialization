@@ -1,0 +1,37 @@
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  explosiveness: 0.0
+  flammability: 0.0
+  temperature: 1.0
+  heatCapacity: 0.5
+  viscosity: 0.5
+  boilPoint: 60.0
+  effect: melting
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: feb380
+  lightColor: feb38080
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  incinerable: false
+  coolant: false
+  capPuddles: true

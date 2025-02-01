@@ -1,0 +1,77 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: DuctRouter
+  category: distribution
+  requirements: [
+    item-bio-timber/25
+    item-chem-copper/15
+    item-chem-graphite/10
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: dis-aux-router
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 1
+  hasItems: true
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  configurable: false
+  group: transportation
+  speed: 10.0

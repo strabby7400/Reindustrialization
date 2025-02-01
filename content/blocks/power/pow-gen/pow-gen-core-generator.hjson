@@ -1,0 +1,208 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: ConsumeGenerator
+  category: power
+  requirements: [
+    item-chem-lead/220
+    item-chem-tin-bronze/120
+    item-chem-steel/100
+    item-ore-magnetite/120
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: pow-gen-vent-generator
+    objectives: []
+  }
+  researchCostMultiplier: 0.15
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 20
+  fogRadius: 3
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawLiquidRegion
+        suffix: "-liquid"
+        drawLiquid: effc-effc-core
+        alpha: 1.0
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-rotator"
+        spinSprite: true
+        rotateSpeed: 7.0
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-lid"
+      }
+
+
+    ]
+  }
+  generateEffect: {
+
+
+    /* effect_powerCrack */
+
+
+    // Part: Meta
+      type: ParticleEffect
+      interp: linear
+      lifetime: 30.0
+      startDelay: 0.0
+    // End
+
+
+    // Part: Visual
+      region: circle
+      layer: 69.0
+      particles: 3
+      followParent: true
+      rotWithParent: false
+      useRotation: true
+      colorFrom: ffe18f
+      colorTo: ffe18f
+      lightScl: 2.0
+      lightOpacity: 0.65
+    // End
+
+
+    // Part: Angle & Length
+      baseRotation: 0.0
+      offset: 0.0
+      cone: 180.0
+      spin: 0.0
+      randLength: true
+      length: 8.0
+      baseLength: 0.0
+    // End
+
+
+    // Part: Size & Stroke & Len
+      line: false
+      sizeInterp: pow5In
+      sizeFrom: 1.2
+      sizeTo: 0.0
+      strokeFrom: 0.0
+      strokeTo: 0.0
+      lenFrom: 0.0
+      lenTo: 0.0
+    // End
+
+
+  }
+  effectChance: 0.02
+  generateEffectRange: 3.0
+  consumeEffect: none
+  ambientSound: se-amb-turbine
+  ambientSoundVolume: 0.15
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: false
+
+
+/*
+  ========================================
+  Section: Specific (Explosion)
+  ========================================
+*/
+
+
+  explodeOnFull: false
+  explodeEffect: none
+  explodeSound: se-shot-explosion
+  explosionShake: 0.0
+  explosionShakeDuration: 6.0
+  explosionMinWarmup: 0.5
+  explosionRadius: 5
+  explosionDamage: 0
+  # explosionPuddleLiquid: null
+  explosionPuddles: 15
+  explosionPuddleRange: 24.0
+  explosionPuddleAmount: 90.0
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  powerProduction: 20.83333333
+  itemDuration: 120.0
+  outputLiquid: null
+  consumes: {
+    liquids: [
+      effc-effc-core/0.03333333
+    ]
+  }

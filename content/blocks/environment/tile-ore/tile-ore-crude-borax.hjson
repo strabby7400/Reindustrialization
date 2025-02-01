@@ -1,9 +1,0 @@
-type: Floor
-variants: 2
-
-itemDrop: item-ore-crude-borax
-playerUnmineable: false
-
-attributes: {
-  attr-rock-evaporite: 0.85
-}

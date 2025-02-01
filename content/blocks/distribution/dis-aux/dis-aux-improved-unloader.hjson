@@ -1,0 +1,80 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: DirectionalUnloader
+  category: distribution
+  requirements: [
+    item-bio-timber/80
+    item-chem-graphite/65
+    item-chem-brass/50
+    item-chem-steel/30
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: dis-aux-primitive-unloader
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 1
+  hasItems: true
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  regionRotated1: 1
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  solid: false
+  underBullets: true
+  speed: 5.0
+  allowCoreUnload: true

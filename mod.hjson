@@ -1,29 +1,84 @@
 name: reind
 displayName: Reindustrialization
-subtitle: "0.0.9j: Sticky Slurry"
+subtitle: "0.1.0: The Overhaul"
 
-description:
-"I have seen too many mods with fictional contents bearing random names from reality, and somehow I have been working on this mod.
-
-Reind is that type of mod focused on real chemical engineeing and more. Recipes are mostly based on their counterparts in real life, but simplified for gameplay.
-Besides contents, I've spent a lot of time building up new mechanisms, which is done through JS codes.
-
-Only one planet added for now, which has its own tech tree and style to play. Instead of tower defense, you'll focus on the production part and occasionally, fight with units.
-The mod is also kind of inspired by GTNH, an extremely hardcore Minecraft tech mod pack. You won't probably capture the first sector in 3 hours if you are not skilled.
-
-Reind is still WIP. Do not launch to any numbered sectors!
-
-Contents: MaboroshiX
-Sprites: MaboroshiX
-Scripts: MaboroshiX
-Ideas: MaboroshiX
-
-rednificsdnaaidepikiwybderewop"
 
 author: MaboroshiX
+repo: HuanXefh/Reindustrialization
 minGameVersion: 146
 dependencies: [
   multi-crafter
 ]
-repo: HuanXefh/Reindustrialization
-version: 0.0.9j
+
+
+description:
+'''
+
+A JS mod aimed to bring real chemical engineering into Mindustry, where tin is definitely tin.
+
+
+- Nothing extends vanilla gameplay, all the contents including environmental blocks are mod-based. No borrowed or recolored vanilla textures.
+
+- Steps and intermediates are introduced for production routes, which are mostly based on the processes in real life. Say bye to straightforward recipes and fictional real names.
+
+- Extraction methods are required to turn ores into actual materials, e.g. smelting.
+
+- New mechanics like fluid corrosion and underground ores are implemented, which differentiates the gameplay drastically.
+
+- Turrets are absent, the mod will focus on unit-only defense and attack.
+
+
+Most of the factories are multi-crafters, you'll need download MultiCrafterLib first! (Sorry for IOS players D:)
+
+
+Reind is still and probably always WIP, as chemistry itself is a complex thing. Do not launch to numbered sectors since sector generator is not used.
+
+
+------------------------------
+
+
+Contents:
+
+- MaboroshiX
+
+
+Sprites:
+
+- MaboroshiX
+
+
+Scripts:
+
+- MaboroshiX
+
+
+Maps:
+
+- MaboroshiX
+
+
+Ideas:
+
+- MaboroshiX
+
+
+------------------------------
+
+
+Inspiration:
+
+- Greg's Tech: New Horizon (Minecraft modpack)
+
+- Asthosus (Mindustry mod)
+
+- Fictional Octo System (Mindustry mod)
+
+- Sapphirium (Mindustry mod)
+
+- 格雷工业 (Mindustry mod)
+
+'''
+
+
+/* v0.1.0 */
+version: 0.1.0

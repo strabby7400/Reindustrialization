@@ -1,0 +1,43 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: ParticleWeather
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  duration: 60.0
+
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  drawParticles: true
+  particleRegion: reind-efr-shadow
+  color: ffffff
+  minAlpha: 0.015
+  maxAlpha: 0.15
+  density: 16000.0
+  baseSpeed: 15.0
+  useWindVector: true
+  randomParticleRotation: false
+  sinSclMin: 60.0
+  sinSclMax: 120.0
+  sinMagMin: 40.0
+  sinMagMax: 160.0
+  sizeMin: 360.0
+  sizeMax: 720.0

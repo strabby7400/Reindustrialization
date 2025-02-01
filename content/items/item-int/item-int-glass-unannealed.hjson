@@ -1,0 +1,37 @@
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  explosiveness: 0.0
+  flammability: 0.0
+  radioactivity: 0.0
+  charge: 0.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: e8eced
+  frames: 2
+  transitionFrames: 8
+  frameTime: 5.0
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  hardness: 0
+  lowPriority: false
+  buildable: false
+  cost: 1.0

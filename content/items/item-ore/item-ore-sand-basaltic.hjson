@@ -1,0 +1,50 @@
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: item-ore-sandstone
+    objectives: []
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  explosiveness: 0.0
+  flammability: 0.0
+  radioactivity: 0.0
+  charge: 0.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: 57575c
+  frames: 0
+  transitionFrames: 0
+  frameTime: 5.0
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  hardness: 2
+  lowPriority: true
+  buildable: false
+  cost: 1.0

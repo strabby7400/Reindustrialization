@@ -1,0 +1,490 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: multicraft.MultiCrafter
+  category: crafting
+  requirements: [
+    item-chem-copper/180
+    item-chem-lead/160
+    item-chem-graphite/90
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-furn-kiln
+    objectives: []
+  }
+  researchCostMultiplier: 0.05
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
+  hasItems: true
+  itemCapacity: 80
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 20
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawParticles
+        color: eab678
+        alpha: 1.0
+        particles: 24
+        particleLife: 60.0
+        particleRad: 6.0
+        particleSize: 1.0
+        rotateScl: 4.0
+        reverse: true
+      }
+
+
+      {
+        type: DrawParticles
+        color: bfbfbf
+        alpha: 1.0
+        particles: 36
+        particleLife: 40.0
+        particleRad: 6.5
+        particleSize: 0.5
+        rotateScl: 2.0
+        reverse: true
+      }
+
+
+      {
+        type: DrawWeave
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ffffff
+        alpha: 1.0
+        glowScale: 60.0
+        glowIntensity: 0.75
+        layer: 31.01
+        suffix: "-halo-blur"
+        rotate: true
+        rotateSpeed: 0.4
+        blending: normal
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ffffff
+        alpha: 0.75
+        glowScale: 20.0
+        glowIntensity: 0.75
+        suffix: "-halo"
+        rotate: true
+        rotateSpeed: 0.4
+        blending: normal
+      }
+
+
+    ]
+  }
+  craftEffect: {
+
+    # Template: _craftCrack
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow5Out
+    lifetime: 90.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: "reind-efr-diamond"
+    layer: 69.0
+    particles: 5
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffffff
+    colorTo: ffffff
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 10.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: pow10In
+    sizeFrom: 4.0
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-hum-computer
+  ambientSoundVolume: 0.2
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: true
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  menu: simple
+  recipes: [
+
+
+    /*
+      ========================================
+      Section: Specific
+      ========================================
+    */
+
+
+      // Timber
+      /* NOTE: A convenient yet inefficient way for timber. */
+      {
+        craftTime: 600.0
+        icon: reind-item-bio-timber
+        input: {
+          power: 1.25
+          items: [
+            reind-item-bio-log/8
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-bio-timber/5
+          ]
+        }
+      }
+
+
+      // Tempered Glass
+      /* NOTE: Huge waste but simplest. */
+      {
+        craftTime: 600.0
+        icon: reind-item-buil-tempered-glass
+        input: {
+          power: 1.25
+          fluids: [
+            reind-liq-int-melt-glass/0.2
+
+            reind-effc-effc-core/0.01666667
+            reind-gas-misc-air/0.1
+          ]
+        }
+        output: {
+          items: [
+            reind-item-buil-tempered-glass/10
+          ]
+        }
+      }
+
+
+    /*
+      ========================================
+      Section: Brick
+      ========================================
+    */
+
+
+      // Clay Brick (Unbaked)
+      {
+        craftTime: 600.0
+        icon: reind-item-int-brick-clay-unbaked
+        input: {
+          power: 1.25
+          items: [
+            reind-item-ore-clay/20
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+            reind-liq-ore-water/0.1
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-brick-clay-unbaked/10
+          ]
+          fluids: [
+            reind-liq-was-waste-slurry/0.1
+          ]
+        }
+      }
+
+
+      // High-Alumina Brick (Unbaked)
+      {
+        craftTime: 600.0
+        icon: reind-item-int-brick-high-alumina-unbaked
+        input: {
+          power: 1.25
+          items: [
+            reind-item-int-blend-brick-high-alumina/10
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+            reind-liq-ore-water/0.1
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-brick-high-alumina-unbaked/10
+          ]
+          fluids: [
+            reind-liq-was-waste-slurry/0.1
+          ]
+        }
+      }
+
+
+      // Magnesia Brick (Unbaked)
+      {
+        craftTime: 600.0
+        icon: reind-item-int-brick-magnesia-unbaked
+        input: {
+          power: 1.25
+          items: [
+            reind-item-int-blend-brick-magnesia/10
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+            reind-liq-ore-water/0.1
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-brick-magnesia-unbaked/10
+          ]
+          fluids: [
+            reind-liq-was-waste-slurry/0.1
+          ]
+        }
+      }
+
+
+    /*
+      ========================================
+      Section: Consumable
+      ========================================
+    */
+
+
+      // Ball : Steel
+      {
+        craftTime: 600.0
+        icon: reind-item-cons-ball-steel
+        input: {
+          power: 1.25
+          items: [
+            reind-item-chem-steel/12
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-cons-ball-steel/1
+          ]
+        }
+      }
+
+
+      // Electrode : Copper
+      {
+        craftTime: 600.0
+        icon: reind-item-cons-electrode-copper
+        input: {
+          power: 1.25
+          items: [
+            reind-item-chem-copper/10
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-cons-electrode-copper/1
+          ]
+        }
+      }
+
+
+      // Electrode : Graphite
+      {
+        craftTime: 600.0
+        icon: reind-item-cons-electrode-graphite
+        input: {
+          power: 1.25
+          items: [
+            reind-item-chem-graphite/10
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-cons-electrode-graphite/1
+          ]
+        }
+      }
+
+
+      // Electrode : Lead
+      {
+        craftTime: 600.0
+        icon: reind-item-cons-electrode-lead
+        input: {
+          power: 1.25
+          items: [
+            reind-item-chem-lead/10
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-cons-electrode-lead/1
+          ]
+        }
+      }
+
+
+      // Pall Ring : Stainless Steel
+      {
+        craftTime: 600.0
+        icon: reind-item-cons-pall-ring-stainless-steel
+        input: {
+          power: 1.25
+          items: [
+            reind-item-chem-stainless-steel/6
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-cons-pall-ring-stainless-steel/1
+          ]
+        }
+      }
+
+
+      // Pall Ring : Steel
+      {
+        craftTime: 600.0
+        icon: reind-item-cons-pall-ring-steel
+        input: {
+          power: 1.25
+          items: [
+            reind-item-chem-steel/6
+          ]
+          fluids: [
+            reind-effc-effc-core/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-cons-pall-ring-steel/1
+          ]
+        }
+      }
+
+
+  ]

@@ -1,0 +1,156 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Drill
+  category: production
+  requirements: [
+    item-chem-copper/30
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  alwaysUnlocked: true
+  research: {
+    parent: eff-core-ash
+    objectives: []
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 2
+  hasItems: true
+  itemCapacity: 10
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+  fogRadius: 4
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawRim: false
+  drillEffect: none
+  drillEffectChance: 1.0
+  rotateSpeed: 1.5
+  updateEffect: {
+
+
+    /* effect_drillCrack */
+
+
+    // Part: Meta
+      type: ParticleEffect
+      interp: pow10Out
+      lifetime: 180.0
+      startDelay: 0.0
+    // End
+
+
+    // Part: Visual
+      region: reind-efr-diamond
+      layer: 69.0
+      particles: 3
+      followParent: true
+      rotWithParent: false
+      useRotation: true
+      colorFrom: ffffff
+      colorTo: ffffff
+      lightScl: 2.0
+      lightOpacity: 0.0
+    // End
+
+
+    // Part: Angle & Length
+      baseRotation: 0.0
+      offset: 0.0
+      cone: 180.0
+      spin: 0.0
+      randLength: true
+      length: 18.0
+      baseLength: 0.0
+    // End
+
+
+    // Part: Size & Stroke & Len
+      line: false
+      sizeInterp: sine
+      sizeFrom: 4.0
+      sizeTo: 0.0
+      strokeFrom: 0.0
+      strokeTo: 0.0
+      lenFrom: 0.0
+      lenTo: 0.0
+    // End
+
+
+  }
+  updateEffectChance: 0.005
+  ambientSound: se-amb-drill
+  ambientSoundVolume: 0.1
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  tier: 4
+  hardnessDrillMultiplier: 30.0
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  drillTime: 400.0
+  liquidBoostIntensity: 1.3
+  blockedItem: item-ore-sand
+  consumes: {
+    liquid: {
+      liquid: liq-ore-water
+      amount: 0.1
+      optional: true
+      booster: true
+    }
+  }

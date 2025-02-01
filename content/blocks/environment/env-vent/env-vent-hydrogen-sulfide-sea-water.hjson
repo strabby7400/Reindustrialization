@@ -1,0 +1,59 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: SteamVent
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  speedMultiplier: 0.5
+  dragMultiplier: 1.0
+  damageTaken: 0.0
+  isLiquid: true
+  shallow: false
+  drownTime: 150.0
+  status: sta-liq-sea-water-corrosion
+  statusDuration: 300.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  variants: 0
+  cacheLayer: water
+  albedo: 0.5
+  parent: env-liq-sea-water
+  blendGroup: env-liq-sea-water
+  effect: none
+  effectColor: ffffff
+  effectSpacing: 15.0
+
+
+/*
+  ========================================
+  Section: Resource
+  ========================================
+*/
+
+
+  liquidDrop: liq-ore-sea-water
+  liquidMultiplier: 1.0
+  attributes: {
+    reind-attr-env-heat: 0.3
+    reind-attr-env-tide: 1.0
+    reind-attr-flr-sea-water: 1.5
+    reind-attr-underwater-vent-hydrogen-sulfide: 1.0
+  }

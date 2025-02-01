@@ -1,0 +1,404 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: mech
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: unit-core-expedition-i
+    requirements: [
+      item-chem-copper/900
+      item-chem-lead/900
+      item-chem-steel/350
+    ]
+    objectives: []
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  health: 470.0
+  armor: 6.0
+  hitSize: 10.0
+  speed: 0.36
+  rotateSpeed: 1.82
+  accel: 0.5
+  drag: 0.5
+  itemCapacity: 10
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+  fogRadius: 8.0
+  lightRadius: -1.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  outlines: true
+  outlineRadius: 2
+  outlineColor: 373a4d
+  groundLayer: 62.0
+  shadowElevation: 0.02
+  stepShake: 0.0
+  rippleScale: 0.7
+  parts: [
+
+
+    {
+      type: HoverPart
+      layerOffset: -0.0001
+      under: true
+      mirror: false
+      radius: 6.0
+      x: 0.0
+      y: -3.0
+      rotation: 0.0
+      phase: 60.0
+      circles: 2
+      sides: 6
+      color: 8ca9e8
+      stroke: 1.5
+      minStroke: 0.12
+    }
+
+
+    {
+      type: HoverPart
+      layerOffset: -0.00011
+      under: true
+      mirror: false
+      radius: 5.0
+      x: 0.0
+      y: -3.0
+      rotation: 0.0
+      phase: 90.0
+      circles: 2
+      sides: 6
+      color: d1efff
+      stroke: 1.5
+      minStroke: 0.12
+    }
+
+
+  ]
+
+
+/*
+  ========================================
+  Section: Visual (Mech)
+  ========================================
+*/
+
+
+  mechLandShake: 1.0
+  mechSideSway: 0.5
+  mechFrontSway: 0.4
+  mechStride: -1.0
+  mechStepParticles: false
+
+
+/*
+  ========================================
+  Section: Visual (Engine)
+  ========================================
+*/
+
+
+  engineColor: 8ca9e8
+  engineColorInner: ffffff
+  engineOffset: 0.0
+  engineSize: 0.0
+  engines: [
+
+
+    {
+      x: 6.0
+      y: -5.0
+      radius: 2.5
+      rotation: 315.0
+    }
+
+
+    {
+      x: -6.0
+      y: -5.0
+      radius: 2.5
+      rotation: 225.0
+    }
+
+
+  ]
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  flying: false
+  canBoost: true
+  riseSpeed: 0.008
+  fallSpeed: 0.1
+  boostMultiplier: 2.65
+  lowAltitude: true
+  canDrown: true
+  drownTimeMultiplier: 1.0
+  omniMovement: true
+
+
+/*
+  ========================================
+  Section: Attack
+  ========================================
+*/
+
+
+  range: 168.0
+  aimDst: 168.0
+  singleTarget: false
+  targetAir: false
+  targetGround: true
+  faceTarget: true
+  circleTarget: false
+  weapons: [
+
+
+    {
+
+      /* <---------------- meta ----------------> */
+
+      name: unit-inf-tsen-gun
+      display: true
+      controllable: true
+      aiControllable: true
+      useAttackRange: true
+
+      /* <---------------- properties ----------------> */
+
+      top: false
+      mirror: true
+      alternate: true
+      x: 7.0
+      y: 1.5
+      rotate: false
+      baseRotation: 0.0
+      rotationLimit: 361.0
+      rotateSpeed: 1.0
+
+      /* <---------------- visual ----------------> */
+
+      layerOffset: -0.00001
+      shootX: 0.0
+      shootY: 6.0
+      ejectEffect: casing1
+      shake: 0.0
+      recoil: 1.5
+      recoils: -1
+      heatColor: ff3838
+      cooldownTime: 90.0
+      shootSound: se-shot-light
+      chargeSound: none
+      parts: [
+
+
+        {
+          type: RegionPart
+          suffix: "-blade"
+          layerOffset: -0.00001
+          under: true
+          mirror: false
+          x: 0.5
+          y: -1.0
+          rotation: 330.0
+          progress: reload
+          moveX: 1.0
+          moveY: -1.0
+          moveRot: 0.0
+          growProgress: reload
+          growX: 0.0
+          growY: 0.0
+        }
+
+
+        {
+          type: RegionPart
+          suffix: "-blade"
+          layerOffset: -0.00002
+          under: true
+          mirror: false
+          x: 1.0
+          y: -4.0
+          rotation: 315.0
+          progress: reload
+          moveX: 1.0
+          moveY: -1.0
+          moveRot: 0.0
+          growProgress: reload
+          growX: 0.0
+          growY: 0.0
+        }
+
+
+      ]
+
+      /* <---------------- attack ----------------> */
+
+      noAttack: false
+      xRand: 0.0
+      velocityRnd: 0.0
+      minShootVelocity: -1.0
+      reload: 36.0
+      inaccuracy: 2.0
+      shoot: {
+        type: ShootPattern
+        shots: 1
+        shotDelay: 0.0
+        firstShotDelay: 0.0
+      }
+      shootCone: 4.0
+      shootOnDeath: false
+      shootStatus: none
+      shootStatusDuration: 120.0
+      minWarmup: 0.8
+
+      /* <---------------- bullet ----------------> */
+
+      bullet: {
+
+        # Mark: tsenBullet
+
+        /* <---------------- meta ----------------> */
+
+        type: BasicBulletType
+        despawnHit: true
+
+        /* <---------------- properties ----------------> */
+
+        lifetime: 16.8
+        speed: 10.0
+        damage: 42.0
+        buildingDamageMultiplier: 0.3
+        hitSize: 4.0
+        collides: true
+        collidesAir: false
+        collidesGround: true
+        collideTerrain: true
+
+        /* <---------------- visual ----------------> */
+
+        sprite: reind-bul-bullet1
+        layer: 74.0
+        frontColor: ffffff
+        backColor: 8ca9e8
+        hitColor: 8ca9e8
+        width: 5.0
+        height: 10.0
+        lightRadius: -1.0
+        lightOpacity: 0.0
+        hitShake: 0.0
+        despawnShake: 0.0
+        shootEffect: {
+          type: MultiEffect
+          effects: [
+
+
+            shootSmallColor
+
+
+            {
+
+              # Template: _gunSmog
+
+              /* <---------------- meta ----------------> */
+
+              type: ParticleEffect
+              interp: pow10Out
+              lifetime: 180.0
+              startDelay: 0.0
+
+              /* <---------------- visual ----------------> */
+
+              region: reind-efr-shadow-white
+              layer: 86.0
+              particles: 8
+              followParent: false
+              rotWithParent: false
+              useRotation: true
+              colorFrom: ffffff60
+              colorTo: ffffff00
+              lightScl: 2.0
+              lightOpacity: 0.0
+
+              /* <---------------- angle & length ----------------> */
+
+              baseRotation: 0.0
+              offset: 0.0
+              cone: 30.0
+              spin: 0.0
+              randLength: true
+              length: 16.0
+              baseLength: 0.0
+
+              /* <---------------- size & stroke & len ----------------> */
+
+              line: false
+              sizeInterp: pow2Out
+              sizeFrom: 2.0
+              sizeTo: 6.0
+              strokeFrom: 0.0
+              strokeTo: 0.0
+              lenFrom: 0.0
+              lenTo: 0.0
+
+            }
+
+
+          ]
+        }
+        smokeEffect: shootSmallSmoke
+        chargeEffect: none
+        hitEffect: hitBulletSmall
+        despawnEffect: hitBulletSmall
+        trailColor: ffffff20
+        trailLength: 6
+        trailWidth: 2.0
+        hitSound: none
+        despawnSound: none
+
+      }
+
+    }
+
+
+  ]

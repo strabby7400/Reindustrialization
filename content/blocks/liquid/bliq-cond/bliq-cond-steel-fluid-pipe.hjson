@@ -1,37 +1,81 @@
-# type: ArmoredConduit
-category: liquid
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
 
-requirements: [
-  item-chem-steel/3
-]
-buildCostMultiplier: 10.0
 
-research: {
-  parent: bliq-cond-wooden-fluid-pipe
-  objectives: []
-}
-researchCostMultiplier: 5.0
+  # type: ArmoredConduit
+  category: liquid
+  requirements: [
+    item-chem-steel/3
+  ]
+  buildCostMultiplier: 4.0
 
-scaledHealth: 80.0
-armor: 24.0
-size: 1
-hasItems: false
-hasLiquids: true
-liquidCapacity: 40.0
-liquidPressure: 1.1
-outputsLiquid: true
-hasPower: false
-fogRadius: -1
-rotate: true
-solid: false
-underBullets: true
 
-envRequired: 0
-envDisabled: 18
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
 
-timerFlow: 1
-botColor: 565666
-padCorners: true
-leaks: true
 
-junctionReplacement: bliq-misc-fluid-junction
+  research: {
+    parent: bliq-cond-bronze-fluid-pipe
+    objectives: []
+  }
+  researchCostMultiplier: 5.0
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 24.0
+  size: 1
+  hasLiquids: true
+  liquidCapacity: 30.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  botColor: 565666
+  padCorners: true
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  solid: false
+  underBullets: true
+  liquidPressure: 1.4
+  timerFlow: 1
+  leaks: true
+  junctionReplacement: bliq-aux-fluid-junction
+  bridgeReplacement: bliq-brd-primitive-fluid-pipe-bridge

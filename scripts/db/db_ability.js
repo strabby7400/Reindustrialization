@@ -1,64 +1,98 @@
-// Checked on 11-2-2024
-
-
 /*
-    ==================================================
-    Part: Definition
-    ==================================================
+  ========================================
+  Section: Definition
+  ========================================
 */
 
 
-  // Start: Lighting Arc Generator
-    /* Randomly generates clusters of lightning arcs around an unit */
-    const modifyAbilities_lightningArcGenerator = function(obj, dmg, chance, amount, color, bdmtp) {
-      var bullet_lightningArc = extend(LightningBulletType, {
-        lightningColor: color,
-        lightningLength: 4,
-        lightningLengthRand: 8,
-        collides: true,
-        collidesAir: true,
-        collidesGround: true,
-        damage: dmg,
-        buildingDamageMultiplier: bdmtp,
-        status: StatusEffects.shocked,
-      });
+  // Part: Import
+    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_text = require("reind/mdl/mdl_text");
 
-      var ability_lightningArcGenerator = extend(Ability, {
+    const db_unit = require("reind/db/db_unit");
+  // End
+
+
+  // Part: Status
+    /* NOTE: Applies morale status when {count_unit >= limit} */
+    const __legion = function(utp, limit, rad) {
+      var abi_legion = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-legion.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Stat.range.localized(),
+            Strings.autoFixed(rad / Vars.tilesize, 2),
+            StatUnit.blocks.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Core.bundle.get("term.reind-term-unit-count.name"),
+            Strings.autoFixed(limit, 0),
+          ));
+        },
+
+
+        displayBars(unit, bars) {
+          bars.add(new Bar(
+            "term.reind-term-unit-count.name",
+            Pal.accent,
+            () => Math.min(mdl_geometry.countUnits_self(unit, rad) / limit, 1.0),
+          )).row();
+        },
+
+
         update(unit) {
-          this.super$update(unit);
-          if(Mathf.chance(Time.delta * chance)) {
-            for(let i = 0; i < amount; i++) {
-              bullet_lightningArc.create(unit, unit.team, unit.x, unit.y, Mathf.random() * 360.0);
-            };
-          };
+          if(Mathf.chance(0.99)) return;
+
+          var count = mdl_geometry.countUnits_self(unit, rad);
+          if(count >= limit) unit.apply(Vars.content.statusEffect("reind-sta-spec-morale"), 300.0);
         },
 
-        addStats(t) {
-          t.add("[lightgray]" + Core.bundle.get("reindTerms.createChance.name") + ": [white]" + Strings.autoFixed(chance * 60.0, 2) + " " + StatUnit.perSecond.localized());
-          t.row();
-          t.add("[lightgray]" + Core.bundle.get("reindTerms.amount.name") + ": [white]" + amount);
-          t.row();
-          t.add(Core.bundle.format("bullet.damage", dmg));
-          t.row();
-
-          // Color change for BDM
-          if(bdmtp >= 1) {
-            t.add("[lightgray]" + Core.bundle.get("reindTerms.buildingDamageMultiplier.name") + ": [white]" + Strings.autoFixed(bdmtp * 100.0, 2) + "%");
-          } else {
-            t.add("[lightgray]" + Core.bundle.get("reindTerms.buildingDamageMultiplier.name") + ": [red]" + Strings.autoFixed(bdmtp * 100.0, 2) + "%");
-          };
-          t.row();
-          t.add(StatusEffects.shocked.emoji() + StatusEffects.shocked.localizedName);
-        },
 
         localized() {
-          return Core.bundle.get("ability.reind-abi-lightning-arc-generator.name");
+          return Core.bundle.get("ability.reind-abi-legion.name");
         },
+
+
       });
 
-      Events.run(ClientLoadEvent, () => {
-        obj.abilities.addAll(ability_lightningArcGenerator);
-      });
+      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_legion));
     };
-    exports.modifyAbilities_lightningArcGenerator = modifyAbilities_lightningArcGenerator;
+    exports.__legion = __legion;
+  // End
+
+
+  // Part: Misc
+    /* NOTE: This unit contributes to EP count, the value is fetched from {db_unit.energizer} */
+    const __energizer = function(utp) {
+      var ep = mdl_database.read_1n1v(db_unit.energizer, utp.name);
+      if(ep == null) ep = 0.0;
+
+      var abi_energizer = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-energizer.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Core.bundle.get("term.reind-term-energy-points.name"),
+            Strings.autoFixed(ep, 2),
+          ));
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-energizer.name");
+        },
+
+
+      });
+
+      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_energizer));
+    };
+    exports.__energizer = __energizer;
   // End

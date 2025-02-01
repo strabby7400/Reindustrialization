@@ -1,18 +1,37 @@
-hidden: false
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
 
-flammability: 0.0
-temperature: 0.5
-heatCapacity: 0.4
-viscosity: 0.5
-explosiveness: 0.0
 
-coolant: false
-capPuddles: true
-boilPoint: 2.0
+  explosiveness: 0.0
+  flammability: 0.0
+  temperature: 0.5
+  heatCapacity: 0.4
+  viscosity: 0.5
+  boilPoint: 2.0
+  effect: sta-liq-brine-corrosion
 
-color: d4c0d8
-lightColor: 00000000
 
-effect: sta-liq-brine-corrosion
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
 
-incinerable: false
+
+  color: d4c0d8
+  lightColor: 00000000
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  incinerable: false
+  coolant: false
+  capPuddles: true

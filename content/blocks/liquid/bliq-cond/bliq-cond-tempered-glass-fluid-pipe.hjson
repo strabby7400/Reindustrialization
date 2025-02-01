@@ -1,38 +1,199 @@
-# type: Conduit
-category: liquid
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
 
-requirements: [
-  item-prod-tempered-glass-tube/2
-  item-chem-steel/1
-]
-buildCostMultiplier: 10.0
 
-research: {
-  parent: bliq-cond-steel-fluid-pipe
-  objectives: []
-}
-researchCostMultiplier: 7.0
+  # type: Conduit
+  category: liquid
+  requirements: [
+    item-buil-tempered-glass/2
+    item-chem-steel/1
+  ]
+  buildCostMultiplier: 2.0
 
-scaledHealth: 100.0
-armor: 0.0
-size: 1
-hasItems: false
-hasLiquids: true
-liquidCapacity: 65.0
-liquidPressure: 1.05
-outputsLiquid: true
-hasPower: false
-fogRadius: -1
-rotate: true
-solid: false
-underBullets: true
 
-envRequired: 0
-envDisabled: 18
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
 
-timerFlow: 1
-botColor: 565666
-padCorners: true
-leaks: false
 
-junctionReplacement: bliq-misc-fluid-junction
+  research: {
+    parent: bliq-cond-steel-fluid-pipe
+    objectives: []
+  }
+  researchCostMultiplier: 5.0
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 120.0
+  armor: 0.0
+  size: 1
+  hasLiquids: true
+  liquidCapacity: 30.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  botColor: 565666
+  padCorners: true
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  solid: false
+  underBullets: true
+  liquidPressure: 1.0
+  timerFlow: 1
+  leaks: false
+  junctionReplacement: bliq-aux-fluid-junction
+  bridgeReplacement: bliq-brd-primitive-fluid-pipe-bridge
+
+
+/*
+  ========================================
+  Section: Attack
+  ========================================
+*/
+
+
+  destroyBulletSameTeam: false
+  destroyBullet: {
+
+
+    /* bullet_glassShard_trigger */
+
+
+    // Part: Meta
+      type: BasicBulletType
+      instantDisappear: true
+      despawnHit: true
+    // End
+
+
+    // Part: Properties
+      lifetime: 1.0
+      speed: 0.0
+      damage: 1.0
+      buildingDamageMultiplier: 1.0
+      hitSize: 4.0
+      collides: false
+      collidesAir: false
+      collidesGround: true
+    // End
+
+
+    // Part: Visual
+      sprite: bullet
+      layer: 74.0
+      lightRadius: -1.0
+      lightOpacity: 0.0
+      hitShake: 0.0
+      despawnShake: 0.0
+      shootEffect: none
+      smokeEffect: none
+      chargeEffect: none
+      hitEffect: none
+      despawnEffect: none
+      hitSound: none
+      despawnSound: none
+    // End
+
+
+    // Part: Specific (Fragment)
+      fragBullets: 5
+      fragOnHit: true
+      fragOnAbsorb: true
+      fragRandomSpread: 360.0
+      fragSpread: 0.0
+      fragAngle: 0.0
+      fragVelocityMin: 0.2
+      fragVelocityMax: 1.0
+      fragLifeMin: 1.0
+      fragLifeMax: 1.0
+      fragBullet: {
+
+
+        /* bullet_glassShard */
+
+
+        // Part: Meta
+          type: BasicBulletType
+          despawnHit: true
+        // End
+
+
+        // Part: Properties
+          lifetime: 8.0
+          speed: 10.0
+          damage: 80.0
+          buildingDamageMultiplier: 0.1
+          hitSize: 4.0
+          collides: true
+          collidesAir: false
+          collidesGround: true
+          collideTerrain: true
+        // End
+
+
+        // Part: Visual
+          sprite: reind-bul-bullet5
+          layer: 74.0
+          frontColor: ffffff
+          backColor: bfbfbf
+          width: 6.0
+          height: 6.0
+          lightRadius: -1.0
+          lightOpacity: 0.0
+          hitShake: 0.0
+          despawnShake: 0.0
+          shootEffect: none
+          smokeEffect: none
+          chargeEffect: none
+          hitEffect: hitBulletSmall
+          despawnEffect: hitBulletSmall
+          trailColor: ffffff20
+          trailLength: 6
+          trailWidth: 2.0
+          hitSound: none
+          despawnSound: none
+        // End
+
+
+      }
+    // End
+
+
+  }

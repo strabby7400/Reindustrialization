@@ -1,0 +1,171 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: crafting
+  requirements: [
+    item-chem-copper/90
+    item-chem-lead/30
+    item-chem-graphite/30
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-air-air-collector
+    objectives: []
+  }
+  researchCostMultiplier: 0.1
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 2
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 129
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawCultivator
+        plantColor: b8d3e0
+        plantColorLight: 00000000
+        bottomColor: b8d3e0
+        bubbles: 0
+      }
+
+
+      {
+        type: DrawParticles
+        color: b8d3e0
+        alpha: 0.6
+        particles: 16
+        particleLife: 30.0
+        particleRad: 6.0
+        particleSize: 1.0
+        rotateScl: 8.0
+        reverse: false
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-rotator"
+        spinSprite: true
+        rotateSpeed: 1.0
+      }
+
+
+      {
+        type: DrawParticles
+        color: b8d3e0
+        alpha: 0.6
+        particles: 16
+        particleLife: 30.0
+        particleRad: 6.0
+        particleSize: 1.0
+        rotateScl: 8.0
+        reverse: true
+      }
+
+
+      {
+        type: DrawLiquidTile
+        drawLiquid: gas-int-air-clean
+        padding: 1.5
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: wind
+  ambientSoundVolume: 0.1
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: true
+  ignoreLiquidFullness: true
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 60.0
+  consumes: {
+    power: 0.25
+    liquids: [
+      effc-effc-gas-filter/0.01666667
+      gas-misc-air/0.2
+    ]
+  }
+  outputLiquids: [
+    gas-int-air-clean/0.2
+  ]

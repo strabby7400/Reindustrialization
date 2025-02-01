@@ -1,23 +1,50 @@
-hidden: false
-hiddenOnPlanets: [
-  erekir
-  serpulo
-]
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
 
-research: {
-  parent: item-ore-lignite
-  objectives: []
-}
 
-explosiveness: 0.0
-flammability: 0.6
-radioactivity: 0.0
-charge: 0.0
+  research: {
+    parent: item-ore-crude-graphite
+    objectives: []
+  }
 
-hardness: 2
-lowPriority: false
 
-buildable: false
-cost: 1.0
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
 
-color: 696a62
+
+  explosiveness: 0.0
+  flammability: 0.0
+  radioactivity: 0.0
+  charge: 0.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: 696a62
+  frames: 0
+  transitionFrames: 0
+  frameTime: 5.0
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  hardness: 2
+  lowPriority: true
+  buildable: false
+  cost: 1.0

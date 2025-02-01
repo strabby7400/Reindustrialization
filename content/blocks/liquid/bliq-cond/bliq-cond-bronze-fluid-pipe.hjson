@@ -1,37 +1,81 @@
-# type: Conduit
-category: liquid
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
 
-requirements: [
-  item-chem-tin-bronze/2
-]
-buildCostMultiplier: 2.0
 
-research: {
-  parent: min-flr-mechanical-drill
-  objectives: []
-}
-researchCostMultiplier: 2.0
+  # type: Conduit
+  category: liquid
+  requirements: [
+    item-chem-tin-bronze/3
+  ]
+  buildCostMultiplier: 2.0
 
-scaledHealth: 60.0
-armor: 12.0
-size: 1
-hasItems: false
-hasLiquids: true
-liquidCapacity: 25.0
-liquidPressure: 1.05
-outputsLiquid: true
-hasPower: false
-fogRadius: -1
-rotate: true
-solid: false
-underBullets: true
 
-envRequired: 0
-envDisabled: 18
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
 
-timerFlow: 1
-botColor: 565666
-padCorners: true
-leaks: true
 
-junctionReplacement: bliq-misc-fluid-junction
+  research: {
+    parent: bliq-cond-wooden-fluid-pipe
+    objectives: []
+  }
+  researchCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 1
+  hasLiquids: true
+  liquidCapacity: 15.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  botColor: 565666
+  padCorners: true
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  solid: false
+  underBullets: true
+  liquidPressure: 1.15
+  timerFlow: 1
+  leaks: true
+  junctionReplacement: bliq-aux-fluid-junction
+  bridgeReplacement: bliq-brd-primitive-fluid-pipe-bridge

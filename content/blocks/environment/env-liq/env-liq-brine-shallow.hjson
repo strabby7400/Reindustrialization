@@ -1,0 +1,51 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Floor
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  speedMultiplier: 0.8
+  dragMultiplier: 1.0
+  damageTaken: 0.0
+  isLiquid: true
+  shallow: true
+  drownTime: 0.0
+  status: sta-liq-brine-corrosion
+  statusDuration: 300.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  variants: 0
+  cacheLayer: water
+  albedo: 0.5
+
+
+/*
+  ========================================
+  Section: Resource
+  ========================================
+*/
+
+
+  liquidDrop: liq-ore-brine
+  liquidMultiplier: 0.5
+  attributes: {
+    reind-attr-flr-brine: 1.0
+  }

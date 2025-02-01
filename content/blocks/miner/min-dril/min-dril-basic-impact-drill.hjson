@@ -1,0 +1,245 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: BurstDrill
+  category: production
+  requirements: [
+    item-bio-timber/70
+    item-chem-copper/40
+    item-chem-lead/40
+    item-chem-graphite/30
+    item-chem-brass/30
+    item-chem-mangalloy/50
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: min-dril-pneumatic-drill
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
+  hasItems: true
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+  fogRadius: 4
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  shake: 1.5
+  invertedTime: 120.0
+  arrowSpacing: 1.5
+  arrowOffset: 0.0
+  arrows: 4
+  drillEffect: {
+    type: MultiEffect
+    effects: [
+
+
+      {
+
+
+        /* effect_drillImpactWave1 */
+
+
+        // Part: Meta
+          type: WaveEffect
+          interp: linear
+          lifetime: 30.0
+          startDelay: 0.0
+        // End
+
+
+        // Part: Visual
+          layer: 15.0
+          sides: -1
+          followParent: true
+          rotWithParent: false
+          colorFrom: ffffff30
+          colorTo: ffffff00
+          lightScl: 2.0
+          lightOpacity: 0.0
+        // End
+
+
+        // Part: Angle & Size & Stroke
+          baseRotation: 0.0
+          rotation: 0.0
+          sizeFrom: 0.0
+          sizeTo: 48.0
+          strokeFrom: 6.0
+          strokeTo: 4.0
+        // End
+
+
+      }
+
+
+      {
+
+
+        /* effect_drillImpactWave2 */
+
+
+        // Part: Meta
+          type: WaveEffect
+          interp: linear
+          lifetime: 40.0
+          startDelay: 0.0
+        // End
+
+
+        // Visual
+          layer: 15.0
+          sides: -1
+          followParent: true
+          rotWithParent: false
+          colorFrom: ffffff30
+          colorTo: ffffff00
+          lightScl: 2.0
+          lightOpacity: 0.0
+        // End
+
+
+        // Part: Angle & Size & Stroke
+          baseRotation: 0.0
+          rotation: 0.0
+          sizeFrom: 0.0
+          sizeTo: 48.0
+          strokeFrom: 4.0
+          strokeTo: 2.0
+        // End
+
+
+      }
+
+
+      {
+
+
+        /* effect_drillImpactCrack */
+
+
+        // Part: Meta
+          type: ParticleEffect
+          interp: pow10Out
+          lifetime: 240.0
+          startDelay: 0.0
+        // End
+
+
+        // Part: Visual
+          region: reind-efr-diamond
+          layer: 69.0
+          particles: 5
+          followParent: true
+          rotWithParent: false
+          useRotation: true
+          colorFrom: ffffff
+          colorTo: ffffff
+          lightScl: 2.0
+          lightOpacity: 0.0
+        // End
+
+
+        // Part: Angle & Length
+          baseRotation: 0.0
+          offset: 0.0
+          cone: 180.0
+          spin: 0.0
+          randLength: true
+          length: 18.0
+          baseLength: 0.0
+        // End
+
+
+        // Part: Size & Stroke & Len
+          line: false
+          sizeInterp: sine
+          sizeFrom: 4.0
+          sizeTo: 0.0
+          strokeFrom: 0.0
+          strokeTo: 0.0
+          lenFrom: 0.0
+          lenTo: 0.0
+        // End
+
+
+      }
+
+
+    ]
+  }
+  drillSound: se-craft-drill-impact
+  drillSoundVolume: 0.25
+  drillSoundPitchRand: 0.1
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  tier: 8
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  drillTime: 120.0
+  blockedItem: item-ore-sand
+  consumes: {
+    power: 1.33333333
+    liquids: [
+      liq-ore-water/0.25
+    ]
+  }

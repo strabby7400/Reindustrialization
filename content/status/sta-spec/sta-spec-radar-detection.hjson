@@ -1,0 +1,77 @@
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  damage: 0.0
+  damageMultiplier: 1.0
+  healthMultiplier: 0.75
+  speedMultiplier: 1.0
+  reloadMultiplier: 1.0
+  buildSpeedMultiplier: 1.0
+  dragMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: ffffff
+  effect: {
+
+
+    /* effect_status_radarDetection */
+
+
+    // Part: Meta
+      type: ParticleEffect
+      interp: linear
+      lifetime: 150.0
+      startDelay: 0.0
+    // End
+
+
+    // Part: Visual
+      region: reind-efr-triangle-hollow
+      layer: 110.0
+      particles: 1
+      followParent: true
+      rotWithParent: false
+      useRotation: true
+      colorFrom: f15454
+      colorTo: f15454
+      lightScl: 2.0
+      lightOpacity: 0.0
+    // End
+
+
+    // Part: Angle & Length
+      baseRotation: 0.0
+      offset: 180.0
+      cone: 180.0
+      spin: 6.0
+      randLength: true
+      length: 0.0
+      baseLength: 0.0
+    // End
+
+
+    // Part: Size & Stroke & Len
+      line: false
+      sizeInterp: pow2In
+      sizeFrom: 6.0
+      sizeTo: 0.0
+      strokeFrom: 0.0
+      strokeTo: 0.0
+      lenFrom: 0.0
+      lenTo: 0.0
+    // End
+
+
+  }
+  effectChance: 0.04

@@ -1,0 +1,69 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: LiquidJunction
+  category: liquid
+  requirements: [
+    item-chem-lead/20
+    item-chem-graphite/20
+    item-chem-tin-bronze/10
+  ]
+  buildCostMultiplier: 4.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: bliq-cond-wooden-fluid-pipe
+    objectives: []
+  }
+  researchCostMultiplier: 0.4
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 1
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  solid: false
+  underBullets: true
+  liquidPressure: 1.15

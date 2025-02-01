@@ -1,0 +1,49 @@
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: item-chem-sulfur
+    objectives: []
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  explosiveness: 0.0
+  flammability: 0.0
+  temperature: 0.5
+  heatCapacity: 0.5
+  viscosity: 0.5
+  gas: true
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: fff2cc
+  lightColor: 00000000
+  gasColor: bfbfbf
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  incinerable: false
+  coolant: false

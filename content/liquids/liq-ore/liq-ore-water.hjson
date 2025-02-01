@@ -1,23 +1,50 @@
-hidden: false
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
 
-research: {
-  parent: item-bio-log
-  objectives: []
-}
 
-flammability: 0.0
-temperature: 0.5
-heatCapacity: 0.4
-viscosity: 0.5
-explosiveness: 0.0
+  research: {
+    parent: item-bio-log
+    objectives: []
+  }
 
-coolant: true
-capPuddles: true
-boilPoint: 2.0
 
-color: 7898ba
-lightColor: 00000000
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
 
-effect: wet
 
-incinerable: false
+  explosiveness: 0.0
+  flammability: 0.0
+  temperature: 0.5
+  heatCapacity: 0.4
+  viscosity: 0.5
+  boilPoint: 2.0
+  effect: wet
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: 7898ba
+  lightColor: 00000000
+
+
+/*
+  ========================================
+  Section: Material
+  ========================================
+*/
+
+
+  incinerable: false
+  coolant: true
+  capPuddles: true

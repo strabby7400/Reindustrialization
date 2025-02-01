@@ -1,0 +1,92 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Battery
+  category: power
+  requirements: [
+    item-chem-copper/3
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: min-dril-mechanical-drill
+    objectives: []
+  }
+  researchCostMultiplier: 1.2
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 40.0
+  armor: 0.0
+  size: 1
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 20
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: [
+
+
+    {
+      type: DrawDefault
+    }
+
+
+  ]
+  emptyLightColor: 00000000
+  fullLightColor: 00000000
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  consumesPower: true
+  conductivePower: true
+  connectedPower: false
+  rotate: true
+  solid: false
+  underBullets: true
+  schematicPriority: 5

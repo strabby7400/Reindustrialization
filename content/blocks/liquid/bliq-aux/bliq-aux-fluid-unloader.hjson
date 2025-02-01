@@ -1,0 +1,103 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: liquid
+  requirements: [
+    item-chem-lead/40
+    item-chem-graphite/30
+    item-chem-tin-bronze/30
+    item-chem-steel/30
+  ]
+  buildCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: bliq-aux-fluid-junction
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 24.0
+  size: 1
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 15.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: true
+  drawArrow: true
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-dir"
+        buildingRotate: true
+      }
+
+
+    ]
+  }
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  configurable: true
+  saveConfig: true
+  liquidPressure: 1.4
+  outputsLiquid: true
+  ignoreLiquidFullness: false
