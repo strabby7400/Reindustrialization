@@ -11,6 +11,7 @@
     const frag_heat = require("reind/frag/frag_heat");
 
     const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_geometry = require("reind/mdl/mdl_geometry");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -29,22 +30,18 @@
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       // Draw explosion range
-      if(blk.explosionDamage != null && blk.explosionDamage > 0) mdl_draw.drawWarningDisk_1blk(blk, Vars.world.tile(tx, ty), blk.explosionRadius * Vars.tilesize);
+      if(blk.explosionDamage != null && blk.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_geometry.poser_1t(Vars.world.tile(tx, ty), blk.offset), blk.explosionRadius * Vars.tilesize);
     };
 
 
     function drawComp(b) {
-      // Draw fluid heat
-      frag_heat.draw_fluidHeat(b);
+
     };
 
 
     function drawSelectComp(b) {
       // Draw explosion range
-      if(b.block.explosionDamage != null && b.block.explosionDamage > 0) mdl_draw.drawWarningDisk_1b(b, b.block.explosionRadius * Vars.tilesize);
-
-      // Draw fluid heat
-      frag_heat.drawSelect_fluidHeat(b);
+      if(b.block.explosionDamage != null && b.block.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_geometry.poser_1b(b), b.block.explosionRadius * Vars.tilesize);
     };
   // End
 

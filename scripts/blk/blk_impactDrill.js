@@ -44,7 +44,7 @@
           var dmg = b.block.size * b.block.drillTime * 1.2;
           var dur = b.block.drillTime * 0.5;
 
-          frag_attack.attack_impact_1b(b, rad, dmg, dur);
+          frag_attack.attack_impact(mdl_geometry.poser_1b(b), rad, dmg, dur);
         };
       };
 
@@ -63,7 +63,7 @@
             down = true;
           } else {
             var t_sc = b_sc.tile;
-            var d = mdl_geometry.getDistance_2t(t, t_sc);
+            var d = mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(t_sc));
             if(d > (b_sc.block.size / 2 + r_sc) * Vars.tilesize * 1.275) down = true;
           };
         };
@@ -95,14 +95,14 @@
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       // Draw impact range
       var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
-      if(rad != null) mdl_draw.drawCirclePulse_1blk(blk, Vars.world.tile(tx, ty), rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_geometry.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
       // Draw impact range
       var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
-      if(rad != null) mdl_draw.drawCirclePulse_1b(b, rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_geometry.poser_1b(b), rad);
 
       // Draw ore scanner connection
       var t = b.tile;
@@ -112,7 +112,9 @@
         if(b_sc != null) {
           mdl_draw.drawBuildRect(b, true, false);
           mdl_draw.drawBuildRect(b_sc, true, false);
-          mdl_draw.drawLine_2b(b, b_sc);
+          mdl_draw.drawLine(mdl_geometry.poser_1b(b), mdl_geometry.poser_1b(b_sc));
+        } else {
+          mdl_draw.drawSelectText(b, false, Core.bundle.get("info.reind-info-no-ore-scanner.name"));
         };
       };
     };

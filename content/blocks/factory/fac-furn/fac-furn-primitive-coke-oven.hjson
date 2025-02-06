@@ -264,7 +264,10 @@
     */
 
 
-      // Coke : Coal
+      /* <---------------- coke ----------------> */
+
+
+      // Coal
       {
         craftTime: 600.0
         icon: reind-item-chem-coal
@@ -274,8 +277,8 @@
             reind-item-chem-coal/20
           ]
           fluids: [
-            reind-liq-ore-water/0.1
             reind-effc-effc-smoke-exhaust/0.01666667
+            reind-liq-ore-water/0.1
           ]
         }
         output: {
@@ -289,7 +292,10 @@
       }
 
 
-      // Semicoke : Lignite
+      /* <---------------- semicoke ----------------> */
+
+
+      // Lignite
       {
         craftTime: 600.0
         icon: reind-item-ore-lignite
@@ -299,8 +305,8 @@
             reind-item-ore-lignite/20
           ]
           fluids: [
-            reind-liq-ore-water/0.1
             reind-effc-effc-smoke-exhaust/0.01666667
+            reind-liq-ore-water/0.1
           ]
         }
         output: {
@@ -314,7 +320,7 @@
       }
 
 
-      // Semicoke : Peat
+      // Peat
       {
         craftTime: 600.0
         icon: reind-item-ore-peat
@@ -324,8 +330,8 @@
             reind-item-ore-peat/40
           ]
           fluids: [
-            reind-liq-ore-water/0.1
             reind-effc-effc-smoke-exhaust/0.01666667
+            reind-liq-ore-water/0.1
           ]
         }
         output: {

@@ -5,13 +5,13 @@
 */
 
 
-  const group_wood = new Seq([
+  const grp_wood = new Seq([
     "reind-bliq-cond-wooden-fluid-pipe",
   ]);
-  exports.group_wood = group_wood;
+  exports.grp_wood = grp_wood;
 
 
-  const group_copper = new Seq([
+  const grp_copper = new Seq([
     "reind-bliq-pump-primitive-fluid-pump",
 
     "reind-bliq-cond-bronze-fluid-pipe",
@@ -20,10 +20,10 @@
 
     "reind-bliq-stor-liquid-cell",
   ]);
-  exports.group_copper = group_copper;
+  exports.grp_copper = grp_copper;
 
 
-  const group_steel = new Seq([
+  const grp_steel = new Seq([
     "reind-bliq-pump-piston-fluid-pump",
 
     "reind-bliq-cond-steel-fluid-pipe",
@@ -34,19 +34,19 @@
 
     "reind-bliq-stor-gas-cylinder",
   ]);
-  exports.group_steel = group_steel;
+  exports.grp_steel = grp_steel;
 
 
-  const group_stainlessSteel = new Seq([
+  const grp_stainlessSteel = new Seq([
 
   ]);
-  exports.group_stainlessSteel = group_stainlessSteel;
+  exports.grp_stainlessSteel = grp_stainlessSteel;
 
 
-  const group_glass = new Seq([
+  const grp_glass = new Seq([
     "reind-bliq-cond-tempered-glass-fluid-pipe",
   ]);
-  exports.group_glass = group_glass;
+  exports.grp_glass = grp_glass;
 
 
 /*
@@ -58,101 +58,121 @@
 
   // Part: Generic
     /* NOTE: Sets stat for faction. */
-    const list_blockFaction = new Seq([
+    const li_blockFaction = new Seq([
       "reind-eff-core-ash", Core.bundle.get("term.reind-term-outpost-military.name"),
       "reind-eff-core-ember", Core.bundle.get("term.reind-term-outpost-military.name"),
       "reind-eff-core-bonfire", Core.bundle.get("term.reind-term-outpost-military.name"),
 
       "reind-min-dril-sand-excavator", Core.bundle.get("term.reind-term-emerald-tide.name"),
       "reind-min-dril-basic-impact-drill", Core.bundle.get("term.reind-term-emerald-tide.name"),
+      "reind-min-dril-titan-impact-drill", Core.bundle.get("term.reind-term-emerald-tide.name"),
       "reind-min-scan-pulse-ore-scanner", Core.bundle.get("term.reind-term-emerald-tide.name"),
       "reind-min-misc-placer-miner", Core.bundle.get("term.reind-term-emerald-tide.name"),
 
       "reind-ileff-misc-ids-engine", Core.bundle.get("term.reind-term-enclosure.name"),
       "reind-ileff-misc-bit-bank", Core.bundle.get("term.reind-term-enclosure.name"),
     ]);
-    exports.blockFaction = list_blockFaction;
+    exports.blockFaction = li_blockFaction;
 
 
-    const list_attrMap = new Seq([
+    const li_attrMap = new Seq([
       "reind-min-misc-placer-miner", "reind-attr-flr-placer",
     ]);
-    exports.attrMap = list_attrMap;
+    exports.attrMap = li_attrMap;
 
 
-    const list_genericRange = new Seq([
+    const li_genericRange = new Seq([
       "reind-min-harv-mycelial-harvester", 5,
 
       "reind-min-scan-pulse-ore-scanner", 8,
 
+      "reind-pow-gen-energizer-generator", 10,
       "reind-pow-gen-tidal-generator", 6,
     ]);
-    exports.genericRange = list_genericRange;
+    exports.genericRange = li_genericRange;
 
 
-    const list_impactRange = new Seq([
+    const li_impactRange = new Seq([
       "reind-min-dril-basic-impact-drill", 48.0,
+      "reind-min-dril-titan-impact-drill", 32.0,
 
       "reind-dis-mdr-local-mass-driver", 32.0,
       "reind-dis-mdr-standard-mass-driver", 72.0,
     ]);
-    exports.impactRange = list_impactRange;
+    exports.impactRange = li_impactRange;
+
+
+    const li_epRange = new Seq([
+      "reind-min-dril-titan-impact-drill", 64.0,
+
+      "reind-pow-gen-energizer-generator", 80.0,
+    ]);
+    exports.epRange = li_epRange;
+
+
+    const li_epRequirement = new Seq([
+      "reind-min-dril-titan-impact-drill", 2.0,
+
+      "reind-pow-gen-energizer-generator", 5.0,
+    ]);
+    exports.epRequirement = li_epRequirement;
   // End
 
 
   // Part: Miner
-    const list_depthTierMultiplier = new Seq([
+    const li_depthTierMultiplier = new Seq([
       "reind-min-dril-basic-impact-drill", 0.5,
+      "reind-min-dril-titan-impact-drill", 0.7,
     ]);
-    exports.depthTierMultiplier = list_depthTierMultiplier;
+    exports.depthTierMultiplier = li_depthTierMultiplier;
   // End
 
 
   // Part: Item Block
     /* NOTE: Only used for stats. */
-    const list_transportSpeed = new Seq([
+    const li_transportSpeed = new Seq([
       "reind-dis-brd-primitive-conveyor-bridge", 12.0,
     ]);
-    exports.transportSpeed = list_transportSpeed;
+    exports.transportSpeed = li_transportSpeed;
 
 
-    const list_exposedToAir = new Seq([
+    const li_exposedToAir = new Seq([
       "reind-dis-conv-primitive-conveyor",
       "reind-dis-conv-improved-conveyor",
       "reind-dis-conv-multi-port-conveyor",
 
       "reind-eff-stor-crate",
     ]);
-    exports.exposedToAir = list_exposedToAir;
+    exports.exposedToAir = li_exposedToAir;
 
 
-    const list_massDriverBulletDamage = new Seq([
+    const li_massDriverBulletDamage = new Seq([
       "reind-dis-mdr-local-mass-driver", 90.0,
       "reind-dis-mdr-standard-mass-driver", 725.0,
     ]);
-    exports.massDriverBulletDamage = list_massDriverBulletDamage;
+    exports.massDriverBulletDamage = li_massDriverBulletDamage;
   // End
 
 
   // Part: Liquid Block
-    const list_pumpSpeed = new Seq([
+    const li_pumpSpeed = new Seq([
       "reind-bliq-pump-primitive-fluid-pump", 3.0,
       "reind-bliq-pump-piston-fluid-pump", 15.0,
     ]);
-    exports.pumpSpeed = list_pumpSpeed;
+    exports.pumpSpeed = li_pumpSpeed;
 
 
-    const list_baseCorrosionResistence = new Seq([
+    const li_baseCorrosionResistence = new Seq([
       "wood", 1.0,
       "copper", 1.5,
       "steel", 2.0,
       "stainlessSteel", 6.0,
       "glass", 10.0,
     ]);
-    exports.baseCorrosionResistence = list_baseCorrosionResistence;
+    exports.baseCorrosionResistence = li_baseCorrosionResistence;
 
 
-    const list_specificCorrosionResistence = new Seq([
+    const li_specificCorrosionResistence = new Seq([
       "reind-bliq-aux-fluid-unloader", 6.0,
 
       "reind-bliq-stor-liquid-cell", 6.0,
@@ -160,17 +180,17 @@
 
       "reind-bliq-stor-gas-cylinder", 15.0,
     ]);
-    exports.specificCorrosionResistence = list_specificCorrosionResistence;
+    exports.specificCorrosionResistence = li_specificCorrosionResistence;
 
 
-    const list_vulnerableToClogging = new Seq([
+    const li_vulnerableToClogging = new Seq([
       "reind-bliq-cond-wooden-fluid-pipe",
       "reind-bliq-cond-tempered-glass-fluid-pipe",
     ]);
-    exports.vulnerableToClogging = list_vulnerableToClogging;
+    exports.vulnerableToClogging = li_vulnerableToClogging;
 
 
-    const list_fluidHeatCapacity = new Seq([
+    const li_fluidHeatCapacity = new Seq([
       "reind-bliq-pump-primitive-fluid-pump", 800.0,
       "reind-bliq-pump-piston-fluid-pump", 1000.0,
 
@@ -188,32 +208,38 @@
 
       "reind-bliq-stor-gas-cylinder", 1000.0,
     ]);
-    exports.fluidHeatCapacity = list_fluidHeatCapacity;
+    exports.fluidHeatCapacity = li_fluidHeatCapacity;
 
 
-    const list_coreEffcOutput = new Seq([
+    const li_liquidMap = new Seq([
+      "reind-pow-econd-transmission-box", "reind-effc-cond-torque",
+    ]);
+    exports.liquidMap = li_liquidMap;
+
+
+    const li_coreEffcOutput = new Seq([
       "reind-eff-core-ash", 4.0,
     ]);
-    exports.coreEffcOutput = list_coreEffcOutput;
+    exports.coreEffcOutput = li_coreEffcOutput;
   // End
 
 
   // Part: Heat Block
-    const list_heatLimit = new Seq([
+    const li_heatLimit = new Seq([
       "reind-pow-hcond-copper-heat-conductor", 700.0,
       "reind-pow-hcond-steel-heat-conductor", 1000.0,
     ]);
-    exports.heatLimit = list_heatLimit;
+    exports.heatLimit = li_heatLimit;
 
 
-    const list_heatLoss = new Seq([
+    const li_heatLoss = new Seq([
       "reind-pow-hcond-copper-heat-conductor", 0.03,
       "reind-pow-hcond-steel-heat-conductor", 0.01,
     ]);
-    exports.heatLoss = list_heatLoss;
+    exports.heatLoss = li_heatLoss;
 
 
-    const list_heatTransferCoefficient = new Seq([
+    const li_heatTransferCoefficient = new Seq([
       /* Copper */
       "reind-pow-hcond-copper-heat-conductor", 7.76,
 
@@ -222,43 +248,43 @@
 
       /* Stainless Steel */
     ]);
-    exports.heatTransferCoefficient = list_heatTransferCoefficient;
+    exports.heatTransferCoefficient = li_heatTransferCoefficient;
   // End
 
 
   // Part: Power Block
     /* NOTE: Any blocks here will get damaged when soaked in water. */
-    const list_canShortCircuit = new Seq([
+    const li_canShortCircuit = new Seq([
       "reind-pow-wire-copper-cable",
       "reind-pow-wire-copper-wire-relay",
       "reind-pow-wire-copper-wire-node",
     ]);
-    exports.canShortCircuit = list_canShortCircuit;
+    exports.canShortCircuit = li_canShortCircuit;
 
 
-    const list_tierHV = new Seq([
-
-    ]);
-    exports.tierHV = list_tierHV;
-
-
-    const list_tierEHV = new Seq([
+    const li_tierHV = new Seq([
 
     ]);
-    exports.tierEHV = list_tierEHV;
+    exports.tierHV = li_tierHV;
+
+
+    const li_tierEHV = new Seq([
+
+    ]);
+    exports.tierEHV = li_tierEHV;
   // End
 
 
   // Part: Factory
-    const list_factoryFamily = new Seq([
+    const li_factoryFamily = new Seq([
 
       /* ========================================
-        Section: Ball Mill
+        Section: Pulverizer
       ======================================== */
 
-      "reind-fac-mill-ball-mill", Core.bundle.get("term.reind-term-ball-mill.name"),
-      "reind-fac-mill-rod-mill", Core.bundle.get("term.reind-term-ball-mill.name"),
-      "reind-fac-mill-mechanical-mill", Core.bundle.get("term.reind-term-ball-mill.name"),
+      "reind-fac-mill-ball-mill", Core.bundle.get("term.reind-term-pulverizer.name"),
+      "reind-fac-mill-rod-mill", Core.bundle.get("term.reind-term-pulverizer.name"),
+      "reind-fac-mill-mechanical-mill", Core.bundle.get("term.reind-term-pulverizer.name"),
 
       /* ========================================
         Section: Brick Press
@@ -268,61 +294,61 @@
       "reind-fac-proc-brick-press", Core.bundle.get("term.reind-term-brick-press.name"),
 
       /* ========================================
-        Section: Induction Furnace
+        Section: Alloy Furnace
       ======================================== */
 
-      "reind-fac-furn-kiln", Core.bundle.get("term.reind-term-induction-furnace.name"),
-      "reind-fac-furn-induction-furnace", Core.bundle.get("term.reind-term-induction-furnace.name"),
+      "reind-fac-furn-kiln", Core.bundle.get("term.reind-term-alloy-furnace.name"),
+      "reind-fac-furn-induction-furnace", Core.bundle.get("term.reind-term-alloy-furnace.name"),
 
       /* ========================================
-        Section: Jaw Crusher
+        Section: Rock Crusher
       ======================================== */
 
-      "reind-fac-mill-jaw-crusher", Core.bundle.get("term.reind-term-jaw-crusher.name"),
-      "reind-fac-mill-hammer-crusher", Core.bundle.get("term.reind-term-jaw-crusher.name"),
+      "reind-fac-mill-jaw-crusher", Core.bundle.get("term.reind-term-rock-crusher.name"),
+      "reind-fac-mill-hammer-crusher", Core.bundle.get("term.reind-term-rock-crusher.name"),
 
       /* ========================================
-        Section: Primitive Brick Kiln
+        Section: Brick Kiln
       ======================================== */
 
-      "reind-fac-furn-primitive-brick-kiln", Core.bundle.get("term.reind-term-primitive-brick-kiln.name"),
+      "reind-fac-furn-primitive-brick-kiln", Core.bundle.get("term.reind-term-brick-kiln.name"),
 
       /* ========================================
-        Section: Primitive Coke Oven
+        Section: Coke Oven
       ======================================== */
 
-      "reind-fac-furn-primitive-coke-oven", Core.bundle.get("term.reind-term-primitive-coke-oven.name"),
+      "reind-fac-furn-primitive-coke-oven", Core.bundle.get("term.reind-term-coke-oven.name"),
 
       /* ========================================
-        Section: Primitive Sintering Furnace
+        Section: Sintering Furnace
       ======================================== */
 
-      "reind-fac-furn-primitive-sintering-furnace", Core.bundle.get("term.reind-term-primitive-sintering-furnace.name"),
+      "reind-fac-furn-primitive-sintering-furnace", Core.bundle.get("term.reind-term-sintering-furnace.name"),
 
       /* ========================================
-        Section: Shaft Kiln
+        Section: Roasting Furnace
       ======================================== */
 
-      "reind-fac-furn-colossal-kiln", Core.bundle.get("term.reind-term-shaft-kiln.name"),
-      "reind-fac-furn-shaft-kiln", Core.bundle.get("term.reind-term-shaft-kiln.name"),
-      "reind-fac-furn-rotary-kiln-m", Core.bundle.get("term.reind-term-shaft-kiln.name"),
-      "reind-fac-furn-box-furnace", Core.bundle.get("term.reind-term-shaft-kiln.name"),
+      "reind-fac-furn-colossal-kiln", Core.bundle.get("term.reind-term-roasting-furnace.name"),
+      "reind-fac-furn-shaft-kiln", Core.bundle.get("term.reind-term-roasting-furnace.name"),
+      "reind-fac-furn-rotary-kiln-m", Core.bundle.get("term.reind-term-roasting-furnace.name"),
+      "reind-fac-furn-box-furnace", Core.bundle.get("term.reind-term-roasting-furnace.name"),
 
       /* ========================================
-        Section: V-Mixer
+        Section: Dust Mixer
       ======================================== */
 
-      "reind-fac-mix-v-mixer", Core.bundle.get("term.reind-term-v-mixer.name"),
-      "reind-fac-mix-3d-mixer", Core.bundle.get("term.reind-term-v-mixer.name"),
-      "reind-fac-mix-conical-mixer", Core.bundle.get("term.reind-term-v-mixer.name"),
+      "reind-fac-mix-v-mixer", Core.bundle.get("term.reind-term-dust-mixer.name"),
+      "reind-fac-mix-3d-mixer", Core.bundle.get("term.reind-term-dust-mixer.name"),
+      "reind-fac-mix-conical-mixer", Core.bundle.get("term.reind-term-dust-mixer.name"),
 
     ]);
-    exports.factoryFamily = list_factoryFamily;
+    exports.factoryFamily = li_factoryFamily;
   // End
 
 
   // Part: Pollution
-    const list_blockPollution = new Seq([
+    const li_blockPollution = new Seq([
       /* tree */
       "reind-env-tree-shell-tree", -8.0,
       "reind-env-tree-dark-crab-tree", -12.0,
@@ -354,6 +380,7 @@
       "reind-min-dril-sand-excavator", 27.0 / 9.0,
       "reind-min-dril-pneumatic-wall-drill", 4.0 / 4.0,
       "reind-min-dril-basic-impact-drill", 6.0 / 4.0,
+      "reind-min-dril-titan-impact-drill", 40.0 / 16.0,
       "reind-min-harv-lumberjack", 1.5 / 1.0,
       "reind-min-misc-placer-miner", 27.0 / 9.0,
 
@@ -387,5 +414,5 @@
       /* very specific */
       "reind-dis-aux-item-incinerator", 8.0 / 4.0,
     ]);
-    exports.blockPollution = list_blockPollution;
+    exports.blockPollution = li_blockPollution;
   // End

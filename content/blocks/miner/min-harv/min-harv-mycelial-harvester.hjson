@@ -90,7 +90,7 @@
         flameRadiusScl: 0.0
         flameRadiusMag: 0.0
         flameRadiusInMag: 0.0
-        lightRadius: 48.0
+        lightRadius: 16.0
         lightAlpha: 0.65
         lightSinScl: 16.0
         lightSinMag: 6.0

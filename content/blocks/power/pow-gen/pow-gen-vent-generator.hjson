@@ -122,19 +122,17 @@
   }
   generateEffect: {
 
+      # Template: _powerParticles
 
-    /* effect_powerCrack */
+      /* <---------------- meta ----------------> */
 
-
-    // Part: Meta
       type: ParticleEffect
       interp: linear
       lifetime: 30.0
       startDelay: 0.0
-    // End
 
+      /* <---------------- visual ----------------> */
 
-    // Part: Visual
       region: circle
       layer: 69.0
       particles: 3
@@ -145,10 +143,9 @@
       colorTo: ffe18f
       lightScl: 2.0
       lightOpacity: 0.65
-    // End
 
+      /* <---------------- angel & length ----------------> */
 
-    // Part: Angle & Length
       baseRotation: 0.0
       offset: 0.0
       cone: 180.0
@@ -156,20 +153,17 @@
       randLength: true
       length: 8.0
       baseLength: 0.0
-    // End
 
+      /* <---------------- size & stroke & len ----------------> */
 
-    // Part: Size & Stroke & Len
       line: false
-      sizeInterp: pow5In
+      sizeInterp: linear
       sizeFrom: 1.2
       sizeTo: 0.0
       strokeFrom: 0.0
       strokeTo: 0.0
       lenFrom: 0.0
       lenTo: 0.0
-    // End
-
 
   }
   effectChance: 0.02
@@ -198,7 +192,179 @@
 */
 
 
-  explodeEffect: none
+  explodeEffect: {
+    type: MultiEffect
+    effects: [
+
+
+      {
+
+        # Template: _impact
+        # Order: 1
+
+        /* <---------------- meta ----------------> */
+
+        type: WaveEffect
+        interp: pow2Out
+        lifetime: 40.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        layer: 15.0
+        sides: -1
+        followParent: true
+        rotWithParent: false
+        colorFrom: ffffff30
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & size & stroke ----------------> */
+
+        baseRotation: 0.0
+        rotation: 0.0
+        sizeFrom: 0.0
+        sizeTo: 56.0
+        strokeFrom: 6.0
+        strokeTo: 4.0
+
+      }
+
+
+      {
+
+        # Template: _impact
+        # Order: 2
+
+        /* <---------------- meta ----------------> */
+
+        type: WaveEffect
+        interp: pow2Out
+        lifetime: 60.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        layer: 15.0
+        sides: -1
+        followParent: true
+        rotWithParent: false
+        colorFrom: ffffff30
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & size & stroke ----------------> */
+
+        baseRotation: 0.0
+        rotation: 0.0
+        sizeFrom: 0.0
+        sizeTo: 56.0
+        strokeFrom: 6.0
+        strokeTo: 4.0
+
+      }
+
+
+      {
+
+        # Template: _smog
+
+        /* <---------------- meta ----------------> */
+
+        type: ParticleEffect
+        interp: pow5Out
+        lifetime: 360.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: reind-efr-shadow-white
+        layer: 86.0
+        particles: 16
+        followParent: true
+        rotWithParent: false
+        useRotation: true
+        colorFrom: ffffff40
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 0.0
+        offset: 0.0
+        cone: 180.0
+        spin: 0.0
+        randLength: true
+        length: 54.0
+        baseLength: 0.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: pow2Out
+        sizeFrom: 2.0
+        sizeTo: 54.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
+
+
+      {
+
+        # Template: _squareSpark
+
+        /* <---------------- meta ----------------> */
+
+        type: ParticleEffect
+        interp: pow2Out
+        lifetime: 150.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: reind-efr-square
+        layer: 69.0
+        particles: 7
+        followParent: true
+        rotWithParent: false
+        useRotation: true
+        colorFrom: feb380
+        colorTo: feb380
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 0.0
+        offset: 0.0
+        cone: 180.0
+        spin: 0.0
+        randLength: true
+        length: 48.0
+        baseLength: 0.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: pow3In
+        sizeFrom: 4.0
+        sizeTo: 0.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
+
+
+    ]
+  }
   explodeSound: se-shot-explosion
   explosionShake: 4.0
   explosionShakeDuration: 6.0
@@ -219,5 +385,5 @@
 
 
   attribute: reind-attr-vent-steam
-  powerProduction: 0.74074074
+  powerProduction: 0.81481481
   outputLiquid: gas-misc-steam/0.02777778

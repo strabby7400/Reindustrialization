@@ -87,6 +87,7 @@
     /* <---------------- special effc blocks ----------------> */
 
     const ct_blk_heatConductor = require("reind/ct/ct_blk_heatConductor");
+    const ct_blk_efficiencyPipe = require("reind/ct/ct_blk_efficiencyPipe");
 
     /* <---------------- defense ----------------> */
 

@@ -22,37 +22,17 @@
 
 
     /* NOTE: Simply creates explosion. This one ignores team. */
-    const attack_explosion_1pos = function(pos, rad, dmg, shake) {
+    const attack_explosion = function(pos, rad, dmg, shake) {
       if(shake == null) shake = 0.0;
       if(dmg < 0.01) return;
 
       Damage.damage(pos.x, pos.y, rad, dmg);
 
-      mdl_effect.atL_1pos(pos, db_effect._commonExplosion(rad), 0.0);
-      mdl_effect.shake_1pos(pos, shake);
-      mdl_effect.play_1pos(pos, "se-shot-explosion");
+      mdl_effect.showAt_ldm(pos, db_effect._commonExplosion(rad), 0.0);
+      mdl_effect.shakeAt(pos, shake);
+      mdl_effect.playAt(pos, "se-shot-explosion");
     };
-    exports.attack_explosion_1pos = attack_explosion_1pos;
-
-
-    const attack_explosion_1t = function(t, off, rad, dmg, shake) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      attack_explosion_1pos(pos, rad, dmg, shake);
-    };
-    exports.attack_explosion_1t = attack_explosion_1t;
-
-
-    const attack_explosion_1b = function(b, rad, dmg, shake) {
-      if(b == null) return;
-
-      attack_explosion_1t(b.tile, b.block.offset, rad, dmg, shake);
-    };
-    exports.attack_explosion_1b = attack_explosion_1b;
-
+    exports.attack_explosion = attack_explosion;
 
 
     /* <---------------- impact ----------------> */
@@ -65,14 +45,14 @@
       Impact wave always damages all units regardless of team.
       If the impact is called by an unit, use {caller} to avoid damaging itself.
     */
-    const attack_impact_1pos = function(pos, rad, dmg, dur, caller) {
+    const attack_impact = function(pos, rad, dmg, dur, caller) {
       if(rad == null) rad = 40.0;
       if(dmg == null) dmg = 20.0;
       if(dur == null) dur = 120.0;
 
-      mdl_geometry.getUnits_1pos(pos, rad).each(unit => {
+      mdl_geometry.getUnits(pos, rad).each(unit => {
         if(!unit.flying && !unit.type.naval && !unit.hovering && unit != caller) {
-          var d = mdl_geometry.getDistance_2pos(pos, new Point2(unit.x, unit.y));
+          var d = mdl_geometry.getDistance(pos, mdl_geometry.poser_1u(unit));
           var dmg_fi = (Mathf.random(0.6) + 0.7) * Math.max(1.0 - d / rad, 0.1) * dmg + glb_vars.impact_minDamage;
 
           unit.damage(dmg_fi);
@@ -80,33 +60,14 @@
         };
       });
     };
-    exports.attack_impact_1pos = attack_impact_1pos;
-
-
-    const attack_impact_1t = function(t, off, rad, dmg, dur) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      attack_impact_1pos(pos, rad, dmg, dur);
-    };
-    exports.attack_impact_1t = attack_impact_1t;
-
-
-    const attack_impact_1b = function(b, rad, dmg, dur) {
-      if(b == null) return;
-
-      attack_impact_1t(b.tile, b.block.offset, rad, dmg, dur);
-    };
-    exports.attack_impact_1b = attack_impact_1b;
+    exports.attack_impact = attack_impact;
 
 
     /* <---------------- lightning ----------------> */
 
 
     /* NOTE: Creates lightnings at the position. */
-    const attack_lightning_1pos = function(pos, team, amt, r, off_r, dmg, color) {
+    const attack_lightning = function(pos, team, amt, r, off_r, dmg, color) {
       if(team == null) team = Team.derelict;
       if(amt == null) amt = 1;
       if(r == null) r = 5;
@@ -121,26 +82,7 @@
 
       Sounds.spark.at(pos.x, pos.y);
     };
-    exports.attack_lightning_1pos = attack_lightning_1pos;
-
-
-    const attack_lightning_1t = function(t, off, team, amt, r, off_r, dmg, color) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      attack_lightning_1pos(pos, team, amt, r, off_r, dmg, color)
-    };
-    exports.attack_lightning_1t = attack_lightning_1t;
-
-
-    const attack_lightning_1b = function(b, team, amt, r, off_r, dmg, color) {
-      if(b == null) return;
-
-      attack_lightning_1t(b.tile, b.block.offset, team, amt, r, off_r, dmg, color)
-    };
-    exports.attack_lightning_1b = attack_lightning_1b;
+    exports.attack_lightning = attack_lightning;
   // End
 
 

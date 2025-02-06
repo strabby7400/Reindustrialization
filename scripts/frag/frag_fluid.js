@@ -37,7 +37,7 @@
       if(liq.gas) return;
       if(!Mathf.chance(mdl_effect.getP_frac(0.03, puddle.amount / 24.0))) return;
 
-      mdl_effect.at_1pos(puddle, db_effect._heatSmog());
+      mdl_effect.showAt(puddle, db_effect._heatSmog());
     };
     exports.update_fuming = update_fuming;
 
@@ -48,8 +48,8 @@
 
       var t = puddle.tile;
       var b = t.build;
-      var list_ot = mdl_geometry.getTiles_rect(t, 1);
-      list_ot.each(ot => {
+      var li_ot = mdl_geometry.getTiles_rect(t, 1);
+      li_ot.each(ot => {
         var ob = ot.build;
 
         // Spread
@@ -60,8 +60,8 @@
           var dmg = Time.delta * b.maxHealth * 0.01 / 60.0;
           b.damage(dmg);
 
-          mdl_effect.atP_1pos(0.005, b, db_effect._heatSmog());
-          if(Mathf.chanceDelta(0.001)) frag_attack.attack_lightning_1b(b, Team.derelict, 1, 6, 4, glb_vars.shortCircuit_lightningDamage, Pal.accent);
+          mdl_effect.showAtP(0.005, b, db_effect._heatSmog());
+          if(Mathf.chanceDelta(0.001)) frag_attack.attack_lightning(mdl_geometry.poser_1b(b), Team.derelict, 1, 6, 4, glb_vars.shortCircuit_lightningDamage, Pal.accent);
         };
       });
     };
@@ -167,7 +167,7 @@
 
       if(invalid) {
         b.kill();
-        mdl_effect.at_1pos(b, db_effect._invalidPlacement(), 0.0);
+        mdl_effect.showAt(b, db_effect._invalidPlacement(), 0.0);
         mdl_ui.showInfoFade("@info.reind-info-efficiency.name");
       };
     };
@@ -204,7 +204,7 @@
       var dmg = Time.delta * (b.maxHealth * glb_vars.clogging_damageRatio + glb_vars.clogging_minDamage) * Mathf.lerp(0.5, 1.0, amt / cap) * Mathf.lerp(0.5, 1.0, (visc - visc_clog) / 0.25);
       b.damage(dmg);
 
-      mdl_effect.atP_1pos(0.5, b, db_effect._cloggingParticles(b.block, liq));
+      mdl_effect.showAtP(0.5, b, db_effect._cloggingParticles(b.block, liq));
     };
     exports.updateTile_sticky = updateTile_sticky;
 
@@ -226,7 +226,7 @@
       var dmg = Time.delta * b.maxHealth * glb_vars.corrosion_damageRatio * cor * corScl / corRes;
       b.damage(dmg);
 
-      mdl_effect.atP_1pos(0.5, b, db_effect._corrosionParticles(b.block, liq));
+      mdl_effect.showAtP(0.5, b, db_effect._corrosionParticles(b.block, liq));
     };
     exports.updateTile_corrosion = updateTile_corrosion;
   // End
@@ -242,8 +242,8 @@
       var cap = b.block.liquidCapacity;
       if(amt / cap < 0.98) return;
 
-      var list_ot = mdl_geometry.getTiles_edgeInsideB(b);
-      list_ot.each(ot => {
+      var li_ot = mdl_geometry.getTiles_edgeIns(b.tile, b.block.size);
+      li_ot.each(ot => {
         if(Mathf.chance(0.5)) Puddles.deposit(ot, liq, 8.0);
       });
     };

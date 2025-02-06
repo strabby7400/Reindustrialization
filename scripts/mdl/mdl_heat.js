@@ -140,8 +140,8 @@
     /* NOTE: Average heat in the 3*3 range. */
     const getRangeHeat = function(t) {
       var heat = 0.0;
-      var list_ot = mdl_geometry.getTiles_rect(t, 1);
-      list_ot.each(ot => {
+      var li_ot = mdl_geometry.getTiles_rect(t, 1);
+      li_ot.each(ot => {
         // Get floor heat
         heat += ot.floor().attributes.get(Attribute.get("reind-attr-env-heat")) * 16.0;
 

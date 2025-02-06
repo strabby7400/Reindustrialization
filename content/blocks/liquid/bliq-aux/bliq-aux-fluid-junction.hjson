@@ -8,8 +8,8 @@
   # type: LiquidJunction
   category: liquid
   requirements: [
-    item-chem-lead/20
-    item-chem-graphite/20
+    item-chem-lead/25
+    item-chem-graphite/25
     item-chem-tin-bronze/10
   ]
   buildCostMultiplier: 4.0

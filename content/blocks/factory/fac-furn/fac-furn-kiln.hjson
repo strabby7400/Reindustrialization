@@ -336,7 +336,10 @@
     */
 
 
-      // Copper : Azurite
+      /* <---------------- copper ----------------> */
+
+
+      // Azurite
       {
         craftTime: 600.0
         icon: reind-item-ore-azurite
@@ -354,7 +357,7 @@
       }
 
 
-      // Copper : Cuprite
+      // Cuprite
       {
         craftTime: 600.0
         icon: reind-item-ore-cuprite
@@ -372,7 +375,7 @@
       }
 
 
-      // Copper : Malachite
+      // Malachite
       {
         craftTime: 600.0
         icon: reind-item-ore-malachite
@@ -390,7 +393,7 @@
       }
 
 
-      // Copper : Native Copper
+      // Native Copper
       {
         craftTime: 600.0
         icon: reind-item-ore-native-copper
@@ -408,7 +411,10 @@
       }
 
 
-      // Graphite : Crude Graphite
+      /* <---------------- graphite ----------------> */
+
+
+      // Crude Graphite
       {
         craftTime: 600.0
         icon: reind-item-ore-crude-graphite
@@ -426,7 +432,10 @@
       }
 
 
-      // Lead : Anglesite
+      /* <---------------- lead ----------------> */
+
+
+      // Anglesite
       {
         craftTime: 600.0
         icon: reind-item-ore-anglesite
@@ -444,7 +453,7 @@
       }
 
 
-      // Lead : Galena
+      // Galena
       {
         craftTime: 600.0
         icon: reind-item-ore-galena
@@ -462,7 +471,10 @@
       }
 
 
-      // Tin : Cassiterite
+      /* <---------------- tin ----------------> */
+
+
+      // Cassiterite
       {
         craftTime: 600.0
         icon: reind-item-ore-cassiterite
@@ -480,7 +492,10 @@
       }
 
 
-      // Zinc : Smithsonite
+      /* <---------------- zinc ----------------> */
+
+
+      // Smithsonite
       {
         craftTime: 600.0
         icon: reind-item-ore-smithsonite
@@ -498,7 +513,7 @@
       }
 
 
-      // Zinc : Sphalerite
+      // Sphalerite
       {
         craftTime: 600.0
         icon: reind-item-ore-sphalerite
@@ -523,7 +538,10 @@
     */
 
 
-      // Copper : Brass
+      /* <---------------- copper ----------------> */
+
+
+      // Brass
       {
         craftTime: 600.0
         icon: reind-item-chem-brass
@@ -542,7 +560,7 @@
       }
 
 
-      // Copper : Tin Bronze
+      // Tin Bronze
       {
         craftTime: 600.0
         icon: reind-item-chem-tin-bronze
@@ -561,7 +579,10 @@
       }
 
 
-      // Lead : Solder
+      /* <---------------- lead ----------------> */
+
+
+      // Solder
       {
         craftTime: 600.0
         icon: reind-item-chem-solder

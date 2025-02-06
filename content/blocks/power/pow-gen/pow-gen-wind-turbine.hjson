@@ -95,19 +95,17 @@
   }
   generateEffect: {
 
+      # Template: _powerParticles
 
-    /* effect_powerCrack */
+      /* <---------------- meta ----------------> */
 
-
-    // Part: Meta
       type: ParticleEffect
       interp: linear
       lifetime: 30.0
       startDelay: 0.0
-    // End
 
+      /* <---------------- visual ----------------> */
 
-    // Part: Visual
       region: circle
       layer: 69.0
       particles: 3
@@ -118,10 +116,9 @@
       colorTo: ffe18f
       lightScl: 2.0
       lightOpacity: 0.65
-    // End
 
+      /* <---------------- angel & length ----------------> */
 
-    // Part: Angle & Length
       baseRotation: 0.0
       offset: 0.0
       cone: 180.0
@@ -129,20 +126,17 @@
       randLength: true
       length: 8.0
       baseLength: 0.0
-    // End
 
+      /* <---------------- size & stroke & len ----------------> */
 
-    // Part: Size & Stroke & Len
       line: false
-      sizeInterp: pow5In
+      sizeInterp: linear
       sizeFrom: 1.2
       sizeTo: 0.0
       strokeFrom: 0.0
       strokeTo: 0.0
       lenFrom: 0.0
       lenTo: 0.0
-    // End
-
 
   }
   effectChance: 0.02

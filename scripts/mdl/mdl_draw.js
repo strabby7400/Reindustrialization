@@ -11,6 +11,25 @@
   // End
 
 
+  // Part: Color
+    const palette_gn = function(color_gn) {
+      if(color_gn == null) return;
+      if(color_gn instanceof Color) return color_gn;
+
+      var color;
+      if(typeof color_gn == "string") {
+        color = Color.valueOf(color_gn);
+      };
+      if(typeof color_gn == "boolean") {
+        color = color_gn ? Pal.accent : Pal.remove;
+      };
+
+      return color;
+    };
+    exports.palette_gn = palette_gn;
+  // End
+
+
   // Part: Region
 
 
@@ -18,55 +37,81 @@
 
 
     /* NOTE: Simply DrawRegion with more arguments. */
-    const drawNormalRegion_1pos = function(pos, reg, rot, a, scl) {
-      if(rot == null) rot = 0;
+    const drawNormalRegion = function(pos, reg, ang, a, scl, color, z) {
+      if(ang == null) ang = 0.0;
       if(a == null) a = 1.0;
       if(scl == null) scl = 1.0;
+      if(color == null) color = Color.white;
       if(reg == null) return;
 
       var x = pos.x;
       var y = pos.y;
-      var w = reg.width * scl;
-      var h = reg.height * scl;
+      var w = reg.width * 2.0 * scl / Vars.tilesize;
+      var h = reg.height * 2.0 * scl / Vars.tilesize;
 
+      if(z != null) Draw.z(z);
+      Draw.color(color);
       Draw.alpha(a);
-      Draw.rect(reg, x, y, w, h, rot);
+      Draw.rect(reg, x, y, w, h, ang);
       Draw.reset();
     };
-    exports.drawNormalRegion_1pos = drawNormalRegion_1pos;
+    exports.drawNormalRegion = drawNormalRegion;
 
 
-    const drawNormalRegion_1t = function(t, off, reg, rot, a, scl) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
+    /* <---------------- drawFadeRegion ----------------> */
 
-      var pos = mdl_geometry.getPos_1t(t, off);
 
-      drawNormalRegion_1pos(pos, reg, rot, a, scl);
+    /* NOTE: DrawFade. */
+    const drawFadeRegion = function(pos, reg, ang, a, scl, scl_fd, color, z) {
+      if(a == null) a = 1.0;
+      if(scl_fd == null) scl_fd = 1.0;
+      if(reg == null) return;
+
+      var a_fi = a * Math.abs(Math.sin(Time.time / 15.0 / scl_fd));
+
+      drawNormalRegion(pos, reg, ang, a_fi, scl, color, z);
     };
-    exports.drawNormalRegion_1t = drawNormalRegion_1t;
+    exports.drawFadeRegion = drawFadeRegion;
 
 
-    const drawNormalRegion_1blk = function(blk, t, reg, rot, a, scl) {
-      if(blk == null || t == null) return;
+    /* NOTE: Draws a flickering region, used for warning lights. */
+    const drawFadeAlert = function(pos, reg, frac, ang, a, scl, color, z) {
+      if(frac == null) frac = 0.0;
 
-      drawNormalRegion_1t(t, blk.offset, reg, rot, a, scl);
+      var a_fi = Math.min(frac / 0.5, 1.0);
+      var scl_fd = 2.5 - frac * 1.5;
+
+      drawFadeRegion(pos, reg, ang, a_fi, scl, scl_fd, color, z);
+      print(scl_fd);
     };
-    exports.drawNormalRegion_1blk = drawNormalRegion_1blk;
+    exports.drawFadeAlert = drawFadeAlert;
 
 
-    const drawNormalRegion_1b = function(b, reg, rot, a, scl) {
-      if(b == null) return;
+    /* <---------------- drawRotatorRegion ----------------> */
 
-      drawNormalRegion_1t(b.tile, b.block.offset, reg, rot, a, scl);
+
+    /* NOTE: The sprite rotates. */
+    const drawRotatorRegion = function(pos, reg, ang, rate) {
+      if(ang == null) ang = 0.0;
+      if(rate == null) rate = 0.0;
+      if(reg == null) return;
+
+      var x = pos.x;
+      var y = pos.y;
+      var ang_fi = Mathf.mod(Time.time * rate + ang, 90.0);
+
+      Draw.rect(reg, x, y, ang_fi);
+      Draw.alpha(ang / 90.0);
+      Draw.rect(reg, x, y, ang_fi - 90.0);
+      Draw.reset();
     };
-    exports.drawNormalRegion_1b = drawNormalRegion_1b;
+    exports.drawRotatorRegion = drawRotatorRegion;
 
 
     /* <---------------- drawFlameRegion ----------------> */
 
 
-    const drawFlameRegion_1pos = function(pos, reg, frac, rad, radIn, radScl, radMag, radInMag, color) {
+    const drawFlameRegion = function(pos, reg, frac, rad, radIn, radScl, radMag, radInMag, color) {
       if(frac == null) frac = 1.0;
       if(rad == null) rad = 2.5;
       if(radIn == null) radIn = 1.5;
@@ -96,41 +141,14 @@
       Fill.circle(x, y, radIn_fi);
       Draw.reset();
     };
-    exports.drawFlameRegion_1pos = drawFlameRegion_1pos;
-
-
-    const drawFlameRegion_1t = function(t, off, reg, frac, rad, radIn, radScl, radMag, radInMag, color) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      drawFlameRegion_1pos(pos, reg, frac, rad, radIn, radScl, radMag, radInMag, color)
-    };
-    exports.drawFlameRegion_1t = drawFlameRegion_1t;
-
-
-    const drawFlameRegion_1blk = function(blk, t, reg, frac, rad, radIn, radScl, radMag, radInMag, color) {
-      if(blk == null || t == null) return;
-
-      drawFlameRegion_1t(t, blk.offset, reg, frac, rad, radIn, radScl, radMag, radInMag, color);
-    };
-    exports.drawFlameRegion_1blk = drawFlameRegion_1blk;
-
-
-    const drawFlameRegion_1b = function(b, reg, frac, rad, radIn, radScl, radMag, radInMag, color) {
-      if(b == null) return;
-
-      drawFlameRegion_1t(b.tile, b.block.offset, reg, frac, rad, radIn, radScl, radMag, radInMag, color);
-    };
-    exports.drawFlameRegion_1b = drawFlameRegion_1b;
+    exports.drawFlameRegion = drawFlameRegion;
 
 
     /* <---------------- drawGlowRegion ----------------> */
 
 
     /* NOTE: DrawGlowRegion but integrated. */
-    const drawGlowRegion_1pos = function(pos, reg, a, color, pulse, pulseScl) {
+    const drawGlowRegion = function(pos, reg, a, color, pulse, pulseScl) {
       if(a == null) a = 1.0;
       if(color == null) color = Color.valueOf("ff3838");
       if(pulse == null) pulse = 0.3;
@@ -149,51 +167,24 @@
       Draw.blend();
       Draw.reset();
     };
-    exports.drawGlowRegion_1pos = drawGlowRegion_1pos;
-
-
-    const drawGlowRegion_1t = function(t, off, reg, a, color, pulse, pulseScl) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      drawGlowRegion_1pos(pos, reg, a, color, pulse, pulseScl);
-    };
-    exports.drawGlowRegion_1t = drawGlowRegion_1t;
-
-
-    const drawGlowRegion_1blk = function(blk, t, reg, a, color, pulse, pulseScl) {
-      if(blk == null || t == null) return;
-
-      drawGlowRegion_1t(t, blk.offset, reg, a, color, pulse, pulseScl);
-    };
-    exports.drawGlowRegion_1blk = drawGlowRegion_1blk;
-
-
-    const drawGlowRegion_1b = function(b, reg, a, color, pulse, pulseScl) {
-      if(b == null) return;
-
-      drawGlowRegion_1t(b.tile, b.block.offset, reg, a, color, pulse, pulseScl);
-    };
-    exports.drawGlowRegion_1b = drawGlowRegion_1b;
+    exports.drawGlowRegion = drawGlowRegion;
 
 
     /* NOTE: {reg} is optional. */
-    const drawGenericHeatRegion = function(b, frac, reg) {
-      if(reg == null) reg = mdl_heat.getHeatRegion(b.block.size);
-      if(b == null) return;
+    const drawHeatRegion = function(pos, frac, reg, size) {
+      if(size == null) size = 1;
+      if(reg == null) reg = mdl_heat.getHeatRegion(size);
 
-      drawGlowRegion_1b(b, reg, frac);
+      drawGlowRegion(pos, reg, frac);
     };
-    exports.drawGenericHeatRegion = drawGenericHeatRegion;
+    exports.drawHeatRegion = drawHeatRegion;
 
 
     /* <---------------- drawLight ----------------> */
 
 
     /* NOTE: Regular DrawLight. */
-    const drawLight_1pos = function(pos, frac, size, rad, a, sinScl, sinMag, color) {
+    const drawLight = function(pos, frac, size, rad, a, sinScl, sinMag, color) {
       if(frac == null) frac = 1.0;
       if(size == null) size = 1;
       if(rad == null) rad = 48.0;
@@ -208,52 +199,26 @@
 
       Drawf.light(x, y, (rad + Mathf.absin(sinScl, sinMag)) * frac * size, color, a);
     };
-    exports.drawLight_1pos = drawLight_1pos;
-
-
-    const drawLight_1t = function(t, off, frac, size, rad, a, sinScl, sinMag, color) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      drawLight_1pos(pos, frac, size, rad, a, sinScl, sinMag, color);
-    };
-    exports.drawLight_1t = drawLight_1t;
-
-
-    const drawLight_1blk = function(blk, t, frac, rad, a, sinScl, sinMag, color) {
-      if(blk == null || t == null) return;
-
-      drawLight_1t(t, blk.offset, frac, blk.size, rad, a, sinScl, sinMag, color);
-    };
-    exports.drawLight_1blk = drawLight_1blk;
-
-
-    const drawLight_1b = function(b, frac, rad, a, sinScl, sinMag, color) {
-      if(b == null) return;
-
-      drawLight_1t(b.tile, b.block.offset, frac, b.block.size, rad, a, sinScl, sinMag, color);
-    };
-    exports.drawLight_1b = drawLight_1b;
+    exports.drawLight = drawLight;
   // End
 
 
   // Part: Text
     /* NOTE: Draws a text line over the block. */
     const drawPlaceText = function(blk, t, valid, str, off_ty) {
+      if(valid == null) valid = true;
       if(off_ty == null) off_ty = 0;
-      if(blk == null || t == null) return;
+      if(blk == null || t == null || str == null) return;
 
       blk.drawPlaceText(str, t.x + blk.offset / Vars.tilesize, t.y + blk.offset / Vars.tilesize + off_ty, valid);
     };
     exports.drawPlaceText = drawPlaceText;
 
 
-    const drawSelectText = function(b, str, off_ty) {
+    const drawSelectText = function(b, valid, str, off_ty) {
       if(b == null) return;
 
-      drawPlaceText(b.block, b.tile, true, str, off_ty);
+      drawPlaceText(b.block, b.tile, valid, str, off_ty);
     };
     exports.drawSelectText = drawSelectText;
   // End
@@ -266,10 +231,11 @@
 
 
     /* NOTE: Simply draws a line. */
-    const drawLine_2pos = function(pos1, pos2, color, dashed) {
-      if(color == null) color = Pal.accent;
+    const drawLine = function(pos1, pos2, color_gn, dashed) {
+      if(color_gn == null) color_gn = Pal.accent;
       if(dashed == null) dashed = false;
 
+      var color = palette_gn(color_gn);
       var x1 = pos1.x;
       var y1 = pos1.y;
       var x2 = pos2.x;
@@ -282,40 +248,19 @@
       dashed ? (Lines.dashLine(x1, y1, x2, y2, seg)) : (Lines.line(x1, y1, x2, y2));
       Draw.reset();
     };
-    exports.drawLine_2pos = drawLine_2pos;
+    exports.drawLine = drawLine;
 
 
-    const drawLine_2t = function(t1, t2, off1, off2, color, dashed) {
-      if(off1 == null) off1 = 0.0;
-      if(off2 == null) off2 = 0.0;
-
-      if(t1 == null || t2 == null) return;
-
-      var pos1 = mdl_geometry.getPos_1t(t1, off1);
-      var pos2 = mdl_geometry.getPos_1t(t2, off2);
-
-      drawLine_2pos(pos1, pos2, color, dashed);
-    };
-    exports.drawLine_2t = drawLine_2t;
-
-
-    const drawLine_2b = function(b1, b2, color, dashed) {
-      if(b1 == null || b2 == null) return;
-
-      drawLine_2t(b1.tile, b2.tile, b1.block.offset, b2.block.offset, color, dashed);
-    };
-    exports.drawLine_2b = drawLine_2b;
-
-
-    /* <---------------- drawConnectionLine ----------------> */
+    /* <---------------- drawFlickerLine ----------------> */
 
 
     /* NOTE: Draws a pulsing line between two positions. */
-    const drawConnectionLine_2pos = function(pos1, pos2, color, scl, dashed) {
-      if(color == null) color = Pal.accent;
+    const drawFlickerLine = function(pos1, pos2, color_gn, scl, dashed) {
+      if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
       if(dashed == null) dashed = false;
 
+      var color = palette_gn(color_gn);
       var x1 = pos1.x;
       var y1 = pos1.y;
       var x2 = pos2.x;
@@ -329,39 +274,18 @@
       dashed ? (Lines.dashLine(x1, y1, x2, y2, seg)) : (Lines.line(x1, y1, x2, y2));
       Draw.reset();
     };
-    exports.drawConnectionLine_2pos = drawConnectionLine_2pos;
-
-
-    const drawConnectionLine_2t = function(t1, t2, off1, off2, color, scl, dashed) {
-      if(off1 == null) off1 = 0.0;
-      if(off2 == null) off2 = 0.0;
-
-      if(t1 == null || t2 == null) return;
-
-      var pos1 = mdl_geometry.getPos_1t(t1, off1);
-      var pos2 = mdl_geometry.getPos_1t(t2, off2);
-
-      drawConnectionLine_2pos(pos1, pos2, color, scl, dashed);
-    };
-    exports.drawConnectionLine_2t = drawConnectionLine_2t;
-
-
-    const drawConnectionLine_2b = function(b1, b2, color, scl, dashed) {
-      if(b1 == null || b2 == null) return;
-
-      drawConnectionLine_2t(b1.tile, b2.tile, b1.block.offset, b2.block.offset, color, scl, dashed);
-    };
-    exports.drawConnectionLine_2b = drawConnectionLine_2b;
+    exports.drawFlickerLine = drawFlickerLine;
 
 
     /* <---------------- drawLaser ----------------> */
 
 
     /* NOTE: The line is now a laser beam in vanilla style. */
-    const drawLaser_2pos = function(pos1, pos2, color, hasLight) {
-      if(color == null) color = Pal.accent;
+    const drawLaser = function(pos1, pos2, color_gn, hasLight) {
+      if(color_gn == null) color_gn = Pal.accent;
       if(hasLight == null) hasLight = false;
 
+      var color = palette_gn(color_gn);
       var x1 = pos1.x;
       var y1 = pos1.y;
       var x2 = pos2.x;
@@ -379,29 +303,7 @@
       Lines.line(x1, y1, x2, y2);
       if(hasLight) Drawf.light(x1, y1, x2, y2);
     };
-    exports.drawLaser_2pos = drawLaser_2pos;
-
-
-    const drawLaser_2t = function(t1, t2, off1, off2, color, hasLight) {
-      if(off1 == null) off1 = 0.0;
-      if(off2 == null) off2 = 0.0;
-
-      if(t1 == null || t2 == null) return;
-
-      var pos1 = mdl_geometry.getPos_1t(t1, off1);
-      var pos2 = mdl_geometry.getPos_1t(t2, off2);
-
-      drawLaser_2pos(pos1, pos2, color, hasLight);
-    };
-    exports.drawLaser_2t = drawLaser_2t;
-
-
-    const drawLaser_2b = function(b1, b2, color, hasLight) {
-      if(b1 == null || b2 == null) return;
-
-      drawLaser_2t(b1.tile, b2.tile, b1.block.offset, b2.block.offset, color, hasLight);
-    };
-    exports.drawLaser_2b = drawLaser_2b;
+    exports.drawLaser = drawLaser;
   // End
 
 
@@ -412,11 +314,12 @@
 
 
     /* NOTE: The classic rectangular range. */
-    const drawRect_1pos = function(pos, r, color, size, dashed) {
-      if(color == null) color = Pal.accent;
+    const drawRect = function(pos, r, color_gn, size, dashed) {
+      if(color_gn == null) color_gn = Pal.accent;
       if(size == null) size = 1;
       if(dashed == null) dashed = false;
 
+      var color = palette_gn(color_gn);
       var x = pos.x;
       var y = pos.y;
       var hw = (size / 2 + r) * Vars.tilesize;
@@ -448,40 +351,13 @@
       };
       Draw.reset();
     };
-    exports.drawRect_1pos = drawRect_1pos;
-
-
-    const drawRect_1t = function(t, off, r, color, size, dashed) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      drawRect_1pos(pos, r, color, size, dashed);
-    };
-    exports.drawRect_1t = drawRect_1t;
-
-
-    const drawRect_1blk = function(blk, t, r, color, dashed) {
-      if(blk == null || t == null) return;
-
-      drawRect_1t(t, blk.offset, r, color, blk.size, dashed);
-    };
-    exports.drawRect_1blk = drawRect_1blk;
-
-
-    const drawRect_1b = function(b, r, color, dashed) {
-      if(b == null) return;
-
-      drawRect_1t(b.tile, b.block.offset, r, color, b.block.size, dashed);
-    };
-    exports.drawRect_1b = drawRect_1b;
+    exports.drawRect = drawRect;
 
 
     const drawPlaceRect = function(blk, t, valid, r, dashed) {
       if(blk == null || t == null) return;
 
-      drawRect_1blk(blk, t, r, valid ? Pal.accent : Pal.remove, dashed);
+      drawRect(mdl_geometry.poser_1t(t, blk.offset), r, valid, blk.size, dashed);
     };
     exports.drawPlaceRect = drawPlaceRect;
 
@@ -511,10 +387,11 @@
 
 
     /* NOTE: The classic circular range. */
-    const drawCircle_1pos = function(pos, rad, color, dashed) {
-      if(color == null) color = Pal.accent;
+    const drawCircle = function(pos, rad, color_gn, dashed) {
+      if(color_gn == null) color_gn = Pal.accent;
       if(dashed == null) dashed = false;
 
+      var color = palette_gn(color_gn);
       var x = pos.x;
       var y = pos.y;
 
@@ -524,38 +401,13 @@
       dashed ? Lines.dashCircle(x, y, rad) : Lines.circle(x, y, rad);
       Draw.reset();
     };
-    exports.drawCircle_1pos = drawCircle_1pos;
-
-
-    const drawCircle_1t = function(t, off, rad, color, dashed) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      drawCircle_1pos(pos, rad, color, dashed);
-    };
-    exports.drawCircle_1t = drawCircle_1t;
-
-
-    const drawCircle_1blk = function(blk, t, rad, color, dashed) {
-      if(blk == null || t == null) return;
-
-      drawCircle_1t(t, blk.offset, rad, color, dashed);
-    };
-    exports.drawCircle_1blk = drawCircle_1blk;
-
-
-    const drawCircle_1b = function(b, rad, color, dashed) {
-      if(b == null) return;
-
-      drawCircle_1t(b.tile, b.block.offset, rad, color, dashed);
-    };
-    exports.drawCircle_1b = drawCircle_1b;
+    exports.drawCircle = drawCircle;
 
 
     const drawPlaceCircle = function(blk, t, valid, rad, dashed) {
-      drawCircle_1blk(blk, t, rad, valid ? Pal.accent : Pal.remove, dashed);
+      if(blk == null || t == null) return;
+
+      drawCircle(mdl_geometry.poser_1t(t, blk.offset), rad, valid, dashed);
     };
     exports.drawPlaceCircle = drawPlaceCircle;
 
@@ -572,48 +424,22 @@
 
 
     /* NOTE: Draws a pulsing filled circle, usually indicative of explosion. */
-    const drawWarningDisk_1pos = function(pos, rad, color, scl) {
-      if(color == null) color = Pal.remove;
+    const drawWarningDisk = function(pos, rad, color_gn, scl) {
+      if(color_gn == null) color_gn = Pal.remove;
       if(scl == null) scl = 1.0;
 
+      var color = palette_gn(color_gn);
       var x = pos.x;
       var y = pos.y;
       var scl_fi = scl * 15.0;
-      var a = 0.1 + Math.sin(Time.time / scl_fi) * 0.1;
+      var a = 0.15 + Math.sin(Time.time / scl_fi) * 0.15;
 
       Draw.color(color);
       Draw.alpha(a);
       Fill.circle(x, y, rad);
       Draw.reset();
     };
-    exports.drawWarningDisk_1pos = drawWarningDisk_1pos;
-
-
-    const drawWarningDisk_1t = function(t, off, rad, color, scl) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      drawWarningDisk_1pos(pos, rad, color, scl);
-    };
-    exports.drawWarningDisk_1t = drawWarningDisk_1t;
-
-
-    const drawWarningDisk_1blk = function(blk, t, rad, color, scl) {
-      if(blk == null || t == null) return;
-
-      drawWarningDisk_1t(t, blk.offset, rad, color, scl);
-    };
-    exports.drawWarningDisk_1blk = drawWarningDisk_1blk;
-
-
-    const drawWarningDisk_1b = function(b, rad, color, scl) {
-      if(b == null) return;
-
-      drawWarningDisk_1t(b.tile, b.block.offset, rad, color, scl);
-    };
-    exports.drawWarningDisk_1b = drawWarningDisk_1b;
+    exports.drawWarningDisk = drawWarningDisk;
   // End
 
 
@@ -624,11 +450,13 @@
 
 
     /* NOTE: Draws a tiny filled square in a tile. */
-    const drawTileArea = function(t, color, a, size) {
-      if(color == null) color = Pal.accent;
+    const drawTileArea = function(t, color_gn, a, size) {
+      if(color_gn == null) color_gn = Pal.accent;
       if(a == null) a = 0.7;
       if(size == null) size = 1.0;
       if(t == null) return;
+
+      var color = palette_gn(color_gn);
 
       Draw.z(Layer.effect + 0.01);
       Draw.color(color);
@@ -639,45 +467,24 @@
     exports.drawTileArea = drawTileArea;
 
 
-    /* NOTE: Draws an animated square instead. Treats {param} as color if it's not a boolean. */
-    const drawTileIndicator = function(t, param) {
-      var color;
-      switch(typeof param) {
-        case "boolean" :
-          color = param ? Pal.accent : Pal.remove;
-          break;
-        case "string" :
-          color = Color.valueOf(param);
-          break;
-        default :
-          color = param;
-      };
-
-      drawTileArea(t, color, 0.7, (0.75 + Math.sin(Time.time / 15.0) * 0.15));
+    /* NOTE: Draws an animated square instead. Treats {color_gn} as color if it's not a boolean. */
+    const drawTileIndicator = function(t, color_gn) {
+      var size = 0.75 + Math.sin(Time.time / 15.0) * 0.15;
+      drawTileArea(t, color_gn, 0.7, size);
     };
     exports.drawTileIndicator = drawTileIndicator;
 
 
     /* NOTE: Like {drawTileArea} but a building is used. */
-    const drawBuildArea = function(b, param, a, pad) {
-      if(param == null) param = Pal.accent;
+    const drawBuildArea = function(b, color_gn, a, pad) {
+      if(color_gn == null) color_gn = Pal.accent;
       if(a == null) a = 0.5;
       if(pad == null) pad = 0.0;
       if(b == null) return;
 
-      var pos = mdl_geometry.getPos_1b(b);
+      var pos = mdl_geometry.poser_1b(b);
       var w = b.block.size * Vars.tilesize - pad;
-      var color;
-      switch(typeof param) {
-        case "boolean" :
-          color = param ? Pal.accent : Pal.remove;
-          break;
-        case "string" :
-          color = Color.valueOf(param);
-          break;
-        default :
-          color = param;
-      };
+      var color = palette_gn(color_gn);
 
       Draw.z(Layer.effect + 0.01);
       Draw.color(color);
@@ -696,11 +503,12 @@
 
 
     /* NOTE: Used for impact wave indication. */
-    const drawCirclePulse_1pos = function(pos, rad, color, scl, a) {
-      if(color == null) color = Pal.accent;
+    const drawCirclePulse = function(pos, rad, color_gn, scl, a) {
+      if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
       if(a == null) a = 0.5;
 
+      var color = palette_gn(color_gn);
       var x = pos.x;
       var y = pos.y;
       var scl_fi = scl * 150.0;
@@ -728,34 +536,7 @@
       Lines.circle(x, y, rad4);
       Draw.reset();
     };
-    exports.drawCirclePulse_1pos = drawCirclePulse_1pos;
-
-
-    const drawCirclePulse_1t = function(t, off, rad, color, scl, a) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
-
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      drawCirclePulse_1pos(pos, rad, color, scl, a);
-    };
-    exports.drawCirclePulse_1t = drawCirclePulse_1t;
-
-
-    const drawCirclePulse_1blk = function(blk, t, rad, color, scl, a) {
-      if(blk == null || t == null) return;
-
-      drawCirclePulse_1t(t, blk.offset, rad, color, scl, a);
-    };
-    exports.drawCirclePulse_1blk = drawCirclePulse_1blk;
-
-
-    const drawCirclePulse_1b = function(b, rad, color, scl, a) {
-      if(b == null) return;
-
-      drawCirclePulse_1t(b.tile, b.block.offset, rad, color, scl, a);
-    };
-    exports.drawCirclePulse_1b = drawCirclePulse_1b;
+    exports.drawCirclePulse = drawCirclePulse;
   // End
 
 
@@ -766,67 +547,29 @@
 
 
     /* NOTE: Draws a progress bar over the block. */
-    const drawProgressBar_1pos = function(pos, frac, w, color, off_ty) {
-      if(w == null) w = 24.0;
-      if(color == null) color = Pal.accent;
+    const drawProgressBar = function(pos, frac, color_gn, size, off_w, off_ty) {
+      if(color_gn == null) color_gn = Pal.accent;
+      if(size == null) size = 1;
+      if(off_w == null) off_w = 0.0;
       if(off_ty == null) off_ty = 0;
 
+      var color = palette_gn(color_gn);
       var x = pos.x;
       var y = pos.y;
+      var w = (size + 1) * Vars.tilesize + off_w;
+      var off_ty_fi = (off_ty + size * 0.5 + 0.5) * Vars.tilesize;
 
       Lines.stroke(5.0, Pal.gray);
       Draw.alpha(0.7);
-      Lines.line(x - w * 0.5, y + off_ty * Vars.tilesize, x + w * 0.5, y + off_ty * Vars.tilesize);
+      Lines.line(x - w * 0.5, y + off_ty_fi, x + w * 0.5, y + off_ty_fi);
       Lines.stroke(3.0, color);
       Draw.alpha(0.2);
-      Lines.line(x - w * 0.5, y + off_ty * Vars.tilesize, x + w * 0.5, y + off_ty * Vars.tilesize);
+      Lines.line(x - w * 0.5, y + off_ty_fi, x + w * 0.5, y + off_ty_fi);
       Draw.alpha(0.7);
-      Lines.line(x - w * 0.5, y + off_ty * Vars.tilesize, Mathf.lerp(x - w * 0.5, x + w * 0.5, frac), y + off_ty * Vars.tilesize);
+      Lines.line(x - w * 0.5, y + off_ty_fi, Mathf.lerp(x - w * 0.5, x + w * 0.5, frac), y + off_ty_fi);
       Draw.reset();
     };
-    exports.drawProgressBar_1pos = drawProgressBar_1pos;
-
-
-    const drawProgressBar_1t = function(t, off, frac, w, color, off_ty) {
-      if(off_ty == null) off_ty = 0;
-      if(off == null) off = 0.0;
-
-      if(t == null) return;
-
-      var off_ty_fi = off_ty + 1.0;
-      var pos = mdl_geometry.getPos_1t(t, off);
-
-      drawProgressBar_1pos(pos, frac, w, color, off_ty_fi);
-    };
-    exports.drawProgressBar_1t = drawProgressBar_1t;
-
-
-    const drawProgressBar_1blk = function(blk, t, frac, w, color, off_ty) {
-      if(off_ty == null) off_ty = 0;
-
-      if(blk == null || t == null) return;
-      if(w == null) w = (blk.size + 1) * Vars.tilesize;
-
-      var off_ty_fi = off_ty + 0.5 * (blk.size + 1);
-      var pos = mdl_geometry.getPos_1t(t, blk.offset);
-
-      drawProgressBar_1pos(pos, frac, w, color, off_ty_fi);
-    };
-    exports.drawProgressBar_1blk = drawProgressBar_1blk;
-
-
-    const drawProgressBar_1b = function(b, frac, w, color, off_ty) {
-      if(off_ty == null) off_ty = 0;
-
-      if(b == null) return;
-      if(w == null) w = (b.block.size + 1) * Vars.tilesize;
-
-      var off_ty_fi = off_ty + 0.5 * (b.block.size + 1);
-      var pos = mdl_geometry.getPos_1b(b);
-
-      drawProgressBar_1pos(pos, frac, w, color, off_ty_fi);
-    };
-    exports.drawProgressBar_1b = drawProgressBar_1b;
+    exports.drawProgressBar = drawProgressBar;
   // End
 
 
@@ -837,10 +580,11 @@
 
 
     /* NOTE: Draws a series of light orbs which represent the items. */
-    const drawItemTransfer_2pos = function(pos_f, pos_t, color, scl) {
-      if(color == null) color = Pal.accent;
+    const drawItemTransfer = function(pos_f, pos_t, color_gn, scl) {
+      if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
 
+      var color = palette_gn(color_gn);
       var x_f = pos_f.x;
       var y_f = pos_f.y;
       var x_t = pos_t.x;
@@ -871,36 +615,14 @@
       Fill.circle(x_3, y_3, rad_3 * 0.5);
       Draw.reset();
     };
-    exports.drawItemTransfer_2pos = drawItemTransfer_2pos;
-
-
-    const drawItemTransfer_2t = function(t_f, t_t, off_f, off_t, color, scl) {
-      if(off_f == null) off_f = 0.0;
-      if(off_t == null) off_t = 0.0;
-
-      if(t_f == null || t_t == null) return;
-
-      var pos_f = mdl_geometry.getPos_1t(t_f, off_f);
-      var pos_t = mdl_geometry.getPos_1t(t_t, off_t);
-
-      drawItemTransfer_2pos(pos_f, pos_t, color, scl);
-    };
-    exports.drawItemTransfer_2t = drawItemTransfer_2t;
-
-
-    const drawItemTransfer_2b = function(b_f, b_t, color, scl) {
-      if(b_f == null || b_t == null) return;
-
-      drawItemTransfer_2t(b_f.tile, b_t.tile, b_f.block.offset, b_t.block.offset, color, scl);
-    };
-    exports.drawItemTransfer_2b = drawItemTransfer_2b;
+    exports.drawItemTransfer = drawItemTransfer;
 
 
     /* <---------------- drawIcon ----------------> */
 
 
     /* NOTE: Draws the content icon at the left-upper corner of the block. */
-    const drawContentIcon_1pos = function(pos, ct, size) {
+    const drawContentIcon = function(pos, ct, size) {
       if(size == null) size = 1;
 
       var x = pos.x - Vars.tilesize * 0.5 * size;
@@ -913,34 +635,27 @@
       Draw.reset();
       Draw.rect(ct.uiIcon, x, y, w, w);
     };
-    exports.drawContentIcon_1pos = drawContentIcon_1pos;
+    exports.drawContentIcon = drawContentIcon;
+  // End
 
 
-    const drawContentIcon_1t = function(t, off, ct, size) {
-      if(off == null) off = 0.0;
-      if(t == null) return;
+  // Part: Status
 
-      var pos = mdl_geometry.getPos_1t(t, off);
 
-      drawContentIcon_1pos(pos, ct, size);
+    /* <---------------- drawFadeStatus ----------------> */
+
+
+    /* NOTE: Draws a pulsing region on {e}, the size is dynamic. */
+    const drawFadeStatus = function(e, reg, color) {
+      if(color == null) color = Color.white;
+      if(e == null || reg == null) return;
+
+      var pos = (e instanceof Unit) ? mdl_geometry.poser_1u(e) : mdl_geometry.poser_1b(e);
+      var scl = (e instanceof Unit) ? (0.1 * e.type.hitSize) : (0.1 * e.block.size * Vars.tilesize);
+
+      drawFadeRegion(pos, reg, 0.0, 0.5, scl, 0.5, color, 110.0)
     };
-    exports.drawContentIcon_1t = drawContentIcon_1t;
-
-
-    const drawContentIcon_1blk = function(blk, t, ct) {
-      if(blk == null || t == null) return;
-
-      drawContentIcon_1t(t, blk.offset, ct, blk.size);
-    };
-    exports.drawContentIcon_1blk = drawContentIcon_1blk;
-
-
-    const drawContentIcon_1b = function(b, ct) {
-      if(b == null) return;
-
-      drawContentIcon_1t(b.tile, b.block.offset, ct, b.block.size);
-    };
-    exports.drawContentIcon_1b = drawContentIcon_1b;
+    exports.drawFadeStatus = drawFadeStatus;
   // End
 
 

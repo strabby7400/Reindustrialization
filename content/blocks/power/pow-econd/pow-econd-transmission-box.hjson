@@ -1,0 +1,80 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Conduit
+  category: power
+  requirements: [
+    item-chem-tin-bronze/8
+    item-chem-steel/8
+  ]
+  buildCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: pow-hcond-steel-heat-conductor
+    objectives: []
+  }
+  researchCostMultiplier: 4.0
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 1
+  hasLiquids: true
+  liquidCapacity: 0.3
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 18
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  botColor: 6d5e55
+  padCorners: true
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  solid: false
+  underBullets: true
+  liquidPressure: 1.0
+  timerFlow: 1
+  leaks: true

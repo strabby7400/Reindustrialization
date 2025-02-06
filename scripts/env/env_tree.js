@@ -58,7 +58,7 @@
       var t_p;
       if(Vars.player.unit() != null && !Vars.player.unit().flying && Vars.player.unit().type.groundLayer < 76.0) t_p = Vars.player.unit().tileOn();
       if(t_p != null) {
-        var d = mdl_geometry.getDistance_2t(t, t_p);
+        var d = mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(t_p));
         var d_cr = reg.width * 0.15;
         if(d <= d_cr) a = 0.37;
       };

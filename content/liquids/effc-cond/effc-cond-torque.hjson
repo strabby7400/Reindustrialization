@@ -20,9 +20,10 @@
 */
 
 
-  color: b0bac0
+  color: 000000
   lightColor: 00000000
   gasColor: 000000
+  vaporEffect: none
 
 
 /*

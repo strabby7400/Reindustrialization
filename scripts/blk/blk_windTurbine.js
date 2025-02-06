@@ -33,8 +33,8 @@
 
       var cap = blk.size * 4;
       var count_solid = 0;
-      var list_ot = mdl_geometry.getTiles_edgeS(t, blk.size);
-      list_ot.each(ot => {
+      var li_ot = mdl_geometry.getTiles_edge(t, blk.size);
+      li_ot.each(ot => {
         if(ot.solid()) count_solid += 1;
       });
 
@@ -48,8 +48,8 @@
       var t = Vars.world.tile(tx, ty);
       if(t == null) return;
 
-      var list_ot = mdl_geometry.getTiles_edgeS(t, blk.size);
-      list_ot.each(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
+      var li_ot = mdl_geometry.getTiles_edge(t, blk.size);
+      li_ot.each(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
 
       if(blk.displayEfficiency) {
         var str = Core.bundle.formatFloat("bar.efficiency", sumAttribute(blk, blk.attribute, tx, ty) * 100.0, 1);
@@ -61,12 +61,12 @@
     function drawSelectComp(b) {
       var t = b.tile;
 
-      var list_ot = mdl_geometry.getTiles_edgeS(t, b.block.size);
-      list_ot.each(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
+      var li_ot = mdl_geometry.getTiles_edge(t, b.block.size);
+      li_ot.each(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
 
       if(b.block.displayEfficiency) {
         var str = Core.bundle.formatFloat("bar.efficiency", sumAttribute(b.block, b.block.attribute, t.x, t.y) * 100.0, 1);
-        mdl_draw.drawSelectText(b, str, 1);
+        mdl_draw.drawSelectText(b, valid, str, 1);
       };
     };
   // End

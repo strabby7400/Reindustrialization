@@ -17,7 +17,16 @@
 */
 
 
-  // Part: item-ore[aluminum]
+  // Part: env-heap[ore]
+    const envHeap_barite = extend(TallBlock, "env-heap-barite", {
+      setStats() {
+        this.super$setStats();
+        env_heapOre.setStats(this);
+      },
+    });
+    exports.envHeap_barite = envHeap_barite;
+
+
     const envHeap_bauxite = extend(TallBlock, "env-heap-bauxite", {
       setStats() {
         this.super$setStats();
@@ -25,10 +34,8 @@
       },
     });
     exports.envHeap_bauxite = envHeap_bauxite;
-  // End
 
 
-  // Part: item-ore[misc]
     const envHeap_clay = extend(TallBlock, "env-heap-clay", {
       setStats() {
         this.super$setStats();
@@ -63,6 +70,24 @@
       },
     });
     exports.envHeap_limestone = envHeap_limestone;
+
+
+    const envHeap_olivine = extend(TallBlock, "env-heap-olivine", {
+      setStats() {
+        this.super$setStats();
+        env_heapOre.setStats(this);
+      },
+    });
+    exports.envHeap_olivine = envHeap_olivine;
+
+
+    const envHeap_pumice = extend(TallBlock, "env-heap-pumice", {
+      setStats() {
+        this.super$setStats();
+        env_heapOre.setStats(this);
+      },
+    });
+    exports.envHeap_pumice = envHeap_pumice;
 
 
     const envHeap_salt = extend(TallBlock, "env-heap-salt", {

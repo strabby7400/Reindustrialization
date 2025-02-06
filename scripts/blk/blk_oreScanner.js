@@ -41,8 +41,8 @@
 
         var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
         if(r != null) {
-          mdl_effect.atL_1pos(b, db_effect._oreScannerScan(r, b.block.size, ct_blk_oreScanner.accB_scanColor(b, "r")), 0.0);
-          mdl_effect.play_1pos(b, "se-craft-ore-scanner");
+          mdl_effect.showAt_ldm(b, db_effect._oreScannerScan(r, b.block.size, ct_blk_oreScanner.accB_scanColor(b, "r")), 0.0);
+          mdl_effect.playAt(b, "se-craft-ore-scanner");
         };
       };
 
@@ -67,8 +67,8 @@
       var thr = ct_blk_oreScanner.accB_thr(b, "r");
       var a = Math.pow(1.0 - cd / thr, 2);
 
-      var list_ot = mdl_geometry.getTiles_rectS(b.tile, r, b.block.size);
-      list_ot.each(ot => {
+      var li_ot = mdl_geometry.getTiles_rect(b.tile, r, b.block.size);
+      li_ot.each(ot => {
         var ov = ot.overlay();
 
         if(ov != null && ov.name.includes("reind-env-ore-depth-")) {

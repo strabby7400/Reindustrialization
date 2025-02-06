@@ -16,10 +16,10 @@
 
   // Part: Component
     function updateTileComp(b) {
-      var list_ot = mdl_geometry.getTiles_rotBlk(b.block, b.tile, b.block.liquidOutputDirections[0]);
+      var li_ot = mdl_geometry.getTiles_rot(b.tile, b.block.liquidOutputDirections[0], b.block.size);
       var invalid = false;
       var temp_b = new Seq();
-      list_ot.each(ot => {
+      li_ot.each(ot => {
         if(ot.build == null) {
           invalid = true
         } else if(!temp_b.contains(ot.build)) {

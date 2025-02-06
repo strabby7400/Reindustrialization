@@ -1,6 +1,6 @@
 name: reind
 displayName: Reindustrialization
-subtitle: "0.1.0: The Overhaul"
+subtitle: "0.1.1: Local Geology (Test)"
 
 
 author: MaboroshiX
@@ -14,8 +14,10 @@ dependencies: [
 description:
 '''
 
-A JS mod aimed to bring real chemical engineering into Mindustry, where tin is definitely tin.
+A javascript mod aimed to bring real (or surreal, sometimes) chemical engineering into Mindustry, where tin is definitely tin.
 
+
+- This mod focuses on complex manufacturing processes, instead of tower defense or RTS.
 
 - Nothing extends vanilla gameplay, all the contents including environmental blocks are mod-based. No borrowed or recolored vanilla textures.
 
@@ -23,7 +25,7 @@ A JS mod aimed to bring real chemical engineering into Mindustry, where tin is d
 
 - Extraction methods are required to turn ores into actual materials, e.g. smelting.
 
-- New mechanics like fluid corrosion and underground ores are implemented, which differentiates the gameplay drastically.
+- New mechanics like fluid corrosion and underground ores are introduced, which differentiates the gameplay drastically.
 
 - Turrets are absent, the mod will focus on unit-only defense and attack.
 
@@ -31,7 +33,7 @@ A JS mod aimed to bring real chemical engineering into Mindustry, where tin is d
 Most of the factories are multi-crafters, you'll need download MultiCrafterLib first! (Sorry for IOS players D:)
 
 
-Reind is still and probably always WIP, as chemistry itself is a complex thing. Do not launch to numbered sectors since sector generator is not used.
+Reind is still and probably always WIP. Do not launch to numbered sectors since sector generator is not used.
 
 
 ------------------------------
@@ -65,20 +67,22 @@ Ideas:
 ------------------------------
 
 
-Inspiration:
+Inspiration & Acknowledgement
 
-- Greg's Tech: New Horizon (Minecraft modpack)
+- Pixabay (website), for sound effects, most of which have been modified.
 
-- Asthosus (Mindustry mod)
+- Greg's Tech: New Horizon (Minecraft modpack), for ideas about some factories and production routes.
 
-- Fictional Octo System (Mindustry mod)
+- Asthosus (Mindustry mod), for introducing me to hjson, and how to make a planet.
 
-- Sapphirium (Mindustry mod)
+- Sapphirium (Mindustry mod), for introducing me to javascript.
 
-- 格雷工业 (Mindustry mod)
+- Fictional Octo System (Mindustry mod), for ore scanner mechanics.
+
+- 格雷工业 (Mindustry mod), for some codes about tables.
 
 '''
 
 
-/* v0.1.0 */
-version: 0.1.0
+/* v0.1.1: Local Geology */
+version: t25020601

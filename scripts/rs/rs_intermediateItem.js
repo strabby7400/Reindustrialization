@@ -22,12 +22,12 @@
       itm.stats.add(db_stat.isIntermediate, true);
 
       // Get target products
-      var list_tg = new Seq();
-      mdl_database.readList_1n1v(db_item.intermediateMap, itm.name).each(nm_tg => {
+      var li_tg = new Seq();
+      mdl_database.readli_1n1v(db_item.intermediateMap, itm.name).each(nm_tg => {
         var ct_tg = mdl_content.getContent_nm(nm_tg);
-        if(ct_tg != null) list_tg.add(ct_tg);
+        if(ct_tg != null) li_tg.add(ct_tg);
       });
-      if(list_tg.size > 0) itm.stats.add(db_stat.targetProducts, StatValues.content(list_tg));
+      if(li_tg.size > 0) itm.stats.add(db_stat.targetProducts, StatValues.content(li_tg));
     };
   // End
 

@@ -10,6 +10,7 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_geometry = require("reind/mdl/mdl_geometry");
   // End
 
 
@@ -49,13 +50,13 @@
       // No Inheritance
       draw() {
         this.super$draw();
-        mdl_draw.drawFlameRegion_1b(this, this.top3Reg, this.frac);
-        mdl_draw.drawGenericHeatRegion(this, this.power.status, this.glowReg);
+        mdl_draw.drawFlameRegion(mdl_geometry.poser_1b(this), this.top3Reg, this.frac);
+        mdl_draw.drawHeatRegion(mdl_geometry.poser_1b(this), this.power.status, this.glowReg);
       },
       // No Inheritance
       drawLight() {
         this.super$drawLight();
-        mdl_draw.drawLight_1b(this, this.frac);
+        mdl_draw.drawLight(mdl_geometry.poser_1b(this), this.frac);
       },
     });
     exports.disAux_itemIncinerator = disAux_itemIncinerator;

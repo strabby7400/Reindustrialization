@@ -146,6 +146,17 @@
   // End
 
 
+  // Part: item-int[concentrate]
+    const itemInt_concentrate_malachite = extend(Item, "item-int-concentrate-malachite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_concentrate_malachite = itemInt_concentrate_malachite;
+  // End
+
+
   // Part: item-int[dried]
     const itemInt_sawdust_dried = extend(Item, "item-int-sawdust-dried", {
       setStats() {
@@ -267,6 +278,15 @@
         },
       });
       exports.itemInt_dust_malachite = itemInt_dust_malachite;
+
+
+      const itemInt_dust_p1Malachite = extend(Item, "item-int-dust-p1-malachite", {
+        setStats() {
+          this.super$setStats();
+          rs_intermediateItem.setStats(this);
+        },
+      });
+      exports.itemInt_dust_p1Malachite = itemInt_dust_p1Malachite;
 
 
       const itemInt_dust_nativeCopper = extend(Item, "item-int-dust-native-copper", {

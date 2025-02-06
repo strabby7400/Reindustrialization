@@ -30,6 +30,9 @@
 
       const stat_impactRange = new Stat("reind-stat-impact-range.name", StatCat.function);
       exports.impactRange = stat_impactRange;
+
+      const stat_restrictionRange = new Stat("reind-stat-restriction-range.name", StatCat.function);
+      exports.restrictionRange = stat_restrictionRange;
     // End
 
 
@@ -225,6 +228,12 @@
 
 
     // Part: Param
+      const stat_epRange = new Stat("reind-stat-ep-range.name", StatCat.function);
+      exports.epRange = stat_epRange;
+
+      const stat_epRequired = new Stat("reind-stat-ep-required.name", StatCat.function);
+      exports.epRequired = stat_epRequired;
+
       const stat_pollutionTolerance = new Stat("reind-stat-pollution-tolerance.name", StatCat.function);
       exports.pollutionTolerance = stat_pollutionTolerance;
     // End

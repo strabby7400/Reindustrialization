@@ -6,7 +6,7 @@
 
 
   // Part: Space
-    const list_removeSpace = new Seq([
+    const li_removeSpace = new Seq([
       "zh_CN",
       "zh_TW",
       "ja",
@@ -18,7 +18,7 @@
     const getSpace = function() {
       var lang = Core.settings.getString("locale");
 
-      if(list_removeSpace.contains(lang)) return "";
+      if(li_removeSpace.contains(lang)) return "";
 
       return " ";
     };
@@ -56,9 +56,9 @@
     exports.getStatText = getStatText;
 
 
-    const getTagText = function(list_str) {
+    const getTagText = function(li_str) {
       var str_fi = "";
-      list_str.each(str => str_fi += str + "; ");
+      li_str.each(str => str_fi += str + "; ");
 
       if(str_fi == "") return null;
       return str_fi;

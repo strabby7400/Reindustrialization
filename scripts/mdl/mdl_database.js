@@ -68,68 +68,68 @@
     /* list */
 
 
-    const writeList_1n = function(list_tg, list_val) {
-      if(list_val.size == 0) return;
+    const writeli_1n = function(li_tg, li_val) {
+      if(li_val.size == 0) return;
 
-      list_val.each(nm => {
-        write_1n(list_tg, nm);
+      li_val.each(nm => {
+        write_1n(li_tg, nm);
       });
     };
-    exports.writeList_1n = writeList_1n;
+    exports.writeli_1n = writeli_1n;
 
 
-    const writeList_1n1v = function(list_tg, list_val) {
-      if(list_val.size == 0) return;
+    const writeli_1n1v = function(li_tg, li_val) {
+      if(li_val.size == 0) return;
 
-      for(let i = 0; i <= list_val.size - 1; i++) {
+      for(let i = 0; i <= li_val.size - 1; i++) {
         if(i % 2 != 0) continue;
 
-        write_1n1v(list_tg, list_val.get(i), list_val.get(i + 1));
+        write_1n1v(li_tg, li_val.get(i), li_val.get(i + 1));
       };
     };
-    exports.writeList_1n1v = writeList_1n1v;
+    exports.writeli_1n1v = writeli_1n1v;
 
 
-    const readList_1n1v = function(list_tg, nm) {
-      var list_val = new Seq();
-      if(list_tg.size == 0) return list_val;
+    const readli_1n1v = function(li_tg, nm) {
+      var li_val = new Seq();
+      if(li_tg.size == 0) return li_val;
 
-      for(let i = 0; i <= list_tg.size - 1; i++) {
+      for(let i = 0; i <= li_tg.size - 1; i++) {
         if(i % 2 != 0) continue;
 
-        if(list_tg.get(i) == nm) list_val.add(list_tg.get(i + 1));
+        if(li_tg.get(i) == nm) li_val.add(li_tg.get(i + 1));
       };
 
-      return list_val;
+      return li_val;
     };
-    exports.readList_1n1v = readList_1n1v;
+    exports.readli_1n1v = readli_1n1v;
 
 
-    const writeList_2n1v = function(list_tg, list_val) {
-      if(list_val.size == 0) return;
+    const writeli_2n1v = function(li_tg, li_val) {
+      if(li_val.size == 0) return;
 
-      for(let i = 0; i <= list_val.size - 2; i++) {
+      for(let i = 0; i <= li_val.size - 2; i++) {
         if(i % 3 != 0) continue;
 
-        write_2n1v(list_tg, list_val.get(i), list_val.get(i + 1), list_val.get(i + 2));
+        write_2n1v(li_tg, li_val.get(i), li_val.get(i + 1), li_val.get(i + 2));
       };
     };
-    exports.writeList_2n1v = writeList_2n1v;
+    exports.writeli_2n1v = writeli_2n1v;
 
 
-    const readList_2n1v = function(list_tg, nm1, nm2) {
-      var list_val = new Seq();
-      if(list_tg.size == 0) return list_val;
+    const readli_2n1v = function(li_tg, nm1, nm2) {
+      var li_val = new Seq();
+      if(li_tg.size == 0) return li_val;
 
-      for(let i = 0; i <= list_tg.size - 2; i++) {
+      for(let i = 0; i <= li_tg.size - 2; i++) {
         if(i % 3 != 0) continue;
 
-        if(list_tg.get(i) == nm1 && list_tg.get(i + 1) == nm2) list_val.add(list_tg.get(i + 2));
+        if(li_tg.get(i) == nm1 && li_tg.get(i + 1) == nm2) li_val.add(li_tg.get(i + 2));
       };
 
-      return list_val;
+      return li_val;
     };
-    exports.readList_1n1v = readList_1n1v;
+    exports.readli_1n1v = readli_1n1v;
   // End
 
 

@@ -7,33 +7,33 @@
 
   // Part: Planet
     /* NOTE: Tidal generator can only function normally on these. */
-    const list_hasTides = new Seq([
+    const li_hasTides = new Seq([
       "reind-pla-ter-aerth",
     ]);
-    exports.hasTides = list_hasTides;
+    exports.hasTides = li_hasTides;
   // End
 
 
   // Part: Floor
     /* NOTE: Applies quicksand status to units on it. */
-    const list_quicksand = new Seq([
+    const li_quicksand = new Seq([
       "reind-env-liq-quicksand",
       "reind-env-liq-quicksand-dark",
     ]);
-    exports.quicksand = list_quicksand;
+    exports.quicksand = li_quicksand;
 
 
     /* NOTE: Applies parasite status to units on it. */
-     const list_parasiteFluids = new Seq([
+     const li_parasiteFluids = new Seq([
        "reind-env-liq-carnage-plasma",
        "reind-env-liq-carnage-plasma-shallow",
      ]);
-     exports.parasiteFluids = list_parasiteFluids;
+     exports.parasiteFluids = li_parasiteFluids;
   // End
 
 
   // Part: Prop
-    const list_treeLayers = new Seq([
+    const li_treeLayers = new Seq([
 
 
       /* <---------------- tree ----------------> */
@@ -103,5 +103,5 @@
       "reind-env-tree-fungi-aquatic-nightmare", 78.12,
       "reind-env-tree-fungi-jellyfish-crown", 79.85,
     ]);
-    exports.treeLayers = list_treeLayers;
+    exports.treeLayers = li_treeLayers;
   // End

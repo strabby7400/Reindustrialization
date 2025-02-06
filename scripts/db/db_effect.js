@@ -1539,6 +1539,12 @@
     ======================================== */
 
 
+      const _powerParticles = function() {
+        return _releaseParticles("circle", 8.0, 0.5, 3, 1.2, Color.valueOf("ffe18f"), false, false, true);
+      };
+      exports._powerParticles = _powerParticles;
+
+
       const _craftGas = function() {
         return _gasRelease();
       };

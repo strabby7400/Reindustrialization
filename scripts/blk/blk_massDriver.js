@@ -12,6 +12,7 @@
 
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_geometry = require("reind/mdl/mdl_geometry");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -38,7 +39,7 @@
           var dmg = b.block.size * b.block.reload * 0.7;
           var dur = b.block.reload * 0.5;
 
-          frag_attack.attack_impact_1b(b, rad, dmg, dur);
+          frag_attack.attack_impact(mdl_geometry.poser_1b(b), rad, dmg, dur);
         };
       };
     };
@@ -47,17 +48,17 @@
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       // Draw impact range
       var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
-      if(rad != null) mdl_draw.drawCirclePulse_1blk(blk, Vars.world.tile(tx, ty), rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_geometry.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
       // Draw impact range
       var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
-      if(rad != null) mdl_draw.drawCirclePulse_1b(b, rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_geometry.poser_1b(b), rad);
 
       // Draw reload progress
-      mdl_draw.drawProgressBar_1b(b, Math.min(1.0 - b.reloadCounter, 1.0));
+      mdl_draw.drawProgressBar(mdl_geometry.poser_1b(b), Math.min(1.0 - b.reloadCounter, 1.0), Pal.accent, b.block.size);
     };
 
 

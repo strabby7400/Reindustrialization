@@ -9,13 +9,14 @@
     const blk_genericDistributionGate = require("reind/blk/blk_genericDistributionGate");
 
     const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_geometry = require("reind/mdl/mdl_geometry");
   // End
 
 
   // Part: Component
     function drawSelectComp(b) {
       // Draw config content
-      if(b.unloadItem != null) mdl_draw.drawContentIcon_1b(b, b.unloadItem);
+      if(b.unloadItem != null) mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), b.unloadItem, b.block.size);
     };
   // End
 

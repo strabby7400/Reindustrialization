@@ -12,124 +12,124 @@
 
   // Part: Group
     /* Primary */
-    const group_brine = new Seq([
+    const grp_brine = new Seq([
       "reind-liq-ore-brine",
       "reind-liq-ore-sea-water",
 
       "reind-liq-int-brine-purified",
     ]);
-    exports.group_brine = group_brine;
+    exports.grp_brine = grp_brine;
 
 
     /* Primary */
-    const group_basicAq = new Seq([
+    const grp_basicAq = new Seq([
       "reind-liq-was-waste-water-basic",
     ]);
-    exports.group_basicAq = group_basicAq;
+    exports.grp_basicAq = grp_basicAq;
 
 
     /* Primary */
-    const group_acidicAq = new Seq([
+    const grp_acidicAq = new Seq([
       "reind-liq-chem-hydrochloric-acid",
       "reind-liq-chem-sulfuric-acid",
       "reind-liq-chem-sulfurous-acid",
 
       "reind-liq-was-waste-water-acidic",
     ]);
-    exports.group_acidicAq = group_acidicAq;
+    exports.grp_acidicAq = grp_acidicAq;
 
 
     /* Primary */
-    const group_basicOil = new Seq([
+    const grp_basicOil = new Seq([
 
     ]);
-    exports.group_basicOil = group_basicOil;
+    exports.grp_basicOil = grp_basicOil;
 
 
     /* Primary */
-    const group_acidicOil = new Seq([
+    const grp_acidicOil = new Seq([
 
     ]);
-    exports.group_acidicOil = group_acidicOil;
+    exports.grp_acidicOil = grp_acidicOil;
 
 
     /* Primary */
-    const group_basicSub = new Seq([
+    const grp_basicSub = new Seq([
 
     ]);
-    exports.group_basicSub = group_basicSub;
+    exports.grp_basicSub = grp_basicSub;
 
 
     /* Primary */
-    const group_acidicSub = new Seq([
+    const grp_acidicSub = new Seq([
       "reind-liq-chem-sulfuric-acid-conc",
       "reind-liq-chem-sulfuric-acid-fuming",
     ]);
-    exports.group_acidicSub = group_acidicSub;
+    exports.grp_acidicSub = grp_acidicSub;
 
 
     /* Primary */
-    const group_basicGas = new Seq([
+    const grp_basicGas = new Seq([
       "reind-gas-chem-ammonia",
     ]);
-    exports.group_basicGas = group_basicGas;
+    exports.grp_basicGas = grp_basicGas;
 
 
     /* Primary */
-    const group_acidicGas = new Seq([
+    const grp_acidicGas = new Seq([
       "reind-gas-chem-chlorine",
 
       "reind-gas-chem-hydrogen-sulfide",
       "reind-gas-chem-sulfur-dioxide",
       "reind-gas-chem-sulfur-trioxide",
     ]);
-    exports.group_acidicGas = group_acidicGas;
+    exports.grp_acidicGas = grp_acidicGas;
 
 
     /* Primary */
-    const group_slurry = new Seq([
+    const grp_slurry = new Seq([
       "reind-liq-was-waste-slurry",
     ]);
-    exports.group_slurry = group_slurry;
+    exports.grp_slurry = grp_slurry;
 
 
     /* Functional */
-    const group_aqueous = new Seq([
+    const grp_aqueous = new Seq([
       "reind-liq-ore-water",
 
       "reind-liq-was-waste-water",
 
       "reind-gas-misc-steam",
     ]);
-    group_aqueous.addAll(group_brine);
-    group_aqueous.addAll(group_basicAq);
-    group_aqueous.addAll(group_acidicAq);
-    group_aqueous.addAll(group_slurry);
-    exports.group_aqueous = group_aqueous;
+    grp_aqueous.addAll(grp_brine);
+    grp_aqueous.addAll(grp_basicAq);
+    grp_aqueous.addAll(grp_acidicAq);
+    grp_aqueous.addAll(grp_slurry);
+    exports.grp_aqueous = grp_aqueous;
 
 
     /* Primary */
-    const group_melt = new Seq([
+    const grp_melt = new Seq([
 
     ]);
-    exports.group_melt = group_melt;
+    exports.grp_melt = grp_melt;
 
 
     /* Primary */
-    const group_stickyMelt = new Seq([
+    const grp_stickyMelt = new Seq([
       "reind-liq-int-melt-glass",
     ]);
-    exports.group_stickyMelt = group_stickyMelt;
+    exports.grp_stickyMelt = grp_stickyMelt;
 
 
     /* Functional */
-    const group_conductive = new Seq([
+    const grp_conductive = new Seq([
 
     ]);
-    group_conductive.addAll(group_aqueous);
-    group_conductive.addAll(group_melt);
-    group_conductive.addAll(group_stickyMelt);
-    exports.group_conductive = group_conductive;
+    grp_conductive.addAll(grp_aqueous);
+    grp_conductive.addAll(grp_melt);
+    grp_conductive.addAll(grp_stickyMelt);
+    exports.grp_conductive = grp_conductive;
   // End
 
 
@@ -177,7 +177,7 @@
 
 
   // Part: Corrosion
-    const list_baseCorrosion = new Seq([
+    const li_baseCorrosion = new Seq([
       "brine", 1.0,
       "basicAq", 1.35,
       "acidicAq", 1.35,
@@ -188,10 +188,10 @@
       "basicGas", 1.7,
       "acidicGas", 1.7,
     ]);
-    exports.baseCorrosion = list_baseCorrosion;
+    exports.baseCorrosion = li_baseCorrosion;
 
 
-    const list_specificCorrosion = new Seq([
+    const li_specificCorrosion = new Seq([
       "reind-liq-ore-sea-water", 0.7,
 
       "reind-liq-chem-hydrochloric-acid", 1.7,
@@ -205,10 +205,10 @@
 
       "reind-gas-chem-sulfur-trioxide", 2.0,
     ]);
-    exports.specificCorrosion = list_specificCorrosion;
+    exports.specificCorrosion = li_specificCorrosion;
 
 
-    const list_corrosionScale = new Seq([
+    const li_corrosionScale = new Seq([
       "wood", "basicAq", 5.0,
       "wood", "acidicAq", 5.0,
       "wood", "basicOil", 7.0,
@@ -226,10 +226,10 @@
 
       "stainlessSteel", "brine", 4.0,
     ]);
-    exports.corrosionScale = list_corrosionScale;
+    exports.corrosionScale = li_corrosionScale;
 
 
-    const list_specificCorrosionScale = new Seq([
+    const li_specificCorrosionScale = new Seq([
       "wood", "oxidative", 12.0,
 
       "copper", "ammoniacal", 4.0,
@@ -237,12 +237,12 @@
 
       "glass", "fluoric", 9.0,
     ]);
-    exports.specificCorrosionScale = list_specificCorrosionScale;
+    exports.specificCorrosionScale = li_specificCorrosionScale;
   // End
 
 
   // Part: Heat
-    const list_fluidHeat = new Seq([
+    const li_fluidHeat = new Seq([
       "reind-liq-int-melt-glass", 1250.0,
 
       "reind-liq-chem-sulfuric-acid-fuming", 350.0,
@@ -251,12 +251,12 @@
 
       "reind-gas-chem-sulfur-trioxide", 350.0,
     ]);
-    exports.fluidHeat = list_fluidHeat;
+    exports.fluidHeat = li_fluidHeat;
   // End
 
 
   // Part: Flow
-    const list_density = new Seq([
+    const li_density = new Seq([
 
       /* ========================================
         Section: liq-ore
@@ -322,10 +322,10 @@
       "reind-gas-chem-sulfur-trioxide", 0.00197,
 
     ]);
-    exports.density = list_density;
+    exports.density = li_density;
 
 
-    const list_viscosity = new Seq([
+    const li_viscosity = new Seq([
 
       /* ========================================
         Section: liq-ore
@@ -366,33 +366,33 @@
       ======================================== */
 
     ]);
-    exports.viscosity = list_viscosity;
+    exports.viscosity = li_viscosity;
   // End
 
 
   // Part: Efficiency
-    const list_effcWhitelist = new Seq([
-
+    const li_effcWhitelist = new Seq([
+      "reind-pow-econd-transmission-box",
     ]);
-    exports.effcWhitelist = list_effcWhitelist;
+    exports.effcWhitelist = li_effcWhitelist;
   // End
 
 
   // Part: Attribute
-    const list_ventMap = new Seq([
+    const li_ventMap = new Seq([
       "reind-attr-vent-ammonia", "reind-gas-chem-ammonia",
       "reind-attr-vent-sour-gas", "reind-gas-ore-sour-gas",
       "reind-attr-vent-steam", "reind-gas-misc-steam",
       "reind-attr-vent-sulfur-dioxide", "reind-gas-chem-sulfur-dioxide",
       "reind-attr-underwater-vent-hydrogen-sulfide", "reind-gas-chem-hydrogen-sulfide",
     ]);
-    exports.ventMap = list_ventMap;
+    exports.ventMap = li_ventMap;
   // End
 
 
   // Part: Intermediate
     /* NOTE: Sets stat for target products. */
-    const list_intermediateMap = new Seq([
+    const li_intermediateMap = new Seq([
 
       /* ========================================
         Section: Melt
@@ -408,5 +408,5 @@
       "reind-liq-int-brine-purified", "reind-item-chem-sodium-bicarbonate",
 
     ]);
-    exports.intermediateMap = list_intermediateMap;
+    exports.intermediateMap = li_intermediateMap;
   // End

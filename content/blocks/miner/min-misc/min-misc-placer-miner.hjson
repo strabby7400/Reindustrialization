@@ -111,7 +111,7 @@
 */
 
 
-  craftTime: 30.0
+  craftTime: 45.0
   consumes: {
-    power: 0.58333333
+    power: 1.16666667
   }

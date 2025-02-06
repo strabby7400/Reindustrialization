@@ -22,7 +22,7 @@
       itm.stats.add(db_stat.isConsumable, true);
 
       // Get used in
-      var tagVal = mdl_text.getTagText(mdl_database.readList_1n1v(db_item.consumableMap, itm.name));
+      var tagVal = mdl_text.getTagText(mdl_database.readli_1n1v(db_item.consumableMap, itm.name));
       if(tagVal != null) itm.stats.add(db_stat.usedIn, tagVal);
     };
   // End

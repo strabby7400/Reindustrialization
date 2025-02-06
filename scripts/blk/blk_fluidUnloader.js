@@ -26,7 +26,7 @@
       var liq = b.liquids.current();
       if(liq != liq_sel) b.liquids.clear();
       b.moveLiquidForward(false, liq_sel);
-      var ot_f = mdl_geometry.getTile_rotB("f", b);
+      var ot_f = mdl_geometry.getTile_rot_1b("f", b);
       if(ot_f != null) frag_fluid.transferLiquid(ot_f.build, b, liq_sel, true);
     };
 
@@ -50,7 +50,7 @@
     function drawSelectComp(b) {
       // Draw config content
       var liq_sel = Vars.content.liquids().get(ct_blk_fluidUnloader.accB_cfg_id(b, "r"));
-      if(liq_sel != Liquids.water) mdl_draw.drawContentIcon_1b(b, liq_sel);
+      if(liq_sel != Liquids.water) mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), liq_sel, b.block.size);
     };
   // End
 

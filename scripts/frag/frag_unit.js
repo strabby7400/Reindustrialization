@@ -35,9 +35,9 @@
       };
 
       // Range
-      var list_ot = mdl_geometry.getTiles_rect(t, 4);
+      var li_ot = mdl_geometry.getTiles_rect(t, 4);
       var count_wall = 0.0;
-      list_ot.each(ot => {
+      li_ot.each(ot => {
         /* tree */
         if(!unit.flying && utp.hitSize <= 28.0 && ot.block().name.includes("reind-env-tree-")) {
           var z = mdl_database.read_1n1v(db_env.treeLayers, ot.block().name);
@@ -54,7 +54,7 @@
 
         /* wall */
         /* NOTE: An attempt to ban wall spamming */
-        if(!unit.flying && !(unit instanceof Legsc) && ot.block().name.includes("reind-def-wall-") && ot.build.team == unit.team) count_wall += 8.0 / mdl_geometry.getDistance_2t(t, ot);
+        if(!unit.flying && !(unit instanceof Legsc) && ot.block().name.includes("reind-def-wall-") && ot.build.team == unit.team) count_wall += 8.0 / mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(ot));
       });
 
       // Post-detection

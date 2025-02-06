@@ -25,7 +25,7 @@
 
 
   research: {
-    parent: fac-heat-furnace-heater
+    parent: fac-heat-temperature-control-unit
     objectives: []
   }
   researchCostMultiplier: 0.3
@@ -200,7 +200,7 @@
     power: 2.0
   }
   outputLiquids: [
-    effc-cond-heat/0.13333333
+    effc-cond-heat/0.2
     liq-ore-water/0.25
   ]
 

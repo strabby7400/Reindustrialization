@@ -17,14 +17,14 @@
     function setStatsComp(blk) {
       // Get related item
       if(blk.itemDrop != null) {
-        var list_itm = new Seq([blk.itemDrop]);
-        blk.stats.add(db_stat.resourceRelated, StatValues.content(list_itm));
+        var li_itm = new Seq([blk.itemDrop]);
+        blk.stats.add(db_stat.resourceRelated, StatValues.content(li_itm));
       };
 
       // Get related liquid
       if(blk.liquidDrop != null) {
-        var list_liq = new Seq([blk.liquidDrop]);
-        blk.stats.add(db_stat.resourceRelated, StatValues.content(list_liq));
+        var li_liq = new Seq([blk.liquidDrop]);
+        blk.stats.add(db_stat.resourceRelated, StatValues.content(li_liq));
       };
     };
   // End

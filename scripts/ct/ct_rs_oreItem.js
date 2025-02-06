@@ -383,6 +383,15 @@
     exports.itemOre_limestone = itemOre_limestone;
 
 
+    const itemOre_olivine = extend(Item, "item-ore-olivine", {
+      setStats() {
+        this.super$setStats();
+        rs_oreItem.setStats(this);
+      },
+    });
+    exports.itemOre_olivine = itemOre_olivine;
+
+
     const itemOre_sandstone = extend(Item, "item-ore-sandstone", {
       setStats() {
         this.super$setStats();

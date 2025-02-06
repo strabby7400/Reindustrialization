@@ -15,11 +15,11 @@
   // Part: Component
     function setStatsComp_oreFluid(liq) {
       // Get related blocks
-      var list_blk = new Seq();
+      var li_blk = new Seq();
       Vars.content.blocks().each(blk => {
-        if(blk.liquidDrop == liq) list_blk.add(blk);
+        if(blk.liquidDrop == liq) li_blk.add(blk);
       });
-      if(list_blk.size > 0) liq.stats.add(db_stat.blockRelated, StatValues.content(list_blk.sort()));
+      if(li_blk.size > 0) liq.stats.add(db_stat.blockRelated, StatValues.content(li_blk.sort()));
     };
   // End
 

@@ -60,24 +60,24 @@
       if(sector != null) {
         var id = sector.id;
         var pla = Vars.state.planet.name;
-        var list_we;
+        var li_we;
 
         if(pla == "reind-pla-ter-aerth") {
           switch(id) {
             case 0 :
               // Sector Alpha
-              list_we = ldm ? wp_aerthStormLeaves_ldm : wp_aerthStormLeaves;
+              li_we = ldm ? wp_aerthStormLeaves_ldm : wp_aerthStormLeaves;
               break;
             case 94 :
               // Crab Cliff
-              list_we = ldm ? wp_aerthStorm_ldm : wp_aerthStorm;
+              li_we = ldm ? wp_aerthStorm_ldm : wp_aerthStorm;
               break;
             default :
-              list_we = ldm ? wp_aerthStorm_ldm : wp_aerthStorm;
+              li_we = ldm ? wp_aerthStorm_ldm : wp_aerthStorm;
           };
         };
 
-        Vars.state.rules.weather = list_we;
+        Vars.state.rules.weather = li_we;
       };
     };
   // End

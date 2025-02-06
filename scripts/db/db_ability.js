@@ -40,7 +40,7 @@
           bars.add(new Bar(
             "term.reind-term-unit-count.name",
             Pal.accent,
-            () => Math.min(mdl_geometry.countUnits_self(unit, rad) / limit, 1.0),
+            () => Math.min(mdl_geometry.getSameUnits(mdl_geometry.poser_1u(unit), rad, unit.type.name, unit.team).size / limit, 1.0),
           )).row();
         },
 
@@ -48,7 +48,7 @@
         update(unit) {
           if(Mathf.chance(0.99)) return;
 
-          var count = mdl_geometry.countUnits_self(unit, rad);
+          var count = mdl_geometry.getSameUnits(mdl_geometry.poser_1u(unit), rad, unit.type.name, unit.team).size;
           if(count >= limit) unit.apply(Vars.content.statusEffect("reind-sta-spec-morale"), 300.0);
         },
 

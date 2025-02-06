@@ -28,20 +28,20 @@
       if(col == null) col = 4;
 
       tb.table(Tex.button, tb_rt => {
-        var list_liq = Vars.content.liquids();
-        for(let i = 0, j = 0; i < list_liq.size; i++) {
-          if(list_liq.get(i).hidden || !list_liq.get(i).name.includes("reind-") || mdl_content.isEffc(list_liq.get(i))) continue;
+        var li_liq = Vars.content.liquids();
+        for(let i = 0, j = 0; i < li_liq.size; i++) {
+          if(li_liq.get(i).hidden || !li_liq.get(i).name.includes("reind-") || mdl_content.isEffc(li_liq.get(i))) continue;
 
           (function(i) {
             var btn = tb_rt.button(Tex.pane, 32.0, () => {
               (i == id) ? (scr.call(0)) : (scr.call(i));
-            }).pad(4.0).tooltip(list_liq.get(i).localizedName).group(btnGrp).get();
+            }).pad(4.0).tooltip(li_liq.get(i).localizedName).group(btnGrp).get();
 
             btn.getStyle().up = Styles.black3;
             btn.getStyle().down = Styles.black3;
             btn.getStyle().over = Styles.flatOver;
             btn.getStyle().checked = Styles.accentDrawable;
-            btn.getStyle().imageUp = new TextureRegionDrawable(list_liq.get(i).uiIcon);
+            btn.getStyle().imageUp = new TextureRegionDrawable(li_liq.get(i).uiIcon);
             btn.update(() => btn.setChecked(i == id));
           })(i);
           if(j % col == col - 1) tb_rt.row();

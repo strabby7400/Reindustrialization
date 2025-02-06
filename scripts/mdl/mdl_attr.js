@@ -25,14 +25,14 @@
     exports.getAttr_b = getAttr_b;
 
 
-    const getAttr_list = function(list_ot, nm_attr) {
+    const getAttr_li = function(li_ot, nm_attr) {
       var attr = 0;
-      list_ot.each(ot => {
+      li_ot.each(ot => {
         if(!ot.floor().isDeep()) attr += ot.floor().attributes.get(Attribute.get(nm_attr));
       });
       return attr;
     };
-    exports.getAttr_list = getAttr_list;
+    exports.getAttr_li = getAttr_li;
   // End
 
 
@@ -59,7 +59,7 @@
       {db_item.bushMap} ... For bush harvesters.
       {db_fluid.ventMap} ... For vent collectors.
     */
-    const getAttrPair_list = function(map, list_ot) {
+    const getAttrPair_li = function(map, li_ot) {
       if(map == null || map.size == 0) return;
 
       var nm_attr;
@@ -67,7 +67,7 @@
       for(let i = 0; i < map.size; i++) {
         if(i % 2 != 0) continue;
 
-        var temp_attr = getAttr_list(list_ot, map.get(i));
+        var temp_attr = getAttr_li(li_ot, map.get(i));
         if(temp_attr > attr) {
           nm_attr = map.get(i);
           attr = temp_attr;
@@ -80,44 +80,28 @@
         return;
       };
     };
-    exports.getAttrPair_list = getAttrPair_list;
-
-
-    const getAttrPair_blk = function(map, blk, t) {
-      if(blk == null || t == null) return;
-
-      return getAttrPair_list(map, mdl_geometry.getTiles_size(t, blk.size));
-    };
-    exports.getAttrPair_blk = getAttrPair_blk;
-
-
-    const getAttrPair_b = function(map, b) {
-      if(b == null) return;
-
-      return getAttrPair_list(map, mdl_geometry.getTiles_size(b.tile, b.block.size));
-    };
-    exports.getAttrPair_b = getAttrPair_b;
+    exports.getAttrPair_li = getAttrPair_li;
   // End
 
 
   // Part: List
-    const getAttrList_list = function(map, list_ot) {
+    const getAttrli_li = function(map, li_ot) {
       if(map == null || map.size == 0) return new Seq();
 
-      var list_attr = new Seq();
+      var li_attr = new Seq();
       for(let i = 0; i < map.size; i++) {
         if(i % 2 != 0) continue;
 
         var nm_attr = map.get(i);
-        var attr = getAttr_list(list_ot, nm_attr);
+        var attr = getAttr_li(li_ot, nm_attr);
 
-        list_attr.add(nm_attr);
-        list_attr.add(attr);
+        li_attr.add(nm_attr);
+        li_attr.add(attr);
       };
 
-      return list_attr;
+      return li_attr;
     };
-    exports.getAttrList_list = getAttrList_list;
+    exports.getAttrli_li = getAttrli_li;
   // End
 
 

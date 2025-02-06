@@ -190,6 +190,9 @@
     */
 
 
+      /* <---------------- brick ----------------> */
+
+
       // Blend (High-Alumina Brick)
       {
         craftTime: 300.0
@@ -326,436 +329,433 @@
       }
 
 
-      /* Ore */
+      /* <---------------- aluminum ----------------> */
 
 
-        /* Aluminum */
-
-
-        // Bauxite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-bauxite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-bauxite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-bauxite/20
-            ]
-          }
+      // Bauxite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-bauxite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-bauxite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
-
-
-        /* Chromium */
-
-
-        // Chromite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-chromite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-chromite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-chromite/20
-            ]
-          }
+        output: {
+          items: [
+            reind-item-int-dust-bauxite/20
+          ]
         }
+      }
 
 
-        /* Copper */
+      /* <---------------- chromium ----------------> */
 
 
-        // Azurite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-azurite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-azurite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-azurite/20
-            ]
-          }
+      // Chromite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-chromite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-chromite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
-
-
-        // Cuprite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-cuprite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-cuprite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-cuprite/20
-            ]
-          }
+        output: {
+          items: [
+            reind-item-int-dust-chromite/20
+          ]
         }
+      }
 
 
-        // Malachite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-malachite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-malachite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-malachite/20
-            ]
-          }
+      /* <---------------- copper ----------------> */
+
+
+      // Azurite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-azurite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-azurite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
-
-
-        // Native Copper
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-native-copper
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-native-copper/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-native-copper/20
-            ]
-          }
+        output: {
+          items: [
+            reind-item-int-dust-azurite/20
+          ]
         }
+      }
 
 
-        /* Iron */
-
-
-        // Hematite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-hematite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-hematite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-hematite/20
-            ]
-          }
+      // Cuprite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-cuprite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-cuprite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
-
-
-        // Limonite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-limonite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-limonite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-limonite/20
-            ]
-          }
+        output: {
+          items: [
+            reind-item-int-dust-cuprite/20
+          ]
         }
+      }
 
 
-        // Magnetite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-magnetite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-magnetite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-magnetite/20
-            ]
-          }
+      // Malachite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-malachite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-malachite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
-
-
-        // Pyrite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-pyrite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-pyrite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-pyrite/20
-            ]
-          }
+        output: {
+          items: [
+            reind-item-int-dust-malachite/20
+          ]
         }
+      }
 
 
-        /* Lead */
-
-
-        // Anglesite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-anglesite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-anglesite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-anglesite/20
-            ]
-          }
+      // Native Copper
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-native-copper
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-native-copper/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
-
-
-        // Galena
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-galena
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-galena/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-galena/20
-            ]
-          }
+        output: {
+          items: [
+            reind-item-int-dust-native-copper/20
+          ]
         }
+      }
 
 
-        /* Manganese */
+      /* <---------------- iron ----------------> */
 
 
-        // Psilomelane
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-psilomelane
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-psilomelane/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-psilomelane/20
-            ]
-          }
+      // Hematite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-hematite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-hematite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
-
-
-        // Pyrolusite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-pyrolusite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-pyrolusite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-pyrolusite/20
-            ]
-          }
+        output: {
+          items: [
+            reind-item-int-dust-hematite/20
+          ]
         }
+      }
 
 
-        /* Tin */
-
-
-        // Cassiterite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-cassiterite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-cassiterite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-cassiterite/20
-            ]
-          }
+      // Limonite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-limonite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-limonite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
-
-
-        /* Titanium */
-
-
-        // Ilmenite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-ilmenite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-ilmenite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-ilmenite/20
-            ]
-          }
+        output: {
+          items: [
+            reind-item-int-dust-limonite/20
+          ]
         }
+      }
 
 
-        // Rutile
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-rutile
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-rutile/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-rutile/20
-            ]
-          }
+      // Magnetite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-magnetite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-magnetite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
-
-
-        /* Zinc */
-
-
-        // Smithsonite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-smithsonite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-smithsonite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-smithsonite/20
-            ]
-          }
+        output: {
+          items: [
+            reind-item-int-dust-magnetite/20
+          ]
         }
+      }
 
 
-        // Sphalerite
-        {
-          craftTime: 300.0
-          icon: reind-item-ore-sphalerite
-          input: {
-            power: 1.66666667
-            items: [
-              reind-item-ore-sphalerite/20
-            ]
-            fluids: [
-              reind-effc-effc-ball-impact/0.01666667
-            ]
-          }
-          output: {
-            items: [
-              reind-item-int-dust-sphalerite/20
-            ]
-          }
+      // Pyrite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-pyrite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-pyrite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
         }
+        output: {
+          items: [
+            reind-item-int-dust-pyrite/20
+          ]
+        }
+      }
 
 
-      /* Rock */
+      /* <---------------- lead ----------------> */
+
+
+      // Anglesite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-anglesite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-anglesite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-dust-anglesite/20
+          ]
+        }
+      }
+
+
+      // Galena
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-galena
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-galena/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-dust-galena/20
+          ]
+        }
+      }
+
+
+      /* <---------------- manganese ----------------> */
+
+
+      // Psilomelane
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-psilomelane
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-psilomelane/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-dust-psilomelane/20
+          ]
+        }
+      }
+
+
+      // Pyrolusite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-pyrolusite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-pyrolusite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-dust-pyrolusite/20
+          ]
+        }
+      }
+
+
+      /* <---------------- tin ----------------> */
+
+
+      // Cassiterite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-cassiterite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-cassiterite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-dust-cassiterite/20
+          ]
+        }
+      }
+
+
+      /* <---------------- titanium ----------------> */
+
+
+      // Ilmenite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-ilmenite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-ilmenite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-dust-ilmenite/20
+          ]
+        }
+      }
+
+
+      // Rutile
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-rutile
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-rutile/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-dust-rutile/20
+          ]
+        }
+      }
+
+
+      /* <---------------- zinc ----------------> */
+
+
+      // Smithsonite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-smithsonite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-smithsonite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-dust-smithsonite/20
+          ]
+        }
+      }
+
+
+      // Sphalerite
+      {
+        craftTime: 300.0
+        icon: reind-item-ore-sphalerite
+        input: {
+          power: 1.66666667
+          items: [
+            reind-item-ore-sphalerite/20
+          ]
+          fluids: [
+            reind-effc-effc-ball-impact/0.01666667
+          ]
+        }
+        output: {
+          items: [
+            reind-item-int-dust-sphalerite/20
+          ]
+        }
+      }
+
+
+      /* <---------------- rock ----------------> */
 
 
       // Clastic

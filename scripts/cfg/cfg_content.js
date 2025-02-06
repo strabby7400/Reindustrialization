@@ -28,25 +28,25 @@
 
 
         // Preparation
-        var list_itm = new Seq();
-        Vars.content.items().each(itm => {if(itm.name.includes("reind-")) list_itm.add(itm)});
-        var list_liq = new Seq();
-        Vars.content.liquids().each(liq => {if(liq.name.includes("reind-")) list_liq.add(liq)});
-        var list_blk = new Seq();
-        var list_env = new Seq();
+        var li_itm = new Seq();
+        Vars.content.items().each(itm => {if(mdl_content.isReind(itm)) li_itm.add(itm)});
+        var li_liq = new Seq();
+        Vars.content.liquids().each(liq => {if(mdl_content.isReind(liq)) li_liq.add(liq)});
+        var li_blk = new Seq();
+        var li_env = new Seq();
         Vars.content.blocks().each(blk => {
           var tp = mdl_content.getContentType_nm(blk.name);
           switch(tp) {
             case "build" :
-              list_blk.add(blk);
+              li_blk.add(blk);
               break;
             case "env" :
-              list_env.add(blk);
+              li_env.add(blk);
               break;
           };
         });
-        var list_utp = new Seq();
-        Vars.content.units().each(utp => {if(utp.name.includes("reind-")) list_utp.add(utp)});
+        var li_utp = new Seq();
+        Vars.content.units().each(utp => {if(mdl_content.isReind(utp)) li_utp.add(utp)});
 
 
       /* ========================================
@@ -55,7 +55,7 @@
 
 
         // Corrosion
-        list_liq.each(liq => {
+        li_liq.each(liq => {
           var grp = mdl_corrosion.getGroup(liq);
           if(grp != null) {
             var cor = mdl_corrosion.getCorrosion(liq);
@@ -65,7 +65,7 @@
 
 
         // Corrosion Resistence
-        list_blk.each(blk => {
+        li_blk.each(blk => {
           if(blk.hasLiquids) {
             var matGrp = mdl_corrosion.getMaterialGroup(blk);
             if(matGrp != null) blk.stats.add(db_stat.corrosionResistence, mdl_corrosion.getCorrosionResistence(blk));
@@ -79,14 +79,14 @@
 
 
         // Block Faction
-        list_blk.each(blk => {
+        li_blk.each(blk => {
           var faction = mdl_database.read_1n1v(db_block.blockFaction, blk.name);
           if(faction != null) blk.stats.add(db_stat.faction, faction);
         });
 
 
         // Unit Faction
-        list_utp.each(utp => {
+        li_utp.each(utp => {
           var faction = mdl_database.read_1n1v(db_unit.unitFaction, utp.name);
           if(faction != null) utp.stats.add(db_stat.faction, faction);
         });
@@ -98,8 +98,8 @@
 
 
         // Family
-        list_blk.each(blk => {
-          var tagVal = mdl_text.getTagText(mdl_database.readList_1n1v(db_block.factoryFamily, blk.name));
+        li_blk.each(blk => {
+          var tagVal = mdl_text.getTagText(mdl_database.readli_1n1v(db_block.factoryFamily, blk.name));
           if(tagVal != null) blk.stats.add(db_stat.factoryFamily, tagVal);
         });
 
@@ -110,14 +110,14 @@
 
 
         // Pollution
-        var list_blockPollution = db_block.blockPollution;
-        for(let i = 0; i < list_blockPollution.size - 1; i++) {
+        var li_blockPollution = db_block.blockPollution;
+        for(let i = 0; i < li_blockPollution.size - 1; i++) {
           if(i % 2 != 0) continue;
 
-          var blk = Vars.content.block(list_blockPollution.get(i));
+          var blk = Vars.content.block(li_blockPollution.get(i));
           if(blk == null) continue;
 
-          var pol = list_blockPollution.get(i + 1);
+          var pol = li_blockPollution.get(i + 1);
           if(pol > 0.0) {
             blk.stats.add(db_stat.pollution, pol, db_stat.perBlock);
           } else {
@@ -132,7 +132,7 @@
 
 
         // Voltage Tier
-        list_blk.each(blk => {
+        li_blk.each(blk => {
           if(blk.hasPower) {
             if(db_block.tierHV.contains(blk.name)) {
               blk.stats.add(db_stat.voltageTier, "@term.reind-term-high-voltage.name");
@@ -187,7 +187,7 @@
 
 
         // Viscosity
-        list_liq.each(liq => {
+        li_liq.each(liq => {
           liq.viscosity = mdl_flow.getViscosity(liq);
         });
 

@@ -36,7 +36,7 @@
       if(r == null) return 0.0;
 
       var attr = 0.0;
-      mdl_geometry.getTiles_rectS(t, r, blk.size).each(ot => {
+      mdl_geometry.getTiles_rect(t, r, blk.size).each(ot => {
         attr += ot.block().attributes.get(attribute);
       });
 
@@ -50,10 +50,10 @@
       var t = Vars.world.tile(tx, ty);
       if(r != null && t != null) {
         mdl_draw.drawPlaceRect(blk, t, valid, r, true);
-        mdl_geometry.getTiles_rectS(t, r, blk.size).each(ot => {
+        mdl_geometry.getTiles_rect(t, r, blk.size).each(ot => {
           if(ot.block().attributes.get(blk.attribute) > 0.0) {
             mdl_draw.drawTileIndicator(ot, true);
-            mdl_draw.drawConnectionLine_2t(t, ot, blk.offset, ot.block().offset, Pal.accent, 1.0, true);
+            mdl_draw.drawFlickerLine(mdl_geometry.poser_1t(t, blk.offset), mdl_geometry.poser_1t(ot, ot.block().offset), Pal.accent, 1.0, true);
           };
         });
       };
@@ -65,10 +65,10 @@
       var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
       if(r != null) {
         mdl_draw.drawSelectRect(b, r, true);
-        mdl_geometry.getTiles_rectS(b.tile, r, b.block.size).each(ot => {
+        mdl_geometry.getTiles_rect(b.tile, r, b.block.size).each(ot => {
           if(ot.block().attributes.get(b.block.attribute) > 0.0) {
             mdl_draw.drawTileIndicator(ot, true);
-            mdl_draw.drawConnectionLine_2t(b.tile, ot, b.block.offset, ot.block().offset, Pal.accent, 1.0, true);
+            mdl_draw.drawFlickerLine(mdl_geometry.poser_1b(b), mdl_geometry.poser_1t(ot, ot.block().offset), Pal.accent, 1.0, true);
           };
         });
       };
@@ -79,8 +79,8 @@
       // Draw transfer
       if(b.efficiency > 0.0001) {
         var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
-        if(r != null) mdl_geometry.getTiles_rectS(b.tile, r, b.block.size).each(ot => {
-          if(ot.block().attributes.get(b.block.attribute) > 0.0) mdl_draw.drawItemTransfer_2t(ot, b.tile, ot.block().offset, b.block.offset, Pal.accent, 1.0)
+        if(r != null) mdl_geometry.getTiles_rect(b.tile, r, b.block.size).each(ot => {
+          if(ot.block().attributes.get(b.block.attribute) > 0.0) mdl_draw.drawItemTransfer(mdl_geometry.poser_1t(ot, ot.block().offset), mdl_geometry.poser_1b(b), Pal.accent, 1.0)
         });
       };
     };

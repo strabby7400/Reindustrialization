@@ -18,18 +18,18 @@
     const getGroup = function(liq) {
       var nm = liq.name;
 
-      if(db_fluid.group_brine.contains(nm)) return "brine";
-      if(db_fluid.group_basicAq.contains(nm)) return "basicAq";
-      if(db_fluid.group_acidicAq.contains(nm)) return "acidicAq";
-      if(db_fluid.group_basicOil.contains(nm)) return "basicOil";
-      if(db_fluid.group_acidicOil.contains(nm)) return "acidicOil";
-      if(db_fluid.group_basicSub.contains(nm)) return "basicSub";
-      if(db_fluid.group_acidicSub.contains(nm)) return "acidicSub";
-      if(db_fluid.group_basicGas.contains(nm)) return "basicGas";
-      if(db_fluid.group_acidicGas.contains(nm)) return "acidicGas";
-      if(db_fluid.group_slurry.contains(nm)) return "slurry";
-      if(db_fluid.group_melt.contains(nm)) return "melt";
-      if(db_fluid.group_stickyMelt.contains(nm)) return "stickyMelt";
+      if(db_fluid.grp_brine.contains(nm)) return "brine";
+      if(db_fluid.grp_basicAq.contains(nm)) return "basicAq";
+      if(db_fluid.grp_acidicAq.contains(nm)) return "acidicAq";
+      if(db_fluid.grp_basicOil.contains(nm)) return "basicOil";
+      if(db_fluid.grp_acidicOil.contains(nm)) return "acidicOil";
+      if(db_fluid.grp_basicSub.contains(nm)) return "basicSub";
+      if(db_fluid.grp_acidicSub.contains(nm)) return "acidicSub";
+      if(db_fluid.grp_basicGas.contains(nm)) return "basicGas";
+      if(db_fluid.grp_acidicGas.contains(nm)) return "acidicGas";
+      if(db_fluid.grp_slurry.contains(nm)) return "slurry";
+      if(db_fluid.grp_melt.contains(nm)) return "melt";
+      if(db_fluid.grp_stickyMelt.contains(nm)) return "stickyMelt";
       return null;
     };
     exports.getGroup = getGroup;
@@ -94,11 +94,11 @@
     const getMaterialGroup = function(blk) {
       var nm = blk.name;
 
-      if(db_block.group_wood.contains(nm)) return "wood";
-      if(db_block.group_copper.contains(nm)) return "copper";
-      if(db_block.group_steel.contains(nm)) return "steel";
-      if(db_block.group_stainlessSteel.contains(nm)) return "stainlessSteel";
-      if(db_block.group_glass.contains(nm)) return "glass";
+      if(db_block.grp_wood.contains(nm)) return "wood";
+      if(db_block.grp_copper.contains(nm)) return "copper";
+      if(db_block.grp_steel.contains(nm)) return "steel";
+      if(db_block.grp_stainlessSteel.contains(nm)) return "stainlessSteel";
+      if(db_block.grp_glass.contains(nm)) return "glass";
       return null;
     };
     exports.getMaterialGroup = getMaterialGroup;

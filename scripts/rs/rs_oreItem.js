@@ -19,11 +19,11 @@
       itm.stats.add(db_stat.hardness, itm.hardness);
 
       // Get related blocks
-      var list_blk = new Seq();
+      var li_blk = new Seq();
       Vars.content.blocks().each(blk => {
-        if(blk.itemDrop == itm) list_blk.add(blk);
+        if(blk.itemDrop == itm) li_blk.add(blk);
       });
-      if(list_blk.size > 0) itm.stats.add(db_stat.blockRelated, StatValues.content(list_blk.sort()));
+      if(li_blk.size > 0) itm.stats.add(db_stat.blockRelated, StatValues.content(li_blk.sort()));
     };
   // End
 

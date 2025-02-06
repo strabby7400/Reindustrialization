@@ -6,7 +6,7 @@
 
 
   // Part: Attribute
-    const list_rockMap = new Seq([
+    const li_rockMap = new Seq([
       "reind-attr-rock-clastic", "reind-item-ore-rock-shard-clastic",
       "reind-attr-rock-evaporite", "reind-item-ore-rock-shard-evaporite",
       "reind-attr-rock-hypabyssal", "reind-item-ore-rock-shard-hypabyssal",
@@ -16,19 +16,19 @@
       "reind-attr-rock-biological-sedimentary", "reind-item-ore-rock-shard-biological-sedimentary",
       "reind-attr-rock-clastic-sedimentary", "reind-item-ore-rock-shard-clastic-sedimentary",
     ]);
-    exports.rockMap = list_rockMap;
+    exports.rockMap = li_rockMap;
 
 
-    const list_bushMap = new Seq([
+    const li_bushMap = new Seq([
 
     ]);
-    exports.bushMap = list_bushMap;
+    exports.bushMap = li_bushMap;
   // End
 
 
   // Part: Consumable
     /* NOTE: Sets stat for facilities used in. */
-    const list_consumableMap = new Seq([
+    const li_consumableMap = new Seq([
 
       /* ========================================
         Section: Ball Mill
@@ -57,13 +57,13 @@
       "reind-item-cons-pall-ring-stainless-steel", Core.bundle.get("term.reind-term-packed-tower.name"),
 
     ]);
-    exports.consumableMap = list_consumableMap;
+    exports.consumableMap = li_consumableMap;
   // End
 
 
   // Part: Intermediate
     /* NOTE: Sets stat for target products. */
-    const list_intermediateMap = new Seq([
+    const li_intermediateMap = new Seq([
 
       /* ========================================
         Section: Blend
@@ -133,5 +133,5 @@
       "reind-item-int-glass-unannealed", "reind-item-buil-tempered-glass",
 
     ]);
-    exports.intermediateMap = list_intermediateMap;
+    exports.intermediateMap = li_intermediateMap;
   // End

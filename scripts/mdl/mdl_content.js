@@ -37,6 +37,8 @@
 
 
     const getContentType_nm = function(nm) {
+      if(nm == null) return;
+
       if(mdl_text.includes_ex(
         nm,
         "reind-item-",
@@ -109,6 +111,8 @@
 
     /* NOTE: Maps arbitrary name to the content based on systematic naming. */
     const getContent_nm = function(nm) {
+      if(nm == null) return;
+
       var tp_ct = getContentType_nm(nm);
       var ct;
       switch(tp_ct) {
@@ -227,7 +231,7 @@
 
 
     const isConductive = function(ct) {
-      return db_fluid.group_conductive.contains(ct.name);
+      return db_fluid.grp_conductive.contains(ct.name);
     };
     exports.isConductive = isConductive;
 
@@ -273,6 +277,16 @@
       );
     };
     exports.isHcond = isHcond;
+
+
+    const isEcond = function(ct) {
+      return mdl_text.includes_ex(
+        ct.name,
+        "reind-pow-econd-",
+        "reind-ilpow-econd-",
+      );
+    };
+    exports.isEcond = isEcond;
 
 
     const canShortCircuit = function(ct) {

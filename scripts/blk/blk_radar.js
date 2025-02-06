@@ -36,17 +36,17 @@
         cd %= thr;
 
         var rad = b.block.fogRadius * Vars.tilesize * b.progress * b.efficiency;
-        var list_unit = mdl_geometry.getUnits_1b(b, rad);
-        list_unit.each(unit => {
+        var li_unit = mdl_geometry.getUnits(mdl_geometry.poser_1b(b), rad);
+        li_unit.each(unit => {
           if(mdl_content.isEnemy(unit, b.team)) {
             unit.apply(Vars.content.statusEffect("reind-sta-spec-radar-detection"), thr * 0.5);
-            mdl_effect.at_1pos(unit, db_effect._radarDetectionApply(), 0.0);
+            mdl_effect.showAt(unit, db_effect._radarDetectionApply(), 0.0);
           };
         });
 
-        mdl_effect.atL_1pos(b, db_effect._radarScan(rad, b.block.size, ct_blk_radar.accB_scanColor(b, "r")), 0.0);
-        mdl_effect.at_1pos(b, db_effect._craftGasLarge());
-        mdl_effect.play_1pos(b, "se-craft-radar");
+        mdl_effect.showAt_ldm(b, db_effect._radarScan(rad, b.block.size, ct_blk_radar.accB_scanColor(b, "r")), 0.0);
+        mdl_effect.showAt(b, db_effect._craftGasLarge());
+        mdl_effect.playAt(b, "se-craft-radar");
       };
       cd += 1;
       ct_blk_radar.accB_cd(b, "w", cd);
@@ -58,7 +58,7 @@
       var thr = ct_blk_radar.accB_thr(b, "r");
 
       // Draw reload progress
-      mdl_draw.drawProgressBar_1b(b, Math.min(cd / thr, 1.0));
+      mdl_draw.drawProgressBar(mdl_geometry.poser_1b(b), Math.min(cd / thr, 1.0), Pal.accent, b.block.size);
     };
   // End
 

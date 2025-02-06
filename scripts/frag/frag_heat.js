@@ -91,7 +91,7 @@
           var dmg_fi = Math.min(dmg, 4.0);
           b.damage(dmg_fi);
 
-          mdl_effect.atP_1pos(0.5, b, db_effect._heatSmog());
+          mdl_effect.showAtP(0.5, b, db_effect._heatSmog());
         };
       };
 
@@ -102,7 +102,7 @@
 
     /* NOTE: Actively fetch heat from a building that is not a heat conductor. */
     const updateTile_heatInput = function(b, ob) {
-      if(b == null || ob == null || b.liquids == null || ob.liquids == null) return;
+      if(ob == null || b.liquids == null || ob.liquids == null) return;
       if(mdl_content.isHcond(ob.block)) return;
 
       transferHeat(ob, b, true);
@@ -112,9 +112,8 @@
 
     /* NOTE: Yet another customized DrawHeatRegion. {reg} is optional. */
     const draw_heat = function(b, reg) {
-      var a = mdl_heat.getHeatFrac(b);
-
-      mdl_draw.drawGenericHeatRegion(b, a);
+      var frac = mdl_heat.getHeatFrac(b);
+      mdl_draw.drawHeatRegion(mdl_geometry.poser_1b(b), frac, reg, b.block.size);
     };
     exports.draw_heat = draw_heat;
 
@@ -125,8 +124,8 @@
       var theat = mdl_heat.getTotalHeat(b);
       if(theat < 0.01) return;
 
-      mdl_draw.drawSelectText(b, Core.bundle.get("bar.heat") + ": " + Strings.autoFixed(heat, 2), 1);
-      mdl_draw.drawSelectText(b, Core.bundle.get("term.reind-term-total-heat.name") + ": " + Strings.autoFixed(theat, 2), 0);
+      mdl_draw.drawSelectText(b, true, Core.bundle.get("bar.heat") + ": " + Strings.autoFixed(heat, 2), 1);
+      mdl_draw.drawSelectText(b, true, Core.bundle.get("term.reind-term-total-heat.name") + ": " + Strings.autoFixed(theat, 2), 0);
     };
     exports.drawSelect_heat = drawSelect_heat;
 
@@ -171,7 +170,7 @@
       var dmg = Time.delta * 0.04 * heat / fheatCap;
       b.damage(dmg);
 
-      mdl_effect.atP_1pos(0.06, b, db_effect._heatSmog());
+      mdl_effect.showAtP(0.06, b, db_effect._heatSmog());
     };
     exports.updateTile_fluidHeat = updateTile_fluidHeat;
 
@@ -183,7 +182,7 @@
       var heat = mdl_heat.getFluidHeat(b);
       if(heat < 0.01) return;
 
-      mdl_draw.drawGenericHeatRegion(b, Math.min(heat * 1.2 / fheatCap, 1.0), reg);
+      mdl_draw.drawHeatRegion(mdl_geometry.poser_1b(b), Math.min(heat * 1.2 / fheatCap, 1.0), reg, b.block.size);
     };
     exports.draw_fluidHeat = draw_fluidHeat;
 
@@ -193,7 +192,7 @@
       var heat = mdl_heat.getFluidHeat(b);
       if(heat < 0.01) return;
 
-      mdl_draw.drawSelectText(b, Core.bundle.get("term.reind-term-fluid-heat.name") + ": " + Strings.autoFixed(heat, 2), 0);
+      mdl_draw.drawSelectText(b, true, Core.bundle.get("term.reind-term-fluid-heat.name") + ": " + Strings.autoFixed(heat, 2), 0);
     };
     exports.drawSelect_fluidHeat = drawSelect_fluidHeat;
   // End
@@ -220,7 +219,7 @@
         var staTime = Math.min(((heat - meltThr) / meltThr * 8.0 + 2.5) * 60.0, 600.0);
         unit.apply(sta, staTime);
 
-        mdl_effect.atP_1pos(0.08, unit, db_effect._heatSmog());
+        mdl_effect.showAtP(0.08, unit, db_effect._heatSmog());
       };
     };
     exports.update_unitHeat = update_unitHeat;

@@ -31,11 +31,11 @@
 
   // Part: Sound
     /* NOTE: Plays a sound at given position, skips if the asset is not loaded to avoid crash. */
-    const play_1pos = function(pos_gn, path) {
+    const playAt = function(pos_gn, path) {
       if(pos_gn == null || path == null) return false;
 
       var path_fi = "sounds/" + path + ".ogg";
-      var pos = mdl_geometry.getPos_gn(pos_gn);
+      var pos = mdl_geometry.poser_gn(pos_gn);
       var x = pos.x;
       var y = pos.y;
 
@@ -44,17 +44,17 @@
         return true;
       } else return false;
     };
-    exports.play_1pos = play_1pos;
+    exports.playAt = playAt;
   // End
 
 
   // Part: Effect
     /* NOTE: Shows a effect at given position, rotation is random in default. */
-    const at_1pos = function(pos_gn, eff, rot) {
+    const showAt = function(pos_gn, eff, rot) {
       if(rot == null) rot = Mathf.random(360.0);
       if(pos_gn == null || eff == null) return false;
 
-      var pos = mdl_geometry.getPos_gn(pos_gn);
+      var pos = mdl_geometry.poser_gn(pos_gn);
       if(pos == null) return false;
       var x = pos.x;
       var y = pos.y;
@@ -63,43 +63,43 @@
 
       return true;
     };
-    exports.at_1pos = at_1pos;
+    exports.showAt = showAt;
 
 
-    const atL_1pos = function(pos_gn, eff, rot) {
+    const showAt_ldm = function(pos_gn, eff, rot) {
       if(ldm) return false;
 
-      return at_1pos(pos_gn, eff, rot);
+      return showAt(pos_gn, eff, rot);
     };
-    exports.atL_1pos = atL_1pos;
+    exports.showAt_ldm = showAt_ldm;
 
 
     /* NOTE: Chance given to create the effect. */
-    const atP_1pos = function(p, pos_gn, eff, rot) {
+    const showAtP = function(p, pos_gn, eff, rot) {
       if(!Mathf.chance(p)) return false;
 
-      return at_1pos(pos_gn, eff, rot);
+      return showAt(pos_gn, eff, rot);
     };
-    exports.atP_1pos = atP_1pos;
+    exports.showAtP = showAtP;
 
 
-    const atPL_1pos = function(p, pos_gn, eff, rot) {
+    const showAtP_ldm = function(p, pos_gn, eff, rot) {
       if(!Mathf.chance(p) || ldm) return false;
 
-      return at_1pos(pos_gn, eff, rot);
+      return showAt(pos_gn, eff, rot);
     };
-    exports.atPL_1pos = atPL_1pos;
+    exports.showAtP_ldm = showAtP_ldm;
   // End
 
 
   // Part: Special
     /* NOTE: Shakes the screen. */
-    const shake_1pos = function(pos_gn, pow, dur) {
+    const shakeAt = function(pos_gn, pow, dur) {
       if(pow == null) pow = 4.0;
       if(dur == null) dur = 60.0;
       if(pos_gn == null || pow < 0.0001 || dur < 0.0001) return false;
 
-      var pos = mdl_geometry.getPos_gn(pos_gn);
+      var pos = mdl_geometry.poser_gn(pos_gn);
       if(pos == null) return false;
       var x = pos.x;
       var y = pos.y;
@@ -108,7 +108,7 @@
 
       return true;
     };
-    exports.shake_1pos = shake_1pos;
+    exports.shakeAt = shakeAt;
   // End
 
 

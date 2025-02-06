@@ -18,6 +18,15 @@
 
 
   // Part: env-flr[ore]
+    const envFlr_barite = extend(Floor, "env-flr-barite", {
+      setStats() {
+        this.super$setStats();
+        env_genericFloor.setStats(this);
+      },
+    });
+    exports.envFlr_barite = envFlr_barite;
+
+
     const envFlr_bauxite = extend(Floor, "env-flr-bauxite", {
       setStats() {
         this.super$setStats();
@@ -36,6 +45,24 @@
     exports.envFlr_clay = envFlr_clay;
 
 
+    const envFlr_crudeBorax = extend(Floor, "env-flr-crude-borax", {
+      setStats() {
+        this.super$setStats();
+        env_genericFloor.setStats(this);
+      },
+    });
+    exports.envFlr_crudeBorax = envFlr_crudeBorax;
+
+
+    const envFlr_crudeSulfur = extend(Floor, "env-flr-crude-sulfur", {
+      setStats() {
+        this.super$setStats();
+        env_genericFloor.setStats(this);
+      },
+    });
+    exports.envFlr_crudeSulfur = envFlr_crudeSulfur;
+
+
     const envFlr_gypsum = extend(Floor, "env-flr-gypsum", {
       setStats() {
         this.super$setStats();
@@ -43,6 +70,15 @@
       },
     });
     exports.envFlr_gypsum = envFlr_gypsum;
+
+
+    const envFlr_olivine = extend(Floor, "env-flr-olivine", {
+      setStats() {
+        this.super$setStats();
+        env_genericFloor.setStats(this);
+      },
+    });
+    exports.envFlr_olivine = envFlr_olivine;
 
 
     const envFlr_placer = extend(Floor, "env-flr-placer", {
