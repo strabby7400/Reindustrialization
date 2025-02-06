@@ -19,7 +19,6 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get standard pump speed
       blk.stats.remove(Stat.output);
       var pumpSpeed = mdl_database.read_1n1v(db_block.pumpSpeed, blk.name);
       if(pumpSpeed != null) blk.stats.add(db_stat.standardPumpSpeed, pumpSpeed, StatUnit.liquidSecond);
@@ -27,7 +26,6 @@
 
 
     function drawSelectComp(b) {
-      // Draw output content
       var liq = b.tile.floor().liquidDrop;
       if(liq != null) mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), liq, b.block.size);
     };

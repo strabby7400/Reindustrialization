@@ -15,16 +15,16 @@
 
 
   // Part: Integration
-    const setStats_genericStatus = function(sta) {
+    const setStats = function(sta) {
 
     };
-    exports.setStats = setStats_genericStatus;
+    exports.setStats = setStats;
 
 
-    const update_genericStatus = function(sta, unit, time) {
+    const update = function(sta, unit, time) {
 
     };
-    exports.update = update_genericStatus;
+    exports.update = update;
   // End
 
 

@@ -32,10 +32,8 @@
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
         if(!blk_fluidPipe.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
-      // Override
       moveLiquid(next, liquid) {
         return blk_fluidPipe.moveLiquid(this, next, liquid);
       },
@@ -65,10 +63,8 @@
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
         if(!blk_fluidPipe.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
-      // Override
       moveLiquid(next, liquid) {
         return blk_fluidPipe.moveLiquid(this, next, liquid);
       },
@@ -98,12 +94,10 @@
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
         if(!blk_fluidPipe.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
-      // Override
       moveLiquid(next, liquid) {
-        blk_fluidPipe.moveLiquid(this, next, liquid);
+        return blk_fluidPipe.moveLiquid(this, next, liquid);
       },
       draw() {
         this.super$draw();
@@ -131,12 +125,10 @@
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
         if(!blk_fluidPipe.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
-      // Override
       moveLiquid(next, liquid) {
-        blk_fluidPipe.moveLiquid(this, next, liquid);
+        return blk_fluidPipe.moveLiquid(this, next, liquid);
       },
       draw() {
         this.super$draw();

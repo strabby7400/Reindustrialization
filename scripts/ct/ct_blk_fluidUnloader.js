@@ -11,13 +11,13 @@
 
 
   // Part: Accessor
-    const accB_cfg_id = function(b, mode, val) {
+    const accB_id_sel = function(b, mode, val) {
       if(val === undefined) val = 0;
 
-      if(mode == "r") return b.cfg_id;
-      if(mode == "w") b.cfg_id = val;
+      if(mode == "r") return b.id_sel;
+      if(mode == "w") b.id_sel = val;
     };
-    exports.accB_cfg_id = accB_cfg_id;
+    exports.accB_id_sel = accB_id_sel;
   // End
 
 
@@ -36,7 +36,7 @@
       },
     });
     bliqAux_fluidUnloader.buildType = () => extend(GenericCrafter.GenericCrafterBuild, bliqAux_fluidUnloader, {
-      cfg_id: 0,
+      id_sel: 0,
       updateTile() {
         this.super$updateTile();
         blk_fluidUnloader.updateTile(this);
@@ -45,7 +45,6 @@
         this.super$buildConfiguration(table);
         blk_fluidUnloader.buildConfiguration(this, table);
       },
-      // Override
       moveLiquid(next, liquid) {
         return blk_fluidUnloader.moveLiquid(this, next, liquid);
       },
@@ -60,12 +59,12 @@
       // RW
       write(write) {
         this.super$write(write);
-        write.f(this.cfg_id);
+        write.f(this.id_sel);
       },
       // RW
       read(read, revision) {
         this.super$read(read, revision);
-        this.cfg_id = read.f();
+        this.id_sel = read.f();
       },
     });
     exports.bliqAux_fluidUnloader = bliqAux_fluidUnloader;

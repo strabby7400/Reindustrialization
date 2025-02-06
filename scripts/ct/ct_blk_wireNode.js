@@ -24,9 +24,10 @@
         blk_wireNode.setStats(this);
       },
       canPlaceOn(tile, team, rotation) {
-        return this.super$canPlaceOn(tile, team, rotation) && blk_wireNode.canPlaceOn(this, tile, team, rotation);
+        if(!this.super$canPlaceOn(tile, team, rotation)) return false;
+        if(!blk_wireNode.canPlaceOn(this, tile, team, rotation)) return false;
+        return true;
       },
-      // Override
       drawPlace(x, y, rotation, valid) {
         blk_wireNode.drawPlace(this, x, y, rotation, valid);
       },

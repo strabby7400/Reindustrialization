@@ -14,7 +14,6 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Remove unloadble which is nonsense
       blk.stats.remove(db_stat.unloadable);
     };
   // End

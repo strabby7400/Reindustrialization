@@ -17,11 +17,9 @@
 
 
   // Part: Component
-    function setStatsComp_consumableItem(itm) {
-      // Get consumable
+    function setStatsComp(itm) {
       itm.stats.add(db_stat.isConsumable, true);
 
-      // Get used in
       var tagVal = mdl_text.getTagText(mdl_database.readli_1n1v(db_item.consumableMap, itm.name));
       if(tagVal != null) itm.stats.add(db_stat.usedIn, tagVal);
     };
@@ -36,12 +34,12 @@
 
 
   // Part: Integration
-    const setStats_consumableItem = function(itm) {
+    const setStats = function(itm) {
       rs_genericItem.setStats(itm);
 
-      setStatsComp_consumableItem(itm);
+      setStatsComp(itm);
     };
-    exports.setStats = setStats_consumableItem;
+    exports.setStats = setStats;
   // End
 
 

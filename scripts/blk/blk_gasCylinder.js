@@ -12,7 +12,9 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_ui = require("reind/mdl/mdl_ui");
 
     const db_effect = require("reind/db/db_effect");
     const db_stat = require("reind/db/db_stat");
@@ -23,22 +25,19 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get storage type
       blk.stats.add(db_stat.storageType, "@term.reind-term-gas.name");
 
-      // Get explosion stats
       blk.stats.add(db_stat.canExplode, true);
       blk.stats.add(db_stat.explosionRadius, blk.size / 2 * glb_vars.gasCylinder_explosionRadius / Vars.tilesize, StatUnit.blocks);
     };
 
 
     function updateTileComp(b) {
-      // Booms if illegal input
       var liq = b.liquids.current();
       if(liq != null && liq != Liquids.water && !mdl_content.isGas(liq)) {
         b.kill();
-        db_effect._invalidPlacement().at(b.x, b.y, 0.0);
-        new UI().showInfoFade("@info.reind-info-storage-type-mismatch.name", 2.0);
+        mdl_effect.showAt(b, db_effect._invalidPlacement(), 0.0);
+        mdl_ui.showInfoFade("@info.reind-info-storage-type-mismatch.name");
       };
     };
 
@@ -51,21 +50,18 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      // Draw explosion range
       var rad = blk.size / 2 * glb_vars.gasCylinder_explosionRadius;
       if(rad != null) mdl_draw.drawWarningDisk(mdl_geometry.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
-      // Draw explosion range
       var rad = b.block.size / 2 * glb_vars.gasCylinder_explosionRadius;
       if(rad != null) mdl_draw.drawWarningDisk(mdl_geometry.poser_1b(b), rad);
     };
 
 
     function onDestroyedComp(b) {
-      // Create explosion
       if(Vars.state.rules.reactorExplosions) {
         var liq = b.liquids.current();
         if(!mdl_content.isGas(liq)) return;

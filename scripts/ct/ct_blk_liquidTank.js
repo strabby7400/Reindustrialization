@@ -32,7 +32,6 @@
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
         if(!blk_liquidTank.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
       draw() {
@@ -61,7 +60,6 @@
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
         if(!blk_liquidTank.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
       draw() {

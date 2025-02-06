@@ -13,8 +13,7 @@
 
 
   // Part: Component
-    function setStatsComp_wasteFluid(liq) {
-      // Get is waste
+    function setStatsComp(liq) {
       liq.stats.add(db_stat.isWaste, true);
     };
   // End
@@ -28,18 +27,18 @@
 
 
   // Part: Integration
-    const setStats_wasteFluid = function(liq) {
+    const setStats = function(liq) {
       rs_genericFluid.setStats(liq);
 
-      setStatsComp_wasteFluid(liq);
+      setStatsComp(liq);
     };
-    exports.setStats = setStats_wasteFluid;
+    exports.setStats = setStats;
 
 
-    const update_wasteFluid = function(liq, puddle) {
+    const update = function(liq, puddle) {
       rs_genericFluid.update(liq, puddle);
     };
-    exports.update = update_wasteFluid;
+    exports.update = update;
   // End
 
 

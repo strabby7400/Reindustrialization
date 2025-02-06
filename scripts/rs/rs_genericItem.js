@@ -13,7 +13,7 @@
 
 
   // Part: Component
-    function setStatsComp_genericItem(itm) {
+    function setStatsComp(itm) {
       itm.stats.remove(Stat.explosiveness);
       itm.stats.remove(Stat.flammability);
       itm.stats.remove(Stat.radioactivity);
@@ -24,7 +24,6 @@
       if(itm.radioactivity > 0.0) itm.stats.addPercent(Stat.radioactivity, itm.radioactivity);
       if(itm.charge > 0.0) itm.stats.addPercent(Stat.charge, itm.charge);
 
-      // Get buildable
       if(itm.buildable) {
         itm.stats.add(db_stat.buildable, true);
       };
@@ -40,12 +39,12 @@
 
 
   // Part: Integration
-    const setStats_genericItem = function(itm) {
+    const setStats = function(itm) {
       rs_genericResource.setStats(itm);
 
-      setStatsComp_genericItem(itm);
+      setStatsComp(itm);
     };
-    exports.setStats = setStats_genericItem;
+    exports.setStats = setStats;
   // End
 
 

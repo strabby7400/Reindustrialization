@@ -21,7 +21,6 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get range
       blk.stats.add(Stat.range, blk.fogRadius, StatUnit.blocks);
     };
 
@@ -57,7 +56,6 @@
       var cd = ct_blk_radar.accB_cd(b, "r");
       var thr = ct_blk_radar.accB_thr(b, "r");
 
-      // Draw reload progress
       mdl_draw.drawProgressBar(mdl_geometry.poser_1b(b), Math.min(cd / thr, 1.0), Pal.accent, b.block.size);
     };
   // End

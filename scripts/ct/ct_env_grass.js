@@ -28,7 +28,6 @@
         this.super$setStats();
         env_grass.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_grass.drawBase(this, tile);
       },
@@ -44,7 +43,6 @@
         this.super$setStats();
         env_grass.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_grass.drawBase(this, tile);
       },

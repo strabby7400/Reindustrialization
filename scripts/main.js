@@ -107,6 +107,11 @@
 
     const ct_blk_messageBlock = require("reind/ct/ct_blk_messageBlock");
 
+    /* <---------------- map blocks ----------------> */
+
+    const ct_env_nonBuildZone = require("reind/ct/ct_env_nonBuildZone");
+    const ct_env_ruin = require("reind/ct/ct_env_ruin");
+
     /* <---------------- environment ----------------> */
 
     const ct_env_genericFloor = require("reind/ct/ct_env_genericFloor");
@@ -120,11 +125,6 @@
     const ct_env_heapOre = require("reind/ct/ct_env_heapOre");
     const ct_env_grass = require("reind/ct/ct_env_grass");
     const ct_env_tree = require("reind/ct/ct_env_tree");
-
-    /* <---------------- map blocks ----------------> */
-
-    const ct_env_ruin = require("reind/ct/ct_env_ruin");
-    const ct_env_nonBuildZone = require("reind/ct/ct_env_nonBuildZone");
 
     /* <---------------- status effects ----------------> */
 

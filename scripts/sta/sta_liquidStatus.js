@@ -18,16 +18,16 @@
 
 
   // Part: Integration
-    const setStats_liquidStatus = function(sta) {
+    const setStats = function(sta) {
       sta_genericStatus.setStats(sta);
     };
-    exports.setStats = setStats_liquidStatus;
+    exports.setStats = setStats;
 
 
-    const update_liquidStatus = function(sta, unit, time) {
+    const update = function(sta, unit, time) {
       sta_genericStatus.update(sta, unit, time);
     };
-    exports.update = update_liquidStatus;
+    exports.update = update;
   // End
 
 

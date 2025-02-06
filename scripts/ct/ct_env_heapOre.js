@@ -23,6 +23,9 @@
         this.super$setStats();
         env_heapOre.setStats(this);
       },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
+      },
     });
     exports.envHeap_barite = envHeap_barite;
 
@@ -31,6 +34,9 @@
       setStats() {
         this.super$setStats();
         env_heapOre.setStats(this);
+      },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
       },
     });
     exports.envHeap_bauxite = envHeap_bauxite;
@@ -41,6 +47,9 @@
         this.super$setStats();
         env_heapOre.setStats(this);
       },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
+      },
     });
     exports.envHeap_clay = envHeap_clay;
 
@@ -49,6 +58,9 @@
       setStats() {
         this.super$setStats();
         env_heapOre.setStats(this);
+      },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
       },
     });
     exports.envHeap_dolomite = envHeap_dolomite;
@@ -59,6 +71,9 @@
         this.super$setStats();
         env_heapOre.setStats(this);
       },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
+      },
     });
     exports.envHeap_gypsum = envHeap_gypsum;
 
@@ -67,6 +82,9 @@
       setStats() {
         this.super$setStats();
         env_heapOre.setStats(this);
+      },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
       },
     });
     exports.envHeap_limestone = envHeap_limestone;
@@ -77,6 +95,9 @@
         this.super$setStats();
         env_heapOre.setStats(this);
       },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
+      },
     });
     exports.envHeap_olivine = envHeap_olivine;
 
@@ -85,6 +106,9 @@
       setStats() {
         this.super$setStats();
         env_heapOre.setStats(this);
+      },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
       },
     });
     exports.envHeap_pumice = envHeap_pumice;
@@ -95,6 +119,9 @@
         this.super$setStats();
         env_heapOre.setStats(this);
       },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
+      },
     });
     exports.envHeap_salt = envHeap_salt;
 
@@ -103,6 +130,9 @@
       setStats() {
         this.super$setStats();
         env_heapOre.setStats(this);
+      },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
       },
     });
     exports.envHeap_talcum = envHeap_talcum;

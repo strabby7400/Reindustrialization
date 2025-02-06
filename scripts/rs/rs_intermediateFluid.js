@@ -17,11 +17,9 @@
 
 
   // Part: Component
-    function setStatsComp_intermediateFluid(liq) {
-      // Get is intermediate
+    function setStatsComp(liq) {
       liq.stats.add(db_stat.isIntermediate, true);
 
-      // Get target products
       var li_tg = new Seq();
       mdl_database.readli_1n1v(db_fluid.intermediateMap, liq.name).each(nm_tg => {
         var ct_tg = mdl_content.getContent_nm(nm_tg);
@@ -40,18 +38,18 @@
 
 
   // Part: Integration
-    const setStats_intermediateFluid = function(liq) {
+    const setStats = function(liq) {
       rs_genericFluid.setStats(liq);
 
-      setStatsComp_intermediateFluid(liq);
+      setStatsComp(liq);
     };
-    exports.setStats = setStats_intermediateFluid;
+    exports.setStats = setStats;
 
 
-    const update_intermediateFluid = function(liq, puddle) {
+    const update = function(liq, puddle) {
       rs_genericFluid.update(liq, puddle);
     };
-    exports.update = update_intermediateFluid;
+    exports.update = update;
   // End
 
 

@@ -19,14 +19,12 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get core effc
       var rate = mdl_database.read_1n1v(db_block.coreEffcOutput, blk.name);
       if(rate != null) blk.stats.add(db_stat.coreEffc, rate, StatUnit.perSecond);
     };
 
 
     function updateTileComp(b) {
-      // Update core effc
       var rate = Time.delta * mdl_database.read_1n1v(db_block.coreEffcOutput, b.block.name) / 60.0;
       if(rate != null) frag_fluid.updateTile_coreEffc(b, rate);
     };

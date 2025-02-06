@@ -12,74 +12,51 @@
     const db_stat = require("reind/db/db_stat");
 
     const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_geometry = require("reind/mdl/mdl_geometry");
   // End
 
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get type
       var tpVal = (blk.name.includes("reind-env-tree-fungi-")) ? Core.bundle.get("term.reind-term-fungi.name") : Core.bundle.get("term.reind-term-tree.name");
       blk.stats.add(db_stat.type, tpVal);
     };
 
 
     function drawBaseComp(blk, t) {
-      /* NOTE: Tree layers are assigned in {db_env.treeLayers} */
-      var x = t.worldx();
-      var y = t.worldy();
       var z = mdl_database.read_1n1v(db_env.treeLayers, blk.name);
       if(z == null) return;
-      var w = blk.region.width * blk.region.scl();
-      var h = blk.region.height * blk.region.scl();
-      var rot = Mathf.randomSeed(t.pos(), 0, 4) * 90.0 + Mathf.sin(Time.time + x, 50.0, 0.5) + Mathf.sin(Time.time - y, 65.0, 0.9) + Mathf.sin(Time.time + y - x, 85.0, 0.9);
-      var scl = 60.0;
-      var mag = 0.5;
-      var wobScl = 1.5;
 
+      var pos = mdl_geometry.poser_1t(t);
+      var pos_sha = mdl_geometry.poser_1t(t, blk.shadowOffset);
       var reg = blk.region;
-
-      // Bush
+      var ang = Mathf.randomSeed(t.pos(), 0, 4) * 90.0 + Mathf.sin(Time.time + pos.x, 50.0, 0.5) + Mathf.sin(Time.time - pos.y, 65.0, 0.9) + Mathf.sin(Time.time + pos.y - pos.x, 85.0, 0.9);
+      var scl = 1.0;
+      var mag = 1.0;
+      var wobScl = 1.0;
       if(blk.name.includes("reind-env-tree-bush-")) {
-        scl *= 0.5;
-        mag *= 1.5;
-        wobScl *= 0.7;
+        scl = 0.5;
+        mag = 1.5;
+        wobScl = 0.7;
       };
-
-      // Fungi
       if(blk.name.includes("reind-env-tree-fungi-")) {
-        scl *= 3.0;
-        mag *= 0.4;
-        wobScl *= 0.3;
+        scl = 3.0;
+        mag = 0.4;
+        wobScl = 0.3;
       };
 
-      // Alpha change
       var a = 1.0;
-      var t_p;
-      if(Vars.player.unit() != null && !Vars.player.unit().flying && Vars.player.unit().type.groundLayer < 76.0) t_p = Vars.player.unit().tileOn();
-      if(t_p != null) {
-        var d = mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(t_p));
-        var d_cr = reg.width * 0.15;
-        if(d <= d_cr) a = 0.37;
+      if(Vars.player.unit() != null && !Vars.player.unit().flying && Vars.player.unit().type.groundLayer < 76.0) {
+        var pos_pl = mdl_geometry.poser_gn("player");
+        if(pos_pl != null) {
+          var d = mdl_geometry.getDistance(pos, pos_pl);
+          if(d < reg.width * 0.15) a = 0.37;
+        };
       };
 
-      // Shadow
-      /* NOTE: Custom shadow is required. */
-      var sha = blk.customShadowRegion;
-      if(sha.found()) {
-        Draw.z(Layer.power - 1);
-        Draw.alpha(a);
-        Draw.rect(sha, x + blk.shadowOffset, y + blk.shadowOffset, rot);
-      };
-
-      // Region
-      /* NOTE: Variants are not supported. */
-      Draw.z(z);
-      Draw.alpha(a);
-      Draw.rectv(reg, x, y, w, h, rot, vec => vec.add(
-        (Mathf.sin(vec.y * 3 + Time.time, scl, mag) + Mathf.sin(vec.x * 3 - Time.time, 70, 0.8)) * wobScl,
-        (Mathf.cos(vec.x * 3 + Time.time + 8, scl + 6, mag * 1.1) + Mathf.sin(vec.y * 3 - Time.time, 50, 0.2)) * wobScl,
-      ));
+      mdl_draw.drawBlurredShadow(pos_sha, reg, ang, a, 1.05, Color.white, Layer.power - 1.0);
+      mdl_draw.drawWobbleRegion(pos, reg, ang, a, 1.0, Color.white, scl, mag, wobScl, wobScl, z);
     };
   // End
 

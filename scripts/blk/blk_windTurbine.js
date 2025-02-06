@@ -66,7 +66,7 @@
 
       if(b.block.displayEfficiency) {
         var str = Core.bundle.formatFloat("bar.efficiency", sumAttribute(b.block, b.block.attribute, t.x, t.y) * 100.0, 1);
-        mdl_draw.drawSelectText(b, valid, str, 1);
+        mdl_draw.drawSelectText(b, true, str, 1);
       };
     };
   // End

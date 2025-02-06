@@ -14,6 +14,12 @@ dependencies: [
 description:
 '''
 
+If you are downloading the mod with in-game mod browser, and you don't want to install the test versions that may crash the game, choose View Releases and install the latest version.
+
+
+------------------------------
+
+
 A javascript mod aimed to bring real (or surreal, sometimes) chemical engineering into Mindustry, where tin is definitely tin.
 
 
@@ -85,4 +91,4 @@ Inspiration & Acknowledgement
 
 
 /* v0.1.1: Local Geology */
-version: t25020601
+version: t25020602

@@ -16,17 +16,16 @@
 
   // Part: Component
     function updateTileComp(b) {
-      var li_ot = mdl_geometry.getTiles_rot(b.tile, b.block.liquidOutputDirections[0], b.block.size);
       var invalid = false;
-      var temp_b = new Seq();
-      li_ot.each(ot => {
+      var temp_li = new Seq();
+      mdl_geometry.getTiles_rot(b.tile, b.block.liquidOutputDirections[0], b.block.size).each(ot => {
         if(ot.build == null) {
           invalid = true
-        } else if(!temp_b.contains(ot.build)) {
-          temp_b.add(ot.build)
+        } else if(!temp_li.contains(ot.build)) {
+          temp_li.add(ot.build)
         };
       });
-      if(temp_b.size > 1) invalid = true;
+      if(temp_li.size > 1) invalid = true;
 
       ct_blk_fragmentFactory.accB_down(b, "w", invalid);
     };

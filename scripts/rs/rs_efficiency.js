@@ -13,7 +13,7 @@
 
 
   // Part: Component
-    function setStatsComp_efficiency(effc) {
+    function setStatsComp(effc) {
       effc.stats.remove(Stat.explosiveness);
       effc.stats.remove(Stat.flammability);
       effc.stats.remove(Stat.temperature);
@@ -38,18 +38,18 @@
 
 
   // Part: Integration
-    const setStats_efficiency = function(effc) {
+    const setStats = function(effc) {
       rs_genericResource.setStats(effc);
 
-      setStatsComp_efficiency(effc);
+      setStatsComp(effc);
     };
-    exports.setStats = setStats_efficiency;
+    exports.setStats = setStats;
 
 
-    const update_efficiency = function(effc, puddle) {
-      updateComp_efficiency(effc);
+    const update = function(effc, puddle) {
+      updateComp(effc);
     };
-    exports.update = update_efficiency;
+    exports.update = update;
   // End
 
 

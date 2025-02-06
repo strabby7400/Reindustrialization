@@ -23,6 +23,9 @@
         this.super$setStats();
         env_dump.setStats(this);
       },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
+      },
     });
     exports.envDump_dirt = envDump_dirt;
 
@@ -31,6 +34,9 @@
       setStats() {
         this.super$setStats();
         env_dump.setStats(this);
+      },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
       },
     });
     exports.envDump_grass = envDump_grass;
@@ -41,6 +47,9 @@
         this.super$setStats();
         env_dump.setStats(this);
       },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
+      },
     });
     exports.envDump_marble = envDump_marble;
 
@@ -49,6 +58,9 @@
       setStats() {
         this.super$setStats();
         env_dump.setStats(this);
+      },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
       },
     });
     exports.envDump_sand = envDump_sand;
@@ -59,6 +71,9 @@
         this.super$setStats();
         env_dump.setStats(this);
       },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
+      },
     });
     exports.envDump_sandDark = envDump_sandDark;
 
@@ -67,6 +82,9 @@
       setStats() {
         this.super$setStats();
         env_dump.setStats(this);
+      },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
       },
     });
     exports.envDump_sandstone = envDump_sandstone;
@@ -79,6 +97,9 @@
         this.super$setStats();
         env_dump.setStats(this);
       },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
+      },
     });
     exports.envDump_rockEvaporite_white = envDump_rockEvaporite_white;
 
@@ -87,6 +108,9 @@
       setStats() {
         this.super$setStats();
         env_dump.setStats(this);
+      },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
       },
     });
     exports.envDump_rockLava_black = envDump_rockLava_black;
@@ -97,6 +121,9 @@
         this.super$setStats();
         env_dump.setStats(this);
       },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
+      },
     });
     exports.envDump_rockMetamorphic_black = envDump_rockMetamorphic_black;
 
@@ -105,6 +132,9 @@
       setStats() {
         this.super$setStats();
         env_dump.setStats(this);
+      },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
       },
     });
     exports.envDump_rockPlutonic_black = envDump_rockPlutonic_black;
@@ -115,6 +145,9 @@
         this.super$setStats();
         env_dump.setStats(this);
       },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
+      },
     });
     exports.envDump_rockBiologicalSedimentary_grey = envDump_rockBiologicalSedimentary_grey;
 
@@ -124,6 +157,9 @@
         this.super$setStats();
         env_dump.setStats(this);
       },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
+      },
     });
     exports.envDump_rockBiologicalSedimentary_red = envDump_rockBiologicalSedimentary_red;
 
@@ -132,6 +168,9 @@
       setStats() {
         this.super$setStats();
         env_dump.setStats(this);
+      },
+      drawBase(tile) {
+        env_dump.drawBase(this, tile);
       },
     });
     exports.envDump_rockBiologicalSedimentary_white = envDump_rockBiologicalSedimentary_white;

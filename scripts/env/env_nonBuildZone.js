@@ -14,7 +14,6 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get map note
       blk.stats.add(db_stat.mapNote, "@info.reind-info-note-non-build-zone.name");
     };
   // End

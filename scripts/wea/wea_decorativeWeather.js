@@ -18,10 +18,10 @@
 
 
   // Part: Integration
-    const update_decorativeWeather = function(wea, state) {
+    const update = function(wea, state) {
       wea_genericWeather.update(wea, state);
     };
-    exports.update = update_decorativeWeather;
+    exports.update = update;
   // End
 
 

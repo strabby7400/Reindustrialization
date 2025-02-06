@@ -21,35 +21,26 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get material group
       var matGrpVal = mdl_corrosion.getMaterialGroupValue(blk);
       if(matGrpVal != null) blk.stats.add(db_stat.materialGroup, matGrpVal);
 
-      // Get fluid pressure
       if(Math.abs(blk.liquidPressure - 1.0) > 0.0001) blk.stats.add(db_stat.fluidPressure, blk.liquidPressure);
 
-      // Get vulnerable to clogging
       if(db_block.vulnerableToClogging.contains(blk.name)) blk.stats.add(db_stat.vulnerableToClogging, true);
 
-      // Get fluid heat capacity
       var fheatCap = mdl_database.read_1n1v(db_block.fluidHeatCapacity, blk.name);
       if(fheatCap != null) blk.stats.add(db_stat.fluidHeatCapacity, fheatCap);
     };
 
     function updateTileComp(b) {
-      // Update reset
       if(b.liquids.get(b.liquids.current()) <= 0.0001) b.liquids.reset(b.liquids.current(), 0.0);
 
-      // Update efficiency
       frag_fluid.updateTile_efficiency(b);
 
-      // Update corrosion
       frag_fluid.updateTile_corrosion(b);
 
-      // Update clogging
       frag_fluid.updateTile_sticky(b);
 
-      // Update fluid heat
       frag_heat.updateTile_fluidHeat(b);
     };
 
@@ -60,13 +51,11 @@
 
 
     function drawComp(b) {
-      // Draw fluid heat
       frag_heat.draw_fluidHeat(b);
     };
 
 
     function drawSelectComp(b) {
-      // Draw fluid heat
       frag_heat.drawSelect_fluidHeat(b);
     };
   // End

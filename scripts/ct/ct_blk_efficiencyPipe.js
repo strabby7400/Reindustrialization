@@ -44,10 +44,8 @@
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
         if(!blk_efficiencyPipe.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
-      // Override
       moveLiquid(next, liquid) {
         return blk_efficiencyPipe.moveLiquid(this, next, liquid);
       },

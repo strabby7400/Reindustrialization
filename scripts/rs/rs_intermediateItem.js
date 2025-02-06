@@ -17,11 +17,9 @@
 
 
   // Part: Component
-    function setStatsComp_intermediateItem(itm) {
-      // Get is intermediate
+    function setStatsComp(itm) {
       itm.stats.add(db_stat.isIntermediate, true);
 
-      // Get target products
       var li_tg = new Seq();
       mdl_database.readli_1n1v(db_item.intermediateMap, itm.name).each(nm_tg => {
         var ct_tg = mdl_content.getContent_nm(nm_tg);
@@ -40,12 +38,12 @@
 
 
   // Part: Integration
-    const setStats_intermediateItem = function(itm) {
+    const setStats = function(itm) {
       rs_genericItem.setStats(itm);
 
-      setStatsComp_intermediateItem(itm);
+      setStatsComp(itm);
     };
-    exports.setStats = setStats_intermediateItem;
+    exports.setStats = setStats;
   // End
 
 

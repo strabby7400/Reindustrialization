@@ -18,16 +18,16 @@
 
 
   // Part: Integration
-    const setStats_wheelUnit = function(utp) {
+    const setStats = function(utp) {
       unit_genericUnit.setStats(utp);
     };
-    exports.setStats = setStats_wheelUnit;
+    exports.setStats = setStats;
 
 
-    const update_wheelUnit = function(utp, unit) {
+    const update = function(utp, unit) {
       unit_genericUnit.update(utp, unit);
     };
-    exports.update = update_wheelUnit;
+    exports.update = update;
   // End
 
 

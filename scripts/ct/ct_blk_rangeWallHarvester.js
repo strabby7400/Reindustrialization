@@ -22,7 +22,6 @@
       this.super$setStats();
       blk_rangeWallHarvester.setStats(this);
     },
-    // Override
     sumAttribute(attr, x, y) {
       return blk_rangeWallHarvester.sumAttribute(this, attr, x, y);
     },

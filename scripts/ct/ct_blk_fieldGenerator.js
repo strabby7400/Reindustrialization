@@ -40,7 +40,6 @@
       canPlaceOn(tile, team, rotation) {
         if(!this.super$canPlaceOn(tile, team, rotation)) return false;
         if(!blk_fieldGenerator.canPlaceOn(this, tile, team, rotation)) return false;
-
         return true;
       },
       drawPlace(x, y, rotation, valid) {
@@ -58,13 +57,11 @@
       shouldConsume() {
         if(!this.super$shouldConsume()) return false;
         if(!frag_facility.isActive_ep(this)) return false;
-
         return true;
       },
       // Specific
       status() {
         if(!frag_facility.isActive_ep(this)) return BlockStatus.noInput;
-
         return this.super$status();
       },
       // Specific
@@ -96,7 +93,6 @@
       canPlaceOn(tile, team, rotation) {
         if(!this.super$canPlaceOn(tile, team, rotation)) return false;
         if(!blk_tidalGenerator.canPlaceOn(this, tile, team, rotation)) return false;
-
         return true;
       },
       drawPlace(x, y, rotation, valid) {

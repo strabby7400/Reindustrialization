@@ -7,37 +7,16 @@
 
   // Part: Import
     const env_genericProp = require("reind/env/env_genericProp");
+
+    const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_geometry = require("reind/mdl/mdl_geometry");
   // End
 
 
   // Part: Component
     function drawBaseComp(blk, t) {
-      var x = t.worldx();
-      var y = t.worldy();
-      var w = blk.region.width * blk.region.scl();
-      var h = blk.region.height * blk.region.scl();
-      var off_sha = -0.5;
-      var rot = 0.0;
-      var scl = 40.0;
-      var mag = 1.0;
-      var wobScl = 1.25;
-
-      // Shadow
-      /* NOTE: Custom shadow is required. */
-      var sha = blk.customShadowRegion;
-      if(sha.found()) {
-        Draw.z(7.0);
-        Draw.rect(sha, x + off_sha, y + off_sha, rot);
-      };
-
-      // Region
-      /* NOTE: Variants are not supported. */
-      var reg = blk.region;
-      Draw.z(8.0);
-      Draw.rectv(reg, x, y, w, h, rot, vec => vec.add(
-        (Mathf.sin(vec.y * 3 + Time.time, scl, mag) + Mathf.sin(vec.x * 3 - Time.time, 70, 0.8)) * wobScl,
-        (Mathf.cos(vec.x * 3 + Time.time + 8, scl + 6, mag * 1.1) + Mathf.sin(vec.y * 3 - Time.time, 50, 0.2)) * wobScl * 0.4,
-      ));
+      mdl_draw.drawBlurredShadow(mdl_geometry.poser_1t(t), blk.region, 0.0, 1.0, 1.05, Color.white, 7.0);
+      mdl_draw.drawWobbleRegion(mdl_geometry.poser_1t(t), blk.region, 0.0, 1.0, 1.0, Color.white, 0.65, 2.0, 0.85, 0.6, 8.0);
     };
   // End
 

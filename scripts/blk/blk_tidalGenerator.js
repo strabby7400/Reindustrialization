@@ -17,7 +17,6 @@
 
   // Part: Component
     function updateTileComp(b) {
-      // Update ripple effect
       if(b.efficiency > 0.0001 && b.wasVisible && Mathf.chance(0.02)) {
         var x = b.tile.worldx() + b.block.offset + b.block.size * Vars.tilesize * 0.4 * (Mathf.chance(0.5) ? 1.0 : -1.0);
         var y = b.tile.worldy() + b.block.offset + b.block.size * Vars.tilesize * 0.4 * (Mathf.chance(0.5) ? 1.0 : -1.0);

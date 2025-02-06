@@ -14,7 +14,6 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get map only
       blk.stats.add(db_stat.mapOnly, true);
     };
   // End

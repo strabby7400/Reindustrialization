@@ -18,16 +18,16 @@
 
 
   // Part: Integration
-    const setStats_airUnit = function(utp) {
+    const setStats = function(utp) {
       unit_genericUnit.setStats(utp);
     };
-    exports.setStats = setStats_airUnit;
+    exports.setStats = setStats;
 
 
-    const update_airUnit = function(utp, unit) {
+    const update = function(utp, unit) {
       unit_genericUnit.update(utp, unit);
     };
-    exports.update = update_airUnit;
+    exports.update = update;
   // End
 
 

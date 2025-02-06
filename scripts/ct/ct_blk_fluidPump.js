@@ -29,7 +29,6 @@
         this.super$updateTile();
         blk_fluidPump.updateTile(this);
       },
-      // Override
       moveLiquid(next, liquid) {
         return blk_fluidPump.moveLiquid(this, next, liquid);
       },
@@ -56,7 +55,6 @@
         this.super$updateTile();
         blk_fluidPump.updateTile(this);
       },
-      // Override
       moveLiquid(next, liquid) {
         return blk_fluidPump.moveLiquid(this, next, liquid);
       },

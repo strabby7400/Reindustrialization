@@ -23,21 +23,17 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Remove boosted drill speed
       blk.stats.remove(db_stat.boostedDrillSpeed);
 
-      // Get impact range
       var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
       if(rad != null) blk.stats.add(db_stat.impactRange, rad / Vars.tilesize, StatUnit.blocks);
 
-      // Get depth tier multiplier
       var dtmtp = mdl_database.read_1n1v(db_block.depthTierMultiplier, blk.name);
       if(dtmtp != null) blk.stats.add(db_stat.depthTierMultiplier, dtmtp);
     };
 
 
     function updateTileComp(b) {
-      // Update impact
       if(b.invertTime == 1.0) {
         var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
         if(rad != null) {
@@ -48,31 +44,34 @@
         };
       };
 
-      // Update efficiency if mining depth ore
-      var t = b.tile;
-      var ov = t.overlay();
-      if(ov != null && ov.name.includes("reind-env-ore-depth-")) {
-        var down = false;
+      var down = ct_blk_impactDrill.accB_down(b, "r");
+      if(down) b.progress = 0.0;
+      if(Mathf.chance(0.01)) {
+        var t = b.tile;
+        var ov = t.overlay();
+        if(ov != null && ov.name.includes("reind-env-ore-depth-")) {
+          down = false;
 
-        var b_sc = Vars.indexer.findTile(Vars.player.team(), t.worldx(), t.worldy(), 999.0, b => b.block.name.includes("reind-min-scan-"));
-        if(b_sc == null || b_sc.efficiency <= 0.9999) down = true;
+          var b_sc = Vars.indexer.findTile(Vars.player.team(), t.worldx(), t.worldy(), 999.0, b => b.block.name.includes("reind-min-scan-"));
+          if(b_sc == null || b_sc.efficiency <= 0.9999) down = true;
 
-        if(b_sc != null) {
-          var r_sc = mdl_database.read_1n1v(db_block.genericRange, b_sc.block.name);
-          if(r_sc == null) {
-            down = true;
-          } else {
-            var t_sc = b_sc.tile;
-            var d = mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(t_sc));
-            if(d > (b_sc.block.size / 2 + r_sc) * Vars.tilesize * 1.275) down = true;
+          if(b_sc != null) {
+            var r_sc = mdl_database.read_1n1v(db_block.genericRange, b_sc.block.name);
+            if(r_sc == null) {
+              down = true;
+            } else {
+              var t_sc = b_sc.tile;
+              var d = mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(t_sc));
+              if(d > (b_sc.block.size / 2 + r_sc) * Vars.tilesize * 1.275) down = true;
+            };
           };
-        };
 
-        if(down) {
-          b.progress = 0.0;
-          ct_blk_impactDrill.accB_down(b, "w", true);
-        } else {
-          ct_blk_impactDrill.accB_down(b, "w", false);
+          if(down) {
+            b.progress = 0.0;
+            ct_blk_impactDrill.accB_down(b, "w", true);
+          } else {
+            ct_blk_impactDrill.accB_down(b, "w", false);
+          };
         };
       };
     };
@@ -93,18 +92,15 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      // Draw impact range
       var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
       if(rad != null) mdl_draw.drawCirclePulse(mdl_geometry.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
-      // Draw impact range
       var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
       if(rad != null) mdl_draw.drawCirclePulse(mdl_geometry.poser_1b(b), rad);
 
-      // Draw ore scanner connection
       var t = b.tile;
       var ov = t.overlay();
       if(ov != null && ov.name.includes("reind-env-ore-depth-")) {

@@ -24,7 +24,9 @@
         blk_drill.setStats(this);
       },
       canMine(tile) {
-        return this.super$canMine(tile) && blk_drill.canMine(this, tile);
+        if(!this.super$canMine(tile)) return false;
+        if(!blk_drill.canMine(this, tile)) return false;
+        return true;
       },
     });
     minDril_mechanicalDrill.buildType = () => extend(Drill.DrillBuild, minDril_mechanicalDrill, {
@@ -42,7 +44,9 @@
         blk_drill.setStats(this);
       },
       canMine(tile) {
-        return this.super$canMine(tile) && blk_drill.canMine(this, tile);
+        if(!this.super$canMine(tile)) return false;
+        if(!blk_drill.canMine(this, tile)) return false;
+        return true;
       },
     });
     minDril_pneumaticDrill.buildType = () => extend(Drill.DrillBuild, minDril_pneumaticDrill, {
@@ -64,7 +68,12 @@
       },
       // Specific
       canMine(tile) {
-        return this.super$canMine(tile) && (tile.drop() == Vars.content.item("reind-item-ore-sand"));
+        if(!this.super$canMine(tile)) return false;
+        if(
+          tile.drop() != Vars.content.item("reind-item-ore-sand") &&
+          tile.drop() != Vars.content.item("reind-item-ore-sand-basaltic")
+        ) return false;
+        return true;
       },
     });
     minDril_sandExcavator.buildType = () => extend(Drill.DrillBuild, minDril_sandExcavator, {

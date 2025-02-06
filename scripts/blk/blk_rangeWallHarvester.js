@@ -18,11 +18,9 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Fix affinities
       blk.stats.remove(Stat.tiles);
       blk.stats.add(Stat.tiles, StatValues.blocks(blk.attribute, blk.floating, 1.0, true, false));
 
-      // Get range
       var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
       if(r != null) blk.stats.add(Stat.range, r, StatUnit.blocks);
     };
@@ -45,7 +43,6 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      // Draw range
       var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
       var t = Vars.world.tile(tx, ty);
       if(r != null && t != null) {
@@ -61,7 +58,6 @@
 
 
     function drawSelectComp(b) {
-      // Draw range
       var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
       if(r != null) {
         mdl_draw.drawSelectRect(b, r, true);
@@ -76,7 +72,6 @@
 
 
     function drawComp(b) {
-      // Draw transfer
       if(b.efficiency > 0.0001) {
         var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
         if(r != null) mdl_geometry.getTiles_rect(b.tile, r, b.block.size).each(ot => {

@@ -13,8 +13,7 @@
 
 
   // Part: Component
-    function setStatsComp_oreFluid(liq) {
-      // Get related blocks
+    function setStatsComp(liq) {
       var li_blk = new Seq();
       Vars.content.blocks().each(blk => {
         if(blk.liquidDrop == liq) li_blk.add(blk);
@@ -32,18 +31,18 @@
 
 
   // Part: Integration
-    const setStats_oreFluid = function(liq) {
+    const setStats = function(liq) {
       rs_genericFluid.setStats(liq);
 
-      setStatsComp_oreFluid(liq);
+      setStatsComp(liq);
     };
-    exports.setStats = setStats_oreFluid;
+    exports.setStats = setStats;
 
 
-    const update_oreFluid = function(liq, puddle) {
+    const update = function(liq, puddle) {
       rs_genericFluid.update(liq, puddle);
     };
-    exports.update = update_oreFluid;
+    exports.update = update;
   // End
 
 

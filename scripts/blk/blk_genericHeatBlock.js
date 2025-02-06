@@ -19,15 +19,12 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get heat limit
       var heatLimit = mdl_database.read_1n1v(db_block.heatLimit, blk.name);
       if(heatLimit != null) blk.stats.add(db_stat.heatLimit, heatLimit);
 
-      // Get heat loss
       var heatLoss = mdl_database.read_1n1v(db_block.heatLoss, blk.name);
       if(heatLoss != null) blk.stats.add(db_stat.heatLoss, Strings.fixed(heatLoss * 1000.0, 2) + "‰");
 
-      // Get heat transfer coefficient
       var heatTransCoef = mdl_database.read_1n1v(db_block.heatTransferCoefficient, blk.name);
       if(heatTransCoef != null) blk.stats.add(db_stat.heatTransferCoefficient, Strings.fixed(heatTransCoef, 2));
     };

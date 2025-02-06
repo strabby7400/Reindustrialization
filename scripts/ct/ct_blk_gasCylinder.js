@@ -36,7 +36,6 @@
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
         if(!blk_gasCylinder.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
       draw() {

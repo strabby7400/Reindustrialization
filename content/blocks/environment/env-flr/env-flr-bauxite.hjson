@@ -27,7 +27,7 @@
 */
 
 
-  variants: 4
+  variants: 2
   walkEffect: none
   walkSound: se-step-dirt
   walkSoundVolume: 0.1

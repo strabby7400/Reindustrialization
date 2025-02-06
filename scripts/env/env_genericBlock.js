@@ -15,13 +15,11 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get related item
       if(blk.itemDrop != null) {
         var li_itm = new Seq([blk.itemDrop]);
         blk.stats.add(db_stat.resourceRelated, StatValues.content(li_itm));
       };
 
-      // Get related liquid
       if(blk.liquidDrop != null) {
         var li_liq = new Seq([blk.liquidDrop]);
         blk.stats.add(db_stat.resourceRelated, StatValues.content(li_liq));

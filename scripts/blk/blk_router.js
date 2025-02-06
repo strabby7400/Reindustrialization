@@ -15,7 +15,6 @@
 
   // Part: Component
     function drawComp(b) {
-      // Draw backflow warning
       mdl_geometry.getTiles_edge(b.tile, b.block.size).each(ot => {
         if(ot.block() instanceof Router) mdl_draw.drawTileIndicator(ot, false);
       });

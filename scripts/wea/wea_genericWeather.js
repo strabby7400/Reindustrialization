@@ -15,10 +15,10 @@
 
 
   // Part: Integration
-    const update_genericWeather = function(wea, state) {
+    const update = function(wea, state) {
 
     };
-    exports.update = update_genericWeather;
+    exports.update = update;
   // End
 
 

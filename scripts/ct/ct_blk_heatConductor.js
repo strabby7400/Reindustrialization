@@ -31,19 +31,15 @@
       },
     });
     powHcond_copperHeatConductor.buildType = () => extend(Conduit.ConduitBuild, powHcond_copperHeatConductor, {
-      // Override, Suppressed
       updateTile() {
         if(cfg_update.isSuppressed()) return;
         blk_heatConductor.updateTile(this);
       },
-      // Override, Suppressed
       acceptLiquid(source, liquid) {
         if(cfg_update.isSuppressed()) return false;
         if(!blk_heatConductor.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
-      // Override
       moveLiquid(next, liquid) {
         return blk_heatConductor.moveLiquid(this, next, liquid);
       },
@@ -55,7 +51,6 @@
         this.super$drawSelect();
         blk_heatConductor.drawSelect(this);
       },
-      // Override
       onDestroyed() {
         blk_heatConductor.onDestroyed(this);
       },
@@ -74,19 +69,15 @@
       },
     });
     powHcond_steelHeatConductor.buildType = () => extend(Conduit.ConduitBuild, powHcond_steelHeatConductor, {
-      // Override, Suppressed
       updateTile() {
         if(cfg_update.isSuppressed()) return;
         blk_heatConductor.updateTile(this);
       },
-      // Override, Suppressed
       acceptLiquid(source, liquid) {
         if(cfg_update.isSuppressed()) return false;
         if(!blk_heatConductor.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
-      // Override
       moveLiquid(next, liquid) {
         return blk_heatConductor.moveLiquid(this, next, liquid);
       },
@@ -98,7 +89,6 @@
         this.super$drawSelect();
         blk_heatConductor.drawSelect(this);
       },
-      // Override
       onDestroyed() {
         blk_heatConductor.onDestroyed(this);
       },

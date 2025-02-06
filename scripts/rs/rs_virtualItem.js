@@ -13,7 +13,7 @@
 
 
   // Part: Component
-    function setStatsComp_virtualItem(itm) {
+    function setStatsComp(itm) {
       itm.stats.add(db_stat.transportable, false);
     };
   // End
@@ -27,12 +27,12 @@
 
 
   // Part: Integration
-    const setStats_oreItem = function(itm) {
+    const setStats = function(itm) {
       rs_genericItem.setStats(itm);
 
-      setStatsComp_virtualItem(itm);
+      setStatsComp(itm);
     };
-    exports.setStats = setStats_oreItem;
+    exports.setStats = setStats;
   // End
 
 

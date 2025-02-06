@@ -39,13 +39,11 @@
       down: false,
       updateTile() {
         blk_fragmentFactory.updateTile(this);
-
         if(this.down) return;
         this.super$updateTile();
       },
       status() {
         if(this.down) return BlockStatus.noInput;
-
         return this.super$status();
       },
     });

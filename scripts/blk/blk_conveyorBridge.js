@@ -16,10 +16,8 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get range
       blk.stats.add(Stat.range, blk.range, StatUnit.blocks);
 
-      // Get transport speed
       var speed = mdl_database.read_1n1v(db_block.transportSpeed, blk.name);
       blk.stats.add(Stat.speed, speed, StatUnit.itemsSecond);
     };

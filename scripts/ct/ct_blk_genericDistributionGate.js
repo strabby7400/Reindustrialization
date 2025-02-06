@@ -66,11 +66,19 @@
         this.super$setStats();
         blk_filterGate.setStats(this);
       },
+      setBars() {
+        this.super$setBars();
+        blk_filterGate.setBars(this);
+      },
     });
     disAux_filterGate.buildType = () => extend(Sorter.SorterBuild, disAux_filterGate, {
       updateTile() {
         this.super$updateTile();
         blk_filterGate.updateTile(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        blk_filterGate.drawSelect(this);
       },
     });
     exports.disAux_filterGate = disAux_filterGate;
@@ -81,11 +89,19 @@
         this.super$setStats();
         blk_filterGate.setStats(this);
       },
+      setBars() {
+        this.super$setBars();
+        blk_filterGate.setBars(this);
+      },
     });
     disAux_blockerGate.buildType = () => extend(Sorter.SorterBuild, disAux_blockerGate, {
       updateTile() {
         this.super$updateTile();
         blk_filterGate.updateTile(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        blk_filterGate.drawSelect(this);
       },
     });
     exports.disAux_blockerGate = disAux_blockerGate;

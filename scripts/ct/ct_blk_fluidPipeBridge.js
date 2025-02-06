@@ -32,10 +32,8 @@
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
         if(!blk_fluidPipeBridge.acceptLiquid(this, source, liquid)) return false;
-
         return true;
       },
-      // Override
       moveLiquid(next, liquid) {
         return blk_fluidPipeBridge.moveLiquid(this, next, liquid);
       },

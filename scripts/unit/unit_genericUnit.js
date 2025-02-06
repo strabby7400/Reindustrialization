@@ -17,25 +17,20 @@
 
 
   // Part: Component
-    function setStatsComp_genericUnit(utp) {
-      // Get not robot
+    function setStatsComp(utp) {
       if(db_unit.nonRobots.contains(utp.name)) utp.stats.add(db_stat.notRobot, true);
 
-      // Get pollution tolerance
       var polTol = mdl_database.read_1n1v(db_unit.pollutionTolerance, utp.name);
       if(polTol != null) utp.stats.add(db_stat.pollutionTolerance, polTol, db_stat.pollutionUnit);
     };
 
 
-    function updateComp_genericUnit(utp, unit) {
-      // Update unit heat
+    function updateComp(utp, unit) {
       frag_heat.update_unitHeat(utp, unit);
 
-      // Update surrounding
-      frag_unit.updateFrag_surrounding(utp, unit);
+      frag_unit.update_surrounding(utp, unit);
 
-      // Update mouse
-      frag_unit.updateFrag_mouse(utp, unit);
+      frag_unit.update_mouse(utp, unit);
     };
   // End
 
@@ -48,16 +43,16 @@
 
 
   // Part: Integration
-    const setStats_genericUnit = function(utp) {
-      setStatsComp_genericUnit(utp);
+    const setStats = function(utp) {
+      setStatsComp(utp);
     };
-    exports.setStats = setStats_genericUnit;
+    exports.setStats = setStats;
 
 
-    const update_genericUnit = function(utp, unit) {
-      updateComp_genericUnit(utp, unit);
+    const update = function(utp, unit) {
+      updateComp(utp, unit);
     };
-    exports.update = update_genericUnit;
+    exports.update = update;
   // End
 
 

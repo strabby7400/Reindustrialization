@@ -23,7 +23,6 @@
         this.super$setStats();
         env_depthOre.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_depthOre.drawBase(this, tile);
       },
@@ -36,7 +35,6 @@
         this.super$setStats();
         env_depthOre.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_depthOre.drawBase(this, tile);
       },
@@ -51,7 +49,6 @@
         this.super$setStats();
         env_depthOre.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_depthOre.drawBase(this, tile);
       },
@@ -66,7 +63,6 @@
         this.super$setStats();
         env_depthOre.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_depthOre.drawBase(this, tile);
       },
@@ -79,7 +75,6 @@
         this.super$setStats();
         env_depthOre.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_depthOre.drawBase(this, tile);
       },
@@ -94,7 +89,6 @@
         this.super$setStats();
         env_depthOre.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_depthOre.drawBase(this, tile);
       },
@@ -109,7 +103,6 @@
         this.super$setStats();
         env_depthOre.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_depthOre.drawBase(this, tile);
       },
@@ -124,7 +117,6 @@
         this.super$setStats();
         env_depthOre.setStats(this);
       },
-      // Override
       drawBase(tile) {
         env_depthOre.drawBase(this, tile);
       },

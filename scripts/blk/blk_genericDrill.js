@@ -16,7 +16,6 @@
     function setStatsComp(blk) {
       blk.stats.remove(Stat.drillTier);
 
-      // Get boosted drill speed
       if(blk instanceof Drill) {
         var drillSpeed = Math.pow(blk.size, 2) / blk.drillTime * 60.0 * Math.pow(blk.liquidBoostIntensity, 2);
         blk.stats.add(db_stat.boostedDrillSpeed, drillSpeed, StatUnit.itemsSecond);
@@ -25,12 +24,10 @@
         blk.stats.add(db_stat.boostedDrillSpeed, drillSpeed, StatUnit.itemsSecond);
       };
 
-      // Get blocked item
       if(blk.blockedItem != null) {
         blk.stats.add(db_stat.blockedItem, StatValues.content(new Seq([blk.blockedItem]).sort()));
       };
 
-      // Get miner tier
       if(blk.tier != null) {
         blk.stats.add(db_stat.mineTier, blk.tier);
       };

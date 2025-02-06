@@ -37,7 +37,9 @@
         blk_impactDrill.setStats(this);
       },
       canMine(tile) {
-        return this.super$canMine(tile) && blk_impactDrill.canMine(this, tile);
+        if(!this.super$canMine(tile)) return false;
+        if(!blk_impactDrill.canMine(this, tile)) return false;
+        return true;
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
@@ -53,12 +55,10 @@
       shouldConsume() {
         if(!this.super$shouldConsume()) return false;
         if(this.down) return false;
-
         return true;
       },
       status() {
         if(this.down) return BlockStatus.noInput;
-
         return this.super$status();
       },
       drawSelect() {
@@ -82,7 +82,9 @@
         frag_facility.setBars_ep(this);
       },
       canMine(tile) {
-        return this.super$canMine(tile) && blk_impactDrill.canMine(this, tile);
+        if(!this.super$canMine(tile)) return false;
+        if(!blk_impactDrill.canMine(this, tile)) return false;
+        return true;
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
@@ -100,14 +102,12 @@
         if(!this.super$shouldConsume()) return false;
         if(this.down) return false;
         if(!frag_facility.isActive_ep(this)) return false;
-
         return true;
       },
       // Specific
       status() {
         if(this.down) return BlockStatus.noInput;
         if(!frag_facility.isActive_ep(this)) return BlockStatus.noInput;
-
         return this.super$status();
       },
       // Specific

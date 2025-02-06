@@ -56,7 +56,7 @@
         this.super$setStats();
         blk_genericFactory.setStats(this);
       },
-      // Specific, No Inheritance
+      // Specific
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
         frag_facility.drawPlace_2side(this, Vars.world.tile(x, y), rotation);
@@ -66,19 +66,17 @@
       // Specific
       updateTile() {
         if(!frag_facility.isActive_2side(this)) return;
-
         this.super$updateTile();
         blk_genericFactory.updateTile(this);
         frag_effect.updateTile_gasSideRelease(0.06, this, 0, 12.0, 10.0, 0.5, 5.0, false);
         frag_effect.updateTile_gasSideRelease(0.06, this, 2, 12.0, 10.0, 0.5, 5.0, true);
       },
-      // Specific, No Inheritance
+      // Specific
       status() {
         if(!frag_facility.isActive_2side(this)) return BlockStatus.noInput;
-
         return this.super$status();
       },
-      // Specific, No Inheritance
+      // Specific
       drawSelect() {
         this.super$drawSelect();
         frag_facility.drawSelect_2side(this);

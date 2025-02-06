@@ -47,13 +47,13 @@
         this.super$updateTile();
         blk_incinerator.updateTile(this);
       },
-      // No Inheritance
+      // Specific
       draw() {
         this.super$draw();
         mdl_draw.drawFlameRegion(mdl_geometry.poser_1b(this), this.top3Reg, this.frac);
         mdl_draw.drawHeatRegion(mdl_geometry.poser_1b(this), this.power.status, this.glowReg);
       },
-      // No Inheritance
+      // Specific
       drawLight() {
         this.super$drawLight();
         mdl_draw.drawLight(mdl_geometry.poser_1b(this), this.frac);

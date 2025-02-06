@@ -13,7 +13,7 @@
 
 
   // Part: Component
-    function setStatsComp_wasteItem(itm) {
+    function setStatsComp(itm) {
       itm.stats.add(db_stat.isWaste, true);
     };
   // End
@@ -27,12 +27,12 @@
 
 
   // Part: Integration
-    const setStats_wasteItem = function(itm) {
+    const setStats = function(itm) {
       rs_genericItem.setStats(itm);
 
-      setStatsComp_wasteItem(itm);
+      setStatsComp(itm);
     };
-    exports.setStats = setStats_wasteItem;
+    exports.setStats = setStats;
   // End
 
 

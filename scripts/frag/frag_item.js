@@ -7,6 +7,8 @@
 
   // Part: Import
     const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_effect = require("reind/mdl/mdl_effect");
+    const mdl_ui = require("reind/mdl/mdl_ui");
 
     const db_effect = require("reind/db/db_effect");
   // End
@@ -23,8 +25,8 @@
 
         if(illegal) {
           b.kill();
-          db_effect._invalidPlacement().at(b.x, b.y, 0.0);
-          new UI().showInfoFade("@info.reind-info-virtual-item.name", 2.0);
+          mdl_effect.showAt(b, db_effect._invalidPlacement(), 0.0);
+          mdl_ui.showInfoFade("@info.reind-info-efficiency.name");
         };
       };
     };

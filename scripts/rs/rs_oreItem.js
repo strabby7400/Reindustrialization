@@ -14,11 +14,10 @@
 
 
   // Part: Component
-    function setStatsComp_oreItem(itm) {
+    function setStatsComp(itm) {
       itm.stats.add(db_stat.isOre, true);
       itm.stats.add(db_stat.hardness, itm.hardness);
 
-      // Get related blocks
       var li_blk = new Seq();
       Vars.content.blocks().each(blk => {
         if(blk.itemDrop == itm) li_blk.add(blk);
@@ -36,12 +35,12 @@
 
 
   // Part: Integration
-    const setStats_oreItem = function(itm) {
+    const setStats = function(itm) {
       rs_genericItem.setStats(itm);
 
-      setStatsComp_oreItem(itm);
+      setStatsComp(itm);
     };
-    exports.setStats = setStats_oreItem;
+    exports.setStats = setStats;
   // End
 
 

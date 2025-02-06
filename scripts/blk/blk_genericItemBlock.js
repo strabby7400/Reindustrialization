@@ -17,16 +17,13 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get unloadable
       blk.stats.add(db_stat.unloadable, blk.unloadable);
 
-      // Get exposed to air
       if(db_block.exposedToAir.contains(blk.name)) blk.stats.add(db_stat.exposedToAir, true);
     };
 
 
     function updateTileComp(b) {
-      // Update virtual item
       frag_item.updateTile_virtualItem(b);
     };
   // End

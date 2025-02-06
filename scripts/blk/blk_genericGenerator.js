@@ -19,7 +19,6 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get explosion stats
       if(blk.explosionDamage != null && blk.explosionDamage > 0) {
         blk.stats.add(db_stat.canExplode, true);
         blk.stats.add(db_stat.explosionRadius, blk.explosionRadius, StatUnit.blocks);
@@ -29,7 +28,6 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      // Draw explosion range
       if(blk.explosionDamage != null && blk.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_geometry.poser_1t(Vars.world.tile(tx, ty), blk.offset), blk.explosionRadius * Vars.tilesize);
     };
 
@@ -40,7 +38,6 @@
 
 
     function drawSelectComp(b) {
-      // Draw explosion range
       if(b.block.explosionDamage != null && b.block.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_geometry.poser_1b(b), b.block.explosionRadius * Vars.tilesize);
     };
   // End

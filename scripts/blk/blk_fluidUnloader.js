@@ -21,35 +21,34 @@
 
   // Part: Component
     function updateTileComp(b) {
-      // Update transport
-      var liq_sel = Vars.content.liquids().get(ct_blk_fluidUnloader.accB_cfg_id(b, "r"));
       var liq = b.liquids.current();
+      var liq_sel = Vars.content.liquids().get(ct_blk_fluidUnloader.accB_id_sel(b, "r"));
       if(liq != liq_sel) b.liquids.clear();
+
       b.moveLiquidForward(false, liq_sel);
-      var ot_f = mdl_geometry.getTile_rot_1b("f", b);
+      var ot_f = mdl_geometry.getTile_rot("f", b.tile, b.rotation);
       if(ot_f != null) frag_fluid.transferLiquid(ot_f.build, b, liq_sel, true);
     };
 
 
     function buildConfigurationComp(b, tb) {
-      var cfg_id = ct_blk_fluidUnloader.accB_cfg_id(b, "r");
-      db_table.__contentSelected_liquid(tb, cfg_id);
-
-      tb.row();
-
+      var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
       var btnGrp = new ButtonGroup();
       btnGrp.setMinCheckCount(0);
       btnGrp.setMaxCheckCount(1);
-      db_table.__contentSelector_liquid(tb, cfg_id, btnGrp, function() {
-        ct_blk_fluidUnloader.accB_cfg_id(b, "w", this);
+
+      db_table.__contentSelected_liquid(tb, id_sel);
+      tb.row();
+
+      db_table.__contentSelector_liquid(tb, id_sel, btnGrp, function() {
+        ct_blk_fluidUnloader.accB_id_sel(b, "w", this);
         b.deselect();
       }, 7);
     };
 
 
     function drawSelectComp(b) {
-      // Draw config content
-      var liq_sel = Vars.content.liquids().get(ct_blk_fluidUnloader.accB_cfg_id(b, "r"));
+      var liq_sel = Vars.content.liquids().get(ct_blk_fluidUnloader.accB_id_sel(b, "r"));
       if(liq_sel != Liquids.water) mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), liq_sel, b.block.size);
     };
   // End

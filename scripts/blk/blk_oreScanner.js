@@ -24,7 +24,6 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get range
       var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
       if(r != null) blk.stats.add(Stat.range, r, StatUnit.blocks);
     };

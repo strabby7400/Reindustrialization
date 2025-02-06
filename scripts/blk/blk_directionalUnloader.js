@@ -15,7 +15,6 @@
 
   // Part: Component
     function drawSelectComp(b) {
-      // Draw config content
       if(b.unloadItem != null) mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), b.unloadItem, b.block.size);
     };
   // End

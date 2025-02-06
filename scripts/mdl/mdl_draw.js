@@ -37,17 +37,17 @@
 
 
     /* NOTE: Simply DrawRegion with more arguments. */
-    const drawNormalRegion = function(pos, reg, ang, a, scl, color, z) {
+    const drawNormalRegion = function(pos, reg, ang, a, regScl, color, z) {
       if(ang == null) ang = 0.0;
       if(a == null) a = 1.0;
-      if(scl == null) scl = 1.0;
+      if(regScl == null) regScl = 1.0;
       if(color == null) color = Color.white;
       if(reg == null) return;
 
       var x = pos.x;
       var y = pos.y;
-      var w = reg.width * 2.0 * scl / Vars.tilesize;
-      var h = reg.height * 2.0 * scl / Vars.tilesize;
+      var w = reg.width * 2.0 * regScl / Vars.tilesize;
+      var h = reg.height * 2.0 * regScl / Vars.tilesize;
 
       if(z != null) Draw.z(z);
       Draw.color(color);
@@ -58,31 +58,53 @@
     exports.drawNormalRegion = drawNormalRegion;
 
 
+    /* <---------------- drawShadowRegion ----------------> */
+
+
+    const drawSimpleShadow = function(pos, reg, ang, a, regScl, color, z) {
+      Draw.mixcol(Color.darkGray, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.4, regScl, color, z);
+    };
+    exports.drawSimpleShadow = drawSimpleShadow;
+
+
+    const drawBlurredShadow = function(pos, reg, ang, a, regScl, color, z) {
+      Draw.mixcol(Color.darkGray, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.2, regScl, color, z);
+      Draw.mixcol(Color.darkGray, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.18, regScl * 1.05, color, z);
+      Draw.mixcol(Color.darkGray, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.16, regScl * 1.1, color, z);
+      Draw.mixcol(Color.darkGray, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.14, regScl * 1.15, color, z);
+    };
+    exports.drawBlurredShadow = drawBlurredShadow;
+
+
     /* <---------------- drawFadeRegion ----------------> */
 
 
     /* NOTE: DrawFade. */
-    const drawFadeRegion = function(pos, reg, ang, a, scl, scl_fd, color, z) {
+    const drawFadeRegion = function(pos, reg, ang, a, regScl, fadeScl, color, z) {
       if(a == null) a = 1.0;
-      if(scl_fd == null) scl_fd = 1.0;
+      if(fadeScl == null) fadeScl = 1.0;
       if(reg == null) return;
 
-      var a_fi = a * Math.abs(Math.sin(Time.time / 15.0 / scl_fd));
+      var a_fi = a * Math.abs(Math.sin(Time.time / 15.0 / fadeScl));
 
-      drawNormalRegion(pos, reg, ang, a_fi, scl, color, z);
+      drawNormalRegion(pos, reg, ang, a_fi, regScl, color, z);
     };
     exports.drawFadeRegion = drawFadeRegion;
 
 
     /* NOTE: Draws a flickering region, used for warning lights. */
-    const drawFadeAlert = function(pos, reg, frac, ang, a, scl, color, z) {
+    const drawFadeAlert = function(pos, reg, frac, ang, a, regScl, color, z) {
       if(frac == null) frac = 0.0;
 
       var a_fi = Math.min(frac / 0.5, 1.0);
-      var scl_fd = 2.5 - frac * 1.5;
+      var fadeScl = 2.5 - frac * 1.5;
 
-      drawFadeRegion(pos, reg, ang, a_fi, scl, scl_fd, color, z);
-      print(scl_fd);
+      drawFadeRegion(pos, reg, ang, a_fi, regScl, fadeScl, color, z);
     };
     exports.drawFadeAlert = drawFadeAlert;
 
@@ -106,6 +128,35 @@
       Draw.reset();
     };
     exports.drawRotatorRegion = drawRotatorRegion;
+
+
+    /* <---------------- drawWobbleRegion ----------------> */
+
+
+    const drawWobbleRegion = function(pos, reg, ang, a, regScl, color, scl, mag, wobSclX, wobSclY, z) {
+      if(ang == null) ang = 0.0;
+      if(a == null) a = 1.0;
+      if(regScl == null) regScl = 1.0;
+      if(color == null) color = Color.white;
+      if(scl == null) scl = 1.0;
+      if(mag == null) mag = 1.0;
+      if(wobSclX == null) wobSclX = 1.0;
+      if(wobSclY == null) wobSclY = 1.0;
+      if(reg == null) return;
+
+      var w = reg.width * reg.scl();
+      var h = reg.height * reg.scl();
+
+      if(z != null) Draw.z(z);
+      Draw.color(color);
+      Draw.alpha(a);
+      Draw.rectv(reg, pos.x, pos.y, w, h, ang, vec => vec.add(
+        (Mathf.sin(vec.y * 3.0 + Time.time, 60.0 * scl, 0.5 * mag) + Mathf.sin(vec.x * 3.0 - Time.time, 70.0 * scl, 0.8 * mag)) * 1.5 * wobSclX,
+        (Mathf.sin(vec.x * 3.0 + Time.time + 8.0, 66.0 * scl, 0.55 * mag) + Mathf.sin(vec.y * 3.0 - Time.time, 50.0 * scl, 0.2 * mag)) * 1.5 * wobSclY,
+      ));
+      Draw.reset();
+    };
+    exports.drawWobbleRegion = drawWobbleRegion;
 
 
     /* <---------------- drawFlameRegion ----------------> */
@@ -267,7 +318,7 @@
       var y2 = pos2.y;
       var scl_fi = scl * 15.0;
       var seg = Math.round(Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1)) / Vars.tilesize * 2.0);
-      var a = 0.25 + Math.sin(Time.time / scl_fi) * 0.25;
+      var a = 0.3 + Math.sin(Time.time / scl_fi) * 0.2;
 
       Lines.stroke(1.5, color);
       Draw.alpha(a);

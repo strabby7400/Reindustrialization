@@ -15,10 +15,10 @@
 
 
   // Part: Integration
-    const setStats_genericResource = function(ct) {
+    const setStats = function(ct) {
 
     };
-    exports.setStats = setStats_genericResource;
+    exports.setStats = setStats;
   // End
 
 

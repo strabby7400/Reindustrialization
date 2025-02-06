@@ -23,15 +23,12 @@
         this.super$setStats();
         blk_windTurbine.setStats(this);
       },
-      // Override
       sumAttribute(attr, x, y) {
         return blk_windTurbine.sumAttribute(this, attr, x, y);
       },
-      // Override
       canPlaceOn(tile, team, rotation) {
         return blk_windTurbine.canPlaceOn(this, tile, team, rotation);
       },
-      // Override
       drawPlace(x, y, rotation, valid) {
         blk_windTurbine.drawPlace(this, x, y, rotation, valid);
       },
@@ -41,7 +38,6 @@
         this.super$updateTile();
         blk_windTurbine.updateTile(this);
       },
-      // Override
       drawSelect() {
         blk_windTurbine.drawSelect(this);
       },

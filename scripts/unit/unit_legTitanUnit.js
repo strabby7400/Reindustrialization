@@ -18,16 +18,16 @@
 
 
   // Part: Integration
-    const setStats_legTitanUnit = function(utp) {
+    const setStats = function(utp) {
       unit_infantryUnit.setStats(utp);
     };
-    exports.setStats = setStats_legTitanUnit;
+    exports.setStats = setStats;
 
 
-    const update_legTitanUnit = function(utp, unit) {
+    const update = function(utp, unit) {
       unit_infantryUnit.update(utp, unit);
     };
-    exports.update = update_legTitanUnit;
+    exports.update = update;
   // End
 
 

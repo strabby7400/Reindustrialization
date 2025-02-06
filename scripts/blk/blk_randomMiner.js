@@ -17,14 +17,12 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get attribute
       var nm_attr = mdl_database.read_1n1v(db_block.attrMap, blk.name);
       if(nm_attr != null) blk.stats.add(Stat.tiles, Attribute.get(nm_attr));
     };
 
 
     function updateTileComp(b) {
-      // Update effect
       if(b.efficiency > 0.0 && Mathf.chance(0.01)) Vars.content.block("reind-min-dril-mechanical-drill").updateEffect.at(b);
     };
 

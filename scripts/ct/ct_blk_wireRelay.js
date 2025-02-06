@@ -24,7 +24,9 @@
         blk_wireRelay.setStats(this);
       },
       canPlaceOn(tile, team, rotation) {
-        return this.super$canPlaceOn(tile, team, rotation) && blk_wireRelay.canPlaceOn(this, tile, team, rotation);
+        if(!this.super$canPlaceOn(tile, team, rotation)) return false;
+        if(!blk_wireRelay.canPlaceOn(this, tile, team, rotation)) return false;
+        return true;
       },
     });
     powWire_copperWireRelay.buildType = () => extend(BeamNode.BeamNodeBuild, powWire_copperWireRelay, {

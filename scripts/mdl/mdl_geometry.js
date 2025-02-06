@@ -204,14 +204,6 @@
     exports.getTile_rot = getTile_rot;
 
 
-    const getTile_rot_1b = function(mode, b) {
-      if(b == null) return new Seq();
-
-      return getTile_rot(mode, b.tile, b.rotation);
-    };
-    exports.getTile_rot_1b = getTile_rot_1b;
-
-
     /* NOTE: Gets a new tile with a ray. */
     const getTile_ray = function(t_0, ang, rad) {
       if(ang == null) ang = 0.0;
