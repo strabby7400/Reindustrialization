@@ -36,7 +36,7 @@
       },
     });
     bliqAux_fluidUnloader.buildType = () => extend(GenericCrafter.GenericCrafterBuild, bliqAux_fluidUnloader, {
-      id_sel: 0,
+      id_sel: -1,
       updateTile() {
         this.super$updateTile();
         blk_fluidUnloader.updateTile(this);

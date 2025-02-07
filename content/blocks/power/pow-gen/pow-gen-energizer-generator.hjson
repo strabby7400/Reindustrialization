@@ -28,7 +28,7 @@
 
 
   research: {
-    parent: pow-gen-core-generator
+    parent: pow-gen-manual-generator
     objectives: []
   }
   researchCostMultiplier: 0.25

@@ -12,6 +12,7 @@
 
     const frag_fluid = require("reind/frag/frag_fluid");
 
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_geometry = require("reind/mdl/mdl_geometry");
 
@@ -22,7 +23,10 @@
   // Part: Component
     function updateTileComp(b) {
       var liq = b.liquids.current();
-      var liq_sel = Vars.content.liquids().get(ct_blk_fluidUnloader.accB_id_sel(b, "r"));
+      var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
+      var liq_sel = mdl_content.getContent_id("fluid", id_sel);
+      if(liq_sel == null) return;
+
       if(liq != liq_sel) b.liquids.clear();
 
       b.moveLiquidForward(false, liq_sel);
@@ -33,14 +37,11 @@
 
     function buildConfigurationComp(b, tb) {
       var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
-      var btnGrp = new ButtonGroup();
-      btnGrp.setMinCheckCount(0);
-      btnGrp.setMaxCheckCount(1);
 
-      db_table.__contentSelected_liquid(tb, id_sel);
+      db_table.__contentSelected(tb, "fluid", id_sel);
       tb.row();
 
-      db_table.__contentSelector_liquid(tb, id_sel, btnGrp, function() {
+      db_table.__contentSelector(tb, "fluid", id_sel, function() {
         ct_blk_fluidUnloader.accB_id_sel(b, "w", this);
         b.deselect();
       }, 7);
@@ -48,8 +49,9 @@
 
 
     function drawSelectComp(b) {
-      var liq_sel = Vars.content.liquids().get(ct_blk_fluidUnloader.accB_id_sel(b, "r"));
-      if(liq_sel != Liquids.water) mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), liq_sel, b.block.size);
+      var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
+      var liq_sel = mdl_content.getContent_id("fluid", id_sel);
+      mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), liq_sel, b.block.size);
     };
   // End
 

@@ -53,6 +53,9 @@
   // End
 
 
+  // Part: Specific
+    Attribute.add("reind-attr-placeholder");
+  // End
 
 
 Events.run(ClientLoadEvent, () => {

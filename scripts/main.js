@@ -78,6 +78,7 @@
 
     const ct_blk_ventGenerator = require("reind/ct/ct_blk_ventGenerator");
     const ct_blk_consumeGenerator = require("reind/ct/ct_blk_consumeGenerator");
+    const ct_blk_manualGenerator = require("reind/ct/ct_blk_manualGenerator");
     const ct_blk_windTurbine = require("reind/ct/ct_blk_windTurbine");
     const ct_blk_fieldGenerator = require("reind/ct/ct_blk_fieldGenerator");
     const ct_blk_cable = require("reind/ct/ct_blk_cable");

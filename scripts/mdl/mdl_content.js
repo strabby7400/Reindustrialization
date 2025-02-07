@@ -37,7 +37,7 @@
 
 
     const getContentType_nm = function(nm) {
-      if(nm == null) return;
+      if(nm == null || typeof nm != "string") return;
 
       if(mdl_text.includes_ex(
         nm,
@@ -109,12 +109,47 @@
     exports.getContentType_nm = getContentType_nm;
 
 
+    /* NOTE: Gets a content with type and id. */
+    const getContent_id = function(tp_ct, id) {
+      var ct = null;
+      switch(tp_ct) {
+        case "item" :
+          ct = Vars.content.items().get(id);
+          break;
+        case "fluid" :
+          ct = Vars.content.liquids().get(id);
+          break;
+        case "block" :
+          ct = Vars.content.blocks().get(id);
+          break;
+        case "unit" :
+          ct = Vars.content.units().get(id);
+          break;
+        case "status" :
+          ct = Vars.content.statusEffects().get(id);
+          break;
+        case "weather" :
+          ct = Vars.content.weathers().get(id);
+          break;
+        case "sector" :
+          ct = Vars.content.sectors().get(id);
+          break;
+        case "planet" :
+          ct = Vars.content.planets().get(id);
+          break;
+      };
+
+      return ct;
+    };
+    exports.getContent_id = getContent_id;
+
+
     /* NOTE: Maps arbitrary name to the content based on systematic naming. */
     const getContent_nm = function(nm) {
-      if(nm == null) return;
+      if(nm == null || typeof nm != "string") return;
 
       var tp_ct = getContentType_nm(nm);
-      var ct;
+      var ct = null;
       switch(tp_ct) {
         case "item" :
           ct = Vars.content.item(nm);

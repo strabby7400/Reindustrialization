@@ -7,47 +7,41 @@
 
   // Part: Import
     const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_table = require("reind/mdl/mdl_table");
   // End
 
 
-  // Part: Config
-    const __contentSelected_liquid = function(tb, id) {
-      var liq = Vars.content.liquids().get(id);
-      var nm_liq = (liq == Liquids.water) ? "-" : liq.localizedName;
+  // Part: Content
+    /* NOTE: Displays the name of currently selected content. */
+    const __contentSelected = function(tb, tp_ct, id_sel) {
+      var ct_sel = mdl_content.getContent_id(tp_ct, id_sel);
+      var str_ct = (ct_sel == null) ? "-" : ct_sel.localizedName;
 
-      tb.table(Tex.button, tb_rt => {
-        tb_rt.add(Core.bundle.get("term.reind-term-selected.name") + " : " + nm_liq).update(tb_temp => {
-          tb_temp.setText(Core.bundle.get("term.reind-term-selected.name") + " : " + nm_liq);
-        });
-      }).left();
+      mdl_table.setHeadline(
+        tb,
+        Core.bundle.get("term.reind-term-selected.name") + ":" + str_ct,
+      );
     };
-    exports.__contentSelected_liquid = __contentSelected_liquid;
+    exports.__contentSelected = __contentSelected;
 
 
-    const __contentSelector_liquid = function(tb, id, btnGrp, scr, col) {
-      if(col == null) col = 4;
+    /* NOTE: A selector UI for Reind contents. */
+    const __contentSelector = function(tb, tp_ct, id_sel, scr, col) {
+      var li_ct = new Seq();
+      switch(tp_ct) {
+        case "item" :
+          Vars.content.items().each(itm => {
+            if(!itm.hidden && mdl_content.isReind(itm) && !mdl_content.isVirt(itm)) li_ct.add(itm);
+          });
+          break;
+        case "fluid" :
+          Vars.content.liquids().each(liq => {
+            if(!liq.hidden && mdl_content.isReind(liq) && !mdl_content.isEffc(liq)) li_ct.add(liq);
+          });
+          break;
+      };
 
-      tb.table(Tex.button, tb_rt => {
-        var li_liq = Vars.content.liquids();
-        for(let i = 0, j = 0; i < li_liq.size; i++) {
-          if(li_liq.get(i).hidden || !li_liq.get(i).name.includes("reind-") || mdl_content.isEffc(li_liq.get(i))) continue;
-
-          (function(i) {
-            var btn = tb_rt.button(Tex.pane, 32.0, () => {
-              (i == id) ? (scr.call(0)) : (scr.call(i));
-            }).pad(4.0).tooltip(li_liq.get(i).localizedName).group(btnGrp).get();
-
-            btn.getStyle().up = Styles.black3;
-            btn.getStyle().down = Styles.black3;
-            btn.getStyle().over = Styles.flatOver;
-            btn.getStyle().checked = Styles.accentDrawable;
-            btn.getStyle().imageUp = new TextureRegionDrawable(li_liq.get(i).uiIcon);
-            btn.update(() => btn.setChecked(i == id));
-          })(i);
-          if(j % col == col - 1) tb_rt.row();
-          j++;
-        };
-      });
+      mdl_table.setContentSelector(tb, li_ct, id_sel, scr, col);
     };
-    exports.__contentSelector_liquid = __contentSelector_liquid;
+    exports.__contentSelector = __contentSelector;
   // End
