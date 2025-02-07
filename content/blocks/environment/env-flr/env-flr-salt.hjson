@@ -30,7 +30,7 @@
   variants: 0
   walkEffect: none
   walkSound: se-step-dirt
-  walkSoundVolume: 0.1
+  walkSoundVolume: 0.2
   walkSoundPitchMin: 0.95
   walkSoundPitchMax: 1.05
 

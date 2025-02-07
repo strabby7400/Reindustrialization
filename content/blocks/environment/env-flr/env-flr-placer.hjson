@@ -30,7 +30,7 @@
   variants: 4
   walkEffect: none
   walkSound: se-step-sand
-  walkSoundVolume: 0.1
+  walkSoundVolume: 0.2
   walkSoundPitchMin: 0.95
   walkSoundPitchMax: 1.05
 

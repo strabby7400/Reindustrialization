@@ -19,7 +19,7 @@
       var reg = blk.region;
       var ang = Mathf.randomSeedRange(t.pos() + 1, blk.rotationRand);
 
-      mdl_draw.drawBlurredShadow(pos, reg, ang, blk.shadowAlpha, 1.7, Color.white, blk.shadowLayer);
+      mdl_draw.drawBlurredShadow(pos, reg, ang, 0.5, 1.7, Color.white, blk.shadowLayer);
       mdl_draw.drawNormalRegion(pos, reg, ang, 1.0, 1.0, Color.white, blk.layer);
     };
   // End

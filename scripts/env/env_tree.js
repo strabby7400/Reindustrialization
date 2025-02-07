@@ -27,6 +27,7 @@
     function drawBaseComp(blk, t) {
       var z = mdl_database.read_1n1v(db_env.treeLayers, blk.name);
       if(z == null) return;
+      var z_sha = z - 0.0005;
 
       var pos = mdl_geometry.poser_1t(t);
       var pos_sha = mdl_geometry.poser_1t(t, blk.shadowOffset);
@@ -55,7 +56,7 @@
         };
       };
 
-      mdl_draw.drawBlurredShadow(pos_sha, reg, ang, a, 1.05, Color.white, Layer.power - 1.0);
+      mdl_draw.drawBlurredShadow(pos_sha, reg, ang, a, 1.05, Color.white, z_sha);
       mdl_draw.drawWobbleRegion(pos, reg, ang, a, 1.0, Color.white, scl, mag, wobScl, wobScl, z);
     };
   // End

@@ -112,7 +112,7 @@
 
     /* NOTE: Gets the distance between two points. I know it's kind of trivial. */
     const getDistance = function(pos1, pos2) {
-      if(pos1 == null || pos2 == null) return 0.0;
+      if(pos1 == null || pos2 == null) return 99999.0;
 
       return pos1.dst(pos2);
     };

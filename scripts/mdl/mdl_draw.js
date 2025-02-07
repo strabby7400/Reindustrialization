@@ -42,7 +42,7 @@
       if(a == null) a = 1.0;
       if(regScl == null) regScl = 1.0;
       if(color == null) color = Color.white;
-      if(reg == null) return;
+      if(pos == null || reg == null) return;
 
       var x = pos.x;
       var y = pos.y;
@@ -88,7 +88,7 @@
     const drawFadeRegion = function(pos, reg, ang, a, regScl, fadeScl, color, z) {
       if(a == null) a = 1.0;
       if(fadeScl == null) fadeScl = 1.0;
-      if(reg == null) return;
+      if(pos == null || reg == null) return;
 
       var a_fi = a * Math.abs(Math.sin(Time.time / 15.0 / fadeScl));
 
@@ -116,7 +116,7 @@
     const drawRotatorRegion = function(pos, reg, ang, rate) {
       if(ang == null) ang = 0.0;
       if(rate == null) rate = 0.0;
-      if(reg == null) return;
+      if(pos == null || reg == null) return;
 
       var x = pos.x;
       var y = pos.y;
@@ -142,7 +142,7 @@
       if(mag == null) mag = 1.0;
       if(wobSclX == null) wobSclX = 1.0;
       if(wobSclY == null) wobSclY = 1.0;
-      if(reg == null) return;
+      if(pos == null || reg == null) return;
 
       var w = reg.width * reg.scl();
       var h = reg.height * reg.scl();
@@ -170,7 +170,7 @@
       if(radMag == null) radMag = 2.0;
       if(radInMag == null) radInMag = 1.0;
       if(color == null) color = Color.valueOf("ffc999");
-      if(frac < 0.0001) return;
+      if(pos == null || reg == null || frac < 0.0001) return;
 
       var param1 = 0.3;
       var param2 = 0.06;
@@ -204,7 +204,7 @@
       if(color == null) color = Color.valueOf("ff3838");
       if(pulse == null) pulse = 0.3;
       if(pulseScl == null) pulseScl = 10.0;
-      if(reg == null) return;
+      if(pos == null || reg == null) return;
 
       var x = pos.x;
       var y = pos.y;
@@ -243,7 +243,7 @@
       if(sinScl == null) sinScl = 16.0;
       if(sinMag == null) sinMag = 6.0;
       if(color == null) color = Color.valueOf("ffc999");
-      if(frac < 0.0001) return;
+      if(pos == null || frac < 0.0001) return;
 
       var x = pos.x;
       var y = pos.y;
@@ -285,6 +285,7 @@
     const drawLine = function(pos1, pos2, color_gn, dashed) {
       if(color_gn == null) color_gn = Pal.accent;
       if(dashed == null) dashed = false;
+      if(pos1 == null || pos2 == null) return;
 
       var color = palette_gn(color_gn);
       var x1 = pos1.x;
@@ -310,6 +311,7 @@
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
       if(dashed == null) dashed = false;
+      if(pos1 == null || pos2 == null) return;
 
       var color = palette_gn(color_gn);
       var x1 = pos1.x;
@@ -335,6 +337,7 @@
     const drawLaser = function(pos1, pos2, color_gn, hasLight) {
       if(color_gn == null) color_gn = Pal.accent;
       if(hasLight == null) hasLight = false;
+      if(pos1 == null || pos2 == null) return;
 
       var color = palette_gn(color_gn);
       var x1 = pos1.x;
@@ -369,6 +372,7 @@
       if(color_gn == null) color_gn = Pal.accent;
       if(size == null) size = 1;
       if(dashed == null) dashed = false;
+      if(pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -441,6 +445,7 @@
     const drawCircle = function(pos, rad, color_gn, dashed) {
       if(color_gn == null) color_gn = Pal.accent;
       if(dashed == null) dashed = false;
+      if(pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -478,6 +483,7 @@
     const drawWarningDisk = function(pos, rad, color_gn, scl) {
       if(color_gn == null) color_gn = Pal.remove;
       if(scl == null) scl = 1.0;
+      if(pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -558,6 +564,7 @@
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
       if(a == null) a = 0.5;
+      if(pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -603,6 +610,7 @@
       if(size == null) size = 1;
       if(off_w == null) off_w = 0.0;
       if(off_ty == null) off_ty = 0;
+      if(pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -634,6 +642,7 @@
     const drawItemTransfer = function(pos_f, pos_t, color_gn, scl) {
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
+      if(pos_f == null || pos_t == null) return;
 
       var color = palette_gn(color_gn);
       var x_f = pos_f.x;
@@ -675,6 +684,7 @@
     /* NOTE: Draws the content icon at the left-upper corner of the block. */
     const drawContentIcon = function(pos, ct, size) {
       if(size == null) size = 1;
+      if(pos == null || ct == null) return;
 
       var x = pos.x - Vars.tilesize * 0.5 * size;
       var y = pos.y + Vars.tilesize * 0.5 * size;

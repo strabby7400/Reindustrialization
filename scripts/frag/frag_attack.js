@@ -23,8 +23,10 @@
 
     /* NOTE: Simply creates explosion. This one ignores team. */
     const attack_explosion = function(pos, rad, dmg, shake) {
+      if(rad == null) rad = 40.0;
+      if(dmg == null) dmg = 0.0;
       if(shake == null) shake = 0.0;
-      if(dmg < 0.01) return;
+      if(pos == null || dmg < 0.01) return;
 
       Damage.damage(pos.x, pos.y, rad, dmg);
 
@@ -49,6 +51,7 @@
       if(rad == null) rad = 40.0;
       if(dmg == null) dmg = 20.0;
       if(dur == null) dur = 120.0;
+      if(pos == null) return;
 
       mdl_geometry.getUnits(pos, rad).each(unit => {
         if(!unit.flying && !unit.type.naval && !unit.hovering && unit != caller) {
@@ -74,6 +77,7 @@
       if(off_r == null) off_r = 0;
       if(dmg == null) dmg = 10.0;
       if(color == null) color = Pal.techBlue;
+      if(pos == null) return;
 
       for(let i = 0; i < amt; i++) {
         var r_fi = Math.round(r + Mathf.random() * off_r);

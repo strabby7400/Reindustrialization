@@ -28,8 +28,8 @@
       var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
       if(rad != null) blk.stats.add(db_stat.impactRange, rad / Vars.tilesize, StatUnit.blocks);
 
-      var dtmtp = mdl_database.read_1n1v(db_block.depthTierMultiplier, blk.name);
-      if(dtmtp != null) blk.stats.add(db_stat.depthTierMultiplier, dtmtp);
+      var depthMtp = mdl_database.read_1n1v(db_block.depthTierMultiplier, blk.name);
+      if(depthMtp != null) blk.stats.add(db_stat.depthTierMultiplier, depthMtp);
     };
 
 
@@ -46,33 +46,35 @@
 
       var down = ct_blk_impactDrill.accB_down(b, "r");
       if(down) b.progress = 0.0;
-      if(Mathf.chance(0.01)) {
-        var t = b.tile;
-        var ov = t.overlay();
-        if(ov != null && ov.name.includes("reind-env-ore-depth-")) {
+
+      if(Mathf.chance(0.02)) {
+        var ov = b.tile.overlay();
+        var b_sc_fi = null;
+        if(ov == null || !ov.name.includes("reind-env-ore-depth-")) {
           down = false;
-
-          var b_sc = Vars.indexer.findTile(Vars.player.team(), t.worldx(), t.worldy(), 999.0, b => b.block.name.includes("reind-min-scan-"));
-          if(b_sc == null || b_sc.efficiency <= 0.9999) down = true;
-
-          if(b_sc != null) {
+        } else {
+          var b_sc = Vars.indexer.findTile(b.team, b.x, b.y, 999.0, ob => ob.block.name.includes("reind-min-scan-"));
+          if(b_sc == null) {
+            down = true;
+          } else {
             var r_sc = mdl_database.read_1n1v(db_block.genericRange, b_sc.block.name);
             if(r_sc == null) {
               down = true;
             } else {
-              var t_sc = b_sc.tile;
-              var d = mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(t_sc));
-              if(d > (b_sc.block.size / 2 + r_sc) * Vars.tilesize * 1.275) down = true;
+              var d = mdl_geometry.getDistance(mdl_geometry.poser_1b(b), mdl_geometry.poser_1b(b_sc));
+              var d_cr = (b_sc.block.size / 2 + r_sc) * Vars.tilesize * 1.275;
+              if(d > d_cr) {
+                down = true;
+              } else {
+                down = false;
+                b_sc_fi = b_sc;
+              };
             };
           };
-
-          if(down) {
-            b.progress = 0.0;
-            ct_blk_impactDrill.accB_down(b, "w", true);
-          } else {
-            ct_blk_impactDrill.accB_down(b, "w", false);
-          };
         };
+
+        ct_blk_impactDrill.accB_down(b, "w", down);
+        ct_blk_impactDrill.accB_b_sc(b, "w", b_sc_fi);
       };
     };
 
@@ -101,16 +103,15 @@
       var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
       if(rad != null) mdl_draw.drawCirclePulse(mdl_geometry.poser_1b(b), rad);
 
-      var t = b.tile;
-      var ov = t.overlay();
+      var ov = b.tile.overlay();
       if(ov != null && ov.name.includes("reind-env-ore-depth-")) {
-        var b_sc = Vars.indexer.findTile(Vars.player.team(), t.worldx(), t.worldy(), 999.0, b => b.block.name.includes("reind-min-scan-"));
-        if(b_sc != null) {
+        var b_sc = ct_blk_impactDrill.accB_b_sc(b, "r");
+        if(b_sc == null) {
+          mdl_draw.drawSelectText(b, false, Core.bundle.get("info.reind-info-no-ore-scanner.name"));
+        } else {
           mdl_draw.drawBuildRect(b, true, false);
           mdl_draw.drawBuildRect(b_sc, true, false);
           mdl_draw.drawLine(mdl_geometry.poser_1b(b), mdl_geometry.poser_1b(b_sc));
-        } else {
-          mdl_draw.drawSelectText(b, false, Core.bundle.get("info.reind-info-no-ore-scanner.name"));
         };
       };
     };

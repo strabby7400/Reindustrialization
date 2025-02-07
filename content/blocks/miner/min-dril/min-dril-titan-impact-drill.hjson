@@ -217,7 +217,7 @@
     ]
   }
   drillSound: se-craft-drill-impact-titan
-  drillSoundVolume: 1.0
+  drillSoundVolume: 0.5
   drillSoundPitchRand: 0.1
 
 

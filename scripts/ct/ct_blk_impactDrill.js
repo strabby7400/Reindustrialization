@@ -20,6 +20,15 @@
       if(mode == "w") b.down = val;
     };
     exports.accB_down = accB_down;
+
+
+    const accB_b_sc = function(b, mode, val) {
+      if(val === undefined) val = 0;
+
+      if(mode == "r") return b.b_sc;
+      if(mode == "w") b.b_sc = val;
+    };
+    exports.accB_b_sc = accB_b_sc;
   // End
 
 
@@ -47,7 +56,8 @@
       },
     });
     minDril_basicImpactDrill.buildType = () => extend(BurstDrill.BurstDrillBuild, minDril_basicImpactDrill, {
-      down: false,
+      down: true,
+      b_sc: null,
       updateTile() {
         this.super$updateTile();
         blk_impactDrill.updateTile(this);
@@ -92,7 +102,8 @@
       },
     });
     minDril_titanImpactDrill.buildType = () => extend(BurstDrill.BurstDrillBuild, minDril_titanImpactDrill, {
-      down: false,
+      down: true,
+      b_sc: null,
       updateTile() {
         this.super$updateTile();
         blk_impactDrill.updateTile(this);
