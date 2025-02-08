@@ -95,6 +95,13 @@
     const ct_blk_genericWall = require("reind/ct/ct_blk_genericWall");
     const ct_blk_radar = require("reind/ct/ct_blk_radar");
 
+
+    /* <---------------- turret ----------------> */
+
+
+    const ct_blk_liquidTurret = require("reind/ct/ct_blk_liquidTurret");
+
+
     /* <---------------- factory ----------------> */
 
     const ct_blk_genericFactory = require("reind/ct/ct_blk_genericFactory");

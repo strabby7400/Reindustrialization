@@ -19,7 +19,7 @@
 
       mdl_table.setHeadline(
         tb,
-        Core.bundle.get("term.reind-term-selected.name") + ":" + str_ct,
+        Core.bundle.get("term.reind-term-selected.name") + ": " + str_ct,
       );
     };
     exports.__contentSelected = __contentSelected;

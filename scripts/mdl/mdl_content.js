@@ -111,6 +111,8 @@
 
     /* NOTE: Gets a content with type and id. */
     const getContent_id = function(tp_ct, id) {
+      if(id < 0) return;
+
       var ct = null;
       switch(tp_ct) {
         case "item" :

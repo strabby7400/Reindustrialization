@@ -122,6 +122,12 @@
     // End
 
 
+    // Part: Turret
+      const stat_extinguishesFire = new Stat("reind-stat-extinguishes-fire.name", StatCat.function);
+      exports.extinguishesFire = stat_extinguishesFire;
+    // End
+
+
   /*
     ========================================
     Sub-section: Resource

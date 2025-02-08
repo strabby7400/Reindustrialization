@@ -54,7 +54,7 @@
 
   envRequired: 1
   envDisabled: 22
-  fogRadius: 16.0
+  fogRadius: 16
   lightRadius: -1.0
 
 
