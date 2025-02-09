@@ -254,27 +254,6 @@
   // End
 
 
-  // Part: Text
-    /* NOTE: Draws a text line over the block. */
-    const drawPlaceText = function(blk, t, valid, str, off_ty) {
-      if(valid == null) valid = true;
-      if(off_ty == null) off_ty = 0;
-      if(blk == null || t == null || str == null) return;
-
-      blk.drawPlaceText(str, t.x + blk.offset / Vars.tilesize, t.y + blk.offset / Vars.tilesize + off_ty, valid);
-    };
-    exports.drawPlaceText = drawPlaceText;
-
-
-    const drawSelectText = function(b, valid, str, off_ty) {
-      if(b == null) return;
-
-      drawPlaceText(b.block, b.tile, valid, str, off_ty);
-    };
-    exports.drawSelectText = drawSelectText;
-  // End
-
-
   // Part: Line
 
 
@@ -717,6 +696,27 @@
       drawFadeRegion(pos, reg, 0.0, 0.5, scl, 0.5, color, 110.0)
     };
     exports.drawFadeStatus = drawFadeStatus;
+  // End
+
+
+  // Part: Text
+    /* NOTE: Draws a text line over the block. */
+    const drawPlaceText = function(blk, t, valid, str, off_ty) {
+      if(valid == null) valid = true;
+      if(off_ty == null) off_ty = 0;
+      if(blk == null || t == null || str == null) return;
+
+      blk.drawPlaceText(str, t.x + blk.offset / Vars.tilesize, t.y + blk.offset / Vars.tilesize + off_ty, valid);
+    };
+    exports.drawPlaceText = drawPlaceText;
+
+
+    const drawSelectText = function(b, valid, str, off_ty) {
+      if(b == null) return;
+
+      drawPlaceText(b.block, b.tile, valid, str, off_ty);
+    };
+    exports.drawSelectText = drawSelectText;
   // End
 
 

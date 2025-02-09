@@ -62,4 +62,5 @@
   rotate: true
   speed: 0.042
   displayedSpeed: 6.0
+  junctionReplacement: dis-aux-blocker-gate
   bridgeReplacement: dis-brd-primitive-conveyor-bridge

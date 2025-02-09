@@ -35,6 +35,11 @@
   variants: 0
   cacheLayer: water
   albedo: 0.5
+  walkEffect: ripple
+  walkSound: se-step-sea
+  walkSoundVolume: 0.2
+  walkSoundPitchMin: 0.95
+  walkSoundPitchMax: 1.05
 
 
 /*

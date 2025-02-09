@@ -8,6 +8,8 @@
   // Part: Import
     const blk_fieldGenerator = require("reind/blk/blk_fieldGenerator");
 
+    const frag_facility = require("reind/frag/frag_facility");
+
     const mdl_draw = require("reind/mdl/mdl_draw");
 
     const db_effect = require("reind/db/db_effect");
@@ -30,6 +32,7 @@
 
     function canPlaceOnComp(blk, t, team, rot) {
       if(!db_env.hasTides.contains(Vars.state.rules.planet.name)) return false;
+      if(!frag_facility.canPlaceOn_terrain(blk, "sea", "enable", t, team, rot)) return false;
 
       return true;
     };

@@ -9,10 +9,13 @@
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
     const db_unit = require("reind/db/db_unit");
+
+    const glb_vars = require("reind/glb/glb_vars");
   // End
 
 
@@ -162,6 +165,104 @@
       });
     };
     exports.draw_ep = draw_ep;
+  // End
+
+
+  // Part: Terrain
+    const getTerrain = function(t, size) {
+      if(size == null) size = 1;
+      if(t == null) return;
+
+      var li_ot = mdl_geometry.getTiles_rect(t, 5, size);
+      var count_t = li_ot.size;
+      if(count_t == 0) return;
+      var count_dirt = 0;
+      var count_salt = 0;
+      var count_sand = 0;
+      var count_stone = 0;
+      var count_water = 0;
+      var count_sea = 0;
+      li_ot.each(ot => {
+        var str = ot.floor().walkSound.toString();
+        if(str.includes("se-step-dirt") || str.includes("se-step-grass") || str.includes("se-step-mud")) count_dirt += 1;
+        if(str.includes("se-step-salt")) count_salt += 1;
+        if(str.includes("se-step-sand")) count_sand += 1;
+        if(str.includes("se-step-gravel") || str.includes("se-step-stone")) count_stone += 1;
+        if(str.includes("splash")) count_water += 1;
+        if(str.includes("se-step-sea")) count_sea += 1;
+      });
+
+      var thr = glb_vars.terrain_floorThreshold;
+      var ter = null;
+      if(count_dirt / count_t > thr) ter = "dirt";
+      if(count_salt / count_t > thr) ter = "salt";
+      if(count_sand / count_t > thr) ter = "sand";
+      if(count_stone / count_t > thr) ter = "stone";
+      if(count_water / count_t > thr) ter = "water";
+      if(count_sea / count_t > thr) ter = "sea";
+      if(count_sea / count_t > thr * 0.3 && count_sand / count_t > thr * 0.7) ter = "beach";
+
+      return ter;
+    };
+    exports.getTerrain = getTerrain;
+
+
+    const getTerrainValue = function(ter) {
+      var terVal;
+
+      switch(ter) {
+        case "dirt" :
+          terVal = Core.bundle.get("term.reind-term-terrain-dirt.name");
+          break;
+        case "salt" :
+          terVal = Core.bundle.get("term.reind-term-terrain-salt.name");
+          break;
+        case "sand" :
+          terVal = Core.bundle.get("term.reind-term-terrain-sand.name");
+          break;
+        case "stone" :
+          terVal = Core.bundle.get("term.reind-term-terrain-stone.name");
+          break;
+        case "water" :
+          terVal = Core.bundle.get("term.reind-term-terrain-water.name");
+          break;
+        case "sea" :
+          terVal = Core.bundle.get("term.reind-term-terrain-sea.name");
+          break;
+        case "beach" :
+          terVal = Core.bundle.get("term.reind-term-terrain-beach.name");
+          break;
+        default :
+          terVal = Core.bundle.get("term.reind-term-terrain-transition.name");
+      };
+
+      return terVal;
+    };
+    exports.getTerrainValue = getTerrainValue;
+
+
+    const canPlaceOn_terrain = function(blk, ter_sel, mode, t, team, rot) {
+      if(t == null) return;
+      if(mode != "enable" && mode != "disable") return false;
+
+      var ter = getTerrain(t, blk.size);
+      var terVal = getTerrainValue(ter);
+      var valid = true;
+      if(mode == "disable") {
+        if(ter == ter_sel) {
+          mdl_draw.drawPlaceText(blk, t, false, Core.bundle.get("info.reind-info-terrain-disabled.name") + mdl_text.getSpace() + terVal);
+          valid = false;
+        };
+      } else {
+        if(ter != ter_sel) {
+          mdl_draw.drawPlaceText(blk, t, false, Core.bundle.get("info.reind-info-terrain-mismatched.name") + mdl_text.getSpace() + terVal);
+          valid = false;
+        };
+      };
+
+      return valid;
+    };
+    exports.canPlaceOn_terrain = canPlaceOn_terrain;
   // End
 
 

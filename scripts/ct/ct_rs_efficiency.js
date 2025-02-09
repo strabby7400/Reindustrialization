@@ -57,6 +57,19 @@
     exports.effcCond_pressure = effcCond_pressure;
 
 
+    const effcCond_steamEnergy = extend(Liquid, "effc-cond-steam-energy", {
+      setStats() {
+        this.super$setStats();
+        rs_efficiency.setStats(this);
+      },
+      update(puddle) {
+        this.super$update(puddle);
+        rs_efficiency.update(this, puddle);
+      },
+    });
+    exports.effcCond_steamEnergy = effcCond_steamEnergy;
+
+
     const effcCond_torque = extend(Liquid, "effc-cond-torque", {
       setStats() {
         this.super$setStats();

@@ -40,40 +40,40 @@
 
       switch(grp) {
         case "brine" :
-          grpVal = "@term.reind-term-brine.name";
+          grpVal = Core.bundle.get("term.reind-term-brine.name");
           break;
         case "basicAq" :
-          grpVal = "@term.reind-term-basic-solution.name";
+          grpVal = Core.bundle.get("term.reind-term-basic-solution.name");
           break;
         case "acidicAq" :
-          grpVal = "@term.reind-term-acidic-solution.name";
+          grpVal = Core.bundle.get("term.reind-term-acidic-solution.name");
           break;
         case "basicOil" :
-          grpVal = "@term.reind-term-basic-oil.name";
+          grpVal = Core.bundle.get("term.reind-term-basic-oil.name");
           break;
         case "acidicOil" :
-          grpVal = "@term.reind-term-acidic-oil.name";
+          grpVal = Core.bundle.get("term.reind-term-acidic-oil.name");
           break;
         case "basicSub" :
-          grpVal = "@term.reind-term-basic-substance.name";
+          grpVal = Core.bundle.get("term.reind-term-basic-substance.name");
           break;
         case "acidicSub" :
-          grpVal = "@term.reind-term-acidic-substance.name";
+          grpVal = Core.bundle.get("term.reind-term-acidic-substance.name");
           break;
         case "basicGas" :
-          grpVal = "@term.reind-term-basic-gas.name";
+          grpVal = Core.bundle.get("term.reind-term-basic-gas.name");
           break;
         case "acidicGas" :
-          grpVal = "@term.reind-term-acidic-gas.name";
+          grpVal = Core.bundle.get("term.reind-term-acidic-gas.name");
           break;
         case "slurry" :
-          grpVal = "@term.reind-term-slurry.name";
+          grpVal = Core.bundle.get("term.reind-term-slurry.name");
           break;
         case "melt" :
-          grpVal = "@term.reind-term-melt.name";
+          grpVal = Core.bundle.get("term.reind-term-melt.name");
           break;
         case "stickyMelt" :
-          grpVal = "@term.reind-term-sticky-melt.name";
+          grpVal = Core.bundle.get("term.reind-term-sticky-melt.name");
         default:
           grpVal = null;
       };
@@ -109,19 +109,19 @@
 
       switch(matGrp) {
         case "wood" :
-          matGrpVal = "@term.reind-term-wood.name";
+          matGrpVal = Core.bundle.get("term.reind-term-wood.name");
           break;
         case "copper" :
-          matGrpVal = "@term.reind-term-copper.name";
+          matGrpVal = Core.bundle.get("term.reind-term-copper.name");
           break;
         case "steel" :
-          matGrpVal = "@term.reind-term-steel.name";
+          matGrpVal = Core.bundle.get("term.reind-term-steel.name");
           break;
         case "stainlessSteel" :
-          matGrpVal = "@term.reind-term-stainless-steel.name";
+          matGrpVal = Core.bundle.get("term.reind-term-stainless-steel.name");
           break;
         case "glass" :
-          matGrpVal = "@term.reind-term-glass.name";
+          matGrpVal = Core.bundle.get("term.reind-term-glass.name");
           break;
         default:
           matGrpVal = null;

@@ -577,4 +577,179 @@
     }
 
 
+    {
+
+      /* <---------------- meta ----------------> */
+
+      name: unit-core-expedition-i-collider
+      display: false
+      alwaysShooting: true
+      controllable: false
+      aiControllable: true
+      useAttackRange: false
+
+      /* <---------------- properties ----------------> */
+
+      top: false
+      mirror: false
+      alternate: true
+      x: 0.0
+      y: 0.0
+      rotate: false
+      baseRotation: 0.0
+      rotationLimit: 361.0
+      rotateSpeed: 1.0
+
+      /* <---------------- visual ----------------> */
+
+      layerOffset: 0.0001
+      shootX: 0.0
+      shootY: 0.0
+      ejectEffect: none
+      shake: 0.0
+      recoil: 1.5
+      recoils: -1
+      heatColor: feb380
+      cooldownTime: 70.0
+      shootSound: none
+      chargeSound: none
+
+      /* <---------------- attack ----------------> */
+
+      noAttack: true
+      xRand: 0.0
+      velocityRnd: 0.0
+      minShootVelocity: 4.0
+      reload: 1.0
+      inaccuracy: 0.0
+      shoot: {
+        type: ShootPattern
+        shots: 1
+        shotDelay: 0.0
+        firstShotDelay: 0.0
+      }
+      shootCone: 8.0
+      shootOnDeath: false
+      shootStatus: none
+      shootStatusDuration: 120.0
+      minWarmup: 0.0
+
+      /* <---------------- bullet ----------------> */
+
+      bullet: {
+
+        # Mark: expeditionCollider
+
+        /* <---------------- meta ----------------> */
+
+        type: ArtilleryBulletType
+        instantDisappear: true
+        despawnHit: true
+
+        /* <---------------- properties ----------------> */
+
+        lifetime: 1.0
+        speed: 0.0
+        splashDamage: 88.0
+        splashDamageRadius: 24.0
+        scaledSplashDamage: true
+        splashDamagePierce: true
+        buildingDamageMultiplier: 0.0
+        hitSize: 4.0
+        collides: false
+        collidesAir: false
+        collidesGround: true
+
+        /* <---------------- visual ----------------> */
+
+        sprite: bullet
+        layer: 74.0
+        lightRadius: -1.0
+        lightOpacity: 0.0
+        hitShake: 0.0
+        despawnShake: 0.0
+        shootEffect: none
+        smokeEffect: none
+        chargeEffect: none
+        hitEffect: {
+
+          # Template: _impact
+          # Order: 1
+
+          /* <---------------- meta ----------------> */
+
+          type: WaveEffect
+          interp: pow2Out
+          lifetime: 40.0
+          startDelay: 0.0
+
+          /* <---------------- visual ----------------> */
+
+          layer: 15.0
+          sides: -1
+          followParent: true
+          rotWithParent: false
+          colorFrom: ffffff30
+          colorTo: ffffff00
+          lightScl: 2.0
+          lightOpacity: 0.0
+
+          /* <---------------- angle & size & stroke ----------------> */
+
+          baseRotation: 0.0
+          rotation: 0.0
+          sizeFrom: 0.0
+          sizeTo: 24.0
+          strokeFrom: 6.0
+          strokeTo: 4.0
+
+        }
+        despawnEffect: {
+
+          # Template: _impact
+          # Order: 1
+
+          /* <---------------- meta ----------------> */
+
+          type: WaveEffect
+          interp: pow2Out
+          lifetime: 40.0
+          startDelay: 0.0
+
+          /* <---------------- visual ----------------> */
+
+          layer: 15.0
+          sides: -1
+          followParent: true
+          rotWithParent: false
+          colorFrom: ffffff30
+          colorTo: ffffff00
+          lightScl: 2.0
+          lightOpacity: 0.0
+
+          /* <---------------- angle & size & stroke ----------------> */
+
+          baseRotation: 0.0
+          rotation: 0.0
+          sizeFrom: 0.0
+          sizeTo: 24.0
+          strokeFrom: 6.0
+          strokeTo: 4.0
+
+        }
+        trailEffect: none
+        hitSound: none
+        despawnSound: none
+
+        /* <---------------- specific (knockback) ----------------> */
+
+        knockback: 2.0
+        impact: false
+        recoil: 0.0
+
+      }
+
+    }
+
+
   ]

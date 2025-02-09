@@ -48,7 +48,7 @@
     /* turbine */
 
 
-    const powGen_lodestoneTurbine = extend(ConsumeGenerator, "pow-gen-lodestone-turbine", {
+    const powGen_lodestoneTurbineGenerator = extend(ConsumeGenerator, "pow-gen-lodestone-turbine-generator", {
       setStats() {
         this.super$setStats();
         blk_consumeGenerator.setStats(this);
@@ -58,7 +58,7 @@
         blk_consumeGenerator.drawPlace(this, x, y, rotation, valid);
       },
     });
-    powGen_lodestoneTurbine.buildType = () => extend(ConsumeGenerator.ConsumeGeneratorBuild, powGen_lodestoneTurbine, {
+    powGen_lodestoneTurbineGenerator.buildType = () => extend(ConsumeGenerator.ConsumeGeneratorBuild, powGen_lodestoneTurbineGenerator, {
       updateTile() {
         this.super$updateTile();
         blk_consumeGenerator.updateTile(this);
@@ -72,7 +72,7 @@
         blk_consumeGenerator.drawSelect(this);
       },
     });
-    exports.powGen_lodestoneTurbine = powGen_lodestoneTurbine;
+    exports.powGen_lodestoneTurbineGenerator = powGen_lodestoneTurbineGenerator;
   // End
 
 

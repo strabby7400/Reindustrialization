@@ -303,6 +303,7 @@
   shoot: {
     type: ShootPattern
     shots: 50
+    shotDelay: 0.0
     firstShotDelay: 0.0
   }
   minWarmup: 0.9

@@ -26,6 +26,12 @@
         this.super$setStats();
         blk_genericFactory.setStats(this);
       },
+      // Specific
+      canPlaceOn(tile, team, rotation) {
+        if(!this.super$canPlaceOn(tile, team, rotation)) return false;
+        if(!frag_facility.canPlaceOn_terrain(this, "sand", "disable", tile, team, rotation)) return false;
+        return true;
+      },
     });
     facAir_airCollector.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facAir_airCollector, {
       updateTile() {

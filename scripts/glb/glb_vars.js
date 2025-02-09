@@ -66,3 +66,9 @@
     const effect_chanceCap = 0.16;
     exports.effect_chanceCap = effect_chanceCap;
   // End
+
+
+  // Part: Environment
+    const terrain_floorThreshold = 0.75;
+    exports.terrain_floorThreshold = terrain_floorThreshold;
+  // End

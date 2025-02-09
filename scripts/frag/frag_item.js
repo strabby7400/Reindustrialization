@@ -26,7 +26,7 @@
         if(illegal) {
           b.kill();
           mdl_effect.showAt(b, db_effect._invalidPlacement(), 0.0);
-          mdl_ui.showInfoFade("@info.reind-info-efficiency.name");
+          mdl_ui.showInfoFade("@info.reind-info-virtual-item.name");
         };
       };
     };

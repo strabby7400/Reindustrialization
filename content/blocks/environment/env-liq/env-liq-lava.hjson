@@ -38,6 +38,11 @@
   emitLight: true
   lightRadius: 40.0
   lightColor: faae7560
+  walkEffect: ripple
+  walkSound: splash
+  walkSoundVolume: 0.2
+  walkSoundPitchMin: 0.95
+  walkSoundPitchMax: 1.05
 
 
 /*
