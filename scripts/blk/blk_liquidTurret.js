@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericTurret = require("reind/blk/blk_genericTurret");
+    const blk_rotationalTurret = require("reind/blk/blk_rotationalTurret");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -28,7 +28,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericTurret.setStats(blk);
+      blk_rotationalTurret.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -36,13 +36,13 @@
 
 
     const updateTile = function(b) {
-      blk_genericTurret.updateTile(b);
+      blk_rotationalTurret.updateTile(b);
     };
     exports.updateTile = updateTile;
 
 
     const canPlaceOn = function(blk, t, team, rot) {
-      if(!blk_genericTurret.canPlaceOn(blk, t, team, rot)) return false;
+      if(!blk_rotationalTurret.canPlaceOn(blk, t, team, rot)) return false;
 
       return true;
     };
@@ -50,21 +50,27 @@
 
 
     const hasAmmo = function(b) {
-      if(!blk_genericTurret.hasAmmo(b)) return false;
+      if(!blk_rotationalTurret.hasAmmo(b)) return false;
 
       return true;
     };
     exports.hasAmmo = hasAmmo;
 
 
+    const status = function(b) {
+      return blk_rotationalTurret.status(b);
+    };
+    exports.status = status;
+
+
     const drawPlace = function(blk, tx, ty, rot, valid) {
-      blk_genericTurret.drawPlace(blk, tx, ty, rot, valid);
+      blk_rotationalTurret.drawPlace(blk, tx, ty, rot, valid);
     };
     exports.drawPlace = drawPlace;
 
 
     const drawSelect = function(b) {
-      blk_genericTurret.drawSelect(b);
+      blk_rotationalTurret.drawSelect(b);
     };
     exports.drawSelect = drawSelect;
   // End

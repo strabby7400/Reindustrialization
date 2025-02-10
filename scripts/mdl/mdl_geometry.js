@@ -481,10 +481,67 @@
   // Part: Entity (Builds & Units)
 
 
+    /* <---------------- filter ----------------> */
+
+
+    /* NOTE: Filters out some entities by customized scripts. */
+    const filter_scr = function(li_e, scr) {
+      if(scr == null) return li_e;
+
+      var li_e1 = new Seq();
+      li_e.each(e => {if(scr.call(e)) li_e1.add(e)});
+
+      return li_e1;
+    };
+    exports.filter_scr = filter_scr;
+
+
+    /* NOTE: Filters out some entities by name. */
+    const filter_nm = function(li_e, nm) {
+      if(nm == null) return li_e;
+
+      var scr = function() {
+        if(this instanceof Building && this.block.name == nm) return true;
+        if(this instanceof Unit && this.type.name == nm) return true;
+
+        return false;
+      };
+
+      return filter_scr(li_e, scr);
+    };
+    exports.filter_nm = filter_nm;
+
+
+    /* NOTE: Filters out some entities by team. */
+    const filter_team = function(li_e, team) {
+      if(team == null) return li_e;
+
+      var scr = function() {
+        return this.team == team;
+      };
+
+      return filter_scr(li_e, scr);
+    };
+    exports.filter_team = filter_team;
+
+
+    /* NOTE: Filters out some entities that is enemy to the assigned team. */
+    const filter_enemy = function(li_e, team) {
+      if(team == null || team == Team.derelict) return li_e;
+
+      var scr = function() {
+        return (this.team != Team.derelict) && (this.team != team);
+      };
+
+      return filter_scr(li_e, scr);
+    };
+    exports.filter_enemy = filter_enemy;
+
+
     /* <---------------- getBuild ----------------> */
 
 
-    /* NOTE: Gets a list of buildings from a list of tiles, no duplicates. */
+    /* NOTE: Gets a list of buildings from a list of tiles, no duplicates for multi-blocks. */
     const getBuilds = function(li_ot) {
       var li_b = new Seq();
       li_ot.each(ot => {if(ot.build != null && !li_b.contains(ot.build)) li_b.add(ot.build)});
@@ -494,6 +551,7 @@
     exports.getBuilds = getBuilds;
 
 
+    /* NOTE: Gets all buildings of the same type and team in range. */
     const getSameBuilds = function(li_ot, nm_blk, team) {
       var li_b = new Seq();
       li_b.addAll(filter_team(filter_nm(getBuilds(li_ot), nm_blk), team));
@@ -501,36 +559,6 @@
       return li_b;
     };
     exports.getSameBuilds = getSameBuilds;
-
-
-    /* <---------------- filter ----------------> */
-
-
-    /* NOTE: Filters out some entities by name. */
-    const filter_nm = function(li_e, nm) {
-      if(nm == null) return li_e;
-
-      var li_e1 = new Seq();
-      li_e.each(e => {
-        if(e instanceof Building && e.block.name == nm) li_e1.add(e);
-        if(e instanceof Unit && e.type.name == nm) li_e1.add(e);
-      });
-
-      return li_e1;
-    };
-    exports.filter_nm = filter_nm;
-
-
-    /* NOTE: Filters out some entities by team. */
-    const filter_team = function(li_e, team) {
-      if(team == null) return li_e;
-
-      var li_e1 = new Seq();
-      li_e.each(e => {if(e.team == team) li_e1.add(e)});
-
-      return li_e1;
-    };
-    exports.filter_team = filter_team;
 
 
     /* <---------------- getUnit ----------------> */
@@ -549,11 +577,16 @@
     exports.getUnits = getUnits;
 
 
-    const getSameUnits = function(pos, rad, nm_utp, team) {
-      var li_unit = new Seq();
-      li_unit.addAll(filter_team(filter_nm(getUnits(pos, rad)), nm_utp), team);
+    /* NOTE: Gets a list of enemy units in range. Derelict team is excluded. */
+    const getEnemies = function(pos, rad, team) {
+      return filter_enemy(getUnits(pos, rad), team);
+    };
+    exports.getEnemies = getEnemies;
 
-      return li_unit;
+
+    /* NOTE: Gets all units of the same type and team in range. */
+    const getSameUnits = function(pos, rad, nm_utp, team) {
+      return filter_team(filter_nm(getUnits(pos, rad), nm_utp), team);
     };
     exports.getSameUnits = getSameUnits;
   // End

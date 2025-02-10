@@ -353,7 +353,7 @@
       lightOpacity: 0.0
       hitShake: 0.0
       despawnShake: 0.0
-      hitEffect: none
+      hitEffect: hitLiquid
       despawnEffect: none
       hitSound: none
       despawnSound: none
@@ -408,7 +408,7 @@
       lightOpacity: 0.0
       hitShake: 0.0
       despawnShake: 0.0
-      hitEffect: none
+      hitEffect: hitLiquid
       despawnEffect: none
       hitSound: none
       despawnSound: none
@@ -463,7 +463,7 @@
       lightOpacity: 0.0
       hitShake: 0.0
       despawnShake: 0.0
-      hitEffect: none
+      hitEffect: hitLiquid
       despawnEffect: none
       hitSound: none
       despawnSound: none
@@ -518,7 +518,7 @@
       lightOpacity: 0.0
       hitShake: 0.0
       despawnShake: 0.0
-      hitEffect: none
+      hitEffect: hitLiquid
       despawnEffect: none
       hitSound: none
       despawnSound: none

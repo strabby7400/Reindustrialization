@@ -7,14 +7,67 @@
 
   // Part: Import
     const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_geometry = require("reind/mdl/mdl_geometry");
     const mdl_text = require("reind/mdl/mdl_text");
 
+    const db_effect = require("reind/db/db_effect");
     const db_unit = require("reind/db/db_unit");
   // End
 
 
   // Part: Status
+    /* NOTE: Applies terrorized status to units with max health lower than {limit}. */
+    const __deterrence = function(utp, limit, rad) {
+      var abi_deterrence = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-deterrence.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Stat.range.localized(),
+            Strings.autoFixed(rad / Vars.tilesize, 2),
+            StatUnit.blocks.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Core.bundle.get("term.reind-term-max-health-limit.name"),
+            Strings.autoFixed(limit, 0),
+          ));
+        },
+
+
+        update(unit) {
+          if(Mathf.chance(0.98)) return;
+
+          var li_ounit = mdl_geometry.getEnemies(mdl_geometry.poser_1u(unit), rad, unit.team);
+          if(li_ounit.size > 0) {
+            var count_apply = 0;
+            li_ounit.each(ounit => {
+              if(ounit.maxHealth < limit + 0.0001) {
+                ounit.apply(Vars.content.statusEffect("reind-sta-spec-terrorized"), 300.0);
+                count_apply += 1;
+              };
+            });
+
+            if(count_apply > 0) mdl_effect.showAt_ldm(unit, db_effect._scanCircle(rad, 0.5, Color.white), 0.0);
+          };
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-deterrence.name");
+        },
+
+
+      });
+
+      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_deterrence));
+    };
+    exports.__deterrence = __deterrence;
+
+
     /* NOTE: Applies morale status when {count_unit >= limit} */
     const __legion = function(utp, limit, rad) {
       var abi_legion = extend(Ability, {
@@ -46,7 +99,7 @@
 
 
         update(unit) {
-          if(Mathf.chance(0.99)) return;
+          if(Mathf.chance(0.98)) return;
 
           var count = mdl_geometry.getSameUnits(mdl_geometry.poser_1u(unit), rad, unit.type.name, unit.team).size;
           if(count >= limit) unit.apply(Vars.content.statusEffect("reind-sta-spec-morale"), 300.0);

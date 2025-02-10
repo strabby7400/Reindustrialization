@@ -18,39 +18,47 @@
 
   // Part: Update Unit
     const update_surrounding = function(utp, unit) {
-      if(Mathf.chance(0.96)) return;
-
-      var onFloor = !unit.flying;
-
+      if(Mathf.chance(0.98)) return;
       var t = unit.tileOn();
       if(t == null) return;
 
+      var cond_onFloor = !unit.flying;
+      var cond_hidable = !unit.flying && utp.hitSize < 28.0;
+      var cond_standing = !unit.flying && !(unit instanceof Legsc);
+      var count_wall = 0.0;
+      var staTime = 240.0;
+
       // Beneath
-      if(onFloor) {
-        if(db_env.quicksand.contains(t.floor().name)) unit.apply(Vars.content.statusEffect("reind-sta-spec-quicksand"), 90.0);
+      if(cond_onFloor) {
+        if(db_env.quicksand.contains(t.floor().name)) unit.apply(Vars.content.statusEffect("reind-sta-spec-quicksand"), staTime);
         if(db_env.parasiteFluids.contains(t.floor().name)) /*unit.apply(Vars.content.statusEffect("reind-sta-spec-parasite"), 1800.0)*/;
       };
 
       // Range
-      var li_ot = mdl_geometry.getTiles_rect(t, 4);
-      var count_wall = 0.0;
+      var li_ot = mdl_geometry.getTiles_rect(t, 5);
 
       li_ot.each(ot => {
-        if(!unit.flying && utp.hitSize < 28.0 && ot.block().name.includes("reind-env-tree-")) {
+        var d = mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(ot));
+        var oblk = ot.block();
+        var ob = ot.build;
+
+        if(cond_hidable && oblk.name.includes("reind-env-tree-")) {
           var z = mdl_database.read_1n1v(db_env.treeLayers, ot.block().name);
-          if(z > 76.0 && z < 80.0) {
-            unit.apply(Vars.content.statusEffect("reind-sta-spec-hidden-well"), 90.0);
+          if(z > 76.0 && z < 80.0 && d < oblk.region.width * 0.15) {
+            unit.apply(Vars.content.statusEffect("reind-sta-spec-hidden-well"), staTime);
             ot.block().drawBase(ot);
           };
         };
 
-        if(ot.block() instanceof CoreBlock && ot.build.team == unit.team) unit.apply(Vars.content.statusEffect("reind-sta-spec-core-overdrive"), 90.0);
+        if(oblk instanceof CoreBlock && ob.team == unit.team) unit.apply(Vars.content.statusEffect("reind-sta-spec-core-overdrive"), staTime);
 
-        if(!unit.flying && !(unit instanceof Legsc) && ot.block().name.includes("reind-def-wall-") && ot.build.team == unit.team) count_wall += 8.0 / mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(ot));
+        if(utp.name.includes("reind-unit-core-") && ob != null && ob.team != Team.derelict && ob.team != unit.team && !oblk.name.includes("reind-map-")) unit.apply(Vars.content.statusEffect("reind-sta-spec-attack-suppression"), staTime);
+
+        if(cond_standing && oblk.name.includes("reind-def-wall-") && ob.team == unit.team) count_wall += 8.0 / d;
       });
 
       // Post-detection
-      if(count_wall > glb_vars.wall_penaltyLimit) unit.apply(Vars.content.statusEffect("reind-sta-spec-over-protected"), 90.0);
+      if(count_wall > glb_vars.wall_penaltyLimit) unit.apply(Vars.content.statusEffect("reind-sta-spec-over-protected"), staTime);
     };
     exports.update_surrounding = update_surrounding;
 

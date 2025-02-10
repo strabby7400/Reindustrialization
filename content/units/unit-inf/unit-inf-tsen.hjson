@@ -386,10 +386,10 @@
 
           ]
         }
-        smokeEffect: shootSmallSmoke
+        smokeEffect: none
         chargeEffect: none
-        hitEffect: hitBulletSmall
-        despawnEffect: hitBulletSmall
+        hitEffect: hitBulletColor
+        despawnEffect: none
         trailColor: ffffff20
         trailLength: 6
         trailWidth: 2.0

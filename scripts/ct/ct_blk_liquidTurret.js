@@ -44,6 +44,9 @@
 
         return true;
       },
+      status() {
+        return blk_liquidTurret.status(this);
+      },
       drawSelect() {
         this.super$drawSelect();
         blk_liquidTurret.drawSelect(this);

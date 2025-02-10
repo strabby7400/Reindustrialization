@@ -21,6 +21,19 @@
 
 
   // Part: sta-spec
+    const staSpec_attackSuppression = extend(StatusEffect, "sta-spec-attack-suppression", {
+      setStats() {
+        this.super$setStats();
+        sta_genericStatus.setStats(this);
+      },
+      update(unit, time) {
+        this.super$update(unit, time);
+        sta_genericStatus.update(this, unit, time);
+      },
+    });
+    exports.staSpec_attackSuppression = staSpec_attackSuppression;
+
+
     const staSpec_coreOverdrive = extend(StatusEffect, "sta-spec-core-overdrive", {
       setStats() {
         this.super$setStats();

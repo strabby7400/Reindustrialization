@@ -61,6 +61,7 @@
       },
     });
     unitInf_paw.constructor = () => extend(MechUnit, {});
+    db_ability.__deterrence(unitInf_paw, 800.0, 192.0);
     exports.unitInf_paw = unitInf_paw;
   // End
 

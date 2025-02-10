@@ -650,11 +650,11 @@
 
         lifetime: 1.0
         speed: 0.0
-        splashDamage: 88.0
+        splashDamage: 40.0
         splashDamageRadius: 24.0
         scaledSplashDamage: true
-        splashDamagePierce: true
-        buildingDamageMultiplier: 0.0
+        splashDamagePierce: false
+        buildingDamageMultiplier: 1.0
         hitSize: 4.0
         collides: false
         collidesAir: false
