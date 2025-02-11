@@ -10,7 +10,7 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
@@ -51,7 +51,7 @@
       },
       // Specific
       draw() {
-        mdl_draw.drawRotatorRegion(mdl_geometry.poser_1b(this), this.rotatorReg, 0.0, (this.liquids.get(this.liquids.current()) > 0.0001 ? 6.0 : 0.0));
+        mdl_draw.drawRotatorRegion(mdl_game.poser_1b(this), this.rotatorReg, 0.0, (this.liquids.get(this.liquids.current()) > 0.0001 ? 6.0 : 0.0));
         this.super$draw();
         blk_efficiencyPipe.draw(this);
       },

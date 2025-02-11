@@ -84,7 +84,7 @@
   smokeEffect: none
   ammoUseEffect: none
   ammoEjectBack : 1.0
-  shootSound: artillery
+  shootSound: shootAltLong
   chargeSound: none
   soundPitchMin: 0.9
   soundPitchMax: 1.1

@@ -88,6 +88,8 @@
 
       "reind-pow-gen-energizer-generator", 10,
       "reind-pow-gen-tidal-generator", 6,
+
+      "reind-pow-boil-steam-boiler", 8,
     ]);
     exports.genericRange = li_genericRange;
 

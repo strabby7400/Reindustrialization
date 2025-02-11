@@ -10,7 +10,7 @@
 
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -27,7 +27,7 @@
 
     function drawSelectComp(b) {
       var liq = b.tile.floor().liquidDrop;
-      if(liq != null) mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), liq, b.block.size);
+      if(liq != null) mdl_draw.drawContentIcon(mdl_game.poser_1b(b), liq, b.block.size);
     };
   // End
 

@@ -7,7 +7,7 @@
 
   // Part: Import
     const mdl_effect = require("reind/mdl/mdl_effect");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_effect = require("reind/db/db_effect");
 
@@ -22,11 +22,13 @@
 
 
     /* NOTE: Simply creates explosion. This one ignores team. */
-    const attack_explosion = function(pos, rad, dmg, shake) {
+    const attack_explosion = function(pos_gn, rad, dmg, shake) {
       if(rad == null) rad = 40.0;
       if(dmg == null) dmg = 0.0;
       if(shake == null) shake = 0.0;
-      if(pos == null || dmg < 0.01) return;
+      if(pos_gn == null || dmg < 0.01) return;
+
+      var pos = mdl_game.poser_gn(pos_gn);
 
       Damage.damage(pos.x, pos.y, rad, dmg);
 
@@ -47,15 +49,17 @@
       Impact wave always damages all units regardless of team.
       If the impact is called by an unit, use {caller} to avoid damaging itself.
     */
-    const attack_impact = function(pos, rad, dmg, dur, caller) {
+    const attack_impact = function(pos_gn, rad, dmg, dur, caller) {
       if(rad == null) rad = 40.0;
       if(dmg == null) dmg = 20.0;
       if(dur == null) dur = 120.0;
-      if(pos == null) return;
+      if(pos_gn == null) return;
 
-      mdl_geometry.getUnits(pos, rad).each(unit => {
+      var pos = mdl_game.poser_gn(pos_gn);
+
+      mdl_game.getUnits(pos, rad).each(unit => {
         if(!unit.flying && !unit.type.naval && !unit.hovering && unit != caller) {
-          var d = mdl_geometry.getDistance(pos, mdl_geometry.poser_1u(unit));
+          var d = mdl_game.getDistance(pos, mdl_game.poser_1u(unit));
           var dmg_fi = (Mathf.random(0.6) + 0.7) * Math.max(1.0 - d / rad, 0.1) * dmg + glb_vars.impact_minDamage;
 
           unit.damage(dmg_fi);
@@ -70,14 +74,16 @@
 
 
     /* NOTE: Creates lightnings at the position. */
-    const attack_lightning = function(pos, team, amt, r, off_r, dmg, color) {
+    const attack_lightning = function(pos_gn, team, amt, r, off_r, dmg, color) {
       if(team == null) team = Team.derelict;
       if(amt == null) amt = 1;
       if(r == null) r = 5;
       if(off_r == null) off_r = 0;
       if(dmg == null) dmg = 10.0;
       if(color == null) color = Pal.techBlue;
-      if(pos == null) return;
+      if(pos_gn == null) return;
+
+      var pos = mdl_game.poser_gn(pos_gn);
 
       for(let i = 0; i < amt; i++) {
         var r_fi = Math.round(r + Mathf.random() * off_r);

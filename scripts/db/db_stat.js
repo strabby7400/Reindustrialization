@@ -33,6 +33,9 @@
 
       const stat_restrictionRange = new Stat("reind-stat-restriction-range.name", StatCat.function);
       exports.restrictionRange = stat_restrictionRange;
+
+      const stat_flammable = new Stat("reind-stat-flammable.name", StatCat.function);
+      exports.flammable = stat_flammable;
     // End
 
 

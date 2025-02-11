@@ -954,7 +954,7 @@
           layer: top ? 110.0 : 69.0,
           particles: 1,
           followParent: true,
-          rotWithParent: false,
+          rotWithParent: true,
           useRotation: true,
           colorFrom: color_f,
           colorTo: color_t,
@@ -968,13 +968,13 @@
           cone: 180.0,
           spin: 0.0,
           randLength: true,
-          length: 0,
+          length: 0.0,
           baseLength: 0.0,
 
           /* <---------------- size & stroke & len ----------------> */
 
           line: false,
-          sizeInterp: Interp.linear,
+          sizeInterp: rev ? Interp.reverse : Interp.linear,
           sizeFrom: size,
           sizeTo: size,
           strokeFrom: 0.0,
@@ -987,6 +987,70 @@
         return eff_iconFade;
       };
       exports._iconFade = _iconFade;
+
+
+
+
+      /* NOTE: A fixed sprite that fades out, used for trail effects. */
+      const _trailFade = function(spr, scl, size, color, top, rev) {
+        if(spr == null) spr = "circle";
+        if(scl == null) scl = 1.0;
+        if(size == null) size = 8.0;
+        if(color == null) color = Color.white;
+        if(top == null) top = false;
+        if(rev == null) rev = false;
+
+        var color_f = color;
+        var color_t = color.cpy();
+        color_t.a = 0.0;
+
+        var eff_trailFade = extend(ParticleEffect, {
+
+          /* <---------------- meta ----------------> */
+
+          interp: rev ? Interp.pow2In : Interp.pow2Out,
+          lifetime: 90.0 * scl,
+          startDelay: 0.0,
+
+          /* <---------------- visual ----------------> */
+
+          region: spr,
+          layer: top ? 110.0 : 69.0,
+          particles: 1,
+          followParent: false,
+          rotWithParent: true,
+          useRotation: true,
+          colorFrom: color_f,
+          colorTo: color_t,
+          lightScl: 2.0,
+          lightOpacity: 0.0,
+
+          /* <---------------- angle & length ----------------> */
+
+          baseRotation: 0.0,
+          offset: 0.0,
+          cone: 180.0,
+          spin: 0.0,
+          randLength: true,
+          length: 0.0,
+          baseLength: 0.0,
+
+          /* <---------------- size & stroke & len ----------------> */
+
+          line: false,
+          sizeInterp: rev ? Interp.pow2In : Interp.pow2Out,
+          sizeFrom: 0.0,
+          sizeTo: size,
+          strokeFrom: 0.0,
+          strokeTo: 0.0,
+          lenFrom: 0.0,
+          lenTo: 0.0,
+
+        });
+
+        return eff_trailFade;
+      };
+      exports._trailFade = _trailFade;
 
 
 
@@ -1682,6 +1746,12 @@
         return _gasShootRelease(28.0, 30.0, 1.6, 24, 2.0, 10.0);
       };
       exports._sniperSmog = _sniperSmog;
+
+
+      const _sniperTrail = function() {
+        return _trailFade("reind-efr-sniper-wave", 0.22222222, 18.0, Color.valueOf("ffffffa0"), false, false);
+      };
+      exports._sniperTrail = _sniperTrail;
 
 
     /* ========================================

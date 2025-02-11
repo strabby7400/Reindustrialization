@@ -14,7 +14,7 @@
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
     const db_effect = require("reind/db/db_effect");
@@ -66,7 +66,7 @@
       var thr = ct_blk_oreScanner.accB_thr(b, "r");
       var a = Math.pow(1.0 - cd / thr, 2);
 
-      var li_ot = mdl_geometry.getTiles_rect(b.tile, r, b.block.size);
+      var li_ot = mdl_game.getTiles_rect(b.tile, r, b.block.size);
       li_ot.each(ot => {
         var ov = ot.overlay();
 

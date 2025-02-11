@@ -10,7 +10,7 @@
 
     const ct_blk_fragmentFactory = require("reind/ct/ct_blk_fragmentFactory");
 
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
@@ -18,7 +18,7 @@
     function updateTileComp(b) {
       var invalid = false;
       var temp_li = new Seq();
-      mdl_geometry.getTiles_rot(b.tile, b.block.liquidOutputDirections[0], b.block.size).each(ot => {
+      mdl_game.getTiles_rot(b.tile, b.block.liquidOutputDirections[0], b.block.size).each(ot => {
         if(ot.build == null) {
           invalid = true
         } else if(!temp_li.contains(ot.build)) {

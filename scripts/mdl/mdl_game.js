@@ -553,10 +553,7 @@
 
     /* NOTE: Gets all buildings of the same type and team in range. */
     const getSameBuilds = function(li_ot, nm_blk, team) {
-      var li_b = new Seq();
-      li_b.addAll(filter_team(filter_nm(getBuilds(li_ot), nm_blk), team));
-
-      return li_b;
+      return filter_team(filter_nm(getBuilds(li_ot), nm_blk), team);
     };
     exports.getSameBuilds = getSameBuilds;
 
@@ -593,5 +590,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_geometry.js loaded.");
+  Log.info("REIND:mdl_game.js loaded.");
 });

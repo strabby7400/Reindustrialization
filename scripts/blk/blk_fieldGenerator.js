@@ -10,7 +10,7 @@
 
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -26,7 +26,7 @@
 
     function canPlaceOnComp(blk, t, team, rot) {
       var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
-      if(r != null && mdl_geometry.getSameBuilds(mdl_geometry.getTiles_rect(t, r, blk.size), blk.name, Vars.player.team()).size > 0) return false;
+      if(r != null && mdl_game.getSameBuilds(mdl_game.getTiles_rect(t, r, blk.size), blk.name, Vars.player.team()).size > 0) return false;
 
       return true;
     };
@@ -37,7 +37,7 @@
       if(r != null) {
         var t = Vars.world.tile(tx, ty);
         mdl_draw.drawPlaceRect(blk, t, valid, r, true);
-        mdl_geometry.getSameBuilds(mdl_geometry.getTiles_rect(t, r, blk.size), blk.name, Vars.player.team()).each(ob => mdl_draw.drawBuildArea(ob, valid));
+        mdl_game.getSameBuilds(mdl_game.getTiles_rect(t, r, blk.size), blk.name, Vars.player.team()).each(ob => mdl_draw.drawBuildArea(ob, valid));
       };
     };
 
@@ -46,7 +46,7 @@
       var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
       if(r != null) {
         mdl_draw.drawSelectRect(b, r, true);
-        mdl_geometry.getSameBuilds(mdl_geometry.getTiles_rect(b.tile, r, b.block.size), b.block.name, b.team).each(ob => {if(b != ob) mdl_draw.drawBuildArea(ob, false)});
+        mdl_game.getSameBuilds(mdl_game.getTiles_rect(b.tile, r, b.block.size), b.block.name, b.team).each(ob => {if(b != ob) mdl_draw.drawBuildArea(ob, false)});
       };
     };
   // End

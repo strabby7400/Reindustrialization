@@ -11,7 +11,7 @@
     const frag_heat = require("reind/frag/frag_heat");
 
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -28,7 +28,7 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      if(blk.explosionDamage != null && blk.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_geometry.poser_1t(Vars.world.tile(tx, ty), blk.offset), blk.explosionRadius * Vars.tilesize);
+      if(blk.explosionDamage != null && blk.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), blk.explosionRadius * Vars.tilesize);
     };
 
 
@@ -38,7 +38,7 @@
 
 
     function drawSelectComp(b) {
-      if(b.block.explosionDamage != null && b.block.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_geometry.poser_1b(b), b.block.explosionRadius * Vars.tilesize);
+      if(b.block.explosionDamage != null && b.block.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_game.poser_1b(b), b.block.explosionRadius * Vars.tilesize);
     };
   // End
 

@@ -9,13 +9,13 @@
     const env_genericOre = require("reind/env/env_genericOre");
 
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
   // Part: Component
     function drawBaseComp(blk, t) {
-      var pos = mdl_geometry.poser_1t(t);
+      var pos = mdl_game.poser_1t(t);
       var reg = blk.region;
       var ang = Mathf.randomSeedRange(t.pos() + 1, blk.rotationRand);
 

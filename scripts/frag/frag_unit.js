@@ -7,7 +7,7 @@
 
   // Part: Import
     const mdl_database = require("reind/mdl/mdl_database");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
     const db_env = require("reind/db/db_env");
@@ -16,7 +16,7 @@
   // End
 
 
-  // Part: Update Unit
+  // Part: Surrounding
     const update_surrounding = function(utp, unit) {
       if(Mathf.chance(0.98)) return;
       var t = unit.tileOn();
@@ -35,10 +35,10 @@
       };
 
       // Range
-      var li_ot = mdl_geometry.getTiles_rect(t, 5);
+      var li_ot = mdl_game.getTiles_rect(t, 5);
 
       li_ot.each(ot => {
-        var d = mdl_geometry.getDistance(mdl_geometry.poser_1t(t), mdl_geometry.poser_1t(ot));
+        var d = mdl_game.getDistance(mdl_game.poser_1t(t), mdl_game.poser_1t(ot));
         var oblk = ot.block();
         var ob = ot.build;
 
@@ -61,12 +61,14 @@
       if(count_wall > glb_vars.wall_penaltyLimit) unit.apply(Vars.content.statusEffect("reind-sta-spec-over-protected"), staTime);
     };
     exports.update_surrounding = update_surrounding;
+  // End
 
 
+  // Part: Player
     const update_mouse = function(utp, unit) {
       if(unit != Vars.player.unit()) return;
 
-      var ot = mdl_geometry.getTile_mouse();
+      var ot = mdl_game.getTile_mouse();
       if(ot == null) return;
 
       var ui = new UI();

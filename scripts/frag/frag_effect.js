@@ -7,7 +7,7 @@
 
   // Part: Import
     const mdl_effect = require("reind/mdl/mdl_effect");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_effect = require("reind/db/db_effect");
 
@@ -20,9 +20,9 @@
     const updateTile_gasSideRelease = function(p, b, off_rot, rad, cone, scl, size, rev) {
       if(!Mathf.chance(mdl_effect.getP_frac(p, b.efficiency))) return;
 
-      var rot_fi = mdl_geometry.getRotation_diver(b.rotation, off_rot);
+      var rot_fi = mdl_game.getRotation_diver(b.rotation, off_rot);
       var blocked = false;
-      mdl_geometry.getTiles_rot(b.tile, rot_fi, b.block.size).each(ot => {
+      mdl_game.getTiles_rot(b.tile, rot_fi, b.block.size).each(ot => {
         if(ot.solid() || (ot.build != null && ot.build.block instanceof LiquidJunction)) blocked = true;
       });
       if(blocked) return;

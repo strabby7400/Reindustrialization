@@ -10,6 +10,7 @@
 
     const frag_heat = require("reind/frag/frag_heat");
 
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_database = require("reind/mdl/mdl_database");
 
     const db_block = require("reind/db/db_block");
@@ -37,7 +38,10 @@
 
 
     function setBarsComp(blk) {
-      blk.removeBar("liquid");
+      if(mdl_content.isHcond(blk)) {
+        blk.removeBar("liquid");
+        blk.removeBar("liquid-reind-effc-cond-heat")
+      };
     };
   // End
 

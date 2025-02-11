@@ -1,0 +1,198 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: power
+  requirements: [
+    item-chem-copper/160
+    item-chem-graphite/120
+    item-chem-steel/60
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: pow-econd-transmission-box
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 3
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 30.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawLiquidTile
+        drawLiquid: liq-ore-water
+        padding: 1.5
+      }
+
+
+      {
+        type: DrawLiquidTile
+        drawLiquid: gas-misc-steam
+        padding: 1.5
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-over-shade"
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-over"
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+    ]
+  }
+  craftEffect: {
+
+    # Template: _craftGasLarge
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow2Out
+    lifetime: 480.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: reind-efr-shadow-white
+    layer: 86.0
+    particles: 18
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffffff40
+    colorTo: ffffff00
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 64.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: pow5Out
+    sizeFrom: 2.0
+    sizeTo: 14.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-boiler
+  ambientSoundVolume: 0.4
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: false
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 240.0
+  consumes: {
+    liquids: [
+      liq-ore-water/0.25
+      effc-cond-heat/0.3
+    ]
+  }
+  outputLiquids: [
+    gas-misc-steam/0.25
+    effc-cond-steam-energy/0.05
+  ]

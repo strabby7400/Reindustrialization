@@ -81,6 +81,7 @@
     const ct_blk_manualGenerator = require("reind/ct/ct_blk_manualGenerator");
     const ct_blk_windTurbine = require("reind/ct/ct_blk_windTurbine");
     const ct_blk_fieldGenerator = require("reind/ct/ct_blk_fieldGenerator");
+    const ct_blk_boiler = require("reind/ct/ct_blk_boiler");
     const ct_blk_cable = require("reind/ct/ct_blk_cable");
     const ct_blk_wireRelay = require("reind/ct/ct_blk_wireRelay");
     const ct_blk_wireNode = require("reind/ct/ct_blk_wireNode");

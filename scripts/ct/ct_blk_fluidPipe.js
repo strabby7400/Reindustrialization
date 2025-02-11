@@ -7,6 +7,8 @@
 
   // Part: Import
     const blk_fluidPipe = require("reind/blk/blk_fluidPipe");
+
+    const frag_facility = require("reind/frag/frag_facility");
   // End
 
 
@@ -19,15 +21,19 @@
 
   // Part: bliq-cond
     const bliqCond_woodenFluidPipe = extend(Conduit, "bliq-cond-wooden-fluid-pipe", {
+      // Specific
       setStats() {
         this.super$setStats();
         blk_fluidPipe.setStats(this);
+        frag_facility.setStats_flammable(this);
       },
     });
     bliqCond_woodenFluidPipe.buildType = () => extend(Conduit.ConduitBuild, bliqCond_woodenFluidPipe, {
+      // Specific
       updateTile() {
         this.super$updateTile();
         blk_fluidPipe.updateTile(this);
+        frag_facility.updateTile_flammable(this);
       },
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;

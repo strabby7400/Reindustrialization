@@ -8,7 +8,8 @@
   // Part: Import
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
+    const mdl_heat = require("reind/mdl/mdl_heat");
     const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
@@ -27,7 +28,7 @@
 
 
     const isActive_2side = function(b) {
-      if(mdl_geometry.isDirectionBlocked(b, 0) && mdl_geometry.isDirectionBlocked(b, 2)) return false;
+      if(mdl_game.isDirectionBlocked(b, 0) && mdl_game.isDirectionBlocked(b, 2)) return false;
 
       return true;
     };
@@ -35,13 +36,13 @@
 
 
     const drawPlace_2side = function(blk, t, rot) {
-      mdl_geometry.getTiles_2sideRot(t, rot, blk.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
+      mdl_game.getTiles_2sideRot(t, rot, blk.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
     };
     exports.drawPlace_2side = drawPlace_2side;
 
 
     const drawSelect_2side = function(b) {
-      mdl_geometry.getTiles_2sideRot(b.tile, b.rotation, b.block.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
+      mdl_game.getTiles_2sideRot(b.tile, b.rotation, b.block.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
     };
     exports.drawSelect_2side = drawSelect_2side;
   // End
@@ -58,7 +59,7 @@
       if(pos == null || rad == null || team == null) return new Seq();
 
       var map = new Seq();
-      mdl_geometry.filter_team(mdl_geometry.getUnits(pos, rad, caller), team).each(unit => {
+      mdl_game.filter_team(mdl_game.getUnits(pos, rad, caller), team).each(unit => {
         var ep = mdl_database.read_1n1v(db_unit.energizer, unit.type.name);
         if(ep != null) {
           map.add(unit);
@@ -110,7 +111,7 @@
       if(ep_req == null) return true;
 
       var ep = count_ep(
-        (e instanceof Unit) ? mdl_geometry.poser_1u(e) : mdl_geometry.poser_1b(e),
+        (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e),
         rad,
         e.team,
         (e instanceof Unit) ? e : null,
@@ -152,14 +153,14 @@
       if(rad == null) return;
 
       getUnits_ep(
-        (e instanceof Unit) ? mdl_geometry.poser_1u(e) : mdl_geometry.poser_1b(e),
+        (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e),
         rad,
         e.team,
         (e instanceof Unit) ? e : null,
       ).each(unit => {
         mdl_draw.drawFlickerLine(
-          mdl_geometry.poser_1u(unit),
-          (e instanceof Unit) ? mdl_geometry.poser_1u(e) : mdl_geometry.poser_1b(e),
+          mdl_game.poser_1u(unit),
+          (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e),
           Pal.techBlue,
         );
       });
@@ -168,12 +169,33 @@
   // End
 
 
+  // Part: Flammable
+    const setStats_flammable = function(blk) {
+      blk.stats.add(db_stat.flammable, true);
+    };
+    exports.setStats_flammable = setStats_flammable;
+
+
+    const updateTile_flammable = function(b) {
+      if(Mathf.chance(0.99)) return;
+
+      var li_ot = mdl_game.getTiles_linked(b.tile);
+      var rheat = 0.0;
+      li_ot.each(ot => rheat += mdl_heat.getRangeHeat(ot));
+      rheat /= li_ot.size;
+
+      if(rheat > 6.0) Fires.create(li_ot.get(Math.round(Mathf.random(li_ot.size - 1) - 0.4999)));
+    };
+    exports.updateTile_flammable = updateTile_flammable;
+  // End
+
+
   // Part: Terrain
     const getTerrain = function(t, size) {
       if(size == null) size = 1;
       if(t == null) return;
 
-      var li_ot = mdl_geometry.getTiles_rect(t, 5, size);
+      var li_ot = mdl_game.getTiles_rect(t, 5, size);
       var count_t = li_ot.size;
       if(count_t == 0) return;
       var count_dirt = 0;

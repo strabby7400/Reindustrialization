@@ -14,7 +14,7 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_table = require("reind/db/db_table");
   // End
@@ -30,7 +30,7 @@
       if(liq != liq_sel) b.liquids.clear();
 
       b.moveLiquidForward(false, liq_sel);
-      var ot_f = mdl_geometry.getTile_rot("f", b.tile, b.rotation);
+      var ot_f = mdl_game.getTile_rot("f", b.tile, b.rotation);
       if(ot_f != null) frag_fluid.transferLiquid(ot_f.build, b, liq_sel, true);
     };
 
@@ -51,7 +51,7 @@
     function drawSelectComp(b) {
       var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
       var liq_sel = mdl_content.getContent_id("fluid", id_sel);
-      mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), liq_sel, b.block.size);
+      mdl_draw.drawContentIcon(mdl_game.poser_1b(b), liq_sel, b.block.size);
     };
   // End
 

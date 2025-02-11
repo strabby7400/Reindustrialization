@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const glb_vars = require("reind/glb/glb_vars");
   // End
@@ -35,7 +35,7 @@
       if(pos_gn == null || path == null) return false;
 
       var path_fi = "sounds/" + path + ".ogg";
-      var pos = mdl_geometry.poser_gn(pos_gn);
+      var pos = mdl_game.poser_gn(pos_gn);
       var x = pos.x;
       var y = pos.y;
 
@@ -54,7 +54,7 @@
       if(rot == null) rot = Mathf.random(360.0);
       if(pos_gn == null || eff == null) return false;
 
-      var pos = mdl_geometry.poser_gn(pos_gn);
+      var pos = mdl_game.poser_gn(pos_gn);
       if(pos == null) return false;
       var x = pos.x;
       var y = pos.y;
@@ -99,7 +99,7 @@
       if(dur == null) dur = 60.0;
       if(pos_gn == null || pow < 0.0001 || dur < 0.0001) return false;
 
-      var pos = mdl_geometry.poser_gn(pos_gn);
+      var pos = mdl_game.poser_gn(pos_gn);
       if(pos == null) return false;
       var x = pos.x;
       var y = pos.y;

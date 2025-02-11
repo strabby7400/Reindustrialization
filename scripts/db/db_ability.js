@@ -8,7 +8,7 @@
   // Part: Import
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_effect = require("reind/mdl/mdl_effect");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
     const mdl_text = require("reind/mdl/mdl_text");
 
     const db_effect = require("reind/db/db_effect");
@@ -41,7 +41,7 @@
         update(unit) {
           if(Mathf.chance(0.98)) return;
 
-          var li_ounit = mdl_geometry.getEnemies(mdl_geometry.poser_1u(unit), rad, unit.team);
+          var li_ounit = mdl_game.getEnemies(mdl_game.poser_1u(unit), rad, unit.team);
           if(li_ounit.size > 0) {
             var count_apply = 0;
             li_ounit.each(ounit => {
@@ -51,7 +51,7 @@
               };
             });
 
-            if(count_apply > 0) mdl_effect.showAt_ldm(unit, db_effect._scanCircle(rad, 0.5, Color.white), 0.0);
+            if(count_apply > 0) mdl_effect.showAt_ldm(unit, db_effect._scanCircle(rad, 0.5, Color.valueOf("ffffff40")), 0.0);
           };
         },
 
@@ -93,7 +93,7 @@
           bars.add(new Bar(
             "term.reind-term-unit-count.name",
             Pal.accent,
-            () => Math.min(mdl_geometry.getSameUnits(mdl_geometry.poser_1u(unit), rad, unit.type.name, unit.team).size / limit, 1.0),
+            () => Math.min(mdl_game.getSameUnits(mdl_game.poser_1u(unit), rad, unit.type.name, unit.team).size / limit, 1.0),
           )).row();
         },
 
@@ -101,7 +101,7 @@
         update(unit) {
           if(Mathf.chance(0.98)) return;
 
-          var count = mdl_geometry.getSameUnits(mdl_geometry.poser_1u(unit), rad, unit.type.name, unit.team).size;
+          var count = mdl_game.getSameUnits(mdl_game.poser_1u(unit), rad, unit.type.name, unit.team).size;
           if(count >= limit) unit.apply(Vars.content.statusEffect("reind-sta-spec-morale"), 300.0);
         },
 

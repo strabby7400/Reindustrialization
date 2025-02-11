@@ -7,6 +7,8 @@
 
   // Part: Import
     const blk_genericWall = require("reind/blk/blk_genericWall");
+
+    const frag_facility = require("reind/frag/frag_facility");
   // End
 
 
@@ -19,15 +21,19 @@
 
   // Part: def-wall
     const defWall_woodenBarricade = extend(Wall, "def-wall-wooden-barricade", {
+      // Specific
       setStats() {
         this.super$setStats();
         blk_genericWall.setStats(this);
+        frag_facility.setStats_flammable(this);
       },
     });
     defWall_woodenBarricade.buildType = () => extend(Wall.WallBuild, defWall_woodenBarricade, {
+      // Specific
       updateTile() {
         this.super$updateTile();
         blk_genericWall.updateTile(this);
+        frag_facility.updateTile_flammable(this);
       },
     });
     exports.defWall_woodenBarricade = defWall_woodenBarricade;

@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
     const mdl_heat = require("reind/mdl/mdl_heat");
   // End
 
@@ -101,10 +101,9 @@
     const drawFadeAlert = function(pos, reg, frac, ang, a, regScl, color, z) {
       if(frac == null) frac = 0.0;
 
-      var a_fi = Math.min(frac / 0.5, 1.0);
-      var fadeScl = 2.5 - frac * 1.5;
+      var a_fi = 1.0 - Math.pow(Math.min(frac, 1.0) - 1.0, 2);
 
-      drawFadeRegion(pos, reg, ang, a_fi, regScl, fadeScl, color, z);
+      drawFadeRegion(pos, reg, ang, a_fi, regScl, 0.2, color, z);
     };
     exports.drawFadeAlert = drawFadeAlert;
 
@@ -391,7 +390,7 @@
     const drawPlaceRect = function(blk, t, valid, r, dashed) {
       if(blk == null || t == null) return;
 
-      drawRect(mdl_geometry.poser_1t(t, blk.offset), r, valid, blk.size, dashed);
+      drawRect(mdl_game.poser_1t(t, blk.offset), r, valid, blk.size, dashed);
     };
     exports.drawPlaceRect = drawPlaceRect;
 
@@ -442,7 +441,7 @@
     const drawPlaceCircle = function(blk, t, valid, rad, dashed) {
       if(blk == null || t == null) return;
 
-      drawCircle(mdl_geometry.poser_1t(t, blk.offset), rad, valid, dashed);
+      drawCircle(mdl_game.poser_1t(t, blk.offset), rad, valid, dashed);
     };
     exports.drawPlaceCircle = drawPlaceCircle;
 
@@ -518,7 +517,7 @@
       if(pad == null) pad = 0.0;
       if(b == null) return;
 
-      var pos = mdl_geometry.poser_1b(b);
+      var pos = mdl_game.poser_1b(b);
       var w = b.block.size * Vars.tilesize - pad;
       var color = palette_gn(color_gn);
 
@@ -690,7 +689,7 @@
       if(color == null) color = Color.white;
       if(e == null || reg == null) return;
 
-      var pos = (e instanceof Unit) ? mdl_geometry.poser_1u(e) : mdl_geometry.poser_1b(e);
+      var pos = (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e);
       var scl = (e instanceof Unit) ? (0.1 * e.type.hitSize) : (0.1 * e.block.size * Vars.tilesize);
 
       drawFadeRegion(pos, reg, 0.0, 0.5, scl, 0.5, color, 110.0)

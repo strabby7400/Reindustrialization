@@ -9,7 +9,7 @@
     const blk_genericDistributionGate = require("reind/blk/blk_genericDistributionGate");
 
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
@@ -25,7 +25,7 @@
 
 
     function drawSelectComp(b) {
-      if(b.sortItem != null) mdl_draw.drawContentIcon(mdl_geometry.poser_1b(b), b.sortItem, b.block.size);
+      if(b.sortItem != null) mdl_draw.drawContentIcon(mdl_game.poser_1b(b), b.sortItem, b.block.size);
     };
   // End
 

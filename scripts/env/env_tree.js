@@ -13,7 +13,7 @@
 
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
@@ -29,8 +29,8 @@
       if(z == null) return;
       var z_sha = z - 0.0005;
 
-      var pos = mdl_geometry.poser_1t(t);
-      var pos_sha = mdl_geometry.poser_1t(t, blk.shadowOffset);
+      var pos = mdl_game.poser_1t(t);
+      var pos_sha = mdl_game.poser_1t(t, blk.shadowOffset);
       var reg = blk.region;
       var ang = Mathf.randomSeed(t.pos(), 0, 4) * 90.0 + Mathf.sin(Time.time + pos.x, 50.0, 0.5) + Mathf.sin(Time.time - pos.y, 65.0, 0.9) + Mathf.sin(Time.time + pos.y - pos.x, 85.0, 0.9);
       var scl = 1.0;
@@ -49,9 +49,9 @@
 
       var a = 1.0;
       if(Vars.player.unit() != null && !Vars.player.unit().flying && Vars.player.unit().type.groundLayer < 76.0) {
-        var pos_pl = mdl_geometry.poser_gn("player");
+        var pos_pl = mdl_game.poser_gn("player");
         if(pos_pl != null) {
-          var d = mdl_geometry.getDistance(pos, pos_pl);
+          var d = mdl_game.getDistance(pos, pos_pl);
           if(d < reg.width * 0.15) a = 0.37;
         };
       };

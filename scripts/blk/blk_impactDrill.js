@@ -14,7 +14,7 @@
 
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -40,7 +40,7 @@
           var dmg = b.block.size * b.block.drillTime * 1.2;
           var dur = b.block.drillTime * 0.5;
 
-          frag_attack.attack_impact(mdl_geometry.poser_1b(b), rad, dmg, dur);
+          frag_attack.attack_impact(mdl_game.poser_1b(b), rad, dmg, dur);
         };
       };
 
@@ -61,7 +61,7 @@
             if(r_sc == null) {
               down = true;
             } else {
-              var d = mdl_geometry.getDistance(mdl_geometry.poser_1b(b), mdl_geometry.poser_1b(b_sc));
+              var d = mdl_game.getDistance(mdl_game.poser_1b(b), mdl_game.poser_1b(b_sc));
               var d_cr = (b_sc.block.size / 2 + r_sc) * Vars.tilesize * 1.275;
               if(d > d_cr) {
                 down = true;
@@ -95,13 +95,13 @@
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_geometry.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
       var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_geometry.poser_1b(b), rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1b(b), rad);
 
       var ov = b.tile.overlay();
       if(ov != null && ov.name.includes("reind-env-ore-depth-")) {
@@ -111,7 +111,7 @@
         } else {
           mdl_draw.drawBuildRect(b, true, false);
           mdl_draw.drawBuildRect(b_sc, true, false);
-          mdl_draw.drawLine(mdl_geometry.poser_1b(b), mdl_geometry.poser_1b(b_sc));
+          mdl_draw.drawLine(mdl_game.poser_1b(b), mdl_game.poser_1b(b_sc));
         };
       };
     };

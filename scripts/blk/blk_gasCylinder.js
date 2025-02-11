@@ -13,7 +13,7 @@
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
     const mdl_ui = require("reind/mdl/mdl_ui");
 
     const db_effect = require("reind/db/db_effect");
@@ -51,13 +51,13 @@
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var rad = blk.size / 2 * glb_vars.gasCylinder_explosionRadius;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_geometry.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
+      if(rad != null) mdl_draw.drawWarningDisk(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
       var rad = b.block.size / 2 * glb_vars.gasCylinder_explosionRadius;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_geometry.poser_1b(b), rad);
+      if(rad != null) mdl_draw.drawWarningDisk(mdl_game.poser_1b(b), rad);
     };
 
 
@@ -70,7 +70,7 @@
         var dmg = glb_vars.gasCylinder_explosionDamage;
         var shake = 8.0;
 
-        frag_attack.attack_explosion(mdl_geometry.poser_1b(b), rad, dmg, shake);
+        frag_attack.attack_explosion(mdl_game.poser_1b(b), rad, dmg, shake);
       };
     };
   // End

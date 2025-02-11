@@ -13,7 +13,7 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
@@ -70,7 +70,7 @@
         blk_fieldGenerator.draw(this);
         frag_facility.draw_ep(this);
         mdl_draw.drawFadeAlert(
-          mdl_geometry.poser_1b(this),
+          mdl_game.poser_1b(this),
           this.alertReg,
           this.liquids.get(Vars.content.liquid("reind-gas-misc-steam")) / this.block.liquidCapacity,
         );

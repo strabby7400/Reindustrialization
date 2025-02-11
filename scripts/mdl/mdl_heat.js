@@ -7,7 +7,7 @@
 
   // Part: Import
     const mdl_database = require("reind/mdl/mdl_database");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
     const db_fluid = require("reind/db/db_fluid");
@@ -56,7 +56,7 @@
     const getSparedHeat = function(b) {
       var sheat = 0.0;
 
-      b.proximity.each(ob => sheat += getHeat(ob) * mdl_geometry.getFrac_side(ob, b));
+      b.proximity.each(ob => sheat += getHeat(ob) * mdl_game.getFrac_side(ob, b));
 
       return sheat;
     };
@@ -140,7 +140,7 @@
     /* NOTE: Average heat in the 3*3 range. */
     const getRangeHeat = function(t) {
       var heat = 0.0;
-      var li_ot = mdl_geometry.getTiles_rect(t, 1);
+      var li_ot = mdl_game.getTiles_rect(t, 1);
       li_ot.each(ot => {
         // Get floor heat
         heat += ot.floor().attributes.get(Attribute.get("reind-attr-env-heat")) * 16.0;

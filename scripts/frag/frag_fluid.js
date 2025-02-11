@@ -12,7 +12,7 @@
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_flow = require("reind/mdl/mdl_flow");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
     const mdl_heat = require("reind/mdl/mdl_heat");
     const mdl_ui = require("reind/mdl/mdl_ui");
 
@@ -48,7 +48,7 @@
 
       var t = puddle.tile;
       var b = t.build;
-      var li_ot = mdl_geometry.getTiles_rect(t, 1);
+      var li_ot = mdl_game.getTiles_rect(t, 1);
       li_ot.each(ot => {
         var ob = ot.build;
 
@@ -61,7 +61,7 @@
           b.damage(dmg);
 
           mdl_effect.showAtP(0.005, b, db_effect._heatSmog());
-          if(Mathf.chanceDelta(0.001)) frag_attack.attack_lightning(mdl_geometry.poser_1b(b), Team.derelict, 1, 6, 4, glb_vars.shortCircuit_lightningDamage, Pal.accent);
+          if(Mathf.chanceDelta(0.001)) frag_attack.attack_lightning(mdl_game.poser_1b(b), Team.derelict, 1, 6, 4, glb_vars.shortCircuit_lightningDamage, Pal.accent);
         };
       });
     };
@@ -242,7 +242,7 @@
       var cap = b.block.liquidCapacity;
       if(amt / cap < 0.98) return;
 
-      var li_ot = mdl_geometry.getTiles_edgeIns(b.tile, b.block.size);
+      var li_ot = mdl_game.getTiles_edgeIns(b.tile, b.block.size);
       li_ot.each(ot => {
         if(Mathf.chance(0.5)) Puddles.deposit(ot, liq, 8.0);
       });

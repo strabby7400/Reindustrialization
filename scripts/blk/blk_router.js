@@ -9,13 +9,13 @@
     const blk_genericDistributionGate = require("reind/blk/blk_genericDistributionGate");
 
     const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_geometry = require("reind/mdl/mdl_geometry");
+    const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
   // Part: Component
     function drawComp(b) {
-      mdl_geometry.getTiles_edge(b.tile, b.block.size).each(ot => {
+      mdl_game.getTiles_edge(b.tile, b.block.size).each(ot => {
         if(ot.block() instanceof Router) mdl_draw.drawTileIndicator(ot, false);
       });
     };
