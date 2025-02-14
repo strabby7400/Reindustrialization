@@ -14,6 +14,7 @@
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
+    const db_table = require("reind/db/db_table");
   // End
 
 
@@ -27,6 +28,11 @@
     function updateTileComp(b) {
       var rate = Time.delta * mdl_database.read_1n1v(db_block.coreEffcOutput, b.block.name) / 60.0;
       if(rate != null) frag_fluid.updateTile_coreEffc(b, rate);
+    };
+
+
+    function buildConfigurationComp(b, tb) {
+      db_table.__timeController(tb);
     };
   // End
 
@@ -53,6 +59,12 @@
       updateTileComp(b);
     };
     exports.updateTile = updateTile;
+
+
+    const buildConfiguration = function(b, tb) {
+      buildConfigurationComp(b, tb);
+    };
+    exports.buildConfiguration = buildConfiguration;
   // End
 
 

@@ -125,7 +125,7 @@
   }
   updateEffectChance: 0.005
   ambientSound: se-amb-drill
-  ambientSoundVolume: 0.1
+  ambientSoundVolume: 0.2
 
 
 /*

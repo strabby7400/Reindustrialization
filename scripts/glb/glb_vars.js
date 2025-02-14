@@ -72,3 +72,9 @@
     const terrain_floorThreshold = 0.75;
     exports.terrain_floorThreshold = terrain_floorThreshold;
   // End
+
+
+  // Part: Gameplay
+    const time_maxTimeDelta = 2.5;
+    exports.time_maxTimeDelta = time_maxTimeDelta;
+  // End

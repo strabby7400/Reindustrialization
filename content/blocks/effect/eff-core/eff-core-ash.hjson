@@ -74,8 +74,9 @@
 */
 
 
+  configurable: true
   outputsLiquid: true
-  unitCapModifier: 2        /* NOTE: Yet another attempt to ban kamikaze. */
+  unitCapModifier: 2
   isFirstTier: true
   requiresCoreZone: true
   incinerateNonBuildable: false

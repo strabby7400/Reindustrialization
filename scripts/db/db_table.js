@@ -8,6 +8,8 @@
   // Part: Import
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_table = require("reind/mdl/mdl_table");
+
+    const glb_vars = require("reind/glb/glb_vars");
   // End
 
 
@@ -17,10 +19,7 @@
       var ct_sel = mdl_content.getContent_id(tp_ct, id_sel);
       var str_ct = (ct_sel == null) ? "-" : ct_sel.localizedName;
 
-      mdl_table.setHeadline(
-        tb,
-        Core.bundle.get("term.reind-term-selected.name") + ": " + str_ct,
-      );
+      mdl_table.setHeadline(tb, Core.bundle.get("term.reind-term-selected.name") + ": " + str_ct);
     };
     exports.__contentSelected = __contentSelected;
 
@@ -44,4 +43,22 @@
       mdl_table.setContentSelector(tb, li_ct, id_sel, scr, col);
     };
     exports.__contentSelector = __contentSelector;
+  // End
+
+
+  // Part: Special
+    const __timeController = function(tb) {
+      var delta_max = glb_vars.time_maxTimeDelta / 0.5 - 1.0;
+      var delta_cur = Time.delta / 0.5 - 1.0;
+
+      mdl_table.setHeadline(tb, Core.bundle.get("term.reind-term-time-controller.name"));
+      tb.row();
+
+      tb.table(Tex.button, tb1 => {
+        mdl_table.setSlider(tb1, function() {
+          Time.setDeltaProvider(() => Core.graphics.getDeltaTime() * 60.0 * (this + 1.0) * 0.5);
+        }, 0.0, delta_max, 1.0, delta_cur);
+      });
+    };
+    exports.__timeController = __timeController;
   // End

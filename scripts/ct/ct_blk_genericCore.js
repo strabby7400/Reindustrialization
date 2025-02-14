@@ -28,6 +28,10 @@
       this.super$updateTile();
       blk_genericCore.updateTile(this);
     },
+    buildConfiguration(table) {
+      this.super$buildConfiguration(table);
+      blk_genericCore.buildConfiguration(this, table);
+    },
   });
   exports.effCore_ash = effCore_ash;
 

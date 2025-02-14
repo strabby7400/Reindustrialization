@@ -35,13 +35,13 @@
       this.super$updateTile();
       blk_rangeWallHarvester.updateTile(this);
     },
-    drawSelect() {
-      this.super$drawSelect();
-      blk_rangeWallHarvester.drawSelect(this);
-    },
     draw() {
       this.super$draw();
       blk_rangeWallHarvester.draw(this);
+    },
+    drawSelect() {
+      this.super$drawSelect();
+      blk_rangeWallHarvester.drawSelect(this);
     },
   });
   exports.minHarv_mycelialHarvester = minHarv_mycelialHarvester;

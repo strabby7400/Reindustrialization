@@ -19,6 +19,9 @@
       const stat_faction = new Stat("reind-stat-faction.name", StatCat.function);
       exports.faction = stat_faction;
 
+      const stat_connectionRange = new Stat("reind-stat-connection-range.name", StatCat.function);
+      exports.connectionRange = stat_connectionRange;
+
       const stat_canExplode = new Stat("reind-stat-can-explode.name", StatCat.function);
       exports.canExplode = stat_canExplode;
 

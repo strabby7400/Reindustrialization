@@ -7,6 +7,12 @@
 
   // Part: Import
     const blk_drill = require("reind/blk/blk_drill");
+
+    const frag_facility = require("reind/frag/frag_facility");
+
+    const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
@@ -83,6 +89,51 @@
       },
     });
     exports.minDril_sandExcavator = minDril_sandExcavator;
+  // End
+
+
+  // Part: ilmin-dril
+    const ilminDril_idsRemoteDrill = extend(Drill, "ilmin-dril-ids-remote-drill", {
+      // Specific
+      setStats() {
+        this.super$setStats();
+        blk_drill.setStats(this);
+        frag_facility.setStats_coreDump(this, 40.0 * Vars.tilesize);
+      },
+      canMine(tile) {
+        if(!this.super$canMine(tile)) return false;
+        if(!blk_drill.canMine(this, tile)) return false;
+        return true;
+      },
+      // Specific
+      drawPlace(x, y, rotation, valid) {
+        this.super$drawPlace(x, y, rotation, valid);
+        frag_facility.drawPlace_coreDump(this, x, y, rotation, valid, 40.0 * Vars.tilesize);
+      },
+    });
+    ilminDril_idsRemoteDrill.buildType = () => extend(Drill.DrillBuild, ilminDril_idsRemoteDrill, {
+      glow3Reg: mdl_content.getContentRegion(ilminDril_idsRemoteDrill, "-glow3"),
+      updateTile() {
+        this.super$updateTile();
+        blk_drill.updateTile(this);
+      },
+      // Specific
+      dump(todump) {
+        frag_facility.dump_coreDump(this, todump, 40.0 * Vars.tilesize);
+      },
+      // Specific
+      draw() {
+        this.super$draw();
+        mdl_draw.drawGlowRegion(mdl_game.poser_1b(this), this.glow3Reg, this.warmup);
+        frag_facility.draw_coreDump(this, 40.0 * Vars.tilesize);
+      },
+      // Specific
+      drawSelect() {
+        this.super$drawSelect();
+        frag_facility.drawSelect_coreDump(this, 40.0 * Vars.tilesize);
+      },
+    });
+    exports.ilminDril_idsRemoteDrill = ilminDril_idsRemoteDrill;
   // End
 
 

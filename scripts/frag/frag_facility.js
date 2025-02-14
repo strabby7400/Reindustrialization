@@ -6,6 +6,8 @@
 
 
   // Part: Import
+    const frag_item = require("reind/frag/frag_item");
+
     const mdl_database = require("reind/mdl/mdl_database");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -45,6 +47,58 @@
       mdl_game.getTiles_2sideRot(b.tile, b.rotation, b.block.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
     };
     exports.drawSelect_2side = drawSelect_2side;
+  // End
+
+
+  // Part: Core Dump
+    const setStats_coreDump = function(blk, rad) {
+      if(rad != null) blk.stats.add(db_stat.connectionRange, rad / Vars.tilesize, StatUnit.blocks);
+    };
+    exports.setStats_coreDump = setStats_coreDump;
+
+
+    const dump_coreDump = function(b, itm, rad) {
+      if(rad == null) return false;
+
+      var b_core = b.closestCore();
+
+      var shouldCoreDump = true;
+      if(mdl_game.getDistance(mdl_game.poser_1b(b), mdl_game.poser_1b(b_core)) > rad) shouldCoreDump = false;
+      if(b.power != null && b.power.status < 0.9999) shouldCoreDump = false;
+
+      return shouldCoreDump ? frag_item.dumpItem(b, new Seq([b_core]), itm) : b.super$dump(itm);
+    };
+    exports.dump_coreDump = dump_coreDump;
+
+
+    const drawPlace_coreDump = function(blk, tx, ty, rot, valid, rad) {
+      if(rad == null) return;
+      mdl_draw.drawPlaceCircle(blk, Vars.world.tile(tx, ty), valid, rad, false);
+    };
+    exports.drawPlace_coreDump = drawPlace_coreDump;
+
+
+    const draw_coreDump = function(b, rad) {
+      if(b.items == null || rad == null) return;
+      if(b.items.total() > 1) return;
+      if(b.power != null && b.power.status < 0.9999) return;
+
+      var b_core = b.closestCore();
+      if(mdl_game.getDistance(mdl_game.poser_1b(b), mdl_game.poser_1b(b_core)) > rad) return;
+      mdl_draw.drawItemTransfer(mdl_game.poser_1b(b), mdl_game.poser_1b(b_core));
+    };
+    exports.draw_coreDump = draw_coreDump;
+
+
+    const drawSelect_coreDump = function(b, rad) {
+      if(rad == null) return;
+      mdl_draw.drawSelectCircle(b, rad, false);
+
+      var b_core = b.closestCore();
+      if(mdl_game.getDistance(mdl_game.poser_1b(b), mdl_game.poser_1b(b_core)) > rad) return;
+      mdl_draw.drawBuildRectConnector(b, b_core);
+    };
+    exports.drawSelect_coreDump = drawSelect_coreDump;
   // End
 
 

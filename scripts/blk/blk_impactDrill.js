@@ -109,9 +109,7 @@
         if(b_sc == null) {
           mdl_draw.drawSelectText(b, false, Core.bundle.get("info.reind-info-no-ore-scanner.name"));
         } else {
-          mdl_draw.drawBuildRect(b, true, false);
-          mdl_draw.drawBuildRect(b_sc, true, false);
-          mdl_draw.drawLine(mdl_game.poser_1b(b), mdl_game.poser_1b(b_sc));
+          mdl_draw.drawBuildRectConnector(b, b_sc);
         };
       };
     };

@@ -405,11 +405,23 @@
 
     /* NOTE: This rect only contains the building. */
     const drawBuildRect = function(b, valid, dashed) {
+      if(valid == null) valid = true;
+      if(dashed == null) dashed = false;
       if(b == null) return;
 
       drawPlaceRect(b.block, b.tile, valid, 0, dashed);
     };
     exports.drawBuildRect = drawBuildRect;
+
+
+    const drawBuildRectConnector = function(b, ob) {
+      if(b == null || ob == null) return;
+
+      drawBuildRect(b);
+      drawBuildRect(ob);
+      drawLine(mdl_game.poser_1b(b), mdl_game.poser_1b(ob));
+    };
+    exports.drawBuildRectConnector = drawBuildRectConnector;
   // End
 
 
@@ -638,9 +650,9 @@
       var y_1 = y_f + (y_t - y_f) * Math.pow(frac1, 5);
       var y_2 = y_f + (y_t - y_f) * Math.pow(frac2, 5);
       var y_3 = y_f + (y_t - y_f) * Math.pow(frac3, 5);
-      var rad_1 = 1.5 - Math.pow(frac1, 10) * 1.5;
-      var rad_2 = 1.5 - Math.pow(frac2, 10) * 1.5;
-      var rad_3 = 1.5 - Math.pow(frac3, 10) * 1.5;
+      var rad_1 = 1.5 - Math.pow(frac1, 10) * 0.5;
+      var rad_2 = 1.5 - Math.pow(frac2, 10) * 0.5;
+      var rad_3 = 1.5 - Math.pow(frac3, 10) * 0.5;
 
       Draw.z(Layer.effect + 0.01);
       Draw.color(color);

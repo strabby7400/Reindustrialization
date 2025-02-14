@@ -85,7 +85,7 @@
   heatPulse: 0.2
   heatPulseScl: 6.0
   ambientSound: se-amb-drill
-  ambientSoundVolume: 0.2
+  ambientSoundVolume: 0.3
 
 
 /*

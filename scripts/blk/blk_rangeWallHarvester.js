@@ -57,6 +57,16 @@
     };
 
 
+    function drawComp(b) {
+      if(b.efficiency > 0.0001) {
+        var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
+        if(r != null) mdl_game.getTiles_rect(b.tile, r, b.block.size).each(ot => {
+          if(ot.block().attributes.get(b.block.attribute) > 0.0) mdl_draw.drawItemTransfer(mdl_game.poser_1t(ot, ot.block().offset), mdl_game.poser_1b(b), Pal.accent, 1.0)
+        });
+      };
+    };
+
+
     function drawSelectComp(b) {
       var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
       if(r != null) {
@@ -66,16 +76,6 @@
             mdl_draw.drawTileIndicator(ot, true);
             mdl_draw.drawFlickerLine(mdl_game.poser_1b(b), mdl_game.poser_1t(ot, ot.block().offset), Pal.accent, 1.0, true);
           };
-        });
-      };
-    };
-
-
-    function drawComp(b) {
-      if(b.efficiency > 0.0001) {
-        var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
-        if(r != null) mdl_game.getTiles_rect(b.tile, r, b.block.size).each(ot => {
-          if(ot.block().attributes.get(b.block.attribute) > 0.0) mdl_draw.drawItemTransfer(mdl_game.poser_1t(ot, ot.block().offset), mdl_game.poser_1b(b), Pal.accent, 1.0)
         });
       };
     };
@@ -116,16 +116,16 @@
     exports.drawPlace = drawPlace;
 
 
-    const drawSelect = function(b) {
-      drawSelectComp(b);
-    };
-    exports.drawSelect = drawSelect;
-
-
     const draw = function(b) {
       drawComp(b);
     };
     exports.draw = draw;
+
+
+    const drawSelect = function(b) {
+      drawSelectComp(b);
+    };
+    exports.drawSelect = drawSelect;
   // End
 
 

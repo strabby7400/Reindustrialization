@@ -67,12 +67,21 @@
       if(size == null) size = 32.0;
       if(tb == null || scr == null) return;
 
-      var btn = tb.button(icon, size, () => {
-        scr.call();
-      });
+      var btn = tb.button(icon, size, () => scr.call());
       if(str_tt != null) btn.tooltip(str_tt);
     };
     exports.setTrigger = setTrigger;
+
+
+    const setSlider = function(tb, scr, sld_min, sld_max, sld_step, sld_ini) {
+      if(sld_min == null) sld_min = 0.0;
+      if(sld_max == null) sld_max = 1.0;
+      if(sld_step == null) sld_step = 1.0;
+      if(sld_ini == null) sld_ini = 0.0;
+      if(tb == null || scr == null) return;
+      tb.slider(sld_min, sld_max, sld_step, sld_ini, val => scr.call(val));
+    };
+    exports.setSlider = setSlider;
   // End
 
 

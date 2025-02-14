@@ -8,7 +8,11 @@
   # type: Drill
   category: production
   requirements: [
-    item-chem-copper/30
+    item-bio-timber/60
+    item-chem-copper/40
+    item-chem-graphite/60
+    item-chem-steel/40
+    ilitem-misc-ids-exciter-rod/10
   ]
   buildCostMultiplier: 2.0
 
@@ -20,11 +24,11 @@
 */
 
 
-  alwaysUnlocked: true
   research: {
-    parent: eff-core-ash
+    parent: ileff-misc-ids-engine
     objectives: []
   }
+  researchCostMultiplier: 0.3
 
 
 /*
@@ -34,14 +38,14 @@
 */
 
 
-  scaledHealth: 40.0
-  armor: 0.0
+  scaledHealth: 60.0
+  armor: 12.0
   size: 2
   hasItems: true
   itemCapacity: 10
   hasLiquids: true
   liquidCapacity: 5.0
-  hasPower: false
+  hasPower: true
 
 
 /*
@@ -64,10 +68,10 @@
 
 
   squareSprite: false
-  drawRim: false
+  drawRim: true
   drillEffect: none
   drillEffectChance: 1.0
-  rotateSpeed: 1.5
+  rotateSpeed: 2.5
   updateEffect: {
 
 
@@ -132,8 +136,8 @@
 */
 
 
-  tier: 4
-  hardnessDrillMultiplier: 30.0
+  tier: 6
+  hardnessDrillMultiplier: 20.0
 
 
 /*
@@ -143,10 +147,11 @@
 */
 
 
-  drillTime: 400.0
+  drillTime: 200.0
   liquidBoostIntensity: 1.3
   blockedItem: item-ore-sand
   consumes: {
+    power: 1.25
     liquid: {
       liquid: liq-ore-water
       amount: 0.1
