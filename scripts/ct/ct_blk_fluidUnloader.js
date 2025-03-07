@@ -7,13 +7,13 @@
 
   // Part: Import
     const blk_fluidUnloader = require("reind/blk/blk_fluidUnloader");
+
+    const mdl_content = require("reind/mdl/mdl_content");
   // End
 
 
   // Part: Accessor
     const accB_id_sel = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.id_sel;
       if(mode == "w") b.id_sel = val;
     };
@@ -36,7 +36,7 @@
       },
     });
     bliqAux_fluidUnloader.buildType = () => extend(GenericCrafter.GenericCrafterBuild, bliqAux_fluidUnloader, {
-      id_sel: -1,
+      id_sel: mdl_content.getConfig(bliqAux_fluidUnloader, -1),
       updateTile() {
         this.super$updateTile();
         blk_fluidUnloader.updateTile(this);
@@ -44,6 +44,12 @@
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
         blk_fluidUnloader.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_sel;
+      },
+      configured(builder, value) {
+        blk_fluidUnloader.configured(this, builder, value);
       },
       moveLiquid(next, liquid) {
         return blk_fluidUnloader.moveLiquid(this, next, liquid);

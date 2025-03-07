@@ -42,7 +42,7 @@
   rotateSpeed: 0.62
   accel: 0.5
   drag: 0.5
-  itemCapacity: 10
+  itemCapacity: 50
 
 
 /*
@@ -97,7 +97,7 @@
     {
       type: RegionPart
       suffix: "-blade"
-      layerOffset: -0.00006
+      layerOffset: -0.00005
       under: true
       mirror: true
       x: -6.5
@@ -116,7 +116,7 @@
     {
       type: RegionPart
       suffix: "-blade"
-      layerOffset: -0.00007
+      layerOffset: -0.00005
       under: true
       mirror: true
       x: -7.0
@@ -153,7 +153,7 @@
 
     {
       type: HoverPart
-      layerOffset: -0.0001
+      layerOffset: -0.001
       under: true
       mirror: false
       radius: 6.0
@@ -171,7 +171,7 @@
 
     {
       type: HoverPart
-      layerOffset: -0.00011
+      layerOffset: -0.001
       under: true
       mirror: false
       radius: 5.0
@@ -271,7 +271,7 @@
       recoil: 5.0
       recoils: -1
       heatColor: ff3838
-      cooldownTime: 400.0
+      cooldownTime: 320.0
       shootSound: se-shot-heavy
       chargeSound: none
 

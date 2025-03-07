@@ -14,8 +14,10 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
 
+    const db_effect = require("reind/db/db_effect");
     const db_table = require("reind/db/db_table");
   // End
 
@@ -42,9 +44,24 @@
       tb.row();
 
       db_table.__contentSelector(tb, "fluid", id_sel, function() {
-        ct_blk_fluidUnloader.accB_id_sel(b, "w", this);
+        b.block.lastConfig = this;
+        Call.tileConfig(Vars.player, b, new Vec2(this, 0));
         b.deselect();
       }, 7);
+    };
+
+
+    function configuredComp(b, builder, val) {
+      if(val == null) return;
+
+      if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
+      var val_fi = -1;
+      if(val instanceof Vec2) val_fi = val.x;
+      if(val instanceof Building) val_fi = val.config();
+
+      ct_blk_fluidUnloader.accB_id_sel(b, "w", val_fi);
+
+      mdl_effect.showAt(b, db_effect._recipeChange(b), 0.0);
     };
 
 
@@ -82,6 +99,12 @@
       buildConfigurationComp(b, tb);
     };
     exports.buildConfiguration = buildConfiguration;
+
+
+    const configured = function(b, builder, val) {
+      configuredComp(b, builder, val);
+    };
+    exports.configured = configured;
 
 
     const moveLiquid = function(b, ob, liq) {

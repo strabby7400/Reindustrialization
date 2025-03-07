@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
@@ -36,7 +36,9 @@
 
 
     const groupToValue = function(grp) {
-      var grpVal;
+      if(Vars.headless) return;
+
+      var grpVal = null;
 
       switch(grp) {
         case "brine" :
@@ -74,8 +76,7 @@
           break;
         case "stickyMelt" :
           grpVal = Core.bundle.get("term.reind-term-sticky-melt.name");
-        default:
-          grpVal = null;
+          break;
       };
 
       return grpVal;
@@ -196,10 +197,10 @@
     const getCorrosion = function(liq) {
       if(liq == null) return 0.0;
 
-      var cor = mdl_database.read_1n1v(db_fluid.specificCorrosion, liq.name);
+      var cor = mdl_data.read_1n1v(db_fluid.specificCorrosion, liq.name);
       if(cor == null) {
         var grp = getGroup(liq);
-        if(grp != null) cor = mdl_database.read_1n1v(db_fluid.baseCorrosion, grp);
+        if(grp != null) cor = mdl_data.read_1n1v(db_fluid.baseCorrosion, grp);
       };
       if(cor == null) return 0.0;
 
@@ -216,14 +217,14 @@
 
       var corScl = 1.0;
       if(grp != null && matGrp != null) {
-        var corSclTemp = mdl_database.read_2n1v(db_fluid.corrosionScale, matGrp, grp);
+        var corSclTemp = mdl_data.read_2n1v(db_fluid.corrosionScale, matGrp, grp);
         if(corSclTemp != null) corScl = corSclTemp;
       };
 
       if(matGrp != null) {
         var tags = getTags(liq);
         tags.each(tag => {
-          var tagScl = mdl_database.read_2n1v(db_fluid.specificCorrosionScale, matGrp, tag);
+          var tagScl = mdl_data.read_2n1v(db_fluid.specificCorrosionScale, matGrp, tag);
           if(tagScl != null) corScl *= tagScl;
         });
       };
@@ -236,10 +237,10 @@
     const getCorrosionResistence = function(blk) {
       if(blk == null) return 1.0;
 
-      var corRes = mdl_database.read_1n1v(db_block.specificCorrosionResistence, blk.name);
+      var corRes = mdl_data.read_1n1v(db_block.specificCorrosionResistence, blk.name);
       if(corRes == null) {
         var grp = getMaterialGroup(blk);
-        if(grp != null) corRes = mdl_database.read_1n1v(db_block.baseCorrosionResistence, grp);
+        if(grp != null) corRes = mdl_data.read_1n1v(db_block.baseCorrosionResistence, grp);
       };
       if(corRes == null) return 1.0;
 

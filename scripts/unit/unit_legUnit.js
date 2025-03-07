@@ -28,6 +28,12 @@
       unit_infantryUnit.update(utp, unit);
     };
     exports.update = update;
+
+
+    const drawShadow = function(utp, unit) {
+      unit_infantryUnit.drawShadow(utp, unit);
+    };
+    exports.drawShadow = drawShadow;
   // End
 
 

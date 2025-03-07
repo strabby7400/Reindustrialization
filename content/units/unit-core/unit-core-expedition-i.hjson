@@ -91,7 +91,7 @@
     {
       type: RegionPart
       suffix: "-blade"
-      layerOffset: -0.00006
+      layerOffset: -0.00005
       under: true
       mirror: true
       x: 0.0
@@ -110,7 +110,7 @@
     {
       type: RegionPart
       suffix: "-blade"
-      layerOffset: -0.00007
+      layerOffset: -0.00005
       under: true
       mirror: true
       x: 0.0
@@ -128,7 +128,7 @@
 
     {
       type: HoverPart
-      layerOffset: -0.0001
+      layerOffset: -0.001
       under: true
       mirror: false
       radius: 6.0
@@ -146,7 +146,7 @@
 
     {
       type: HoverPart
-      layerOffset: -0.00011
+      layerOffset: -0.001
       under: true
       mirror: false
       radius: 5.0
@@ -308,7 +308,7 @@
 
       /* <---------------- visual ----------------> */
 
-      layerOffset: -0.0001
+      layerOffset: 0.0
       shootX: 0.0
       shootY: 0.0
       ejectEffect: none
@@ -602,7 +602,7 @@
 
       /* <---------------- visual ----------------> */
 
-      layerOffset: 0.0001
+      layerOffset: 0.0
       shootX: 0.0
       shootY: 0.0
       ejectEffect: none

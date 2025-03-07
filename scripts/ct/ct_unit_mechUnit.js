@@ -29,6 +29,9 @@
         this.super$update(unit);
         unit_mechUnit.update(this, unit);
       },
+      drawShadow(unit) {
+        unit_mechUnit.drawShadow(this, unit);
+      },
     });
     unitInf_tsen.constructor = () => extend(MechUnit, {});
     db_ability.__legion(unitInf_tsen, 5, 40.0);
@@ -45,9 +48,30 @@
         this.super$update(unit);
         unit_mechUnit.update(this, unit);
       },
+      drawShadow(unit) {
+        unit_mechUnit.drawShadow(this, unit);
+      },
     });
     unitInf_74ka.constructor = () => extend(MechUnit, {});
+    db_ability.__energizedRegeneration(unitInf_74ka, 30.0);
     exports.unitInf_74ka = unitInf_74ka;
+
+
+    const unitInf_psas = extend(UnitType, "unit-inf-psas", {
+      setStats() {
+        this.super$setStats();
+        unit_mechUnit.setStats(this);
+      },
+      update(unit) {
+        this.super$update(unit);
+        unit_mechUnit.update(this, unit);
+      },
+      drawShadow(unit) {
+        unit_mechUnit.drawShadow(this, unit);
+      },
+    });
+    unitInf_psas.constructor = () => extend(MechUnit, {});
+    exports.unitInf_psas = unitInf_psas;
 
 
     const unitInf_paw = extend(UnitType, "unit-inf-paw", {
@@ -58,6 +82,9 @@
       update(unit) {
         this.super$update(unit);
         unit_mechUnit.update(this, unit);
+      },
+      drawShadow(unit) {
+        unit_mechUnit.drawShadow(this, unit);
       },
     });
     unitInf_paw.constructor = () => extend(MechUnit, {});

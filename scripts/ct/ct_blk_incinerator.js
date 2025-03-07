@@ -16,8 +16,6 @@
 
   // Part: Accessor
     const accB_frac = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.frac;
       if(mode == "w") b.frac = val;
     };
@@ -40,8 +38,8 @@
       },
     });
     disAux_itemIncinerator.buildType = () => extend(ItemIncinerator.ItemIncineratorBuild, disAux_itemIncinerator, {
-      glowReg: mdl_content.getContentRegion(disAux_itemIncinerator, "-glow"),
-      top3Reg: mdl_content.getContentRegion(disAux_itemIncinerator, "-top3"),
+      glowReg: mdl_content.getRegion(disAux_itemIncinerator, "-glow"),
+      top3Reg: mdl_content.getRegion(disAux_itemIncinerator, "-top3"),
       frac: 0.0,
       updateTile() {
         this.super$updateTile();

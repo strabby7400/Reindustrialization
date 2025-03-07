@@ -47,7 +47,7 @@
 
 
   // Part: Special
-    const __timeController = function(tb) {
+    const __timeController = function(tb, b) {
       var delta_max = glb_vars.time_maxTimeDelta / 0.5 - 1.0;
       var delta_cur = Time.delta / 0.5 - 1.0;
 
@@ -56,7 +56,8 @@
 
       tb.table(Tex.button, tb1 => {
         mdl_table.setSlider(tb1, function() {
-          Time.setDeltaProvider(() => Core.graphics.getDeltaTime() * 60.0 * (this + 1.0) * 0.5);
+          var val = (this + 1.0) * 0.5;
+          Call.tileConfig(Vars.player, b, new Vec2(val, 0));
         }, 0.0, delta_max, 1.0, delta_cur);
       });
     };

@@ -14,8 +14,6 @@
 
   // Part: Accessor
     const accB_cd = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.cd;
       if(mode == "w") b.cd = val;
     };
@@ -23,8 +21,6 @@
 
 
     const accB_thr = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.thr;
       if(mode == "w") b.thr = val;
     };
@@ -32,8 +28,6 @@
 
 
     const accB_scanColor = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.scanColor;
       if(mode == "w") b.scanColor = val;
     };

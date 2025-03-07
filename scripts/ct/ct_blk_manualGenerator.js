@@ -12,8 +12,6 @@
 
   // Part: Accessor
     const accB_frac = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.frac;
       if(mode == "w") b.frac = val;
     };
@@ -47,6 +45,9 @@
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
         blk_manualGenerator.buildConfiguration(this, table);
+      },
+      configured(builder, value) {
+        blk_manualGenerator.configured(this, builder, value);
       },
     });
     exports.powGen_manualGenerator = powGen_manualGenerator;

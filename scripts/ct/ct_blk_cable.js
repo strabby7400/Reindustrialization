@@ -32,6 +32,10 @@
         this.super$updateTile();
         blk_cable.updateTile(this);
       },
+      unitOn(unit) {
+        this.super$unitOn(unit);
+        blk_cable.unitOn(this, unit);
+      },
     });
     blk_cable.setup(powWire_copperCable, 2.25 / 60.0);
     exports.powWire_copperCable = powWire_copperCable;

@@ -1,0 +1,495 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: mech
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: unit-inf-paw
+    requirements: [
+      item-chem-graphite/9000
+      item-chem-brass/9000
+      item-chem-steel/9000
+    ]
+    objectives: []
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  health: 3020.0
+  armor: 14.0
+  hitSize: 22.0
+  speed: 0.37
+  rotateSpeed: 0.9
+  accel: 0.5
+  drag: 0.5
+  itemCapacity: 40
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+  fogRadius: 16
+  lightRadius: -1.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  outlines: true
+  outlineRadius: 2
+  outlineColor: 373a4d
+  groundLayer: 62.0
+  shadowElevation: 0.02
+  stepShake: 0.0
+  rippleScale: 0.9
+  parts: [
+
+
+    {
+      type: HoverPart
+      layerOffset: -0.001
+      under: true
+      mirror: false
+      radius: 6.0
+      x: 0.0
+      y: -9.0
+      rotation: 0.0
+      phase: 60.0
+      circles: 2
+      sides: 6
+      color: 8ca9e8
+      stroke: 1.5
+      minStroke: 0.12
+    }
+
+
+    {
+      type: HoverPart
+      layerOffset: -0.001
+      under: true
+      mirror: false
+      radius: 5.0
+      x: 0.0
+      y: -9.0
+      rotation: 0.0
+      phase: 90.0
+      circles: 2
+      sides: 6
+      color: d1efff
+      stroke: 1.5
+      minStroke: 0.12
+    }
+
+
+  ]
+
+
+/*
+  ========================================
+  Section: Visual (Mech)
+  ========================================
+*/
+
+
+  mechLandShake: 6.0
+  mechSideSway: 0.9
+  mechFrontSway: 0.7
+  mechStride: -1.0
+  mechStepParticles: false
+
+
+/*
+  ========================================
+  Section: Visual (Engine)
+  ========================================
+*/
+
+
+  engineColor: 8ca9e8
+  engineColorInner: ffffff
+  engineOffset: 0.0
+  engineSize: 0.0
+  engines: [
+
+
+    {
+      x: 6.0
+      y: -9.5
+      radius: 4.0
+      rotation: 315.0
+    }
+
+
+    {
+      x: -6.0
+      y: -9.5
+      radius: 4.0
+      rotation: 225.0
+    }
+
+
+    {
+      x: 12.0
+      y: -7.0
+      radius: 2.5
+      rotation: 315.0
+    }
+
+
+    {
+      x: -12.0
+      y: -7.0
+      radius: 2.5
+      rotation: 225.0
+    }
+
+
+  ]
+
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  flying: false
+  canBoost: true
+  riseSpeed: 0.008
+  fallSpeed: 0.1
+  boostMultiplier: 1.4
+  lowAltitude: false
+  canDrown: true
+  drownTimeMultiplier: 1.1
+  omniMovement: true
+  abilities: [
+
+
+    {
+      type: ShieldArcAbility
+      whenShooting: false
+      x: 0.0
+      y: -18.0
+      radius: 40.0
+      angle: 90.0
+      angleOffset: 0.0
+      width: 4.0
+      max: 900.0
+      regen: 1.0
+      cooldown: 300.0
+    }
+
+
+  ]
+
+
+/*
+  ========================================
+  Section: Attack
+  ========================================
+*/
+
+
+  range: 60.0
+  aimDst: 160.0
+  singleTarget: false
+  targetAir: false
+  targetGround: true
+  faceTarget: true
+  circleTarget: false
+  weapons: [
+
+
+    {
+
+      /* <---------------- meta ----------------> */
+
+      name: unit-inf-psas-gun
+      display: true
+      controllable: true
+      aiControllable: true
+      useAttackRange: true
+
+      /* <---------------- properties ----------------> */
+
+      top: false
+      mirror: false
+      alternate: false
+      x: 15.0
+      y: 0.0
+      rotate: true
+      baseRotation: 0.0
+      rotationLimit: 25.0
+      rotateSpeed: 1.0
+
+      /* <---------------- visual ----------------> */
+
+      layerOffset: -0.00005
+      shootX: 0.0
+      shootY: 13.5
+      ejectEffect: none
+      shake: 6.0
+      recoil: 5.0
+      recoils: -1
+      heatColor: ff3838
+      cooldownTime: 200.0
+      shootSound: se-shot-heavy1
+      chargeSound: none
+
+      /* <---------------- attack ----------------> */
+
+      noAttack: false
+      xRand: 0.0
+      velocityRnd: 0.35
+      minShootVelocity: -1.0
+      reload: 200.0
+      inaccuracy: 2.0
+      shoot: {
+        type: ShootSpread
+        shots: 64
+        spread: 0.25
+      }
+      shootCone: 8.0
+      shootOnDeath: false
+      shootStatus: none
+      shootStatusDuration: 120.0
+      minWarmup: 0.8
+
+      /* <---------------- bullet ----------------> */
+
+      bullet: {
+
+        # Mark: psasBullet
+
+        /* <---------------- meta ----------------> */
+
+        type: BasicBulletType
+        despawnHit: true
+
+        /* <---------------- properties ----------------> */
+
+        lifetime: 16.0
+        speed: 10.0
+        damage: 36.0
+        buildingDamageMultiplier: 0.3
+        hitSize: 2.0
+        collides: true
+        collidesAir: false
+        collidesGround: true
+        collideTerrain: true
+
+        /* <---------------- visual ----------------> */
+
+        sprite: reind-bul-bullet5
+        layer: 74.0
+        frontColor: ffffff
+        backColor: 8ca9e8
+        hitColor: 8ca9e8
+        width: 5.0
+        height: 5.0
+        lightRadius: -1.0
+        lightOpacity: 0.0
+        hitShake: 0.0
+        despawnShake: 0.0
+        shootEffect: shootSmallColor
+        smokeEffect: none
+        chargeEffect: none
+        hitEffect: hitBulletColor
+        despawnEffect: none
+        trailColor: ffffff20
+        trailLength: 6
+        trailWidth: 2.0
+        hitSound: none
+        despawnSound: none
+
+        /* <---------------- specific (pierce) ----------------> */
+
+        pierce: true
+        pierceBuilding: false
+        pierceCap: 2
+        pierceDamageFactor: 0.0
+
+      }
+
+    }
+
+
+    {
+
+      /* <---------------- meta ----------------> */
+
+      name: unit-inf-psas-torch
+      display: true
+      controllable: true
+      aiControllable: true
+      useAttackRange: true
+
+      /* <---------------- properties ----------------> */
+
+      top: true
+      mirror: false
+      alternate: false
+      x: -17.0
+      y: -1.5
+      rotate: true
+      baseRotation: 0.0
+      rotationLimit: 45.0
+      rotateSpeed: 1.0
+
+      /* <---------------- visual ----------------> */
+
+      layerOffset: 0.00005
+      shootX: 0.0
+      shootY: 2.0
+      ejectEffect: none
+      shake: 6.0
+      recoil: 2.0
+      recoils: -1
+      heatColor: ff3838
+      cooldownTime: 60.0
+      shootSound: torch
+      chargeSound: none
+
+      /* <---------------- specific (continuous) ----------------> */
+
+      continuous: true
+      alwaysContinuous: true
+
+      /* <---------------- attack ----------------> */
+
+      noAttack: false
+      xRand: 0.0
+      velocityRnd: 0.0
+      minShootVelocity: -1.0
+      reload: 180.0
+      inaccuracy: 0.0
+      shoot: {
+        type: ShootPattern
+        shots: 1
+        shotDelay: 0.0
+        firstShotDelay: 0.0
+      }
+      shootCone: 4.0
+      shootOnDeath: false
+      shootStatus: none
+      shootStatusDuration: 120.0
+      minWarmup: 0.8
+
+      /* <---------------- bullet ----------------> */
+
+      bullet: {
+
+        # Mark: psasTorchFlame
+
+        /* <---------------- meta ----------------> */
+
+        type: ContinuousFlameBulletType
+        despawnHit: true
+
+        /* <---------------- properties ----------------> */
+
+        lifetime: 15.0
+        speed: 0.0
+        damage: 60.0
+        damageInterval: 5.0
+        buildingDamageMultiplier: 0.3
+        optimalLifeFract: 0.5
+        hitSize: 4.0
+        collides: false
+        collidesAir: false
+        collidesGround: true
+        collideTerrain: true
+
+        /* <---------------- visual ----------------> */
+
+        layer: 74.0
+        colors: [
+          bc5452
+          ea8878
+          feb380
+          ffe2cd
+          ffffff
+        ]
+        hitColor: feb380
+        width: 3.5
+        length: 60.0
+        oscScl: 1.2
+        oscMag: 0.05
+        drawFlare: false
+        flareLayer: 74.0001
+        flareColor: feb380
+        flareWidth: 3.5
+        flareLength: 30.0
+        flareInnerLenScl: 0.5
+        rotateFlare: true
+        flareRotSpeed: 0.8
+        lightRadius: -1.0
+        lightOpacity: 0.65
+        lightStroke: 40.0
+        shake: 0.5
+        shootEffect: none
+        smokeEffect: none
+        chargeEffect: none
+        hitEffect: hitFlameBeam
+        despawnEffect: none
+        hitSound: none
+        despawnSound: none
+
+        /* <---------------- specific (armor) ----------------> */
+
+        pierceArmor: true
+
+        /* <---------------- specific (knockback) ----------------> */
+
+        knockback: 1.0
+        impact: true
+        recoil: 0.0
+
+        /* <---------------- specific (pierce) ----------------> */
+
+        pierce: true
+        pierceBuilding: true
+        pierceCap: 2
+        pierceDamageFactor: 0.0
+
+        /* <---------------- specific (status) ----------------> */
+
+        status: melting
+        statusDuration: 300.0
+
+      }
+
+    }
+
+
+  ]

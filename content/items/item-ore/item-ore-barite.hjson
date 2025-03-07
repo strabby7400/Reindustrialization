@@ -6,7 +6,7 @@
 
 
   research: {
-    parent: item-ore-gypsum
+    parent: item-ore-silica-stone
     objectives: []
   }
 

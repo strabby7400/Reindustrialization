@@ -5,7 +5,7 @@
 */
 
 
-  # type: multicraft.MultiCrafter
+  # type: GenericCrafter
   category: effect
   requirements: [
     item-chem-graphite/120
@@ -149,6 +149,7 @@
 */
 
 
+  configurable: true
   outputsLiquid: false
   ignoreLiquidFullness: false
 
@@ -160,148 +161,7 @@
 */
 
 
-  menu: simple
-  recipes: [
-
-
-    /*
-      ========================================
-      Section: Up
-      ========================================
-    */
-
-
-      // Kilobit: Bit
-      {
-        craftTime: 180.0
-        icon: reind-icon-kilobit-bit
-        input: {
-          power: 1.5
-          items: [
-            reind-item-virt-bit/1000
-          ]
-          fluids: [
-            reind-ileffc-effc-ids/0.01666667
-          ]
-        }
-        output: {
-          items: [
-            reind-item-virt-kilobit/1
-          ]
-        }
-      }
-
-
-      // Megabit: Kilobit
-      {
-        craftTime: 180.0
-        icon: reind-icon-megabit-kilobit
-        input: {
-          power: 1.5
-          items: [
-            reind-item-virt-kilobit/1000
-          ]
-          fluids: [
-            reind-ileffc-effc-ids/0.01666667
-          ]
-        }
-        output: {
-          items: [
-            reind-item-virt-megabit/1
-          ]
-        }
-      }
-
-
-      // Gigabit: Megabit
-      {
-        craftTime: 180.0
-        icon: reind-icon-gigabit-megabit
-        input: {
-          power: 1.5
-          items: [
-            reind-item-virt-megabit/1000
-          ]
-          fluids: [
-            reind-ileffc-effc-ids/0.01666667
-          ]
-        }
-        output: {
-          items: [
-            reind-item-virt-gigabit/1
-          ]
-        }
-      }
-
-
-    /*
-      ========================================
-      Section: Down
-      ========================================
-    */
-
-
-      // Bit: Kilobit
-      {
-        craftTime: 180.0
-        icon: reind-icon-bit-kilobit
-        input: {
-          power: 1.5
-          items: [
-            reind-item-virt-kilobit/1
-          ]
-          fluids: [
-            reind-ileffc-effc-ids/0.01666667
-          ]
-        }
-        output: {
-          items: [
-            reind-item-virt-bit/1000
-          ]
-        }
-      }
-
-
-      // Kilobit: Megabit
-      {
-        craftTime: 180.0
-        icon: reind-icon-kilobit-megabit
-        input: {
-          power: 1.5
-          items: [
-            reind-item-virt-megabit/1
-          ]
-          fluids: [
-            reind-ileffc-effc-ids/0.01666667
-          ]
-        }
-        output: {
-          items: [
-            reind-item-virt-kilobit/1000
-          ]
-        }
-      }
-
-
-      // Megabit: Gigabit
-      {
-        craftTime: 180.0
-        icon: reind-icon-megabit-gigabit
-        input: {
-          power: 1.5
-          items: [
-            reind-item-virt-gigabit/1
-          ]
-          fluids: [
-            reind-ileffc-effc-ids/0.01666667
-          ]
-        }
-        output: {
-          items: [
-            reind-item-virt-megabit/1000
-          ]
-        }
-      }
-
-
-  ]
+  craftTime: 180.0
+  consumes: {
+    power: 1.5
+  }

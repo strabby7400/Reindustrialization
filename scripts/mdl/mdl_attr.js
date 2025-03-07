@@ -64,7 +64,8 @@
 
       var nm_attr;
       var attr = 0.0;
-      for(let i = 0; i < map.size; i++) {
+      var cap = map.size;
+      for(let i = 0; i < cap; i++) {
         if(i % 2 != 0) continue;
 
         var temp_attr = getAttr_li(li_ot, map.get(i));
@@ -89,7 +90,8 @@
       if(map == null || map.size == 0) return new Seq();
 
       var li_attr = new Seq();
-      for(let i = 0; i < map.size; i++) {
+      var cap = map.size;
+      for(let i = 0; i < cap; i++) {
         if(i % 2 != 0) continue;
 
         var nm_attr = map.get(i);

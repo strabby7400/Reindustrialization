@@ -6,13 +6,73 @@
 
 
   // Part: Import
-    const mdl_database = require("reind/mdl/mdl_database");
+    const frag_facility = require("reind/frag/frag_facility");
+
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_text = require("reind/mdl/mdl_text");
 
     const db_effect = require("reind/db/db_effect");
     const db_unit = require("reind/db/db_unit");
+  // End
+
+
+  // Part: Attack
+    /* NOTE: Explodes when destroyed. */
+    const __deathExplosion = function(utp, dmg, rad, sta, dur) {
+      if(dmg == null) dmg = 160.0;
+      if(rad == null) rad = 40.0;
+      if(sta == null) sta = StatusEffects.none;
+      if(dur == null) dur = 120.0;
+
+      var abi_deathExplosion = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-death-explosion.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Stat.damage.localized(),
+            Strings.autoFixed(dmg, 2),
+          ));
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Stat.range.localized(),
+            Strings.autoFixed(rad / Vars.tilesize, 2),
+            StatUnit.blocks.localized(),
+          ));
+          tb.row();
+          if(sta != StatusEffects.none) {
+            tb.add(mdl_text.getStatText(
+              Core.bundle.get("term.reind-term-status.name"),
+              sta.localizedName,
+            ));
+          };
+        },
+
+
+        death(unit) {
+          Damage.damage(unit.team, unit.x, unit.y, rad, dmg);
+          mdl_game.getEnemies(mdl_game.poser_1u(unit), rad, unit.team).each(ounit => {
+            ounit.apply(sta, dur);
+          });
+
+          var eff = db_effect._commonExplosion(rad);
+          mdl_effect.showAt(unit, eff, 0.0);
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-death-explosion.name");
+        },
+
+
+      });
+
+      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_deathExplosion));
+    };
+    exports.__deathExplosion = __deathExplosion;
   // End
 
 
@@ -120,9 +180,80 @@
 
 
   // Part: Misc
-    /* NOTE: This unit contributes to EP count, the value is fetched from {db_unit.energizer} */
+    /* NOTE: This unit will heal itself when supplied with enough EPs. */
+    const __energizedRegeneration = function(utp, hp_heal) {
+      if(hp_heal == null) hp_heal = 30.0;
+
+      var r = mdl_data.read_1n1v(db_unit.epRange, utp.name);
+      if(r == null) r = 5;
+      var ep_req = mdl_data.read_1n1v(db_unit.epRequirement, utp.name);
+      if(ep_req == null) ep_req = 0.0;
+
+      var abi_energizedRegeneration = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-energized-regeneration.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Core.bundle.get("stat.repairspeed"),
+            Strings.autoFixed(hp_heal, 2),
+            Core.bundle.get("unit.persecond"),
+          ));
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Core.bundle.get("stat.reind-stat-ep-range.name"),
+            Strings.autoFixed(r, 2),
+            Core.bundle.get("unit.blocks"),
+          ));
+          tb.row();
+          tb.add(mdl_text.getStatText(
+            Core.bundle.get("stat.reind-stat-ep-required.name"),
+            Strings.autoFixed(ep_req, 2),
+          ));
+        },
+
+
+        displayBars(unit, bars) {
+          bars.add(new Bar(
+            "term.reind-term-energy-points.name",
+            Pal.techBlue,
+            () => Math.min(frag_facility.getFrac_ep(unit), 1.0),
+          )).row();
+        },
+
+
+        update(unit) {
+          if(!unit.damaged()) return;
+          if(Mathf.chance(0.98)) return;
+          if(frag_facility.getFrac_ep(unit) < 0.9999) return;
+
+          unit.heal(hp_heal * 1.2);
+
+          mdl_effect.showAt(unit, Fx.heal, 0.0);
+        },
+
+
+        draw(unit) {
+          frag_facility.draw_ep(unit);
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-energized-regeneration.name");
+        },
+
+
+      });
+
+      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_energizedRegeneration));
+    };
+    exports.__energizedRegeneration = __energizedRegeneration;
+
+
+    /* NOTE: This unit contributes to EP count, the value is fetched from {db_unit.energizer}. */
     const __energizer = function(utp) {
-      var ep = mdl_database.read_1n1v(db_unit.energizer, utp.name);
+      var ep = mdl_data.read_1n1v(db_unit.energizer, utp.name);
       if(ep == null) ep = 0.0;
 
       var abi_energizer = extend(Ability, {

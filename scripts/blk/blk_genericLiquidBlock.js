@@ -12,7 +12,7 @@
     const frag_heat = require("reind/frag/frag_heat");
 
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -28,7 +28,7 @@
 
       if(db_block.vulnerableToClogging.contains(blk.name)) blk.stats.add(db_stat.vulnerableToClogging, true);
 
-      var fheatCap = mdl_database.read_1n1v(db_block.fluidHeatCapacity, blk.name);
+      var fheatCap = mdl_data.read_1n1v(db_block.fluidHeatCapacity, blk.name);
       if(fheatCap != null) blk.stats.add(db_stat.fluidHeatCapacity, fheatCap);
     };
 

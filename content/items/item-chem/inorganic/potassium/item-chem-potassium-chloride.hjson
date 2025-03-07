@@ -6,7 +6,7 @@
 
 
   research: {
-    parent: item-chem-potassium-hydroxide
+    parent: item-chem-sodium-chloride
     objectives: []
   }
 

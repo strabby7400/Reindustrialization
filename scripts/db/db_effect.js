@@ -9,7 +9,7 @@
     ========================================
     Sub-section: Primary
 
-    Those effects are building blocks of other effects.
+    Those effects are building blocks for other effects.
     ========================================
   */
 
@@ -87,6 +87,68 @@
 
 
 
+      /* NOTE: Used for status like {staLiq_brineCorrosion}. */
+      const _lingeringParticles = function(spr, rad, scl, amt, size, color, hasLight) {
+        if(spr == null) spr = "circle";
+        if(rad == null) rad = 3.5;
+        if(scl == null) scl = 1.0;
+        if(amt == null) amt = 3;
+        if(size == null) size = 2.0;
+        if(color == null) color = Color.white;
+        if(hasLight == null) hasLight = false;
+
+        var eff_lingeringParticles = extend(ParticleEffect, {
+
+          /* <---------------- meta ----------------> */
+
+          interp: Interp.linear,
+          lifetime: 120.0 * scl,
+          startDelay: 0.0,
+
+          /* <---------------- visual ----------------> */
+
+          region: spr,
+          layer: 110.0,
+          particles: amt,
+          followParent: true,
+          rotWithParent: false,
+          useRotation: true,
+          colorFrom: color,
+          colorTo: color,
+          lightScl: 2.0,
+          lightOpacity: hasLight ? 0.65 : 0.0,
+
+          /* <---------------- angle & length ----------------> */
+
+          baseRotation: 0.0,
+          offset: 180.0,
+          cone: 45.0,
+          spin: 0.0,
+          randLength: true,
+          length: rad,
+          baseLength: 0.0,
+
+          /* <---------------- size & stroke & len ----------------> */
+
+          line: false,
+          sizeInterp: Interp.pow5In,
+          sizeFrom: size,
+          sizeTo: 0.0,
+          strokeFrom: 0.0,
+          strokeTo: 0.0,
+          lenFrom: 0.0,
+          lenTo: 0.0,
+
+        });
+
+        return eff_lingeringParticles;
+      };
+      exports._lingeringParticles = _lingeringParticles;
+
+
+
+
+      /* NOTE: Particles are ejected. */
       const _releaseParticles = function(spr, rad, scl, amt, size, color, rev, top, hasLight) {
         if(spr == null) spr = "circle";
         if(rad == null) rad = 12.0;
@@ -97,7 +159,7 @@
         if(top == null) top = false;
         if(hasLight == null) hasLight = false;
 
-        var eff_relaseParticles = extend(ParticleEffect, {
+        var eff_releaseParticles = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -140,6 +202,8 @@
           lenTo: 0.0,
 
         });
+
+        return eff_releaseParticles;
       };
       exports._releaseParticles = _releaseParticles;
 
@@ -212,6 +276,143 @@
 
 
 
+      /* NOTE: Particles randomly spread, and shrink out. */
+      const _shrinkSpreadParticles = function(spr, rad, scl, spin, size, color, top, hasLight) {
+        if(spr == null) spr = "circle";
+        if(rad == null) rad = 4.0;
+        if(scl == null) scl = 1.0;
+        if(spin == null) spin = 0.0;
+        if(size == null) size = 4.0;
+        if(color == null) color = Color.white;
+        if(top == null) top = false;
+        if(hasLight == null) hasLight = false;
+
+        var off_x = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+        var off_y = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+
+        var eff_shrinkSpreadParticles = extend(ParticleEffect, {
+
+          /* <---------------- meta ----------------> */
+
+          interp: Interp.linear,
+          lifetime: 150.0 * scl,
+          startDelay: 0.0,
+
+          /* <---------------- visual ----------------> */
+
+          region: spr,
+          layer: top ? 110.0 : 69.0,
+          particles: 1,
+          followParent: true,
+          rotWithParent: false,
+          useRotation: true,
+          colorFrom: color,
+          colorTo: color,
+          lightScl: 2.0,
+          lightOpacity: hasLight ? 0.65 : 0.0,
+
+          /* <---------------- angle & length ----------------> */
+
+          baseRotation: 0.0,
+          offset: 0.0,
+          offsetX: off_x,
+          offsetY: off_y,
+          cone: 180.0,
+          spin: spin,
+          randLength: true,
+          length: 0.0,
+          baseLength: 0.0,
+
+          /* <---------------- size & stroke & len ----------------> */
+
+          line: false,
+          sizeInterp: Interp.pow2In,
+          sizeFrom: size,
+          sizeTo: 0.0,
+          strokeFrom: 0.0,
+          strokeTo: 0.0,
+          lenFrom: 0.0,
+          lenTo: 0.0,
+
+        });
+
+        return eff_shrinkSpreadParticles;
+      };
+      exports._fadeShrinkSpreadParticles = _fadeShrinkSpreadParticles;
+
+
+
+
+      /* NOTE: Particles randomly spread, fade in, and finally shrink out. */
+      const _fadeShrinkSpreadParticles = function(spr, rad, scl, spin, size, color, top, hasLight) {
+        if(spr == null) spr = "circle";
+        if(rad == null) rad = 4.0;
+        if(scl == null) scl = 1.0;
+        if(spin == null) spin = 1.0;
+        if(size == null) size = 4.0;
+        if(color == null) color = Color.white;
+        if(top == null) top = false;
+        if(hasLight == null) hasLight = false;
+
+        var off_x = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+        var off_y = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+        var color_f = color.cpy();
+        var color_t = color;
+        color_f.a = 0.0;
+
+        var eff_fadeShrinkSpreadParticles = extend(ParticleEffect, {
+
+          /* <---------------- meta ----------------> */
+
+          interp: Interp.linear,
+          lifetime: 150.0 * scl,
+          startDelay: 0.0,
+
+          /* <---------------- visual ----------------> */
+
+          region: spr,
+          layer: top ? 110.0 : 69.0,
+          particles: 1,
+          followParent: true,
+          rotWithParent: false,
+          useRotation: true,
+          colorFrom: color_f,
+          colorTo: color_t,
+          lightScl: 2.0,
+          lightOpacity: hasLight ? 0.65 : 0.0,
+
+          /* <---------------- angle & length ----------------> */
+
+          baseRotation: 0.0,
+          offset: 0.0,
+          offsetX: off_x,
+          offsetY: off_y,
+          cone: 180.0,
+          spin: spin,
+          randLength: true,
+          length: 0.0,
+          baseLength: 0.0,
+
+          /* <---------------- size & stroke & len ----------------> */
+
+          line: false,
+          sizeInterp: Interp.pow10In,
+          sizeFrom: size,
+          sizeTo: 0.0,
+          strokeFrom: 0.0,
+          strokeTo: 0.0,
+          lenFrom: 0.0,
+          lenTo: 0.0,
+
+        });
+
+        return eff_fadeShrinkSpreadParticles;
+      };
+      exports._fadeShrinkSpreadParticles = _fadeShrinkSpreadParticles;
+
+
+
+
     /* ========================================
       Sub-Sub-Section: Spark
     ======================================== */
@@ -271,13 +472,74 @@
 
         });
 
-        return eff_squareSpark;
+        return eff_crack;
       };
-      exports._squareSpark = _squareSpark;
+      exports._crack = _crack;
 
 
 
 
+      /* NOTE: Modified {_crack} used in drills. */
+      const _drillCrack = function(rad, scl, amt, size, color, hasLight) {
+        if(rad == null) rad = 18.0;
+        if(scl == null) scl = 1.0;
+        if(amt == null) amt = 3;
+        if(size == null) size = 4.0;
+        if(color == null) color = Color.white;
+        if(hasLight == null) hasLight = false;
+
+        var eff_drillCrack = extend(ParticleEffect, {
+
+          /* <---------------- meta ----------------> */
+
+          interp: Interp.pow10Out,
+          lifetime: 180.0 * scl,
+          startDelay: 0.0,
+
+          /* <---------------- visual ----------------> */
+
+          region: "reind-efr-diamond",
+          layer: 69.0,
+          particles: amt,
+          followParent: true,
+          rotWithParent: false,
+          useRotation: true,
+          colorFrom: color,
+          colorTo: color,
+          lightScl: 2.0,
+          lightOpacity: hasLight ? 0.65 : 0.0,
+
+          /* <---------------- angle & length ----------------> */
+
+          baseRotation: 0.0,
+          offset: 0.0,
+          cone: 180.0,
+          spin: 0.0,
+          randLength: true,
+          length: rad,
+          baseLength: 0.0,
+
+          /* <---------------- size & stroke & len ----------------> */
+
+          line: false,
+          sizeInterp: Interp.sine,
+          sizeFrom: size,
+          sizeTo: 0.0,
+          strokeFrom: 0.0,
+          strokeTo: 0.0,
+          lenFrom: 0.0,
+          lenTo: 0.0,
+
+        });
+
+        return eff_drillCrack;
+      };
+      exports._drillCrack = _drillCrack;
+
+
+
+
+      /* NOTE: See {facMisc_coreCrafter}. */
       const _craftCrack = function(rad, scl, amt) {
         if(rad == null) rad = 10.0;
         if(scl == null) scl = 1.0;
@@ -990,6 +1252,66 @@
 
 
 
+      /* NOTE: Shows a square that fades out. Used for buildings. */
+      const _squareFade = function(size, scl, color) {
+        if(size == null) size = 1;
+        if(scl == null) scl = 1.0;
+        if(color == null) color = Color.valueOf("feb380");
+
+        var color_f = color;
+        var color_t = color.cpy();
+        color_t.a = 0.0;
+
+        var eff_squareFade = extend(ParticleEffect, {
+
+          /* <---------------- meta ----------------> */
+
+          interp: Interp.linear,
+          lifetime: 40.0 * scl,
+          startDelay: 0.0,
+
+          /* <---------------- visual ----------------> */
+
+          region: "reind-efr-square",
+          layer: 110.0,
+          particles: 1,
+          followParent: true,
+          rotWithParent: false,
+          useRotation: true,
+          colorFrom: color_f,
+          colorTo: color_t,
+          lightScl: 2.0,
+          lightOpacity: 0.0,
+
+          /* <---------------- angle & length ----------------> */
+
+          baseRotation: 0.0,
+          offset: 0.0,
+          cone: 180.0,
+          spin: 0.0,
+          randLength: true,
+          length: 0,
+          baseLength: 0.0,
+
+          /* <---------------- size & stroke & len ----------------> */
+
+          line: false,
+          sizeInterp: Interp.linear,
+          sizeFrom: size * Vars.tilesize * 0.8,
+          sizeTo: size * Vars.tilesize * 0.8,
+          strokeFrom: 0.0,
+          strokeTo: 0.0,
+          lenFrom: 0.0,
+          lenTo: 0.0,
+
+        });
+
+        return eff_squareFade;
+      };
+      exports._squareFade = _squareFade;
+
+
+
 
       /* NOTE: A fixed sprite that fades out, used for trail effects. */
       const _trailFade = function(spr, scl, size, color, top, rev) {
@@ -1245,6 +1567,47 @@
         return eff_ripple;
       };
       exports._ripple = _ripple;
+
+
+
+
+      /* NOTE: A wave effect used by rotor units. */
+      const _rotorWave = function(rad) {
+        if(rad == null) rad = 40.0;
+
+        var effect_rotorWave = extend(WaveEffect, {
+
+          /* <---------------- meta ----------------> */
+
+          interp: Interp.linear,
+          lifetime: 20.0 * Math.pow(rad / 40.0, 0.5),
+          startDelay: 0.0,
+
+          /* <---------------- visual ----------------> */
+
+          layer: 15.0,
+          sides: -1,
+          followParent: true,
+          rotWithParent: false,
+          colorFrom: Color.valueOf("ffffff30"),
+          colorTo: Color.valueOf("ffffff00"),
+          lightScl: 2.0,
+          lightOpacity: 0.0,
+
+          /* <---------------- angle & size & stroke ----------------> */
+
+          baseRotation: 0.0,
+          rotation: 0.0,
+          sizeFrom: 0.0,
+          sizeTo: rad,
+          strokeFrom: 2.0,
+          strokeTo: 2.0,
+
+        });
+
+        return effect_rotorWave;
+      };
+      exports._rotorWave = _rotorWave;
 
 
 
@@ -1586,6 +1949,12 @@
     ======================================== */
 
 
+      const _impactDrillCrack = function() {
+        return _drillCrack(18.0, 1.33333333, 6, 4.0, Color.white, false);
+      };
+      exports._impactDrillCrack = _impactDrillCrack;
+
+
       const _oreScannerScan = function(r, size, color) {
         var flareRad = (size / 2 + r) * Vars.tilesize * 0.7;
 
@@ -1596,6 +1965,16 @@
         );
       };
       exports._oreScannerScan = _oreScannerScan;
+
+
+      const _harvesterParticles = function(blk, color) {
+        if(color == null) color = Color.valueOf("ffd37f");
+
+        var rad = blk.size * Vars.tilesize * 0.5;
+
+        return _shrinkSpreadParticles("reind-efr-square", rad, 0.4, 0.0, 2.0, color, false, false);
+      };
+      exports._harvesterParticles = _harvesterParticles;
 
 
     /* ========================================
@@ -1650,6 +2029,15 @@
     ======================================== */
 
 
+      const _menderParticles = function(blk, color) {
+        if(color == null) color = Pal.heal;
+
+        var rad = blk.size * Vars.tilesize * 0.5;
+
+        return _fadeShrinkSpreadParticles("reind-efr-triangle", rad, 1.0, 1.0, 6.0, color, false, false);
+      };
+
+
       const _radarScan = function(rad, size, color) {
         return new MultiEffect(
           _scanCircle(rad, 1.0, color),
@@ -1682,6 +2070,12 @@
         return _iconFade("reind-efr-cross", 1.33333333, 7.0, Color.red, true, false);
       };
       exports._invalidPlacement = _invalidPlacement;
+
+
+      const _recipeChange = function(size, color) {
+        return _squareFade(size, 1.0, color);
+      };
+      exports._recipeChange = _recipeChange;
 
 
       const _cloggingParticles = function(blk, liq) {
@@ -1757,3 +2151,22 @@
     /* ========================================
       Sub-Sub-Section: Status
     ======================================== */
+
+
+      const _commonStatusParticles = function(spr, size, color) {
+        if(spr == null) spr = "reind-efr-diamond-hollow";
+        if(size == null) size = 4.5;
+        if(color == null) color = Color.valueOf("ffd37f");
+
+        return _releaseParticles(spr, 0.0, 1.0, 1, size, color, false, true, false);
+      };
+      exports._commonStatusParticles = _commonStatusParticles;
+
+
+      const _liquidStatusParticles = function(liq, hasLight) {
+        if(liq == null) liq = Liquids.water;
+        if(hasLight == null) hasLight = false;
+
+        return _lingeringParticles("circle", 3.5, 1.0, 3, 0.6, liq.color, hasLight);
+      };
+      exports._liquidStatusParticles = _liquidStatusParticles;

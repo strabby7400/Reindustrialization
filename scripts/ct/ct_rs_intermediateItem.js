@@ -57,6 +57,23 @@
     });
     exports.itemInt_blend_brickMagnesia = itemInt_blend_brickMagnesia;
 
+
+    const itemInt_blend_brickMullite = extend(Item, "item-int-blend-brick-mullite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_blend_brickMullite = itemInt_blend_brickMullite;
+
+
+    const itemInt_blend_brickSilica = extend(Item, "item-int-blend-brick-silica", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_blend_brickSilica = itemInt_blend_brickSilica;
   // End
 
 
@@ -87,6 +104,24 @@
       },
     });
     exports.itemInt_brickMagnesia_unbaked = itemInt_brickMagnesia_unbaked;
+
+
+    const itemInt_brickMullite_unbaked = extend(Item, "item-int-brick-mullite-unbaked", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_brickMullite_unbaked = itemInt_brickMullite_unbaked;
+
+
+    const itemInt_brickSilica_unbaked = extend(Item, "item-int-brick-silica-unbaked", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_brickSilica_unbaked = itemInt_brickSilica_unbaked;
   // End
 
 
@@ -107,6 +142,15 @@
       },
     });
     exports.itemInt_chunks_barite = itemInt_chunks_barite;
+
+
+    const itemInt_chunks_crudeSulfur = extend(Item, "item-int-chunks-crude-sulfur", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_chunks_crudeSulfur = itemInt_chunks_crudeSulfur;
 
 
     const itemInt_chunks_dolomite = extend(Item, "item-int-chunks-dolomite", {
@@ -136,6 +180,15 @@
     exports.itemInt_chunks_limestone = itemInt_chunks_limestone;
 
 
+    const itemInt_chunks_silicaStone = extend(Item, "item-int-chunks-silica-stone", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_chunks_silicaStone = itemInt_chunks_silicaStone;
+
+
     const itemInt_chunks_zircon = extend(Item, "item-int-chunks-zircon", {
       setStats() {
         this.super$setStats();
@@ -147,6 +200,21 @@
 
 
   // Part: item-int[concentrate]
+    /* aluminum */
+
+
+    const itemInt_concentrate_bauxite = extend(Item, "item-int-concentrate-bauxite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_concentrate_bauxite = itemInt_concentrate_bauxite;
+
+
+    /* copper */
+
+
     const itemInt_concentrate_malachite = extend(Item, "item-int-concentrate-malachite", {
       setStats() {
         this.super$setStats();
@@ -154,6 +222,18 @@
       },
     });
     exports.itemInt_concentrate_malachite = itemInt_concentrate_malachite;
+
+
+    /* lead */
+
+
+    const itemInt_concentrate_galena = extend(Item, "item-int-concentrate-galena", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_concentrate_galena = itemInt_concentrate_galena;
   // End
 
 
@@ -214,223 +294,250 @@
     exports.itemInt_dust_p1Sand = itemInt_dust_p1Sand;
 
 
-    /* ore */
+    const itemInt_dust_zircon = extend(Item, "item-int-dust-zircon", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_zircon = itemInt_dust_zircon;
 
 
-      /* aluminum */
+    /* aluminum */
 
 
-      const itemInt_dust_bauxite = extend(Item, "item-int-dust-bauxite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_bauxite = itemInt_dust_bauxite;
+    const itemInt_dust_bauxite = extend(Item, "item-int-dust-bauxite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_bauxite = itemInt_dust_bauxite;
 
 
-      const itemInt_dust_p1Bauxite = extend(Item, "item-int-dust-p1-bauxite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_p1Bauxite = itemInt_dust_p1Bauxite;
+    const itemInt_dust_p1Bauxite = extend(Item, "item-int-dust-p1-bauxite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_p1Bauxite = itemInt_dust_p1Bauxite;
 
 
-      /* chromium */
+    /* chromium */
 
 
-      const itemInt_dust_chromite = extend(Item, "item-int-dust-chromite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_chromite = itemInt_dust_chromite;
+    const itemInt_dust_chromite = extend(Item, "item-int-dust-chromite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_chromite = itemInt_dust_chromite;
 
 
-      /* copper */
+    /* copper */
 
 
-      const itemInt_dust_azurite = extend(Item, "item-int-dust-azurite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_azurite = itemInt_dust_azurite;
+    const itemInt_dust_azurite = extend(Item, "item-int-dust-azurite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_azurite = itemInt_dust_azurite;
 
 
-      const itemInt_dust_cuprite = extend(Item, "item-int-dust-cuprite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_cuprite = itemInt_dust_cuprite;
+    const itemInt_dust_cuprite = extend(Item, "item-int-dust-cuprite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_cuprite = itemInt_dust_cuprite;
 
 
-      const itemInt_dust_malachite = extend(Item, "item-int-dust-malachite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_malachite = itemInt_dust_malachite;
+    const itemInt_dust_malachite = extend(Item, "item-int-dust-malachite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_malachite = itemInt_dust_malachite;
 
 
-      const itemInt_dust_p1Malachite = extend(Item, "item-int-dust-p1-malachite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_p1Malachite = itemInt_dust_p1Malachite;
+    const itemInt_dust_p1Malachite = extend(Item, "item-int-dust-p1-malachite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_p1Malachite = itemInt_dust_p1Malachite;
 
 
-      const itemInt_dust_nativeCopper = extend(Item, "item-int-dust-native-copper", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_nativeCopper = itemInt_dust_nativeCopper;
+    const itemInt_dust_nativeCopper = extend(Item, "item-int-dust-native-copper", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_nativeCopper = itemInt_dust_nativeCopper;
 
 
-      /* iron */
+    /* iron */
 
 
-      const itemInt_dust_hematite = extend(Item, "item-int-dust-hematite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_hematite = itemInt_dust_hematite;
+    const itemInt_dust_hematite = extend(Item, "item-int-dust-hematite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_hematite = itemInt_dust_hematite;
 
 
-      const itemInt_dust_limonite = extend(Item, "item-int-dust-limonite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_limonite = itemInt_dust_limonite;
+    const itemInt_dust_limonite = extend(Item, "item-int-dust-limonite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_limonite = itemInt_dust_limonite;
 
 
-      const itemInt_dust_magnetite = extend(Item, "item-int-dust-magnetite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_magnetite = itemInt_dust_magnetite;
+    const itemInt_dust_magnetite = extend(Item, "item-int-dust-magnetite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_magnetite = itemInt_dust_magnetite;
 
 
-      const itemInt_dust_pyrite = extend(Item, "item-int-dust-pyrite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_pyrite = itemInt_dust_pyrite;
+    const itemInt_dust_pyrite = extend(Item, "item-int-dust-pyrite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_pyrite = itemInt_dust_pyrite;
 
 
-      /* lead */
+    /* lead */
 
 
-      const itemInt_dust_anglesite = extend(Item, "item-int-dust-anglesite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_anglesite = itemInt_dust_anglesite;
+    const itemInt_dust_anglesite = extend(Item, "item-int-dust-anglesite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_anglesite = itemInt_dust_anglesite;
 
 
-      const itemInt_dust_galena = extend(Item, "item-int-dust-galena", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_galena = itemInt_dust_galena;
+    const itemInt_dust_galena = extend(Item, "item-int-dust-galena", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_galena = itemInt_dust_galena;
 
 
-      /* manganese */
+    const itemInt_dust_p1Galena = extend(Item, "item-int-dust-p1-galena", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_p1Galena = itemInt_dust_p1Galena;
 
 
-      const itemInt_dust_psilomelane = extend(Item, "item-int-dust-psilomelane", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_psilomelane = itemInt_dust_psilomelane;
+    /* manganese */
 
 
-      const itemInt_dust_pyrolusite = extend(Item, "item-int-dust-pyrolusite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_pyrolusite = itemInt_dust_pyrolusite;
+    const itemInt_dust_psilomelane = extend(Item, "item-int-dust-psilomelane", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_psilomelane = itemInt_dust_psilomelane;
 
 
-      /* tin */
+    const itemInt_dust_pyrolusite = extend(Item, "item-int-dust-pyrolusite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_pyrolusite = itemInt_dust_pyrolusite;
 
 
-      const itemInt_dust_cassiterite = extend(Item, "item-int-dust-cassiterite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_cassiterite = itemInt_dust_cassiterite;
+    /* mercury */
 
 
-      /* titanium */
+    const itemInt_dust_cinnabar = extend(Item, "item-int-dust-cinnabar", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_cinnabar = itemInt_dust_cinnabar;
 
 
-      const itemInt_dust_ilmenite = extend(Item, "item-int-dust-ilmenite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_ilmenite = itemInt_dust_ilmenite;
+    /* tin */
 
 
-      const itemInt_dust_rutile = extend(Item, "item-int-dust-rutile", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_rutile = itemInt_dust_rutile;
+    const itemInt_dust_cassiterite = extend(Item, "item-int-dust-cassiterite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_cassiterite = itemInt_dust_cassiterite;
 
 
-      /* zinc */
+    /* titanium */
 
 
-      const itemInt_dust_smithsonite = extend(Item, "item-int-dust-smithsonite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_smithsonite = itemInt_dust_smithsonite;
+    const itemInt_dust_ilmenite = extend(Item, "item-int-dust-ilmenite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_ilmenite = itemInt_dust_ilmenite;
 
 
-      const itemInt_dust_sphalerite = extend(Item, "item-int-dust-sphalerite", {
-        setStats() {
-          this.super$setStats();
-          rs_intermediateItem.setStats(this);
-        },
-      });
-      exports.itemInt_dust_sphalerite = itemInt_dust_sphalerite;
+    const itemInt_dust_rutile = extend(Item, "item-int-dust-rutile", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_rutile = itemInt_dust_rutile;
+
+
+    /* zinc */
+
+
+    const itemInt_dust_smithsonite = extend(Item, "item-int-dust-smithsonite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_smithsonite = itemInt_dust_smithsonite;
+
+
+    const itemInt_dust_sphalerite = extend(Item, "item-int-dust-sphalerite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_sphalerite = itemInt_dust_sphalerite;
 
 
     /* rock */
@@ -535,6 +642,27 @@
       },
     });
     exports.itemInt_glass_unannealed = itemInt_glass_unannealed;
+
+
+    /* smelting */
+
+
+    const itemInt_copperMatte = extend(Item, "item-int-copper-matte", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_copperMatte = itemInt_copperMatte;
+
+
+    const itemInt_blisterCopper = extend(Item, "item-int-blister-copper", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_blisterCopper = itemInt_blisterCopper;
   // End
 
 

@@ -28,6 +28,23 @@
   // End
 
 
+  // Part: Voltage Tier
+    const getTier = function(blk) {
+      var tier = "none";
+      var nm = blk.name;
+
+      if(blk.hasPower) {
+        if(db_block.tierHV.contains(nm)) {tier = "hv"}
+        else if(db_block.tierEHV.contains(nm)) {tier = "ehv"}
+        else {tier = "lv"};
+      };
+
+      return tier;
+    };
+    exports.getTier = getTier;
+  // End
+
+
 Events.run(ClientLoadEvent, () => {
   Log.info("REIND:frag_power.js loaded.");
 });

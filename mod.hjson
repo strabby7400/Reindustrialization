@@ -6,89 +6,37 @@ subtitle: "0.1.1: Local Geology (Test)"
 author: MaboroshiX
 repo: HuanXefh/Reindustrialization
 minGameVersion: 146
-dependencies: [
-  multi-crafter
-]
+dependencies: []
 
 
 description:
 '''
 
-If you are downloading the mod with in-game mod browser, and you don't want to install the test versions that may crash the game, choose View Releases and install the latest version.
+If you are downloading the mod with in-game mod browser, and you don't want to install the test versions that may crash the game, choose View Releases and install the latest version instead.
+
+
+The mod used to rely on MultiCrafter Lib mod by Liplum & Jojo. If you are playing those versions (before t25021401, including 0.1.0), remember to install it! If you're updating the mod from those versions, remove all multi-crafters in your map first since they will cause loading failure.
 
 
 ------------------------------
 
 
-A javascript mod aimed to bring real (or surreal, sometimes) chemical engineering into Mindustry, where tin is definitely tin.
+A javascript mod aimed to bring real (or surreal, sometimes) chemical engineering into Mindustry, where tin is definitely tin. Expected to be WIP for a very long time.
 
 
-- This mod focuses on complex manufacturing processes, instead of tower defense or RTS.
-
-- Nothing extends vanilla gameplay, all the contents including environmental blocks are mod-based. No borrowed or recolored vanilla textures.
-
-- Steps and intermediates are introduced for production routes, which are mostly based on the processes in real life. Say bye to straightforward recipes and fictional real names.
-
-- Extraction methods are required to turn ores into actual materials, e.g. smelting.
-
-- New mechanics like fluid corrosion and underground ores are introduced, which differentiates the gameplay drastically.
-
-- Turrets are absent, the mod will focus on unit-only defense and attack.
+The mod adds a new tech tree with totally different style to the game, along with a bunch of new mechanics including fluid corrosion, heat transfer, recipe selection and ore scanning.
 
 
-Most of the factories are multi-crafters, you'll need download MultiCrafterLib first! (Sorry for IOS players D:)
-
-
-Reind is still and probably always WIP. Do not launch to numbered sectors since sector generator is not used.
+Do not launch to numbered sectors since sector generator is not used.
 
 
 ------------------------------
 
 
-Contents:
-
-- MaboroshiX
-
-
-Sprites:
-
-- MaboroshiX
-
-
-Scripts:
-
-- MaboroshiX
-
-
-Maps:
-
-- MaboroshiX
-
-
-Ideas:
-
-- MaboroshiX
-
-
-------------------------------
-
-
-Inspiration & Acknowledgement:
-
-- Pixabay (website), for sound effects, most of which have been modified.
-
-- Greg's Tech: New Horizon (Minecraft modpack), for ideas about some factories and production routes.
-
-- Asthosus (Mindustry mod), for introducing me to hjson, and how to make a planet.
-
-- Sapphirium (Mindustry mod), for introducing me to javascript.
-
-- Fictional Octo System (Mindustry mod), for ore scanner mechanics.
-
-- 格雷工业 (Mindustry mod), for some codes about tables.
+See the complete credits in game!
 
 '''
 
 
 /* v0.1.1: Local Geology */
-version: t25021401
+version: t25030701

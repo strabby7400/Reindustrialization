@@ -11,12 +11,12 @@
   // End
 
 
-  // Part: LDM
+  // Part: Setting
     var ldm = false;
-    const setup_ldm = function(bool) {
+    const set_ldm = function(bool) {
       ldm = bool;
     };
-    exports.setup_ldm = setup_ldm;
+    exports.set_ldm = set_ldm;
   // End
 
 
@@ -60,7 +60,7 @@
       if(sector != null) {
         var id = sector.id;
         var pla = Vars.state.planet.name;
-        var li_we;
+        var li_we = null;
 
         if(pla == "reind-pla-ter-aerth") {
           switch(id) {
@@ -72,12 +72,10 @@
               // Crab Cliff
               li_we = ldm ? wp_aerthStorm_ldm : wp_aerthStorm;
               break;
-            default :
-              li_we = ldm ? wp_aerthStorm_ldm : wp_aerthStorm;
           };
         };
 
-        Vars.state.rules.weather = li_we;
+        if(li_we != null) Vars.state.rules.weather = li_we;
       };
     };
   // End

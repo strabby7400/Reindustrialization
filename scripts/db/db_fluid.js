@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
   // End
 
 
@@ -390,23 +390,10 @@
   // End
 
 
-  // Part: Intermediate
-    /* NOTE: Sets stat for target products. */
-    const li_intermediateMap = new Seq([
-
-      /* ========================================
-        Section: Melt
-      ======================================== */
-
-      "reind-liq-int-melt-glass", "reind-item-buil-tempered-glass",
-
-      /* ========================================
-        Section: Misc
-      ======================================== */
-
-      "reind-liq-int-brine-purified", "reind-item-chem-sodium-hydroxide",
-      "reind-liq-int-brine-purified", "reind-item-chem-sodium-bicarbonate",
-
+  // Part: Reaction
+    const li_fluidReaction = new Seq([
+      "reind-liq-chem-sulfuric-acid-conc", "reind-liq-ore-water", "evaporation",
+      "reind-liq-chem-sulfuric-acid-fuming", "reind-liq-ore-water", "evaporation",
     ]);
-    exports.intermediateMap = li_intermediateMap;
+    exports.fluidReaction = li_fluidReaction;
   // End

@@ -12,7 +12,7 @@
 
     const frag_attack = require("reind/frag/frag_attack");
 
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
 
@@ -25,17 +25,17 @@
     function setStatsComp(blk) {
       blk.stats.remove(db_stat.boostedDrillSpeed);
 
-      var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
+      var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
       if(rad != null) blk.stats.add(db_stat.impactRange, rad / Vars.tilesize, StatUnit.blocks);
 
-      var depthMtp = mdl_database.read_1n1v(db_block.depthTierMultiplier, blk.name);
+      var depthMtp = mdl_data.read_1n1v(db_block.depthTierMultiplier, blk.name);
       if(depthMtp != null) blk.stats.add(db_stat.depthTierMultiplier, depthMtp);
     };
 
 
     function updateTileComp(b) {
       if(b.invertTime == 1.0) {
-        var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
+        var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
         if(rad != null) {
           var dmg = b.block.size * b.block.drillTime * 1.2;
           var dur = b.block.drillTime * 0.5;
@@ -57,7 +57,7 @@
           if(b_sc == null) {
             down = true;
           } else {
-            var r_sc = mdl_database.read_1n1v(db_block.genericRange, b_sc.block.name);
+            var r_sc = mdl_data.read_1n1v(db_block.genericRange, b_sc.block.name);
             if(r_sc == null) {
               down = true;
             } else {
@@ -85,7 +85,7 @@
         if(itm == blk.blockedItem) return false;
 
         var hardness = t.overlay().itemDrop.hardness;
-        var tier_depth = blk.tier * mdl_database.read_1n1v(db_block.depthTierMultiplier, blk.name);
+        var tier_depth = blk.tier * mdl_data.read_1n1v(db_block.depthTierMultiplier, blk.name);
         if(hardness > tier_depth) return false;
       };
 
@@ -94,13 +94,13 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
+      var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
       if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
-      var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
+      var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
       if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1b(b), rad);
 
       var ov = b.tile.overlay();

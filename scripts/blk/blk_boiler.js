@@ -12,7 +12,7 @@
 
     const frag_attack = require("reind/frag/frag_attack");
 
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_heat = require("reind/mdl/mdl_heat");
@@ -25,7 +25,7 @@
   // Part: Component
     function setStatsComp(blk) {
       blk.stats.add(db_stat.canExplode, true);
-      var rad = mdl_database.read_1n1v(db_block.genericRange, blk.name) * Vars.tilesize;
+      var rad = mdl_data.read_1n1v(db_block.genericRange, blk.name) * Vars.tilesize;
       if(rad != null) blk.stats.add(db_stat.explosionRadius, rad / Vars.tilesize, StatUnit.blocks);
     };
 
@@ -33,11 +33,11 @@
     function updateTileComp(b) {
       var amt_water = b.liquids.get(Vars.content.liquid("reind-liq-ore-water"));
       var amt_steam = b.liquids.get(Vars.content.liquid("reind-gas-misc-steam"));
-      var sheat = mdl_heat.getSparedHeat(b);
+      var heat = mdl_heat.getHeat(b);
       var cap = b.block.liquidCapacity;
 
-      if(amt_water < 1.0 && sheat > 0.0001) ct_blk_boiler.accB_dryHeated(b, "w", true);
-      if(sheat < 0.0001) ct_blk_boiler.accB_dryHeated(b, "w", false);
+      if(amt_water < 1.0 && heat > 0.0001) ct_blk_boiler.accB_dryHeated(b, "w", true);
+      if(heat < 0.0001) ct_blk_boiler.accB_dryHeated(b, "w", false);
 
       var instab = ct_blk_boiler.accB_instab(b, "r") + (((ct_blk_boiler.accB_dryHeated(b, "r") && amt_water > 1.0) || amt_steam / cap > 0.5) ? 0.001 : -0.001);
       if(instab < 0.0) instab = 0.0;
@@ -45,7 +45,7 @@
       ct_blk_boiler.accB_instab(b, "w", instab);
 
       if(instab > 0.9999) {
-        var rad = mdl_database.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
+        var rad = mdl_data.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
         if(rad == null) rad = 40.0;
 
         b.kill();
@@ -55,20 +55,20 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var rad = mdl_database.read_1n1v(db_block.genericRange, blk.name) * Vars.tilesize;
+      var rad = mdl_data.read_1n1v(db_block.genericRange, blk.name) * Vars.tilesize;
       if(rad != null) mdl_draw.drawWarningDisk(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
-      var rad = mdl_database.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
+      var rad = mdl_data.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
       if(rad != null) mdl_draw.drawWarningDisk(mdl_game.poser_1b(b), rad);
     };
 
 
     function onDestroyedComp(b) {
       if(Vars.state.rules.reactorExplosions && ct_blk_boiler.accB_instab(b, "r") > 0.3) {
-        var rad = mdl_database.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
+        var rad = mdl_data.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
         if(rad == null) rad = 40.0;
 
         frag_attack.attack_explosion(b, rad, 3000.0, 12.0);

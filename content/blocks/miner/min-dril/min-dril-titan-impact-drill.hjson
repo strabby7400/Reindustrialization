@@ -84,132 +84,165 @@
 
       {
 
+        # Template: _impact
+        # Order: 1
 
-        /* effect_drillImpactWave1 */
+        /* <---------------- meta ----------------> */
 
+        type: WaveEffect
+        interp: linear
+        lifetime: 30.0
+        startDelay: 0.0
 
-        // Part: Meta
-          type: WaveEffect
-          interp: linear
-          lifetime: 30.0
-          startDelay: 0.0
-        // End
+        /* <---------------- visual ----------------> */
 
+        layer: 15.0
+        sides: -1
+        followParent: true
+        rotWithParent: false
+        colorFrom: ffffff30
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
 
-        // Part: Visual
-          layer: 15.0
-          sides: -1
-          followParent: true
-          rotWithParent: false
-          colorFrom: ffffff30
-          colorTo: ffffff00
-          lightScl: 2.0
-          lightOpacity: 0.0
-        // End
+        /* <---------------- angle & size & stroke ----------------> */
 
-
-        // Part: Angle & Size & Stroke
-          baseRotation: 0.0
-          rotation: 0.0
-          sizeFrom: 0.0
-          sizeTo: 32.0
-          strokeFrom: 6.0
-          strokeTo: 4.0
-        // End
-
+        baseRotation: 0.0
+        rotation: 0.0
+        sizeFrom: 0.0
+        sizeTo: 32.0
+        strokeFrom: 6.0
+        strokeTo: 4.0
 
       }
 
 
       {
 
+        # Template: _impact
+        # Order: 2
 
-        /* effect_drillImpactWave2 */
+        /* <---------------- meta ----------------> */
 
+        type: WaveEffect
+        interp: linear
+        lifetime: 40.0
+        startDelay: 0.0
 
-        // Part: Meta
-          type: WaveEffect
-          interp: linear
-          lifetime: 40.0
-          startDelay: 0.0
-        // End
+        /* <---------------- visual ----------------> */
 
+        layer: 15.0
+        sides: -1
+        followParent: true
+        rotWithParent: false
+        colorFrom: ffffff30
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
 
-        // Visual
-          layer: 15.0
-          sides: -1
-          followParent: true
-          rotWithParent: false
-          colorFrom: ffffff30
-          colorTo: ffffff00
-          lightScl: 2.0
-          lightOpacity: 0.0
-        // End
+        /* <---------------- angle & size & stroke ----------------> */
 
-
-        // Part: Angle & Size & Stroke
-          baseRotation: 0.0
-          rotation: 0.0
-          sizeFrom: 0.0
-          sizeTo: 32.0
-          strokeFrom: 4.0
-          strokeTo: 2.0
-        // End
-
+        baseRotation: 0.0
+        rotation: 0.0
+        sizeFrom: 0.0
+        sizeTo: 32.0
+        strokeFrom: 6.0
+        strokeTo: 4.0
 
       }
 
 
       {
 
+        # Template: _craftGas
 
-        /* effect_drillImpactCrack */
+        /* <---------------- meta ----------------> */
+
+        interp: pow2Out
+        lifetime: 120.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: reind-efr-shadow-white
+        layer: 86.0
+        particles: 12
+        followParent: true
+        rotWithParent: false
+        useRotation: true
+        colorFrom: ffffff40
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 0.0
+        offset: 0.0
+        cone: 180.0
+        spin: 0.0
+        randLength: true
+        length: 24.0
+        baseLength: 0.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: pow5Out
+        sizeFrom: 2.0
+        sizeTo: 7.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
 
 
-        // Part: Meta
-          type: ParticleEffect
-          interp: pow10Out
-          lifetime: 240.0
-          startDelay: 0.0
-        // End
+      {
 
+        # Template: _impactDrillCrack
 
-        // Part: Visual
-          region: reind-efr-diamond
-          layer: 69.0
-          particles: 5
-          followParent: true
-          rotWithParent: false
-          useRotation: true
-          colorFrom: ffffff
-          colorTo: ffffff
-          lightScl: 2.0
-          lightOpacity: 0.0
-        // End
+        /* <---------------- meta ----------------> */
 
+        type: ParticleEffect
+        interp: pow10Out
+        lifetime: 240.0
+        startDelay: 0.0
 
-        // Part: Angle & Length
-          baseRotation: 0.0
-          offset: 0.0
-          cone: 180.0
-          spin: 0.0
-          randLength: true
-          length: 18.0
-          baseLength: 0.0
-        // End
+        /* <---------------- visual ----------------> */
 
+        region: reind-efr-diamond
+        layer: 69.0
+        particles: 6
+        followParent: true
+        rotWithParent: false
+        useRotation: true
+        colorFrom: ffffff
+        colorTo: ffffff
+        lightScl: 2.0
+        lightOpacity: 0.0
 
-        // Part: Size & Stroke & Len
-          line: false
-          sizeInterp: sine
-          sizeFrom: 4.0
-          sizeTo: 0.0
-          strokeFrom: 0.0
-          strokeTo: 0.0
-          lenFrom: 0.0
-          lenTo: 0.0
-        // End
+        /* <---------------- angle & length ----------------> */
 
+        baseRotation: 0.0
+        offset: 0.0
+        cone: 180.0
+        spin: 0.0
+        randLength: true
+        length: 18.0
+        baseLength: 0.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: sine
+        sizeFrom: 4.0
+        sizeTo: 0.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
 
       }
 

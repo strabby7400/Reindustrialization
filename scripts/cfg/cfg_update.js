@@ -10,7 +10,7 @@
   // End
 
 
-  // Part: Methods
+  // Part: Suppressor
     var count_load = 0;
 
 
@@ -33,6 +33,13 @@
   // End
 
 
+  // Part: Time Control
+    function update_timeControl() {
+      if(Vars.state.isMenu()) Time.setDeltaProvider(() => Core.graphics.getDeltaTime() * 60.0 * 1.0);
+    };
+  // End
+
+
   /*
     ========================================
     Section: Application
@@ -42,10 +49,11 @@
 
   // Part: Event
     Events.run(WorldLoadEvent, () => {
-      onWorldLoad_updateSuppressor()
+      onWorldLoad_updateSuppressor();
     });
     Events.run(Trigger.update, () => {
-      update_updateSuppressor()
+      update_updateSuppressor();
+      update_timeControl();
     });
   // End
 

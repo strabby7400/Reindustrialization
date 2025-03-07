@@ -174,8 +174,8 @@
 */
 
 
-  outputsLiquid: false
-  ignoreLiquidFullness: false
+  outputsLiquid: true
+  ignoreLiquidFullness: true
 
 
 /*

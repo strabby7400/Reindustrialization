@@ -22,6 +22,10 @@
       this.super$setStats();
       blk_wallHarvester.setStats(this);
     },
+    drawPlace(x, y, rotation, valid) {
+      this.super$drawPlace(x, y, rotation, valid);
+      blk_wallHarvester.drawPlace(this, x, y, rotation, valid);
+    },
   });
   minHarv_lumberjack.buildType = () => extend(WallCrafter.WallCrafterBuild, minHarv_lumberjack, {
     updateTile() {

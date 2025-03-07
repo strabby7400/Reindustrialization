@@ -28,6 +28,12 @@
       unit_genericUnit.update(utp, unit);
     };
     exports.update = update;
+
+
+    const drawShadow = function(utp, unit) {
+      unit_genericUnit.drawShadow(utp, unit);
+    };
+    exports.drawShadow = drawShadow;
   // End
 
 

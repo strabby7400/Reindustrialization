@@ -9,7 +9,7 @@
     const blk_fluidPipe = require("reind/blk/blk_fluidPipe");
 
     const mdl_content = require("reind/mdl/mdl_content");
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
 
     const db_block = require("reind/db/db_block");
   // End
@@ -27,7 +27,7 @@
 
 
     function acceptLiquidComp(b, ob, liq) {
-      var liq_tg = mdl_content.getContent_nm(mdl_database.read_1n1v(db_block.liquidMap, b.block.name));
+      var liq_tg = mdl_content.getContent_nm(mdl_data.read_1n1v(db_block.liquidMap, b.block.name));
       return liq == liq_tg;
     };
   // End

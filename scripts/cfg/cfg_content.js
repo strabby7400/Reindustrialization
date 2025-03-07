@@ -6,11 +6,11 @@
 
 
   // Start: Import
+    const frag_power = require("reind/frag/frag_power");
+
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
-    const mdl_database = require("reind/mdl/mdl_database");
     const mdl_flow = require("reind/mdl/mdl_flow");
-    const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -20,6 +20,9 @@
 
   // Start: Methods
     const setup_content = function() {
+
+
+      if(Vars.headless) return;
 
 
       /* ========================================
@@ -35,7 +38,7 @@
         var li_blk = new Seq();
         var li_env = new Seq();
         Vars.content.blocks().each(blk => {
-          var tp = mdl_content.getContentType_nm(blk.name);
+          var tp = mdl_content.getType_nm(blk.name);
           switch(tp) {
             case "build" :
               li_blk.add(blk);
@@ -80,15 +83,15 @@
 
         // Block Faction
         li_blk.each(blk => {
-          var faction = mdl_database.read_1n1v(db_block.blockFaction, blk.name);
-          if(faction != null) blk.stats.add(db_stat.faction, faction);
+          var factionVal = mdl_content.getFactionValue(blk);
+          if(factionVal != null) blk.stats.add(db_stat.faction, factionVal);
         });
 
 
         // Unit Faction
         li_utp.each(utp => {
-          var faction = mdl_database.read_1n1v(db_unit.unitFaction, utp.name);
-          if(faction != null) utp.stats.add(db_stat.faction, faction);
+          var factionVal = mdl_content.getFactionValue(utp);
+          if(factionVal != null) utp.stats.add(db_stat.faction, factionVal);
         });
 
 
@@ -99,8 +102,11 @@
 
         // Family
         li_blk.each(blk => {
-          var tagVal = mdl_text.getTagText(mdl_database.readli_1n1v(db_block.factoryFamily, blk.name));
-          if(tagVal != null) blk.stats.add(db_stat.factoryFamily, tagVal);
+          var famiVal = mdl_content.getFamilyValue(blk);
+          if(famiVal != null) {
+            blk.stats.add(db_stat.factoryFamily, famiVal);
+            blk.stats.add(db_stat.familyMembers, StatValues.content(mdl_content.getFamilyMembers(blk)));
+          };
         });
 
 
@@ -111,7 +117,8 @@
 
         // Pollution
         var li_blockPollution = db_block.blockPollution;
-        for(let i = 0; i < li_blockPollution.size - 1; i++) {
+        var cap = li_blockPollution.size - 1;
+        for(let i = 0; i < cap; i++) {
           if(i % 2 != 0) continue;
 
           var blk = Vars.content.block(li_blockPollution.get(i));
@@ -133,15 +140,21 @@
 
         // Voltage Tier
         li_blk.each(blk => {
-          if(blk.hasPower) {
-            if(db_block.tierHV.contains(blk.name)) {
-              blk.stats.add(db_stat.voltageTier, "@term.reind-term-high-voltage.name");
-            } else if(db_block.tierEHV.contains(blk.name)) {
-              blk.stats.add(db_stat.voltageTier, "@term.reind-term-extra-high-voltage.name");
-            } else {
-              blk.stats.add(db_stat.voltageTier, "@term.reind-term-low-voltage.name");
-            };
+          var tier = frag_power.getTier(blk);
+          var val = null;
+          if(tier != "none") switch(tier) {
+            case "lv" :
+              val = Core.bundle.get("term.reind-term-low-voltage.name");
+              break;
+            case "hv" :
+              val = Core.bundle.get("term.reind-term-high-voltage.name");
+              break;
+            case "ehv" :
+              val = Core.bundle.get("term.reind-term-extra-high-voltage.name");
+              break;
           };
+
+          if(val != null) blk.stats.add(db_stat.voltageTier, val);
         });
 
 

@@ -192,6 +192,17 @@
   // End
 
 
+  // Part: item-ore[mercury]
+    const itemOre_cinnabar = extend(Item, "item-ore-cinnabar", {
+      setStats() {
+        this.super$setStats();
+        rs_oreItem.setStats(this);
+      },
+    });
+    exports.itemOre_cinnabar = itemOre_cinnabar;
+  // End
+
+
   // Part: item-ore[tin]
     const itemOre_cassiterite = extend(Item, "item-ore-cassiterite", {
       setStats() {
@@ -300,6 +311,15 @@
     exports.itemOre_crudeSulfur = itemOre_crudeSulfur;
 
 
+    const itemOre_fluorapatite = extend(Item, "item-ore-fluorapatite", {
+      setStats() {
+        this.super$setStats();
+        rs_oreItem.setStats(this);
+      },
+    });
+    exports.itemOre_fluorapatite = itemOre_fluorapatite;
+
+
     const itemOre_gypsum = extend(Item, "item-ore-gypsum", {
       setStats() {
         this.super$setStats();
@@ -399,6 +419,15 @@
       },
     });
     exports.itemOre_sandstone = itemOre_sandstone;
+
+
+    const itemOre_silicaStone = extend(Item, "item-ore-silica-stone", {
+      setStats() {
+        this.super$setStats();
+        rs_oreItem.setStats(this);
+      },
+    });
+    exports.itemOre_silicaStone = itemOre_silicaStone;
   // End
 
 

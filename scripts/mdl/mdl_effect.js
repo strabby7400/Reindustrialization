@@ -12,12 +12,12 @@
   // End
 
 
-  // Part: LDM
+  // Part: Setting
     var ldm = false;
-    const setup_ldm = function(bool) {
+    const set_ldm = function(bool) {
       ldm = bool;
     };
-    exports.setup_ldm = setup_ldm;
+    exports.set_ldm = set_ldm;
   // End
 
 
@@ -32,7 +32,7 @@
   // Part: Sound
     /* NOTE: Plays a sound at given position, skips if the asset is not loaded to avoid crash. */
     const playAt = function(pos_gn, path) {
-      if(pos_gn == null || path == null) return false;
+      if(Vars.headless || pos_gn == null || path == null) return false;
 
       var path_fi = "sounds/" + path + ".ogg";
       var pos = mdl_game.poser_gn(pos_gn);
@@ -45,6 +45,22 @@
       } else return false;
     };
     exports.playAt = playAt;
+
+
+    const netPlayAt = function(pos_gn, path) {
+      if(Vars.headless || pos_gn == null || path == null) return false;
+
+      var path_fi = "sounds/" + path + ".ogg";
+      var pos = mdl_game.poser_gn(pos_gn);
+      var x = pos.x;
+      var y = pos.y;
+
+      if(Core.assets.isLoaded(path_fi)) {
+        Vars.netClient.soundAt(Core.assets.get(path_fi), x, y, 1.0, 1.0);
+        return true;
+      } else return false;
+    };
+    exports.netPlayAt = netPlayAt;
   // End
 
 
@@ -52,7 +68,7 @@
     /* NOTE: Shows a effect at given position, rotation is random in default. */
     const showAt = function(pos_gn, eff, rot) {
       if(rot == null) rot = Mathf.random(360.0);
-      if(pos_gn == null || eff == null) return false;
+      if(Vars.headless || pos_gn == null || eff == null) return false;
 
       var pos = mdl_game.poser_gn(pos_gn);
       if(pos == null) return false;
@@ -67,7 +83,7 @@
 
 
     const showAt_ldm = function(pos_gn, eff, rot) {
-      if(ldm) return false;
+      if(Vars.headless || ldm) return false;
 
       return showAt(pos_gn, eff, rot);
     };
@@ -76,7 +92,7 @@
 
     /* NOTE: Chance given to create the effect. */
     const showAtP = function(p, pos_gn, eff, rot) {
-      if(!Mathf.chance(p)) return false;
+      if(Vars.headless || !Mathf.chance(p)) return false;
 
       return showAt(pos_gn, eff, rot);
     };
@@ -84,11 +100,47 @@
 
 
     const showAtP_ldm = function(p, pos_gn, eff, rot) {
-      if(!Mathf.chance(p) || ldm) return false;
+      if(Vars.headless || !Mathf.chance(p) || ldm) return false;
 
       return showAt(pos_gn, eff, rot);
     };
     exports.showAtP_ldm = showAtP_ldm;
+
+
+    /* NOTE: The effect is randomly created around the point. */
+    const showAround = function(pos_gn, eff, rad, rot) {
+      if(Vars.headless) return;
+
+      var pos = mdl_game.poser_gn(pos_gn);
+      var pos1 = new Vec2(pos.x + Mathf.range(rad), pos.y + Mathf.range(rad));
+
+      return showAt(pos1, eff, rot);
+    };
+    exports.showAround = showAround;
+
+
+    const showAround_ldm = function(pos_gn, eff, rad, rot) {
+      if(Vars.headless || ldm) return false;
+
+      return showAround(pos_gn, eff, rad, rot);
+    };
+    exports.showAround_ldm = showAround_ldm;
+
+
+    const showAroundP = function(p, pos_gn, eff, rad, rot) {
+      if(Vars.headless || !Mathf.chance(p)) return false;
+
+      return showAround(pos_gn, eff, rad, rot);
+    };
+    exports.showAroundP = showAroundP;
+
+
+    const showAroundP_ldm = function(p, pos_gn, eff, rad, rot) {
+      if(Vars.headless || !Mathf.chance(p) || ldm) return false;
+
+      return showAround(pos_gn, eff, rad, rot);
+    };
+    exports.showAroundP_ldm = showAroundP_ldm;
   // End
 
 
@@ -97,7 +149,7 @@
     const shakeAt = function(pos_gn, pow, dur) {
       if(pow == null) pow = 4.0;
       if(dur == null) dur = 60.0;
-      if(pos_gn == null || pow < 0.0001 || dur < 0.0001) return false;
+      if(Vars.headless || pos_gn == null || pow < 0.0001 || dur < 0.0001) return false;
 
       var pos = mdl_game.poser_gn(pos_gn);
       if(pos == null) return false;

@@ -11,7 +11,7 @@
     const db_env = require("reind/db/db_env");
     const db_stat = require("reind/db/db_stat");
 
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
   // End
@@ -25,7 +25,7 @@
 
 
     function drawBaseComp(blk, t) {
-      var z = mdl_database.read_1n1v(db_env.treeLayers, blk.name);
+      var z = mdl_data.read_1n1v(db_env.treeLayers, blk.name);
       if(z == null) return;
       var z_sha = z - 0.0005;
 

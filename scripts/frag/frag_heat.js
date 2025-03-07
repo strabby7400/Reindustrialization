@@ -6,8 +6,12 @@
 
 
   // Part: Import
+    const ct_rs_efficiency = require("reind/ct/ct_rs_efficiency");
+
+    const cfg_update = require("reind/cfg/cfg_update");
+
     const mdl_content = require("reind/mdl/mdl_content");
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -21,30 +25,38 @@
 
 
   // Part: Block Heat
-    const heatEffc = Vars.content.liquid("reind-effc-cond-heat");
+    const heatEffc = ct_rs_efficiency.effcCond_heat;
 
 
     /*
       NOTE:
       Called to balance the heat from b_f to b_t.
       Set {forced} to true to ignore the heat in b_t.
-      Set {noSide} to true to ignore actually number of sides that are in contact, in case of remote heat transfer.
+      Set {noSide} to true to ignore actual amount of sides that are in contact, in case of remote heat transfer.
     */
     const transferHeat = function(b_f, b_t, forced, noSide) {
       if(forced == null) forced = false;
       if(noSide == null) noSide = false;
-      if(b_f == null || b_t == null) return;
+      if(b_f == null || b_f.liquids == null || b_t == null || b_t.liquids == null) return;
 
+      var isHcond = mdl_content.isHcond(b_t.block);
       var heat_f = mdl_heat.getHeat(b_f);
       var heat_t = mdl_heat.getHeat(b_t);
-      var temp_heat_t = forced ? 0.0 : heat_t;
-      var coef = (mdl_heat.getHeatTransferCoefficient(b_f.block) + mdl_heat.getHeatTransferCoefficient(b_t.block)) / 2.0;
-      var rate = Time.delta * mdl_heat.getHeatTransferRate(heat_f, temp_heat_t, coef) * (noSide ? 1.0 : mdl_game.getFrac_side(b_f, b_t)) * glb_vars.heat_transferMultiplier;
-      var heat_trans = Math.min(rate, heat_f, 3.0);
+      var heat_trans = 0.0;
 
       if(heat_f > 0.0001) {
-        b_t.handleLiquid(b_f, heatEffc, heat_trans);
-        b_f.liquids.remove(heatEffc, heat_trans);
+        if(isHcond) {
+          var temp_heat_t = forced ? 0.0 : heat_t;
+          var coef = (mdl_heat.getHeatTransferCoefficient(b_f.block) + mdl_heat.getHeatTransferCoefficient(b_t.block)) / 2.0;
+          var rate = Time.delta * mdl_heat.getHeatTransferRate(heat_f, temp_heat_t, coef) * (noSide ? 1.0 : mdl_game.getFrac_side(b_f, b_t)) * glb_vars.heat_transferMultiplier;
+          heat_trans = Math.max(Math.min(rate, heat_f, mdl_heat.getSparedHeat(b_t) - mdl_heat.getHeat(b_t)), 0.0);
+
+          b_t.handleLiquid(b_f, heatEffc, heat_trans);
+          b_f.liquids.remove(heatEffc, heat_trans);
+        } else {
+          heat_trans = Math.min(heat_f / 60.0, b_t.block.liquidCapacity - heat_t);
+          b_t.handleLiquid(b_f, heatEffc, heat_trans);
+        };
 
         return heat_trans;
       };
@@ -56,7 +68,7 @@
 
     /* NOTE: Called for spontaneous heat decay, automatically reads loss if not assigned. */
     const dissipateHeat = function(b, loss) {
-      if(b == null) return;
+      if(b == null || b.liquids == null) return;
       if(loss == null) loss = mdl_heat.getHeatLoss(b.block);
 
       var heat = mdl_heat.getHeat(b);
@@ -71,8 +83,9 @@
       else if(heat < 8000.0) {param = 0.48}
       else if(heat < 9000.0) {param = 0.54}
       else {param = 0.6};
+      var paramScl = glb_vars.heat_lossMultiplier;
 
-      var heat_l = Time.delta * heat * loss * param;
+      var heat_l = Time.delta * heat * loss * param * paramScl;
       b.liquids.remove(heatEffc, heat_l);
 
       return heat_l;
@@ -132,6 +145,8 @@
 
     /* NOTE: The building will gather heat from proximity and move it forward. */
     const updateTile_hcond = function(b) {
+      if(cfg_update.isSuppressed()) return;
+
       b.proximity.each(ob => {if(!ob.acceptLiquid(b, heatEffc)) updateTile_heatInput(b, ob)});
       if(mdl_heat.getHeat(b) > 0.01) b.moveLiquidForward(false, heatEffc);
     };
@@ -140,6 +155,7 @@
 
     /* NOTE: Only accepts heat. */
     const acceptLiquid_hcond = function(b, ob, liq) {
+      if(cfg_update.isSuppressed()) return false;
       if(liq != heatEffc) return false;
 
       return true;
@@ -162,7 +178,7 @@
   // Start: Fluid Heat
     /* NOTE: Damages the block if total fluid heat surpasses the capacity. The cap is stored in {db_block.fluidHeatCapacity}. */
     const updateTile_fluidHeat = function(b) {
-      var fheatCap = mdl_database.read_1n1v(db_block.fluidHeatCapacity, b.block.name);
+      var fheatCap = mdl_data.read_1n1v(db_block.fluidHeatCapacity, b.block.name);
       if(fheatCap == null) return;
       var heat = mdl_heat.getFluidHeat(b);
       if(heat <= fheatCap) return;
@@ -177,7 +193,7 @@
 
     /* NOTE: Draw glow region if fluid heat exists. {reg} is optional. */
     const draw_fluidHeat = function(b, reg) {
-      var fheatCap = mdl_database.read_1n1v(db_block.fluidHeatCapacity, b.block.name);
+      var fheatCap = mdl_data.read_1n1v(db_block.fluidHeatCapacity, b.block.name);
       if(fheatCap == null) fheatCap = 120.0;
       var heat = mdl_heat.getFluidHeat(b);
       if(heat < 0.01) return;

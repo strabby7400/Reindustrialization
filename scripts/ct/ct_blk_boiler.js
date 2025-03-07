@@ -16,8 +16,6 @@
 
   // Part: Accessor
     const accB_dryHeated = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.dryHeated;
       if(mode == "w") b.dryHeated = val;
     };
@@ -25,8 +23,6 @@
 
 
     const accB_instab = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.instab;
       if(mode == "w") b.instab = val;
     };
@@ -43,6 +39,7 @@
 
   // Part: pow-boil
     const powBoil_steamBoiler = extend(GenericCrafter, "pow-boil-steam-boiler", {
+      // Specific
       icons: function() {
         return [Core.atlas.find(this.name + "-icon")];
       },
@@ -60,7 +57,7 @@
       },
     });
     powBoil_steamBoiler.buildType = () => extend(GenericCrafter.GenericCrafterBuild, powBoil_steamBoiler, {
-      alertReg: mdl_content.getContentRegion(powBoil_steamBoiler, "-alert"),
+      alertReg: mdl_content.getRegion(powBoil_steamBoiler, "-alert"),
       dryHeated: false,
       instab: 0.0,
       updateTile() {

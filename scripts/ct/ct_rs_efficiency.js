@@ -41,7 +41,7 @@
         rs_efficiency.update(this, puddle);
       },
     });
-    exports.effcCond_heat = effcCond_pressure;
+    exports.effcCond_heat = effcCond_heat;
 
 
     const effcCond_pressure = extend(Liquid, "effc-cond-pressure", {
@@ -243,6 +243,19 @@
       },
     });
     exports.effcEffc_gasFilter = effcEffc_gasFilter;
+
+
+    const effcEffc_packedTower = extend(Liquid, "effc-effc-packed-tower", {
+      setStats() {
+        this.super$setStats();
+        rs_efficiency.setStats(this);
+      },
+      update(puddle) {
+        this.super$update(puddle);
+        rs_efficiency.update(this, puddle);
+      },
+    });
+    exports.effcEffc_packedTower = effcEffc_packedTower;
   // End
 
 
@@ -258,6 +271,19 @@
       },
     });
     exports.effcLink_charcoalRodMaker_r1 = effcLink_charcoalRodMaker_r1;
+
+
+    const effcLink_mineralJig_r1 = extend(Liquid, "effc-link-mineral-jig-r1", {
+      setStats() {
+        this.super$setStats();
+        rs_efficiency.setStats(this);
+      },
+      update(puddle) {
+        this.super$update(puddle);
+        rs_efficiency.update(this, puddle);
+      },
+    });
+    exports.effcLink_mineralJig_r1 = effcLink_mineralJig_r1;
   // End
 
 

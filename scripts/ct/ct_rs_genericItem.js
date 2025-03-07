@@ -163,6 +163,15 @@
     exports.itemBuil_brickMagnesia = itemBuil_brickMagnesia;
 
 
+    const itemBuil_brickMullite = extend(Item, "item-buil-brick-mullite", {
+      setStats() {
+        this.super$setStats();
+        rs_genericItem.setStats(this);
+      },
+    });
+    exports.itemBuil_brickMullite = itemBuil_brickMullite;
+
+
     const itemBuil_brickSilica = extend(Item, "item-buil-brick-silica", {
       setStats() {
         this.super$setStats();
@@ -244,6 +253,15 @@
       },
     });
     exports.itemChem_semicoke = itemChem_semicoke;
+
+
+    const itemChem_sodium = extend(Item, "item-chem-sodium", {
+      setStats() {
+        this.super$setStats();
+        rs_genericItem.setStats(this);
+      },
+    });
+    exports.itemChem_sodium = itemChem_sodium;
 
 
     const itemChem_sulfur = extend(Item, "item-chem-sulfur", {
@@ -395,6 +413,15 @@
 
 
     /* potassium */
+
+
+    const itemChem_potassiumCarbonate = extend(Item, "item-chem-potassium-carbonate", {
+      setStats() {
+        this.super$setStats();
+        rs_genericItem.setStats(this);
+      },
+    });
+    exports.itemChem_potassiumCarbonate = itemChem_potassiumCarbonate;
 
 
     const itemChem_potassiumChloride = extend(Item, "item-chem-potassium-chloride", {

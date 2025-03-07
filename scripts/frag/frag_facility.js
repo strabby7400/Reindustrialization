@@ -7,11 +7,14 @@
 
   // Part: Import
     const frag_item = require("reind/frag/frag_item");
+    const frag_recipe = require("reind/frag/frag_recipe");
 
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_heat = require("reind/mdl/mdl_heat");
+    const mdl_recipe = require("reind/mdl/mdl_recipe");
     const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
@@ -114,7 +117,7 @@
 
       var map = new Seq();
       mdl_game.filter_team(mdl_game.getUnits(pos, rad, caller), team).each(unit => {
-        var ep = mdl_database.read_1n1v(db_unit.energizer, unit.type.name);
+        var ep = mdl_data.read_1n1v(db_unit.energizer, unit.type.name);
         if(ep != null) {
           map.add(unit);
           map.add(ep);
@@ -159,14 +162,14 @@
 
 
     const getFrac_ep = function(e) {
-      var rad = (e instanceof Unit) ? mdl_database.read_1n1v(db_unit.epRange, e.type.name) : mdl_database.read_1n1v(db_block.epRange, e.block.name);
-      if(rad == null) return true;
-      var ep_req = (e instanceof Unit) ? mdl_database.read_1n1v(db_unit.epRequirement, e.type.name) : mdl_database.read_1n1v(db_block.epRequirement, e.block.name);
+      var r = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.epRange, e.type.name) : mdl_data.read_1n1v(db_block.epRange, e.block.name);
+      if(r == null) return true;
+      var ep_req = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.epRequirement, e.type.name) : mdl_data.read_1n1v(db_block.epRequirement, e.block.name);
       if(ep_req == null) return true;
 
       var ep = count_ep(
         (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e),
-        rad,
+        r * Vars.tilesize,
         e.team,
         (e instanceof Unit) ? e : null,
       );
@@ -183,10 +186,10 @@
 
 
     const setStats_ep = function(ct) {
-      var rad = (ct instanceof UnitType) ? mdl_database.read_1n1v(db_unit.epRange, ct.name) : mdl_database.read_1n1v(db_block.epRange, ct.name);
-      if(rad != null) ct.stats.add(db_stat.epRange, rad / Vars.tilesize, StatUnit.blocks);
+      var r = (ct instanceof UnitType) ? mdl_data.read_1n1v(db_unit.epRange, ct.name) : mdl_data.read_1n1v(db_block.epRange, ct.name);
+      if(r != null) ct.stats.add(db_stat.epRange, r, StatUnit.blocks);
 
-      var ep_req = (ct instanceof UnitType) ? mdl_database.read_1n1v(db_unit.epRequirement, ct.name) : mdl_database.read_1n1v(db_block.epRequirement, ct.name);
+      var ep_req = (ct instanceof UnitType) ? mdl_data.read_1n1v(db_unit.epRequirement, ct.name) : mdl_data.read_1n1v(db_block.epRequirement, ct.name);
       if(ep_req != null) ct.stats.add(db_stat.epRequired, ep_req);
     };
     exports.setStats_ep = setStats_ep;
@@ -203,12 +206,12 @@
 
 
     const draw_ep = function(e) {
-      var rad = (e instanceof Unit) ? mdl_database.read_1n1v(db_unit.epRange, e.type.name) : mdl_database.read_1n1v(db_block.epRange, e.block.name);
-      if(rad == null) return;
+      var r = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.epRange, e.type.name) : mdl_data.read_1n1v(db_block.epRange, e.block.name);
+      if(r == null) return;
 
       getUnits_ep(
         (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e),
-        rad,
+        r * Vars.tilesize,
         e.team,
         (e instanceof Unit) ? e : null,
       ).each(unit => {
@@ -241,6 +244,123 @@
       if(rheat > 6.0) Fires.create(li_ot.get(Math.round(Mathf.random(li_ot.size - 1) - 0.4999)));
     };
     exports.updateTile_flammable = updateTile_flammable;
+  // End
+
+
+  // Part: Restriction Range
+    const setStats_restrict = function(blk, r) {
+      var r_fi = (r == null) ? mdl_data.read_1n1v(db_block.genericRange, blk.name) : r;
+      if(r_fi != null) blk.stats.add(db_stat.restrictionRange, r_fi, StatUnit.blocks);
+    };
+    exports.setStats_restrict = setStats_restrict;
+
+
+    const canPlaceOn_restrict = function(blk, t, team, rot, r) {
+      var r_fi = (r == null) ? mdl_data.read_1n1v(db_block.genericRange, blk.name) : r;
+      if(r_fi != null && mdl_game.getSameBuilds(mdl_game.getTiles_rect(t, r_fi, blk.size), blk.name, Vars.player.team()).size > 0) return false;
+
+      return true;
+    };
+    exports.canPlaceOn_restrict = canPlaceOn_restrict;
+
+
+    const drawPlace_restrict = function(blk, tx, ty, rot, valid, r) {
+      var r_fi = (r == null) ? mdl_data.read_1n1v(db_block.genericRange, blk.name) : r;
+      if(r_fi != null) {
+        var t = Vars.world.tile(tx, ty);
+        mdl_draw.drawPlaceRect(blk, t, valid, r_fi, true);
+        mdl_game.getSameBuilds(mdl_game.getTiles_rect(t, r_fi, blk.size), blk.name, Vars.player.team()).each(ob => mdl_draw.drawBuildArea(ob, valid));
+      };
+    };
+    exports.drawPlace_restrict = drawPlace_restrict;
+
+
+    const drawSelect_restrict = function(b, r) {
+      var r_fi = (r == null) ? mdl_data.read_1n1v(db_block.genericRange, b.block.name) : r;
+      if(r_fi != null) {
+        mdl_draw.drawSelectRect(b, r_fi, true);
+      };
+    };
+    exports.drawSelect_restrict = drawSelect_restrict;
+  // End
+
+
+  // Part: Structure
+    const getStructurePair = function(blk) {
+      var val = null;
+      var li = db_block.structure;
+      var cap = li.size;
+      if(cap > 0) {
+        for(let i = 0; i < cap; i++) {
+          if(i % 3 != 0) continue;
+
+          var nm = li.get(i);
+          var nm_tg = li.get(i + 1);
+          var plan = li.get(i + 2);
+
+          var blk_tg = Vars.content.block(nm_tg);
+          if(blk.name == nm && blk_tg != null) val = [blk_tg, plan];
+        };
+      };
+
+      return val;
+    };
+    exports.getStructurePair = getStructurePair;
+
+
+    const isStructureComplete = function(t, plan) {
+      if(t == null || plan == null) return false;
+
+      var cond = true;
+      var li = plan;
+      var cap = plan.size;
+      if(cap > 0) {
+        for(let i = 0; i < cap; i++) {
+          if(i % 2 != 0) continue;
+
+          var rPos = li.get(i);
+          var nm = li.get(i + 1);
+          var ot = t.nearby(rPos);
+
+          if(ot == null) {
+            cond = false;
+          } else {
+            if(ot.build == null || ot.build.block.name != nm) cond = false;
+          };
+        };
+      };
+
+      return cond;
+    };
+    exports.isStructureComplete = isStructureComplete;
+
+
+    const draw_structure = function(t, plan) {
+      if(t == null || plan == null) return;
+
+      var li = plan;
+      var cap = plan.size;
+      if(cap > 0) {
+        for(let i = 0; i < cap; i++) {
+          if(i % 2 != 0) continue;
+
+          var rPos = li.get(i);
+          var nm = li.get(i + 1);
+          var blk = mdl_content.getContent_nm(nm);
+          var ot = t.nearby(rPos);
+
+          if(blk != null && ot != null) {
+            var reg = mdl_content.getBuildRegion(blk);
+            var color_gn = Color.white;
+            if(ot.solid()) color_gn = false;
+            if(ot.build != null) color_gn = false;
+
+            if(ot.build == null || ot.build.block.name != nm) mdl_draw.drawPlaceRegion(blk, ot, color_gn);
+          };
+        };
+      };
+    };
+    exports.draw_structure = draw_structure;
   // End
 
 
@@ -284,7 +404,9 @@
 
 
     const getTerrainValue = function(ter) {
-      var terVal;
+      if(Vars.headless) return "";
+
+      var terVal = "";
 
       switch(ter) {
         case "dirt" :
@@ -339,6 +461,30 @@
       return valid;
     };
     exports.canPlaceOn_terrain = canPlaceOn_terrain;
+  // End
+
+
+  // Part: Waste
+    const setBars_was = function(blk, rcFi) {
+      var cap = mdl_recipe.getRecipeSize(rcFi);
+      var cond_water = false;
+      var cond_waterA = false;
+      var cond_waterB = false;
+      var cond_slurry = false;
+
+      for(let i = 0; i < cap; i++) {
+        if(frag_recipe.hasOutput(rcFi, i, "reind-liq-was-waste-water")) cond_water = true;
+        if(frag_recipe.hasOutput(rcFi, i, "reind-liq-was-waste-water-acidic")) cond_waterA = true;
+        if(frag_recipe.hasOutput(rcFi, i, "reind-liq-was-waste-water-basic")) cond_waterB = true;
+        if(frag_recipe.hasOutput(rcFi, i, "reind-liq-was-waste-slurry")) cond_slurry = true;
+      };
+
+      if(cond_water) blk.addLiquidBar(Vars.content.liquid("reind-liq-was-waste-water"));
+      if(cond_waterA) blk.addLiquidBar(Vars.content.liquid("reind-liq-was-waste-water-acidic"));
+      if(cond_waterB) blk.addLiquidBar(Vars.content.liquid("reind-liq-was-waste-water-basic"));
+      if(cond_slurry) blk.addLiquidBar(Vars.content.liquid("reind-liq-was-waste-slurry"));
+    };
+    exports.setBars_was = setBars_was;
   // End
 
 

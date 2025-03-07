@@ -184,7 +184,7 @@
 */
 
 
-  powerProduction: 8.0
+  powerProduction: 9.0
   itemDuration: 120.0
   outputLiquid: null
   consumes: {

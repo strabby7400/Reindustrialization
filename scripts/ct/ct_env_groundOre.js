@@ -157,6 +157,18 @@
   // End
 
 
+  // Part: item-ore[mercury]
+    const envOre_ground_cinnabar = extend(OreBlock, "env-ore-ground-cinnabar", {
+      setStats() {
+        this.super$setStats();
+        env_groundOre.setStats(this);
+      },
+    });
+    env_groundOre.setup(envOre_ground_cinnabar);
+    exports.envOre_ground_cinnabar = envOre_ground_cinnabar;
+  // End
+
+
   // Part: item-ore[tin]
     const envOre_ground_cassiterite = extend(OreBlock, "env-ore-ground-cassiterite", {
       setStats() {
@@ -212,6 +224,18 @@
     });
     env_groundOre.setup(envOre_ground_zircon);
     exports.envOre_ground_zircon = envOre_ground_zircon;
+  // End
+
+
+  // Part: item-ore[misc]
+    const envOre_ground_trona = extend(OreBlock, "env-ore-ground-trona", {
+      setStats() {
+        this.super$setStats();
+        env_groundOre.setStats(this);
+      },
+    });
+    env_groundOre.setup(envOre_ground_trona);
+    exports.envOre_ground_trona = envOre_ground_trona;
   // End
 
 

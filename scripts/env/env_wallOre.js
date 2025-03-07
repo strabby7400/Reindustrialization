@@ -15,7 +15,7 @@
   // Part: Component
     function setupComp(blk) {
       Events.run(ClientLoadEvent, () => {
-        blk.localizedName = blk.itemDrop.localizedName + mdl_text.getSpace() + Core.bundle.get("term.reind-term-wall-ore.name");
+        if(!Vars.headless) blk.localizedName = blk.itemDrop.localizedName + mdl_text.getSpace() + Core.bundle.get("term.reind-term-wall-ore.name");
       });
     };
   // End

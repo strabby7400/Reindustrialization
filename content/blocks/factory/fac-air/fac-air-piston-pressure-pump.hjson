@@ -11,8 +11,7 @@
     item-chem-lead/25
     item-chem-graphite/35
     item-chem-brass/30
-    item-chem-tin-bronze/20
-    item-chem-steel/45
+    item-chem-tin-bronze/30
   ]
   buildCostMultiplier: 2.0
 
@@ -116,7 +115,7 @@
 
   craftTime: 1.0
   consumes: {
-    power: 0.5
+    power: 0.83333333
   }
   outputLiquids: [
     effc-cond-pressure/0.01666667

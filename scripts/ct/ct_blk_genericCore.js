@@ -32,6 +32,9 @@
       this.super$buildConfiguration(table);
       blk_genericCore.buildConfiguration(this, table);
     },
+    configured(builder, value) {
+      blk_genericCore.configured(this, builder, value);
+    },
   });
   exports.effCore_ash = effCore_ash;
 

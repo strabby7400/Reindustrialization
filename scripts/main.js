@@ -12,13 +12,19 @@
     const cfg_attribute = require("reind/cfg/cfg_attribute");
     const cfg_content = require("reind/cfg/cfg_content");
     const cfg_hidden = require("reind/cfg/cfg_hidden");
-    const cfg_ldm = require("reind/cfg/cfg_ldm");
+    const cfg_setting = require("reind/cfg/cfg_setting");
     const cfg_sector = require("reind/cfg/cfg_sector");
     const cfg_update = require("reind/cfg/cfg_update");
 
     /* <---------------- module ----------------> */
 
-    const mdl_tip = require("reind/mdl/mdl_tip");
+    const mdl_math = require("reind/mdl/mdl_math");
+    const mdl_ui = require("reind/mdl/mdl_ui");
+
+    /* <---------------- database ----------------> */
+
+    const db_dialog = require("reind/db/db_dialog");
+    const db_event = require("reind/db/db_event");
 
     /* <---------------- global ----------------> */
 
@@ -63,6 +69,7 @@
     const ct_blk_massDriver = require("reind/ct/ct_blk_massDriver");
     const ct_blk_genericCore = require("reind/ct/ct_blk_genericCore");
     const ct_blk_container = require("reind/ct/ct_blk_container");
+    const ct_blk_bitContainer = require("reind/ct/ct_blk_bitContainer");
 
     /* <---------------- liquid blocks ----------------> */
 
@@ -95,13 +102,11 @@
 
     const ct_blk_genericWall = require("reind/ct/ct_blk_genericWall");
     const ct_blk_radar = require("reind/ct/ct_blk_radar");
-
+    const ct_blk_projectiveMender = require("reind/ct/ct_blk_projectiveMender");
 
     /* <---------------- turret ----------------> */
 
-
     const ct_blk_liquidTurret = require("reind/ct/ct_blk_liquidTurret");
-
 
     /* <---------------- factory ----------------> */
 
@@ -109,8 +114,13 @@
     const ct_blk_attributeFactory = require("reind/ct/ct_blk_attributeFactory");
     const ct_blk_attributeHeater = require("reind/ct/ct_blk_attributeHeater");
     const ct_blk_heatFactory = require("reind/ct/ct_blk_heatFactory");
-    const ct_blk_multiCrafter = require("reind/ct/ct_blk_multiCrafter");
+    const ct_blk_recipeFactory = require("reind/ct/ct_blk_recipeFactory");
     const ct_blk_fragmentFactory = require("reind/ct/ct_blk_fragmentFactory");
+    const ct_blk_structureCore = require("reind/ct/ct_blk_structureCore");
+
+    /* <---------------- payload ----------------> */
+
+    const ct_blk_payloadConveyor = require("reind/ct/ct_blk_payloadConveyor");
 
     /* <---------------- logic ----------------> */
 
@@ -118,7 +128,7 @@
 
     /* <---------------- map blocks ----------------> */
 
-    const ct_env_nonBuildZone = require("reind/ct/ct_env_nonBuildZone");
+    const ct_env_restrictionZone = require("reind/ct/ct_env_restrictionZone");
     const ct_env_ruin = require("reind/ct/ct_env_ruin");
 
     /* <---------------- environment ----------------> */
@@ -144,41 +154,57 @@
 
     const ct_unit_mechUnit = require("reind/ct/ct_unit_mechUnit");
     const ct_unit_legUnit = require("reind/ct/ct_unit_legUnit");
+    const ct_unit_rotorUnit = require("reind/ct/ct_unit_rotorUnit");
 
   // End
 
 
+  // Part: Tip
+    const li_tips = new Seq();
+    let id_tip = 1;
+    while(Core.bundle.has("info.reind-info-tip-" + id_tip + ".name")) {
+      li_tips.add(Core.bundle.get("info.reind-info-tip-" + id_tip + ".name"));
+      id_tip++;
+    };
+
+
+    function getTip(id) {
+      return (id > li_tips.size - 1) ? null : li_tips.get(id);
+    };
+
+
+    function getRandomTip() {
+      return getTip(mdl_math.randInt(li_tips.size - 1));
+    };
+  // End
+
+
   // Part: Dialog
-    function setup_dialog_welcome() {
+    function setDialog_welcome() {
+      if(Vars.headless) return;
+
       Sounds.wave.play();
+      var dial = new BaseDialog("@info.reind-info-dial-welcome.name");
 
-      var dial = extend(BaseDialog, "@info.reind-info-welcome.name", {
+      dial.cont.image(Core.atlas.find("reind-bg")).center().row();
 
-      });
+      dial.cont.add("").row();
+      dial.cont.add("").row();
+      dial.cont.pane(pn => {
+        pn.marginLeft(12.0).marginRight(12.0).marginTop(15.0).marginBottom(15.0);
 
-      // Contents
-      dial.cont.row();
-      dial.cont.add("\n").row();
+        pn.add("@info.reind-info-dial-welcome.description").center().labelAlign(Align.left).wrap().width(mdl_ui.getSizePair(null, null, 120.0)[0]).row();
+      }).width(mdl_ui.getSizePair()[0]);
 
-      dial.cont.image(Core.atlas.find("reind-bg")).row();
-      dial.cont.row();
-      dial.cont.add("\n").row();
+      dial.cont.add("").row();
+      dial.cont.add("").row();
+      dial.cont.add("").row();
+      dial.cont.add("").row();
+      dial.cont.add("[orange]" + getRandomTip() + "[white]").center().labelAlign(Align.center).wrap().width(mdl_ui.getSizePair()[0]).row();
 
-      dial.cont.add("@info.reind-info-welcome.description").row();
-      dial.cont.row();
-      dial.cont.add("\n").row();
-
-      dial.cont.add("[grey]------------------------------------------------------------[]").row();
-      dial.cont.row();
-      dial.cont.add("\n").row();
-
-      dial.cont.add("[orange]" + mdl_tip.getTip_random() + "[white]").row();
-      dial.cont.row();
-      dial.cont.add("\n").row();
-
-      dial.cont.row();
-
-      dial.cont.table(Styles.black, btns => {
+      dial.cont.add("").row();
+      dial.cont.add("").row();
+      dial.cont.table(Styles.none, btns => {
         btns.button("@ok", run(() => {
           Sounds.door.play();
           dial.hide();
@@ -189,18 +215,18 @@
           if(!enableLdm) {
             Sounds.shootSmite.play();
             enableLdm = true;
-            cfg_ldm.setup_ldm(true);
+            cfg_setting.set_ldm(true);
             new UI().showInfoFade("\n\n\n\n" + Core.bundle.get("info.reind-info-ldm-enabled.name"), 2.0);
           } else {
             Sounds.place.play();
             enableLdm = false;
-            cfg_ldm.setup_ldm(false);
+            cfg_setting.set_ldm(false);
             new UI().showInfoFade("\n\n\n\n" + Core.bundle.get("info.reind-info-ldm-disabled.name"), 2.0);
           };
         })).size(200.0, 50.0).center().pad(12.0).tooltip("@info.reind-info-low-detail-mode.name");
-      });
 
-      dial.cont.row();
+        btns.button("@term.reind-term-credits.name", db_dialog._credits()).size(200.0, 50.0).center().pad(12.0);
+      });
 
       dial.show();
     };
@@ -215,8 +241,26 @@
 
 
   // Part: Event
+    const reindCmd = Vars.netServer.clientCommands;
+    const li_commands = db_event.commands;
+    var cap = li_commands.size;
+    if(cap > 0) {
+      for(let i = 0; i < cap; i++) {
+        if(i % 3 != 0) continue;
+
+        (function(i) {
+          var str_nm = li_commands.get(i);
+          var str_param = li_commands.get(i + 1);
+          var str_des = Vars.headless ? "" : (Core.bundle.get("info.reind-info-cmd-" + str_nm + ".name"));
+          var scr = li_commands.get(i + 2);
+
+          reindCmd.register(str_nm, str_param, str_des, cons(arg => scr.call(arg)));
+        }) (i);
+      };
+    };
+
     Events.run(MusicRegisterEvent, () => {
-      setup_dialog_welcome();
+      setDialog_welcome();
       cfg_hidden.setup_hiddenItems();
       cfg_content.setup_content();
 

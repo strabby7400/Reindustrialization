@@ -12,7 +12,7 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_flow = require("reind/mdl/mdl_flow");
 
     const db_fluid = require("reind/db/db_fluid");
@@ -52,14 +52,14 @@
 
       if(liq.effect != StatusEffects.none) liq.stats.add(db_stat.fluidStatus, liq.effect.localizedName);
 
-      var liqHeat = mdl_database.read_1n1v(db_fluid.fluidHeat, liq.name);
+      var liqHeat = mdl_data.read_1n1v(db_fluid.fluidHeat, liq.name);
       if(liqHeat != null) liq.stats.add(db_stat.fluidHeat, liqHeat);
     };
 
 
     function updateComp(liq, puddle) {
       frag_fluid.update_fix(liq, puddle);
-
+      frag_fluid.update_puddleReaction(liq, puddle);
       frag_fluid.update_shortCircuit(liq, puddle);
     };
   // End

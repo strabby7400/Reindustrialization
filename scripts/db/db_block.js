@@ -59,18 +59,19 @@
   // Part: Generic
     /* NOTE: Sets stat for faction. */
     const li_blockFaction = new Seq([
-      "reind-eff-core-ash", Core.bundle.get("term.reind-term-outpost-military.name"),
-      "reind-eff-core-ember", Core.bundle.get("term.reind-term-outpost-military.name"),
-      "reind-eff-core-bonfire", Core.bundle.get("term.reind-term-outpost-military.name"),
+      "reind-eff-core-ash", "outpost-military",
+      "reind-eff-core-ember", "outpost-military",
+      "reind-eff-core-bonfire", "outpost-military",
 
-      "reind-min-dril-sand-excavator", Core.bundle.get("term.reind-term-emerald-tide.name"),
-      "reind-min-dril-basic-impact-drill", Core.bundle.get("term.reind-term-emerald-tide.name"),
-      "reind-min-dril-titan-impact-drill", Core.bundle.get("term.reind-term-emerald-tide.name"),
-      "reind-min-scan-pulse-ore-scanner", Core.bundle.get("term.reind-term-emerald-tide.name"),
-      "reind-min-misc-placer-miner", Core.bundle.get("term.reind-term-emerald-tide.name"),
+      "reind-min-dril-sand-excavator", "emerald-tide",
+      "reind-ilmin-dril-ids-remote-drill", "emerald-tide",
+      "reind-min-dril-basic-impact-drill", "emerald-tide",
+      "reind-min-dril-titan-impact-drill", "emerald-tide",
+      "reind-min-scan-pulse-ore-scanner", "emerald-tide",
+      "reind-min-misc-placer-miner", "emerald-tide",
 
-      "reind-ileff-misc-ids-engine", Core.bundle.get("term.reind-term-enclosure.name"),
-      "reind-ileff-misc-bit-bank", Core.bundle.get("term.reind-term-enclosure.name"),
+      "reind-ileff-misc-ids-engine", "enclosure",
+      "reind-ileff-misc-bit-bank", "enclosure",
     ]);
     exports.blockFaction = li_blockFaction;
 
@@ -90,6 +91,10 @@
       "reind-pow-gen-tidal-generator", 6,
 
       "reind-pow-boil-steam-boiler", 8,
+
+      "reind-def-proj-basic-repair-projector", 8,
+
+      "reind-fac-sep-dry-magnetic-separator", 2,
     ]);
     exports.genericRange = li_genericRange;
 
@@ -105,9 +110,9 @@
 
 
     const li_epRange = new Seq([
-      "reind-min-dril-titan-impact-drill", 64.0,
+      "reind-min-dril-titan-impact-drill", 8,
 
-      "reind-pow-gen-energizer-generator", 80.0,
+      "reind-pow-gen-energizer-generator", 10,
     ]);
     exports.epRange = li_epRange;
 
@@ -228,8 +233,8 @@
 
   // Part: Heat Block
     const li_heatLimit = new Seq([
-      "reind-pow-hcond-copper-heat-conductor", 700.0,
-      "reind-pow-hcond-steel-heat-conductor", 1000.0,
+      "reind-pow-hcond-copper-heat-conductor", 40.0,
+      "reind-pow-hcond-steel-heat-conductor", 100.0,
     ]);
     exports.heatLimit = li_heatLimit;
 
@@ -281,77 +286,248 @@
     const li_factoryFamily = new Seq([
 
       /* ========================================
-        Section: Pulverizer
+        Section: Absorber
       ======================================== */
-
-      "reind-fac-mill-ball-mill", Core.bundle.get("term.reind-term-pulverizer.name"),
-      "reind-fac-mill-rod-mill", Core.bundle.get("term.reind-term-pulverizer.name"),
-      "reind-fac-mill-mechanical-mill", Core.bundle.get("term.reind-term-pulverizer.name"),
-
-      /* ========================================
-        Section: Brick Press
-      ======================================== */
-
-      "reind-fac-misc-core-crafter", Core.bundle.get("term.reind-term-brick-press.name"),
-      "reind-fac-proc-brick-press", Core.bundle.get("term.reind-term-brick-press.name"),
 
       /* ========================================
         Section: Alloy Furnace
       ======================================== */
 
-      "reind-fac-furn-kiln", Core.bundle.get("term.reind-term-alloy-furnace.name"),
-      "reind-fac-furn-induction-furnace", Core.bundle.get("term.reind-term-alloy-furnace.name"),
-
-      /* ========================================
-        Section: Rock Crusher
-      ======================================== */
-
-      "reind-fac-mill-jaw-crusher", Core.bundle.get("term.reind-term-rock-crusher.name"),
-      "reind-fac-mill-hammer-crusher", Core.bundle.get("term.reind-term-rock-crusher.name"),
+      "reind-fac-furn-kiln", "alloy-furnace",
+      "reind-fac-furn-induction-furnace", "alloy-furnace",
 
       /* ========================================
         Section: Brick Kiln
       ======================================== */
 
-      "reind-fac-furn-primitive-brick-kiln", Core.bundle.get("term.reind-term-brick-kiln.name"),
+      "reind-fac-furn-primitive-brick-kiln", "brick-kiln",
+
+      /* ========================================
+        Section: Brick Press
+      ======================================== */
+
+      "reind-fac-misc-core-crafter", "brick-press",
+      "reind-fac-proc-brick-press", "brick-press",
+
+      /* ========================================
+        Section: Chemical Reactor
+      ======================================== */
+
+      "reind-fac-reac-tank-reactor", "reactor",
+      "reind-fac-reac-fixed-bed-reactor", "reactor",
 
       /* ========================================
         Section: Coke Oven
       ======================================== */
 
-      "reind-fac-furn-primitive-coke-oven", Core.bundle.get("term.reind-term-coke-oven.name"),
+      "reind-fac-furn-primitive-coke-oven", "coke-oven",
 
       /* ========================================
-        Section: Sintering Furnace
+        Section: Concentrate Smelter
       ======================================== */
 
-      "reind-fac-furn-primitive-sintering-furnace", Core.bundle.get("term.reind-term-sintering-furnace.name"),
+      "reind-fac-furn-bricked-blast-furnace", "concentrate-smelter",
 
       /* ========================================
-        Section: Roasting Furnace
+        Section: Convertor
       ======================================== */
 
-      "reind-fac-furn-colossal-kiln", Core.bundle.get("term.reind-term-roasting-furnace.name"),
-      "reind-fac-furn-shaft-kiln", Core.bundle.get("term.reind-term-roasting-furnace.name"),
-      "reind-fac-furn-rotary-kiln-m", Core.bundle.get("term.reind-term-roasting-furnace.name"),
-      "reind-fac-furn-box-furnace", Core.bundle.get("term.reind-term-roasting-furnace.name"),
+      /* ========================================
+        Section: Crafter
+      ======================================== */
+
+      "reind-fac-misc-core-crafter", "crafter",
 
       /* ========================================
         Section: Dust Mixer
       ======================================== */
 
-      "reind-fac-mix-v-mixer", Core.bundle.get("term.reind-term-dust-mixer.name"),
-      "reind-fac-mix-3d-mixer", Core.bundle.get("term.reind-term-dust-mixer.name"),
-      "reind-fac-mix-conical-mixer", Core.bundle.get("term.reind-term-dust-mixer.name"),
+      "reind-fac-mix-v-mixer", "dust-mixer",
+      "reind-fac-mix-3d-mixer", "dust-mixer",
+      "reind-fac-mix-conical-mixer", "dust-mixer",
+
+      /* ========================================
+        Section: Dust Remover
+      ======================================== */
+
+      "reind-fac-sep-cyclone-separator", "dust-remover",
+
+      /* ========================================
+        Section: Electrolyzer
+      ======================================== */
+
+      /* ========================================
+        Section: Fluid Dryer
+      ======================================== */
+
+      "reind-fac-reac-fixed-bed-reactor", "fluid-dryer",
+
+      /* ========================================
+        Section: Grain Dryer
+      ======================================== */
+
+      "reind-fac-rmv-hot-air-dryer", "grain-dryer",
+
+      /* ========================================
+        Section: Grain Heater
+      ======================================== */
+
+      /* ========================================
+        Section: Heat Exchanger
+      ======================================== */
+
+      "reind-fac-heat-vent-heat-exchanger", "heat-exchanger",
+      "reind-fac-heat-temperature-control-unit", "heat-exchanger",
+
+      /* ========================================
+        Section: Heater
+      ======================================== */
+
+      "reind-fac-heat-furnace-heater", "heater",
+      "reind-fac-heat-vent-heat-exchanger", "heater",
+
+      /* ========================================
+        Section: Inlet
+      ======================================== */
+
+      "reind-fac-misc-generic-inlet", "inlet",
+      "reind-fac-misc-fuel-inlet", "inlet",
+
+      /* ========================================
+        Section: Leacher
+      ======================================== */
+
+      /* ========================================
+        Section: Liquid Mixer
+      ======================================== */
+
+      "reind-fac-mix-tank-mixer", "liquid-mixer",
+
+      /* ========================================
+        Section: Melt Reactor
+      ======================================== */
+
+      "reind-fac-furn-bricked-blast-furnace", "melt-reactor",
+
+      /* ========================================
+        Section: Melter
+      ======================================== */
+
+      /* ========================================
+        Section: Pressure Pump
+      ======================================== */
+
+      "reind-fac-air-piston-pressure-pump", "pressure-pump",
+      "reind-fac-air-liquid-ring-pressure-pump", "pressure-pump",
+
+      /* ========================================
+        Section: Pulverizer
+      ======================================== */
+
+      "reind-fac-mill-mechanical-mill", "pulverizer",
+      "reind-fac-mill-ball-mill", "pulverizer",
+      "reind-fac-mill-rod-mill", "pulverizer",
+
+      /* ========================================
+        Section: Purifier I
+      ======================================== */
+
+      "reind-fac-sep-dry-magnetic-separator", "purifier-i",
+      "reind-fac-sep-mineral-jig-m", "purifier-i",                // NOTE: Usually not used for concentrate purification.
+
+      /* ========================================
+        Section: Purifier II
+      ======================================== */
+
+      /* ========================================
+        Section: Roasting Furnace
+      ======================================== */
+
+      "reind-fac-furn-colossal-kiln", "roasting-furnace",
+      "reind-fac-furn-shaft-kiln", "roasting-furnace",
+      "reind-fac-furn-rotary-kiln-m", "roasting-furnace",
+      "reind-fac-furn-box-furnace", "roasting-furnace",
+
+      /* ========================================
+        Section: Rock Crusher
+      ======================================== */
+
+      "reind-fac-mill-jaw-crusher", "rock-crusher",
+      "reind-fac-mill-hammer-crusher", "rock-crusher",                // NOTE: Hard materials are excluded.
+
+      /* ========================================
+        Section: Sintering Furnace
+      ======================================== */
+
+      "reind-fac-furn-primitive-sintering-furnace", "sintering-furnace",
+
+      /* ========================================
+        Section: Vibration Screen
+      ======================================== */
+
+      "reind-fac-sep-vibration-screen", "vibration-screen",
 
     ]);
     exports.factoryFamily = li_factoryFamily;
+
+
+    const li_structure = new Seq([
+      "reind-fac-furn-bricked-blast-furnace-controller", "reind-fac-furn-bricked-blast-furnace", new Seq([
+        new Point2(-3, -3), "reind-def-wall-concrete-barricade",
+        new Point2(-1, -3), "reind-def-wall-plate-wall-steel",
+        new Point2(0, -3), "reind-def-wall-plate-wall-steel",
+        new Point2(1, -3), "reind-def-wall-plate-wall-steel",
+        new Point2(2, -3), "reind-def-wall-concrete-barricade",
+
+        new Point2(-1, -2), "reind-def-wall-brick-wall-mullite",
+        new Point2(0, -2), "reind-def-wall-brick-wall-mullite",
+        new Point2(1, -2), "reind-def-wall-brick-wall-mullite",
+
+        new Point2(-3, -1), "reind-def-wall-plate-wall-steel",
+        new Point2(-2, -1), "reind-def-wall-brick-wall-mullite",
+        new Point2(-1, -1), "reind-def-wall-brick-wall-silica",
+        new Point2(0, -1), "reind-def-wall-brick-wall-silica",
+        new Point2(1, -1), "reind-def-wall-brick-wall-silica",
+        new Point2(2, -1), "reind-def-wall-brick-wall-mullite",
+        new Point2(3, -1), "reind-def-wall-plate-wall-steel",
+
+        new Point2(-3, 0), "reind-def-wall-plate-wall-steel",
+        new Point2(-2, 0), "reind-def-wall-brick-wall-mullite",
+        new Point2(-1, 0), "reind-def-wall-brick-wall-silica",
+        new Point2(1, 0), "reind-def-wall-brick-wall-silica",
+        new Point2(2, 0), "reind-def-wall-brick-wall-mullite",
+        new Point2(3, 0), "reind-def-wall-plate-wall-steel",
+
+        new Point2(-3, 1), "reind-def-wall-plate-wall-steel",
+        new Point2(-2, 1), "reind-def-wall-brick-wall-mullite",
+        new Point2(-1, 1), "reind-def-wall-brick-wall-silica",
+        new Point2(0, 1), "reind-def-wall-brick-wall-silica",
+        new Point2(1, 1), "reind-def-wall-brick-wall-silica",
+        new Point2(2, 1), "reind-def-wall-brick-wall-mullite",
+        new Point2(3, 1), "reind-def-wall-plate-wall-steel",
+
+        new Point2(-3, 2), "reind-def-wall-concrete-barricade",
+        new Point2(-1, 2), "reind-def-wall-brick-wall-mullite",
+        new Point2(0, 2), "reind-def-wall-brick-wall-mullite",
+        new Point2(1, 2), "reind-def-wall-brick-wall-mullite",
+        new Point2(2, 2), "reind-def-wall-concrete-barricade",
+
+        new Point2(-1, 3), "reind-def-wall-plate-wall-steel",
+        new Point2(0, 3), "reind-def-wall-plate-wall-steel",
+        new Point2(1, 3), "reind-def-wall-plate-wall-steel",
+      ]),
+    ]);
+    exports.structure = li_structure;
   // End
 
 
   // Part: Pollution
     const li_blockPollution = new Seq([
-      /* tree */
+
+      /* ========================================
+        Section: Tree (And Fungi)
+      ======================================== */
+
       "reind-env-tree-shell-tree", -8.0,
       "reind-env-tree-dark-crab-tree", -12.0,
       "reind-env-tree-campfire-tree", -20.0,
@@ -374,9 +550,10 @@
       "reind-env-tree-elder-gem-tree", -26.0,
       "reind-env-tree-bush-rock-fern", -6.0,
 
-      /* vent */
+      /* ========================================
+        Section: Miner
+      ======================================== */
 
-      /* miner */
       "reind-min-dril-mechanical-drill", 4.0 / 4.0,
       "reind-min-dril-pneumatic-drill", 4.0 / 4.0,
       "reind-min-dril-sand-excavator", 27.0 / 9.0,
@@ -386,35 +563,54 @@
       "reind-min-harv-lumberjack", 1.5 / 1.0,
       "reind-min-misc-placer-miner", 27.0 / 9.0,
 
-      /* generic factory */
+      /* ========================================
+        Section: Generic Factory
+      ======================================== */
+
       "reind-fac-air-air-collector", -2.0,
       "reind-fac-air-air-filter", -12.0 / 4.0,
       "reind-fac-proc-sawmill", 24.0 / 16.0,
       "reind-fac-sep-vibration-screen", 4.0 / 4.0,
       "reind-fac-misc-basic-chimney", 8.0 / 4.0,
 
-      /* heat factory */
+      /* ========================================
+        Section: Heat Factory
+      ======================================== */
+
       "reind-fac-furn-primitive-glass-kiln", 27.0 / 9.0,
 
-      /* multi-crafter */
+      /* ========================================
+        Section: Recipe Factory & Fragment Factory
+      ======================================== */
+
       "reind-fac-furn-kiln", 8.0 / 4.0,
       "reind-fac-furn-colossal-kiln", 72.0 / 16.0,
       "reind-fac-furn-primitive-sintering-furnace", 15.0 / 9.0,
       "reind-fac-furn-bloomery", 16.0 / 4.0,
+      "reind-fac-furn-bricked-blast-furnace", 171.5 / 49.0,
       "reind-fac-furn-carbonization-kiln", 8.0 / 4.0,
       "reind-fac-furn-primitive-brick-kiln", 8.0 / 4.0,
       "reind-fac-furn-primitive-coke-oven", 12.0 / 4.0,
       "reind-fac-heat-furnace-heater", 16.0 / 4.0,
       "reind-fac-mill-jaw-crusher", 6.0 / 4.0,
+      "reind-fac-mill-hammer-crusher", 13.5 / 9.0,
+      "reind-fac-mill-mechanical-mill", 6.0 / 4.0,
       "reind-fac-mill-ball-mill", 9.0 / 9.0,
       "reind-fac-mix-v-mixer", 2.0 / 4.0,
       "reind-fac-proc-brick-press", 13.5 / 9.0,
       "reind-fac-proc-charcoal-rod-maker-m", 2.0 / 4.0,
+      "reind-fac-proc-charcoal-rod-maker-r1", 2.0 / 4.0,
       "reind-fac-sep-dry-magnetic-separator", 13.5 / 9.0,
+      "reind-fac-sep-mineral-jig-m", 8.0 / 4.0,
+      "reind-fac-sep-mineral-jig-r1", 8.0 / 4.0,
       "reind-fac-misc-core-crafter", 6.0 / 4.0,
 
-      /* very specific */
+      /* ========================================
+        Section: VERY SPECIFIC ZONE
+      ======================================== */
+
       "reind-dis-aux-item-incinerator", 8.0 / 4.0,
+
     ]);
     exports.blockPollution = li_blockPollution;
   // End

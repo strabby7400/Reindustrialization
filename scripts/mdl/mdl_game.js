@@ -16,7 +16,7 @@
       if(off == null) off = 0.0;
       if(t == null) return;
 
-      return new Point2(t.worldx() + off, t.worldy() + off);
+      return new Vec2(t.worldx() + off, t.worldy() + off);
     };
     exports.poser_1t = poser_1t;
 
@@ -34,7 +34,7 @@
     const poser_1u = function(unit) {
       if(unit == null) return;
 
-      return new Point2(unit.x, unit.y);
+      return new Vec2(unit.x, unit.y);
     };
     exports.poser_1u = poser_1u;
 
@@ -42,7 +42,7 @@
     /* NOTE: I have to deal with {pos} */
     const poser_gn = function(pos_gn) {
       if(pos_gn == null) return;
-      if(pos_gn instanceof Point2) return pos_gn;
+      if(pos_gn instanceof Vec2) return pos_gn;
 
       var pos;
 
@@ -73,7 +73,7 @@
           break;
         case "player" :
           var unit_p = Vars.player.unit();
-          if(unit_p != null) pos = new Point2(unit_p.x, unit_p.y);
+          if(unit_p != null) pos = new Vec2(unit_p.x, unit_p.y);
           break;
       };
 
@@ -89,7 +89,7 @@
 
       var dx = rad * Math.cos(ang);
       var dy = rad * Math.sin(ang);
-      var pos = new Point2(pos_0.x + dx, pos_0.y + dy);
+      var pos = new Vec2(pos_0.x + dx, pos_0.y + dy);
 
       return pos;
     };
@@ -98,7 +98,7 @@
 
     /* NOTE: Gets the position of the mouse. */
     const poser_mouse = function() {
-      return new Point2(Core.input.mouseWorldX(), Core.input.mouseWorldY());
+      return new Vec2(Core.input.mouseWorldX(), Core.input.mouseWorldY());
     };
     exports.poser_mouse = poser_mouse;
   // End
@@ -572,6 +572,13 @@
       return li_unit;
     };
     exports.getUnits = getUnits;
+
+
+    /* NOTE: Gets a list of allied units in range. */
+    const getAllied = function(pos, rad, team) {
+      return filter_team(getUnits(pos, rad), team);
+    };
+    exports.getAllied = getAllied;
 
 
     /* NOTE: Gets a list of enemy units in range. Derelict team is excluded. */

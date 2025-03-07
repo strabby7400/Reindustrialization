@@ -1,0 +1,90 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: PayloadConveyor
+  category: units
+  requirements: [
+    item-chem-graphite/20
+    item-chem-steel/15
+    item-buil-cement/10
+    item-buil-coarse-aggregate/20
+    item-buil-fine-aggregate/10
+  ]
+  buildCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: dis-conv-improved-conveyor
+    objectives: []
+  }
+  researchCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 24.0
+  size: 2
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  canOverdrive: false
+  conductivePower: true
+  connectedPower: false
+  rotate: true
+  solid: false
+  underBullets: true
+  moveTime: 10.0
+  moveForce: 180.0
+  interp: linear
+  payloadLimit: 2.0
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  consumes: {
+    power: 0.125
+  }

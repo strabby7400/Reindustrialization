@@ -6,6 +6,7 @@
 
 
   // Part: Import
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_heat = require("reind/mdl/mdl_heat");
   // End
@@ -42,7 +43,7 @@
       if(a == null) a = 1.0;
       if(regScl == null) regScl = 1.0;
       if(color == null) color = Color.white;
-      if(pos == null || reg == null) return;
+      if(Vars.headless || pos == null || reg == null) return;
 
       var x = pos.x;
       var y = pos.y;
@@ -62,23 +63,67 @@
 
 
     const drawSimpleShadow = function(pos, reg, ang, a, regScl, color, z) {
-      Draw.mixcol(Color.darkGray, 1.0);
-      drawNormalRegion(pos, reg, ang, a * 0.4, regScl, color, z);
+      if(Vars.headless) return;
+
+      Draw.mixcol(Pal.shadow, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.22, regScl, color, z);
     };
     exports.drawSimpleShadow = drawSimpleShadow;
 
 
     const drawBlurredShadow = function(pos, reg, ang, a, regScl, color, z) {
-      Draw.mixcol(Color.darkGray, 1.0);
-      drawNormalRegion(pos, reg, ang, a * 0.2, regScl, color, z);
-      Draw.mixcol(Color.darkGray, 1.0);
-      drawNormalRegion(pos, reg, ang, a * 0.18, regScl * 1.05, color, z);
-      Draw.mixcol(Color.darkGray, 1.0);
-      drawNormalRegion(pos, reg, ang, a * 0.16, regScl * 1.1, color, z);
-      Draw.mixcol(Color.darkGray, 1.0);
-      drawNormalRegion(pos, reg, ang, a * 0.14, regScl * 1.15, color, z);
+      if(Vars.headless) return;
+
+      Draw.mixcol(Pal.shadow, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.18, regScl, color, z);
+      Draw.mixcol(Pal.shadow, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.09, regScl * 1.05, color, z);
+      Draw.mixcol(Pal.shadow, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.05, regScl * 1.1, color, z);
+      Draw.mixcol(Pal.shadow, 1.0);
+      drawNormalRegion(pos, reg, ang, a * 0.03, regScl * 1.15, color, z);
     };
     exports.drawBlurredShadow = drawBlurredShadow;
+
+
+    /* NOTE: Inspired by Miscellaneous Concepts mod by MEEPofFaith. */
+    const drawPseudo3dShadow = function(pos, reg, elev, ang, a, regScl, color, z) {
+      if(elev == null) elev = 0.0;
+      if(ang == null) ang = 0.0;
+      if(a == null) a = 1.0;
+      if(regScl == null) regScl = 1.0;
+      if(color == null) color = Color.white;
+      if(Vars.headless || pos == null || reg == null) return;
+
+      var x = pos.x;
+      var y = pos.y;
+      var w = reg.width * 2.0 * regScl / Vars.tilesize;
+      var h = reg.height * 2.0 * regScl / Vars.tilesize;
+
+      var x_cam = Core.camera.position.x;
+      var y_cam = Core.camera.position.y;
+      var offsetScl = 0.06;
+      var offsetMax = elev * 24.0;
+      var off_x = (x - x_cam + 16.0) * elev * offsetScl;
+      var off_y = (y - y_cam + 40.0) * elev * offsetScl;
+      var x_fi = x - ((Math.abs(off_x) > offsetMax) ? offsetMax * Mathf.sign(off_x) : off_x);
+      var y_fi = y - ((Math.abs(off_y) > offsetMax) ? offsetMax * Mathf.sign(off_y) : off_y);
+      var pos_fi = new Vec2(x_fi, y_fi);
+      var flr = Vars.world.floorWorld(x_fi, y_fi);
+      var a_fi = (flr != null && flr.canShadow) ? 0.5 * a : 0.0;
+
+      var arr_pos = [0.0, 0.03, 0.06, 0.1];
+      var arr_a = [0.84, 0.36, 0.14, 0.06];
+      var arr_regScl = [1.0, 1.2, 1.4, 1.6];
+      for(let i = 0; i < 4; i++) {
+        var pos_i = new Vec2(Mathf.lerp(x_fi, x, arr_pos[i]), Mathf.lerp(y_fi, y, arr_pos[i]));
+        var a_i = arr_a[i];
+        var regScl_i = arr_regScl[i];
+
+        drawSimpleShadow(pos_i, reg, ang, a_i, regScl_i * Mathf.lerp(1.0, 1.165, elev), color, z);
+      };
+    };
+    exports.drawPseudo3dShadow = drawPseudo3dShadow;
 
 
     /* <---------------- drawFadeRegion ----------------> */
@@ -88,7 +133,7 @@
     const drawFadeRegion = function(pos, reg, ang, a, regScl, fadeScl, color, z) {
       if(a == null) a = 1.0;
       if(fadeScl == null) fadeScl = 1.0;
-      if(pos == null || reg == null) return;
+      if(Vars.headless || pos == null || reg == null) return;
 
       var a_fi = a * Math.abs(Math.sin(Time.time / 15.0 / fadeScl));
 
@@ -100,6 +145,7 @@
     /* NOTE: Draws a flickering region, used for warning lights. */
     const drawFadeAlert = function(pos, reg, frac, ang, a, regScl, color, z) {
       if(frac == null) frac = 0.0;
+      if(Vars.headless) return;
 
       var a_fi = 1.0 - Math.pow(Math.min(frac, 1.0) - 1.0, 2);
 
@@ -115,7 +161,7 @@
     const drawRotatorRegion = function(pos, reg, ang, rate) {
       if(ang == null) ang = 0.0;
       if(rate == null) rate = 0.0;
-      if(pos == null || reg == null) return;
+      if(Vars.headless || pos == null || reg == null) return;
 
       var x = pos.x;
       var y = pos.y;
@@ -141,7 +187,7 @@
       if(mag == null) mag = 1.0;
       if(wobSclX == null) wobSclX = 1.0;
       if(wobSclY == null) wobSclY = 1.0;
-      if(pos == null || reg == null) return;
+      if(Vars.headless || pos == null || reg == null) return;
 
       var w = reg.width * reg.scl();
       var h = reg.height * reg.scl();
@@ -169,7 +215,7 @@
       if(radMag == null) radMag = 2.0;
       if(radInMag == null) radInMag = 1.0;
       if(color == null) color = Color.valueOf("ffc999");
-      if(pos == null || reg == null || frac < 0.0001) return;
+      if(Vars.headless || pos == null || reg == null || frac < 0.0001) return;
 
       var param1 = 0.3;
       var param2 = 0.06;
@@ -203,7 +249,7 @@
       if(color == null) color = Color.valueOf("ff3838");
       if(pulse == null) pulse = 0.3;
       if(pulseScl == null) pulseScl = 10.0;
-      if(pos == null || reg == null) return;
+      if(Vars.headless || pos == null || reg == null) return;
 
       var x = pos.x;
       var y = pos.y;
@@ -223,8 +269,9 @@
     /* NOTE: {reg} is optional. */
     const drawHeatRegion = function(pos, frac, reg, size) {
       if(size == null) size = 1;
-      if(reg == null) reg = mdl_heat.getHeatRegion(size);
+      if(Vars.headless) return;
 
+      if(reg == null) reg = mdl_heat.getHeatRegion(size);
       drawGlowRegion(pos, reg, frac);
     };
     exports.drawHeatRegion = drawHeatRegion;
@@ -242,7 +289,7 @@
       if(sinScl == null) sinScl = 16.0;
       if(sinMag == null) sinMag = 6.0;
       if(color == null) color = Color.valueOf("ffc999");
-      if(pos == null || frac < 0.0001) return;
+      if(Vars.headless || pos == null || frac < 0.0001) return;
 
       var x = pos.x;
       var y = pos.y;
@@ -250,6 +297,39 @@
       Drawf.light(x, y, (rad + Mathf.absin(sinScl, sinMag)) * frac * size, color, a);
     };
     exports.drawLight = drawLight;
+
+
+    /* <---------------- drawPlanRegion ----------------> */
+
+
+    const drawPlanRegion = function(pos, reg, color_gn) {
+      if(color_gn == null) color_gn = Color.white;
+      if(Vars.headless || pos == null || reg == null) return;
+
+      var color = palette_gn(color_gn);
+      var x = pos.x;
+      var y = pos.y;
+      var regScl = 0.75 + Math.sin(Time.time / 15.0) * 0.15;
+      var w = reg.width * 2.0 * regScl / Vars.tilesize;
+      var h = reg.height * 2.0 * regScl / Vars.tilesize;
+
+      Draw.z(Layer.power - 0.01);
+      Draw.color(color, 0.75);
+      Draw.rect(reg, x, y, w, h);
+      Draw.reset();
+    };
+    exports.drawPlanRegion = drawPlanRegion;
+
+
+    const drawPlaceRegion = function(blk, t, color_gn) {
+      if(Vars.headless || blk == null || t == null) return;
+
+      var pos = mdl_game.poser_1t(t, blk.offset);
+      var reg = mdl_content.getBuildRegion(blk);
+
+      drawPlanRegion(pos, reg, color_gn)
+    };
+    exports.drawPlaceRegion = drawPlaceRegion;
   // End
 
 
@@ -263,7 +343,7 @@
     const drawLine = function(pos1, pos2, color_gn, dashed) {
       if(color_gn == null) color_gn = Pal.accent;
       if(dashed == null) dashed = false;
-      if(pos1 == null || pos2 == null) return;
+      if(Vars.headless || pos1 == null || pos2 == null) return;
 
       var color = palette_gn(color_gn);
       var x1 = pos1.x;
@@ -289,7 +369,7 @@
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
       if(dashed == null) dashed = false;
-      if(pos1 == null || pos2 == null) return;
+      if(Vars.headless || pos1 == null || pos2 == null) return;
 
       var color = palette_gn(color_gn);
       var x1 = pos1.x;
@@ -315,7 +395,7 @@
     const drawLaser = function(pos1, pos2, color_gn, hasLight) {
       if(color_gn == null) color_gn = Pal.accent;
       if(hasLight == null) hasLight = false;
-      if(pos1 == null || pos2 == null) return;
+      if(Vars.headless || pos1 == null || pos2 == null) return;
 
       var color = palette_gn(color_gn);
       var x1 = pos1.x;
@@ -350,7 +430,7 @@
       if(color_gn == null) color_gn = Pal.accent;
       if(size == null) size = 1;
       if(dashed == null) dashed = false;
-      if(pos == null) return;
+      if(Vars.headless || pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -387,18 +467,19 @@
     exports.drawRect = drawRect;
 
 
-    const drawPlaceRect = function(blk, t, valid, r, dashed) {
-      if(blk == null || t == null) return;
+    const drawPlaceRect = function(blk, t, color_gn, r, dashed) {
+      if(Vars.headless || blk == null || t == null) return;
 
-      drawRect(mdl_game.poser_1t(t, blk.offset), r, valid, blk.size, dashed);
+      drawRect(mdl_game.poser_1t(t, blk.offset), r, color_gn, blk.size, dashed);
     };
     exports.drawPlaceRect = drawPlaceRect;
 
 
-    const drawSelectRect = function(b, r, dashed) {
-      if(b == null) return;
+    const drawSelectRect = function(b, r, dashed, color_gn) {
+      if(color_gn == null) color_gn = true;
+      if(Vars.headless || b == null) return;
 
-      drawPlaceRect(b.block, b.tile, true, r, dashed);
+      drawPlaceRect(b.block, b.tile, color_gn, r, dashed);
     };
     exports.drawSelectRect = drawSelectRect;
 
@@ -407,7 +488,7 @@
     const drawBuildRect = function(b, valid, dashed) {
       if(valid == null) valid = true;
       if(dashed == null) dashed = false;
-      if(b == null) return;
+      if(Vars.headless || b == null) return;
 
       drawPlaceRect(b.block, b.tile, valid, 0, dashed);
     };
@@ -415,7 +496,7 @@
 
 
     const drawBuildRectConnector = function(b, ob) {
-      if(b == null || ob == null) return;
+      if(Vars.headless || b == null || ob == null) return;
 
       drawBuildRect(b);
       drawBuildRect(ob);
@@ -435,7 +516,7 @@
     const drawCircle = function(pos, rad, color_gn, dashed) {
       if(color_gn == null) color_gn = Pal.accent;
       if(dashed == null) dashed = false;
-      if(pos == null) return;
+      if(Vars.headless || pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -450,18 +531,19 @@
     exports.drawCircle = drawCircle;
 
 
-    const drawPlaceCircle = function(blk, t, valid, rad, dashed) {
-      if(blk == null || t == null) return;
+    const drawPlaceCircle = function(blk, t, color_gn, rad, dashed) {
+      if(Vars.headless || blk == null || t == null) return;
 
-      drawCircle(mdl_game.poser_1t(t, blk.offset), rad, valid, dashed);
+      drawCircle(mdl_game.poser_1t(t, blk.offset), rad, color_gn, dashed);
     };
     exports.drawPlaceCircle = drawPlaceCircle;
 
 
-    const drawSelectCircle = function(b, rad, dashed) {
-      if(b == null) return;
+    const drawSelectCircle = function(b, rad, dashed, color_gn) {
+      if(color_gn == null) color_gn = true;
+      if(Vars.headless || b == null) return;
 
-      drawPlaceCircle(b.block, b.tile, true, rad, dashed);
+      drawPlaceCircle(b.block, b.tile, color_gn, rad, dashed);
     };
     exports.drawSelectCircle = drawSelectCircle;
 
@@ -473,7 +555,7 @@
     const drawWarningDisk = function(pos, rad, color_gn, scl) {
       if(color_gn == null) color_gn = Pal.remove;
       if(scl == null) scl = 1.0;
-      if(pos == null) return;
+      if(Vars.headless || pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -501,7 +583,7 @@
       if(color_gn == null) color_gn = Pal.accent;
       if(a == null) a = 0.7;
       if(size == null) size = 1.0;
-      if(t == null) return;
+      if(Vars.headless || t == null) return;
 
       var color = palette_gn(color_gn);
 
@@ -527,7 +609,7 @@
       if(color_gn == null) color_gn = Pal.accent;
       if(a == null) a = 0.5;
       if(pad == null) pad = 0.0;
-      if(b == null) return;
+      if(Vars.headless || b == null) return;
 
       var pos = mdl_game.poser_1b(b);
       var w = b.block.size * Vars.tilesize - pad;
@@ -554,7 +636,7 @@
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
       if(a == null) a = 0.5;
-      if(pos == null) return;
+      if(Vars.headless || pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -600,7 +682,7 @@
       if(size == null) size = 1;
       if(off_w == null) off_w = 0.0;
       if(off_ty == null) off_ty = 0;
-      if(pos == null) return;
+      if(Vars.headless || pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
@@ -632,7 +714,7 @@
     const drawItemTransfer = function(pos_f, pos_t, color_gn, scl) {
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
-      if(pos_f == null || pos_t == null) return;
+      if(Vars.headless || pos_f == null || pos_t == null) return;
 
       var color = palette_gn(color_gn);
       var x_f = pos_f.x;
@@ -674,7 +756,7 @@
     /* NOTE: Draws the content icon at the left-upper corner of the block. */
     const drawContentIcon = function(pos, ct, size) {
       if(size == null) size = 1;
-      if(pos == null || ct == null) return;
+      if(Vars.headless || pos == null || ct == null) return;
 
       var x = pos.x - Vars.tilesize * 0.5 * size;
       var y = pos.y + Vars.tilesize * 0.5 * size;
@@ -693,13 +775,34 @@
   // Part: Status
 
 
+    /* <---------------- drawBlockStatus ----------------> */
+
+
+    const drawBlockStatus = function(b, color) {
+      if(Vars.headless || b == null) return;
+
+      if(color == null) color = b.status().color;
+      var mtp = b.block.size > 1 ? 1.0 : 0.64;
+      var cx = b.x + b.block.size * Vars.tilesize * 0.5 - Vars.tilesize * mtp * 0.5;
+      var cy = b.y - b.block.size * Vars.tilesize * 0.5 + Vars.tilesize * mtp * 0.5;
+
+      Draw.z(Layer.power + 1.0);
+      Draw.color(Pal.gray);
+      Fill.square(cx, cy, mtp * 2.5, 45.0);
+      Draw.color(color);
+      Fill.square(cx, cy, mtp * 1.5, 45.0);
+      Draw.reset();
+    };
+    exports.drawBlockStatus = drawBlockStatus;
+
+
     /* <---------------- drawFadeStatus ----------------> */
 
 
     /* NOTE: Draws a pulsing region on {e}, the size is dynamic. */
     const drawFadeStatus = function(e, reg, color) {
       if(color == null) color = Color.white;
-      if(e == null || reg == null) return;
+      if(Vars.headless || e == null || reg == null) return;
 
       var pos = (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e);
       var scl = (e instanceof Unit) ? (0.1 * e.type.hitSize) : (0.1 * e.block.size * Vars.tilesize);
@@ -715,7 +818,7 @@
     const drawPlaceText = function(blk, t, valid, str, off_ty) {
       if(valid == null) valid = true;
       if(off_ty == null) off_ty = 0;
-      if(blk == null || t == null || str == null) return;
+      if(Vars.headless || blk == null || t == null || str == null) return;
 
       blk.drawPlaceText(str, t.x + blk.offset / Vars.tilesize, t.y + blk.offset / Vars.tilesize + off_ty, valid);
     };
@@ -723,7 +826,7 @@
 
 
     const drawSelectText = function(b, valid, str, off_ty) {
-      if(b == null) return;
+      if(Vars.headless || b == null) return;
 
       drawPlaceText(b.block, b.tile, valid, str, off_ty);
     };

@@ -48,7 +48,7 @@
       },
     });
     powGen_energizerGenerator.buildType = () => extend(ConsumeGenerator.ConsumeGeneratorBuild, powGen_energizerGenerator, {
-      alertReg: mdl_content.getContentRegion(powGen_energizerGenerator, "-alert"),
+      alertReg: mdl_content.getRegion(powGen_energizerGenerator, "-alert"),
       updateTile() {
         this.super$updateTile();
         blk_fieldGenerator.updateTile(this);

@@ -14,8 +14,6 @@
 
   // Part: Accessor
     const accB_down = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.down;
       if(mode == "w") b.down = val;
     };

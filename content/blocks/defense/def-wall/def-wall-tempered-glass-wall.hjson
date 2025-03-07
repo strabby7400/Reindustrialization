@@ -1,0 +1,192 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Wall
+  category: defense
+  requirements: [
+    item-buil-tempered-glass/25
+    item-chem-steel/10
+  ]
+  buildCostMultiplier: 6.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: def-wall-plate-wall-copper
+    objectives: []
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 120.0
+  armor: 0.0
+  size: 1
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: true
+  flashHit: true
+  flashColor: ffffff
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  crushDamageMultiplier: 0.75
+  update: true
+  lightningChance: -1.0
+  lightningDamage: 20.0
+  lightningLength: 17
+  lightningColor: ffd37f
+  lightningSound: spark
+  chanceDeflect: -1.0
+  deflectSound: none
+
+
+/*
+  ========================================
+  Section: Attack
+  ========================================
+*/
+
+
+  destroyBulletSameTeam: false
+  destroyBullet: {
+
+    # Mark: glassShard
+
+    /* <---------------- meta ----------------> */
+
+    type: BasicBulletType
+    instantDisappear: true
+    despawnHit: true
+
+    /* <---------------- properties ----------------> */
+
+    lifetime: 1.0
+    speed: 0.0
+    damage: 1.0
+    buildingDamageMultiplier: 1.0
+    hitSize: 4.0
+    collides: false
+    collidesAir: false
+    collidesGround: true
+
+    /* <---------------- visual ----------------> */
+
+    sprite: bullet
+    layer: 74.0
+    lightRadius: -1.0
+    lightOpacity: 0.0
+    hitShake: 0.0
+    despawnShake: 0.0
+    shootEffect: none
+    smokeEffect: none
+    chargeEffect: none
+    hitEffect: none
+    despawnEffect: none
+    hitSound: none
+    despawnSound: se-shot-glass
+
+    /* <---------------- specific (fragment) ----------------> */
+
+    fragBullets: 5
+    fragOnHit: true
+    fragOnAbsorb: true
+    fragRandomSpread: 360.0
+    fragSpread: 0.0
+    fragAngle: 0.0
+    fragVelocityMin: 0.2
+    fragVelocityMax: 1.0
+    fragLifeMin: 1.0
+    fragLifeMax: 1.0
+    fragBullet: {
+
+      # Mark: glassShardFrag
+
+      /* <---------------- meta ----------------> */
+
+      type: BasicBulletType
+      despawnHit: true
+
+      /* <---------------- properties ----------------> */
+
+      lifetime: 8.0
+      speed: 10.0
+      damage: 80.0
+      buildingDamageMultiplier: 0.1
+      hitSize: 4.0
+      collides: true
+      collidesAir: false
+      collidesGround: true
+      collideTerrain: true
+
+      /* <---------------- visual ----------------> */
+
+      sprite: reind-bul-bullet5
+      layer: 74.0
+      frontColor: ffffff
+      backColor: bfbfbf
+      hitColor: ffffff
+      width: 6.0
+      height: 6.0
+      lightRadius: -1.0
+      lightOpacity: 0.0
+      hitShake: 0.0
+      despawnShake: 0.0
+      shootEffect: none
+      smokeEffect: none
+      chargeEffect: none
+      hitEffect: hitBulletColor
+      despawnEffect: hitBulletColor
+      trailColor: ffffff20
+      trailLength: 6
+      trailWidth: 2.0
+      hitSound: none
+      despawnSound: none
+
+    }
+
+  }

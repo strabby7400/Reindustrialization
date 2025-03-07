@@ -5,7 +5,7 @@
 */
 
 
-  # type: multicraft.MultiCrafter
+  # type: GenericCrafter
   category: crafting
   requirements: [
     item-chem-copper/30
@@ -242,6 +242,7 @@
 */
 
 
+  configurable: true
   outputsLiquid: true
   ignoreLiquidFullness: false
 
@@ -253,96 +254,7 @@
 */
 
 
-  menu: simple
-  recipes: [
-
-
-    /*
-      ========================================
-      Section: Coking
-      ========================================
-    */
-
-
-      /* <---------------- coke ----------------> */
-
-
-      // Coal
-      {
-        craftTime: 600.0
-        icon: reind-item-chem-coal
-        input: {
-          power: 0.66666667
-          items: [
-            reind-item-chem-coal/20
-          ]
-          fluids: [
-            reind-effc-effc-smoke-exhaust/0.01666667
-            reind-liq-ore-water/0.1
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-coke/15
-          ]
-          fluids: [
-            reind-liq-was-waste-water/0.1
-          ]
-        }
-      }
-
-
-      /* <---------------- semicoke ----------------> */
-
-
-      // Lignite
-      {
-        craftTime: 600.0
-        icon: reind-item-ore-lignite
-        input: {
-          power: 0.66666667
-          items: [
-            reind-item-ore-lignite/20
-          ]
-          fluids: [
-            reind-effc-effc-smoke-exhaust/0.01666667
-            reind-liq-ore-water/0.1
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-semicoke/15
-          ]
-          fluids: [
-            reind-liq-was-waste-water/0.1
-          ]
-        }
-      }
-
-
-      // Peat
-      {
-        craftTime: 600.0
-        icon: reind-item-ore-peat
-        input: {
-          power: 0.66666667
-          items: [
-            reind-item-ore-peat/40
-          ]
-          fluids: [
-            reind-effc-effc-smoke-exhaust/0.01666667
-            reind-liq-ore-water/0.1
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-semicoke/15
-          ]
-          fluids: [
-            reind-liq-was-waste-water/0.1
-          ]
-        }
-      }
-
-
-  ]
+  craftTime: 600.0
+  consumes: {
+    power: 0.66666667
+  }

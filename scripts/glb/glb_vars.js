@@ -33,8 +33,11 @@
 
 
   // Part: Heat
-    const heat_transferMultiplier = 2.2;
+    const heat_transferMultiplier = 0.95;
     exports.heat_transferMultiplier = heat_transferMultiplier;
+
+    const heat_lossMultiplier = 1.5;
+    exports.heat_lossMultiplier = heat_lossMultiplier;
 
     const overheat_damageRatio = 0.05;
     exports.overheat_damageRatio = overheat_damageRatio;

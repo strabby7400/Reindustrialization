@@ -6,7 +6,7 @@
 
 
   research: {
-    parent: item-chem-sodium-bicarbonate
+    parent: item-chem-sodium-hydroxide
     objectives: []
   }
 

@@ -1,0 +1,182 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: RegenProjector
+  category: defense
+  requirements: [
+    item-bio-timber/100
+    item-chem-graphite/100
+    item-chem-brass/60
+    item-chem-steel/50
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: def-proj-basic-radar
+    objectives: []
+  }
+  researchCostMultiplier: 0.35
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
+  hasItems: true
+  itemCapacity: 10
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 20
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawFade
+        suffix: "-fade"
+      }
+
+
+      {
+        type: DrawPulseShape
+        color: 84f491
+        timeScl: 25.0
+        stroke: 2.0
+        minStroke: 0.2
+        radiusScl: 1.0
+        square: true
+      }
+
+
+    ]
+  }
+  effect: {
+
+    # Template: _menderParticles
+
+    /* <---------------- meta ----------------> */
+
+    interp: linear
+    lifetime: 150.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: "reind-efr-triangle"
+    layer: 69.0
+    particles: 1
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: 84f49100
+    colorTo: 84f491ff
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 1.0
+    randLength: true
+    length: 0.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: pow10In
+    sizeFrom: 6.0
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  effectChance: 0.002
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.15
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  range: 22
+  healPercent: 0.03
+  optionalMultiplier: 1.0
+  optionalUseTime: 120.0
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  consumes: {
+    power: 1.16666667
+    items: [
+
+
+      {
+        item: item-chem-solder
+        amount: 1
+        optional: false
+        booster: true
+      }
+
+
+    ]
+  }

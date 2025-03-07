@@ -6,7 +6,7 @@
 
 
   research: {
-    parent: item-buil-brick-zirconia-mullite
+    parent: item-buil-brick-mullite
     objectives: []
   }
 

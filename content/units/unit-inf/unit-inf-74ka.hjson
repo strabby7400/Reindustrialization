@@ -42,7 +42,7 @@
   rotateSpeed: 1.2
   accel: 0.5
   drag: 0.5
-  itemCapacity: 10
+  itemCapacity: 40
 
 
 /*
@@ -77,7 +77,7 @@
 
     {
       type: HoverPart
-      layerOffset: -0.0001
+      layerOffset: -0.001
       under: true
       mirror: false
       radius: 6.0
@@ -95,7 +95,7 @@
 
     {
       type: HoverPart
-      layerOffset: -0.00011
+      layerOffset: -0.001
       under: true
       mirror: false
       radius: 5.0
@@ -187,7 +187,7 @@
 
       /* <---------------- visual ----------------> */
 
-      layerOffset: -0.00001
+      layerOffset: -0.00005
       shootX: 0.0
       shootY: 8.5
       ejectEffect: casing2
@@ -195,7 +195,7 @@
       recoil: 3.0
       recoils: -1
       heatColor: ff3838
-      cooldownTime: 93.75
+      cooldownTime: 75.0
       shootSound: se-shot-light1
       chargeSound: none
 
@@ -359,7 +359,7 @@
 
       /* <---------------- visual ----------------> */
 
-      layerOffset: 0.00001
+      layerOffset: 0.00005
       shootX: 0.0
       shootY: 4.0
       ejectEffect: none
@@ -367,7 +367,7 @@
       recoil: 3.0
       recoils: -1
       heatColor: ff3838
-      cooldownTime: 675.0
+      cooldownTime: 540.0
       shootSound: se-shot-launcher
       chargeSound: none
 

@@ -5,7 +5,7 @@
 */
 
 
-  # type: multicraft.MultiCrafter
+  # type: GenericCrafter
   category: crafting
   requirements: [
     item-chem-copper/80
@@ -41,7 +41,7 @@
   size: 2
   hasItems: true
   itemCapacity: 10
-  hasLiquids: false
+  hasLiquids: true
   liquidCapacity: 5.0
   hasPower: false
 
@@ -65,7 +65,7 @@
 
 
   squareSprite: false
-  drawArrow: false
+  drawArrow: true
   drawer: {
     type: DrawMulti
     drawers: [
@@ -220,10 +220,11 @@
 */
 
 
+  configurable: true
   rotate: true
   outputsLiquid: true
   ignoreLiquidFullness: true
-  fluidOutputDirections: [0]
+  liquidOutputDirections: [0]
 
 
 /*
@@ -233,186 +234,4 @@
 */
 
 
-  menu: simple
-  recipes: [
-
-
-    /*
-      ========================================
-      Section: 3 Heat
-      ========================================
-    */
-
-
-      // Peat
-      {
-        craftTime: 180.0
-        icon: reind-item-ore-peat
-        input: {
-          items: [
-            reind-item-ore-peat/1
-          ]
-        }
-        output: {
-          fluids: [
-            reind-effc-cond-heat/0.05
-          ]
-        }
-      }
-
-
-      // Lignite
-      {
-        craftTime: 240.0
-        icon: reind-item-ore-lignite
-        input: {
-          items: [
-            reind-item-ore-lignite/1
-          ]
-        }
-        output: {
-          fluids: [
-            reind-effc-cond-heat/0.05
-          ]
-        }
-      }
-
-
-      // Raw Coal
-      /* NOTE: This sucks. */
-      {
-        craftTime: 240.0
-        icon: reind-item-ore-raw-coal
-        input: {
-          items: [
-            reind-item-ore-raw-coal/1
-          ]
-        }
-        output: {
-          items: [
-            reind-item-was-gangue/1
-          ]
-          fluids: [
-            reind-effc-cond-heat/0.05
-          ]
-        }
-      }
-
-
-    /*
-      ========================================
-      Section: 4 Heat
-      ========================================
-    */
-
-
-      // Sawdust
-      {
-        craftTime: 120.0
-        icon: reind-item-bio-sawdust
-        input: {
-          items: [
-            reind-item-bio-sawdust/1
-          ]
-        }
-        output: {
-          fluids: [
-            reind-effc-cond-heat/0.06666667
-          ]
-        }
-      }
-
-
-      // Timber
-      {
-        craftTime: 240.0
-        icon: reind-item-bio-timber
-        input: {
-          items: [
-            reind-item-bio-timber/1
-          ]
-        }
-        output: {
-          fluids: [
-            reind-effc-cond-heat/0.06666667
-          ]
-        }
-      }
-
-
-      // Coal
-      {
-        craftTime: 480.0
-        icon: reind-item-chem-coal
-        input: {
-          items: [
-            reind-item-chem-coal/1
-          ]
-        }
-        output: {
-          fluids: [
-            reind-effc-cond-heat/0.06666667
-          ]
-        }
-      }
-
-
-    /*
-      ========================================
-      Section: 5 Heat
-      ========================================
-    */
-
-
-      // Charcoal
-      {
-        craftTime: 240.0
-        icon: reind-item-bio-charcoal
-        input: {
-          items: [
-            reind-item-bio-charcoal/1
-          ]
-        }
-        output: {
-          fluids: [
-            reind-effc-cond-heat/0.08333333
-          ]
-        }
-      }
-
-
-      // Semicoke
-      {
-        craftTime: 360.0
-        icon: reind-item-chem-semicoke
-        input: {
-          items: [
-            reind-item-chem-semicoke/1
-          ]
-        }
-        output: {
-          fluids: [
-            reind-effc-cond-heat/0.08333333
-          ]
-        }
-      }
-
-
-      // Coke
-      {
-        craftTime: 480.0
-        icon: reind-item-chem-coke
-        input: {
-          items: [
-            reind-item-chem-coke/1
-          ]
-        }
-        output: {
-          fluids: [
-            reind-effc-cond-heat/0.08333333
-          ]
-        }
-      }
-
-
-  ]
+  craftTime: 60.0

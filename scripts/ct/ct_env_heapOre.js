@@ -66,6 +66,18 @@
     exports.envHeap_dolomite = envHeap_dolomite;
 
 
+    const envHeap_fluorapatite = extend(TallBlock, "env-heap-fluorapatite", {
+      setStats() {
+        this.super$setStats();
+        env_heapOre.setStats(this);
+      },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
+      },
+    });
+    exports.envHeap_fluorapatite = envHeap_fluorapatite;
+
+
     const envHeap_gypsum = extend(TallBlock, "env-heap-gypsum", {
       setStats() {
         this.super$setStats();
@@ -124,6 +136,18 @@
       },
     });
     exports.envHeap_salt = envHeap_salt;
+
+
+    const envHeap_silicaStone = extend(TallBlock, "env-heap-silica-stone", {
+      setStats() {
+        this.super$setStats();
+        env_heapOre.setStats(this);
+      },
+      drawBase(tile) {
+        env_heapOre.drawBase(this, tile);
+      },
+    });
+    exports.envHeap_silicaStone = envHeap_silicaStone;
 
 
     const envHeap_talcum = extend(TallBlock, "env-heap-talcum", {

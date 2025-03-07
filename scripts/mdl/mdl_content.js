@@ -6,10 +6,12 @@
 
 
   // Part: Import
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
     const db_fluid = require("reind/db/db_fluid");
+    const db_unit = require("reind/db/db_unit");
   // End
 
 
@@ -27,16 +29,8 @@
   // End
 
 
-  // Part: Get
-    const getContentRegion = function(ct, suffix) {
-      if(suffix == null) suffix = "";
-
-      return Core.atlas.find(ct.name + suffix);
-    };
-    exports.getContentRegion = getContentRegion;
-
-
-    const getContentType_nm = function(nm) {
+  // Part: Meta
+    const getType_nm = function(nm) {
       if(nm == null || typeof nm != "string") return;
 
       if(mdl_text.includes_ex(
@@ -106,7 +100,7 @@
         "reind-pla-",
       )) return "planet";
     };
-    exports.getContentType_nm = getContentType_nm;
+    exports.getType_nm = getType_nm;
 
 
     /* NOTE: Gets a content with type and id. */
@@ -150,7 +144,7 @@
     const getContent_nm = function(nm) {
       if(nm == null || typeof nm != "string") return;
 
-      var tp_ct = getContentType_nm(nm);
+      var tp_ct = getType_nm(nm);
       var ct = null;
       switch(tp_ct) {
         case "item" :
@@ -185,6 +179,120 @@
       return ct;
     };
     exports.getContent_nm = getContent_nm;
+  // End
+
+
+  // Part: Field
+    const getRegion = function(ct, suffix) {
+      if(suffix == null) suffix = "";
+
+      return Core.atlas.find(ct.name + suffix);
+    };
+    exports.getRegion = getRegion;
+
+
+    const getBuildRegion = function(blk) {
+      return Core.atlas.find(blk.name + "-icon", Core.atlas.find(blk.name));
+    };
+    exports.getBuildRegion = getBuildRegion;
+
+
+    const getConfig = function(ct, val_ini) {
+      var cfg = null;
+      if(ct instanceof Block) cfg = ct.lastConfig;
+
+      return (cfg == null) ? val_ini : cfg;
+    };
+    exports.getConfig = getConfig;
+  // End
+
+
+  // Part: Setting
+    const getFaction = function(ct) {
+      if(ct == null) return;
+
+      var nm = ct.name;
+      var tp_ct = getType_nm(nm);
+      var faction = null;
+      switch(tp_ct) {
+        case "build" :
+          faction = mdl_data.read_1n1v(db_block.blockFaction, nm);
+          break;
+        case "unit" :
+          faction = mdl_data.read_1n1v(db_unit.unitFaction, nm);
+          break;
+      };
+
+      return faction;
+    };
+    exports.getFaction = getFaction;
+
+
+    const getFactionValue = function(ct) {
+      if(ct == null) return;
+
+      var faction = getFaction(ct);
+      return (Vars.headless || faction == null) ? null : Core.bundle.get("term.reind-term-" + faction + ".name");
+    };
+    exports.getFactionValue = getFactionValue;
+
+
+    const getFactionMembers = function(faction) {
+      if(faction instanceof Block || faction instanceof UnitType) faction = getFaction(faction);
+      if(faction == null) return new Seq();
+
+      var li_ct = new Seq();
+
+      Vars.content.blocks().each(blk => {if(!isEnv(blk) && getFaction(blk) == faction) li_ct.add(blk)});
+      Vars.content.units().each(utp => {if(getFaction(utp) == faction) li_ct.add(blk)});
+
+      return li_ct;
+    };
+    exports.getFamilyMembers = getFamilyMembers;
+
+
+    const getFamily = function(ct) {
+      if(ct == null) return new Seq();
+
+      var nm = ct.name;
+      var fami = new Seq();
+      if(isFactory(ct)) fami = mdl_data.readli_1n1v(db_block.factoryFamily, nm);
+
+      return fami;
+    };
+    exports.getFamily = getFamily;
+
+
+    const getFamilyValue = function(ct) {
+      if(Vars.headless || ct == null) return;
+
+      var fami = getFamily(ct);
+      var temp_fami = new Seq();
+      fami.each(i => temp_fami.add(Core.bundle.get("term.reind-term-" + i + ".name")));
+
+      return mdl_text.getTagText(temp_fami);
+    };
+    exports.getFamilyValue = getFamilyValue;
+
+
+    const getFamilyMembers = function(fami) {
+      if(fami instanceof Block) fami = getFamily(fami);
+      if(typeof fami == "string") fami = new Seq([fami]);
+
+      var li_blk = new Seq();
+      Vars.content.blocks().each(blk => {
+        if(isFactory(blk)) {
+          var cond = false;
+          var temp_fami = getFamily(blk);
+          fami.each(i => {if(temp_fami.contains(i)) cond = true});
+
+          if(cond) li_blk.add(blk);
+        };
+      });
+
+      return li_blk;
+    };
+    exports.getFamilyMembers = getFamilyMembers;
   // End
 
 
@@ -267,13 +375,19 @@
     exports.isOre = isOre;
 
 
+    const isAqueous = function(ct) {
+      return db_fluid.grp_aqueous.contains(ct.name);
+    };
+    exports.isAqueous = isAqueous;
+
+
     const isConductive = function(ct) {
       return db_fluid.grp_conductive.contains(ct.name);
     };
     exports.isConductive = isConductive;
 
 
-    /* block */
+    /* build */
 
 
     const isConduit = function(ct) {
@@ -330,6 +444,28 @@
       return db_block.canShortCircuit.contains(ct.name);
     };
     exports.canShortCircuit = canShortCircuit;
+
+
+    const isFactory = function(ct) {
+      return mdl_text.includes_ex(
+        ct.name,
+        "reind-fac-",
+        "reind-ilfac-",
+      );
+    };
+    exports.isFactory = isFactory;
+
+
+    /* env */
+
+
+    const isEnv = function(ct) {
+      return mdl_text.includes_ex(
+        ct.name,
+        "reind-env-",
+      );
+    };
+    exports.isEnv = isEnv;
 
 
     /* entity */

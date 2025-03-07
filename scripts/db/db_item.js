@@ -61,77 +61,36 @@
   // End
 
 
-  // Part: Intermediate
-    /* NOTE: Sets stat for target products. */
-    const li_intermediateMap = new Seq([
+  // Part: Reaction
+    const li_itemReaction = new Seq([
+      "reind-item-chem-lithium", "reind-liq-ore-water", "explosionII",
+      "reind-item-chem-lithium", "reind-gas-misc-air", "explosionII",
 
-      /* ========================================
-        Section: Blend
-      ======================================== */
+      "reind-item-chem-sodium", "reind-liq-ore-water", "explosionII",
+      "reind-item-chem-sodium", "reind-gas-misc-air", "explosionII",
 
-      "reind-item-int-blend-cement", "reind-item-buil-cement",
-      "reind-item-int-blend-roasted-cement", "reind-item-buil-cement",
+      "reind-item-chem-potassium", "reind-liq-ore-water", "explosionII",
+      "reind-item-chem-potassium", "reind-gas-misc-air", "explosionIII",
 
-      "reind-item-int-blend-brick-high-alumina", "reind-item-buil-brick-high-alumina",
+      "reind-item-chem-potassium-hydroxide", "reind-gas-misc-air", "denaturing",
 
-      "reind-item-int-blend-brick-magnesia", "reind-item-buil-brick-magnesia",
-
-      /* ========================================
-        Section: Brick
-      ======================================== */
-
-      "reind-item-int-brick-clay-unbaked", "reind-item-buil-brick-clay",
-
-      "reind-item-int-brick-high-alumina-unbaked", "reind-item-buil-brick-high-alumina",
-
-      "reind-item-int-brick-magnesia-unbaked", "reind-item-buil-brick-magnesia",
-
-      /* ========================================
-        Section: Chunks
-      ======================================== */
-
-      "reind-item-int-chunks-aggregate", "reind-item-buil-coarse-aggregate",
-      "reind-item-int-chunks-aggregate", "reind-item-buil-fine-aggregate",
-
-      "reind-item-int-chunks-dolomite", "reind-item-chem-magnesia-sand",
-
-      "reind-item-int-chunks-gypsum", "reind-item-buil-cement",
-
-      "reind-item-int-chunks-limestone", "reind-item-buil-cement",
-      "reind-item-int-chunks-limestone", "reind-item-chem-lime",
-
-      "reind-item-int-chunks-zircon", "reind-item-chem-zircon-sand",
-
-      /* ========================================
-        Section: Dried
-      ======================================== */
-
-      "reind-item-int-sawdust-dried", "reind-item-bio-charcoal",
-
-      /* ========================================
-        Section: Dust
-      ======================================== */
-
-      "reind-item-int-dust-asbestos", "reind-item-buil-asbestos-wool",
-      "reind-item-int-dust-p1-asbestos", "reind-item-buil-asbestos-wool",
-
-      "reind-item-int-dust-bauxite", "reind-item-buil-brick-high-alumina",
-      "reind-item-int-dust-p1-bauxite", "reind-item-buil-brick-high-alumina",
-
-      "reind-item-int-dust-raw-coal", "reind-item-chem-coal",
-
-      "reind-item-int-dust-sand", "reind-item-chem-silica-sand",
-      "reind-item-int-dust-p1-sand", "reind-item-chem-silica-sand",
-
-      /* ========================================
-        Section: Misc
-      ======================================== */
-
-      "reind-item-int-charcoal-uncarbonized", "reind-item-bio-charcoal",
-
-      "reind-item-int-glass", "reind-item-buil-tempered-glass",
-      "reind-item-int-glass-unannealed", "reind-item-buil-tempered-glass",
-
+      "reind-item-chem-sodium-hydroxide", "reind-gas-misc-air", "denaturing",
     ]);
-    exports.intermediateMap = li_intermediateMap;
+    exports.itemReaction = li_itemReaction;
+
+
+    const li_denatured = new Seq([
+      "reind-item-chem-potassium-hydroxide", "reind-item-chem-potassium-carbonate",
+
+      "reind-item-chem-sodium-hydroxide", "reind-item-chem-sodium-carbonate",
+    ]);
+    exports.denatured = li_denatured;
+  // End
+
+
+  // Part: Virtual
+    const li_virtWhitelist = new Seq([
+      "reind-eff-stor-bit-container",
+    ]);
+    exports.virtWhitelist = li_virtWhitelist;
   // End

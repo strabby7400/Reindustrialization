@@ -8,12 +8,15 @@
   // Part: Import
     const frag_attack = require("reind/frag/frag_attack");
 
+    const cfg_update = require("reind/cfg/cfg_update");
+
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_flow = require("reind/mdl/mdl_flow");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_heat = require("reind/mdl/mdl_heat");
+    const mdl_reaction = require("reind/mdl/mdl_reaction");
     const mdl_ui = require("reind/mdl/mdl_ui");
 
     const db_block = require("reind/db/db_block");
@@ -42,8 +45,26 @@
     exports.update_fuming = update_fuming;
 
 
+    /* NOTE: More reaction triggers. */
+    const update_puddleReaction = function(liq, puddle) {
+      var t = puddle.tile;
+      mdl_game.getTiles_rect(t, 1).each(ot => {
+        var ob = ot.build;
+
+        if(ob != null && ob.items != null && !(ob.block instanceof CoreBlock)) {
+          // Water
+          if(mdl_content.isAqueous(liq)) ob.items.each(itm => mdl_reaction.handleReaction(ob, itm, Vars.content.liquid("reind-liq-ore-water")));
+
+          ob.items.each(itm => mdl_reaction.handleReaction(ob, itm, liq));
+        };
+      });
+    };
+    exports.update_puddleReaction = update_puddleReaction;
+
+
     /* NOTE: If the liquid is marked as conductive, damage some blocks in contact with the puddle. */
     const update_shortCircuit = function(liq, puddle) {
+      if(cfg_update.isSuppressed()) return;
       if(liq.gas || !mdl_content.isConductive(liq)) return;
 
       var t = puddle.tile;
@@ -148,6 +169,15 @@
 
       if(b.team == ob_fi.team && b.liquids != null && ob_fi.liquids != null && ob_fi.acceptLiquid(b, liq)) {
         return transferLiquid(b, ob_fi, liq, !mdl_content.isConduit(ob_fi.block));
+      } else if (!ob_fi.block.consumesLiquid(liq) && ob_fi.liquids != null && ob_fi.liquids.currentAmount() / ob_fi.block.liquidCapacity > 0.1 && b.liquids != null && b.liquids.currentAmount() / b.block.liquidCapacity > 0.1) {
+        mdl_reaction.handleReaction(ob_fi, b.liquids.current(), ob_fi.liquids.current());
+      };
+
+      if(b.team == ob_fi.team && ob_fi.items != null && !(ob_fi.block instanceof CoreBlock) && !ob_fi.block.consumesLiquid(liq)) {
+        // Water
+        if(mdl_content.isAqueous(liq)) ob.items.each(itm => mdl_reaction.handleReaction(ob, itm, Vars.content.liquid("reind-liq-ore-water")));
+
+        ob_fi.items.each(itm => mdl_reaction.handleReaction(ob, itm, liq));
       };
 
       return 0.0;
@@ -188,6 +218,7 @@
   // Part: Durability
     /* NOTE: Sticky fluids can damage some blocks that are vulnerable to clogging. */
     const updateTile_sticky = function(b) {
+      if(cfg_update.isSuppressed()) return;
       if(!Mathf.chanceDelta(0.02)) return;
       if(b.liquids == null) return;
       if(!mdl_content.vulnerableToClogging(b.block)) return;
@@ -198,7 +229,7 @@
       var visc_clog = glb_vars.clogging_viscosity;
       if(visc < visc_clog) return;
       var amt = b.liquids.get(liq);
-      if(amt < 0.5) return;
+      if(amt < 0.05) return;
       var cap = b.block.liquidCapacity;
 
       var dmg = Time.delta * (b.maxHealth * glb_vars.clogging_damageRatio + glb_vars.clogging_minDamage) * Mathf.lerp(0.5, 1.0, amt / cap) * Mathf.lerp(0.5, 1.0, (visc - visc_clog) / 0.25);
@@ -211,11 +242,12 @@
 
     /* NOTE: Corrosive fluids can damage some blocks. */
     const updateTile_corrosion = function(b) {
+      if(cfg_update.isSuppressed()) return;
       if(!Mathf.chanceDelta(0.02)) return;
       var liq = b.liquids.current();
       if(!mdl_content.isReind(liq)) return;
       var amt = b.liquids.get(liq);
-      if(amt < 0.5) return;
+      if(amt < 0.05) return;
 
       var cor = mdl_corrosion.getCorrosion(liq);
       var corScl = mdl_corrosion.getCorrosionScale(b.block, liq);

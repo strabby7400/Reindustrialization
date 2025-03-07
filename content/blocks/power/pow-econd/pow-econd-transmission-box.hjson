@@ -39,7 +39,7 @@
   armor: 12.0
   size: 1
   hasLiquids: true
-  liquidCapacity: 0.3
+  liquidCapacity: 0.5
   hasPower: false
 
 

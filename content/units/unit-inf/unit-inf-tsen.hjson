@@ -75,7 +75,7 @@
 
     {
       type: HoverPart
-      layerOffset: -0.0001
+      layerOffset: -0.001
       under: true
       mirror: false
       radius: 6.0
@@ -93,7 +93,7 @@
 
     {
       type: HoverPart
-      layerOffset: -0.00011
+      layerOffset: -0.001
       under: true
       mirror: false
       radius: 5.0
@@ -218,7 +218,7 @@
 
       /* <---------------- visual ----------------> */
 
-      layerOffset: -0.00001
+      layerOffset: -0.00005
       shootX: 0.0
       shootY: 6.0
       ejectEffect: casing1
@@ -226,7 +226,7 @@
       recoil: 1.5
       recoils: -1
       heatColor: ff3838
-      cooldownTime: 90.0
+      cooldownTime: 72.0
       shootSound: se-shot-light
       chargeSound: none
       parts: [
@@ -254,7 +254,7 @@
         {
           type: RegionPart
           suffix: "-blade"
-          layerOffset: -0.00002
+          layerOffset: -0.00001
           under: true
           mirror: false
           x: 1.0

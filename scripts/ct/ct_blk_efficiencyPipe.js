@@ -23,6 +23,7 @@
 
   // Part: pow-econd
     const powEcond_transmissionBox = extend(Conduit, "pow-econd-transmission-box", {
+      // Specific
       icons: function() {
         return [Core.atlas.find(this.name + "-icon")];
       },
@@ -36,7 +37,7 @@
       },
     });
     powEcond_transmissionBox.buildType = () => extend(Conduit.ConduitBuild, powEcond_transmissionBox, {
-      rotatorReg: mdl_content.getContentRegion(powEcond_transmissionBox, "-rotator"),
+      rotatorReg: mdl_content.getRegion(powEcond_transmissionBox, "-rotator"),
       updateTile() {
         this.super$updateTile();
         blk_efficiencyPipe.updateTile(this);

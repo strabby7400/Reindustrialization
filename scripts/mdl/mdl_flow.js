@@ -7,7 +7,7 @@
 
   // Part: Import
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
 
     const db_fluid = require("reind/db/db_fluid");
   // End
@@ -16,7 +16,7 @@
   // Part: Methods
     /* NOTE: Reads density of the assigned liquid. The two default values are densities of water and air. */
     const getDensity = function(liq) {
-      var dens = mdl_database.read_1n1v(db_fluid.density, liq.name);
+      var dens = mdl_data.read_1n1v(db_fluid.density, liq.name);
       if(dens != null) return dens;
 
       var grp = mdl_corrosion.getGroup(liq);
@@ -67,11 +67,11 @@
 
     /* Note: Reads viscosity of the assigned liquid, which is based on real data. */
     const getViscosity = function(liq) {
-      var visc = mdl_database.read_1n1v(db_fluid.viscosity, liq.name);
+      var visc = mdl_data.read_1n1v(db_fluid.viscosity, liq.name);
       var visc_fi;
       if(visc != null) {
-        var visc_water = mdl_database.read_1n1v(db_fluid.viscosity, "reind-liq-ore-water");
-        var visc_pitch = mdl_database.read_1n1v(db_fluid.viscosity, "reind-liq-was-pitch");
+        var visc_water = mdl_data.read_1n1v(db_fluid.viscosity, "reind-liq-ore-water");
+        var visc_pitch = mdl_data.read_1n1v(db_fluid.viscosity, "reind-liq-was-pitch");
         visc_fi = 1.0 - 0.5 * (Math.log(visc_pitch + 1.0) - Math.log(visc + 1.0)) / (Math.log(visc_pitch + 1.0) - Math.log(visc_water + 1.0));
       } else if(liq.gas) {
         visc_fi = 0.15;

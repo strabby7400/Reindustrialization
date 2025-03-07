@@ -43,14 +43,24 @@
         if(Vars.state.paused) {
           mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-manual-generator-paused.name"));
         } else {
-          ct_blk_manualGenerator.accB_frac(b, "w", Mathf.lerpDelta(
-            ct_blk_manualGenerator.accB_frac(b, "r"),
-            1.0,
-            0.125,
-          ));
-          mdl_effect.showAt(b, b.block.generateEffect);
+          var frac_fi = Mathf.lerpDelta(ct_blk_manualGenerator.accB_frac(b, "r"), 1.0, 0.135);
+          Call.tileConfig(Vars.player, b, new Vec2(frac_fi, 0));
         };
       }, Icon.power, Core.bundle.get("info.reind-info-manual-generator.name"), Tex.button, 72.0);
+    };
+
+
+    function configuredComp(b, builder, val) {
+      if(val == null) return;
+
+      if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
+      var val_fi = 0.0;
+      if(val instanceof Vec2) val_fi = val.x;
+      if(val instanceof Building) val_fi = val.config();
+
+      ct_blk_manualGenerator.accB_frac(b, "w", val_fi);
+
+      mdl_effect.showAt(b, b.block.generateEffect);
     };
   // End
 
@@ -89,6 +99,12 @@
       buildConfigurationComp(b, tb);
     };
     exports.buildConfiguration = buildConfiguration;
+
+
+    const configured = function(b, builder, val) {
+      configuredComp(b, builder, val);
+    };
+    exports.configured = configured;
   // End
 
 

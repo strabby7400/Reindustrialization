@@ -112,7 +112,7 @@
       },
     });
     ilminDril_idsRemoteDrill.buildType = () => extend(Drill.DrillBuild, ilminDril_idsRemoteDrill, {
-      glow3Reg: mdl_content.getContentRegion(ilminDril_idsRemoteDrill, "-glow3"),
+      glow3Reg: mdl_content.getRegion(ilminDril_idsRemoteDrill, "-glow3"),
       updateTile() {
         this.super$updateTile();
         blk_drill.updateTile(this);

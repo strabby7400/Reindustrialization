@@ -8,7 +8,7 @@
   // Part: Import
     const blk_genericHarvester = require("reind/blk/blk_genericHarvester");
 
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
 
@@ -21,7 +21,7 @@
       blk.stats.remove(Stat.tiles);
       blk.stats.add(Stat.tiles, StatValues.blocks(blk.attribute, blk.floating, 1.0, true, false));
 
-      var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
+      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
       if(r != null) blk.stats.add(Stat.range, r, StatUnit.blocks);
     };
 
@@ -30,7 +30,7 @@
       if(attribute == null) return 0.0;
       var t = Vars.world.tile(tx, ty);
       if(t == null) return 0.0;
-      var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
+      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
       if(r == null) return 0.0;
 
       var attr = 0.0;
@@ -43,7 +43,7 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
+      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
       var t = Vars.world.tile(tx, ty);
       if(r != null && t != null) {
         mdl_draw.drawPlaceRect(blk, t, valid, r, true);
@@ -59,7 +59,7 @@
 
     function drawComp(b) {
       if(b.efficiency > 0.0001) {
-        var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
+        var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
         if(r != null) mdl_game.getTiles_rect(b.tile, r, b.block.size).each(ot => {
           if(ot.block().attributes.get(b.block.attribute) > 0.0) mdl_draw.drawItemTransfer(mdl_game.poser_1t(ot, ot.block().offset), mdl_game.poser_1b(b), Pal.accent, 1.0)
         });
@@ -68,7 +68,7 @@
 
 
     function drawSelectComp(b) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
+      var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
       if(r != null) {
         mdl_draw.drawSelectRect(b, r, true);
         mdl_game.getTiles_rect(b.tile, r, b.block.size).each(ot => {

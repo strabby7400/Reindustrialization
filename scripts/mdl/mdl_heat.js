@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
@@ -56,7 +56,13 @@
     const getSparedHeat = function(b) {
       var sheat = 0.0;
 
-      b.proximity.each(ob => sheat += getHeat(ob) * mdl_game.getFrac_side(ob, b));
+      b.proximity.each(ob => {
+        var cond = true;
+        mdl_game.getTiles_rot(b.tile, b.rotation, b.block.size).each(ot => {
+          if(ot.build == ob) cond = false;
+        });
+        if(cond) sheat += getHeat(ob) * mdl_game.getFrac_side(ob, b);
+      });
 
       return sheat;
     };
@@ -72,7 +78,7 @@
 
     /* NOTE: A limit over which the block melts. */
     const getHeatLimit = function(blk) {
-      var limit = mdl_database.read_1n1v(db_block.heatLimit, blk.name);
+      var limit = mdl_data.read_1n1v(db_block.heatLimit, blk.name);
       if(limit == null) limit = 30.0;
 
       return limit;
@@ -82,7 +88,7 @@
 
     /* NOTE: The rate at which heat dissipates. */
     const getHeatLoss = function(blk) {
-      var loss = mdl_database.read_1n1v(db_block.heatLoss, blk.name);
+      var loss = mdl_data.read_1n1v(db_block.heatLoss, blk.name);
       if(loss == null) loss = 0.01;
 
       return loss;
@@ -99,7 +105,7 @@
 
     /* NOTE: The param k in heat transfer formula. */
     const getHeatTransferCoefficient = function(blk) {
-      var coef = mdl_database.read_1n1v(db_block.heatTransferCoefficient, blk.name);
+      var coef = mdl_data.read_1n1v(db_block.heatTransferCoefficient, blk.name);
       if(coef == null) coef = 1.0;
 
       return coef;
@@ -127,7 +133,7 @@
       var amt = b.liquids.get(liq);
       if(amt < 0.01) return 0.0;
       var cap = b.block.liquidCapacity;
-      var fheat = mdl_database.read_1n1v(db_fluid.fluidHeat, liq.name);
+      var fheat = mdl_data.read_1n1v(db_fluid.fluidHeat, liq.name);
 
       var heat = fheat * (amt / cap * 0.75 + 0.75) * (cap / 300.0 * 0.15 + 0.75);
       return heat;
@@ -149,7 +155,7 @@
         if(ot.build != null) heat += getFluidHeat(ot.build) * 0.05;
 
         // Get block heat
-        if(ot.build != null) heat += getHeat(ot.build);
+        if(ot.build != null) heat += getHeat(ot.build) * 1.5;
       });
       heat /= 6.0;
       return heat;

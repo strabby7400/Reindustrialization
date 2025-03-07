@@ -10,7 +10,7 @@
 
     const frag_fluid = require("reind/frag/frag_fluid");
 
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -20,19 +20,30 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      var rate = mdl_database.read_1n1v(db_block.coreEffcOutput, blk.name);
+      var rate = mdl_data.read_1n1v(db_block.coreEffcOutput, blk.name);
       if(rate != null) blk.stats.add(db_stat.coreEffc, rate, StatUnit.perSecond);
     };
 
 
     function updateTileComp(b) {
-      var rate = Time.delta * mdl_database.read_1n1v(db_block.coreEffcOutput, b.block.name) / 60.0;
+      var rate = Time.delta * mdl_data.read_1n1v(db_block.coreEffcOutput, b.block.name) / 60.0;
       if(rate != null) frag_fluid.updateTile_coreEffc(b, rate);
     };
 
 
     function buildConfigurationComp(b, tb) {
-      db_table.__timeController(tb);
+      db_table.__timeController(tb, b);
+    };
+
+
+    function configuredComp(b, builder, val) {
+      if(val == null) return;
+
+      var val_fi = 0.0;
+      if(val instanceof Vec2) val_fi = val.x;
+      if(val instanceof Building) val_fi = val.config();
+
+      Time.setDeltaProvider(() => Core.graphics.getDeltaTime() * 60.0 * val_fi);
     };
   // End
 
@@ -65,6 +76,12 @@
       buildConfigurationComp(b, tb);
     };
     exports.buildConfiguration = buildConfiguration;
+
+
+    const configured = function(b, builder, val) {
+      configuredComp(b, builder, val);
+    };
+    exports.configured = configured;
   // End
 
 

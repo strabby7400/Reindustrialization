@@ -92,32 +92,83 @@
   destroyBulletSameTeam: false
   destroyBullet: {
 
+    # Mark: glassShard
 
-    /* bullet_glassShard_trigger */
+    /* <---------------- meta ----------------> */
 
+    type: BasicBulletType
+    instantDisappear: true
+    despawnHit: true
 
-    // Part: Meta
+    /* <---------------- properties ----------------> */
+
+    lifetime: 1.0
+    speed: 0.0
+    damage: 1.0
+    buildingDamageMultiplier: 1.0
+    hitSize: 4.0
+    collides: false
+    collidesAir: false
+    collidesGround: true
+
+    /* <---------------- visual ----------------> */
+
+    sprite: bullet
+    layer: 74.0
+    lightRadius: -1.0
+    lightOpacity: 0.0
+    hitShake: 0.0
+    despawnShake: 0.0
+    shootEffect: none
+    smokeEffect: none
+    chargeEffect: none
+    hitEffect: none
+    despawnEffect: none
+    hitSound: none
+    despawnSound: se-shot-glass
+
+    /* <---------------- specific (fragment) ----------------> */
+
+    fragBullets: 5
+    fragOnHit: true
+    fragOnAbsorb: true
+    fragRandomSpread: 360.0
+    fragSpread: 0.0
+    fragAngle: 0.0
+    fragVelocityMin: 0.2
+    fragVelocityMax: 1.0
+    fragLifeMin: 1.0
+    fragLifeMax: 1.0
+    fragBullet: {
+
+      # Mark: glassShardFrag
+
+      /* <---------------- meta ----------------> */
+
       type: BasicBulletType
-      instantDisappear: true
       despawnHit: true
-    // End
 
+      /* <---------------- properties ----------------> */
 
-    // Part: Properties
-      lifetime: 1.0
-      speed: 0.0
-      damage: 1.0
-      buildingDamageMultiplier: 1.0
+      lifetime: 8.0
+      speed: 10.0
+      damage: 80.0
+      buildingDamageMultiplier: 0.1
       hitSize: 4.0
-      collides: false
+      collides: true
       collidesAir: false
       collidesGround: true
-    // End
+      collideTerrain: true
 
+      /* <---------------- visual ----------------> */
 
-    // Part: Visual
-      sprite: bullet
+      sprite: reind-bul-bullet5
       layer: 74.0
+      frontColor: ffffff
+      backColor: bfbfbf
+      hitColor: ffffff
+      width: 6.0
+      height: 6.0
       lightRadius: -1.0
       lightOpacity: 0.0
       hitShake: 0.0
@@ -125,75 +176,14 @@
       shootEffect: none
       smokeEffect: none
       chargeEffect: none
-      hitEffect: none
-      despawnEffect: none
+      hitEffect: hitBulletColor
+      despawnEffect: hitBulletColor
+      trailColor: ffffff20
+      trailLength: 6
+      trailWidth: 2.0
       hitSound: none
       despawnSound: none
-    // End
 
-
-    // Part: Specific (Fragment)
-      fragBullets: 5
-      fragOnHit: true
-      fragOnAbsorb: true
-      fragRandomSpread: 360.0
-      fragSpread: 0.0
-      fragAngle: 0.0
-      fragVelocityMin: 0.2
-      fragVelocityMax: 1.0
-      fragLifeMin: 1.0
-      fragLifeMax: 1.0
-      fragBullet: {
-
-
-        /* bullet_glassShard */
-
-
-        // Part: Meta
-          type: BasicBulletType
-          despawnHit: true
-        // End
-
-
-        // Part: Properties
-          lifetime: 8.0
-          speed: 10.0
-          damage: 80.0
-          buildingDamageMultiplier: 0.1
-          hitSize: 4.0
-          collides: true
-          collidesAir: false
-          collidesGround: true
-          collideTerrain: true
-        // End
-
-
-        // Part: Visual
-          sprite: reind-bul-bullet5
-          layer: 74.0
-          frontColor: ffffff
-          backColor: bfbfbf
-          width: 6.0
-          height: 6.0
-          lightRadius: -1.0
-          lightOpacity: 0.0
-          hitShake: 0.0
-          despawnShake: 0.0
-          shootEffect: none
-          smokeEffect: none
-          chargeEffect: none
-          hitEffect: hitBulletColor
-          despawnEffect: hitBulletColor
-          trailColor: ffffff20
-          trailLength: 6
-          trailWidth: 2.0
-          hitSound: none
-          despawnSound: none
-        // End
-
-
-      }
-    // End
-
+    }
 
   }

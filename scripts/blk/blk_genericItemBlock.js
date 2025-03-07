@@ -25,6 +25,7 @@
 
     function updateTileComp(b) {
       frag_item.updateTile_virtualItem(b);
+      frag_item.updateTile_exposed(b);
     };
   // End
 

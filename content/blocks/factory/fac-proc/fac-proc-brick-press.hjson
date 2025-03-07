@@ -5,7 +5,7 @@
 */
 
 
-  # type: multicraft.MultiCrafter
+  # type: GenericCrafter
   category: crafting
   requirements: [
     item-chem-graphite/60
@@ -142,6 +142,7 @@
 */
 
 
+  configurable: true
   outputsLiquid: true
   ignoreLiquidFullness: false
 
@@ -153,87 +154,7 @@
 */
 
 
-  menu: simple
-  recipes: [
-
-
-    /*
-      ========================================
-      Section: Brick
-      ========================================
-    */
-
-
-      // Clay Brick
-      {
-        craftTime: 120.0
-        icon: reind-item-int-brick-clay-unbaked
-        input: {
-          power: 1.16666667
-          items: [
-            reind-item-ore-clay/8
-          ]
-          fluids: [
-            reind-liq-ore-water/0.15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-brick-clay-unbaked/4
-          ]
-          fluids: [
-            reind-liq-was-waste-slurry/0.15
-          ]
-        }
-      }
-
-
-      // High-Alumina Brick
-      {
-        craftTime: 120.0
-        icon: reind-item-int-brick-high-alumina-unbaked
-        input: {
-          power: 1.16666667
-          items: [
-            reind-item-int-blend-brick-high-alumina/4
-          ]
-          fluids: [
-            reind-liq-ore-water/0.15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-brick-high-alumina-unbaked/4
-          ]
-          fluids: [
-            reind-liq-was-waste-slurry/0.15
-          ]
-        }
-      }
-
-
-      // Magnesia Brick
-      {
-        craftTime: 120.0
-        icon: reind-item-int-brick-magnesia-unbaked
-        input: {
-          power: 1.16666667
-          items: [
-            reind-item-int-blend-brick-magnesia/4
-          ]
-          fluids: [
-            reind-liq-ore-water/0.15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-brick-magnesia-unbaked/4
-          ]
-          fluids: [
-            reind-liq-was-waste-slurry/0.15
-          ]
-        }
-      }
-
-
-  ]
+  craftTime: 120.0
+  consumes: {
+    power: 1.16666667
+  }

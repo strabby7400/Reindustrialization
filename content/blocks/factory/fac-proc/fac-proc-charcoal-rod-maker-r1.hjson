@@ -92,7 +92,7 @@
 
 
   outputsLiquid: true
-  ignoreLiquidFullness: false
+  ignoreLiquidFullness: true
   liquidOutputDirections: [2]
   conductivePower: true
   connectedPower: false

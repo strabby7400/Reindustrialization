@@ -173,6 +173,23 @@
   // End
 
 
+  // Part: pow-turb
+    const powTurb_basicSteamTurbine = extend(GenericCrafter, "pow-turb-basic-steam-turbine", {
+      setStats() {
+        this.super$setStats();
+        blk_genericFactory.setStats(this);
+      },
+    });
+    powTurb_basicSteamTurbine.buildType = () => extend(GenericCrafter.GenericCrafterBuild, powTurb_basicSteamTurbine, {
+      updateTile() {
+        this.super$updateTile();
+        blk_genericFactory.updateTile(this);
+      },
+    });
+    exports.powTurb_basicSteamTurbine = powTurb_basicSteamTurbine;
+  // End
+
+
   // Part: ileff-misc
     const ileffMisc_idsEngine = extend(GenericCrafter, "ileff-misc-ids-engine", {
       setStats() {

@@ -5,7 +5,7 @@
 */
 
 
-  # type: multicraft.MultiCrafter
+  # type: GenericCrafter
   category: crafting
   requirements: [
     item-chem-brass/20
@@ -99,6 +99,7 @@
 */
 
 
+  configurable: true
   outputsLiquid: false
   ignoreLiquidFullness: false
 
@@ -110,81 +111,7 @@
 */
 
 
-  menu: simple
-  recipes: [
-
-
-    /*
-      ========================================
-      Section: Specific
-      ========================================
-    */
-
-
-      // Cement
-      {
-        craftTime: 600.0
-        icon: reind-item-buil-cement
-        input: {
-          power: 0.83333333
-          items: [
-            reind-item-int-blend-roasted-cement/10
-            reind-item-int-chunks-gypsum/15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-buil-cement/10
-          ]
-        }
-      }
-
-
-    /*
-      ========================================
-      Section: Blend
-      ========================================
-    */
-
-
-      // Blend (Cement) : Sand
-      {
-        craftTime: 600.0
-        icon: reind-icon-blend-cement-sand
-        input: {
-          power: 0.83333333
-          items: [
-            reind-item-int-chunks-limestone/15
-            reind-item-ore-sand/20
-            reind-item-ore-clay/10
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-blend-cement/10
-          ]
-        }
-      }
-
-
-      // Blend (Cement) : Slag
-      {
-        craftTime: 600.0
-        icon: reind-icon-blend-cement-slag
-        input: {
-          power: 0.83333333
-          items: [
-            reind-item-int-chunks-limestone/15
-            reind-item-was-slag/20
-            reind-item-ore-clay/10
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-blend-cement/10
-          ]
-        }
-      }
-
-
-  ]
+  craftTime: 600.0
+  consumes: {
+    power: 0.83333333
+  }

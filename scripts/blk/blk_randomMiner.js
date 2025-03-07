@@ -9,7 +9,7 @@
     const blk_genericMiner = require("reind/blk/blk_genericMiner");
 
     const mdl_attr = require("reind/mdl/mdl_attr");
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
 
     const db_block = require("reind/db/db_block");
   // End
@@ -17,7 +17,7 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      var nm_attr = mdl_database.read_1n1v(db_block.attrMap, blk.name);
+      var nm_attr = mdl_data.read_1n1v(db_block.attrMap, blk.name);
       if(nm_attr != null) blk.stats.add(Stat.tiles, Attribute.get(nm_attr));
     };
 
@@ -28,7 +28,7 @@
 
 
     function canPlaceOnComp(blk, t, team, rot) {
-      var nm_attr = mdl_database.read_1n1v(db_block.attrMap, blk.name);
+      var nm_attr = mdl_data.read_1n1v(db_block.attrMap, blk.name);
       if(!(nm_attr != null && mdl_attr.isEnough_blk(blk, t, nm_attr))) return false;
 
       return true;

@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
@@ -43,7 +43,7 @@
         var ob = ot.build;
 
         if(cond_hidable && oblk.name.includes("reind-env-tree-")) {
-          var z = mdl_database.read_1n1v(db_env.treeLayers, ot.block().name);
+          var z = mdl_data.read_1n1v(db_env.treeLayers, ot.block().name);
           if(z > 76.0 && z < 80.0 && d < oblk.region.width * 0.15) {
             unit.apply(Vars.content.statusEffect("reind-sta-spec-hidden-well"), staTime);
             ot.block().drawBase(ot);
@@ -76,7 +76,7 @@
       var nm_blk = ot.block().name;
 
       if(Core.input.touched) {
-        if(nm_flr == "reind-map-misc-non-build-zone") ui.showInfoFade("@info.reind-info-non-build-zone.name", 2.0);
+        if(nm_flr == "reind-map-misc-restriction-zone") ui.showInfoFade("@info.reind-info-restriction-zone.name", 2.0);
       };
     };
     exports.update_mouse = update_mouse;

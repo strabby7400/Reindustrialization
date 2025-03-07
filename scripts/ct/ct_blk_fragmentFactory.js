@@ -12,8 +12,6 @@
 
   // Part: Accessor
     const accB_down = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
       if(mode == "r") return b.down;
       if(mode == "w") b.down = val;
     };
@@ -48,6 +46,29 @@
       },
     });
     exports.facProc_charcoalRodMaker_r1 = facProc_charcoalRodMaker_r1;
+  // End
+
+
+  // Part: fac-sep
+    const facSep_mineralJig_r1 = extend(GenericCrafter, "fac-sep-mineral-jig-r1", {
+      setStats() {
+        this.super$setStats();
+        blk_fragmentFactory.setStats(this);
+      },
+    });
+    facSep_mineralJig_r1.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_mineralJig_r1, {
+      down: false,
+      updateTile() {
+        blk_fragmentFactory.updateTile(this);
+        if(this.down) return;
+        this.super$updateTile();
+      },
+      status() {
+        if(this.down) return BlockStatus.noInput;
+        return this.super$status();
+      },
+    });
+    exports.facSep_mineralJig_r1 = facSep_mineralJig_r1;
   // End
 
 

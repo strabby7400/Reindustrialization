@@ -8,7 +8,7 @@
   // Part: Import
     const blk_genericLiquidBlock = require("reind/blk/blk_genericLiquidBlock");
 
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
 
@@ -20,7 +20,7 @@
   // Part: Component
     function setStatsComp(blk) {
       blk.stats.remove(Stat.output);
-      var pumpSpeed = mdl_database.read_1n1v(db_block.pumpSpeed, blk.name);
+      var pumpSpeed = mdl_data.read_1n1v(db_block.pumpSpeed, blk.name);
       if(pumpSpeed != null) blk.stats.add(db_stat.standardPumpSpeed, pumpSpeed, StatUnit.liquidSecond);
     };
 

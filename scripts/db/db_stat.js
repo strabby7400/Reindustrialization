@@ -119,8 +119,17 @@
 
 
     // Part: Factory
+      const stat_recipes = new Stat("reind-stat-recipes.name", StatCat.crafting);
+      exports.recipes = stat_recipes;
+
       const stat_factoryFamily = new Stat("reind-stat-factory-family.name", StatCat.function);
       exports.factoryFamily = stat_factoryFamily;
+
+      const stat_familyMembers = new Stat("reind-stat-family-members.name", StatCat.function);
+      exports.familyMembers = stat_familyMembers;
+
+      const stat_targetBlock = new Stat("reind-stat-target-block.name", StatCat.function);
+      exports.targetBlock = stat_targetBlock;
     // End
 
 
@@ -147,9 +156,6 @@
 
       const stat_isIntermediate = new Stat("reind-stat-is-intermediate.name", StatCat.function);
       exports.isIntermediate = stat_isIntermediate;
-
-      const stat_targetProducts = new Stat("reind-stat-target-products.name", StatCat.function);
-      exports.targetProducts = stat_targetProducts;
 
       const stat_isConsumable = new Stat("reind-stat-is-consumable.name", StatCat.function);
       exports.isConsumable = stat_isConsumable;

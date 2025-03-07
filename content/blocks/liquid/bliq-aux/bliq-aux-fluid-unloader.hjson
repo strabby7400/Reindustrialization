@@ -97,7 +97,6 @@
 
   rotate: true
   configurable: true
-  saveConfig: true
   liquidPressure: 1.4
   outputsLiquid: true
   ignoreLiquidFullness: false

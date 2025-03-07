@@ -29,7 +29,7 @@
       if(t == null) return 0.0;
 
       var scl = 6400.0;
-      var attr = (1.0 - Math.pow(Math.sin(Time.time / scl), 2) * 0.7) * Vars.state.rules.planet.defaultAttributes.get(attribute);
+      var attr = (1.0 - Math.pow(Math.sin(Time.time / scl), 2) * 0.7) * blk.attribute.env();
 
       var cap = blk.size * 4;
       var count_solid = 0;

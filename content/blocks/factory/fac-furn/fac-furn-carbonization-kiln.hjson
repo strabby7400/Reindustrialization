@@ -5,7 +5,7 @@
 */
 
 
-  # type: multicraft.MultiCrafter
+  # type: GenericCrafter
   category: crafting
   requirements: [
     item-chem-graphite/30
@@ -212,6 +212,7 @@
 */
 
 
+  configurable: true
   outputsLiquid: false
   ignoreLiquidFullness: false
 
@@ -223,105 +224,4 @@
 */
 
 
-  menu: simple
-  recipes: [
-
-
-    /*
-      ========================================
-      Section: Carbonization
-      ========================================
-    */
-
-
-      // Charcoal : Log
-      {
-        craftTime: 600.0
-        icon: reind-item-bio-log
-        input: {
-          items: [
-            reind-item-bio-log/15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-bio-charcoal/10
-            reind-item-bio-wood-ash/5
-          ]
-        }
-      }
-
-
-      // Charcoal : Timber
-      /* NOTE: No more wood ash for convenience. */
-      {
-        craftTime: 600.0
-        icon: reind-item-bio-timber
-        input: {
-          items: [
-            reind-item-bio-timber/15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-bio-charcoal/10
-          ]
-        }
-      }
-
-
-      // Charcoal : Sawdust
-      /* NOTE: This is actually a waste. */
-      {
-        craftTime: 600.0
-        icon: reind-item-bio-sawdust
-        input: {
-          items: [
-            reind-item-bio-sawdust/20
-          ]
-        }
-        output: {
-          items: [
-            reind-item-bio-charcoal/5
-            reind-item-was-dust/5
-          ]
-        }
-      }
-
-
-      // Charcoal : Charcoal (Uncarbonized)
-      {
-        craftTime: 600.0
-        icon: reind-item-int-charcoal-uncarbonized
-        input: {
-          items: [
-            reind-item-int-charcoal-uncarbonized/10
-          ]
-        }
-        output: {
-          items: [
-            reind-item-bio-charcoal/10
-          ]
-        }
-      }
-
-
-      // Charcoal : Hypha Rod
-      {
-        craftTime: 600.0
-        icon: reind-item-bio-hypha-rod
-        input: {
-          items: [
-            reind-item-bio-hypha-rod/15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-bio-charcoal/10
-            reind-item-was-dust/5
-          ]
-        }
-      }
-
-
-  ]
+  craftTime: 600.0

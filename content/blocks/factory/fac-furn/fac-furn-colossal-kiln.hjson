@@ -5,7 +5,7 @@
 */
 
 
-  # type: multicraft.MultiCrafter
+  # type: GenericCrafter
   category: crafting
   requirements: [
     item-chem-graphite/120
@@ -212,6 +212,7 @@
 */
 
 
+  configurable: true
   outputsLiquid: false
   ignoreLiquidFullness: false
 
@@ -223,183 +224,7 @@
 */
 
 
-  menu: simple
-  recipes: [
-
-
-    /*
-      ========================================
-      Section: Batch
-      ========================================
-    */
-
-
-      /* NOTE: Isn't this pointless? */
-
-
-      // Copper
-      {
-        craftTime: 39600.0
-        icon: reind-item-chem-copper
-        input: {
-          power: 1.5
-          items: [
-            reind-item-ore-native-copper/640
-            reind-item-ore-lignite/480
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-copper/640
-          ]
-        }
-      }
-
-
-      // Graphite
-      {
-        craftTime: 39600.0
-        icon: reind-item-chem-graphite
-        input: {
-          power: 1.5
-          items: [
-            reind-item-ore-crude-graphite/640
-            reind-item-ore-lignite/480
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-graphite/200
-          ]
-        }
-      }
-
-
-      // Lead
-      {
-        craftTime: 39600.0
-        icon: reind-item-chem-lead
-        input: {
-          power: 1.5
-          items: [
-            reind-item-ore-galena/640
-            reind-item-ore-lignite/480
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-lead/520
-          ]
-        }
-      }
-
-
-      // Tin
-      {
-        craftTime: 39600.0
-        icon: reind-item-chem-tin
-        input: {
-          power: 1.5
-          items: [
-            reind-item-ore-cassiterite/640
-            reind-item-ore-lignite/480
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-tin/520
-          ]
-        }
-      }
-
-
-      // Zinc
-      {
-        craftTime: 39600.0
-        icon: reind-item-chem-zinc
-        input: {
-          power: 1.5
-          items: [
-            reind-item-ore-sphalerite/640
-            reind-item-ore-lignite/480
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-zinc/520
-          ]
-        }
-      }
-
-
-    /*
-      ========================================
-      Section: Roasting
-      ========================================
-    */
-
-
-      // Lime
-      {
-        craftTime: 2400.0
-        icon: reind-item-chem-lime
-        input: {
-          power: 1.5
-          items: [
-            reind-item-int-chunks-limestone/160
-            reind-item-bio-charcoal/80
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-lime/80
-          ]
-        }
-      }
-
-
-      /* Blend */
-
-
-      // Blend (Cement)
-      {
-        craftTime: 2400.0
-        icon: reind-item-int-blend-roasted-cement
-        input: {
-          power: 1.5
-          items: [
-            reind-item-int-blend-cement/80
-            reind-item-bio-charcoal/80
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-blend-roasted-cement/80
-          ]
-        }
-      }
-
-
-      /* Sand */
-
-
-      // Magnesia Sand
-      {
-        craftTime: 2400.0
-        icon: reind-item-chem-magnesia-sand
-        input: {
-          power: 1.5
-          items: [
-            reind-item-int-chunks-dolomite/160
-            reind-item-bio-charcoal/80
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-magnesia-sand/80
-          ]
-        }
-      }
-
-
-  ]
+  craftTime: 2400.0
+  consumes: {
+    power: 1.5
+  }

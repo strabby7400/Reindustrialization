@@ -7,8 +7,6 @@
 
   // Part: Import
     const blk_heatConductor = require("reind/blk/blk_heatConductor");
-
-    const cfg_update = require("reind/cfg/cfg_update");
   // End
 
 
@@ -32,11 +30,9 @@
     });
     powHcond_copperHeatConductor.buildType = () => extend(Conduit.ConduitBuild, powHcond_copperHeatConductor, {
       updateTile() {
-        if(cfg_update.isSuppressed()) return;
         blk_heatConductor.updateTile(this);
       },
       acceptLiquid(source, liquid) {
-        if(cfg_update.isSuppressed()) return false;
         if(!blk_heatConductor.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
@@ -70,11 +66,9 @@
     });
     powHcond_steelHeatConductor.buildType = () => extend(Conduit.ConduitBuild, powHcond_steelHeatConductor, {
       updateTile() {
-        if(cfg_update.isSuppressed()) return;
         blk_heatConductor.updateTile(this);
       },
       acceptLiquid(source, liquid) {
-        if(cfg_update.isSuppressed()) return false;
         if(!blk_heatConductor.acceptLiquid(this, source, liquid)) return false;
         return true;
       },

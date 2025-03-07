@@ -8,46 +8,28 @@
   // Part: Import
     const blk_genericGenerator = require("reind/blk/blk_genericGenerator");
 
-    const mdl_database = require("reind/mdl/mdl_database");
-    const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_game = require("reind/mdl/mdl_game");
-
-    const db_block = require("reind/db/db_block");
-    const db_stat = require("reind/db/db_stat");
+    const frag_facility = require("reind/frag/frag_facility");
   // End
 
 
   // Part: Component
     function setStatsComp(blk) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
-      if(r != null) blk.stats.add(db_stat.restrictionRange, r, StatUnit.blocks);
+      frag_facility.setStats_restrict(blk);
     };
 
 
     function canPlaceOnComp(blk, t, team, rot) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
-      if(r != null && mdl_game.getSameBuilds(mdl_game.getTiles_rect(t, r, blk.size), blk.name, Vars.player.team()).size > 0) return false;
-
-      return true;
+      return frag_facility.canPlaceOn_restrict(blk, t, team, rot);
     };
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
-      if(r != null) {
-        var t = Vars.world.tile(tx, ty);
-        mdl_draw.drawPlaceRect(blk, t, valid, r, true);
-        mdl_game.getSameBuilds(mdl_game.getTiles_rect(t, r, blk.size), blk.name, Vars.player.team()).each(ob => mdl_draw.drawBuildArea(ob, valid));
-      };
+      frag_facility.drawPlace_restrict(blk, tx, ty, rot, valid);
     };
 
 
     function drawSelectComp(b) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
-      if(r != null) {
-        mdl_draw.drawSelectRect(b, r, true);
-        mdl_game.getSameBuilds(mdl_game.getTiles_rect(b.tile, r, b.block.size), b.block.name, b.team).each(ob => {if(b != ob) mdl_draw.drawBuildArea(ob, false)});
-      };
+      frag_facility.drawSelect_restrict(b);
     };
   // End
 

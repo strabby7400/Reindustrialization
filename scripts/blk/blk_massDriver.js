@@ -10,7 +10,7 @@
 
     const frag_attack = require("reind/frag/frag_attack");
 
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
 
@@ -22,11 +22,11 @@
   // Part: Component
     function setStatsComp(blk) {
       // Get bullet damage
-      var damage = mdl_database.read_1n1v(db_block.massDriverBulletDamage, blk.name);
+      var damage = mdl_data.read_1n1v(db_block.massDriverBulletDamage, blk.name);
       if(damage != null) blk.stats.add(Stat.damage, damage);
 
       // Get impact range
-      var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
+      var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
       if(rad != null) blk.stats.add(db_stat.impactRange, rad / Vars.tilesize, StatUnit.blocks);
     };
 
@@ -34,7 +34,7 @@
     function updateTileComp(b) {
       // Update impact
       if(b.reloadCounter >= 0.9999) {
-        var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
+        var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
         if(rad != null) {
           var dmg = b.block.size * b.block.reload * 0.7;
           var dur = b.block.reload * 0.5;
@@ -47,14 +47,14 @@
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       // Draw impact range
-      var rad = mdl_database.read_1n1v(db_block.impactRange, blk.name);
+      var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
       if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
       // Draw impact range
-      var rad = mdl_database.read_1n1v(db_block.impactRange, b.block.name);
+      var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
       if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1b(b), rad);
 
       // Draw reload progress
@@ -64,7 +64,7 @@
 
     function setupComp(blk) {
       Events.run(ClientLoadEvent, () => {
-        var damage = mdl_database.read_1n1v(db_block.massDriverBulletDamage, blk.name);
+        var damage = mdl_data.read_1n1v(db_block.massDriverBulletDamage, blk.name);
         if(damage != null) blk.bullet.damage = damage;
         blk.bullet.collidesAir = false;
       });

@@ -11,7 +11,7 @@
 
     const ct_blk_oreScanner = require("reind/ct/ct_blk_oreScanner");
 
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -24,7 +24,7 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
+      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
       if(r != null) blk.stats.add(Stat.range, r, StatUnit.blocks);
     };
 
@@ -38,7 +38,7 @@
       if(cd >= thr) {
         cd %= thr;
 
-        var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
+        var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
         if(r != null) {
           mdl_effect.showAt_ldm(b, db_effect._oreScannerScan(r, b.block.size, ct_blk_oreScanner.accB_scanColor(b, "r")), 0.0);
           mdl_effect.playAt(b, "se-craft-ore-scanner");
@@ -51,13 +51,13 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, blk.name);
+      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
       if(r != null) mdl_draw.drawPlaceRect(blk, Vars.world.tile(tx, ty), valid, r, true);
     };
 
 
     function drawComp(b) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
+      var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
       if(r == null) return;
 
       if(b.efficiency < 0.9999) return;
@@ -78,7 +78,7 @@
 
 
     function drawSelectComp(b) {
-      var r = mdl_database.read_1n1v(db_block.genericRange, b.block.name);
+      var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
       if(r != null) mdl_draw.drawSelectRect(b, r, true);
     };
   // End

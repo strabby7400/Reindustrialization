@@ -29,6 +29,9 @@
         this.super$update(unit);
         unit_legUnit.update(this, unit);
       },
+      drawShadow(unit) {
+        unit_legUnit.drawShadow(this, unit);
+      },
     });
     unitCore_expeditionI.constructor = () => extend(LegsUnit, {});
     db_ability.__energizer(unitCore_expeditionI);

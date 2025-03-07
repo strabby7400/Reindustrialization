@@ -5,7 +5,7 @@
 */
 
 
-  # type: multicraft.MultiCrafter
+  # type: GenericCrafter
   category: crafting
   requirements: [
     item-chem-graphite/40
@@ -96,6 +96,12 @@
       }
 
 
+      {
+        type: DrawFade
+        suffix: "-fade"
+      }
+
+
     ]
   }
   craftEffect: none
@@ -112,6 +118,7 @@
 */
 
 
+  configurable: true
   outputsLiquid: false
   ignoreLiquidFullness: false
 
@@ -123,150 +130,7 @@
 */
 
 
-  menu: simple
-  recipes: [
-
-
-    /*
-      ========================================
-      Section: Purification
-      ========================================
-    */
-
-
-      // Sand
-      {
-        craftTime: 120.0
-        icon: reind-item-int-dust-sand
-        input: {
-          power: 2.16666667
-          items: [
-            reind-item-int-dust-sand/8
-          ]
-          fluids: [
-            reind-effc-effc-dust-recycling/0.03333333
-            reind-effc-effc-vibration-screen/0.01666667
-            reind-gas-misc-air/0.2
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-dust-p1-sand/4
-            reind-item-was-dust/4
-          ]
-        }
-      }
-
-
-      // Raw Coal
-      {
-        craftTime: 120.0
-        icon: reind-item-int-dust-raw-coal
-        input: {
-          power: 2.16666667
-          items: [
-            reind-item-int-dust-raw-coal/8
-          ]
-          fluids: [
-            reind-effc-effc-dust-recycling/0.03333333
-            reind-effc-effc-vibration-screen/0.01666667
-            reind-gas-misc-air/0.2
-          ]
-        }
-        output: {
-          items: [
-            reind-item-chem-coal/4
-            reind-item-was-gangue/4
-          ]
-        }
-      }
-
-
-      /* <---------------- aluminum ----------------> */
-
-
-      // Bauxite
-      {
-        craftTime: 120.0
-        icon: reind-item-int-dust-bauxite
-        input: {
-          power: 2.16666667
-          items: [
-            reind-item-int-dust-bauxite/8
-          ]
-          fluids: [
-            reind-effc-effc-dust-recycling/0.03333333
-            reind-effc-effc-vibration-screen/0.01666667
-            reind-gas-misc-air/0.2
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-dust-p1-bauxite/4
-            reind-item-was-gangue/4
-          ]
-        }
-      }
-
-
-      /* <---------------- copper ----------------> */
-
-
-      // Malachite
-      {
-        craftTime: 120.0
-        icon: reind-item-int-dust-malachite
-        input: {
-          power: 2.16666667
-          items: [
-            reind-item-int-dust-malachite/8
-          ]
-          fluids: [
-            reind-effc-effc-dust-recycling/0.03333333
-            reind-effc-effc-vibration-screen/0.01666667
-            reind-gas-misc-air/0.2
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-dust-p1-malachite/4
-            reind-item-int-dust-limonite/2
-            reind-item-was-gangue/2
-          ]
-        }
-      }
-
-
-    /*
-      ========================================
-      Section: Selection
-      ========================================
-    */
-
-
-      // Magnetite / Pyrolusite : Sand
-      {
-        craftTime: 120.0
-        icon: reind-item-int-dust-magnetite
-        input: {
-          power: 2.16666667
-          items: [
-            reind-item-int-dust-sand/8
-          ]
-          fluids: [
-            reind-effc-effc-dust-recycling/0.03333333
-            reind-effc-effc-vibration-screen/0.01666667
-            reind-gas-misc-air/0.2
-          ]
-        }
-        output: {
-          items: [
-            reind-item-int-dust-magnetite/3
-            reind-item-int-dust-pyrolusite/1
-            reind-item-was-dust/4
-          ]
-        }
-      }
-
-
-  ]
+  craftTime: 120.0
+  consumes: {
+    power: 2.16666667
+  }

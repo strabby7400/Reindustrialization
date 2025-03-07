@@ -11,7 +11,7 @@
     const frag_heat = require("reind/frag/frag_heat");
 
     const mdl_content = require("reind/mdl/mdl_content");
-    const mdl_database = require("reind/mdl/mdl_database");
+    const mdl_data = require("reind/mdl/mdl_data");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -20,13 +20,13 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      var heatLimit = mdl_database.read_1n1v(db_block.heatLimit, blk.name);
+      var heatLimit = mdl_data.read_1n1v(db_block.heatLimit, blk.name);
       if(heatLimit != null) blk.stats.add(db_stat.heatLimit, heatLimit);
 
-      var heatLoss = mdl_database.read_1n1v(db_block.heatLoss, blk.name);
+      var heatLoss = mdl_data.read_1n1v(db_block.heatLoss, blk.name);
       if(heatLoss != null) blk.stats.add(db_stat.heatLoss, Strings.fixed(heatLoss * 1000.0, 2) + "‰");
 
-      var heatTransCoef = mdl_database.read_1n1v(db_block.heatTransferCoefficient, blk.name);
+      var heatTransCoef = mdl_data.read_1n1v(db_block.heatTransferCoefficient, blk.name);
       if(heatTransCoef != null) blk.stats.add(db_stat.heatTransferCoefficient, Strings.fixed(heatTransCoef, 2));
     };
 

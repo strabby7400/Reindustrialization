@@ -5,7 +5,7 @@
 */
 
 
-  # type: multicraft.MultiCrafter
+  # type: GenericCrafter
   category: crafting
   requirements: [
     item-chem-copper/30
@@ -40,7 +40,7 @@
   armor: 0.0
   size: 2
   hasItems: true
-  itemCapacity: 40
+  itemCapacity: 60
   hasLiquids: false
   liquidCapacity: 5.0
   hasPower: false
@@ -207,6 +207,7 @@
 */
 
 
+  configurable: true
   outputsLiquid: false
   ignoreLiquidFullness: false
 
@@ -218,69 +219,4 @@
 */
 
 
-  menu: simple
-  recipes: [
-
-
-    /*
-      ========================================
-      Section: Brick
-      ========================================
-    */
-
-
-      // Clay Brick
-      {
-        craftTime: 600.0
-        icon: reind-item-buil-brick-clay
-        input: {
-          items: [
-            reind-item-int-brick-clay-unbaked/10
-            reind-item-bio-charcoal/15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-buil-brick-clay/10
-          ]
-        }
-      }
-
-
-      // High-Alumina Brick
-      {
-        craftTime: 600.0
-        icon: reind-item-buil-brick-high-alumina
-        input: {
-          items: [
-            reind-item-int-brick-high-alumina-unbaked/10
-            reind-item-bio-charcoal/15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-buil-brick-high-alumina/10
-          ]
-        }
-      }
-
-
-      // Magnesia Brick
-      {
-        craftTime: 600.0
-        icon: reind-item-buil-brick-magnesia
-        input: {
-          items: [
-            reind-item-int-brick-magnesia-unbaked/10
-            reind-item-bio-charcoal/15
-          ]
-        }
-        output: {
-          items: [
-            reind-item-buil-brick-magnesia/10
-          ]
-        }
-      }
-
-
-  ]
+  craftTime: 600.0

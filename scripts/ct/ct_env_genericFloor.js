@@ -117,6 +117,15 @@
     exports.envFlr_salt = envFlr_salt;
 
 
+    const envFlr_silicaStone = extend(Floor, "env-flr-silica-stone", {
+      setStats() {
+        this.super$setStats();
+        env_genericFloor.setStats(this);
+      },
+    });
+    exports.envFlr_silicaStone = envFlr_silicaStone;
+
+
     const envFlr_talcum = extend(Floor, "env-flr-talcum", {
       setStats() {
         this.super$setStats();
