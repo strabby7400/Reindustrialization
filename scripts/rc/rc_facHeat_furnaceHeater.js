@@ -20,7 +20,7 @@ const rc = {
         "reind-item-ore-peat", 1,
       ]),
       "randInputs": new Seq([
-        "reind-item-ore-peat", 1, 0.1,
+        "reind-item-ore-peat", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-cond-heat", 0.05,
@@ -37,7 +37,7 @@ const rc = {
         "reind-item-ore-lignite", 1,
       ]),
       "randInputs": new Seq([
-        "reind-item-ore-lignite", 1, 0.1,
+        "reind-item-ore-lignite", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-cond-heat", 0.05,
@@ -54,13 +54,13 @@ const rc = {
         "reind-item-ore-raw-coal", 1,
       ]),
       "randInputs": new Seq([
-        "reind-item-ore-raw-coal", 1, 0.1,
+        "reind-item-ore-raw-coal", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-cond-heat", 0.05,
       ]),
       "randOutputs": new Seq([
-        "reind-item-was-gangue", 1, 0.1,
+        "reind-item-was-gangue", 1, 0.2,
       ]),
       "timeScale": 4.0,
     },
@@ -77,7 +77,7 @@ const rc = {
         "reind-item-bio-sawdust", 1,
       ]),
       "randInputs": new Seq([
-        "reind-item-bio-sawdust", 1, 0.1,
+        "reind-item-bio-sawdust", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-cond-heat", 0.06666667,
@@ -94,7 +94,7 @@ const rc = {
         "reind-item-bio-timber", 1,
       ]),
       "randInputs": new Seq([
-        "reind-item-bio-timber", 1, 0.1,
+        "reind-item-bio-timber", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-cond-heat", 0.06666667,
@@ -111,13 +111,13 @@ const rc = {
         "reind-item-chem-coal", 1,
       ]),
       "randInputs": new Seq([
-        "reind-item-chem-coal", 1, 0.1,
+        "reind-item-chem-coal", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-cond-heat", 0.06666667,
       ]),
       "randOutputs": new Seq([
-        "reind-item-was-dust", 1, 0.1,
+        "reind-item-was-dust", 1, 0.2,
       ]),
       "timeScale": 8.0,
     },
@@ -134,7 +134,7 @@ const rc = {
         "reind-item-bio-charcoal", 1,
       ]),
       "randInputs": new Seq([
-        "reind-item-bio-charcoal", 1, 0.1,
+        "reind-item-bio-charcoal", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-cond-heat", 0.08333333,
@@ -151,7 +151,7 @@ const rc = {
         "reind-item-chem-semicoke", 1,
       ]),
       "randInputs": new Seq([
-        "reind-item-chem-semicoke", 1, 0.1,
+        "reind-item-chem-semicoke", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-cond-heat", 0.08333333,
@@ -171,7 +171,7 @@ const rc = {
         "reind-item-chem-coke", 1,
       ]),
       "randInputs": new Seq([
-        "reind-item-chem-coke", 1, 0.1,
+        "reind-item-chem-coke", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-cond-heat", 0.1,

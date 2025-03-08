@@ -6,13 +6,15 @@
 
 
   # type: GenericCrafter
-  category: power
+  category: crafting
+  buildVisibility: sandboxOnly
   requirements: [
-    item-chem-brass/60
-    item-chem-tin-bronze/120
-    item-chem-steel/75
+    item-chem-copper/160
+    item-chem-graphite/100
+    item-chem-brass/140
+    item-chem-steel/210
   ]
-  buildCostMultiplier: 2.0
+  buildCostMultiplier: 1.0
 
 
 /*
@@ -23,10 +25,10 @@
 
 
   research: {
-    parent: fac-misc-mechanical-crank
+    parent: fac-sep-high-pressure-cyclone-separator-controller
     objectives: []
   }
-  researchCostMultiplier: 0.3
+  researchCostMultiplier: 0.0
 
 
 /*
@@ -36,14 +38,14 @@
 */
 
 
-  scaledHealth: 60.0
-  armor: 12.0
+  scaledHealth: 80.0
+  armor: 24.0
   size: 4
-  hasItems: false
+  hasItems: true
   itemCapacity: 20
   hasLiquids: true
-  liquidCapacity: 1.0
-  hasPower: false
+  liquidCapacity: 5.0
+  hasPower: true
 
 
 /*
@@ -71,34 +73,20 @@
 
 
       {
-        type: DrawRegion
-        suffix: "-bottom"
-      }
-
-
-      {
-        type: DrawRegion
-        suffix: "-rotator"
-        spinSprite: true
-        rotateSpeed: 6.0
-      }
-
-
-      {
         type: DrawDefault
       }
 
 
       {
-        type: DrawRegion
-        suffix: "-lid"
-      }
-
-
-      {
-        type: DrawGlowRegion
-        color: ff3838
-        suffix: "-glow"
+        type: DrawParticles
+        color: bfbfbf
+        alpha: 0.6
+        particles: 15
+        particleLife: 90.0
+        particleRad: 12.0
+        particleSize: 3.0
+        rotateScl: 3.0
+        reverse: true
       }
 
 
@@ -106,9 +94,9 @@
   }
   craftEffect: none
   updateEffect: none
-  updateEffectChance: 0.02
-  ambientSound: se-amb-turbine
-  ambientSoundVolume: 0.4
+  updateEffectChance: 0.01
+  ambientSound: wind
+  ambientSoundVolume: 0.5
 
 
 /*
@@ -118,6 +106,7 @@
 */
 
 
+  configurable: true
   outputsLiquid: true
   ignoreLiquidFullness: true
 
@@ -131,11 +120,5 @@
 
   craftTime: 60.0
   consumes: {
-    liquids: [
-      effc-cond-steam-energy/0.05
-      effc-cond-pressure/0.01666667
-    ]
+    power: 1.08333333
   }
-  outputLiquids: [
-    effc-cond-torque/0.2
-  ]

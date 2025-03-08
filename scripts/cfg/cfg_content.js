@@ -11,10 +11,20 @@
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
     const mdl_flow = require("reind/mdl/mdl_flow");
+    const mdl_table = require("reind/mdl/mdl_table");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
     const db_unit = require("reind/db/db_unit");
+  // End
+
+
+  // Part: Auxiliary
+    function ax_buildStats_contentRowDisplay(li_ct) {
+      return function(tb) {
+        mdl_table.setContentRowDisplay(tb, li_ct);
+      };
+    };
   // End
 
 
@@ -105,7 +115,7 @@
           var famiVal = mdl_content.getFamilyValue(blk);
           if(famiVal != null) {
             blk.stats.add(db_stat.factoryFamily, famiVal);
-            blk.stats.add(db_stat.familyMembers, StatValues.content(mdl_content.getFamilyMembers(blk)));
+            blk.stats.add(db_stat.familyMembers, ax_buildStats_contentRowDisplay(mdl_content.getFamilyMembers(blk)));
           };
         });
 

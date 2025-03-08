@@ -97,6 +97,24 @@ const rc = {
 
 
     /* ========================================
+      Section: Special
+    ======================================== */
+
+
+    // Melter Effc
+    {
+      "icon": "reind-effc-effc-melter",
+      "category": "special",
+      "randInputs": new Seq([
+        "reind-item-bio-charcoal", 20, 0.25,
+      ]),
+      "outputs": new Seq([
+        "reind-effc-effc-melter", 0.01666667,
+      ]),
+    },
+
+
+    /* ========================================
       Section: Smelting
     ======================================== */
 

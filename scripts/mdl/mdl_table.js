@@ -316,6 +316,11 @@
               // Fail Probability
               var failP = mdl_recipe.getFailProbability(rcFi, i);
               if(failP > 0.0001) tb2.add(mdl_text.getStatText(Core.bundle.get("term.reind-term-chance-to-fail.name"), Strings.fixed(failP * 100.0, 1) + "%")).left().row();
+
+              var tt = mdl_recipe.getRawTooltip(rcFi, i);
+
+              // Tooltip: Overdriven Mode
+              if(tt == "overdriven") tb2.add(Core.bundle.get("info.reind-info-tt-overdriven.name")).left().row();
             }).left().marginRight(72.0);
           }).left().growX().row();
         };

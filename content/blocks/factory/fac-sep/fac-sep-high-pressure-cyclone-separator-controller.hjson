@@ -5,13 +5,14 @@
 */
 
 
-  # type: Conduit
-  category: power
+  # type: Wall
+  category: crafting
   requirements: [
-    item-chem-tin-bronze/8
-    item-chem-steel/8
+    item-chem-copper/60
+    item-chem-graphite/100
+    item-chem-brass/80
   ]
-  buildCostMultiplier: 1.0
+  buildCostMultiplier: 2.0
 
 
 /*
@@ -22,10 +23,9 @@
 
 
   research: {
-    parent: pow-hcond-steel-heat-conductor
+    parent: fac-sep-cyclone-separator
     objectives: []
   }
-  researchCostMultiplier: 4.0
 
 
 /*
@@ -35,11 +35,13 @@
 */
 
 
-  scaledHealth: 60.0
-  armor: 12.0
+  scaledHealth: 80.0
+  armor: 24.0
   size: 1
-  hasLiquids: true
-  liquidCapacity: 0.5
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: false
+  liquidCapacity: 5.0
   hasPower: false
 
 
@@ -51,7 +53,7 @@
 
 
   envRequired: 0
-  envDisabled: 16
+  envDisabled: 22
 
 
 /*
@@ -61,8 +63,9 @@
 */
 
 
-  botColor: 6d5e55
-  padCorners: true
+  squareSprite: true
+  flashHit: true
+  flashColor: ffffff
 
 
 /*
@@ -72,9 +75,13 @@
 */
 
 
-  rotate: true
-  solid: false
-  underBullets: true
-  liquidPressure: 1.0
-  timerFlow: 1
-  leaks: true
+  crushDamageMultiplier: 0.75
+  update: true
+  configurable: true
+  lightningChance: -1.0
+  lightningDamage: 20.0
+  lightningLength: 17
+  lightningColor: ffd37f
+  lightningSound: spark
+  chanceDeflect: -1.0
+  deflectSound: none

@@ -45,7 +45,7 @@
 
       db_table.__contentSelector(tb, "fluid", id_sel, function() {
         b.block.lastConfig = this;
-        Call.tileConfig(Vars.player, b, new Vec2(this, 0));
+        Call.tileConfig(Vars.player, b, new Vec2(this, -2));
         b.deselect();
       }, 7);
     };
@@ -55,13 +55,19 @@
       if(val == null) return;
 
       if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
-      var val_fi = -1;
-      if(val instanceof Vec2) val_fi = val.x;
+      var val_fi = -2;
+      var param_fi = -2;
+      if(val instanceof Vec2) {
+        val_fi = val.x;
+        param_fi = val.y;
+      };
       if(val instanceof Building) val_fi = val.config();
 
-      ct_blk_fluidUnloader.accB_id_sel(b, "w", val_fi);
+      if(val_fi > -2) {
+        ct_blk_fluidUnloader.accB_id_sel(b, "w", val_fi);
 
-      mdl_effect.showAt(b, db_effect._recipeChange(b), 0.0);
+        mdl_effect.showAt(b, db_effect._recipeChange(b.block.size, b.team.color), 0.0);
+      };
     };
 
 

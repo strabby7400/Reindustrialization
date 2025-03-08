@@ -475,7 +475,7 @@
     exports.consumeItems = consumeItems;
 
 
-    const consumeLiquids = function(b, ci, progInc) {
+    const consumeLiquids = function(b, ci, progInc, timeScale) {
       // CI
       var li = ci;
       var cap = li.size;
@@ -487,7 +487,7 @@
           var amt = li.get(i + 1);
 
           if(b.liquids != null) {
-            b.liquids.remove(ct, Math.min(amt * progInc, b.liquids.get(ct)));
+            b.liquids.remove(ct, Math.min(amt * progInc * timeScale, b.liquids.get(ct)));
           };
         };
       };
@@ -538,7 +538,7 @@
     exports.addItems = addItems;
 
 
-    const addLiquids = function(b, co, progInc) {
+    const addLiquids = function(b, co, progInc, timeScale) {
       // CO
       var li = co;
       var cap = li.size;
@@ -550,7 +550,7 @@
           var amt = li.get(i + 1);
 
           if(b.liquids != null) {
-            b.handleLiquid(b, ct, Math.min(amt * progInc, b.block.liquidCapacity - b.liquids.get(ct)));
+            b.handleLiquid(b, ct, Math.min(amt * progInc * timeScale, b.block.liquidCapacity - b.liquids.get(ct)));
           };
         };
       };

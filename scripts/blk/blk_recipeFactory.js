@@ -6,6 +6,9 @@
 
 
   // Part: Import
+    const lib_base = require("reind/lib/lib_base");
+    const lib_tmi = lib_base.hasTmi ? require("reind/lib/lib_tmi") : null;
+
     const blk_genericFactory = require("reind/blk/blk_genericFactory");
 
     const ct_blk_recipeFactory = require("reind/ct/ct_blk_recipeFactory");
@@ -69,7 +72,9 @@
     };
 
 
-    function updateTileComp(b, rcFi, id_rc) {
+    function updateTileComp(b, rcFi, id_rc, tag) {
+      var isManual = (tag == "manual");
+
       // Prevents invalid recipe
       if(mdl_recipe.getRecipeSize(rcFi) < id_rc + 0.9999) {
         ct_blk_recipeFactory.accB_id_rc(b, "w", 0);
@@ -108,6 +113,14 @@
       };
 
       b.efficiency = temp_effc;
+      if(isManual) {
+        var param = ct_blk_recipeFactory.accB_param(b, "r");
+        b.efficiency *= param;
+
+        var param_dec = Math.min(0.002, param);
+        ct_blk_recipeFactory.accB_param(b, "w", param - param_dec);
+      };
+
       mdl_recipe.getScript(rcFi, id_rc).call(b);
 
       if(b.efficiency < 0.0001 || !b.shouldConsume()) {
@@ -132,8 +145,8 @@
           mdl_recipe.getCraftScript(rcFi, id_rc).call(b);
         };
 
-        frag_recipe.addLiquids(b, co, ax_getProgressIncrease(b, 1.0, rcFi, id_rc));
-        frag_recipe.consumeLiquids(b, ci, ax_getProgressIncrease(b, 1.0, rcFi, id_rc));
+        frag_recipe.addLiquids(b, co, ax_getProgressIncrease(b, 1.0, rcFi, id_rc), mdl_recipe.getTimeScale(rcFi, id_rc));
+        frag_recipe.consumeLiquids(b, ci, ax_getProgressIncrease(b, 1.0, rcFi, id_rc), mdl_recipe.getTimeScale(rcFi, id_rc));
 
         mdl_effect.showAroundP(b.block.updateEffectChance, b, b.block.updateEffect, b.block.size * Vars.tilesize * 0.5, 0.0);
 
@@ -156,6 +169,10 @@
       if(cond_liq) blk.outputsLiquid = true;
 
       blk.hasConsumers = true;
+
+      if(lib_base.hasTmi) {
+        Events.run(MusicRegisterEvent, () => lib_tmi.register_recipeFactory(blk, rcFi));
+      };
     };
 
 
@@ -172,14 +189,28 @@
     };
 
 
-    function buildConfigurationComp(b, tb) {
+    function buildConfigurationComp(b, tb, tag) {
+      var isManual = (tag == "manual");
+
       var rcFi = ct_blk_recipeFactory.accB_rcFi(b, "r");
       var id_rc = ct_blk_recipeFactory.accB_id_rc(b, "r");
+
+      if(isManual) {
+        mdl_table.setTrigger(tb, function() {
+          if(Vars.state.paused) {
+            mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-manual-generator-paused.name"));
+          } else {
+            var param_fi = Mathf.lerpDelta(ct_blk_recipeFactory.accB_param(b, "r"), 1.0, 0.135);
+            Call.tileConfig(Vars.player, b, new Vec2(-2, param_fi));
+          };
+        }, Icon.crafting, Core.bundle.get("info.reind-info-manual-crafter.name"), Tex.button, 72.0);
+        tb.row().add("").row();
+      };
 
       mdl_table.setRecipeSelector(tb, rcFi, id_rc, b, function() {
         frag_recipe.consumeItems(b, rcFi, id_rc);
         b.block.lastConfig = this;
-        Call.tileConfig(Vars.player, b, new Vec2(this, 0));
+        Call.tileConfig(Vars.player, b, new Vec2(this, -2));
         b.deselect();
       }, 7);
     };
@@ -189,15 +220,27 @@
       if(val == null) return;
 
       if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
-      var val_fi = 0;
-      if(val instanceof Vec2) val_fi = val.x;
+      var val_fi = -2;
+      var param_fi = -2;
+      if(val instanceof Vec2) {
+        val_fi = val.x;
+        param_fi = val.y;
+      };
       if(val instanceof Building) val_fi = val.config();
 
-      ct_blk_recipeFactory.accB_id_rc(b, "w", val_fi);
-      ct_blk_recipeFactory.accB_needCheck(b, "w", true);
-      b.progress = 0.0;
+      if(val_fi > -2) {
+        ct_blk_recipeFactory.accB_id_rc(b, "w", val_fi);
+        ct_blk_recipeFactory.accB_needCheck(b, "w", true);
+        b.progress = 0.0;
 
-      mdl_effect.showAt(b, db_effect._recipeChange(b.block.size, b.team.color), 0.0);
+        mdl_effect.showAt(b, db_effect._recipeChange(b.block.size, b.team.color), 0.0);
+      };
+
+      if(param_fi > -2) {
+        ct_blk_recipeFactory.accB_param(b, "w", param_fi);
+
+        mdl_effect.showAt(b, b.block.updateEffect);
+      };
     };
 
 
@@ -260,8 +303,13 @@
     };
 
 
-    function drawStatusComp(b) {
-      if(b.block.enableDrawStatus) mdl_draw.drawBlockStatus(b);
+    function drawStatusComp(b, tag) {
+      var isManual = (tag == "manual");
+
+      var color = b.status().color;
+      if(isManual && b.efficiency > 0.5) color = BlockStatus.active.color;
+
+      if(b.block.enableDrawStatus) mdl_draw.drawBlockStatus(b, color);
     };
   // End
 
@@ -282,10 +330,10 @@
     exports.setStats = setStats;
 
 
-    const updateTile = function(b, rcFi, id_rc) {
+    const updateTile = function(b, rcFi, id_rc, tag) {
       blk_genericFactory.updateTile(b);
 
-      updateTileComp(b, rcFi, id_rc);
+      updateTileComp(b, rcFi, id_rc, tag);
     };
     exports.updateTile = updateTile;
 
@@ -302,8 +350,8 @@
     exports.setBars = setBars;
 
 
-    const buildConfiguration = function(b, tb) {
-      buildConfigurationComp(b, tb);
+    const buildConfiguration = function(b, tb, tag) {
+      buildConfigurationComp(b, tb, tag);
     };
     exports.buildConfiguration = buildConfiguration;
 
@@ -356,8 +404,8 @@
     exports.drawSelect = drawSelect;
 
 
-    const drawStatus = function(b) {
-      drawStatusComp(b);
+    const drawStatus = function(b, tag) {
+      drawStatusComp(b, tag);
     };
     exports.drawStatus = drawStatus;
   // End

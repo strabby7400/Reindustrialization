@@ -18,7 +18,7 @@
 
   // Part: Component
     function updateTileComp(b) {
-      if(Mathf.chance(0.01) && b.liquids != null) {
+      if(Vars.state.rules.reactorExplosions && Mathf.chance(0.01) && b.liquids != null) {
         var amt_pres = b.liquids.get(Vars.content.liquid("reind-effc-cond-pressure"));
         var amt_vac = b.liquids.get(Vars.content.liquid("reind-effc-cond-vacuum"));
         var cap = b.block.liquidCapacity;

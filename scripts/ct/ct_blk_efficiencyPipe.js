@@ -8,6 +8,8 @@
   // Part: Import
     const blk_efficiencyPipe = require("reind/blk/blk_efficiencyPipe");
 
+    const frag_facility = require("reind/frag/frag_facility");
+
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -38,9 +40,12 @@
     });
     powEcond_transmissionBox.buildType = () => extend(Conduit.ConduitBuild, powEcond_transmissionBox, {
       rotatorReg: mdl_content.getRegion(powEcond_transmissionBox, "-rotator"),
+      tprog: 0.0,
+      // Specific
       updateTile() {
         this.super$updateTile();
         blk_efficiencyPipe.updateTile(this);
+        this.tprog += frag_facility.getTprogInc(this, "liq", this.liquids.current());
       },
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
@@ -52,7 +57,7 @@
       },
       // Specific
       draw() {
-        mdl_draw.drawRotatorRegion(mdl_game.poser_1b(this), this.rotatorReg, 0.0, (this.liquids.get(this.liquids.current()) > 0.0001 ? 6.0 : 0.0));
+        mdl_draw.drawRotatorRegion(mdl_game.poser_1b(this), this.rotatorReg, this.tprog, 0.0, 9.0);
         this.super$draw();
         blk_efficiencyPipe.draw(this);
       },

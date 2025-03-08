@@ -139,6 +139,19 @@
     exports.effcEffc_materialLifting = effcEffc_materialLifting;
 
 
+    const effcEffc_melter = extend(Liquid, "effc-effc-melter", {
+      setStats() {
+        this.super$setStats();
+        rs_efficiency.setStats(this);
+      },
+      update(puddle) {
+        this.super$update(puddle);
+        rs_efficiency.update(this, puddle);
+      },
+    });
+    exports.effcEffc_melter = effcEffc_melter;
+
+
     const effcEffc_pump = extend(Liquid, "effc-effc-pump", {
       setStats() {
         this.super$setStats();

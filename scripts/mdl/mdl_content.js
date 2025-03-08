@@ -243,8 +243,8 @@
 
       var li_ct = new Seq();
 
-      Vars.content.blocks().each(blk => {if(!isEnv(blk) && getFaction(blk) == faction) li_ct.add(blk)});
-      Vars.content.units().each(utp => {if(getFaction(utp) == faction) li_ct.add(blk)});
+      Vars.content.blocks().each(blk => {if(!isEnv(blk) && getFaction(blk) == faction && !li_ct.contains(blk)) li_ct.add(blk)});
+      Vars.content.units().each(utp => {if(getFaction(utp) == faction && !li_ct.contains(utp)) li_ct.add(utp)});
 
       return li_ct;
     };
@@ -284,7 +284,7 @@
         if(isFactory(blk)) {
           var cond = false;
           var temp_fami = getFamily(blk);
-          fami.each(i => {if(temp_fami.contains(i)) cond = true});
+          fami.each(i => {if(temp_fami.contains(i) && !li_blk.contains(i)) cond = true});
 
           if(cond) li_blk.add(blk);
         };

@@ -15,6 +15,13 @@
 
 
   // Part: Accessor
+    const accB_param = function(b, mode, val) {
+      if(mode == "r") return b.param;
+      if(mode == "w") b.param = val;
+    };
+    exports.accB_param = accB_param;
+
+
     const accB_rcFi = function(b, mode, val) {
       if(mode == "r") return b.rcFi;
       if(mode == "w") b.rcFi = val;
@@ -122,6 +129,7 @@
       },
     });
     facHeat_temperatureControlUnit.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facHeat_temperatureControlUnit, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
       id_rc: mdl_content.getConfig(facHeat_temperatureControlUnit, 0),
       needCheck: true,
@@ -203,6 +211,7 @@
       },
     });
     facHeat_furnaceHeater.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facHeat_furnaceHeater, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facHeat_furnaceHeater"),
       id_rc: mdl_content.getConfig(facHeat_furnaceHeater, 0),
       needCheck: true,
@@ -293,6 +302,7 @@
       },
     });
     facAir_liquidRingPressurePump.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facAir_liquidRingPressurePump, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facAir_liquidRingPressurePump"),
       id_rc: mdl_content.getConfig(facAir_liquidRingPressurePump, 0),
       needCheck: true,
@@ -380,6 +390,7 @@
       },
     });
     facFurn_carbonizationKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_carbonizationKiln, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facFurn_carbonizationKiln"),
       id_rc: mdl_content.getConfig(facFurn_carbonizationKiln, 0),
       needCheck: true,
@@ -458,6 +469,7 @@
       },
     });
     facFurn_primitiveBrickKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveBrickKiln, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveBrickKiln"),
       id_rc: mdl_content.getConfig(facFurn_primitiveBrickKiln, 0),
       needCheck: true,
@@ -539,6 +551,7 @@
       },
     });
     facFurn_kiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_kiln, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facFurn_kiln"),
       id_rc: mdl_content.getConfig(facFurn_kiln, 0),
       needCheck: true,
@@ -617,6 +630,7 @@
       },
     });
     facFurn_bloomery.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_bloomery, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facFurn_bloomery"),
       id_rc: mdl_content.getConfig(facFurn_bloomery, 0),
       needCheck: true,
@@ -699,6 +713,7 @@
       },
     });
     facFurn_brickedBlastFurnace.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_brickedBlastFurnace, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facFurn_brickedBlastFurnace"),
       id_rc: mdl_content.getConfig(facFurn_brickedBlastFurnace, 0),
       needCheck: true,
@@ -780,6 +795,7 @@
       },
     });
     facFurn_primitiveSinteringFurnace.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveSinteringFurnace, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveSinteringFurnace"),
       id_rc: mdl_content.getConfig(facFurn_primitiveSinteringFurnace, 0),
       needCheck: true,
@@ -861,6 +877,7 @@
       },
     });
     facFurn_colossalKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_colossalKiln, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facFurn_colossalKiln"),
       id_rc: mdl_content.getConfig(facFurn_colossalKiln, 0),
       needCheck: true,
@@ -942,6 +959,7 @@
       },
     });
     facFurn_primitiveCokeOven.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveCokeOven, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveCokeOven"),
       id_rc: mdl_content.getConfig(facFurn_primitiveCokeOven, 0),
       needCheck: true,
@@ -1029,6 +1047,7 @@
       },
     });
     facMill_jawCrusher.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_jawCrusher, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facMill_jawCrusher"),
       id_rc: mdl_content.getConfig(facMill_jawCrusher, 0),
       needCheck: true,
@@ -1111,6 +1130,7 @@
       },
     });
     facMill_hammerCrusher.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_hammerCrusher, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facMill_hammerCrusher"),
       id_rc: mdl_content.getConfig(facMill_hammerCrusher, 0),
       needCheck: true,
@@ -1192,6 +1212,7 @@
       },
     });
     facMill_mechanicalMill.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_mechanicalMill, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facMill_mechanicalMill"),
       id_rc: mdl_content.getConfig(facMill_mechanicalMill, 0),
       needCheck: true,
@@ -1274,6 +1295,7 @@
       },
     });
     facMill_ballMill.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_ballMill, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facMill_ballMill"),
       id_rc: mdl_content.getConfig(facMill_ballMill, 0),
       needCheck: true,
@@ -1361,6 +1383,7 @@
       },
     });
     facMix_vMixer.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMix_vMixer, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facMix_vMixer"),
       id_rc: mdl_content.getConfig(facMix_vMixer, 0),
       needCheck: true,
@@ -1448,6 +1471,7 @@
       },
     });
     facProc_brickPress.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_brickPress, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facProc_brickPress"),
       id_rc: mdl_content.getConfig(facProc_brickPress, 0),
       needCheck: true,
@@ -1526,6 +1550,7 @@
       },
     });
     facProc_charcoalRodMaker_m.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_charcoalRodMaker_m, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facProc_charcoalRodMaker_m"),
       id_rc: mdl_content.getConfig(facProc_charcoalRodMaker_m, 0),
       needCheck: true,
@@ -1613,6 +1638,7 @@
       },
     });
     facRmv_hotAirDryer.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facRmv_hotAirDryer, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facRmv_hotAirDryer"),
       id_rc: mdl_content.getConfig(facRmv_hotAirDryer, 0),
       needCheck: true,
@@ -1675,6 +1701,88 @@
   // Part: fac-sep
 
 
+    /* <---------------- auxiliary ----------------> */
+
+
+    const facSep_highPressureCycloneSeparator = extend(GenericCrafter, "fac-sep-high-pressure-cyclone-separator", {
+      rcFi: require("reind/rc/rc_facSep_highPressureCycloneSeparator"),
+      setStats() {
+        this.super$setStats();
+        blk_recipeFactory.setStats(this, this.rcFi);
+      },
+      init() {
+        this.super$init();
+        blk_recipeFactory.init(this, this.rcFi);
+      },
+      setBars() {
+        this.super$setBars();
+        blk_recipeFactory.setBars(this, this.rcFi);
+      },
+      outputsItems() {
+        return blk_recipeFactory.outputsItems(this, this.rcFi);
+      },
+      consumesLiquid(liquid) {
+        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+      },
+    });
+    facSep_highPressureCycloneSeparator.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_highPressureCycloneSeparator, {
+      param: 0.0,
+      rcFi: require("reind/rc/rc_facSep_highPressureCycloneSeparator"),
+      id_rc: mdl_content.getConfig(facSep_highPressureCycloneSeparator, 0),
+      needCheck: true,
+      ci: new Seq(),
+      bi: new Seq(),
+      opt: new Seq(),
+      co: new Seq(),
+      bo: new Seq(),
+      fo: new Seq(),
+      temp_effc: 0.0,
+      updateTile() {
+        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        blk_recipeFactory.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        blk_recipeFactory.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+      },
+      drawStatus() {
+        blk_recipeFactory.drawStatus(this);
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.facSep_highPressureCycloneSeparator = facSep_highPressureCycloneSeparator;
+
+
     /* <---------------- purification ----------------> */
 
 
@@ -1717,6 +1825,7 @@
       },
     });
     facSep_dryMagneticSeparator.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_dryMagneticSeparator, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facSep_dryMagneticSeparator"),
       id_rc: mdl_content.getConfig(facSep_dryMagneticSeparator, 0),
       needCheck: true,
@@ -1797,6 +1906,7 @@
       },
     });
     facSep_mineralJig_m.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_mineralJig_m, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facSep_mineralJig_m"),
       id_rc: mdl_content.getConfig(facSep_mineralJig_m, 0),
       needCheck: true,
@@ -1859,6 +1969,88 @@
   // Part: fac-misc
 
 
+    /* <---------------- special ----------------> */
+
+
+    const facMisc_mechanicalCrank = extend(GenericCrafter, "fac-misc-mechanical-crank", {
+      rcFi: require("reind/rc/rc_facMisc_mechanicalCrank"),
+      setStats() {
+        this.super$setStats();
+        blk_recipeFactory.setStats(this, this.rcFi);
+      },
+      init() {
+        this.super$init();
+        blk_recipeFactory.init(this, this.rcFi);
+      },
+      setBars() {
+        this.super$setBars();
+        blk_recipeFactory.setBars(this, this.rcFi);
+      },
+      outputsItems() {
+        return blk_recipeFactory.outputsItems(this, this.rcFi);
+      },
+      consumesLiquid(liquid) {
+        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+      },
+    });
+    facMisc_mechanicalCrank.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_mechanicalCrank, {
+      param: 0.0,
+      rcFi: require("reind/rc/rc_facMisc_mechanicalCrank"),
+      id_rc: mdl_content.getConfig(facMisc_mechanicalCrank, 0),
+      needCheck: true,
+      ci: new Seq(),
+      bi: new Seq(),
+      opt: new Seq(),
+      co: new Seq(),
+      bo: new Seq(),
+      fo: new Seq(),
+      temp_effc: 0.0,
+      updateTile() {
+        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc, "manual");
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        blk_recipeFactory.buildConfiguration(this, table, "manual");
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        blk_recipeFactory.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+      },
+      drawStatus() {
+        blk_recipeFactory.drawStatus(this, "manual");
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.facMisc_mechanicalCrank = facMisc_mechanicalCrank;
+
+
     /* <---------------- inlet ----------------> */
 
 
@@ -1885,6 +2077,7 @@
       },
     });
     facMisc_genericInlet.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_genericInlet, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facMisc_genericInlet"),
       id_rc: mdl_content.getConfig(facMisc_genericInlet, 0),
       needCheck: true,
@@ -1963,6 +2156,7 @@
       },
     });
     facMisc_fuelInlet.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_fuelInlet, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facMisc_fuelInlet"),
       id_rc: mdl_content.getConfig(facMisc_fuelInlet, 0),
       needCheck: true,
@@ -2044,6 +2238,7 @@
       },
     });
     facMisc_coreCrafter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_coreCrafter, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_facMisc_coreCrafter"),
       id_rc: mdl_content.getConfig(facMisc_coreCrafter, 0),
       needCheck: true,
@@ -2131,6 +2326,7 @@
       },
     });
     ileffMisc_bitBank.buildType = () => extend(GenericCrafter.GenericCrafterBuild, ileffMisc_bitBank, {
+      param: 0.0,
       rcFi: require("reind/rc/rc_ileffMisc_bitBank"),
       id_rc: mdl_content.getConfig(ileffMisc_bitBank, 0),
       needCheck: true,

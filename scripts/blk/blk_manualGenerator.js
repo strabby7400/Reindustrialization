@@ -44,7 +44,7 @@
           mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-manual-generator-paused.name"));
         } else {
           var frac_fi = Mathf.lerpDelta(ct_blk_manualGenerator.accB_frac(b, "r"), 1.0, 0.135);
-          Call.tileConfig(Vars.player, b, new Vec2(frac_fi, 0));
+          Call.tileConfig(Vars.player, b, new Vec2(frac_fi, -2));
         };
       }, Icon.power, Core.bundle.get("info.reind-info-manual-generator.name"), Tex.button, 72.0);
     };
@@ -54,13 +54,19 @@
       if(val == null) return;
 
       if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
-      var val_fi = 0.0;
-      if(val instanceof Vec2) val_fi = val.x;
+      var val_fi = -2;
+      var param_fi = -2;
+      if(val instanceof Vec2) {
+        val_fi = val.x;
+        param_fi = val.y;
+      };
       if(val instanceof Building) val_fi = val.config();
 
-      ct_blk_manualGenerator.accB_frac(b, "w", val_fi);
+      if(val_fi > -2) {
+        ct_blk_manualGenerator.accB_frac(b, "w", val_fi);
 
-      mdl_effect.showAt(b, b.block.generateEffect);
+        mdl_effect.showAt(b, b.block.generateEffect);
+      };
     };
   // End
 
@@ -109,5 +115,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_windTurbine.js loaded.");
+  Log.info("REIND:blk_manualGenerator.js loaded.");
 });

@@ -104,6 +104,22 @@ const rc = {
 
 
     /* ========================================
+      Section: Special
+    ======================================== */
+
+
+    // Melter Effc
+    {
+      "icon": "reind-effc-effc-melter",
+      "category": "special",
+      "inputs": new Seq([].concat(gi)),
+      "outputs": new Seq([
+        "reind-effc-effc-melter", 0.1,
+      ]),
+    },
+
+
+    /* ========================================
       Section: Roasting
     ======================================== */
 

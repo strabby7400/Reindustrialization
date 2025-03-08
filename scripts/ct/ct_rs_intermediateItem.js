@@ -224,6 +224,18 @@
     exports.itemInt_concentrate_malachite = itemInt_concentrate_malachite;
 
 
+    /* iron */
+
+
+    const itemInt_concentrate_pyrite = extend(Item, "item-int-concentrate-pyrite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_concentrate_pyrite = itemInt_concentrate_pyrite;
+
+
     /* lead */
 
 
@@ -421,6 +433,15 @@
       },
     });
     exports.itemInt_dust_pyrite = itemInt_dust_pyrite;
+
+
+    const itemInt_dust_p1Pyrite = extend(Item, "item-int-dust-p1-pyrite", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_dust_p1Pyrite = itemInt_dust_p1Pyrite;
 
 
     /* lead */

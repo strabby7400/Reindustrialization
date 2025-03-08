@@ -464,6 +464,52 @@
   // End
 
 
+  // Part: Total Progress
+    const getTprogRate_effc = function(b) {
+      return b.efficiency;
+    };
+    exports.getTprogRate_effc = getTprogRate_effc;
+
+
+    const getTprogRate_liq = function(b, liq) {
+      if(b.liquids == null || liq == null) return 0.0;
+
+      return b.liquids.get(liq) / b.block.liquidCapacity;
+    };
+    exports.getTprogRate_liq = getTprogRate_liq;
+
+
+    const getTprogRate_heat = function(b, cap) {
+      if(cap == null) cap = mdl_heat.getHeatLimit(b.block);
+
+      return Math.min(mdl_heat.getHeat(b) / cap, 1.0);
+    };
+    exports.getTprogRate_heat = getTprogRate_heat;
+
+
+    const getTprogInc = function(b, mode, param, warmup) {
+      if(mode != "effc" && mode != "liq" && mode != "heat") return 0.0;
+
+      var inc = 0.0;
+      switch(mode) {
+        case "effc" :
+          inc = Time.delta * getTprogRate_effc(b);
+          break;
+        case "liq" :
+          inc = Time.delta * getTprogRate_liq(b, param);
+          break;
+        case "heat" :
+          inc = Time.delta * getTprogRate_heat(b, param);
+          break;
+      };
+      if(warmup != null) inc *= warmup;
+
+      return inc;
+    };
+    exports.getTprogInc = getTprogInc;
+  // End
+
+
   // Part: Waste
     const setBars_was = function(blk, rcFi) {
       var cap = mdl_recipe.getRecipeSize(rcFi);

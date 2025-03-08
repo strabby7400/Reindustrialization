@@ -224,5 +224,5 @@
 
   craftTime: 600.0
   consumes: {
-    power: 0.83333333
+    power: 2.5
   }

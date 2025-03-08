@@ -14,6 +14,7 @@
 
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
+    const mdl_game = require("reind/mdl/mdl_game");
     const mdl_table = require("reind/mdl/mdl_table");
     const mdl_ui = require("reind/mdl/mdl_ui");
 
@@ -73,7 +74,7 @@
 
       if(Math.abs(val_fi - 1.0) < 0.0001) {
         var blk_tg = frag_facility.getStructurePair(b.block)[0];
-        mdl_effect.showAt(b, db_effect._recipeChange(blk_tg.size, b.team.color), 0.0);
+        mdl_effect.showAt(mdl_game.poser_1t(b.tile, blk_tg.offset), db_effect._recipeChange(blk_tg.size, b.team.color), 0.0);
         b.tile.setBlock(blk_tg, b.team);
       };
     };

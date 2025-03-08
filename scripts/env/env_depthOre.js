@@ -12,7 +12,8 @@
 
   // Part: Component
     function drawBaseComp(blk, t, a) {
-      if(a === undefined) a = 0.0;
+      if(a == null) a = 0.0;
+      if(Vars.state.isEditor()) a = 1.0;
 
       Draw.z(1.0);
       Draw.alpha(a);

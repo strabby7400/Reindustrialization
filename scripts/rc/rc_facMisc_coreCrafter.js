@@ -148,7 +148,7 @@ const rc = {
         "reind-item-cons-ball-steel", 1,
       ]),
       "randOutputs": new Seq([
-        "reind-item-cons-ball-steel", 1, 0.1,
+        "reind-item-cons-ball-steel", 1, 0.2,
       ]),
     },
 
@@ -167,7 +167,7 @@ const rc = {
         "reind-item-cons-electrode-copper", 1,
       ]),
       "randOutputs": new Seq([
-        "reind-item-cons-electrode-copper", 1, 0.1,
+        "reind-item-cons-electrode-copper", 1, 0.2,
       ]),
     },
 
@@ -183,7 +183,7 @@ const rc = {
         "reind-item-cons-electrode-graphite", 1,
       ]),
       "randOutputs": new Seq([
-        "reind-item-cons-electrode-graphite", 1, 0.1,
+        "reind-item-cons-electrode-graphite", 1, 0.2,
       ]),
     },
 
@@ -199,7 +199,7 @@ const rc = {
         "reind-item-cons-electrode-lead", 1,
       ]),
       "randOutputs": new Seq([
-        "reind-item-cons-electrode-lead", 1, 0.1,
+        "reind-item-cons-electrode-lead", 1, 0.2,
       ]),
     },
 
@@ -218,7 +218,7 @@ const rc = {
         "reind-item-cons-pall-ring-steel", 1,
       ]),
       "randOutputs": new Seq([
-        "reind-item-cons-pall-ring-steel", 1, 0.1,
+        "reind-item-cons-pall-ring-steel", 1, 0.2,
       ]),
     },
 
@@ -234,7 +234,7 @@ const rc = {
         "reind-item-cons-pall-ring-stainless-steel", 1,
       ]),
       "randOutputs": new Seq([
-        "reind-item-cons-pall-ring-stainless-steel", 1, 0.1,
+        "reind-item-cons-pall-ring-stainless-steel", 1, 0.2,
       ]),
     },
 

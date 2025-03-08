@@ -71,6 +71,42 @@
   // End
 
 
+  // Part: fac-sep
+    const facSep_highPressureCycloneSeparatorController = extend(Wall, "fac-sep-high-pressure-cyclone-separator-controller", {
+      setStats() {
+        this.super$setStats();
+        blk_structureCore.setStats(this);
+      },
+      drawPlace(x, y, rotation, valid) {
+        this.super$drawPlace(x, y, rotation, valid);
+        blk_structureCore.drawPlace(this, x, y, rotation, valid);
+      },
+    });
+    facSep_highPressureCycloneSeparatorController.buildType = () => extend(Wall.WallBuild, facSep_highPressureCycloneSeparatorController, {
+      needCheck: true,
+      plan: new Seq(),
+      updateTile() {
+        this.super$updateTile();
+        blk_structureCore.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        blk_structureCore.buildConfiguration(this, table, this.plan);
+      },
+      configured(builder, value) {
+        blk_structureCore.configured(this, builder, value);
+      },
+      draw() {
+        this.super$draw();
+        blk_structureCore.draw(this, this.plan);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        blk_structureCore.drawSelect(this, this.plan);
+      },
+    });
+    exports.facSep_highPressureCycloneSeparatorController = facSep_highPressureCycloneSeparatorController;
+  // End
 
 
 Events.run(ClientLoadEvent, () => {

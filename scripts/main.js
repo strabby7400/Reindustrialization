@@ -258,7 +258,6 @@
         }) (i);
       };
     };
-
     Events.run(MusicRegisterEvent, () => {
       setDialog_welcome();
       cfg_hidden.setup_hiddenItems();

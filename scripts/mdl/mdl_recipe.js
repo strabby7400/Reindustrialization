@@ -151,6 +151,12 @@
     exports.getFailOutputs = getFailOutputs;
 
 
+    const getRawTooltip = function(rcFi, id_rc) {
+      return getRecipeValue(rcFi, id_rc, "tooltip");
+    };
+    exports.getRawTooltip = getRawTooltip;
+
+
     /* NOTE: Gets the tooltip text that is used in configuration table. */
     const getTooltip = function(rcFi, id_rc) {
       if(Vars.headless) return "";
@@ -163,7 +169,7 @@
       var failP = getFailProbability(rcFi, id_rc);
       var str_fail = (failP > 0.0001) ? mdl_text.getStatText(Core.bundle.get("term.reind-term-chance-to-fail.name"), Strings.fixed(failP * 100.0, 1) + "%") : null;
 
-      var tt = getRecipeValue(rcFi, id_rc, "tooltip");
+      var tt = getRawTooltip(rcFi, id_rc);
       var str_tt = (tt == null) ? null : Core.bundle.get("info.reind-info-tt-" + tt + ".name");
 
       var str_fi =  "[accent]<" + str_cat + " [" + Strings.fixed(id_rc + 1.0, 0) + "]" + ">[]\n" + str_ct +

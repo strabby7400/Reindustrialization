@@ -98,6 +98,26 @@ const rc = {
     },
 
 
+    /* <---------------- iron ----------------> */
+
+
+    // Dust (Pyrite)
+    {
+      "icon": "reind-item-int-dust-pyrite",
+      "category": "purification",
+      "inputs": new Seq([
+        "reind-item-int-dust-pyrite", 8,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-dust-p1-pyrite", 4,
+        "reind-item-was-gangue", 4,
+      ]),
+      "randOutputs": new Seq([
+        "reind-item-ore-raw-coal", 4, 0.5,
+      ]),
+    },
+
+
     /* <---------------- lead ----------------> */
 
 

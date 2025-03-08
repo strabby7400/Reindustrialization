@@ -158,18 +158,21 @@
 
 
     /* NOTE: The sprite rotates. */
-    const drawRotatorRegion = function(pos, reg, ang, rate) {
+    const drawRotatorRegion = function(pos, reg, tprog, ang, rate, sides) {
       if(ang == null) ang = 0.0;
       if(rate == null) rate = 0.0;
-      if(Vars.headless || pos == null || reg == null) return;
+      if(sides == null) sides = 4;
+      if(Vars.headless || pos == null || reg == null || tprog == null) return;
 
       var x = pos.x;
       var y = pos.y;
-      var ang_fi = Mathf.mod(Time.time * rate + ang, 90.0);
+      var ang_fd = 360.0 / sides;
+      var ang_fi = Mathf.mod(tprog * rate + ang, ang_fd);
 
+      Draw.alpha(1.0);
       Draw.rect(reg, x, y, ang_fi);
-      Draw.alpha(ang / 90.0);
-      Draw.rect(reg, x, y, ang_fi - 90.0);
+      Draw.alpha(ang_fi / ang_fd);
+      Draw.rect(reg, x, y, ang_fi - ang_fd);
       Draw.reset();
     };
     exports.drawRotatorRegion = drawRotatorRegion;

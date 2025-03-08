@@ -1,5 +1,4 @@
 const gi = [
-  "reind-effc-cond-heat", 0.13333333,
   "reind-effc-effc-temperature-control", 0.01666667,
   "reind-effc-effc-smoke-exhaust", 0.03333333,
 ];
@@ -43,6 +42,22 @@ const rc = {
       ].concat(gi)),
       "outputs": new Seq([
         "reind-item-int-concentrate-malachite", 20,
+      ]),
+    },
+
+
+    /* <---------------- pyrite ----------------> */
+
+
+    // Dust (P1 : Pyrite)
+    {
+      "icon": "reind-item-int-dust-p1-pyrite",
+      "category": "concentrate-sintering",
+      "inputs": new Seq([
+        "reind-item-int-dust-p1-pyrite", 20,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-concentrate-pyrite", 20,
       ]),
     },
 

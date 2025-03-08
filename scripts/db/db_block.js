@@ -351,6 +351,7 @@
       ======================================== */
 
       "reind-fac-sep-cyclone-separator", "dust-remover",
+      "reind-fac-sep-high-pressure-cyclone-separator", "dust-remover",
 
       /* ========================================
         Section: Electrolyzer
@@ -412,6 +413,9 @@
       /* ========================================
         Section: Melter
       ======================================== */
+
+      "reind-fac-furn-kiln", "melter",
+      "reind-fac-furn-colossal-kiln", "melter",
 
       /* ========================================
         Section: Pressure Pump
@@ -515,6 +519,21 @@
         new Point2(-1, 3), "reind-def-wall-plate-wall-steel",
         new Point2(0, 3), "reind-def-wall-plate-wall-steel",
         new Point2(1, 3), "reind-def-wall-plate-wall-steel",
+      ]),
+
+      "reind-fac-sep-high-pressure-cyclone-separator-controller", "reind-fac-sep-high-pressure-cyclone-separator", new Seq([
+        new Point2(-1, -1), "reind-def-wall-plate-wall-steel",
+        new Point2(0, -1), "reind-def-wall-plate-wall-steel",
+        new Point2(1, -1), "reind-fac-sep-cyclone-separator",
+
+        new Point2(-1, 0), "reind-def-wall-plate-wall-steel",
+
+        new Point2(-1, 1), "reind-fac-sep-cyclone-separator",
+        new Point2(1, 1), "reind-def-wall-plate-wall-steel",
+        new Point2(2, 1), "reind-def-wall-plate-wall-steel",
+
+        new Point2(1, 2), "reind-def-wall-plate-wall-steel",
+        new Point2(2, 2), "reind-def-wall-plate-wall-steel",
       ]),
     ]);
     exports.structure = li_structure;
