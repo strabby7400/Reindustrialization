@@ -45,5 +45,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_grass.js loaded.");
+  Log.info("REIND: env_grass.js loaded.");
 });

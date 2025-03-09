@@ -64,5 +64,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_incinerator.js loaded.");
+  Log.info("REIND: ct_blk_incinerator.js loaded.");
 });

@@ -202,5 +202,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_genericWall.js loaded.");
+  Log.info("REIND: ct_blk_genericWall.js loaded.");
 });

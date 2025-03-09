@@ -67,5 +67,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_env_ruin.js loaded.");
+  Log.info("REIND: ct_env_ruin.js loaded.");
 });

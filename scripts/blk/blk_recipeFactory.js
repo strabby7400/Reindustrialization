@@ -109,7 +109,7 @@
 
         ct_blk_recipeFactory.accB_needCheck(b, "w", false);
       } else {
-        if(Mathf.chance(0.01)) ct_blk_recipeFactory.accB_needCheck(b, "w", true);
+        if(Mathf.chance(0.008)) ct_blk_recipeFactory.accB_needCheck(b, "w", true);
       };
 
       b.efficiency = temp_effc;
@@ -203,7 +203,7 @@
             var param_fi = Mathf.lerpDelta(ct_blk_recipeFactory.accB_param(b, "r"), 1.0, 0.135);
             Call.tileConfig(Vars.player, b, new Vec2(-2, param_fi));
           };
-        }, Icon.crafting, Core.bundle.get("info.reind-info-manual-crafter.name"), Tex.button, 72.0);
+        }, Icon.crafting, Core.bundle.get("info.reind-info-manual-crafter.name"), 72.0);
         tb.row().add("").row();
       };
 
@@ -300,6 +300,9 @@
     function drawSelectComp(b, rcFi, id_rc) {
       var ct = mdl_content.getContent_nm(mdl_recipe.getIconName(rcFi, id_rc));
       mdl_draw.drawContentIcon(mdl_game.poser_1b(b), ct, b.block.size);
+
+      var tt = mdl_recipe.getRawTooltip(rcFi, id_rc);
+      if(tt == "overdriven") mdl_draw.drawRectPulse(mdl_game.poser_1b(b), b.block.size * 0.5 * Vars.tilesize, Pal.remove);
     };
 
 
@@ -412,5 +415,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_recipeFactory.js loaded.");
+  Log.info("REIND: blk_recipeFactory.js loaded.");
 });

@@ -51,5 +51,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:rs_genericItem.js loaded.");
+  Log.info("REIND: rs_genericItem.js loaded.");
 });

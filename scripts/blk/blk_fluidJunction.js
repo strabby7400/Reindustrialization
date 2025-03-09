@@ -38,5 +38,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_fluidJunction.js loaded.");
+  Log.info("REIND: blk_fluidJunction.js loaded.");
 });

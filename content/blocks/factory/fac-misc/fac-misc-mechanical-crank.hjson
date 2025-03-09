@@ -5,7 +5,7 @@
 */
 
 
-  # type: AttributeCrafter
+  # type: GenericCrafter
   category: crafting
   requirements: [
     item-bio-timber/60

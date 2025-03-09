@@ -45,5 +45,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:rs_wasteFluid.js loaded.");
+  Log.info("REIND: rs_wasteFluid.js loaded.");
 });

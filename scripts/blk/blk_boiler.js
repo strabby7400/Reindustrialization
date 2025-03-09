@@ -127,5 +127,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_boiler.js loaded.");
+  Log.info("REIND: blk_boiler.js loaded.");
 });

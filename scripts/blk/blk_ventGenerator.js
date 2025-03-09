@@ -50,5 +50,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_ventGenerator.js loaded.");
+  Log.info("REIND: blk_ventGenerator.js loaded.");
 });

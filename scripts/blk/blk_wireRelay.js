@@ -61,5 +61,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_wireRelay.js loaded.");
+  Log.info("REIND: blk_wireRelay.js loaded.");
 });

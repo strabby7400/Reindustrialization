@@ -61,5 +61,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_rs_oreFluid.js loaded.");
+  Log.info("REIND: ct_rs_oreFluid.js loaded.");
 });

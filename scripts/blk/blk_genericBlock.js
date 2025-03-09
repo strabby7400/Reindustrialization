@@ -29,5 +29,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_genericBlock.js loaded.");
+  Log.info("REIND: blk_genericBlock.js loaded.");
 });

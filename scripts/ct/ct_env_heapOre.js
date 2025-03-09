@@ -166,5 +166,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_env_heapOre.js loaded.");
+  Log.info("REIND: ct_env_heapOre.js loaded.");
 });

@@ -105,5 +105,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_genericLiquidBlock.js loaded.");
+  Log.info("REIND: blk_genericLiquidBlock.js loaded.");
 });

@@ -41,5 +41,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_ui.js loaded.");
+  Log.info("REIND: mdl_ui.js loaded.");
 });

@@ -313,8 +313,7 @@
         Section: Chemical Reactor
       ======================================== */
 
-      "reind-fac-reac-tank-reactor", "reactor",
-      "reind-fac-reac-fixed-bed-reactor", "reactor",
+      "reind-fac-misc-basic-chimney", "chimney",
 
       /* ========================================
         Section: Coke Oven
@@ -442,6 +441,13 @@
       /* ========================================
         Section: Purifier II
       ======================================== */
+
+      /* ========================================
+        Section: Reactor
+      ======================================== */
+
+      "reind-fac-reac-tank-reactor", "reactor",
+      "reind-fac-reac-fixed-bed-reactor", "reactor",
 
       /* ========================================
         Section: Roasting Furnace

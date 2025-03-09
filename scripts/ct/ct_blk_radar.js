@@ -67,5 +67,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_radar.js loaded.");
+  Log.info("REIND: ct_blk_radar.js loaded.");
 });

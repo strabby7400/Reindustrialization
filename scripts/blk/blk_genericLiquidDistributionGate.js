@@ -50,5 +50,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_genericLiquidDistributionGate.js loaded.");
+  Log.info("REIND: blk_genericLiquidDistributionGate.js loaded.");
 });

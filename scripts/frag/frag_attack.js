@@ -97,5 +97,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:frag_attack.js loaded.");
+  Log.info("REIND: frag_attack.js loaded.");
 });

@@ -221,5 +221,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:cfg_content.js loaded.");
+  Log.info("REIND: cfg_content.js loaded.");
 });

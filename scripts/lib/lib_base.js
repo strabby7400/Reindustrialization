@@ -20,5 +20,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:lib_base.js loaded.");
+  Log.info("REIND: lib_base.js loaded.");
 });

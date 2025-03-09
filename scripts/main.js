@@ -19,6 +19,7 @@
     /* <---------------- module ----------------> */
 
     const mdl_math = require("reind/mdl/mdl_math");
+    const mdl_table = require("reind/mdl/mdl_table");
     const mdl_ui = require("reind/mdl/mdl_ui");
 
     /* <---------------- database ----------------> */
@@ -188,22 +189,20 @@
 
       dial.cont.image(Core.atlas.find("reind-bg")).center().row();
 
-      dial.cont.add("").row();
-      dial.cont.add("").row();
+      mdl_table.__break(dial.cont);
       dial.cont.pane(pn => {
         pn.marginLeft(12.0).marginRight(12.0).marginTop(15.0).marginBottom(15.0);
 
-        pn.add("@info.reind-info-dial-welcome.description").center().labelAlign(Align.left).wrap().width(mdl_ui.getSizePair(null, null, 120.0)[0]).row();
-      }).width(mdl_ui.getSizePair()[0]);
+        mdl_table.__wrapLine(pn, Core.bundle.get("info.reind-info-dial-welcome.description"), null, 1);
+      }).width(mdl_ui.getSizePair()[0]).row();
 
-      dial.cont.add("").row();
-      dial.cont.add("").row();
-      dial.cont.add("").row();
-      dial.cont.add("").row();
-      dial.cont.add("[orange]" + getRandomTip() + "[white]").center().labelAlign(Align.center).wrap().width(mdl_ui.getSizePair()[0]).row();
+      mdl_table.__break(dial.cont);
+      mdl_table.__bar(dial.cont, null, mdl_ui.getSizePair()[0]);
 
-      dial.cont.add("").row();
-      dial.cont.add("").row();
+      mdl_table.__break(dial.cont);
+      mdl_table.__wrapLine(dial.cont, "[orange]" + getRandomTip() + "[]", Align.center);
+
+      mdl_table.__break(dial.cont);
       dial.cont.table(Styles.none, btns => {
         btns.button("@ok", run(() => {
           Sounds.door.play();
@@ -226,7 +225,9 @@
         })).size(200.0, 50.0).center().pad(12.0).tooltip("@info.reind-info-low-detail-mode.name");
 
         btns.button("@term.reind-term-credits.name", db_dialog._credits()).size(200.0, 50.0).center().pad(12.0);
-      });
+
+        btns.button("@term.reind-term-updates.name", db_dialog._updates()).size(200.0, 50.0).center().pad(12.0);
+      }).row();
 
       dial.show();
     };
@@ -241,23 +242,27 @@
 
 
   // Part: Event
-    const reindCmd = Vars.netServer.clientCommands;
-    const li_commands = db_event.commands;
-    var cap = li_commands.size;
-    if(cap > 0) {
-      for(let i = 0; i < cap; i++) {
-        if(i % 3 != 0) continue;
+    if(!Vars.headless) {
+      const reindCmd = Vars.netServer.clientCommands;
+      const li_commands = db_event.commands;
+      var cap = li_commands.size;
+      if(cap > 0) {
+        for(let i = 0; i < cap; i++) {
+          if(i % 3 != 0) continue;
 
-        (function(i) {
-          var str_nm = li_commands.get(i);
-          var str_param = li_commands.get(i + 1);
-          var str_des = Vars.headless ? "" : (Core.bundle.get("info.reind-info-cmd-" + str_nm + ".name"));
-          var scr = li_commands.get(i + 2);
+          (function(i) {
+            var str_nm = li_commands.get(i);
+            var str_param = li_commands.get(i + 1);
+            var str_des = Vars.headless ? "" : (Core.bundle.get("info.reind-info-cmd-" + str_nm + ".name"));
+            var scr = li_commands.get(i + 2);
 
-          reindCmd.register(str_nm, str_param, str_des, cons(arg => scr.call(arg)));
-        }) (i);
+            reindCmd.register(str_nm, str_param, str_des, cons(arg => scr.call(arg)));
+          }) (i);
+        };
       };
     };
+
+
     Events.run(MusicRegisterEvent, () => {
       setDialog_welcome();
       cfg_hidden.setup_hiddenItems();

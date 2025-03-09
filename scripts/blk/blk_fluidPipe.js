@@ -58,5 +58,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_fluidPipe.js loaded.");
+  Log.info("REIND: blk_fluidPipe.js loaded.");
 });

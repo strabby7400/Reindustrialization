@@ -89,5 +89,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_efficiencyPipe.js loaded.");
+  Log.info("REIND: blk_efficiencyPipe.js loaded.");
 });

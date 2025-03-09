@@ -419,5 +419,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_env_tree.js loaded.");
+  Log.info("REIND: ct_env_tree.js loaded.");
 });

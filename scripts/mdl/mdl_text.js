@@ -68,5 +68,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_text.js loaded.");
+  Log.info("REIND: mdl_text.js loaded.");
 });

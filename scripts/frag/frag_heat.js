@@ -243,5 +243,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:frag_heat.js loaded.");
+  Log.info("REIND: frag_heat.js loaded.");
 });

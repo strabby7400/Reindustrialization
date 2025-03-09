@@ -43,5 +43,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_genericDistributionGate.js loaded.");
+  Log.info("REIND: blk_genericDistributionGate.js loaded.");
 });

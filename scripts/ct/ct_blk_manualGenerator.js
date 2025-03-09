@@ -57,5 +57,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_manualGenerator.js loaded.");
+  Log.info("REIND: ct_blk_manualGenerator.js loaded.");
 });

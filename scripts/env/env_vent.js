@@ -26,5 +26,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_vent.js loaded.");
+  Log.info("REIND: env_vent.js loaded.");
 });

@@ -43,5 +43,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_wallOre.js loaded.");
+  Log.info("REIND: env_wallOre.js loaded.");
 });

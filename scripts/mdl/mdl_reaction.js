@@ -76,5 +76,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_reaction.js loaded.");
+  Log.info("REIND: mdl_reaction.js loaded.");
 });

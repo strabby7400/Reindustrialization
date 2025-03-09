@@ -88,5 +88,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_genericCore.js loaded.");
+  Log.info("REIND: blk_genericCore.js loaded.");
 });

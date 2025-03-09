@@ -48,5 +48,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_directionalUnloader.js loaded.");
+  Log.info("REIND: blk_directionalUnloader.js loaded.");
 });

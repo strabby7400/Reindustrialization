@@ -108,5 +108,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_attr.js loaded.");
+  Log.info("REIND: mdl_attr.js loaded.");
 });

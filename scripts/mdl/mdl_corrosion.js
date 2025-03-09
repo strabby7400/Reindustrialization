@@ -251,5 +251,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_corrosion.js loaded.");
+  Log.info("REIND: mdl_corrosion.js loaded.");
 });

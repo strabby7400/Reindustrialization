@@ -49,5 +49,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:cfg_hidden.js loaded.");
+  Log.info("REIND: cfg_hidden.js loaded.");
 });

@@ -37,5 +37,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_wallDrill.js loaded.");
+  Log.info("REIND: ct_blk_wallDrill.js loaded.");
 });

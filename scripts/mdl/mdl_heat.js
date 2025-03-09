@@ -165,5 +165,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_heat.js loaded.");
+  Log.info("REIND: mdl_heat.js loaded.");
 });

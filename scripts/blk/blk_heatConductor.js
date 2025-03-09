@@ -70,5 +70,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_heatConductor.js loaded.");
+  Log.info("REIND: blk_heatConductor.js loaded.");
 });

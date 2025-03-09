@@ -180,5 +180,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_env_dump.js loaded.");
+  Log.info("REIND: ct_env_dump.js loaded.");
 });

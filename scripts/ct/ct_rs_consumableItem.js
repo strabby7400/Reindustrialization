@@ -80,5 +80,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_rs_consumableItem.js loaded.");
+  Log.info("REIND: ct_rs_consumableItem.js loaded.");
 });

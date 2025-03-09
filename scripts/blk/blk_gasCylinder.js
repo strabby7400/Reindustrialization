@@ -136,5 +136,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_gasCylinder.js loaded.");
+  Log.info("REIND: blk_gasCylinder.js loaded.");
 });

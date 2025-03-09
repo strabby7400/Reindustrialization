@@ -98,5 +98,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:cfg_sector.js loaded.");
+  Log.info("REIND: cfg_sector.js loaded.");
 });

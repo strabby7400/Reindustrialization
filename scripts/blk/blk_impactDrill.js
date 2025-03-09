@@ -160,5 +160,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_impactDrill.js loaded.");
+  Log.info("REIND: blk_impactDrill.js loaded.");
 });

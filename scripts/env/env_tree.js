@@ -88,5 +88,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_tree.js loaded.");
+  Log.info("REIND: env_tree.js loaded.");
 });

@@ -6,6 +6,9 @@
 
 
   // Part: Import
+    const lib_base = require("reind/lib/lib_base");
+    const lib_tmi = lib_base.hasTmi ? require("reind/lib/lib_tmi") : null;
+
     const blk_genericFactory = require("reind/blk/blk_genericFactory");
 
     const ct_blk_structureCore = require("reind/ct/ct_blk_structureCore");
@@ -50,6 +53,16 @@
       } else {
         if(Mathf.chance(0.01)) ct_blk_structureCore.accB_needCheck(b, "w", true);
       };
+
+      var cooldown = ct_blk_structureCore.accB_cooldown(b, "r");
+      if(cooldown > 0.0) {ct_blk_structureCore.accB_cooldown(b, "w", cooldown - 1.0)} else {ct_blk_structureCore.accB_cooldown(b, "w", 0.0)}
+    };
+
+
+    function initComp(blk) {
+      if(lib_base.hasTmi) {
+        Events.run(MusicRegisterEvent, () => lib_tmi.register_structureCore(blk));
+      };
     };
 
 
@@ -58,9 +71,9 @@
         if(Vars.state.paused) {
           mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-large-building-paused.name"));
         } else {
-          if(frag_facility.isStructureComplete(b.tile, plan)) Call.tileConfig(Vars.player, b, new Vec2(1, 0));
+          if(frag_facility.isStructureComplete(b.tile, plan) && ct_blk_structureCore.accB_cooldown(b, "r") < 0.0001) Call.tileConfig(Vars.player, b, new Vec2(1, 0));
         };
-      }, Icon.hammer, Core.bundle.get("info.reind-info-large-building.name"), Tex.button, 72.0);
+      }, Icon.hammer, Core.bundle.get("info.reind-info-large-building.name"), 72.0);
     };
 
 
@@ -95,10 +108,20 @@
 
 
     function drawSelectComp(b, plan) {
-      var cond = frag_facility.isStructureComplete(b.tile, plan);
-      var str = cond ? Core.bundle.get("info.reind-info-structure-complete.name") : Core.bundle.get("info.reind-info-structure-incomplete.name");
+      var cond1 = ct_blk_structureCore.accB_cooldown(b, "r") < 0.0001;
+      var cond2 = frag_facility.isStructureComplete(b.tile, plan);
+      var valid = false;
+      var str = "";
+      if(!cond1) {
+        str = Core.bundle.get("info.reind-info-structure-cooldown.name");
+      } else if(!cond2) {
+        str = Core.bundle.get("info.reind-info-structure-incomplete.name");
+      } else {
+        valid = true;
+        str = Core.bundle.get("info.reind-info-structure-complete.name");
+      };
 
-      mdl_draw.drawSelectText(b, cond, str);
+      mdl_draw.drawSelectText(b, valid, str);
     };
   // End
 
@@ -125,6 +148,12 @@
       updateComp(b);
     };
     exports.updateTile = updateTile;
+
+
+    const init = function(blk) {
+      initComp(blk);
+    };
+    exports.init = init;
 
 
     const buildConfiguration = function(b, tb, plan) {
@@ -159,5 +188,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_structureCore.js loaded.");
+  Log.info("REIND: blk_structureCore.js loaded.");
 });

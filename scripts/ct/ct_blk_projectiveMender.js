@@ -62,5 +62,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_projectiveMender.js loaded.");
+  Log.info("REIND: ct_blk_projectiveMender.js loaded.");
 });

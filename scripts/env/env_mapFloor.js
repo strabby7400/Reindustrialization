@@ -26,5 +26,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_mapFloor.js loaded.");
+  Log.info("REIND: env_mapFloor.js loaded.");
 });

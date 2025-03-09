@@ -59,5 +59,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_randomMiner.js loaded.");
+  Log.info("REIND: ct_blk_randomMiner.js loaded.");
 });

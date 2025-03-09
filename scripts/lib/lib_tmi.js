@@ -8,6 +8,7 @@
   // Part: Import
     const lib_base = require("reind/lib/lib_base");
 
+    const frag_facility = require("reind/frag/frag_facility");
     const frag_recipe = require("reind/frag/frag_recipe");
 
     const mdl_content = require("reind/mdl/mdl_content");
@@ -97,13 +98,39 @@
 
 
   // Part: Recipe
+    const li_ct = new Seq();
+    Vars.content.items().each(itm => {if(mdl_content.isReind(itm)) li_ct.add(itm)});
+    Vars.content.liquids().each(liq => {if(mdl_content.isReind(liq)) li_ct.add(liq)});
+
+
+    const register_structureCore = function(blk) {
+      var pair = frag_facility.getStructurePair(blk);
+      var blk_tg = pair[0];
+      var plan = pair[1];
+      var rawRc = getRawRecipe("building", blk_tg, 0.0);
+
+      addRaw(rawRc, blk, 1);
+      var li = frag_facility.getPlanList(plan);
+      var cap = li.size;
+      if(cap > 0) {
+        for(let i = 0; i < cap; i++) {
+          if(i % 2 != 0) continue;
+
+          var blk1 = li.get(i);
+          var amt = li.get(i + 1);
+
+          addRaw(rawRc, blk1, amt);
+        };
+      };
+
+      register(rawRc);
+    };
+    exports.register_structureCore = register_structureCore;
+
+
     const register_recipeFactory = function(blk, rcFi) {
       var cap0 = mdl_recipe.getRecipeSize(rcFi);
       if(cap0 == 0) return;
-
-      var li_ct = new Seq();
-      Vars.content.items().each(itm => {if(mdl_content.isReind(itm)) li_ct.add(itm)});
-      Vars.content.liquids().each(liq => {if(mdl_content.isReind(liq)) li_ct.add(liq)});
 
       for(let i = 0; i < cap0; i++) {
         var ci = frag_recipe.getCI(rcFi, i);
@@ -223,5 +250,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:lib_tmi.js loaded.");
+  Log.info("REIND: lib_tmi.js loaded.");
 });

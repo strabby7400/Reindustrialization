@@ -90,5 +90,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_env_wallOre.js loaded.");
+  Log.info("REIND: ct_env_wallOre.js loaded.");
 });

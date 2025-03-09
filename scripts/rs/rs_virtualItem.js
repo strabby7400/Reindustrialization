@@ -39,5 +39,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:rs_virtualItem.js loaded.");
+  Log.info("REIND: rs_virtualItem.js loaded.");
 });

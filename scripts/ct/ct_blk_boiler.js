@@ -99,5 +99,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_boiler.js loaded.");
+  Log.info("REIND: ct_blk_boiler.js loaded.");
 });

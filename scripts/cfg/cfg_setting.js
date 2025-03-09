@@ -32,5 +32,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:cfg_setting.js loaded.");
+  Log.info("REIND: cfg_setting.js loaded.");
 });

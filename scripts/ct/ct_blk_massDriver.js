@@ -69,5 +69,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_massDriver.js loaded.");
+  Log.info("REIND: ct_blk_massDriver.js loaded.");
 });

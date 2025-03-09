@@ -97,5 +97,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_tidalGenerator.js loaded.");
+  Log.info("REIND: blk_tidalGenerator.js loaded.");
 });

@@ -46,5 +46,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_wea_ambientWeather.js loaded.");
+  Log.info("REIND: ct_wea_ambientWeather.js loaded.");
 });

@@ -44,5 +44,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_genericBlock.js loaded.");
+  Log.info("REIND: env_genericBlock.js loaded.");
 });

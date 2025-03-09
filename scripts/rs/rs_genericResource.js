@@ -25,5 +25,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:rs_genericResource.js loaded.");
+  Log.info("REIND: rs_genericResource.js loaded.");
 });

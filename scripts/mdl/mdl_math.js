@@ -252,5 +252,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_math.js loaded.");
+  Log.info("REIND: mdl_math.js loaded.");
 });

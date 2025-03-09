@@ -637,6 +637,38 @@
   // End
 
 
+  // Part: item-int[electrode]
+    const itemInt_electrodeCopper_accumulated = extend(Item, "item-int-electrode-copper-accumulated", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_electrodeCopper_accumulated = itemInt_electrodeCopper_accumulated;
+
+
+    const itemInt_electrodeLead_accumulated = extend(Item, "item-int-electrode-lead-accumulated", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_electrodeLead_accumulated = itemInt_electrodeLead_accumulated;
+
+
+    /* temporary electrode */
+
+
+    const itemInt_temporaryElectrode_blisterCopper = extend(Item, "item-int-temporary-electrode-blister-copper", {
+      setStats() {
+        this.super$setStats();
+        rs_intermediateItem.setStats(this);
+      },
+    });
+    exports.itemInt_temporaryElectrode_blisterCopper = itemInt_temporaryElectrode_blisterCopper;
+  // End
+
+
   // Part: item-int[misc]
     const itemInt_charcoal_uncarbonized = extend(Item, "item-int-charcoal-uncarbonized", {
       setStats() {
@@ -690,5 +722,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_rs_intermediateItem.js loaded.");
+  Log.info("REIND: ct_rs_intermediateItem.js loaded.");
 });

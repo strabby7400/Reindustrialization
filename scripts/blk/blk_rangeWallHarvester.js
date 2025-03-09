@@ -130,5 +130,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_rangeWallHarvester.js loaded.");
+  Log.info("REIND: blk_rangeWallHarvester.js loaded.");
 });

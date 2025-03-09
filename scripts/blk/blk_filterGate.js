@@ -66,5 +66,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_filterGate.js loaded.");
+  Log.info("REIND: blk_filterGate.js loaded.");
 });

@@ -46,5 +46,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:frag_power.js loaded.");
+  Log.info("REIND: frag_power.js loaded.");
 });

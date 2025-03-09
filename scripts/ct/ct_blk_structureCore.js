@@ -11,6 +11,13 @@
 
 
   // Part: Accessor
+    const accB_cooldown = function(b, mode, val) {
+      if(mode == "r") return b.cooldown;
+      if(mode == "w") b.cooldown = val;
+    };
+    exports.accB_cooldown = accB_cooldown;
+
+
     const accB_needCheck = function(b, mode, val) {
       if(mode == "r") return b.needCheck;
       if(mode == "w") b.needCheck = val;
@@ -39,12 +46,17 @@
         this.super$setStats();
         blk_structureCore.setStats(this);
       },
+      init() {
+        this.super$init();
+        blk_structureCore.init(this);
+      },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
         blk_structureCore.drawPlace(this, x, y, rotation, valid);
       },
     });
     facFurn_brickedBlastFurnaceController.buildType = () => extend(Wall.WallBuild, facFurn_brickedBlastFurnaceController, {
+      cooldown: 480.0,
       needCheck: true,
       plan: new Seq(),
       updateTile() {
@@ -77,12 +89,17 @@
         this.super$setStats();
         blk_structureCore.setStats(this);
       },
+      init() {
+        this.super$init();
+        blk_structureCore.init(this);
+      },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
         blk_structureCore.drawPlace(this, x, y, rotation, valid);
       },
     });
     facSep_highPressureCycloneSeparatorController.buildType = () => extend(Wall.WallBuild, facSep_highPressureCycloneSeparatorController, {
+      cooldown: 480.0,
       needCheck: true,
       plan: new Seq(),
       updateTile() {
@@ -110,5 +127,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_structureCore.js loaded.");
+  Log.info("REIND: ct_blk_structureCore.js loaded.");
 });

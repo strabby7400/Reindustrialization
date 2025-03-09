@@ -308,6 +308,18 @@
     exports.getStructurePair = getStructurePair;
 
 
+    const getPlanList = function(plan) {
+      var li = new Seq();
+      Vars.content.blocks().each(blk => {
+        var count = plan.count(i => blk.name == i);
+        if(count > 0) li.add(blk, count);
+      });
+
+      return li;
+    };
+    exports.getPlanList = getPlanList;
+
+
     const isStructureComplete = function(t, plan) {
       if(t == null || plan == null) return false;
 
@@ -535,5 +547,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:frag_facility.js loaded.");
+  Log.info("REIND: frag_facility.js loaded.");
 });

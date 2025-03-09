@@ -84,5 +84,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:frag_unit.js loaded.");
+  Log.info("REIND: frag_unit.js loaded.");
 });

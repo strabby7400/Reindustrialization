@@ -46,7 +46,7 @@
           var frac_fi = Mathf.lerpDelta(ct_blk_manualGenerator.accB_frac(b, "r"), 1.0, 0.135);
           Call.tileConfig(Vars.player, b, new Vec2(frac_fi, -2));
         };
-      }, Icon.power, Core.bundle.get("info.reind-info-manual-generator.name"), Tex.button, 72.0);
+      }, Icon.power, Core.bundle.get("info.reind-info-manual-generator.name"), 72.0);
     };
 
 
@@ -115,5 +115,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_manualGenerator.js loaded.");
+  Log.info("REIND: blk_manualGenerator.js loaded.");
 });

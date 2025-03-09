@@ -140,5 +140,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_drill.js loaded.");
+  Log.info("REIND: ct_blk_drill.js loaded.");
 });

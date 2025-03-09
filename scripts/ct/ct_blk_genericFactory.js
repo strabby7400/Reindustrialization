@@ -157,6 +157,21 @@
     exports.facMisc_basicChimney = facMisc_basicChimney;
 
 
+    const facMisc_materialHoist = extend(GenericCrafter, "fac-misc-material-hoist", {
+      setStats() {
+        this.super$setStats();
+        blk_genericFactory.setStats(this);
+      },
+    });
+    facMisc_materialHoist.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_materialHoist, {
+      updateTile() {
+        this.super$updateTile();
+        blk_genericFactory.updateTile(this);
+      },
+    });
+    exports.facMisc_materialHoist = facMisc_materialHoist;
+
+
     const facMisc_motorPump = extend(GenericCrafter, "fac-misc-motor-pump", {
       setStats() {
         this.super$setStats();
@@ -210,5 +225,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_genericFactory.js loaded.");
+  Log.info("REIND: ct_blk_genericFactory.js loaded.");
 });

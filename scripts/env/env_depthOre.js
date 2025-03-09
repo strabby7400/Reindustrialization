@@ -47,5 +47,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_depthOre.js loaded.");
+  Log.info("REIND: env_depthOre.js loaded.");
 });

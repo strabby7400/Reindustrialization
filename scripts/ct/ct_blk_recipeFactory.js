@@ -526,6 +526,85 @@
     exports.facFurn_primitiveBrickKiln = facFurn_primitiveBrickKiln;
 
 
+    const facFurn_electrodeMelter = extend(GenericCrafter, "fac-furn-electrode-melter", {
+      rcFi: require("reind/rc/rc_facFurn_electrodeMelter"),
+      setStats() {
+        this.super$setStats();
+        blk_recipeFactory.setStats(this, this.rcFi);
+      },
+      init() {
+        this.super$init();
+        blk_recipeFactory.init(this, this.rcFi);
+      },
+      setBars() {
+        this.super$setBars();
+        blk_recipeFactory.setBars(this, this.rcFi);
+      },
+      outputsItems() {
+        return blk_recipeFactory.outputsItems(this, this.rcFi);
+      },
+      consumesLiquid(liquid) {
+        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+      },
+    });
+    facFurn_electrodeMelter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_electrodeMelter, {
+      param: 0.0,
+      rcFi: require("reind/rc/rc_facFurn_electrodeMelter"),
+      id_rc: mdl_content.getConfig(facFurn_electrodeMelter, 0),
+      needCheck: true,
+      ci: new Seq(),
+      bi: new Seq(),
+      opt: new Seq(),
+      co: new Seq(),
+      bo: new Seq(),
+      fo: new Seq(),
+      temp_effc: 0.0,
+      updateTile() {
+        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        blk_recipeFactory.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        blk_recipeFactory.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+      },
+      drawStatus() {
+        blk_recipeFactory.drawStatus(this);
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.facFurn_electrodeMelter = facFurn_electrodeMelter;
+
+
     /* <---------------- smelter ----------------> */
 
 
@@ -2387,5 +2466,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_recipeFactory.js loaded.");
+  Log.info("REIND: ct_blk_recipeFactory.js loaded.");
 });

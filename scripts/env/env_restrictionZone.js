@@ -37,5 +37,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_restrictionZone.js loaded.");
+  Log.info("REIND: env_restrictionZone.js loaded.");
 });

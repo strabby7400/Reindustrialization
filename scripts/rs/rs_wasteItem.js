@@ -39,5 +39,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:rs_wasteItem.js loaded.");
+  Log.info("REIND: rs_wasteItem.js loaded.");
 });

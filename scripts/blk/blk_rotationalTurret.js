@@ -112,5 +112,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_rotationalTurret.js loaded.");
+  Log.info("REIND: blk_rotationalTurret.js loaded.");
 });

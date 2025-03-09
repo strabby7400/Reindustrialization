@@ -204,6 +204,25 @@ const rc = {
     },
 
 
+    /* <---------------- temporary electrode ----------------> */
+
+
+    // Temporary Electode (Blister Copper)
+    {
+      "icon": "reind-item-int-temporary-electrode-blister-copper",
+      "category": "crafting",
+      "inputs": new Seq([
+        "reind-item-int-blister-copper", 10,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-temporary-electrode-blister-copper", 1,
+      ]),
+      "randOutputs": new Seq([
+        "reind-item-int-temporary-electrode-blister-copper", 1, 0.2,
+      ]),
+    },
+
+
     /* <---------------- pall ring ----------------> */
 
 

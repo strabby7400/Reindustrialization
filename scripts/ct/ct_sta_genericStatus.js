@@ -177,5 +177,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_sta_genericStatus.js loaded.");
+  Log.info("REIND: ct_sta_genericStatus.js loaded.");
 });

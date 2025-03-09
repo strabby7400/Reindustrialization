@@ -26,5 +26,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_genericLiquidFloor.js loaded.");
+  Log.info("REIND: env_genericLiquidFloor.js loaded.");
 });

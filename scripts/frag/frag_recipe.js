@@ -588,5 +588,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:frag_recipe.js loaded.");
+  Log.info("REIND: frag_recipe.js loaded.");
 });

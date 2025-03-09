@@ -32,5 +32,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_overflowGate.js loaded.");
+  Log.info("REIND: blk_overflowGate.js loaded.");
 });

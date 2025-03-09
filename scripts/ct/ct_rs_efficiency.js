@@ -318,5 +318,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_rs_efficiency.js loaded.");
+  Log.info("REIND: ct_rs_efficiency.js loaded.");
 });

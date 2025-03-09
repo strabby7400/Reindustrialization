@@ -90,5 +90,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:unit_genericUnit.js loaded.");
+  Log.info("REIND: unit_genericUnit.js loaded.");
 });

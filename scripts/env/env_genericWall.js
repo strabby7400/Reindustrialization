@@ -26,5 +26,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_genericWall.js loaded.");
+  Log.info("REIND: env_genericWall.js loaded.");
 });

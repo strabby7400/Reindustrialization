@@ -597,5 +597,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_game.js loaded.");
+  Log.info("REIND: mdl_game.js loaded.");
 });

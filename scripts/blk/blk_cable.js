@@ -95,5 +95,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_cable.js loaded.");
+  Log.info("REIND: blk_cable.js loaded.");
 });

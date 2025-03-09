@@ -71,5 +71,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_conveyor.js loaded.");
+  Log.info("REIND: ct_blk_conveyor.js loaded.");
 });

@@ -39,5 +39,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_wallHarvester.js loaded.");
+  Log.info("REIND: ct_blk_wallHarvester.js loaded.");
 });

@@ -7,6 +7,7 @@
 
   // Part: Import
     const mdl_data = require("reind/mdl/mdl_data");
+    const mdl_test = require("reind/mdl/mdl_test");
     const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
@@ -65,6 +66,7 @@
         "reind-log-",
         "reind-min-",
         "reind-pow-",
+        "reind-pay-",
         "reind-ildef-",
         "reind-ildis-",
         "reind-ileff-",
@@ -73,6 +75,7 @@
         "reind-illog-",
         "reind-ilmin-",
         "reind-ilpow-",
+        "reind-ilpay-",
       )) return "build";
 
       if(mdl_text.includes_ex(
@@ -175,6 +178,8 @@
           ct = Vars.content.planet(nm);
           break;
       };
+
+      if(ct == null) mdl_test._w_contentNotFound(nm);
 
       return ct;
     };
@@ -483,5 +488,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_content.js loaded.");
+  Log.info("REIND: mdl_content.js loaded.");
 });

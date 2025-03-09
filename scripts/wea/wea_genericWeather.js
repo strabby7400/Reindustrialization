@@ -23,5 +23,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:wea_genericWeather.js loaded.");
+  Log.info("REIND: wea_genericWeather.js loaded.");
 });

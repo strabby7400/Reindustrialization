@@ -32,5 +32,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_directionalRouter.js loaded.");
+  Log.info("REIND: blk_directionalRouter.js loaded.");
 });

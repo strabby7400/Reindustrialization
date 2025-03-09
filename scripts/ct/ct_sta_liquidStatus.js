@@ -218,5 +218,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_sta_liquidStatus.js loaded.");
+  Log.info("REIND: ct_sta_liquidStatus.js loaded.");
 });

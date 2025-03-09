@@ -96,5 +96,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_unit_mechUnit.js loaded.");
+  Log.info("REIND: ct_unit_mechUnit.js loaded.");
 });

@@ -117,5 +117,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_flow.js loaded.");
+  Log.info("REIND: mdl_flow.js loaded.");
 });

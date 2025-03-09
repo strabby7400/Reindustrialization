@@ -37,5 +37,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:env_mapBlock.js loaded.");
+  Log.info("REIND: env_mapBlock.js loaded.");
 });

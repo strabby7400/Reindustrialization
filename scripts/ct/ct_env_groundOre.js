@@ -242,5 +242,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_env_groundOre.js loaded.");
+  Log.info("REIND: ct_env_groundOre.js loaded.");
 });

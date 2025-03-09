@@ -165,5 +165,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_effect.js loaded.");
+  Log.info("REIND: mdl_effect.js loaded.");
 });

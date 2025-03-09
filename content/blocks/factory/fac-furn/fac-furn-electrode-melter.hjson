@@ -1,0 +1,237 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: crafting
+  requirements: [
+    item-chem-graphite/60
+    item-buil-brick-high-alumina/40
+    item-buil-brick-mullite/40
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-furn-primitive-coke-oven
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 24.0
+  size: 3
+  hasItems: true
+  itemCapacity: 60
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawFlame
+        flameColor: ffc999
+        flameRadius: 2.5
+        flameRadiusIn: 1.5
+        flameRadiusScl: 5.0
+        flameRadiusMag: 2.0
+        flameRadiusInMag: 1.0
+        lightRadius: 48.0
+        lightAlpha: 0.65
+        lightSinScl: 16.0
+        lightSinMag: 6.0
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-lid"
+      }
+
+
+      {
+        type: DrawFade
+        suffix: "-fade"
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+    ]
+  }
+  craftEffect: {
+
+    # Template: _craftGas
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow2Out
+    lifetime: 120.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: reind-efr-shadow-white
+    layer: 86.0
+    particles: 12
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffffff40
+    colorTo: ffffff00
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 24.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: pow5Out
+    sizeFrom: 2.0
+    sizeTo: 7.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffect: {
+
+    # Template: _crack
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow2Out
+    lifetime: 60.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: "reind-efr-diamond"
+    layer: 69.0
+    particles: 2
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffc999
+    colorTo: ffc999
+    lightScl: 2.0
+    lightOpacity: 0.65
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 18.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: sine
+    sizeFrom: 3.0
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffectChance: 0.01
+  ambientSound: se-amb-furnace
+  ambientSoundVolume: 0.1
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  configurable: true
+  outputsLiquid: false
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 600.0
+  consumes: {
+    power: 0.33333333
+  }

@@ -45,5 +45,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_blk_attributeHeater.js loaded.");
+  Log.info("REIND: ct_blk_attributeHeater.js loaded.");
 });

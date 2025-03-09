@@ -40,5 +40,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:unit_legUnit.js loaded.");
+  Log.info("REIND: unit_legUnit.js loaded.");
 });

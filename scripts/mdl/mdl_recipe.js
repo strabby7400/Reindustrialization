@@ -214,5 +214,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_pollution.js loaded.");
+  Log.info("REIND: mdl_pollution.js loaded.");
 });

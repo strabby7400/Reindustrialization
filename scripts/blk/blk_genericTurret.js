@@ -32,5 +32,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_genericTurret.js loaded.");
+  Log.info("REIND: blk_genericTurret.js loaded.");
 });

@@ -91,5 +91,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:rs_genericFluid.js loaded.");
+  Log.info("REIND: rs_genericFluid.js loaded.");
 });

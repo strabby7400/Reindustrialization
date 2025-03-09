@@ -36,5 +36,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:frag_effect.js loaded.");
+  Log.info("REIND: frag_effect.js loaded.");
 });

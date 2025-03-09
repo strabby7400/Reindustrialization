@@ -62,5 +62,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_genericFactory.js loaded.");
+  Log.info("REIND: blk_genericFactory.js loaded.");
 });

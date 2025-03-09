@@ -77,5 +77,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_wireNode.js loaded.");
+  Log.info("REIND: blk_wireNode.js loaded.");
 });

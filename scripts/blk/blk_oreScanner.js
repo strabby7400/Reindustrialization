@@ -128,5 +128,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_oreScanner.js loaded.");
+  Log.info("REIND: blk_oreScanner.js loaded.");
 });

@@ -305,5 +305,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:ct_env_genericFloor.js loaded.");
+  Log.info("REIND: ct_env_genericFloor.js loaded.");
 });

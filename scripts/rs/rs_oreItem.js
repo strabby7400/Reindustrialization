@@ -47,5 +47,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:rs_oreItem.js loaded.");
+  Log.info("REIND: rs_oreItem.js loaded.");
 });

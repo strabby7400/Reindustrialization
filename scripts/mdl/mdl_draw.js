@@ -646,30 +646,63 @@
       var y = pos.y;
       var scl_fi = scl * 150.0;
       var stroke_f = 4.0 * rad / 64.0;
-      var stroke_t = 0.0;
+      var stroke_t = 0.2;
 
       var frac1 = 1.0 - (Time.time / scl_fi) % 1.0;
       var frac2 = (frac1 + 1.0 / 4.0) % 1.0;
       var frac3 = (frac2 + 1.0 / 4.0) % 1.0;
       var frac4 = (frac3 + 1.0 / 4.0) % 1.0;
-      var rad1 = Math.min(1.0 + (1.0 - frac1) * rad, rad);
-      var rad2 = Math.min(1.0 + (1.0 - frac2) * rad, rad);
-      var rad3 = Math.min(1.0 + (1.0 - frac3) * rad, rad);
-      var rad4 = Math.min(1.0 + (1.0 - frac4) * rad, rad);
+      var arr_rad = [
+        Math.min(1.0 + (1.0 - frac1) * rad, rad),
+        Math.min(1.0 + (1.0 - frac2) * rad, rad),
+        Math.min(1.0 + (1.0 - frac3) * rad, rad),
+        Math.min(1.0 + (1.0 - frac4) * rad, rad),
+      ];
 
       Draw.color(color);
       Draw.alpha(a);
-      Lines.stroke(Mathf.lerpDelta(stroke_f, stroke_t, rad1 / rad));
-      Lines.circle(x, y, rad1);
-      Lines.stroke(Mathf.lerpDelta(stroke_f, stroke_t, rad2 / rad));
-      Lines.circle(x, y, rad2);
-      Lines.stroke(Mathf.lerpDelta(stroke_f, stroke_t, rad3 / rad));
-      Lines.circle(x, y, rad3);
-      Lines.stroke(Mathf.lerpDelta(stroke_f, stroke_t, rad4 / rad));
-      Lines.circle(x, y, rad4);
+      for(let i = 0; i < 4; i++) {
+        Lines.stroke(Mathf.lerpDelta(stroke_f, stroke_t, arr_rad[i] / rad));
+        Lines.circle(x, y, arr_rad[i]);
+      };
       Draw.reset();
     };
     exports.drawCirclePulse = drawCirclePulse;
+
+
+    /* NOTE: Used for overdriven mode indication. */
+    const drawRectPulse = function(pos, rad, color_gn, scl, a) {
+      if(color_gn == null) color_gn = Pal.accent;
+      if(scl == null) scl = 1.0;
+      if(a == null) a = 0.7;
+      if(Vars.headless || pos == null) return;
+
+      var color = palette_gn(color_gn);
+      var x = pos.x;
+      var y = pos.y;
+      var scl_fi = scl * 150.0;
+      var stroke_f = 16.0 * rad / 64.0;
+      var stroke_t = 0.2;
+
+      var frac1 = 1.0 - (Time.time / scl_fi) % 1.0;
+      var frac2 = (frac1 + 1.0 / 2.0) % 1.0;
+      var arr_rad = [
+        Math.min(1.0 + Math.pow(1.0 - frac1, 0.5) * rad, rad),
+        Math.min(1.0 + Math.pow(1.0 - frac2, 0.5) * rad, rad),
+      ];
+
+      Draw.color(color);
+      Draw.alpha(a);
+      for(let i = 0; i < 2; i++) {
+        Lines.stroke(Mathf.lerpDelta(stroke_f, stroke_t, arr_rad[i] / rad));
+        Lines.line(x - arr_rad[i], y - arr_rad[i], x + arr_rad[i], y - arr_rad[i]);
+        Lines.line(x + arr_rad[i], y - arr_rad[i], x + arr_rad[i], y + arr_rad[i]);
+        Lines.line(x + arr_rad[i], y + arr_rad[i], x - arr_rad[i], y + arr_rad[i]);
+        Lines.line(x - arr_rad[i], y + arr_rad[i], x - arr_rad[i], y - arr_rad[i]);
+      };
+      Draw.reset();
+    };
+    exports.drawRectPulse = drawRectPulse;
   // End
 
 
@@ -838,5 +871,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:mdl_draw.js loaded.");
+  Log.info("REIND: mdl_draw.js loaded.");
 });

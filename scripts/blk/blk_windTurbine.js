@@ -122,5 +122,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND:blk_windTurbine.js loaded.");
+  Log.info("REIND: blk_windTurbine.js loaded.");
 });
