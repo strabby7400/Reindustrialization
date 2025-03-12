@@ -171,15 +171,15 @@
       var meanX = mean(xs);
       var meanY = mean(ys);
 
-      var temp_var = 0.0;
-      var temp_cov = 0.0;
+      var tmpVar = 0.0;
+      var tmpCov = 0.0;
       var cap = vs.length;
       for(let i = 0; i < cap; i++) {
-        temp_var += Math.pow(xs[i] - meanX, 2);
-        temp_cov += (xs[i] - meanX) * (ys[i] - meanY);
+        tmpVar += Math.pow(xs[i] - meanX, 2);
+        tmpCov += (xs[i] - meanX) * (ys[i] - meanY);
       };
 
-      var slp = temp_cov / temp_var;
+      var slp = tmpCov / tmpVar;
       var y_0 = meanY - meanX * slp;
 
       return [slp, y_0];
@@ -219,7 +219,10 @@
     /* <---------------- vec2 ----------------> */
 
 
+    const vec2_22577890 = new Vec2();
     const sumVec2 = function(vs) {
+      var vec = vec2_22577890.setZero();
+
       var valX = 0.0;
       var valY = 0.0;
       for(let v in vs) {
@@ -227,7 +230,7 @@
         valY += v.y;
       };
 
-      return new Vec2(valX, valY);
+      return vec2.set(valX, valY);
     };
     exports.sumVec2 = sumVec2;
 

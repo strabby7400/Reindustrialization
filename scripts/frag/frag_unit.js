@@ -35,10 +35,10 @@
       };
 
       // Range
-      var li_ot = mdl_game.getTiles_rect(t, 5);
+      var li_ot = mdl_game._liTileRect(t, 5);
 
       li_ot.each(ot => {
-        var d = mdl_game.getDistance(mdl_game.poser_1t(t), mdl_game.poser_1t(ot));
+        var d = mdl_game._dst(mdl_game._pos(1, t), mdl_game._pos(2, ot));
         var oblk = ot.block();
         var ob = ot.build;
 
@@ -68,7 +68,7 @@
     const update_mouse = function(utp, unit) {
       if(unit != Vars.player.unit()) return;
 
-      var ot = mdl_game.getTile_mouse();
+      var ot = mdl_game._tileMouse();
       if(ot == null) return;
 
       var ui = new UI();

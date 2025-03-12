@@ -27,7 +27,7 @@
 
     function drawSelectComp(b) {
       var liq = b.tile.floor().liquidDrop;
-      if(liq != null) mdl_draw.drawContentIcon(mdl_game.poser_1b(b), liq, b.block.size);
+      if(liq != null) mdl_draw.drawContentIcon(mdl_game._pos(1, b), liq, b.block.size);
     };
   // End
 

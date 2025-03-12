@@ -1,0 +1,71 @@
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  damage: -1.0
+  damageMultiplier: 1.5
+  healthMultiplier: 2.5
+  speedMultiplier: 1.5
+  reloadMultiplier: 1.0
+  buildSpeedMultiplier: 2.0
+  dragMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: ffffff
+  effect: {
+
+    # Template: _commonStatusParticles
+
+    /* <---------------- meta ----------------> */
+
+    type: ParticleEffect
+    interp: linear
+    lifetime: 60.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: reind-efr-cai
+    layer: 110.0
+    particles: 1
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: f15454
+    colorTo: f15454
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 180.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 0.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: linear
+    sizeFrom: 12.0
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  effectChance: 0.008

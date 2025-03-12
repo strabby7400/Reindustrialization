@@ -29,6 +29,13 @@
         this.super$update(unit);
         unit_mechUnit.update(this, unit);
       },
+      killed(unit) {
+        this.super$killed(unit);
+        unit_mechUnit.killed(this, unit);
+      },
+      draw(unit) {
+        unit_mechUnit.draw(this, unit);
+      },
       drawShadow(unit) {
         unit_mechUnit.drawShadow(this, unit);
       },
@@ -48,6 +55,13 @@
         this.super$update(unit);
         unit_mechUnit.update(this, unit);
       },
+      killed(unit) {
+        this.super$killed(unit);
+        unit_mechUnit.killed(this, unit);
+      },
+      draw(unit) {
+        unit_mechUnit.draw(this, unit);
+      },
       drawShadow(unit) {
         unit_mechUnit.drawShadow(this, unit);
       },
@@ -66,6 +80,13 @@
         this.super$update(unit);
         unit_mechUnit.update(this, unit);
       },
+      killed(unit) {
+        this.super$killed(unit);
+        unit_mechUnit.killed(this, unit);
+      },
+      draw(unit) {
+        unit_mechUnit.draw(this, unit);
+      },
       drawShadow(unit) {
         unit_mechUnit.drawShadow(this, unit);
       },
@@ -82,6 +103,13 @@
       update(unit) {
         this.super$update(unit);
         unit_mechUnit.update(this, unit);
+      },
+      killed(unit) {
+        this.super$killed(unit);
+        unit_mechUnit.killed(this, unit);
+      },
+      draw(unit) {
+        unit_mechUnit.draw(this, unit);
       },
       drawShadow(unit) {
         unit_mechUnit.drawShadow(this, unit);

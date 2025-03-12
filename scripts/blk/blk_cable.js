@@ -37,7 +37,7 @@
           unit.hasEffect(Vars.content.statusEffect("reind-sta-liq-slurry-slowed"))
         ) p *= 2.0;
 
-        if(Mathf.chanceDelta(p)) frag_attack.attack_lightning(mdl_game.poser_1b(b), Team.derelict, 1, 6, 4, glb_vars.shortCircuit_lightningDamage, Pal.accent);
+        if(Mathf.chanceDelta(p)) frag_attack.attack_lightning_noob(mdl_game._pos(1, b), Team.derelict, 1, 6, 4, glb_vars.shortCircuit_lightningDamage, Pal.accent);
       };
     };
 

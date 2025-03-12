@@ -123,6 +123,47 @@
       },
     });
     exports.facSep_highPressureCycloneSeparatorController = facSep_highPressureCycloneSeparatorController;
+
+
+    const facSep_largeVibrationScreenController = extend(Wall, "fac-sep-large-vibration-screen-controller", {
+      setStats() {
+        this.super$setStats();
+        blk_structureCore.setStats(this);
+      },
+      init() {
+        this.super$init();
+        blk_structureCore.init(this);
+      },
+      drawPlace(x, y, rotation, valid) {
+        this.super$drawPlace(x, y, rotation, valid);
+        blk_structureCore.drawPlace(this, x, y, rotation, valid);
+      },
+    });
+    facSep_largeVibrationScreenController.buildType = () => extend(Wall.WallBuild, facSep_largeVibrationScreenController, {
+      cooldown: 480.0,
+      needCheck: true,
+      plan: new Seq(),
+      updateTile() {
+        this.super$updateTile();
+        blk_structureCore.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        blk_structureCore.buildConfiguration(this, table, this.plan);
+      },
+      configured(builder, value) {
+        blk_structureCore.configured(this, builder, value);
+      },
+      draw() {
+        this.super$draw();
+        blk_structureCore.draw(this, this.plan);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        blk_structureCore.drawSelect(this, this.plan);
+      },
+    });
+    exports.facSep_largeVibrationScreenController = facSep_largeVibrationScreenController;
   // End
 
 

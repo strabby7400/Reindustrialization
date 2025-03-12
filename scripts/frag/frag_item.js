@@ -33,10 +33,10 @@
           for(let j = 0; j < li_itm.size; j++) {
             if(!b.items.has(j)) continue;
 
-            var temp_itm = li_itm.items[j];
-            if(ob.acceptItem(b, temp_itm) && b.canDump(ob, temp_itm)) {
-              ob.handleItem(b, temp_itm);
-              b.items.remove(temp_itm, 1);
+            var tmpItm = li_itm.items[j];
+            if(ob.acceptItem(b, tmpItm) && b.canDump(ob, tmpItm)) {
+              ob.handleItem(b, tmpItm);
+              b.items.remove(tmpItm, 1);
               b.incrementDump(li_ob.size);
               return true;
             };

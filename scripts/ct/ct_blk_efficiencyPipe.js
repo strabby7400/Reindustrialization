@@ -57,7 +57,7 @@
       },
       // Specific
       draw() {
-        mdl_draw.drawRotatorRegion(mdl_game.poser_1b(this), this.rotatorReg, this.tprog, 0.0, 9.0);
+        mdl_draw.drawRotatorRegion(mdl_game._pos(1, this), this.rotatorReg, this.tprog, 0.0, 9.0);
         this.super$draw();
         blk_efficiencyPipe.draw(this);
       },

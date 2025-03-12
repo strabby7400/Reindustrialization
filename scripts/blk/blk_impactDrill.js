@@ -14,6 +14,7 @@
 
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
@@ -34,13 +35,20 @@
 
 
     function updateTileComp(b) {
+      var size = b.block.size;
+      var time = b.block.drillTime;
+
       if(b.invertTime == 1.0) {
         var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
         if(rad != null) {
-          var dmg = b.block.size * b.block.drillTime * 1.2;
-          var dur = b.block.drillTime * 0.5;
+          var dmg = size * time * 1.2;
+          var dur = time * 0.5;
 
-          frag_attack.attack_impact(mdl_game.poser_1b(b), rad, dmg, dur);
+          frag_attack.attack_impact(mdl_game._pos(1, b), rad, dmg, dur);
+
+          var cap = Math.pow(size, 2);
+          var rad1 = (size * 0.5 + 1.0) * Vars.tilesize;
+          for(let i = 0; i < cap; i++) {mdl_effect.dustAt_ldm(b, rad1)};
         };
       };
 
@@ -61,7 +69,7 @@
             if(r_sc == null) {
               down = true;
             } else {
-              var d = mdl_game.getDistance(mdl_game.poser_1b(b), mdl_game.poser_1b(b_sc));
+              var d = mdl_game._dst(mdl_game._pos(2, b), mdl_game._pos(3, b_sc));
               var d_cr = (b_sc.block.size / 2 + r_sc) * Vars.tilesize * 1.275;
               if(d > d_cr) {
                 down = true;
@@ -95,13 +103,13 @@
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_game._pos(1, Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
       var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1b(b), rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_game._pos(1, b), rad);
 
       var ov = b.tile.overlay();
       if(ov != null && ov.name.includes("reind-env-ore-depth-")) {

@@ -68,7 +68,7 @@
       draw() {
         this.super$draw();
         mdl_draw.drawFadeAlert(
-          mdl_game.poser_1b(this),
+          mdl_game._pos(1, this),
           this.alertReg,
           this.instab,
         );

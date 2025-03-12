@@ -1,0 +1,119 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: crafting
+  buildVisibility: sandboxOnly
+  requirements: [
+    item-chem-copper/160
+    item-chem-graphite/100
+    item-chem-brass/140
+    item-chem-steel/210
+  ]
+  buildCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-sep-large-vibration-screen-controller
+    objectives: []
+  }
+  researchCostMultiplier: 0.0
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 24.0
+  size: 5
+  hasItems: true
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawFrames
+        frames: 4
+        interval: 7.5
+        sine: false
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: none
+  updateEffectChance: 0.01
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.5
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  configurable: true
+  outputsLiquid: true
+  ignoreLiquidFullness: true
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 60.0
+  consumes: {
+    power: 1.5
+  }

@@ -30,11 +30,12 @@
     };
 
 
+    const li_77025514 = new Seq();
     function updateTileComp(b) {
       var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
       if(r != null) {
-        var li_unit = new Seq();
-        mdl_game.getAllied(mdl_game.poser_1b(b), r * Vars.tilesize).each(unit => {if(unit.damaged()) li_unit.add(unit)});
+        var li_unit = li_77025514.clear();
+        mdl_game._liUnitAllied(mdl_game._pos(1, b), r * Vars.tilesize).each(unit => {if(unit.damaged()) li_unit.add(unit)});
 
         var down = !(li_unit.size > 0);
         ct_blk_projectiveMender.accB_down(b, "w", down);
@@ -50,13 +51,14 @@
     };
 
 
+    const li_70254486 = new Seq();
     function drawComp(b) {
       var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
       if(r != null) {
-        var li_unit = new Seq();
-        mdl_game.getAllied(mdl_game.poser_1b(b), r * Vars.tilesize).each(unit => {if(unit.damaged()) li_unit.add(unit)});
+        var li_unit = li_70254486.clear();
+        mdl_game._liUnitAllied(mdl_game._pos(1, b), r * Vars.tilesize).each(unit => {if(unit.damaged()) li_unit.add(unit)});
 
-        if(b.shouldConsume()) li_unit.each(unit => mdl_draw.drawFlickerLine(mdl_game.poser_1b(b), mdl_game.poser_1u(unit), Pal.heal));
+        if(b.shouldConsume()) li_unit.each(unit => mdl_draw.drawFlickerLine(mdl_game._pos(1, b), mdl_game._pos(2, unit), Pal.heal));
       };
     };
 

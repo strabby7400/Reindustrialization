@@ -32,12 +32,15 @@
       if(liq != liq_sel) b.liquids.clear();
 
       b.moveLiquidForward(false, liq_sel);
-      var ot_f = mdl_game.getTile_rot("f", b.tile, b.rotation);
+      var ot_f = mdl_game._tileRot("f", b.tile, b.rotation);
       if(ot_f != null) frag_fluid.transferLiquid(ot_f.build, b, liq_sel, true);
     };
 
 
+    const vec2_55128562 = new Vec2();
     function buildConfigurationComp(b, tb) {
+      var vec2 = vec2_55128562.setZero();
+
       var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
 
       db_table.__contentSelected(tb, "fluid", id_sel);
@@ -45,7 +48,7 @@
 
       db_table.__contentSelector(tb, "fluid", id_sel, function() {
         b.block.lastConfig = this;
-        Call.tileConfig(Vars.player, b, new Vec2(this, -2));
+        Call.tileConfig(Vars.player, b, vec2.set(this, -2));
         b.deselect();
       }, 7);
     };
@@ -74,7 +77,7 @@
     function drawSelectComp(b) {
       var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
       var liq_sel = mdl_content.getContent_id("fluid", id_sel);
-      mdl_draw.drawContentIcon(mdl_game.poser_1b(b), liq_sel, b.block.size);
+      mdl_draw.drawContentIcon(mdl_game._pos(1, b), liq_sel, b.block.size);
     };
   // End
 

@@ -124,7 +124,7 @@
       // Specific
       draw() {
         this.super$draw();
-        mdl_draw.drawGlowRegion(mdl_game.poser_1b(this), this.glow3Reg, this.warmup);
+        mdl_draw.drawGlowRegion(mdl_game._pos(1, this), this.glow3Reg, this.warmup);
         frag_facility.draw_coreDump(this, 40.0 * Vars.tilesize);
       },
       // Specific

@@ -66,12 +66,15 @@
     };
 
 
+    const vec2_55691745 = new Vec2();
     function buildConfigurationComp(b, tb, plan) {
+      var vec2 = vec2_55691745.setZero();
+
       mdl_table.setTrigger(tb, function() {
         if(Vars.state.paused) {
           mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-large-building-paused.name"));
         } else {
-          if(frag_facility.isStructureComplete(b.tile, plan) && ct_blk_structureCore.accB_cooldown(b, "r") < 0.0001) Call.tileConfig(Vars.player, b, new Vec2(1, 0));
+          if(frag_facility.isStructureComplete(b.tile, plan) && ct_blk_structureCore.accB_cooldown(b, "r") < 0.0001) Call.tileConfig(Vars.player, b, vec2.set(1, -2));
         };
       }, Icon.hammer, Core.bundle.get("info.reind-info-large-building.name"), 72.0);
     };
@@ -87,7 +90,7 @@
 
       if(Math.abs(val_fi - 1.0) < 0.0001) {
         var blk_tg = frag_facility.getStructurePair(b.block)[0];
-        mdl_effect.showAt(mdl_game.poser_1t(b.tile, blk_tg.offset), db_effect._recipeChange(blk_tg.size, b.team.color), 0.0);
+        mdl_effect.showAt(mdl_game._pos(1, b.tile, blk_tg.offset), db_effect._recipeChange(blk_tg.size, b.team.color), 0.0);
         b.tile.setBlock(blk_tg, b.team);
       };
     };

@@ -25,8 +25,9 @@
 
 
     /* NOTE: A selector UI for Reind contents. */
+    const li_58693334 = new Seq();
     const __contentSelector = function(tb, tp_ct, id_sel, scr, col) {
-      var li_ct = new Seq();
+      var li_ct = li_58693334.clear();
       switch(tp_ct) {
         case "item" :
           Vars.content.items().each(itm => {
@@ -47,7 +48,10 @@
 
 
   // Part: Special
+    const vec2_12576628 = new Vec2();
     const __timeController = function(tb, b) {
+      var vec2 = vec2_12576628.setZero();
+
       var delta_max = glb_vars.time_maxTimeDelta / 0.5 - 1.0;
       var delta_cur = Time.delta / 0.5 - 1.0;
 
@@ -57,7 +61,7 @@
       tb.table(Tex.button, tb1 => {
         mdl_table.setSlider(tb1, function() {
           var val = (this + 1.0) * 0.5;
-          Call.tileConfig(Vars.player, b, new Vec2(val, 0));
+          Call.tileConfig(Vars.player, b, vec2.set(val, 0));
         }, 0.0, delta_max, 1.0, delta_cur);
       });
     };

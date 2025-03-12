@@ -105,8 +105,15 @@
         tb1.table(Styles.none, tb2 => {
           tb2.left();
 
-          tb2.image(ct.uiIcon).tooltip(ct.localizedName).padRight(-4.0);
+          var btn = tb2.button(new TextureRegionDrawable(ct.uiIcon), 32.0, db_dialog._content(ct)).tooltip(ct.localizedName).padRight(-4.0).get();
           tb2.add(str).bottom().fontScale(0.85).style(Styles.outlineLabel);
+
+          btn.margin(0.0);
+          var btnStyle = btn.getStyle();
+          btnStyle.up = Styles.none;
+          btnStyle.down = Styles.none;
+          btnStyle.over = Styles.flatOver;
+          btnStyle.checked = Styles.accentDrawable;
         }).padRight(6.0);
 
         if(Math.abs(p - 1.0) > 0.0001) tb1.add(Strings.autoFixed(p * 100.0, 2) + "%").color(Color.gray).padRight(4.0);
@@ -133,18 +140,23 @@
 
 
   // Part: Content
+    const li_56925512 = new Seq();
     const setContentRowDisplay = function(tb, li_ct, showOrder) {
+      var li = li_56925512.clear();
+
       if(showOrder == null) showOrder = false;
       if(li_ct instanceof UnlockableContent) {
-        li_ct = new Seq([li_ct]);
+        li.add(li_ct);
         showOrder = false;
+      } else {
+        li.addAll(li_ct);
       };
 
       var ord = 0;
 
       tb.row();
       __breakHalf(tb);
-      li_ct.each(ct => {
+      li.each(ct => {
         if(typeof ct == "string") ct = mdl_content.getContent_nm(ct);
         if(ct != null) {
           tb.table(Tex.whiteui, tb1 => {
@@ -443,7 +455,7 @@
                 tb2.left();
                 __margin(tb2);
 
-                tb2.add("BFI:").left().tooltip(Core.bundle.get("term.reind-term-batch-fluid-input.name")).row();
+                tb2.add("BFO:").left().tooltip(Core.bundle.get("term.reind-term-batch-fluid-output.name")).row();
 
                 tb2.table(Styles.none, tb3 => {
                   for(let j = 0; j < cap1; j++) {
@@ -520,8 +532,8 @@
       var cap = mdl_recipe.getRecipeSize(rcFi);
       if(cap == 0) return;
 
-      tb.button("?", db_dialog._content(b.block)).left().size(42.0);
-      tb.row();
+      tb.button("?", db_dialog._content(b.block)).left().size(42.0).row();
+
       tb.table(Tex.button, tb1 => {
         tb1.left();
 
@@ -532,21 +544,22 @@
             if(cat != cat_pre) {
               j = 0;
               if(i != 0) {
-                __breakHalf(tb1);
+                __break(tb1);
               };
             };
 
+            var tt = mdl_recipe.getRawTooltip(rcFi, i);
             var tooltip = mdl_recipe.getTooltip(rcFi, i);
             var btn = tb1.button(Tex.pane, 32.0, () => {
               (i == id_rc) ? scr.call(0) : scr.call(i);
             }).pad(4.0).tooltip(tooltip).group(btnGrp).get();
 
             var btnStyle = btn.getStyle();
-            btnStyle.up = Styles.black3;
-            btnStyle.down = Styles.black3;
+            btnStyle.up = Styles.none;
+            btnStyle.down = Styles.none;
             btnStyle.over = Styles.flatOver;
             btnStyle.checked = Styles.accentDrawable;
-            btnStyle.imageUp = mdl_recipe.getIcon(rcFi, i);
+            btnStyle.imageUp = (tt == "overdriven") ? mdl_recipe.getIcon(rcFi, i).tint(Color.red) : mdl_recipe.getIcon(rcFi, i);
             btn.update(() => btn.setChecked(i == id_rc));
           })(i);
 

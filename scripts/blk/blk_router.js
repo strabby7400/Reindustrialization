@@ -15,7 +15,7 @@
 
   // Part: Component
     function drawComp(b) {
-      mdl_game.getTiles_edge(b.tile, b.block.size).each(ot => {
+      mdl_game._liTileEdge(b.tile, b.block.size).each(ot => {
         if(ot.block() instanceof Router) mdl_draw.drawTileIndicator(ot, false);
       });
     };

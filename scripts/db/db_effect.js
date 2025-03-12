@@ -220,8 +220,8 @@
         if(top == null) top = false;
         if(hasLight == null) hasLight = false;
 
-        var off_x = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
-        var off_y = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+        var offX = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+        var offY = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
 
         var eff_spreadParticles = extend(ParticleEffect, {
 
@@ -248,8 +248,8 @@
 
           baseRotation: 0.0,
           offset: 0.0,
-          offsetX: off_x,
-          offsetY: off_y,
+          offsetX: offX,
+          offsetY: offY,
           cone: 180.0,
           spin: 0.0,
           randLength: true,
@@ -287,8 +287,8 @@
         if(top == null) top = false;
         if(hasLight == null) hasLight = false;
 
-        var off_x = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
-        var off_y = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+        var offX = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+        var offY = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
 
         var eff_shrinkSpreadParticles = extend(ParticleEffect, {
 
@@ -315,8 +315,8 @@
 
           baseRotation: 0.0,
           offset: 0.0,
-          offsetX: off_x,
-          offsetY: off_y,
+          offsetX: offX,
+          offsetY: offY,
           cone: 180.0,
           spin: spin,
           randLength: true,
@@ -354,8 +354,8 @@
         if(top == null) top = false;
         if(hasLight == null) hasLight = false;
 
-        var off_x = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
-        var off_y = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+        var offX = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
+        var offY = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
         var color_f = color.cpy();
         var color_t = color;
         color_f.a = 0.0;
@@ -385,8 +385,8 @@
 
           baseRotation: 0.0,
           offset: 0.0,
-          offsetX: off_x,
-          offsetY: off_y,
+          offsetX: offX,
+          offsetY: offY,
           cone: 180.0,
           spin: spin,
           randLength: true,
@@ -773,13 +773,13 @@
 
 
       /* NOTE: Used for chimneys. */
-      const _blackSmogRelease = function() {
+      const _blackSmogRelease = function(rad, scl, amt, size) {
         if(rad == null) rad = 24.0;
         if(scl == null) scl = 1.0;
         if(amt == null) amt = 3;
         if(size == null) size = 9.0;
 
-        var eff_gasRelease = extend(ParticleEffect, {
+        var eff_blackSmogRelease = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -822,6 +822,8 @@
           lenTo: 0.0,
 
         });
+
+        return eff_blackSmogRelease;
       };
       exports._blackSmogRelease = _blackSmogRelease;
 
@@ -947,9 +949,9 @@
 
 
       /* NOTE: The gas is released to a certain direction. */
-      const _gasSideRelease = function(rad, off_rad, cone, scl, size, rev) {
+      const _gasSideRelease = function(rad, offRad, cone, scl, size, rev) {
         if(rad == null) rad = 10.0;
-        if(off_rad == null) off_rad = 0.0;
+        if(offRad == null) offRad = 0.0;
         if(cone == null) cone = 10.0;
         if(scl == null) scl = 1.0;
         if(size == null) size = 5.0;
@@ -985,7 +987,7 @@
           spin: 0.0,
           randLength: true,
           length: rad,
-          baseLength: off_rad,
+          baseLength: offRad,
 
           /* <---------------- size & stroke & len ----------------> */
 

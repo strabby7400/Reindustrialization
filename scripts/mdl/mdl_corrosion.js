@@ -141,16 +141,18 @@
     exports.getMaterialGroupValue = getMaterialGroupValue;
 
 
+    const li_94077784 = new Seq();
     const getTags = function(liq) {
-      var tags = new Seq();
+      var li = li_94077784.clear();
+      
       var nm = liq.name;
 
-      if(db_fluid.tag_ammoniacal.contains(nm)) tags.add("ammoniacal");
-      if(db_fluid.tag_chloric.contains(nm)) tags.add("chloric");
-      if(db_fluid.tag_fluoric.contains(nm)) tags.add("fluoric");
-      if(db_fluid.tag_oxidative.contains(nm)) tags.add("oxidative");
+      if(db_fluid.tag_ammoniacal.contains(nm)) li.add("ammoniacal");
+      if(db_fluid.tag_chloric.contains(nm)) li.add("chloric");
+      if(db_fluid.tag_fluoric.contains(nm)) li.add("fluoric");
+      if(db_fluid.tag_oxidative.contains(nm)) li.add("oxidative");
 
-      return tags;
+      return li;
     };
     exports.getTags = getTags;
 
@@ -183,11 +185,13 @@
     exports.tagToValue = tagToValue;
 
 
+    const li_99387709 = new Seq();
     const getTagValue = function(liq) {
+      var li = li_99387709.clear();
+
       var tags = getTags(liq);
-      var temp_tags = new Seq();
-      tags.each(tag => temp_tags.add(tagToValue(tag)));
-      var tagVal = mdl_text.getTagText(temp_tags);
+      tags.each(tag => li.add(tagToValue(tag)));
+      var tagVal = mdl_text.getTagText(li);
 
       return tagVal;
     };

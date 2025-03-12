@@ -22,7 +22,7 @@
         var liq = b.liquids.current();
         var cond1 = liq.explosiveness > 0.2999 || liq.flammability > 0.2999;
         var cond2 = false;
-        if(cond1) mdl_game.getTiles_rect(b.tile, 1, b.block.size).each(ot => {if(Fires.get(ot.x, ot.y)) cond2 = true});
+        if(cond1) mdl_game._liTileRect(b.tile, 1, b.block.size).each(ot => {if(Fires.get(ot.x, ot.y)) cond2 = true});
 
         if(cond1 && cond2) {
           b.kill();
@@ -31,7 +31,7 @@
           var dmg = glb_vars.gasCylinder_explosionDamage;
           var shake = 8.0;
 
-          frag_attack.attack_explosion(mdl_game.poser_1b(b), rad, dmg, shake);
+          frag_attack.attack_explosion_noob(mdl_game._pos(1, b), rad, dmg, shake);
         };
       };
     };

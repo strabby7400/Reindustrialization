@@ -15,7 +15,7 @@
 
   // Part: Component
     function drawSelectComp(b) {
-      if(b.unloadItem != null) mdl_draw.drawContentIcon(mdl_game.poser_1b(b), b.unloadItem, b.block.size);
+      if(b.unloadItem != null) mdl_draw.drawContentIcon(mdl_game._pos(1, b), b.unloadItem, b.block.size);
     };
   // End
 

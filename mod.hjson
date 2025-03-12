@@ -7,6 +7,9 @@ author: MaboroshiX
 repo: HuanXefh/Reindustrialization
 minGameVersion: 146
 dependencies: []
+softDependencies: [
+  tmi
+]
 
 
 description:
@@ -39,4 +42,4 @@ See the complete credits in game!
 
 
 /* v0.1.1: Local Geology */
-version: t25030902
+version: t25031201

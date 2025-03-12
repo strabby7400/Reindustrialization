@@ -183,16 +183,16 @@
 
 
         // Robot-only
-        var temp_nonRobots = new Seq();
+        var tmpNonRobots = new Seq();
         db_unit.nonRobots.each(nm_utp => {
           var utp = Vars.content.unit(nm_utp);
-          if(utp != null) temp_nonRobots.add(utp);
+          if(utp != null) tmpNonRobots.add(utp);
         });
         db_unit.robotOnlyStatus.each(nm_sta => {
           var sta = Vars.content.statusEffect(nm_sta);
           if(sta != null) {
             sta.stats.add(db_stat.robotOnly, true);
-            temp_nonRobots.each(utp => utp.immunities.addAll(sta));
+            tmpNonRobots.each(utp => utp.immunities.addAll(sta));
           };
         });
 

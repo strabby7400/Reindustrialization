@@ -25,7 +25,7 @@
 
 
     function drawSelectComp(b) {
-      if(b.sortItem != null) mdl_draw.drawContentIcon(mdl_game.poser_1b(b), b.sortItem, b.block.size);
+      if(b.sortItem != null) mdl_draw.drawContentIcon(mdl_game._pos(1, b), b.sortItem, b.block.size);
     };
   // End
 

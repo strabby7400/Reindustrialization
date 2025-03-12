@@ -38,13 +38,16 @@
     };
 
 
+    const vec2_66892251 = new Vec2();
     function buildConfigurationComp(b, tb) {
+      var vec2 = vec2_66892251.setZero();
+
       mdl_table.setTrigger(tb, function() {
         if(Vars.state.paused) {
           mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-manual-generator-paused.name"));
         } else {
           var frac_fi = Mathf.lerpDelta(ct_blk_manualGenerator.accB_frac(b, "r"), 1.0, 0.135);
-          Call.tileConfig(Vars.player, b, new Vec2(frac_fi, -2));
+          Call.tileConfig(Vars.player, b, vec2.set(frac_fi, -2));
         };
       }, Icon.power, Core.bundle.get("info.reind-info-manual-generator.name"), 72.0);
     };

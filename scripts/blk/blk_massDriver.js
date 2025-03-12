@@ -39,7 +39,7 @@
           var dmg = b.block.size * b.block.reload * 0.7;
           var dur = b.block.reload * 0.5;
 
-          frag_attack.attack_impact(mdl_game.poser_1b(b), rad, dmg, dur);
+          frag_attack.attack_impact(mdl_game._pos(1, b), rad, dmg, dur);
         };
       };
     };
@@ -48,17 +48,17 @@
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       // Draw impact range
       var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_game._pos(1, Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
       // Draw impact range
       var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_game.poser_1b(b), rad);
+      if(rad != null) mdl_draw.drawCirclePulse(mdl_game._pos(1, b), rad);
 
       // Draw reload progress
-      mdl_draw.drawProgressBar(mdl_game.poser_1b(b), Math.min(1.0 - b.reloadCounter, 1.0), Pal.accent, b.block.size);
+      mdl_draw.drawProgressBar(mdl_game._pos(2, b), Math.min(1.0 - b.reloadCounter, 1.0), Pal.accent, b.block.size);
     };
 
 

@@ -66,7 +66,7 @@
       var thr = ct_blk_oreScanner.accB_thr(b, "r");
       var a = Math.pow(1.0 - cd / thr, 2);
 
-      var li_ot = mdl_game.getTiles_rect(b.tile, r, b.block.size);
+      var li_ot = mdl_game._liTileRect(b.tile, r, b.block.size);
       li_ot.each(ot => {
         var ov = ot.overlay();
 

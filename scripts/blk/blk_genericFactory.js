@@ -31,7 +31,7 @@
           var dmg = glb_vars.gasCylinder_explosionDamage;
           var shake = 8.0;
 
-          frag_attack.attack_explosion(mdl_game.poser_1b(b), rad, dmg, shake);
+          frag_attack.attack_explosion_noob(mdl_game._pos(1, b), rad, dmg, shake);
         };
       };
     };

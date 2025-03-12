@@ -27,6 +27,15 @@
   // End
 
 
+  // Part: Setting
+    var noob = false;
+    const set_noob = function(bool) {
+      noob = bool;
+    };
+    exports.set_noob = set_noob;
+  // End
+
+
   // Part: Puddle
     /* NOTE: Fixes puddles with invalid amount value. */
     const update_fix = function(liq, puddle) {
@@ -48,7 +57,7 @@
     /* NOTE: More reaction triggers. */
     const update_puddleReaction = function(liq, puddle) {
       var t = puddle.tile;
-      mdl_game.getTiles_rect(t, 1).each(ot => {
+      mdl_game._liTileRect(t, 1).each(ot => {
         var ob = ot.build;
 
         if(ob != null && ob.items != null && !(ob.block instanceof CoreBlock)) {
@@ -69,7 +78,7 @@
 
       var t = puddle.tile;
       var b = t.build;
-      var li_ot = mdl_game.getTiles_rect(t, 1);
+      var li_ot = mdl_game._liTileRect(t, 1);
       li_ot.each(ot => {
         var ob = ot.build;
 
@@ -82,7 +91,7 @@
           b.damage(dmg);
 
           mdl_effect.showAtP(0.005, b, db_effect._heatSmog());
-          if(Mathf.chanceDelta(0.001)) frag_attack.attack_lightning(mdl_game.poser_1b(b), Team.derelict, 1, 6, 4, glb_vars.shortCircuit_lightningDamage, Pal.accent);
+          if(Mathf.chanceDelta(0.001)) frag_attack.attack_lightning_noob(mdl_game._pos(1, b), Team.derelict, 1, 6, 4, glb_vars.shortCircuit_lightningDamage, Pal.accent);
         };
       });
     };
@@ -121,11 +130,11 @@
 
       var amt_f = b_f.liquids.get(liq);
       var amt_t = b_t.liquids.get(liq);
-      var temp_amt_t = forced ? 0.0 : amt_t;
+      var tmpAmt_t = forced ? 0.0 : amt_t;
       var cap_t = b_t.block.liquidCapacity;
       var pres = (b_f.block.liquidPressure + b_t.block.liquidPressure) / 2.0;
       var visc = liq.viscosity;
-      var rate = Time.delta * mdl_flow.getFlowRate(amt_f, temp_amt_t, pres, visc);
+      var rate = Time.delta * mdl_flow.getFlowRate(amt_f, tmpAmt_t, pres, visc);
       var amt_trans = Math.min(rate, cap_t - amt_t);
 
       if(amt_f > 0.0001) {
@@ -218,7 +227,7 @@
   // Part: Durability
     /* NOTE: Sticky fluids can damage some blocks that are vulnerable to clogging. */
     const updateTile_sticky = function(b) {
-      if(cfg_update.isSuppressed()) return;
+      if(cfg_update.isSuppressed() || noob) return;
       if(!Mathf.chanceDelta(0.02)) return;
       if(b.liquids == null) return;
       if(!mdl_content.vulnerableToClogging(b.block)) return;
@@ -242,7 +251,7 @@
 
     /* NOTE: Corrosive fluids can damage some blocks. */
     const updateTile_corrosion = function(b) {
-      if(cfg_update.isSuppressed()) return;
+      if(cfg_update.isSuppressed() || noob) return;
       if(!Mathf.chanceDelta(0.02)) return;
       var liq = b.liquids.current();
       if(!mdl_content.isReind(liq)) return;
@@ -274,7 +283,7 @@
       var cap = b.block.liquidCapacity;
       if(amt / cap < 0.98) return;
 
-      var li_ot = mdl_game.getTiles_edgeIns(b.tile, b.block.size);
+      var li_ot = mdl_game._liTileEdgeIns(b.tile, b.block.size);
       li_ot.each(ot => {
         if(Mathf.chance(0.5)) Puddles.deposit(ot, liq, 8.0);
       });

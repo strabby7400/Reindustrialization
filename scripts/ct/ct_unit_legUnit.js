@@ -29,6 +29,13 @@
         this.super$update(unit);
         unit_legUnit.update(this, unit);
       },
+      killed(unit) {
+        this.super$killed(unit);
+        unit_legUnit.killed(this, unit);
+      },
+      draw(unit) {
+        unit_legUnit.draw(this, unit);
+      },
       drawShadow(unit) {
         unit_legUnit.drawShadow(this, unit);
       },

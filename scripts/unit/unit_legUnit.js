@@ -30,6 +30,18 @@
     exports.update = update;
 
 
+    const killed = function(utp, unit) {
+      unit_infantryUnit.killed(utp, unit);
+    };
+    exports.killed = killed;
+
+
+    const draw = function(utp, unit) {
+      unit_infantryUnit.draw(utp, unit);
+    };
+    exports.draw = draw;
+
+
     const drawShadow = function(utp, unit) {
       unit_infantryUnit.drawShadow(utp, unit);
     };

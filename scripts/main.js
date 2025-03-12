@@ -209,21 +209,6 @@
           dial.hide();
         })).size(200.0, 50.0).center().pad(12.0);
 
-        var enableLdm = false;
-        btns.button("@term.reind-term-ldm.name", run(() => {
-          if(!enableLdm) {
-            Sounds.shootSmite.play();
-            enableLdm = true;
-            cfg_setting.set_ldm(true);
-            new UI().showInfoFade("\n\n\n\n" + Core.bundle.get("info.reind-info-ldm-enabled.name"), 2.0);
-          } else {
-            Sounds.place.play();
-            enableLdm = false;
-            cfg_setting.set_ldm(false);
-            new UI().showInfoFade("\n\n\n\n" + Core.bundle.get("info.reind-info-ldm-disabled.name"), 2.0);
-          };
-        })).size(200.0, 50.0).center().pad(12.0).tooltip("@info.reind-info-low-detail-mode.name");
-
         btns.button("@term.reind-term-credits.name", db_dialog._credits()).size(200.0, 50.0).center().pad(12.0);
 
         btns.button("@term.reind-term-updates.name", db_dialog._updates()).size(200.0, 50.0).center().pad(12.0);
@@ -264,6 +249,8 @@
 
 
     Events.run(MusicRegisterEvent, () => {
+      cfg_setting.loadSettings();
+      db_dialog.setSettings();
       setDialog_welcome();
       cfg_hidden.setup_hiddenItems();
       cfg_content.setup_content();

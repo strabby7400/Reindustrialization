@@ -12,6 +12,17 @@
   // End
 
 
+  // Part: Element
+    const _scl = function(scl) {
+      if(scl == null) scl = 1.0;
+
+      Draw.xscl = scl;
+      Draw.yscl = scl;
+    };
+    exports._scl = _scl;
+  // End
+
+
   // Part: Color
     const palette_gn = function(color_gn) {
       if(color_gn == null) return;
@@ -65,6 +76,9 @@
     const drawSimpleShadow = function(pos, reg, ang, a, regScl, color, z) {
       if(Vars.headless) return;
 
+      var flr = Vars.world.floorWorld(pos.x, pos.y);
+      if(flr == null || !flr.canShadow) return;
+
       Draw.mixcol(Pal.shadow, 1.0);
       drawNormalRegion(pos, reg, ang, a * 0.22, regScl, color, z);
     };
@@ -73,6 +87,9 @@
 
     const drawBlurredShadow = function(pos, reg, ang, a, regScl, color, z) {
       if(Vars.headless) return;
+
+      var flr = Vars.world.floorWorld(pos.x, pos.y);
+      if(flr == null || !flr.canShadow) return;
 
       Draw.mixcol(Pal.shadow, 1.0);
       drawNormalRegion(pos, reg, ang, a * 0.18, regScl, color, z);
@@ -99,16 +116,10 @@
       var y = pos.y;
       var w = reg.width * 2.0 * regScl / Vars.tilesize;
       var h = reg.height * 2.0 * regScl / Vars.tilesize;
+      var pos1 = mdl_game._posP3d(1, pos, elev);
+      var x_fi = pos1.x;
+      var y_fi = pos1.y;
 
-      var x_cam = Core.camera.position.x;
-      var y_cam = Core.camera.position.y;
-      var offsetScl = 0.06;
-      var offsetMax = elev * 24.0;
-      var off_x = (x - x_cam + 16.0) * elev * offsetScl;
-      var off_y = (y - y_cam + 40.0) * elev * offsetScl;
-      var x_fi = x - ((Math.abs(off_x) > offsetMax) ? offsetMax * Mathf.sign(off_x) : off_x);
-      var y_fi = y - ((Math.abs(off_y) > offsetMax) ? offsetMax * Mathf.sign(off_y) : off_y);
-      var pos_fi = new Vec2(x_fi, y_fi);
       var flr = Vars.world.floorWorld(x_fi, y_fi);
       var a_fi = (flr != null && flr.canShadow) ? 0.5 * a : 0.0;
 
@@ -116,7 +127,7 @@
       var arr_a = [0.84, 0.36, 0.14, 0.06];
       var arr_regScl = [1.0, 1.2, 1.4, 1.6];
       for(let i = 0; i < 4; i++) {
-        var pos_i = new Vec2(Mathf.lerp(x_fi, x, arr_pos[i]), Mathf.lerp(y_fi, y, arr_pos[i]));
+        var pos_i = Tmp.v2.set(Mathf.lerp(x_fi, x, arr_pos[i]), Mathf.lerp(y_fi, y, arr_pos[i]));
         var a_i = arr_a[i];
         var regScl_i = arr_regScl[i];
 
@@ -327,7 +338,7 @@
     const drawPlaceRegion = function(blk, t, color_gn) {
       if(Vars.headless || blk == null || t == null) return;
 
-      var pos = mdl_game.poser_1t(t, blk.offset);
+      var pos = mdl_game._pos(9, t, blk.offset);
       var reg = mdl_content.getBuildRegion(blk);
 
       drawPlanRegion(pos, reg, color_gn)
@@ -419,6 +430,34 @@
       if(hasLight) Drawf.light(x1, y1, x2, y2);
     };
     exports.drawLaser = drawLaser;
+
+
+    const drawMiningBeam = function(pos_f, pos_t, ang, off) {
+      if(ang == null) ang = 0.0;
+      if(off == null) off = 4.0;
+      if(Vars.headless || pos_f == null || pos_t == null) return;
+
+      var len = off + Mathf.absin(Time.time, 1.1, 0.5);
+      var swingScl = 12.0;
+      var swingMag = 1.1;
+      var flashScl = 0.3;
+      var mineLaserReg = Core.atlas.find("reind-misc-mine-laser");
+      var mineLaserEndReg = Core.atlas.find("reind-misc-mine-laser-end");
+
+      var x_f = pos_f.x + Angles.trnsx(ang, len);
+      var y_f = pos_f.y + Angles.trnsy(ang, len);
+      var x_t = pos_t.x + Mathf.sin(Time.time + 48.0, swingScl, swingMag);
+      var y_t = pos_t.y + Mathf.sin(Time.time + 48.0, swingScl + 2.0, swingMag);
+
+      Draw.z(Layer.flyingUnit + 0.1);
+      Draw.color(Color.lightGray, Color.white, 1.0 - flashScl + Mathf.absin(Time.time, 0.5, flashScl));
+      // V8 PENDING                 Draw.alpha(Vars.renderer.unitLaserOpacity);
+      Drawf.laser(mineLaserReg, mineLaserEndReg, x_f, y_f, x_t, y_t, 0.75);
+      Lines.stroke(1.0, Pal.techBlue);
+      Lines.poly(pos_t.x, pos_t.y, 4, Vars.tilesize / 2.0 * Mathf.sqrt2, Time.time);
+      Draw.reset();
+    };
+    exports.drawMiningBeam = drawMiningBeam;
   // End
 
 
@@ -473,7 +512,7 @@
     const drawPlaceRect = function(blk, t, color_gn, r, dashed) {
       if(Vars.headless || blk == null || t == null) return;
 
-      drawRect(mdl_game.poser_1t(t, blk.offset), r, color_gn, blk.size, dashed);
+      drawRect(mdl_game._pos(9, t, blk.offset), r, color_gn, blk.size, dashed);
     };
     exports.drawPlaceRect = drawPlaceRect;
 
@@ -503,7 +542,7 @@
 
       drawBuildRect(b);
       drawBuildRect(ob);
-      drawLine(mdl_game.poser_1b(b), mdl_game.poser_1b(ob));
+      drawLine(mdl_game._pos(9, b), mdl_game._pos(8, ob));
     };
     exports.drawBuildRectConnector = drawBuildRectConnector;
   // End
@@ -537,7 +576,7 @@
     const drawPlaceCircle = function(blk, t, color_gn, rad, dashed) {
       if(Vars.headless || blk == null || t == null) return;
 
-      drawCircle(mdl_game.poser_1t(t, blk.offset), rad, color_gn, dashed);
+      drawCircle(mdl_game._pos(9, t, blk.offset), rad, color_gn, dashed);
     };
     exports.drawPlaceCircle = drawPlaceCircle;
 
@@ -614,7 +653,7 @@
       if(pad == null) pad = 0.0;
       if(Vars.headless || b == null) return;
 
-      var pos = mdl_game.poser_1b(b);
+      var pos = mdl_game._pos(9, b);
       var w = b.block.size * Vars.tilesize - pad;
       var color = palette_gn(color_gn);
 
@@ -713,27 +752,27 @@
 
 
     /* NOTE: Draws a progress bar over the block. */
-    const drawProgressBar = function(pos, frac, color_gn, size, off_w, off_ty) {
+    const drawProgressBar = function(pos, frac, color_gn, size, offW, offTy) {
       if(color_gn == null) color_gn = Pal.accent;
       if(size == null) size = 1;
-      if(off_w == null) off_w = 0.0;
-      if(off_ty == null) off_ty = 0;
+      if(offW == null) offW = 0.0;
+      if(offTy == null) offTy = 0;
       if(Vars.headless || pos == null) return;
 
       var color = palette_gn(color_gn);
       var x = pos.x;
       var y = pos.y;
-      var w = (size + 1) * Vars.tilesize + off_w;
-      var off_ty_fi = (off_ty + size * 0.5 + 0.5) * Vars.tilesize;
+      var w = (size + 1) * Vars.tilesize + offW;
+      var offTy_fi = (offTy + size * 0.5 + 0.5) * Vars.tilesize;
 
       Lines.stroke(5.0, Pal.gray);
       Draw.alpha(0.7);
-      Lines.line(x - w * 0.5, y + off_ty_fi, x + w * 0.5, y + off_ty_fi);
+      Lines.line(x - w * 0.5, y + offTy_fi, x + w * 0.5, y + offTy_fi);
       Lines.stroke(3.0, color);
       Draw.alpha(0.2);
-      Lines.line(x - w * 0.5, y + off_ty_fi, x + w * 0.5, y + off_ty_fi);
+      Lines.line(x - w * 0.5, y + offTy_fi, x + w * 0.5, y + offTy_fi);
       Draw.alpha(0.7);
-      Lines.line(x - w * 0.5, y + off_ty_fi, Mathf.lerp(x - w * 0.5, x + w * 0.5, frac), y + off_ty_fi);
+      Lines.line(x - w * 0.5, y + offTy_fi, Mathf.lerp(x - w * 0.5, x + w * 0.5, frac), y + offTy_fi);
       Draw.reset();
     };
     exports.drawProgressBar = drawProgressBar;
@@ -796,11 +835,11 @@
 
       var x = pos.x - Vars.tilesize * 0.5 * size;
       var y = pos.y + Vars.tilesize * 0.5 * size;
-      var off_y = -1.0;
+      var offY = -1.0;
       var w = 6.0;
 
       Draw.mixcol(Color.darkGray, 1.0);
-      Draw.rect(ct.uiIcon, x, y + off_y, w, w);
+      Draw.rect(ct.uiIcon, x, y + offY, w, w);
       Draw.reset();
       Draw.rect(ct.uiIcon, x, y, w, w);
     };
@@ -840,7 +879,7 @@
       if(color == null) color = Color.white;
       if(Vars.headless || e == null || reg == null) return;
 
-      var pos = (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e);
+      var pos = mdl_game._pos(9, e);
       var scl = (e instanceof Unit) ? (0.1 * e.type.hitSize) : (0.1 * e.block.size * Vars.tilesize);
 
       drawFadeRegion(pos, reg, 0.0, 0.5, scl, 0.5, color, 110.0)
@@ -851,20 +890,20 @@
 
   // Part: Text
     /* NOTE: Draws a text line over the block. */
-    const drawPlaceText = function(blk, t, valid, str, off_ty) {
+    const drawPlaceText = function(blk, t, valid, str, offTy) {
       if(valid == null) valid = true;
-      if(off_ty == null) off_ty = 0;
+      if(offTy == null) offTy = 0;
       if(Vars.headless || blk == null || t == null || str == null) return;
 
-      blk.drawPlaceText(str, t.x + blk.offset / Vars.tilesize, t.y + blk.offset / Vars.tilesize + off_ty, valid);
+      blk.drawPlaceText(str, t.x + blk.offset / Vars.tilesize, t.y + blk.offset / Vars.tilesize + offTy, valid);
     };
     exports.drawPlaceText = drawPlaceText;
 
 
-    const drawSelectText = function(b, valid, str, off_ty) {
+    const drawSelectText = function(b, valid, str, offTy) {
       if(Vars.headless || b == null) return;
 
-      drawPlaceText(b.block, b.tile, valid, str, off_ty);
+      drawPlaceText(b.block, b.tile, valid, str, offTy);
     };
     exports.drawSelectText = drawSelectText;
   // End

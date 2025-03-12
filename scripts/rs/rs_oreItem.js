@@ -14,15 +14,17 @@
 
 
   // Part: Component
+    const li_39572123 = new Seq();
     function setStatsComp(itm) {
+      var li = li_39572123.clear();
+
       itm.stats.add(db_stat.isOre, true);
       itm.stats.add(db_stat.hardness, itm.hardness);
 
-      var li_blk = new Seq();
       Vars.content.blocks().each(blk => {
-        if(blk.itemDrop == itm) li_blk.add(blk);
+        if(blk.itemDrop == itm) li.add(blk);
       });
-      if(li_blk.size > 0) itm.stats.add(db_stat.blockRelated, StatValues.content(li_blk.sort()));
+      if(li.size > 0) itm.stats.add(db_stat.blockRelated, StatValues.content(li.sort()));
     };
   // End
 

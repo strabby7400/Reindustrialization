@@ -58,10 +58,10 @@ const rc = {
         "reind-item-ore-lignite", 480,
       ]),
       "outputs": new Seq([
-        "reind-item-chem-copper", 460,
+        "reind-item-chem-lead", 460,
       ]),
       "randOutputs": new Seq([
-        "reind-item-chem-copper", 120, 0.5,
+        "reind-item-chem-lead", 120, 0.5,
       ]),
       "timeScale": 16.5,
     },

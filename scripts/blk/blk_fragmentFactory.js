@@ -15,17 +15,18 @@
 
 
   // Part: Component
+    const li_22856458 = new Seq();
     function updateTileComp(b) {
       var invalid = false;
-      var temp_li = new Seq();
-      mdl_game.getTiles_rot(b.tile, b.block.liquidOutputDirections[0], b.block.size).each(ot => {
+      var tmpLi = li_22856458.clear();
+      mdl_game._liTileRot(b.tile, b.block.liquidOutputDirections[0], b.block.size).each(ot => {
         if(ot.build == null) {
           invalid = true
-        } else if(!temp_li.contains(ot.build)) {
-          temp_li.add(ot.build)
+        } else if(!tmpLi.contains(ot.build)) {
+          tmpLi.add(ot.build)
         };
       });
-      if(temp_li.size > 1) invalid = true;
+      if(tmpLi.size > 1) invalid = true;
 
       ct_blk_fragmentFactory.accB_down(b, "w", invalid);
     };

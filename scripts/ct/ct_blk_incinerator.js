@@ -48,13 +48,13 @@
       // Specific
       draw() {
         this.super$draw();
-        mdl_draw.drawFlameRegion(mdl_game.poser_1b(this), this.top3Reg, this.frac);
-        mdl_draw.drawHeatRegion(mdl_game.poser_1b(this), this.power.status, this.glowReg);
+        mdl_draw.drawFlameRegion(mdl_game._pos(1, this), this.top3Reg, this.frac);
+        mdl_draw.drawHeatRegion(mdl_game._pos(2, this), this.power.status, this.glowReg);
       },
       // Specific
       drawLight() {
         this.super$drawLight();
-        mdl_draw.drawLight(mdl_game.poser_1b(this), this.frac);
+        mdl_draw.drawLight(mdl_game._pos(1, this), this.frac);
       },
     });
     exports.disAux_itemIncinerator = disAux_itemIncinerator;

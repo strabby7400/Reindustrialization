@@ -1,0 +1,91 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Wall
+  category: crafting
+  requirements: [
+    item-chem-copper/80
+    item-chem-lead/80
+    item-chem-graphite/60
+    item-chem-brass/160
+    item-buil-cement/100
+    item-buil-coarse-aggregate/80
+    item-buil-fine-aggregate/60
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-sep-vibration-screen
+    objectives: []
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 24.0
+  size: 1
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: true
+  flashHit: true
+  flashColor: ffffff
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  crushDamageMultiplier: 0.75
+  update: true
+  configurable: true
+  lightningChance: -1.0
+  lightningDamage: 20.0
+  lightningLength: 17
+  lightningColor: ffd37f
+  lightningSound: spark
+  chanceDeflect: -1.0
+  deflectSound: none

@@ -310,7 +310,7 @@
       "reind-fac-proc-brick-press", "brick-press",
 
       /* ========================================
-        Section: Chemical Reactor
+        Section: Chimney
       ======================================== */
 
       "reind-fac-misc-basic-chimney", "chimney",
@@ -538,6 +538,25 @@
         new Point2(1, 1), "reind-def-wall-plate-wall-steel",
         new Point2(2, 1), "reind-def-wall-plate-wall-steel",
 
+        new Point2(1, 2), "reind-def-wall-plate-wall-steel",
+        new Point2(2, 2), "reind-def-wall-plate-wall-steel",
+      ]),
+
+      "reind-fac-sep-large-vibration-screen-controller", "reind-fac-sep-large-vibration-screen", new Seq([
+        new Point2(-2, -2), "reind-def-wall-plate-wall-steel",
+        new Point2(-1, -2), "reind-def-wall-plate-wall-steel",
+        new Point2(0, -2), "reind-fac-sep-vibration-screen",
+        new Point2(2, -2), "reind-def-wall-plate-wall-steel",
+
+        new Point2(-2, -1), "reind-fac-sep-vibration-screen",
+        new Point2(2, -1), "reind-def-wall-plate-wall-steel",
+
+        new Point2(1, 0), "reind-fac-sep-vibration-screen",
+
+        new Point2(-2, 1), "reind-def-wall-plate-wall-steel",
+        new Point2(-1, 1), "reind-fac-sep-vibration-screen",
+
+        new Point2(-2, 2), "reind-def-wall-plate-wall-steel",
         new Point2(1, 2), "reind-def-wall-plate-wall-steel",
         new Point2(2, 2), "reind-def-wall-plate-wall-steel",
       ]),

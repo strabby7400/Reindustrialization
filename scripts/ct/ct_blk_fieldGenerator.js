@@ -70,7 +70,7 @@
         blk_fieldGenerator.draw(this);
         frag_facility.draw_ep(this);
         mdl_draw.drawFadeAlert(
-          mdl_game.poser_1b(this),
+          mdl_game._pos(1, this),
           this.alertReg,
           this.liquids.get(Vars.content.liquid("reind-gas-misc-steam")) / this.block.liquidCapacity,
         );

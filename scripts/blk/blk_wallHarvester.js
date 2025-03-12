@@ -16,7 +16,7 @@
   // Part: Component
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var t = Vars.world.tile(tx, ty);
-      mdl_game.getTiles_rect(t, 5, blk.size).each(ot => {if(ot.block().attributes.get(blk.attribute) > 0.0) mdl_draw.drawTileIndicator(ot)});
+      mdl_game._liTileRect(t, 5, blk.size).each(ot => {if(ot.block().attributes.get(blk.attribute) > 0.0) mdl_draw.drawTileIndicator(ot)});
     };
   // End
 

@@ -15,6 +15,20 @@ const rc = {
     ======================================== */
 
 
+    // Asbestos
+    {
+      "icon": "reind-item-int-dust-asbestos",
+      "category": "purification",
+      "inputs": new Seq([
+        "reind-item-int-dust-asbestos", 8,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-dust-p1-asbestos", 4,
+        "reind-item-was-dust", 4,
+      ]),
+    },
+
+
     // Raw Coal
     {
       "icon": "reind-item-int-dust-raw-coal",

@@ -15,7 +15,7 @@
 
   // Part: Component
     function drawBaseComp(blk, t) {
-      var pos = mdl_game.poser_1t(t);
+      var pos = mdl_game._pos(1, t);
       var reg = blk.region;
       var ang = Mathf.randomSeedRange(t.pos() + 1, blk.rotationRand);
 

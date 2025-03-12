@@ -136,7 +136,7 @@
   engineColor: 8ca9e8
   engineColorInner: ffffff
   engineOffset: 0.0
-  engineSize: 0.0
+  engineSize: 2.5
   engines: [
 
 
@@ -157,6 +157,20 @@
 
 
   ]
+
+
+/*
+  ========================================
+  Section: Visual (Trail)
+  ========================================
+*/
+
+
+  trailLength: 15
+  trailColor: 8ca9e8
+  trailScl: 1.0
+  waveTrailX: 4.0
+  waveTrailY: -3.0
 
 
 /*
@@ -235,7 +249,7 @@
         {
           type: RegionPart
           suffix: "-blade"
-          layerOffset: -0.00001
+          layerOffset: -0.00005
           under: true
           mirror: false
           x: 0.5
@@ -254,7 +268,7 @@
         {
           type: RegionPart
           suffix: "-blade"
-          layerOffset: -0.00001
+          layerOffset: -0.00005
           under: true
           mirror: false
           x: 1.0

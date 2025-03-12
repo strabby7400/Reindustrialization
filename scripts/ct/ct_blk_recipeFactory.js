@@ -85,11 +85,11 @@
     exports.accB_fo = accB_fo;
 
 
-    const accB_temp_effc = function(b, mode, val) {
-      if(mode == "r") return b.temp_effc;
-      if(mode == "w") b.temp_effc = val;
+    const accB_tmpEffc = function(b, mode, val) {
+      if(mode == "r") return b.tmpEffc;
+      if(mode == "w") b.tmpEffc = val;
     };
-    exports.accB_temp_effc = accB_temp_effc;
+    exports.accB_tmpEffc = accB_tmpEffc;
   // End
 
 
@@ -139,7 +139,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -221,7 +221,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -312,7 +312,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -400,7 +400,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -479,7 +479,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -558,7 +558,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -640,7 +640,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -719,7 +719,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -802,7 +802,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -884,7 +884,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -966,7 +966,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1048,7 +1048,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1136,7 +1136,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1219,7 +1219,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1301,7 +1301,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1384,7 +1384,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1472,7 +1472,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1560,7 +1560,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1639,7 +1639,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1727,7 +1727,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1815,7 +1815,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1860,6 +1860,85 @@
       },
     });
     exports.facSep_highPressureCycloneSeparator = facSep_highPressureCycloneSeparator;
+
+
+    const facSep_largeVibrationScreen = extend(GenericCrafter, "fac-sep-large-vibration-screen", {
+      rcFi: require("reind/rc/rc_facSep_largeVibrationScreen"),
+      setStats() {
+        this.super$setStats();
+        blk_recipeFactory.setStats(this, this.rcFi);
+      },
+      init() {
+        this.super$init();
+        blk_recipeFactory.init(this, this.rcFi);
+      },
+      setBars() {
+        this.super$setBars();
+        blk_recipeFactory.setBars(this, this.rcFi);
+      },
+      outputsItems() {
+        return blk_recipeFactory.outputsItems(this, this.rcFi);
+      },
+      consumesLiquid(liquid) {
+        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+      },
+    });
+    facSep_largeVibrationScreen.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_largeVibrationScreen, {
+      param: 0.0,
+      rcFi: require("reind/rc/rc_facSep_largeVibrationScreen"),
+      id_rc: mdl_content.getConfig(facSep_largeVibrationScreen, 0),
+      needCheck: true,
+      ci: new Seq(),
+      bi: new Seq(),
+      opt: new Seq(),
+      co: new Seq(),
+      bo: new Seq(),
+      fo: new Seq(),
+      tmpEffc: 0.0,
+      updateTile() {
+        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        blk_recipeFactory.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        blk_recipeFactory.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+      },
+      drawStatus() {
+        blk_recipeFactory.drawStatus(this);
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.facSep_largeVibrationScreen = facSep_largeVibrationScreen;
 
 
     /* <---------------- purification ----------------> */
@@ -1914,7 +1993,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -1995,7 +2074,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -2083,7 +2162,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc, "manual");
       },
@@ -2166,7 +2245,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -2245,7 +2324,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -2327,7 +2406,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },
@@ -2415,7 +2494,7 @@
       co: new Seq(),
       bo: new Seq(),
       fo: new Seq(),
-      temp_effc: 0.0,
+      tmpEffc: 0.0,
       updateTile() {
         blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
       },

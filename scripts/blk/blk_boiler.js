@@ -49,20 +49,20 @@
         if(rad == null) rad = 40.0;
 
         b.kill();
-        frag_attack.attack_explosion(b, rad, 3000.0, 12.0);
+        frag_attack.attack_explosion_noob(b, rad, 3000.0, 12.0);
       };
     };
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var rad = mdl_data.read_1n1v(db_block.genericRange, blk.name) * Vars.tilesize;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
+      if(rad != null) mdl_draw.drawWarningDisk(mdl_game._pos(1, Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
       var rad = mdl_data.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_game.poser_1b(b), rad);
+      if(rad != null) mdl_draw.drawWarningDisk(mdl_game._pos(1, b), rad);
     };
 
 
@@ -71,7 +71,7 @@
         var rad = mdl_data.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
         if(rad == null) rad = 40.0;
 
-        frag_attack.attack_explosion(b, rad, 3000.0, 12.0);
+        frag_attack.attack_explosion_noob(b, rad, 3000.0, 12.0);
       };
     };
   // End

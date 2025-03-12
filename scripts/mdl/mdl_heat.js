@@ -58,10 +58,10 @@
 
       b.proximity.each(ob => {
         var cond = true;
-        mdl_game.getTiles_rot(b.tile, b.rotation, b.block.size).each(ot => {
+        mdl_game._liTileRot(b.tile, b.rotation, b.block.size).each(ot => {
           if(ot.build == ob) cond = false;
         });
-        if(cond) sheat += getHeat(ob) * mdl_game.getFrac_side(ob, b);
+        if(cond) sheat += getHeat(ob) * mdl_game._fracSide(ob, b);
       });
 
       return sheat;
@@ -146,7 +146,7 @@
     /* NOTE: Average heat in the 3*3 range. */
     const getRangeHeat = function(t) {
       var heat = 0.0;
-      var li_ot = mdl_game.getTiles_rect(t, 1);
+      var li_ot = mdl_game._liTileRect(t, 1);
       li_ot.each(ot => {
         // Get floor heat
         heat += ot.floor().attributes.get(Attribute.get("reind-attr-env-heat")) * 16.0;

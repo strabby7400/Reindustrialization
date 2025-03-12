@@ -33,7 +33,7 @@
 
 
     const isActive_2side = function(b) {
-      if(mdl_game.isDirectionBlocked(b, 0) && mdl_game.isDirectionBlocked(b, 2)) return false;
+      if(mdl_game.isDirBlocked(b, 0) && mdl_game.isDirBlocked(b, 2)) return false;
 
       return true;
     };
@@ -41,13 +41,13 @@
 
 
     const drawPlace_2side = function(blk, t, rot) {
-      mdl_game.getTiles_2sideRot(t, rot, blk.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
+      mdl_game._liTileRot_2side(t, rot, blk.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
     };
     exports.drawPlace_2side = drawPlace_2side;
 
 
     const drawSelect_2side = function(b) {
-      mdl_game.getTiles_2sideRot(b.tile, b.rotation, b.block.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
+      mdl_game._liTileRot_2side(b.tile, b.rotation, b.block.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
     };
     exports.drawSelect_2side = drawSelect_2side;
   // End
@@ -60,16 +60,19 @@
     exports.setStats_coreDump = setStats_coreDump;
 
 
+    const li_48512244 = new Seq();
     const dump_coreDump = function(b, itm, rad) {
+      var li = li_48512244.clear();
+
       if(rad == null) return false;
 
       var b_core = b.closestCore();
 
       var shouldCoreDump = true;
-      if(mdl_game.getDistance(mdl_game.poser_1b(b), mdl_game.poser_1b(b_core)) > rad) shouldCoreDump = false;
+      if(mdl_game._dst(mdl_game._pos(1, b), mdl_game._pos(2, b_core)) > rad) shouldCoreDump = false;
       if(b.power != null && b.power.status < 0.9999) shouldCoreDump = false;
 
-      return shouldCoreDump ? frag_item.dumpItem(b, new Seq([b_core]), itm) : b.super$dump(itm);
+      return shouldCoreDump ? frag_item.dumpItem(b, li.add(b_core), itm) : b.super$dump(itm);
     };
     exports.dump_coreDump = dump_coreDump;
 
@@ -87,8 +90,8 @@
       if(b.power != null && b.power.status < 0.9999) return;
 
       var b_core = b.closestCore();
-      if(mdl_game.getDistance(mdl_game.poser_1b(b), mdl_game.poser_1b(b_core)) > rad) return;
-      mdl_draw.drawItemTransfer(mdl_game.poser_1b(b), mdl_game.poser_1b(b_core));
+      if(mdl_game._dst(mdl_game._pos(1, b), mdl_game._pos(2, b_core)) > rad) return;
+      mdl_draw.drawItemTransfer(mdl_game._pos(3, b), mdl_game._pos(4, b_core));
     };
     exports.draw_coreDump = draw_coreDump;
 
@@ -98,7 +101,7 @@
       mdl_draw.drawSelectCircle(b, rad, false);
 
       var b_core = b.closestCore();
-      if(mdl_game.getDistance(mdl_game.poser_1b(b), mdl_game.poser_1b(b_core)) > rad) return;
+      if(mdl_game._dst(mdl_game._pos(1, b), mdl_game._pos(2, b_core)) > rad) return;
       mdl_draw.drawBuildRectConnector(b, b_core);
     };
     exports.drawSelect_coreDump = drawSelect_coreDump;
@@ -112,48 +115,59 @@
     */
 
 
+    const li_73097008 = new Seq();
     const getUnitMap_ep = function(pos, rad, team, caller) {
-      if(pos == null || rad == null || team == null) return new Seq();
+      var li = li_73097008.clear();
 
-      var map = new Seq();
-      mdl_game.filter_team(mdl_game.getUnits(pos, rad, caller), team).each(unit => {
+      if(pos == null || rad == null || team == null) return li;
+
+      mdl_game._filterTeam(mdl_game._liUnit(pos, rad, caller), team).each(unit => {
         var ep = mdl_data.read_1n1v(db_unit.energizer, unit.type.name);
         if(ep != null) {
-          map.add(unit);
-          map.add(ep);
+          li.add(unit);
+          li.add(ep);
         };
       });
 
-      return map;
+      return li;
     };
     exports.getUnitMap_ep = getUnitMap_ep;
 
 
+    const li_95226458 = new Seq();
+    const li_65225877 = new Seq();
     const getUnits_ep = function(pos, rad, team, caller) {
-      var map = getUnitMap_ep(pos, rad, team, caller);
-      if(map.size == 0) return new Seq();
+      var li = li_95226458.clear();
+      var li1 = li_65225877.clear();
 
-      var li_unit = new Seq();
-      for(let i = 0; i < map.size; i++) {
+      li.addAll(getUnitMap_ep(pos, rad, team, caller));
+
+      var cap = li.size;
+      if(cap == 0) return li;
+      for(let i = 0; i < cap; i++) {
         if(i % 2 != 0) continue;
 
-        li_unit.add(map.get(i));
+        li1.add(li.get(i));
       };
 
-      return li_unit;
+      return li1;
     };
     exports.getUnits_ep = getUnits_ep;
 
 
+    const li_22579666 = new Seq();
     const count_ep = function(pos, rad, team, caller) {
-      var map = getUnitMap_ep(pos, rad, team, caller);
-      if(map.size == 0) return 0.0;
+      var li = li_22579666.clear();
+
+      li.addAll(getUnitMap_ep(pos, rad, team, caller));
 
       var ep_fi = 0.0;
-      for(let i = 0; i < map.size; i++) {
+      var cap = li.size;
+      if(cap == 0) return ep_fi;
+      for(let i = 0; i < cap; i++) {
         if(i % 2 != 0) continue;
 
-        ep_fi += map.get(i + 1);
+        ep_fi += li.get(i + 1);
       };
 
       return ep_fi;
@@ -168,7 +182,7 @@
       if(ep_req == null) return true;
 
       var ep = count_ep(
-        (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e),
+        mdl_game._pos(1, e),
         r * Vars.tilesize,
         e.team,
         (e instanceof Unit) ? e : null,
@@ -210,14 +224,14 @@
       if(r == null) return;
 
       getUnits_ep(
-        (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e),
+        mdl_game._pos(1, e),
         r * Vars.tilesize,
         e.team,
         (e instanceof Unit) ? e : null,
       ).each(unit => {
         mdl_draw.drawFlickerLine(
-          mdl_game.poser_1u(unit),
-          (e instanceof Unit) ? mdl_game.poser_1u(e) : mdl_game.poser_1b(e),
+          mdl_game._pos(2, unit),
+          mdl_game._pos(3, unit),
           Pal.techBlue,
         );
       });
@@ -236,7 +250,7 @@
     const updateTile_flammable = function(b) {
       if(Mathf.chance(0.99)) return;
 
-      var li_ot = mdl_game.getTiles_linked(b.tile);
+      var li_ot = mdl_game._liTileLinked(b.tile);
       var rheat = 0.0;
       li_ot.each(ot => rheat += mdl_heat.getRangeHeat(ot));
       rheat /= li_ot.size;
@@ -257,7 +271,7 @@
 
     const canPlaceOn_restrict = function(blk, t, team, rot, r) {
       var r_fi = (r == null) ? mdl_data.read_1n1v(db_block.genericRange, blk.name) : r;
-      if(r_fi != null && mdl_game.getSameBuilds(mdl_game.getTiles_rect(t, r_fi, blk.size), blk.name, Vars.player.team()).size > 0) return false;
+      if(r_fi != null && mdl_game._liBuildSame(mdl_game._liTileRect(t, r_fi, blk.size), blk.name, Vars.player.team()).size > 0) return false;
 
       return true;
     };
@@ -269,7 +283,7 @@
       if(r_fi != null) {
         var t = Vars.world.tile(tx, ty);
         mdl_draw.drawPlaceRect(blk, t, valid, r_fi, true);
-        mdl_game.getSameBuilds(mdl_game.getTiles_rect(t, r_fi, blk.size), blk.name, Vars.player.team()).each(ob => mdl_draw.drawBuildArea(ob, valid));
+        mdl_game._liBuildSame(mdl_game._liTileRect(t, r_fi, blk.size), blk.name, Vars.player.team()).each(ob => mdl_draw.drawBuildArea(ob, valid));
       };
     };
     exports.drawPlace_restrict = drawPlace_restrict;
@@ -308,8 +322,10 @@
     exports.getStructurePair = getStructurePair;
 
 
+    const li_77002519 = new Seq();
     const getPlanList = function(plan) {
-      var li = new Seq();
+      var li = li_77002519.clear();
+
       Vars.content.blocks().each(blk => {
         var count = plan.count(i => blk.name == i);
         if(count > 0) li.add(blk, count);
@@ -381,7 +397,7 @@
       if(size == null) size = 1;
       if(t == null) return;
 
-      var li_ot = mdl_game.getTiles_rect(t, 5, size);
+      var li_ot = mdl_game._liTileRect(t, 5, size);
       var count_t = li_ot.size;
       if(count_t == 0) return;
       var count_dirt = 0;

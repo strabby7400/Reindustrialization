@@ -54,7 +54,7 @@
 
         death(unit) {
           Damage.damage(unit.team, unit.x, unit.y, rad, dmg);
-          mdl_game.getEnemies(mdl_game.poser_1u(unit), rad, unit.team).each(ounit => {
+          mdl_game._liUnitEnemy(mdl_game._pos(1, unit), rad, unit.team).each(ounit => {
             ounit.apply(sta, dur);
           });
 
@@ -101,7 +101,7 @@
         update(unit) {
           if(Mathf.chance(0.98)) return;
 
-          var li_ounit = mdl_game.getEnemies(mdl_game.poser_1u(unit), rad, unit.team);
+          var li_ounit = mdl_game._liUnitEnemy(mdl_game._pos(1, unit), rad, unit.team);
           if(li_ounit.size > 0) {
             var count_apply = 0;
             li_ounit.each(ounit => {
@@ -153,7 +153,7 @@
           bars.add(new Bar(
             "term.reind-term-unit-count.name",
             Pal.accent,
-            () => Math.min(mdl_game.getSameUnits(mdl_game.poser_1u(unit), rad, unit.type.name, unit.team).size / limit, 1.0),
+            () => Math.min(mdl_game._liUnitSame(mdl_game._pos(1, unit), rad, unit.type.name, unit.team).size / limit, 1.0),
           )).row();
         },
 
@@ -161,7 +161,7 @@
         update(unit) {
           if(Mathf.chance(0.98)) return;
 
-          var count = mdl_game.getSameUnits(mdl_game.poser_1u(unit), rad, unit.type.name, unit.team).size;
+          var count = mdl_game._liUnitSame(mdl_game._pos(1, unit), rad, unit.type.name, unit.team).size;
           if(count >= limit) unit.apply(Vars.content.statusEffect("reind-sta-spec-morale"), 300.0);
         },
 

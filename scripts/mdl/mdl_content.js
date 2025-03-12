@@ -242,60 +242,68 @@
     exports.getFactionValue = getFactionValue;
 
 
+    const li_80286997 = new Seq();
     const getFactionMembers = function(faction) {
+      var li = li_80286997.clear();
+
       if(faction instanceof Block || faction instanceof UnitType) faction = getFaction(faction);
-      if(faction == null) return new Seq();
+      if(faction == null) return li;
 
-      var li_ct = new Seq();
+      Vars.content.blocks().each(blk => {if(!isEnv(blk) && getFaction(blk) == faction && !li.contains(blk)) li.add(blk)});
+      Vars.content.units().each(utp => {if(getFaction(utp) == faction && !li.contains(utp)) li.add(utp)});
 
-      Vars.content.blocks().each(blk => {if(!isEnv(blk) && getFaction(blk) == faction && !li_ct.contains(blk)) li_ct.add(blk)});
-      Vars.content.units().each(utp => {if(getFaction(utp) == faction && !li_ct.contains(utp)) li_ct.add(utp)});
-
-      return li_ct;
+      return li;
     };
     exports.getFamilyMembers = getFamilyMembers;
 
 
+    const li_29300769 = new Seq();
     const getFamily = function(ct) {
-      if(ct == null) return new Seq();
+      var li = li_29300769.clear();
+
+      if(ct == null) return li;
 
       var nm = ct.name;
-      var fami = new Seq();
-      if(isFactory(ct)) fami = mdl_data.readli_1n1v(db_block.factoryFamily, nm);
+      if(isFactory(ct)) li.addAll(mdl_data.readli_1n1v(db_block.factoryFamily, nm));
 
-      return fami;
+      return li;
     };
     exports.getFamily = getFamily;
 
 
+    const li_92008749 = new Seq();
     const getFamilyValue = function(ct) {
+      var li = li_92008749.clear();
+
       if(Vars.headless || ct == null) return;
 
       var fami = getFamily(ct);
-      var temp_fami = new Seq();
-      fami.each(i => temp_fami.add(Core.bundle.get("term.reind-term-" + i + ".name")));
+      fami.each(i => li.add(Core.bundle.get("term.reind-term-" + i + ".name")));
 
-      return mdl_text.getTagText(temp_fami);
+      return mdl_text.getTagText(li);
     };
     exports.getFamilyValue = getFamilyValue;
 
 
+    const li_24116230 = new Seq();
     const getFamilyMembers = function(fami) {
-      if(fami instanceof Block) fami = getFamily(fami);
-      if(typeof fami == "string") fami = new Seq([fami]);
+      var li = li_24116230.clear();
+      var li1 = new Seq();
 
-      var li_blk = new Seq();
+      if(fami instanceof Block) li.addAll(getFamily(fami));
+      if(typeof fami == "string") li.add(fami);
+
       Vars.content.blocks().each(blk => {
         if(isFactory(blk)) {
           var cond = false;
-          var temp_fami = getFamily(blk);
-          fami.each(i => {if(temp_fami.contains(i) && !li_blk.contains(i)) cond = true});
+          var tmpFami = getFamily(blk);
+          li.each(i => {if(tmpFami.contains(i) && !li1.contains(i)) cond = true});
 
-          if(cond) li_blk.add(blk);
+          if(cond) li1.add(blk);
         };
       });
 
-      return li_blk;
+      return li1;
     };
     exports.getFamilyMembers = getFamilyMembers;
   // End
@@ -393,6 +401,16 @@
 
 
     /* build */
+
+
+    const isCore = function(ct) {
+      return mdl_text.includes_ex(
+        ct.name,
+        "reind-eff-core-",
+        "reind-ileff-core",
+      );
+    };
+    exports.isCore = isCore;
 
 
     const isConduit = function(ct) {

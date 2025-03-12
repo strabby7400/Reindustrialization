@@ -6,6 +6,8 @@
 
 
   // Part: Import
+    const cfg_setting = require("reind/cfg/cfg_setting");
+
     const mdl_table = require("reind/mdl/mdl_table");
     const mdl_text = require("reind/mdl/mdl_text");
     const mdl_ui = require("reind/mdl/mdl_ui");
@@ -53,8 +55,7 @@
             var mtp = rcLi.get(i + 3);
 
             pn.add("[" + Strings.fixed(i / 4.0 + 1.0, 0) + "]").center().color(Pal.accent).padRight(36.0);
-            pn.add(new ItemImage(itm.uiIcon, amt)).center().pad(3.0).tooltip(itm.localizedName);
-            pn.add(Strings.fixed(p * 100.0, 0) + "%").center().color(Color.lightGray).padRight(72.0);
+            mdl_table.__recipeItem(pn, itm, amt, p).padRight(72.0);
             pn.add(mdl_text.getStatText(Core.bundle.get("term.reind-term-efficiency-multiplier.name"), Strings.fixed(mtp * 100.0, 0) + "%")).center().padRight(6.0);
             pn.row();
           };
@@ -115,6 +116,11 @@
 
           mdl_table.__break(pn);
           pn.add("Idea:").left().color(Pal.accent).row();
+          mdl_table.__breakHalf(pn);
+          pn.add("MaboroshiX - Most of the work.").left().labelAlign(Align.left).wrap().width(mdl_ui.getSizePair(null, null, 120.0)[0]).padLeft(48.0).row();
+
+          mdl_table.__break(pn);
+          pn.add("Music:").left().color(Pal.accent).row();
           mdl_table.__breakHalf(pn);
           pn.add("MaboroshiX - Most of the work.").left().labelAlign(Align.left).wrap().width(mdl_ui.getSizePair(null, null, 120.0)[0]).padLeft(48.0).row();
 
@@ -257,6 +263,7 @@
           "reind-unit-inf-psas",
           "reind-fac-furn-bricked-blast-furnace-controller",
           "reind-fac-misc-mechanical-crank",
+          "reind-sta-spec-earses-mark",
         ]),
       ],
 
@@ -285,4 +292,26 @@
       };
     };
     exports._updatesRowDisplay = _updatesRowDisplay;
+
+
+    const setSettings = function() {
+      var dial = Vars.ui.settings;
+
+      dial.addCategory(Core.bundle.get("term.reind-term-reind-settings.name"), Icon.crafting, tb => {
+        tb.checkPref("reind-beta-mode", false);
+        tb.checkPref("reind-noob-mode", false);
+
+        tb.checkPref("reind-ldm", false);
+        tb.checkPref("reind-p3d-shadow", true);
+
+        tb.checkPref("reind-core-time-control", true);
+
+        tb.sliderPref("reind-tree-alpha", 20, 0, 20, function(val) {return Strings.fixed(val * 5.0, 0) + "%"})
+      });
+
+      dial.hidden(run(() => {
+        cfg_setting.loadSettings();
+      }));
+    };
+    exports.setSettings = setSettings;
   // End

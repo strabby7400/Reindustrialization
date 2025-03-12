@@ -50,9 +50,9 @@
           var liq = Vars.content.liquid(outputs.get(i));
           if(liq == null) continue;
           var amt = outputs.get(i + 1);
-          var temp_val = (b.block.liquidCapacity - b.liquids.get(liq)) / (amt * b.edelta());
-          val = Math.max(val, temp_val);
-          scl = Math.min(scl, temp_val);
+          var tmpVal = (b.block.liquidCapacity - b.liquids.get(liq)) / (amt * b.edelta());
+          val = Math.max(val, tmpVal);
+          scl = Math.min(scl, tmpVal);
           hasLiquidOutput = true;
         };
       };
@@ -88,7 +88,7 @@
       var co = ct_blk_recipeFactory.accB_co(b, "r");
       var bo = ct_blk_recipeFactory.accB_bo(b, "r");
       var fo = ct_blk_recipeFactory.accB_fo(b, "r");
-      var temp_effc = ct_blk_recipeFactory.accB_temp_effc(b, "r");
+      var tmpEffc = ct_blk_recipeFactory.accB_tmpEffc(b, "r");
 
       if(needCheck) {
         ci = frag_recipe.getCI(rcFi, id_rc);
@@ -97,7 +97,7 @@
         co = frag_recipe.getCO(rcFi, id_rc);
         bo = frag_recipe.getBO(rcFi, id_rc);
         fo = frag_recipe.getFO(rcFi, id_rc);
-        temp_effc = frag_recipe.getEfficiency(b, ci, bi, opt, mdl_recipe.getRequireOptional(rcFi, id_rc));
+        tmpEffc = frag_recipe.getEfficiency(b, ci, bi, opt, mdl_recipe.getRequireOptional(rcFi, id_rc));
 
         ct_blk_recipeFactory.accB_ci(b, "w", ci);
         ct_blk_recipeFactory.accB_bi(b, "w", bi);
@@ -105,14 +105,14 @@
         ct_blk_recipeFactory.accB_co(b, "w", co);
         ct_blk_recipeFactory.accB_bo(b, "w", bo);
         ct_blk_recipeFactory.accB_fo(b, "w", fo);
-        ct_blk_recipeFactory.accB_temp_effc(b, "w", temp_effc);
+        ct_blk_recipeFactory.accB_tmpEffc(b, "w", tmpEffc);
 
         ct_blk_recipeFactory.accB_needCheck(b, "w", false);
       } else {
         if(Mathf.chance(0.008)) ct_blk_recipeFactory.accB_needCheck(b, "w", true);
       };
 
-      b.efficiency = temp_effc;
+      b.efficiency = tmpEffc;
       if(isManual) {
         var param = ct_blk_recipeFactory.accB_param(b, "r");
         b.efficiency *= param;
@@ -189,7 +189,10 @@
     };
 
 
+    const vec2_95321152 = new Vec2();
     function buildConfigurationComp(b, tb, tag) {
+      var vec2 = vec2_95321152.setZero();
+
       var isManual = (tag == "manual");
 
       var rcFi = ct_blk_recipeFactory.accB_rcFi(b, "r");
@@ -201,7 +204,7 @@
             mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-manual-generator-paused.name"));
           } else {
             var param_fi = Mathf.lerpDelta(ct_blk_recipeFactory.accB_param(b, "r"), 1.0, 0.135);
-            Call.tileConfig(Vars.player, b, new Vec2(-2, param_fi));
+            Call.tileConfig(Vars.player, b, vec2.set(-2, param_fi));
           };
         }, Icon.crafting, Core.bundle.get("info.reind-info-manual-crafter.name"), 72.0);
         tb.row().add("").row();
@@ -210,7 +213,7 @@
       mdl_table.setRecipeSelector(tb, rcFi, id_rc, b, function() {
         frag_recipe.consumeItems(b, rcFi, id_rc);
         b.block.lastConfig = this;
-        Call.tileConfig(Vars.player, b, new Vec2(this, -2));
+        Call.tileConfig(Vars.player, b, vec2.set(this, -2));
         b.deselect();
       }, 7);
     };
@@ -299,10 +302,10 @@
 
     function drawSelectComp(b, rcFi, id_rc) {
       var ct = mdl_content.getContent_nm(mdl_recipe.getIconName(rcFi, id_rc));
-      mdl_draw.drawContentIcon(mdl_game.poser_1b(b), ct, b.block.size);
+      mdl_draw.drawContentIcon(mdl_game._pos(1, b), ct, b.block.size);
 
       var tt = mdl_recipe.getRawTooltip(rcFi, id_rc);
-      if(tt == "overdriven") mdl_draw.drawRectPulse(mdl_game.poser_1b(b), b.block.size * 0.5 * Vars.tilesize, Pal.remove);
+      if(tt == "overdriven") mdl_draw.drawRectPulse(mdl_game._pos(2, b), b.block.size * 0.5 * Vars.tilesize, Pal.remove);
     };
 
 

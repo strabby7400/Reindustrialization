@@ -17,6 +17,15 @@
   // End
 
 
+  // Part: Setting
+    var treeAlpha = 20;
+    const set_treeAlpha = function(int) {
+      treeAlpha = int;
+    };
+    exports.set_treeAlpha = set_treeAlpha;
+  // End
+
+
   // Part: Component
     function setStatsComp(blk) {
       var tpVal = (blk.name.includes("reind-env-tree-fungi-")) ? Core.bundle.get("term.reind-term-fungi.name") : Core.bundle.get("term.reind-term-tree.name");
@@ -29,8 +38,8 @@
       if(z == null) return;
       var z_sha = z - 0.0005;
 
-      var pos = mdl_game.poser_1t(t);
-      var pos_sha = mdl_game.poser_1t(t, blk.shadowOffset);
+      var pos = mdl_game._pos(1, t);
+      var pos_sha = mdl_game._pos(2, t, blk.shadowOffset);
       var reg = blk.region;
       var ang = Mathf.randomSeed(t.pos(), 0, 4) * 90.0 + Mathf.sin(Time.time + pos.x, 50.0, 0.5) + Mathf.sin(Time.time - pos.y, 65.0, 0.9) + Mathf.sin(Time.time + pos.y - pos.x, 85.0, 0.9);
       var scl = 1.0;
@@ -47,12 +56,12 @@
         wobScl = 0.3;
       };
 
-      var a = 1.0;
+      var a = (Groups.player.size() > 1) ? 1.0 : treeAlpha / 20.0;
       if(Vars.player.unit() != null && !Vars.player.unit().flying && Vars.player.unit().type.groundLayer < 76.0) {
-        var pos_pl = mdl_game.poser_gn("player");
+        var pos_pl = mdl_game._pos(3, "player");
         if(pos_pl != null) {
-          var d = mdl_game.getDistance(pos, pos_pl);
-          if(d < reg.width * 0.15) a = 0.37;
+          var d = mdl_game._dst(pos, pos_pl);
+          if(d < reg.width * 0.15) a *= 0.37;
         };
       };
 

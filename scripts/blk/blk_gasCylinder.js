@@ -51,13 +51,13 @@
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var rad = blk.size / 2 * glb_vars.gasCylinder_explosionRadius;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_game.poser_1t(Vars.world.tile(tx, ty), blk.offset), rad);
+      if(rad != null) mdl_draw.drawWarningDisk(mdl_game._pos(1, Vars.world.tile(tx, ty), blk.offset), rad);
     };
 
 
     function drawSelectComp(b) {
       var rad = b.block.size / 2 * glb_vars.gasCylinder_explosionRadius;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_game.poser_1b(b), rad);
+      if(rad != null) mdl_draw.drawWarningDisk(mdl_game._pos(1, b), rad);
     };
 
 
@@ -70,7 +70,7 @@
         var dmg = glb_vars.gasCylinder_explosionDamage;
         var shake = 8.0;
 
-        frag_attack.attack_explosion(mdl_game.poser_1b(b), rad, dmg, shake);
+        frag_attack.attack_explosion_noob(mdl_game._pos(1, b), rad, dmg, shake);
       };
     };
   // End

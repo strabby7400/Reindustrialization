@@ -41,7 +41,7 @@ const rc = {
 
     // Sand
     {
-      "icon": "reind-effc-effc-dust-recycling",
+      "icon": "reind-item-ore-sand",
       "category": "special",
       "inputs": new Seq([
         "reind-gas-misc-air", 0.4,

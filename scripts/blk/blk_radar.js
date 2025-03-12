@@ -35,7 +35,7 @@
         cd %= thr;
 
         var rad = b.block.fogRadius * Vars.tilesize * b.progress * b.efficiency;
-        var li_unit = mdl_game.getUnits(mdl_game.poser_1b(b), rad);
+        var li_unit = mdl_game._liUnit(mdl_game._pos(1, b), rad);
         li_unit.each(unit => {
           if(mdl_content.isEnemy(unit, b.team)) {
             unit.apply(Vars.content.statusEffect("reind-sta-spec-radar-detection"), thr * 0.5);
@@ -56,7 +56,7 @@
       var cd = ct_blk_radar.accB_cd(b, "r");
       var thr = ct_blk_radar.accB_thr(b, "r");
 
-      mdl_draw.drawProgressBar(mdl_game.poser_1b(b), Math.min(cd / thr, 1.0), Pal.accent, b.block.size);
+      mdl_draw.drawProgressBar(mdl_game._pos(1, b), Math.min(cd / thr, 1.0), Pal.accent, b.block.size);
     };
   // End
 

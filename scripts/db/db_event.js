@@ -78,8 +78,8 @@
             b.liquids.each(liq => {
               var nm_l = liq.localizedName;
               var amt = b.liquids.get(liq);
-              var temp_str = "\n    > " + nm_l + ": " + Strings.fixed(amt, 4);
-              str += temp_str;
+              var tmpStr = "\n    > " + nm_l + ": " + Strings.fixed(amt, 4);
+              str += tmpStr;
             });
             Log.info(str);
           };

@@ -33,7 +33,7 @@
 
       var cap = blk.size * 4;
       var count_solid = 0;
-      var li_ot = mdl_game.getTiles_edge(t, blk.size);
+      var li_ot = mdl_game._liTileEdge(t, blk.size);
       li_ot.each(ot => {
         if(ot.solid()) count_solid += 1;
       });
@@ -48,7 +48,7 @@
       var t = Vars.world.tile(tx, ty);
       if(t == null) return;
 
-      var li_ot = mdl_game.getTiles_edge(t, blk.size);
+      var li_ot = mdl_game._liTileEdge(t, blk.size);
       li_ot.each(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
 
       if(blk.displayEfficiency) {
@@ -61,7 +61,7 @@
     function drawSelectComp(b) {
       var t = b.tile;
 
-      var li_ot = mdl_game.getTiles_edge(t, b.block.size);
+      var li_ot = mdl_game._liTileEdge(t, b.block.size);
       li_ot.each(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
 
       if(b.block.displayEfficiency) {

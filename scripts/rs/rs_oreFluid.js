@@ -13,12 +13,14 @@
 
 
   // Part: Component
+    const li_94069987 = new Seq();
     function setStatsComp(liq) {
-      var li_blk = new Seq();
+      var li = li_94069987.clear();
+
       Vars.content.blocks().each(blk => {
-        if(blk.liquidDrop == liq) li_blk.add(blk);
+        if(blk.liquidDrop == liq) li.add(blk);
       });
-      if(li_blk.size > 0) liq.stats.add(db_stat.blockRelated, StatValues.content(li_blk.sort()));
+      if(li.size > 0) liq.stats.add(db_stat.blockRelated, StatValues.content(li.sort()));
     };
   // End
 

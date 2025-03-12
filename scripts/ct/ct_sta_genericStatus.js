@@ -50,6 +50,19 @@
     exports.staSpec_coreOverdrive = staSpec_coreOverdrive;
 
 
+    const staSpec_earsesMark = extend(StatusEffect, "sta-spec-earses-mark", {
+      setStats() {
+        this.super$setStats();
+        sta_genericStatus.setStats(this);
+      },
+      update(unit, time) {
+        this.super$update(unit, time);
+        sta_genericStatus.update(this, unit, time);
+      },
+    });
+    exports.staSpec_earsesMark = staSpec_earsesMark;
+
+
     const staSpec_explosionCountdown = extend(StatusEffect, "sta-spec-explosion-countdown", {
       setStats() {
         this.super$setStats();

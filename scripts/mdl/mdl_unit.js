@@ -10,6 +10,16 @@
   // End
 
 
+  // Part: Param
+    const getElevation = function(unit) {
+      if(unit == null) return 0.0;
+
+      return Mathf.clamp(unit.elevation, unit.type.shadowElevation, 1.0) * unit.type.shadowElevationScl * (1.0 - unit.drownTime);
+    };
+    exports.getElevation = getElevation;
+  // End
+
+
   // Part: Move
     /*
       NOTE:
@@ -34,7 +44,7 @@
     const lookAt = function(unit, pos_gn) {
       if(unit == null || pos_gn == null) return;
 
-      var pos = mdl_game.poser_gn(pos_gn);
+      var pos = mdl_game._pos(6, pos_gn);
 
       unit.lookAt(pos.x, pos.y);
     };
@@ -45,7 +55,7 @@
     const aimAt = function(unit, pos_gn) {
       if(unit == null || pos_gn == null) return;
 
-      var pos = mdl_game.poser_gn(pos_gn);
+      var pos = mdl_game._pos(6, pos_gn);
 
       unit.aimLook(pos.x, pos.y);
     };

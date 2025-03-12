@@ -9,6 +9,8 @@
     const unit_airUnit = require("reind/unit/unit_airUnit");
 
     const mdl_effect = require("reind/mdl/mdl_effect");
+    const mdl_game = require("reind/mdl/mdl_game");
+    const mdl_unit = require("reind/mdl/mdl_unit");
 
     const db_effect = require("reind/db/db_effect");
   // End
@@ -25,8 +27,16 @@
         };
       };
 
-      var t = unit.tileOn();
-      if(t != null && t.floor().placeableOn && Mathf.chance(0.25)) mdl_effect.showAt_ldm(unit, db_effect._rotorWave(utp.hitSize * 2.0), 0.0);
+      if(!Vars.headless && Mathf.chance(0.25)) {
+        var elev = mdl_unit.getElevation(unit);
+        var pos_p3d = mdl_game._posP3d(1, mdl_game._pos(1, unit), elev);
+        var flr = Vars.world.floorWorld(pos_p3d.x, pos_p3d.y);
+
+        if(flr != null) {
+          if(flr.canShadow) mdl_effect.showAt_ldm(pos_p3d, db_effect._rotorWave(utp.hitSize * 2.0), 0.0);
+          if(flr.isLiquid && utp.lowAltitude && Mathf.chance(0.7)) mdl_effect.dustAt_ldm(pos_p3d, 8.0);
+        };
+      };
     };
   // End
 
@@ -51,6 +61,18 @@
       updateComp(utp, unit);
     };
     exports.update = update;
+
+
+    const killed = function(utp, unit) {
+      unit_airUnit.killed(utp, unit);
+    };
+    exports.killed = killed;
+
+
+    const draw = function(utp, unit) {
+      unit_airUnit.draw(utp, unit);
+    };
+    exports.draw = draw;
 
 
     const drawShadow = function(utp, unit) {

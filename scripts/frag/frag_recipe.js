@@ -129,7 +129,7 @@
 
     const getOptCur = function(b, opt) {
       var optCur = null;
-      var temp_mtp = 0.0;
+      var tmpMtp = 0.0;
 
       var li = opt;
       var cap = opt.size;
@@ -142,8 +142,8 @@
           var p = opt.get(i + 2);
           var mtp = opt.get(i + 3);
 
-          if(b.items != null && b.items.get(ct) >= amt && mtp >= temp_mtp) {
-            temp_mtp = mtp;
+          if(b.items != null && b.items.get(ct) >= amt && mtp >= tmpMtp) {
+            tmpMtp = mtp;
             optCur = [ct, amt, p, mtp];
           };
         };
@@ -232,7 +232,6 @@
           bo.add(1.0);
         };
       };
-
       return bo;
     };
     exports.getBO = getBO;
@@ -510,7 +509,7 @@
           var p = li.get(i + 2);
 
           if(b.items != null && ct instanceof Item) {
-            for(let j = 0; j < amt; j++) {if(Mathf.chanceDelta(p)) b.offload(ct)};
+            for(let j = 0; j < amt; j++) {if(Mathf.chance(p)) b.offload(ct)};
           };
 
           if(b.liquids != null && ct instanceof Liquid) {
@@ -568,7 +567,7 @@
           var ct = li.get(i);
           var dir = (b.block.liquidOutputDirections.length > i / 2) ? b.block.liquidOutputDirections[i / 2] : -1;
 
-          b.dumpLiquid(ct, 2.0, dir);
+          if(b.liquids != null) b.dumpLiquid(ct, 2.0, dir);
         };
       };
 
@@ -580,8 +579,8 @@
       });
       fo.each(i => {if(i instanceof Item && !li_itm.contains(i)) li_itm.add(i)});
 
-      li_itm.each(itm => b.dump(itm));
-      li_liq.each(liq => b.dumpLiquid(liq, 2.0));
+      if(b.items != null) li_itm.each(itm => b.dump(itm));
+      if(b.liquids != null) li_liq.each(liq => b.dumpLiquid(liq, 2.0));
     };
     exports.dumpResource = dumpResource;
   // End

@@ -68,10 +68,10 @@
       for(let i = 0; i < cap; i++) {
         if(i % 2 != 0) continue;
 
-        var temp_attr = getAttr_li(li_ot, map.get(i));
-        if(temp_attr > attr) {
+        var tmpAttr = getAttr_li(li_ot, map.get(i));
+        if(tmpAttr > attr) {
           nm_attr = map.get(i);
-          attr = temp_attr;
+          attr = tmpAttr;
         };
       };
 
@@ -86,22 +86,25 @@
 
 
   // Part: List
+    const li_76000210 = new Seq();
     const getAttrli_li = function(map, li_ot) {
-      if(map == null || map.size == 0) return new Seq();
+      var li = li_76000210.clear();
 
-      var li_attr = new Seq();
+      if(map == null) return li;
+
       var cap = map.size;
+      if(cap == 0) return li;
       for(let i = 0; i < cap; i++) {
         if(i % 2 != 0) continue;
 
         var nm_attr = map.get(i);
         var attr = getAttr_li(li_ot, nm_attr);
 
-        li_attr.add(nm_attr);
-        li_attr.add(attr);
+        li.add(nm_attr);
+        li.add(attr);
       };
 
-      return li_attr;
+      return li;
     };
     exports.getAttrli_li = getAttrli_li;
   // End

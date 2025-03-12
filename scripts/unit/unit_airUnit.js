@@ -30,6 +30,18 @@
     exports.update = update;
 
 
+    const killed = function(utp, unit) {
+      unit_genericUnit.killed(utp, unit);
+    };
+    exports.killed = killed;
+
+
+    const draw = function(utp, unit) {
+      unit_genericUnit.draw(utp, unit);
+    };
+    exports.draw = draw;
+
+
     const drawShadow = function(utp, unit) {
       unit_genericUnit.drawShadow(utp, unit);
     };

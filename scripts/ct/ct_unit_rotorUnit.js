@@ -29,6 +29,13 @@
         this.super$update(unit);
         unit_rotorUnit.update(this, unit);
       },
+      killed(unit) {
+        this.super$killed(unit);
+        unit_rotorUnit.killed(this, unit);
+      },
+      draw(unit) {
+        unit_rotorUnit.draw(this, unit);
+      },
       drawShadow(unit) {
         unit_rotorUnit.drawShadow(this, unit);
       },

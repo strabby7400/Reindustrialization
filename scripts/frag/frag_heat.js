@@ -46,9 +46,9 @@
 
       if(heat_f > 0.0001) {
         if(isHcond) {
-          var temp_heat_t = forced ? 0.0 : heat_t;
+          var tmpHeat_t = forced ? 0.0 : heat_t;
           var coef = (mdl_heat.getHeatTransferCoefficient(b_f.block) + mdl_heat.getHeatTransferCoefficient(b_t.block)) / 2.0;
-          var rate = Time.delta * mdl_heat.getHeatTransferRate(heat_f, temp_heat_t, coef) * (noSide ? 1.0 : mdl_game.getFrac_side(b_f, b_t)) * glb_vars.heat_transferMultiplier;
+          var rate = Time.delta * mdl_heat.getHeatTransferRate(heat_f, tmpHeat_t, coef) * (noSide ? 1.0 : mdl_game._fracSide(b_f, b_t)) * glb_vars.heat_transferMultiplier;
           heat_trans = Math.max(Math.min(rate, heat_f, mdl_heat.getSparedHeat(b_t) - mdl_heat.getHeat(b_t)), 0.0);
 
           b_t.handleLiquid(b_f, heatEffc, heat_trans);
@@ -126,7 +126,7 @@
     /* NOTE: Yet another customized DrawHeatRegion. {reg} is optional. */
     const draw_heat = function(b, reg) {
       var frac = mdl_heat.getHeatFrac(b);
-      mdl_draw.drawHeatRegion(mdl_game.poser_1b(b), frac, reg, b.block.size);
+      mdl_draw.drawHeatRegion(mdl_game._pos(1, b), frac, reg, b.block.size);
     };
     exports.draw_heat = draw_heat;
 
@@ -198,7 +198,7 @@
       var heat = mdl_heat.getFluidHeat(b);
       if(heat < 0.01) return;
 
-      mdl_draw.drawHeatRegion(mdl_game.poser_1b(b), Math.min(heat * 1.2 / fheatCap, 1.0), reg, b.block.size);
+      mdl_draw.drawHeatRegion(mdl_game._pos(1, b), Math.min(heat * 1.2 / fheatCap, 1.0), reg, b.block.size);
     };
     exports.draw_fluidHeat = draw_fluidHeat;
 
