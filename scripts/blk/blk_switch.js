@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericLogicBlock = require("reind/blk/blk_genericLogicBlock");
+    const PARENT = require("reind/blk/blk_genericLogicBlock");
   // End
 
 
@@ -19,13 +19,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericLogicBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericLogicBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
   // End

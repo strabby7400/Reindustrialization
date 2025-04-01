@@ -24,7 +24,7 @@
     const __margin = function(tb, scl) {
       if(scl == null) scl = 1.0;
 
-      return tb.marginLeft(12.0 * scl).marginRight(12.0 * scl).marginTop(15.0 * scl).marginBottom(15.0 * scl);
+      tb.marginLeft(12.0 * scl).marginRight(12.0 * scl).marginTop(15.0 * scl).marginBottom(15.0 * scl);
     };
     exports.__margin = __margin;
 
@@ -58,9 +58,9 @@
       if(color == null) color = Color.darkGray;
 
       if(w == null) {
-        return tb.image().color(color).height(4.0).pad(0.0).growX().fillX().row();
+        tb.image().color(color).height(4.0).pad(0.0).growX().fillX().row();
       } else {
-        return tb.image().color(color).width(w).height(4.0).pad(0.0).fillX().row();
+        tb.image().color(color).width(w).height(4.0).pad(0.0).fillX().row();
       };
     };
     exports.__bar = __bar;
@@ -81,13 +81,29 @@
     /* <---------------- text ----------------> */
 
 
-    const __wrapLine = function(tb, str, align, order) {
+    const __wrapLine = function(tb, str, align, order, padLeft) {
       if(align == null) align = Align.left;
       if(order == null) order = 0;
+      if(padLeft == null) padLeft = 0.0;
 
-      return tb.add(str).center().labelAlign(align).wrap().width(mdl_ui.getSizePair(null, null, order * 120.0)[0]).row();
+      tb.add(str).center().labelAlign(align).wrap().width(mdl_ui.getSizePair(null, null, order * 120.0)[0]).padLeft(padLeft).row();
     };
     exports.__wrapLine = __wrapLine;
+
+
+    /* <---------------- input ----------------> */
+
+
+    const __slider = function(tb, scr, min, max, step, ini) {
+      if(min == null) min = 0;
+      if(max == null) max = 2;
+      if(step == null) step = 1;
+      if(ini == null) ini = min;
+      if(scr == null) return;
+
+      tb.slider(min, max, step, ini, val => scr.call(val)).row();
+    };
+    exports.__slider = __slider;
 
 
     /* <---------------- content ----------------> */
@@ -113,7 +129,6 @@
           btnStyle.up = Styles.none;
           btnStyle.down = Styles.none;
           btnStyle.over = Styles.flatOver;
-          btnStyle.checked = Styles.accentDrawable;
         }).padRight(6.0);
 
         if(Math.abs(p - 1.0) > 0.0001) tb1.add(Strings.autoFixed(p * 100.0, 2) + "%").color(Color.gray).padRight(4.0);
@@ -133,16 +148,28 @@
         tb1.left();
 
         tb1.add(str);
-      }).left();
+      }).left().row();
     };
     exports.setHeadline = setHeadline;
+
+
+    const setNoteStat = function(tb, str) {
+      tb.row();
+
+      tb.table(Tex.whiteui, tb1 => {
+        tb1.center().setColor(Pal.darkestGray);
+        __margin(tb1);
+
+        __wrapLine(tb1, str, Align.center, 1, 48.0);
+      }).padTop(8.0).padBottom(8.0).growX().row();
+    };
+    exports.setNoteStat = setNoteStat;
   // End
 
 
   // Part: Content
-    const li_56925512 = new Seq();
     const setContentRowDisplay = function(tb, li_ct, showOrder) {
-      var li = li_56925512.clear();
+      var li = new Seq();
 
       if(showOrder == null) showOrder = false;
       if(li_ct instanceof UnlockableContent) {
@@ -157,7 +184,7 @@
       tb.row();
       __breakHalf(tb);
       li.each(ct => {
-        if(typeof ct == "string") ct = mdl_content.getContent_nm(ct);
+        if(typeof ct == "string") ct = mdl_content._ct_nm(ct);
         if(ct != null) {
           tb.table(Tex.whiteui, tb1 => {
             tb1.left().setColor(Pal.darkestGray);
@@ -196,6 +223,28 @@
       });
     };
     exports.setContentRowDisplay = setContentRowDisplay;
+
+
+    const setBatchDisplay = function(tb, batch) {
+      var cap = batch.size;
+      if(cap == 0) return;
+
+      tb.row();
+      tb.table(Styles.none, tb1 => {
+        __margin(tb1, 0.5);
+
+        for(let i = 0; i < cap; i++) {
+          if(i % 3 != 0) continue;
+
+          var itm = mdl_content._ct_gn(batch.get(i));
+          var amt = batch.get(i + 1);
+          var p = batch.get(i + 2);
+
+          __recipeItem(tb1, itm, amt, p).padLeft(24.0).row();
+        };
+      }).row();
+    };
+    exports.setBatchDisplay = setBatchDisplay;
 
 
     const setContentSelector = function(tb, li_ct, id_sel, scr, col) {
@@ -242,53 +291,42 @@
 
 
   // Part: Event
-    const setTrigger = function(tb, scr, icon, str_tt, size) {
-      if(icon == null) icon = Icon.cross;
+    const setTrigger = function(tb, scr, icon_gn, str_tt, size) {
+      if(icon_gn == null) icon_gn = Icon.cross;
       if(size == null) size = 32.0;
       if(tb == null || scr == null) return;
 
-      var btn = tb.button(icon, size, () => scr.call()).center();
+      var btn = tb.button(icon_gn, size, () => scr.call()).center();
       if(str_tt != null) btn.tooltip(str_tt);
+      tb.row();
     };
     exports.setTrigger = setTrigger;
-
-
-    const setSlider = function(tb, scr, sld_min, sld_max, sld_step, sld_ini) {
-      if(sld_min == null) sld_min = 0.0;
-      if(sld_max == null) sld_max = 1.0;
-      if(sld_step == null) sld_step = 1.0;
-      if(sld_ini == null) sld_ini = 0.0;
-      if(tb == null || scr == null) return;
-
-      tb.slider(sld_min, sld_max, sld_step, sld_ini, val => scr.call(val));
-    };
-    exports.setSlider = setSlider;
   // End
 
 
   // Part: Recipe
     const setRecipeDisplay = function(tb, rcFi) {
-      var cap = mdl_recipe.getRecipeSize(rcFi);
+      var cap = mdl_recipe._rcSize(rcFi);
       if(cap == 0) {
         tb.add(Core.bundle.get("info.reind-info-no-recipe-found.name"));
       } else {
         tb.row();
 
         for(let i = 0; i < cap; i++) {
-          var cat = mdl_recipe.getCategory(rcFi, i);
-          var cat_pre = (i == 0) ? null : mdl_recipe.getCategory(rcFi, i - 1);
-          var inputs = mdl_recipe.getInputs(rcFi, i);
-          var outputs = mdl_recipe.getOutputs(rcFi, i);
-          var randInputs = mdl_recipe.getRandInputs(rcFi, i);
-          var randOutputs = mdl_recipe.getRandOutputs(rcFi, i);
-          var bfInputs = mdl_recipe.getBatchFluidInputs(rcFi, i);
-          var bfOutputs = mdl_recipe.getBatchFluidOutputs(rcFi, i);
-          var optInputs = mdl_recipe.getOptionalInputs(rcFi, i);
-          var failOutputs = mdl_recipe.getFailOutputs(rcFi, i);
+          var cat = mdl_recipe._cat(rcFi, i);
+          var cat_pre = (i == 0) ? null : mdl_recipe._cat(rcFi, i - 1);
+          var inputs = mdl_recipe._inputs(rcFi, i);
+          var outputs = mdl_recipe._outputs(rcFi, i);
+          var randInputs = mdl_recipe._randInputs(rcFi, i);
+          var randOutputs = mdl_recipe._randOutputs(rcFi, i);
+          var bfInputs = mdl_recipe._bfInputs(rcFi, i);
+          var bfOutputs = mdl_recipe._bfOutputs(rcFi, i);
+          var optInputs = mdl_recipe._optInputs(rcFi, i);
+          var failOutputs = mdl_recipe._failOutputs(rcFi, i);
 
           // Category
           if(cat != cat_pre) {
-            var catVal = mdl_recipe.getCategoryValue(rcFi, i);
+            var catVal = mdl_recipe._catVal(rcFi, i);
             tb.table(Tex.whiteui, tb1 => {
               tb1.center().setColor(Color.darkGray);
               __margin(tb1, 0.5);
@@ -327,7 +365,7 @@
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content.getContent_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(li.get(j));
                     if(ct == null) continue;
                     var amt = li.get(j + 1);
 
@@ -350,7 +388,7 @@
                   for(let j = 0; j < cap1; j++) {
                     if(j % 3 != 0) continue;
 
-                    var ct = mdl_content.getContent_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(li.get(j));
                     if(ct == null) continue;
                     var amt = li.get(j + 1);
                     var p = li.get(j + 2);
@@ -374,7 +412,7 @@
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content.getContent_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(li.get(j));
                     var amt = li.get(j + 1);
 
                     __recipeItem(tb3, ct, amt, 1.0, true);
@@ -413,7 +451,7 @@
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content.getContent_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(li.get(j));
                     if(ct == null) continue;
                     var amt = li.get(j + 1);
 
@@ -436,7 +474,7 @@
                   for(let j = 0; j < cap1; j++) {
                     if(j % 3 != 0) continue;
 
-                    var ct = mdl_content.getContent_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(li.get(j));
                     if(ct == null) continue;
                     var amt = li.get(j + 1);
                     var p = li.get(j + 2);
@@ -461,7 +499,7 @@
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content.getContent_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(li.get(j));
                     if(ct == null) continue;
                     var amt = li.get(j + 1);
                     __recipeItem(tb3, ct, amt, 1.0, true);
@@ -483,7 +521,7 @@
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content.getContent_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(li.get(j));
                     if(ct == null) continue;
                     var amt = li.get(j + 1);
                     __recipeItem(tb3, ct, amt);
@@ -494,22 +532,22 @@
 
             // Recipe stats
             tb1.table(Styles.none, tb2 => {
-              var tt = mdl_recipe.getRawTooltip(rcFi, i);
+              var tt = mdl_recipe._rawTooltip(rcFi, i);
 
               tb2.left();
               __margin(tb2);
 
               // Time Scale
-              var scl = mdl_recipe.getTimeScale(rcFi, i);
-              if(Math.abs(scl - 1.0) > 0.01) tb2.add(mdl_text.getStatText(Core.bundle.get("term.reind-term-time-required.name"), Strings.fixed(scl, 1) + "x")).left().row();
+              var scl = mdl_recipe._timeScale(rcFi, i);
+              if(Math.abs(scl - 1.0) > 0.01) tb2.add(mdl_text._statText(Core.bundle.get("term.reind-term-time-required.name"), Strings.fixed(scl, 1) + "x")).left().row();
 
               // Require Optional
-              var requireOptional = mdl_recipe.getRequireOptional(rcFi, i);
-              if(requireOptional) tb2.add(mdl_text.getStatText(Core.bundle.get("term.reind-term-require-optional.name"), Core.bundle.get("yes"))).left().row();
+              var reqOpt = mdl_recipe._reqOpt(rcFi, i);
+              if(reqOpt) tb2.add(mdl_text._statText(Core.bundle.get("term.reind-term-require-optional.name"), Core.bundle.get("yes"))).left().row();
 
               // Fail Probability
-              var failP = mdl_recipe.getFailProbability(rcFi, i);
-              if(failP > 0.0001) tb2.add(mdl_text.getStatText(Core.bundle.get("term.reind-term-chance-to-fail.name"), Strings.fixed(failP * 100.0, 1) + "%")).left().row();
+              var failP = mdl_recipe._failP(rcFi, i);
+              if(failP > 0.0001) tb2.add(mdl_text._statText(Core.bundle.get("term.reind-term-chance-to-fail.name"), Strings.fixed(failP * 100.0, 1) + "%")).left().row();
 
               // Tooltip: Overdriven Mode
               if(tt == "overdriven") tb2.add(Core.bundle.get("info.reind-info-tt-overdriven.name")).left().row();
@@ -529,7 +567,7 @@
       btnGrp.setMinCheckCount(0);
       btnGrp.setMaxCheckCount(1);
 
-      var cap = mdl_recipe.getRecipeSize(rcFi);
+      var cap = mdl_recipe._rcSize(rcFi);
       if(cap == 0) return;
 
       tb.button("?", db_dialog._content(b.block)).left().size(42.0).row();
@@ -539,8 +577,8 @@
 
         for(let i = 0, j = 0; i < cap; i++) {
           (function(i) {
-            var cat = mdl_recipe.getCategory(rcFi, i);
-            var cat_pre = (i == 0) ? null : mdl_recipe.getCategory(rcFi, i - 1);
+            var cat = mdl_recipe._cat(rcFi, i);
+            var cat_pre = (i == 0) ? null : mdl_recipe._cat(rcFi, i - 1);
             if(cat != cat_pre) {
               j = 0;
               if(i != 0) {
@@ -548,8 +586,8 @@
               };
             };
 
-            var tt = mdl_recipe.getRawTooltip(rcFi, i);
-            var tooltip = mdl_recipe.getTooltip(rcFi, i);
+            var tt = mdl_recipe._rawTooltip(rcFi, i);
+            var tooltip = mdl_recipe._tooltip(rcFi, i);
             var btn = tb1.button(Tex.pane, 32.0, () => {
               (i == id_rc) ? scr.call(0) : scr.call(i);
             }).pad(4.0).tooltip(tooltip).group(btnGrp).get();
@@ -559,7 +597,7 @@
             btnStyle.down = Styles.none;
             btnStyle.over = Styles.flatOver;
             btnStyle.checked = Styles.accentDrawable;
-            btnStyle.imageUp = (tt == "overdriven") ? mdl_recipe.getIcon(rcFi, i).tint(Color.red) : mdl_recipe.getIcon(rcFi, i);
+            btnStyle.imageUp = (tt == "overdriven") ? mdl_recipe._icon(rcFi, i).tint(Color.red) : mdl_recipe._icon(rcFi, i);
             btn.update(() => btn.setChecked(i == id_rc));
           })(i);
 

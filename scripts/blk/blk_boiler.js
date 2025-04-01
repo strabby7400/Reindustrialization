@@ -6,12 +6,11 @@
 
 
   // Part: Import
-    const blk_heatFactory = require("reind/blk/blk_heatFactory");
-
-    const ct_blk_boiler = require("reind/ct/ct_blk_boiler");
+    const PARENT = require("reind/blk/blk_heatFactory");
 
     const frag_attack = require("reind/frag/frag_attack");
 
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -25,53 +24,68 @@
   // Part: Component
     function setStatsComp(blk) {
       blk.stats.add(db_stat.canExplode, true);
-      var rad = mdl_data.read_1n1v(db_block.genericRange, blk.name) * Vars.tilesize;
-      if(rad != null) blk.stats.add(db_stat.explosionRadius, rad / Vars.tilesize, StatUnit.blocks);
+
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
+      blk.stats.add(db_stat.explosionRadius, r, StatUnit.blocks);
     };
 
 
     function updateTileComp(b) {
+      // Initialize
+      if(b.needCheck) {
+        b.alertReg = mdl_content._reg(b.block, "-alert");
+
+        b.r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
+
+        b.needCheck = false;
+      };
+
       var amt_water = b.liquids.get(Vars.content.liquid("reind-liq-ore-water"));
       var amt_steam = b.liquids.get(Vars.content.liquid("reind-gas-misc-steam"));
-      var heat = mdl_heat.getHeat(b);
+      var heat = mdl_heat._heat(b);
       var cap = b.block.liquidCapacity;
 
-      if(amt_water < 1.0 && heat > 0.0001) ct_blk_boiler.accB_dryHeated(b, "w", true);
-      if(heat < 0.0001) ct_blk_boiler.accB_dryHeated(b, "w", false);
+      if(amt_water < 1.0 && heat > 0.0001) b.dryHeated = true;
+      if(heat < 0.0001) b.dryHeated = false;
 
-      var instab = ct_blk_boiler.accB_instab(b, "r") + (((ct_blk_boiler.accB_dryHeated(b, "r") && amt_water > 1.0) || amt_steam / cap > 0.5) ? 0.001 : -0.001);
-      if(instab < 0.0) instab = 0.0;
-      if(instab > 1.0) instab = 1.0;
-      ct_blk_boiler.accB_instab(b, "w", instab);
+      b.instab += (((b.dryHeated && amt_water > 1.0) || amt_steam / cap > 0.5) ? 0.001 : -0.001);
+      b.instab = Mathf.clamp(b.instab);
 
-      if(instab > 0.9999) {
-        var rad = mdl_data.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
-        if(rad == null) rad = 40.0;
-
+      if(b.instab > 0.9999) {
         b.kill();
-        frag_attack.attack_explosion_noob(b, rad, 3000.0, 12.0);
+        frag_attack.atk_explosion_noob(b, b.r * Vars.tilesize, 3000.0, 12.0);
       };
     };
 
 
+    function displayBarsComp(b, tb) {
+      tb.add(new Bar(
+        "bar.instability",
+        Pal.sap,
+        () => b.instab,
+      )).row();
+    };
+
+
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var rad = mdl_data.read_1n1v(db_block.genericRange, blk.name) * Vars.tilesize;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_game._pos(1, Vars.world.tile(tx, ty), blk.offset), rad);
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5)
+      mdl_draw.drawWarningDisk(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), r * Vars.tilesize);
+    };
+
+
+    function drawComp(b) {
+      mdl_draw.drawFadeAlert(b, b.alertReg, b.instab);
     };
 
 
     function drawSelectComp(b) {
-      var rad = mdl_data.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_game._pos(1, b), rad);
+      mdl_draw.drawWarningDisk(b, b.r * Vars.tilesize);
     };
 
 
     function onDestroyedComp(b) {
-      if(Vars.state.rules.reactorExplosions && ct_blk_boiler.accB_instab(b, "r") > 0.3) {
-        var rad = mdl_data.read_1n1v(db_block.genericRange, b.block.name) * Vars.tilesize;
-        if(rad == null) rad = 40.0;
-
-        frag_attack.attack_explosion_noob(b, rad, 3000.0, 12.0);
+      if(Vars.state.rules.reactorExplosions && b.instab > 0.3) {
+        frag_attack.atk_explosion_noob(b, b.r * Vars.tilesize, 3000.0, 12.0);
       };
     };
   // End
@@ -86,7 +100,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_heatFactory.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -94,7 +108,7 @@
 
 
     const updateTile = function(b) {
-      blk_heatFactory.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };
@@ -102,15 +116,27 @@
 
 
     const setBars = function(blk) {
-      blk_heatFactory.setBars(blk);
+      PARENT.setBars(blk);
     };
     exports.setBars = setBars;
+
+
+    const displayBars = function(b, tb) {
+      displayBarsComp(b, tb);
+    };
+    exports.displayBars = displayBars;
 
 
     const drawPlace = function(blk, tx, ty, rot, valid) {
       drawPlaceComp(blk, tx, ty, rot, valid);
     };
     exports.drawPlace = drawPlace;
+
+
+    const draw = function(b) {
+      drawComp(b);
+    };
+    exports.draw = draw;
 
 
     const drawSelect = function(b) {

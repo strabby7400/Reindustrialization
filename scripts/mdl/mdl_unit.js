@@ -6,28 +6,22 @@
 
 
   // Part: Import
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
   // Part: Param
-    const getElevation = function(unit) {
+    const _elev = function(unit) {
       if(unit == null) return 0.0;
 
       return Mathf.clamp(unit.elevation, unit.type.shadowElevation, 1.0) * unit.type.shadowElevationScl * (1.0 - unit.drownTime);
     };
-    exports.getElevation = getElevation;
+    exports._elev = _elev;
   // End
 
 
   // Part: Move
-    /*
-      NOTE:
-      Lets a unit move to the assigned position.
-      {len} is the circular distance at which the unit stops.
-      {smooth} is the rate at which the unit slows down.
-      {keepDst} determines if the unit will move outwards if distance is smaller than circle length.
-    */
     const moveTo = function(unit, pos_in, len, smooth, keepDst) {
       if(len == null) len = 0.0;
       if(smooth == null) smooth = 20.0;
@@ -40,22 +34,20 @@
     exports.moveTo = moveTo;
 
 
-    /* NOTE: Lets a unit rotate towards the assigned position. */
     const lookAt = function(unit, pos_gn) {
       if(unit == null || pos_gn == null) return;
 
-      var pos = mdl_game._pos(6, pos_gn);
+      var pos = mdl_game._pos(pos_gn);
 
       unit.lookAt(pos.x, pos.y);
     };
     exports.lookAt = lookAt;
 
 
-    /* NOTE: Just like {lookAt}, but the weapons will point at the position too. */
     const aimAt = function(unit, pos_gn) {
       if(unit == null || pos_gn == null) return;
 
-      var pos = mdl_game._pos(6, pos_gn);
+      var pos = mdl_game._pos(pos_gn);
 
       unit.aimLook(pos.x, pos.y);
     };
@@ -64,16 +56,58 @@
 
 
   // Part: Interact
-    /* NOTE: Lets a unit discards its items if mismatched. */
     const selectItem = function(unit, itm) {
-      if(unit == null || itm == null) return;
+      if(unit == null || itm == null) return false;
 
-      if(unit.item() != itm) unit.clearItem();
+      if(unit.item() != itm) {
+        unit.clearItem()
+        return true;
+      };
+
+      return false;
     };
     exports.selectItem = selectItem;
 
 
-    /* NOTE: Lets a unit interact with the item module of a building. Does nothing if item is mismatched. */
+    const addItem = function(unit, itm, amt) {
+      if(amt == null) amt = 1;
+      if(unit == null || itm == null) return false;
+
+      var amt_trans = Math.min(amt, unit.type.itemCapacity - unit.stack.amount);
+      if(amt_trans > 0) {
+        unit.stack.addItem(itm, amt_trans);
+        return true;
+      };
+
+      return false;
+    };
+    exports.addItem = addItem;
+
+
+    const addItemBatch = function(unit, batch) {
+      if(unit == null || batch == null) return false;
+
+      var cap = batch.size;
+      if(cap == 0) return false;
+      for(let i = 0; i < cap; i++) {
+        if(i % 3 != 0) continue;
+
+        var itm = mdl_content._ct_gn(batch.get(i));
+        var amt = batch.get(i + 1);
+        var p = batch.get(i + 2);
+
+        if(unit.acceptsItem(itm)) {
+          for(let j = 0; j < amt; j++) {if(unit.acceptsItem(itm) && Mathf.chance(p)) unit.addItem(itm)};
+
+          return true;
+        };
+      };
+
+      return false;
+    };
+    exports.addItemBatch = addItemBatch;
+
+
     const transferItem = function(b, unit, mode, itm, rad, amt) {
       if(rad == null) rad = 999999.0;
       if(amt == null) amt = 999999;

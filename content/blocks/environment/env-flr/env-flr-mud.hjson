@@ -45,6 +45,6 @@
 
 
   attributes: {
-    reind-attr-env-growth: 1.0
+    reind-attr-env-growth: 1.1
     reind-attr-rock-biological-sedimentary: 0.75
   }

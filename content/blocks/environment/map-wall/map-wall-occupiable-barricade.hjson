@@ -1,0 +1,67 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Wall
+  category: defense
+  buildVisibility: editorOnly
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 400.0
+  armor: 24.0
+  size: 2
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: true
+  flashHit: true
+  flashColor: ffffff
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  update: true
+  lightningChance: -1.0
+  lightningDamage: 20.0
+  lightningLength: 17
+  lightningColor: ffd37f
+  lightningSound: spark
+  chanceDeflect: -1.0
+  deflectSound: none

@@ -45,5 +45,6 @@
   itemDrop: item-ore-rock-shard-biological-sedimentary
   playerUnmineable: true
   attributes: {
+    reind-attr-env-growth: 0.6
     reind-attr-rock-biological-sedimentary: 1.0
   }

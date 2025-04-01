@@ -80,6 +80,7 @@
 */
 
 
+  update: true
   consumesPower: true
   conductivePower: false
   connectedPower: true

@@ -12,8 +12,7 @@
 
 
   // Part: Parser
-    /* NOTE: Gets a recipe according to {id_rc}. */
-    const getRecipe = function(rcFi, id_rc) {
+    const _rc = function(rcFi, id_rc) {
       if(rcFi == null || id_rc == null) return;
 
       var li_rc = rcFi.rc["recipes"];
@@ -21,155 +20,138 @@
 
       return li_rc.get(id_rc);
     };
-    exports.getRecipe = getRecipe;
+    exports._rc = _rc;
 
 
-    /* NOTE: Gets size of the recipe list. */
-    const getRecipeSize = function(rcFi) {
+    const _rcSize = function(rcFi) {
       if(rcFi == null) return;
 
       return rcFi.rc["recipes"].size;
     };
-    exports.getRecipeSize = getRecipeSize;
+    exports._rcSize = _rcSize;
 
 
-    /* NOTE: Gets a value in a recipe. */
-    const getRecipeValue = function(rcFi, id_rc, str_val) {
-      var rc = getRecipe(rcFi, id_rc);
+    const _rcVal = function(rcFi, id_rc, str_val) {
+      var rc = _rc(rcFi, id_rc);
       return rc[str_val];
     };
-    exports.getRecipeValue = getRecipeValue;
+    exports._rcVal = _rcVal;
 
 
-    /* NOTE: Gets the name used for icon. */
-    const getIconName = function(rcFi, id_rc) {
-      return getRecipeValue(rcFi, id_rc, "icon");
+    const _iconNm = function(rcFi, id_rc) {
+      return _rcVal(rcFi, id_rc, "icon");
     };
-    exports.getIconName = getIconName;
+    exports._iconNm = _iconNm;
 
 
-    /* NOTE: Gets a drawable icon that is used in tables. */
-    const getIcon = function(rcFi, id_rc) {
-      var ct = mdl_content.getContent_nm(getIconName(rcFi, id_rc));
+    const _icon = function(rcFi, id_rc) {
+      var ct = mdl_content._ct_nm(_iconNm(rcFi, id_rc));
       return (ct == null) ? null : new TextureRegionDrawable(ct.uiIcon);
     };
-    exports.getIcon = getIcon;
+    exports._icon = _icon;
 
 
-    /* NOTE: Gets the category for the recipe. */
-    const getCategory = function(rcFi, id_rc) {
-      return getRecipeValue(rcFi, id_rc, "category");
+    const _cat = function(rcFi, id_rc) {
+      return _rcVal(rcFi, id_rc, "category");
     };
-    exports.getCategory = getCategory;
+    exports._cat = _cat;
 
 
-    /* NOTE: Gets the category name in bundle. */
-    const getCategoryValue = function(rcFi, id_rc) {
-      var cat = getCategory(rcFi, id_rc);
+    const _catVal = function(rcFi, id_rc) {
+      var cat = _cat(rcFi, id_rc);
       return (Vars.headless || cat == null) ? "UNDEFINED" : Core.bundle.get("term.reind-term-" + cat + ".name");
     };
-    exports.getCategoryValue = getCategoryValue;
+    exports._catVal = _catVal;
 
 
-    /* NOTE: Gets a list of inputs for the recipe. */
-    const getInputs = function(rcFi, id_rc) {
-      var inputs = getRecipeValue(rcFi, id_rc, "inputs");
+    const _inputs = function(rcFi, id_rc) {
+      var inputs = _rcVal(rcFi, id_rc, "inputs");
       return (inputs == null) ? new Seq() : inputs;
     };
-    exports.getInputs = getInputs;
+    exports._inputs = _inputs;
 
 
-    /* NOTE: Gets a list of outputs for the recipe. */
-    const getOutputs = function(rcFi, id_rc) {
-      var outputs = getRecipeValue(rcFi, id_rc, "outputs");
+    const _outputs = function(rcFi, id_rc) {
+      var outputs = _rcVal(rcFi, id_rc, "outputs");
       return (outputs == null) ? new Seq() : outputs;
     };
-    exports.getOutputs = getOutputs;
+    exports._outputs = _outputs;
 
 
-    /* NOTE: Gets a list of random inputs for the recipe. */
-    const getRandInputs = function(rcFi, id_rc) {
-      var inputs = getRecipeValue(rcFi, id_rc, "randInputs");
+    const _randInputs = function(rcFi, id_rc) {
+      var inputs = _rcVal(rcFi, id_rc, "randInputs");
       return (inputs == null) ? new Seq() : inputs;
     };
-    exports.getRandInputs = getRandInputs;
+    exports._randInputs = _randInputs;
 
 
-    /* NOTE: Gets a list of random outputs for the recipe. */
-    const getRandOutputs = function(rcFi, id_rc) {
-      var outputs = getRecipeValue(rcFi, id_rc, "randOutputs");
+    const _randOutputs = function(rcFi, id_rc) {
+      var outputs = _rcVal(rcFi, id_rc, "randOutputs");
       return (outputs == null) ? new Seq() : outputs;
     };
-    exports.getRandOutputs = getRandOutputs;
+    exports._randOutputs = _randOutputs;
 
 
-    /* NOTE: Gets a list of batch fluid inputs for the recipe. These are consumed once the building finishes crafting. */
-    const getBatchFluidInputs = function(rcFi, id_rc) {
-      var bfInputs = getRecipeValue(rcFi, id_rc, "bfInputs");
+    const _bfInputs = function(rcFi, id_rc) {
+      var bfInputs = _rcVal(rcFi, id_rc, "bfInputs");
       return (bfInputs == null) ? new Seq() : bfInputs;
     };
-    exports.getBatchFluidInputs = getBatchFluidInputs;
+    exports._bfInputs = _bfInputs;
 
 
-    /* NOTE: Gets a list of batch fluid outputs for the recipe. These are added once the building finishes crafting. */
-    const getBatchFluidOutputs = function(rcFi, id_rc) {
-      var bfOutputs = getRecipeValue(rcFi, id_rc, "bfOutputs");
+    const _bfOutputs = function(rcFi, id_rc) {
+      var bfOutputs = _rcVal(rcFi, id_rc, "bfOutputs");
       return (bfOutputs == null) ? new Seq() : bfOutputs;
     };
-    exports.getBatchFluidOutputs = getBatchFluidOutputs;
+    exports._bfOutputs = _bfOutputs;
 
 
-    /* NOTE: Gets wether the optional input is required (at least one is required for the factory to run). */
-    const getRequireOptional = function(rcFi, id_rc) {
-      var requireOptional = getRecipeValue(rcFi, id_rc, "requireOptional");
-      return (requireOptional == null) ? false : requireOptional;
+    const _reqOpt = function(rcFi, id_rc) {
+      var reqOpt = _rcVal(rcFi, id_rc, "requireOptional");
+      return (reqOpt == null) ? false : reqOpt;
     };
-    exports.getRequireOptional = getRequireOptional;
+    exports._reqOpt = _reqOpt;
 
 
-    /* NOTE: Gets a list of optional item inputs for the recipe. */
-    const getOptionalInputs = function(rcFi, id_rc) {
-      var optInputs = getRecipeValue(rcFi, id_rc, "optInputs");
+    const _optInputs = function(rcFi, id_rc) {
+      var optInputs = _rcVal(rcFi, id_rc, "optInputs");
       return (optInputs == null) ? new Seq() : optInputs;
     };
-    exports.getOptionalInputs = getOptionalInputs;
+    exports._optInputs = _optInputs;
 
 
-    /* NOTE: Gets the probability of failure. This only applys for item outputs. */
-    const getFailProbability = function(rcFi, id_rc) {
-      var p = getRecipeValue(rcFi, id_rc, "failProbability");
+    const _failP = function(rcFi, id_rc) {
+      var p = _rcVal(rcFi, id_rc, "failProbability");
       return (p == null) ? 0.0 : p;
     };
-    exports.getFailProbability = getFailProbability;
+    exports._failP = _failP;
 
 
-    /* NOTE: Gets a list of outputs that is used when crafting fails. */
-    const getFailOutputs = function(rcFi, id_rc) {
-      var outputs = getRecipeValue(rcFi, id_rc, "failOutputs");
+    const _failOutputs = function(rcFi, id_rc) {
+      var outputs = _rcVal(rcFi, id_rc, "failOutputs");
       return (outputs == null) ? new Seq() : outputs;
     };
-    exports.getFailOutputs = getFailOutputs;
+    exports._failOutputs = _failOutputs;
 
 
-    const getRawTooltip = function(rcFi, id_rc) {
-      return getRecipeValue(rcFi, id_rc, "tooltip");
+    const _rawTooltip = function(rcFi, id_rc) {
+      return _rcVal(rcFi, id_rc, "tooltip");
     };
-    exports.getRawTooltip = getRawTooltip;
+    exports._rawTooltip = _rawTooltip;
 
 
-    /* NOTE: Gets the tooltip text that is used in configuration table. */
-    const getTooltip = function(rcFi, id_rc) {
+    const _tooltip = function(rcFi, id_rc) {
       if(Vars.headless) return "";
 
-      var str_cat = getCategoryValue(rcFi, id_rc);
+      var str_cat = _catVal(rcFi, id_rc);
 
-      var ct = mdl_content.getContent_nm(getIconName(rcFi, id_rc));
+      var ct = mdl_content._ct_nm(_iconNm(rcFi, id_rc));
       var str_ct = (ct == null) ? "-" : ct.localizedName;
 
-      var failP = getFailProbability(rcFi, id_rc);
-      var str_fail = (failP > 0.0001) ? mdl_text.getStatText(Core.bundle.get("term.reind-term-chance-to-fail.name"), Strings.fixed(failP * 100.0, 1) + "%") : null;
+      var failP = _failP(rcFi, id_rc);
+      var str_fail = (failP > 0.0001) ? mdl_text._statText(Core.bundle.get("term.reind-term-chance-to-fail.name"), Strings.fixed(failP * 100.0, 1) + "%") : null;
 
-      var tt = getRawTooltip(rcFi, id_rc);
+      var tt = _rawTooltip(rcFi, id_rc);
       var str_tt = (tt == null) ? null : Core.bundle.get("info.reind-info-tt-" + tt + ".name");
 
       var str_fi =  "[accent]<" + str_cat + " [" + Strings.fixed(id_rc + 1.0, 0) + "]" + ">[]\n" + str_ct +
@@ -177,39 +159,35 @@
       ((str_tt == null) ? "" : ("\n\n[gray]" + str_tt + "[]"));
       return str_fi;
     };
-    exports.getTooltip = getTooltip;
+    exports._tooltip = _tooltip;
 
 
-    /* NOTE: Gets the multiplier for craft time. */
-    const getTimeScale = function(rcFi, id_rc) {
-      var scl = getRecipeValue(rcFi, id_rc, "timeScale");
+    const _timeScale = function(rcFi, id_rc) {
+      var scl = _rcVal(rcFi, id_rc, "timeScale");
       return (scl == null) ? 1.0 : scl;
     };
-    exports.getTimeScale = getTimeScale;
+    exports._timeScale = _timeScale;
 
 
-    /* NOTE: Gets a script that runs when the recipe is choosen. This is called after efficiency calculation. */
-    const getScript = function(rcFi, id_rc) {
-      var scr = getRecipeValue(rcFi, id_rc, "script");
+    const _script = function(rcFi, id_rc) {
+      var scr = _rcVal(rcFi, id_rc, "script");
       return (scr == null) ? function() {} : scr;
     };
-    exports.getScript = getScript;
+    exports._script = _script;
 
 
-    /* NOTE: Gets a script that runs when the recipe is choosen and the factory is active. */
-    const getUpdateScript = function(rcFi, id_rc) {
-      var scr = getRecipeValue(rcFi, id_rc, "updateScript");
+    const _updateScript = function(rcFi, id_rc) {
+      var scr = _rcVal(rcFi, id_rc, "updateScript");
       return (scr == null) ? function() {} : scr;
     };
-    exports.getUpdateScript = getUpdateScript;
+    exports._updateScript = _updateScript;
 
 
-    /* NOTE: Gets a script that runs when the recipe is choosen and the factory finishes a round. */
-    const getCraftScript = function(rcFi, id_rc) {
-      var scr = getRecipeValue(rcFi, id_rc, "craftScript");
+    const _craftScript = function(rcFi, id_rc) {
+      var scr = _rcVal(rcFi, id_rc, "craftScript");
       return (scr == null) ? function() {} : scr;
     };
-    exports.getCraftScript = getCraftScript;
+    exports._craftScript = _craftScript;
   // End
 
 

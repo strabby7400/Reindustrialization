@@ -18,7 +18,41 @@
 
 
   // Part: Transport
-    /* NOTE: Dumps selected item from {b} to {ob}, set {itm} to null to dump anything. */
+    const addItem = function(b, itm, amt) {
+      if(amt == null) amt = 1;
+      if(b == null || item == null) return false;
+
+      for(let i = 0; i < amt; i++) {
+        if(b.acceptItem(b, itm)) b.offload(itm);
+      };
+
+      return true;
+    };
+    exports.addItem = addItem;
+
+
+    const addItemBatch = function(b, batch) {
+      if(b == null || batch == null) return false;
+
+      var cap = batch.size;
+      if(cap == 0) return false;
+      for(let i = 0; i < cap; i++) {
+        if(i % 3 != 0) continue;
+
+        var itm = mdl_content._ct_gn(batch.get(i));
+        var amt = batch.get(i + 1);
+        var p = batch.get(i + 2);
+
+        if(b.items != null && itm instanceof Item) {
+          for(let j = 0; j < amt; j++) {if(b.acceptItem(b, itm) && Mathf.chance(p)) b.items.add(itm, 1)};
+        };
+      };
+
+      return true;
+    };
+    exports.addItemBatch = addItemBatch;
+
+
     const dumpItem = function(b, li_ob, itm) {
       if(b.items == null || b.items.total() == 0 || li_ob.size == 0) return false;
       if(itm != null && !b.items.has(itm)) return false;
@@ -68,7 +102,7 @@
   // Part: Reaction
     const updateTile_exposed = function(b) {
       if(b.block instanceof CoreBlock) return;
-      if(!db_block.exposedToAir.contains(b.block.name)) return;
+      if(!mdl_content.isExposed(b.block)) return;
       if(b.items == null) return;
 
       b.items.each(itm => mdl_reaction.handleReaction(b, itm, Vars.content.liquid("reind-gas-misc-air")));
@@ -78,10 +112,9 @@
 
 
   // Part: Virtual
-    /* NOTE: Kills blocks with illegal contents. */
     const updateTile_virtualItem = function(b) {
       if(b.block instanceof CoreBlock) return;
-      if(db_item.virtWhitelist.contains(b.block.name)) return;
+      if(db_item.db["virtual"]["whitelist"].contains(b.block.name)) return;
 
       var illegal = false;
       b.items.each(itm => {

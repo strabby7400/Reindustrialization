@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_wallDrill = require("reind/blk/blk_wallDrill");
+    const TEMPLATE = require("reind/blk/blk_wallDrill");
   // End
 
 
@@ -21,13 +21,13 @@
     const minDril_pneumaticWallDrill = extend(BeamDrill, "min-dril-pneumatic-wall-drill", {
       setStats() {
         this.super$setStats();
-        blk_wallDrill.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     minDril_pneumaticWallDrill.buildType = () => extend(BeamDrill.BeamDrillBuild, minDril_pneumaticWallDrill, {
       updateTile() {
         this.super$updateTile();
-        blk_wallDrill.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
     });
     exports.minDril_pneumaticWallDrill = minDril_pneumaticWallDrill;

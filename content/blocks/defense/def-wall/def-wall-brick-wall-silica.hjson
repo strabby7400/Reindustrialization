@@ -26,6 +26,7 @@
     parent: def-wall-brick-wall-mullite
     objectives: []
   }
+  researchCostMultiplier: 0.5
 
 
 /*

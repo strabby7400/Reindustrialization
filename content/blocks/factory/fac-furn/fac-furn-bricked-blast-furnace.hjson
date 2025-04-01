@@ -46,7 +46,7 @@
   armor: 36.0
   size: 7
   hasItems: true
-  itemCapacity: 200
+  itemCapacity: 600
   hasLiquids: true
   liquidCapacity: 5.0
   hasPower: true
@@ -228,6 +228,8 @@
   configurable: true
   outputsLiquid: false
   ignoreLiquidFullness: false
+  conductivePower: true
+  connectedPower: false
 
 
 /*
@@ -237,7 +239,7 @@
 */
 
 
-  craftTime: 600.0
+  craftTime: 1800.0
   consumes: {
     power: 3.66666667
   }

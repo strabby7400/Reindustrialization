@@ -6,15 +6,15 @@
 
 
   // Part: Import
-    const blk_genericProjector = require("reind/blk/blk_genericProjector");
-
-    const ct_blk_radar = require("reind/ct/ct_blk_radar");
+    const PARENT = require("reind/blk/blk_genericProjector");
 
     const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
 
+    const db_block = require("reind/db/db_block");
     const db_effect = require("reind/db/db_effect");
   // End
 
@@ -26,37 +26,36 @@
 
 
     function updateTileComp(b) {
-      if(b.efficiency <= 0.0001) return;
+      // Initialize
+      if(b.needCheck) {
+        b.scanColor = mdl_data.read_1n1v(db_block.db["param"]["color"]["base"], b.block.name, Color.white);
 
-      var cd = ct_blk_radar.accB_cd(b, "r");
-      var thr = ct_blk_radar.accB_thr(b, "r");
-
-      if(cd >= thr) {
-        cd %= thr;
-
-        var rad = b.block.fogRadius * Vars.tilesize * b.progress * b.efficiency;
-        var li_unit = mdl_game._liUnit(mdl_game._pos(1, b), rad);
-        li_unit.each(unit => {
-          if(mdl_content.isEnemy(unit, b.team)) {
-            unit.apply(Vars.content.statusEffect("reind-sta-spec-radar-detection"), thr * 0.5);
-            mdl_effect.showAt(unit, db_effect._radarDetectionApply(), 0.0);
-          };
-        });
-
-        mdl_effect.showAt_ldm(b, db_effect._radarScan(rad, b.block.size, ct_blk_radar.accB_scanColor(b, "r")), 0.0);
-        mdl_effect.showAt(b, db_effect._craftGasLarge());
-        mdl_effect.playAt(b, "se-craft-radar");
+        b.needCheck = false;
       };
-      cd += 1;
-      ct_blk_radar.accB_cd(b, "w", cd);
+
+      if(b.efficiency > 0.0) {
+        b.prog += b.edelta();
+
+        if(b.prog > b.thr) {
+          b.prog %= b.thr;
+
+          var rad = b.block.fogRadius * Vars.tilesize * b.progress * b.efficiency;
+          mdl_game._liUnitEnemy(b, rad, b.team).each(unit => {
+            unit.apply(Vars.content.statusEffect("reind-sta-spec-radar-detection"), b.thr * 0.5);
+
+            mdl_effect.showAt(unit, db_effect._radarDetectionApply(), 0.0);
+          });
+
+          mdl_effect.showAt_ldm(b, db_effect._radarScan(rad, b.block.size, b.scanColor), 0.0);
+          mdl_effect.showAt(b, db_effect._craftGasLarge());
+          mdl_effect.playAt(b, "se-craft-radar", 1.0, 1.0, 0.1);
+        };
+      };
     };
 
 
     function drawSelectComp(b) {
-      var cd = ct_blk_radar.accB_cd(b, "r");
-      var thr = ct_blk_radar.accB_thr(b, "r");
-
-      mdl_draw.drawProgressBar(mdl_game._pos(1, b), Math.min(cd / thr, 1.0), Pal.accent, b.block.size);
+      mdl_draw.drawProgressBar(b, Mathf.clamp(b.prog / b.thr), Pal.accent, b.block.size);
     };
   // End
 
@@ -70,7 +69,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericProjector.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -78,7 +77,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericProjector.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };

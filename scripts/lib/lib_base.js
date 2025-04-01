@@ -6,8 +6,17 @@
 
 
   // Part: Cond
+    // NOTE: Keep this on top!
     const hasTmi = (Vars.mods.locateMod("tmi") != null);
     exports.hasTmi = hasTmi;
+
+
+    const hasAsthosus = (Vars.mods.locateMod("asthosus") != null);
+    exports.hasAsthosus = hasAsthosus;
+
+
+    const hasSubvoyage = (Vars.mods.locateMod("subvoyage") != null);
+    exports.hasSubvoyage = hasSubvoyage;
   // End
 
 

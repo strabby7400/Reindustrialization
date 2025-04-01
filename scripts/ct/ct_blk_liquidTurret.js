@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_liquidTurret = require("reind/blk/blk_liquidTurret");
+    const TEMPLATE = require("reind/blk/blk_liquidTurret");
   // End
 
 
@@ -21,35 +21,35 @@
     const defTur_extinguisherTurret = extend(LiquidTurret, "def-tur-extinguisher-turret", {
       setStats() {
         this.super$setStats();
-        blk_liquidTurret.setStats(this);
+        TEMPLATE.setStats(this);
       },
       canPlaceOn(tile, team, rotation) {
         if(!this.super$canPlaceOn(tile, team, rotation)) return false;
-        if(!blk_liquidTurret.canPlaceOn(this, tile, team, rotation)) return false;
+        if(!TEMPLATE.canPlaceOn(this, tile, team, rotation)) return false;
         return true;
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
-        blk_liquidTurret.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     defTur_extinguisherTurret.buildType = () => extend(LiquidTurret.LiquidTurretBuild, defTur_extinguisherTurret, {
       updateTile() {
         this.super$updateTile();
-        blk_liquidTurret.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       hasAmmo() {
         if(!this.super$hasAmmo()) return false;
-        if(!blk_liquidTurret.hasAmmo(this)) return false;
+        if(!TEMPLATE.hasAmmo(this)) return false;
 
         return true;
       },
       status() {
-        return blk_liquidTurret.status(this);
+        return TEMPLATE.status(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_liquidTurret.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.defTur_extinguisherTurret = defTur_extinguisherTurret;

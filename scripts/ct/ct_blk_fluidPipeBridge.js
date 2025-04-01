@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_fluidPipeBridge = require("reind/blk/blk_fluidPipeBridge");
+    const TEMPLATE = require("reind/blk/blk_fluidPipeBridge");
   // End
 
 
@@ -21,29 +21,29 @@
     const bliqBrd_primitiveFluidPipeBridge = extend(LiquidBridge, "bliq-brd-primitive-fluid-pipe-bridge", {
       setStats() {
         this.super$setStats();
-        blk_fluidPipeBridge.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     bliqBrd_primitiveFluidPipeBridge.buildType = () => extend(LiquidBridge.LiquidBridgeBuild, bliqBrd_primitiveFluidPipeBridge, {
       updateTile() {
         this.super$updateTile();
-        blk_fluidPipeBridge.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       acceptLiquid(source, liquid) {
         if(!this.super$acceptLiquid(source, liquid)) return false;
-        if(!blk_fluidPipeBridge.acceptLiquid(this, source, liquid)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       moveLiquid(next, liquid) {
-        return blk_fluidPipeBridge.moveLiquid(this, next, liquid);
+        return TEMPLATE.moveLiquid(this, next, liquid);
       },
       draw() {
         this.super$draw();
-        blk_fluidPipeBridge.draw(this);
+        TEMPLATE.draw(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_fluidPipeBridge.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.bliqBrd_primitiveFluidPipeBridge = bliqBrd_primitiveFluidPipeBridge;

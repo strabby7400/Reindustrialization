@@ -91,6 +91,12 @@
 
       {
         type: DrawRegion
+        suffix: "-lid-shade"
+      }
+
+
+      {
+        type: DrawRegion
         suffix: "-lid"
       }
 

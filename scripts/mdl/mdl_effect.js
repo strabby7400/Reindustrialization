@@ -6,157 +6,200 @@
 
 
   // Part: Import
+    const VAR = require("reind/glb/glb_vars");
+
+    const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
 
     const db_effect = require("reind/db/db_effect");
-
-    const glb_vars = require("reind/glb/glb_vars");
   // End
 
 
   // Part: Setting
     var ldm = false;
-    const set_ldm = function(bool) {
-      ldm = bool;
+    const set_ldm = function(val) {
+      ldm = val;
     };
     exports.set_ldm = set_ldm;
+
+
+    var decalLifetime = 3600.0;
+    const set_decalLifetime = function(val) {
+      decalLifetime = val;
+    };
+    exports.set_decalLifetime = set_decalLifetime;
   // End
 
 
   // Part: Chance
-    const getP_frac = function(p_base, frac) {
-      return Math.min(p_base * frac, glb_vars.effect_chanceCap);
+    const _pFrac = function(p_base, frac) {
+      return Math.min(p_base * frac, VAR.effect_chanceCap);
     };
-    exports.getP_frac = getP_frac;
+    exports._pFrac = _pFrac;
   // End
 
 
   // Part: Sound
-    /* NOTE: Plays a sound at given position, skips if the asset is not loaded to avoid crash. */
-    const playAt = function(pos_gn, path) {
-      if(Vars.headless || pos_gn == null || path == null) return false;
+    /*
+     * NOTE:
+     *
+     * Simply plays a sound.
+     */
+    const play = function(sound_gn) {
+      if(Vars.headless || sound_gn == null) return false;
 
-      var path_fi = "sounds/" + path + ".ogg";
-      var pos = mdl_game._pos(7, pos_gn);
+      if(sound_gn instanceof Sound) {
+        sound_gn.play();
+        return true;
+      } else {
+        var path = "sounds/" + sound_gn + ".ogg";
+
+        if(Core.assets.isLoaded(path)) {
+          Core.assets.get(path).play();
+          return true;
+        } else return false;
+      }
+    };
+    exports.play = play;
+
+
+    /*
+     * NOTE:
+     *
+     * Plays a sound at {pos_gn}.
+     */
+    const playAt = function(pos_gn, sound_gn, vol, pitch, offPitch) {
+      if(vol == null) vol = 1.0;
+      if(pitch == null) pitch = 1.0;
+      if(Vars.headless || pos_gn == null || sound_gn == null) return false;
+
+      var pos = mdl_game._pos(pos_gn);
       var x = pos.x;
       var y = pos.y;
+      var pitch_fi = (offPitch == null) ? pitch : (pitch + Mathf.range(offPitch));
 
-      if(Core.assets.isLoaded(path_fi)) {
-        Core.assets.get(path_fi).at(x, y);
+      if(sound_gn instanceof Sound) {
+        sound_gn.at(x, y, pitch_fi, vol);
         return true;
-      } else return false;
+      } else {
+        var path = "sounds/" + sound_gn + ".ogg";
+
+        if(Core.assets.isLoaded(path)) {
+          Core.assets.get(path).at(x, y, pitch_fi, vol);
+          return true;
+        } else return false;
+      };
     };
     exports.playAt = playAt;
-
-
-    const netPlayAt = function(pos_gn, path) {
-      if(Vars.headless || pos_gn == null || path == null) return false;
-
-      var path_fi = "sounds/" + path + ".ogg";
-      var pos = mdl_game._pos(7, pos_gn);
-      var x = pos.x;
-      var y = pos.y;
-
-      if(Core.assets.isLoaded(path_fi)) {
-        Vars.netClient.soundAt(Core.assets.get(path_fi), x, y, 1.0, 1.0);
-        return true;
-      } else return false;
-    };
-    exports.netPlayAt = netPlayAt;
   // End
 
 
   // Part: Effect
-    /* NOTE: Shows a effect at given position, rotation is random in default. */
-    const showAt = function(pos_gn, eff, rot) {
+    /*
+     * NOTE:
+     *
+     * Shows a effect at {pos_gn}.
+     */
+    const showAt = function(pos_gn, eff, rot, color, data) {
       if(rot == null) rot = Mathf.random(360.0);
+      if(color == null) color = Color.white;
       if(Vars.headless || Vars.state.isPaused() || pos_gn == null || eff == null) return false;
 
-      var pos = mdl_game._pos(7, pos_gn);
+      var pos = mdl_game._pos(pos_gn);
       if(pos == null) return false;
       var x = pos.x;
       var y = pos.y;
 
-      eff.at(x, y, rot);
+      if(data == null) {
+        eff.at(x, y, rot, color);
+      } else {
+        eff.at(x, y, rot, color, data);
+      };
 
       return true;
     };
     exports.showAt = showAt;
 
 
-    const showAt_ldm = function(pos_gn, eff, rot) {
+    const showAt_ldm = function(pos_gn, eff, rot, color, data) {
       if(Vars.headless || ldm) return false;
 
-      return showAt(pos_gn, eff, rot);
+      return showAt(pos_gn, eff, rot, color, data);
     };
     exports.showAt_ldm = showAt_ldm;
 
 
-    /* NOTE: Chance given to create the effect. */
-    const showAtP = function(p, pos_gn, eff, rot) {
+    const showAtP = function(p, pos_gn, eff, rot, color, data) {
       if(Vars.headless || !Mathf.chance(p)) return false;
 
-      return showAt(pos_gn, eff, rot);
+      return showAt(pos_gn, eff, rot, color, data);
     };
     exports.showAtP = showAtP;
 
 
-    const showAtP_ldm = function(p, pos_gn, eff, rot) {
+    const showAtP_ldm = function(p, pos_gn, eff, rot, color, data) {
       if(Vars.headless || !Mathf.chance(p) || ldm) return false;
 
-      return showAt(pos_gn, eff, rot);
+      return showAt(pos_gn, eff, rot, color, data);
     };
     exports.showAtP_ldm = showAtP_ldm;
 
 
-    /* NOTE: The effect is randomly created around the point. */
-    const vec2_26877751 = new Vec2();
-    const showAround = function(pos_gn, eff, rad, rot) {
+    /*
+     * NOTE:
+     *
+     * Shows a effect around {pos_gn}, with the max distance as {rad}.
+     */
+    const showAround = function(pos_gn, eff, rad, rot, color, data) {
       if(Vars.headless) return;
 
-      var vec2 = vec2_26877751.setZero();
+      var vec2 = new Vec2();
 
-      var pos = mdl_game._pos(7, pos_gn);
+      var pos = mdl_game._pos(pos_gn);
       var pos1 = vec2.set(pos.x + Mathf.range(rad), pos.y + Mathf.range(rad));
 
-      return showAt(pos1, eff, rot);
+      return showAt(pos1, eff, rot, color, data);
     };
     exports.showAround = showAround;
 
 
-    const showAround_ldm = function(pos_gn, eff, rad, rot) {
+    const showAround_ldm = function(pos_gn, eff, rad, rot, color, data) {
       if(Vars.headless || ldm) return false;
 
-      return showAround(pos_gn, eff, rad, rot);
+      return showAround(pos_gn, eff, rad, rot, color, data);
     };
     exports.showAround_ldm = showAround_ldm;
 
 
-    const showAroundP = function(p, pos_gn, eff, rad, rot) {
+    const showAroundP = function(p, pos_gn, eff, rad, rot, color, data) {
       if(Vars.headless || !Mathf.chance(p)) return false;
 
-      return showAround(pos_gn, eff, rad, rot);
+      return showAround(pos_gn, eff, rad, rot, color, data);
     };
     exports.showAroundP = showAroundP;
 
 
-    const showAroundP_ldm = function(p, pos_gn, eff, rad, rot) {
+    const showAroundP_ldm = function(p, pos_gn, eff, rad, rot, color, data) {
       if(Vars.headless || !Mathf.chance(p) || ldm) return false;
 
-      return showAround(pos_gn, eff, rad, rot);
+      return showAround(pos_gn, eff, rad, rot, color, data);
     };
     exports.showAroundP_ldm = showAroundP_ldm;
   // End
 
 
   // Part: Special
-    /* NOTE: Shakes the screen. */
+    /*
+     * NOTE:
+     *
+     * Creats a shake effect at {pos_gn}.
+     */
     const shakeAt = function(pos_gn, pow, dur) {
       if(pow == null) pow = 4.0;
       if(dur == null) dur = 60.0;
       if(Vars.headless || pos_gn == null || pow < 0.0001 || dur < 0.0001) return false;
 
-      var pos = mdl_game._pos(7, pos_gn);
+      var pos = mdl_game._pos(pos_gn);
       if(pos == null) return false;
       var x = pos.x;
       var y = pos.y;
@@ -168,12 +211,16 @@
     exports.shakeAt = shakeAt;
 
 
-    /* NOTE: Floor dust. */
+    /*
+     * NOTE:
+     *
+     * Creates land dust effect at {pos_gn}.
+     */
     const dustAt = function(pos_gn, rad) {
       if(rad == null) rad = 8.0;
       if(Vars.headless || Vars.state.isPaused() || pos_gn == null) return false;
 
-      var pos = mdl_game._pos(7, pos_gn);
+      var pos = mdl_game._pos(pos_gn);
       if(pos == null) return false;
       var x = pos.x + Mathf.random(rad) * (Mathf.chance(0.5) ? 1 : -1);
       var y = pos.y + Mathf.random(rad) * (Mathf.chance(0.5) ? 1 : -1);
@@ -193,10 +240,15 @@
     exports.dustAt_ldm = dustAt_ldm;
 
 
+    /*
+     * NOTE:
+     *
+     * Creates unit decal at {pos_gn}.
+     */
     const remainsAt = function(pos_gn, unit) {
       if(Vars.headless || pos_gn == null || unit == null) return false;
 
-      var pos = mdl_game._pos(7, pos_gn);
+      var pos = mdl_game._pos(pos_gn);
       if(pos == null) return false;
       var x = pos.x;
       var y = pos.y;
@@ -204,7 +256,7 @@
       if(t == null || !t.floor().canShadow) return false;
 
       var decal = extend(Decal, {
-        lifetime: 3600.0,
+        lifetime: decalLifetime,
         x: x,
         y: y,
         rotation: Mathf.random(360.0),
@@ -250,6 +302,45 @@
       decal.add();
     };
     exports.remainsAt = remainsAt;
+
+
+    /*
+     * NOTE:
+     *
+     * Creates damage indicator effect at {pos_gn}.
+     */
+    const eff_showDmg = new Effect(40.0, e => {
+      var dmg = e.data;
+      var sizeScl = Math.max(Math.log((dmg + 10.0) / 10.0), 0.7);
+
+      mdl_draw.drawText(new Vec2(e.x, e.y), Strings.autoFixed(e.data, 2), e.color, sizeScl - Interp.pow3In.apply(e.fin()) * sizeScl, Align.center, 0.0, 8.0 * e.fin(), Math.min(dmg / 10000.0), 10.0);
+    });
+
+
+    const damageAt = function(pos_gn, dmg, team, isHeal) {
+      if(team == null) team = Team.derelict;
+      if(isHeal == null) isHeal = false;
+      if(Vars.headless || !Core.settings.get("reind-damage-display", true) || pos_gn == null || dmg == null) return;
+
+      showAround(pos_gn, eff_showDmg, 14.0, 0.0, isHeal ? Pal.heal : (team == Team.derelict ? Color.white : team.color), dmg);
+    };
+    exports.damageAt = damageAt;
+
+
+    /*
+     * NOTE:
+     *
+     * Creates item transfer effect from {pos_gn_f} to {pos_gn_t}.
+     */
+    const itemTransfer = function(pos_gn_f, pos_gn_t, color_gn, repeat) {
+      if(repeat == null) repeat = 3;
+      if(pos_gn_f == null || pos_gn_t == null) return;
+
+      var color = (color_gn == null) ? null : mdl_draw._color(color_gn);
+
+      for(let i = 0; i < repeat; i++) {showAt(pos_gn_f, Fx.itemTransfer, 0.0, color, pos_gn_t)};
+    };
+    exports.itemTransfer = itemTransfer;
   // End
 
 

@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const env_grass = require("reind/env/env_grass");
+    const TEMPLATE = require("reind/env/env_grass");
   // End
 
 
@@ -26,10 +26,10 @@
     const envGrass_duckweed = extend(TreeBlock, "env-grass-duckweed", {
       setStats() {
         this.super$setStats();
-        env_grass.setStats(this);
+        TEMPLATE.setStats(this);
       },
       drawBase(tile) {
-        env_grass.drawBase(this, tile);
+        TEMPLATE.drawBase(this, tile);
       },
     });
     exports.envGrass_duckweed = envGrass_duckweed;
@@ -41,10 +41,10 @@
     const envGrass_brownFly = extend(TreeBlock, "env-grass-brown-fly", {
       setStats() {
         this.super$setStats();
-        env_grass.setStats(this);
+        TEMPLATE.setStats(this);
       },
       drawBase(tile) {
-        env_grass.drawBase(this, tile);
+        TEMPLATE.drawBase(this, tile);
       },
     });
     exports.envGrass_brownFly = envGrass_brownFly;

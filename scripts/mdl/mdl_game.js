@@ -5,12 +5,31 @@
 */
 
 
+  // Part: Import
+    const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_data = require("reind/mdl/mdl_data");
+
+    const db_block = require("reind/db/db_block");
+  // End
+
+
   // Part: Setting
     var beta = false;
-    const set_beta = function(bool) {
-      beta = bool;
+    const set_beta = function(val) {
+      beta = val;
     };
     exports.set_beta = set_beta;
+  // End
+
+
+  // Part: Radius
+    const _radSize = function(size, off) {
+      if(size == null) size = 2;
+      if(off == null) off = 0.0;
+
+      return (size * 0.5 + 1.0 + off) * Vars.tilesize;
+    };
+    exports._radSize = _radSize;
   // End
 
 
@@ -20,88 +39,59 @@
     /* <---------------- pos ----------------> */
 
 
-    const arr_vec2_25663251 = [
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-    ];
-    const _pos = function(chan, pos_gn, param) {
-      if(chan == null || pos_gn == null) return;
+    const _pos = function(pos_gn, param) {
+      if(pos_gn == null) return;
 
-      var vec2 = beta ? arr_vec2_25663251[chan].setZero() : new Vec2();
+      var vec2 = new Vec2();
 
-      if(pos_gn instanceof Vec2) vec2.set(pos_gn.x, pos_gn.y);
-      if(pos_gn instanceof Point2) vec2.set(pos_gn.x, pos_gn.y);
+      if(pos_gn instanceof Vec2) return vec2.set(pos_gn.x, pos_gn.y);
+      if(pos_gn instanceof Point2) return vec2.set(pos_gn.x, pos_gn.y);
+
+      if(pos_gn instanceof Building) return vec2.set(pos_gn.x, pos_gn.y);
+      if(pos_gn instanceof Unit) return vec2.set(pos_gn.x, pos_gn.y);
+
       if(pos_gn instanceof Tile) {
         if(param == null) {vec2.set(pos_gn.worldx(), pos_gn.worldy())}
         else {vec2.set(pos_gn.worldx() + param, pos_gn.worldy() + param)};
-      };
-      if(pos_gn instanceof Building) vec2.set(pos_gn.x, pos_gn.y);
-      if(pos_gn instanceof Unit) vec2.set(pos_gn.x, pos_gn.y);
-      if(pos_gn instanceof Puddle) vec2.set(pos_gn.x, pos_gn.y);
-      if(typeof pos_gn == "string") {
-        if(pos_gn == "player" && Vars.player.unit() != null) vec2.set(Vars.player.unit().x, Vars.player.unit().y);
-        if(pos_gn == "mouse") vec2.set(Core.input.mouseWorldX(), Core.input.mouseWorldY());
+
+        return vec2;
       };
 
-      return vec2;
+      if(pos_gn instanceof Bullet) return vec2.set(pos_gn.x, pos_gn.y); 
+      if(pos_gn instanceof Puddle) return vec2.set(pos_gn.x, pos_gn.y);
+
+      if(typeof pos_gn == "string") {
+        if(pos_gn == "player" && Vars.player.unit() != null) return vec2.set(Vars.player.unit().x, Vars.player.unit().y);
+        if(pos_gn == "mouse") return vec2.set(Core.input.mouseWorldX(), Core.input.mouseWorldY());
+      };
+
+      return;
     };
     exports._pos = _pos;
 
 
-    /* NOTE: Gets a new position with a ray. */
-    const arr_vec2_25895656 = [
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-    ];
-    const _posRay = function(chan, pos_0, ang, rad) {
-      if(chan == null || pos_0 == null || angle == null || rad == null) return pos_0;
+    const _posRay = function(pos_gn_0, ang, rad) {
+      if(pos_gn_0 == null || angle == null || rad == null) return;
 
-      var vec2 = beta ? arr_vec2_25895656[chan].setZero() : new Vec2();
+      var vec2 = new Vec2();
+      var pos_0 = _pos(pos_gn_0);
 
       var x = pos_0.x;
       var y = pos_0.y;
       var dx = rad * Math.cos(ang);
       var dy = rad * Math.sin(ang);
 
-      return vec.set(x + dx, y + dy);
+      return vec2.set(x + dx, y + dy);
     };
     exports._posRay = _posRay;
 
 
-    /* NOTE: Gets a position used for pseudo-3D effects. */
-    const arr_vec2_29856665 = [
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-      new Vec2(),
-    ];
-    const _posP3d = function(chan, pos_0, elev) {
+    const _posP3d = function(pos_gn_0, elev) {
       if(elev == null) elev = 0.0;
-      if(chan == null || pos_0 == null) return pos_0;
+      if(pos_gn_0 == null) return;
 
-      var vec2 = beta ? arr_vec2_29856665[chan].setZero() : new Vec2();
+      var vec2 = new Vec2();
+      var pos_0 = _pos(pos_gn_0);
 
       var x = pos_0.x;
       var y = pos_0.y;
@@ -126,11 +116,10 @@
     /* <---------------- dst ----------------> */
 
 
-    /* NOTE: Gets the distance between two points. I know it's kind of trivial. */
-    const _dst = function(pos1, pos2) {
-      if(pos1 == null || pos2 == null) return 99999.0;
+    const _dst = function(pos_gn1, pos_gn2) {
+      if(pos_gn1 == null || pos_gn2 == null) return 99999.0;
 
-      return pos1.dst(pos2);
+      return _pos(pos_gn1).dst(_pos(pos_gn2));
     };
     exports._dst = _dst;
   // End
@@ -142,7 +131,6 @@
     /* <---------------- rot ----------------> */
 
 
-    /* NOTE: Gets the opposite direction. */
     const _rotConj = function(rot, rots) {
       if(rots == null) rots = 4;
       if(rot == null) return;
@@ -152,7 +140,6 @@
     exports._rotConj = _rotConj;
 
 
-    /* NOTE: Gets the offset direction. */
     const _rotDiv = function(rot, offRot, rots) {
       if(offRot == null) offRot = 0;
       if(rots == null) rots = 4;
@@ -166,7 +153,6 @@
     /* <---------------- cond ----------------> */
 
 
-    /* NOTE: Checks if the direction is blocked. */
     const isDirBlocked = function(b, offRot) {
       if(offRot == null) offRot = 0;
       if(b == null) return false;
@@ -179,7 +165,6 @@
     exports.isDirBlocked = isDirBlocked;
 
 
-    /* NOTE: Checks if two buildings are facing each other. */
     const isFacing = function(b, ob) {
       if(b == null || ob == null) return false;
 
@@ -190,25 +175,21 @@
 
 
   // Part: Tile
-    /*
-      PART NOTE:
-      Most {li_ot} won't contain {null} at most occasions, since calling tile properties from {null} will crash the game.
-    */
 
 
     /* <---------------- tile ----------------> */
 
 
-    /* NOTE: Gets a tile from a position. */
-    const _tilePos = function(pos) {
-      if(pos == null) return;
+    const _tilePos = function(pos_gn) {
+      if(pos_gn == null) return;
+
+      var pos = _pos(pos_gn);
 
       return Vars.world.tileWorld(pos.x, pos.y);
     };
     exports._tilePos = _tilePos;
 
 
-    /* NOTE: Gets a tile according to the assigned rotation. I know {nearby} can do this. */
     const _tileRot = function(mode, t, rot) {
       if(rot == null) rot = 0;
       if(mode != "f" && mode != "t") return;
@@ -223,7 +204,6 @@
     exports._tileRot = _tileRot;
 
 
-    /* NOTE: Gets a rand tile in a list, uses {scr} to filter some tiles out. */
     const _tileRand = function(li_t, scr, cap) {
       if(scr == null) scr = function() {return true};
       if(cap == null) cap = li_t.size;
@@ -234,7 +214,7 @@
       let i = 0;
       var t = null;
       while((i < cap && !scr.call(t)) || i == 0) {
-        t = li_t.get(mdl_math.randInt(cap - 1));
+        t = li_t.get(mdl_math._randInt(cap - 1));
         i++;
       };
 
@@ -243,7 +223,6 @@
     exports._tileRand = _tileRand;
 
 
-    /* NOTE: Gets a random tile that is safe for ground units to spawn on. */
     const _tileRandGround = function(li_t, cap) {
       var scr = function() {
         var cond = true;
@@ -257,7 +236,6 @@
     exports._tileRandGround = _tileRandGround;
 
 
-    /* NOTE: Safe for naval units instead. */
     const _tileRandNaval = function(li_t, cap) {
       var scr = function() {
         var cond = true;
@@ -271,13 +249,12 @@
     exports._tileRandNaval = _tileRandNaval;
 
 
-    /* NOTE: Gets a new tile with a ray. */
     const _tileRay = function(t, ang, rad) {
       if(ang == null) ang = 0.0;
       if(rad == null) rad = 0.0;
       if(t == null) return t;
 
-      var pos = _posRay(0, t, ang, rad);
+      var pos = _posRay(t, ang, rad);
       var ot = _tilePos(pos);
 
       return ot;
@@ -285,9 +262,8 @@
     exports._tileRay = _tileRay;
 
 
-    /* NOTE: Gets the tile under the mouse. This is nullable! */
     const _tileMouse = function() {
-      return _tilePos(_pos(0, "mouse"));
+      return _tilePos(_pos("mouse"));
     };
     exports._tileMouse = _tileMouse;
 
@@ -295,7 +271,6 @@
     /* <---------------- tilePair ----------------> */
 
 
-    /* NOTE: Gets a pair of tiles in aspect of rotation. From [0] to [1]. */
     const _tilePairRot = function(t, rot) {
       var ot_f = _tileRot("f", t, rot);
       var ot_t = _tileRot("t", t, rot);
@@ -307,7 +282,6 @@
     exports._tilePairRot = _tilePairRot;
 
 
-    /* NOTE: Works only for 1-sized blocks. */
     const _tilePairRot_b = function(b) {
       if(b == null) return;
 
@@ -319,7 +293,6 @@
     /* <---------------- liTile ----------------> */
 
 
-    /* NOTE: Get a list of tiles according to rotation and size. */
     const pon2_55875521 = new Point2();
     const li_70224930 = new Seq();
     const _liTileRot = function(t, rot, size) {
@@ -358,7 +331,6 @@
     exports._liTileRot = _liTileRot;
 
 
-    /* NOTE: Gets both the front and back sides. */
     const li_26854444 = new Seq();
     const _liTileRot_2side = function(t, rot, size) {
       var li = li_26854444.clear();
@@ -375,7 +347,6 @@
     exports._liTileRot_2side = _liTileRot_2side;
 
 
-    /* NOTE: Gets a list of tiles from edges. */
     const li_26885125 = new Seq();
     const _liTileEdge = function(t, size) {
       var li = li_26885125.clear();
@@ -396,7 +367,6 @@
     exports._liTileEdge = _liTileEdge;
 
 
-    /* NOTE: Inner edges now, with no duplicates. */
     const li_28885542 = new Seq();
     const _liTileEdgeIns = function(t, size) {
       var li = li_28885542.clear();
@@ -417,7 +387,6 @@
     exports._liTileEdgeIns = _liTileEdgeIns;
 
 
-    /* NOTE: Simply {getLinkedTiles}. */
     const li_87558861 = new Seq();
     const _liTileLinked = function(t) {
       var li = li_87558861.clear();
@@ -431,7 +400,6 @@
     exports._liTileLinked = _liTileLinked;
 
 
-    /* NOTE: Get tiles from a rectangular range, {size} is simply the inner radius... is it radius? */
     const li_26268851 = new Seq();
     const _liTileRect = function(t, r, size) {
       var li = li_26268851.clear();
@@ -462,7 +430,6 @@
     exports._liTileRect = _liTileRect;
 
 
-    /* NOTE: Rotation is introduced, like assemblers. */
     const li_77921834 = new Seq();
     const _liTileRectRot = function(t, r, rot, size) {
       var li = li_77921834.clear();
@@ -505,7 +472,6 @@
     exports._liTileRectRot = _liTileRectRot;
 
 
-    /* NOTE: Gets a list of tiles from a circular range. */
     const li_76214589 = new Seq();
     const _liTileCircle = function(t, r, size) {
       var li = li_76214589.clear();
@@ -533,7 +499,6 @@
     /* <---------------- count ----------------> */
 
 
-    /* NOTE: Counts how many shared sides there are between two buildings. */
     const _countSide = function(b, ob) {
       if(b == null || ob == null) return 0;
 
@@ -549,7 +514,6 @@
     /* <---------------- frac ----------------> */
 
 
-    /* NOTE: Just like how heat works in vanilla game, {b} should be the giver. */
     const _fracSide = function(b, ob) {
       if(b == null || ob == null) return 0.0;
 
@@ -568,7 +532,6 @@
     /* <---------------- filter ----------------> */
 
 
-    /* NOTE: Filters out some entities by customized scripts. */
     const li_22777861 = new Seq();
     const _filterScr = function(li_e, scr) {
       var li = li_22777861.clear();
@@ -582,7 +545,6 @@
     exports._filterScr = _filterScr;
 
 
-    /* NOTE: Filters out some entities by name. */
     const li_26986145 = new Seq();
     const _filterNm = function(li_e, nm) {
       var li = li_26986145.clear();
@@ -602,7 +564,6 @@
     exports._filterNm = _filterNm;
 
 
-    /* NOTE: Filters out some entities by team. */
     const li_83840097 = new Seq();
     const _filterTeam = function(li_e, team) {
       var li = li_83840097.clear();
@@ -619,7 +580,6 @@
     exports._filterTeam = _filterTeam;
 
 
-    /* NOTE: Filters out some entities that is enemy to the assigned team. */
     const li_70251302 = new Seq();
     const _filterEnemy = function(li_e, team) {
       var li = li_70251302.clear();
@@ -639,7 +599,6 @@
     /* <---------------- liBuild ----------------> */
 
 
-    /* NOTE: Gets a list of buildings from a list of tiles, no duplicates for multi-blocks. */
     const li_70256100 = new Seq();
     const _liBuild = function(li_ot) {
       var li = li_70256100.clear();
@@ -651,7 +610,6 @@
     exports._liBuild = _liBuild;
 
 
-    /* NOTE: Gets all buildings of the same type and team in range. */
     const _liBuildSame = function(li_ot, nm_blk, team) {
       return _filterTeam(_filterNm(_liBuild(li_ot), nm_blk), team);
     };
@@ -661,12 +619,12 @@
     /* <---------------- liUnit ----------------> */
 
 
-    /* NOTE: Gets a list of units in a circular range. Use {caller} if the a unit should be excluded. */
-    const li_77025433 = new Seq();
-    const _liUnit = function(pos, rad, caller) {
-      var li = li_77025433.clear();
+    const _liUnit = function(pos_gn, rad, caller) {
+      var li = new Seq();
 
-      if(pos == null || rad == null) return li;
+      if(pos_gn == null || rad == null) return li;
+
+      var pos = _pos(pos_gn);
 
       Units.nearby(null, pos.x, pos.y, rad, unit => {if(unit != caller) li.add(unit)});
 
@@ -675,25 +633,107 @@
     exports._liUnit = _liUnit;
 
 
-    /* NOTE: Gets a list of allied units in range. */
-    const _liUnitAllied = function(pos, rad, team) {
-      return _filterTeam(_liUnit(pos, rad), team);
+    const _liUnitAllied = function(pos_gn, rad, team) {
+      return _filterTeam(_liUnit(_pos(pos_gn), rad), team);
     };
     exports._liUnitAllied = _liUnitAllied;
 
 
-    /* NOTE: Gets a list of enemy units in range. Derelict team is excluded. */
-    const _liUnitEnemy = function(pos, rad, team) {
-      return _filterEnemy(_liUnit(pos, rad), team);
+    const _liUnitEnemy = function(pos_gn, rad, team) {
+      return _filterEnemy(_liUnit(_pos(pos_gn), rad), team);
     };
     exports._liUnitEnemy = _liUnitEnemy;
 
 
-    /* NOTE: Gets all units of the same type and team in range. */
-    const _liUnitSame = function(pos, rad, nm_utp, team) {
-      return _filterTeam(_filterNm(_liUnit(pos, rad), nm_utp), team);
+    const _liUnitSame = function(pos_gn, rad, nm_utp, team) {
+      return _filterTeam(_filterNm(_liUnit(_pos(pos_gn), rad), nm_utp), team);
     };
     exports._liUnitSame = _liUnitSame;
+  // End
+
+
+  // Part: Locate
+
+
+    /* <---------------- env ----------------> */
+
+
+    const _ore = function(pos_gn, itm) {
+      if(pos_gn == null || itm == null) return;
+
+      var pos = _pos(pos_gn);
+
+      return Vars.indexer.findClosestOre(pos.x, pos.y, itm);
+    };
+    exports._ore = _ore;
+
+
+    /* <---------------- build ----------------> */
+
+
+    const _oreScanner = function(pos_gn, rad, team) {
+      if(pos_gn == null || rad == null || team == null) return;
+
+      var pos = _pos(pos_gn);
+      var b = null;
+
+      var b_sc = Vars.indexer.findTile(team, pos.x, pos.y, rad, ob => mdl_content.isOreScanner(ob.block));
+      if(b_sc != null) {
+        var r_sc = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b_sc.block.name, 5);
+        var d_cr = (b_sc.block.size * 0.5 + r_sc) * Vars.tilesize * 1.275;
+
+        if(_dst(pos, _pos(b_sc)) < d_cr + 0.0001) b = b_sc;
+      };
+
+      return b;
+    };
+    exports._oreScanner = _oreScanner;
+
+
+    const _container = function(pos_gn, rad, team) {
+      if(pos_gn == null || rad == null || team == null) return;
+
+      var pos = _pos(pos_gn);
+
+      return Vars.indexer.findTile(team, pos.x, pos.y, rad, ob => ob.block instanceof StorageBlock);
+    };
+    exports._container = _container;
+
+
+    const _playerContainer = function(pos_gn, rad, team) {
+      if(pos_gn == null || rad == null || team == null) return;
+
+      var pos = _pos(pos_gn);
+      var unit = null;
+      var tmpRad = rad;
+      Groups.player.each(pl => {
+        var unit_pl = pl.unit();
+        if(unit_pl.team == team) {
+          var dst = _dst(pos, _pos(unit_pl));
+
+          if(dst < tmpRad + 0.0001) {
+            tmpRad = dst;
+            unit = unit_pl;
+          };
+        };
+      });
+
+      return unit;
+    };
+    exports._playerContainer = _playerContainer;
+
+
+    /* <---------------- entity ----------------> */
+
+
+    const _closest = function(pos_gn, rad, team) {
+      if(pos_gn == null || rad == null || team == null) return;
+
+      var pos = _pos(pos_gn);
+
+      return Units.closestTarget(team, pos.x, pos.y, rad);
+    };
+    exports._closest = _closest;
   // End
 
 

@@ -33,7 +33,6 @@ const rc = {
     },
 
 
-
   ]),
 };
 exports.rc = rc;

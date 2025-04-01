@@ -6,30 +6,7 @@
 
 
   // Part: Import
-    const blk_structureCore = require("reind/blk/blk_structureCore");
-  // End
-
-
-  // Part: Accessor
-    const accB_cooldown = function(b, mode, val) {
-      if(mode == "r") return b.cooldown;
-      if(mode == "w") b.cooldown = val;
-    };
-    exports.accB_cooldown = accB_cooldown;
-
-
-    const accB_needCheck = function(b, mode, val) {
-      if(mode == "r") return b.needCheck;
-      if(mode == "w") b.needCheck = val;
-    };
-    exports.accB_needCheck = accB_needCheck;
-
-
-    const accB_plan = function(b, mode, val) {
-      if(mode == "r") return b.plan;
-      if(mode == "w") b.plan = val;
-    };
-    exports.accB_plan = accB_plan;
+    const TEMPLATE = require("reind/blk/blk_structureCore");
   // End
 
 
@@ -44,39 +21,40 @@
     const facFurn_brickedBlastFurnaceController = extend(Wall, "fac-furn-bricked-blast-furnace-controller", {
       setStats() {
         this.super$setStats();
-        blk_structureCore.setStats(this);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_structureCore.init(this);
+        TEMPLATE.init(this);
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
-        blk_structureCore.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     facFurn_brickedBlastFurnaceController.buildType = () => extend(Wall.WallBuild, facFurn_brickedBlastFurnaceController, {
-      cooldown: 480.0,
+      cd: 480.0,
       needCheck: true,
       plan: new Seq(),
+      showPlan: false,
       updateTile() {
         this.super$updateTile();
-        blk_structureCore.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_structureCore.buildConfiguration(this, table, this.plan);
+        TEMPLATE.buildConfiguration(this, table);
       },
       configured(builder, value) {
-        blk_structureCore.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       draw() {
         this.super$draw();
-        blk_structureCore.draw(this, this.plan);
+        TEMPLATE.draw(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_structureCore.drawSelect(this, this.plan);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.facFurn_brickedBlastFurnaceController = facFurn_brickedBlastFurnaceController;
@@ -87,39 +65,40 @@
     const facSep_highPressureCycloneSeparatorController = extend(Wall, "fac-sep-high-pressure-cyclone-separator-controller", {
       setStats() {
         this.super$setStats();
-        blk_structureCore.setStats(this);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_structureCore.init(this);
+        TEMPLATE.init(this);
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
-        blk_structureCore.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     facSep_highPressureCycloneSeparatorController.buildType = () => extend(Wall.WallBuild, facSep_highPressureCycloneSeparatorController, {
-      cooldown: 480.0,
+      cd: 480.0,
       needCheck: true,
       plan: new Seq(),
+      showPlan: false,
       updateTile() {
         this.super$updateTile();
-        blk_structureCore.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_structureCore.buildConfiguration(this, table, this.plan);
+        TEMPLATE.buildConfiguration(this, table);
       },
       configured(builder, value) {
-        blk_structureCore.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       draw() {
         this.super$draw();
-        blk_structureCore.draw(this, this.plan);
+        TEMPLATE.draw(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_structureCore.drawSelect(this, this.plan);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.facSep_highPressureCycloneSeparatorController = facSep_highPressureCycloneSeparatorController;
@@ -128,42 +107,90 @@
     const facSep_largeVibrationScreenController = extend(Wall, "fac-sep-large-vibration-screen-controller", {
       setStats() {
         this.super$setStats();
-        blk_structureCore.setStats(this);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_structureCore.init(this);
+        TEMPLATE.init(this);
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
-        blk_structureCore.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     facSep_largeVibrationScreenController.buildType = () => extend(Wall.WallBuild, facSep_largeVibrationScreenController, {
-      cooldown: 480.0,
+      cd: 480.0,
       needCheck: true,
       plan: new Seq(),
+      showPlan: false,
       updateTile() {
         this.super$updateTile();
-        blk_structureCore.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_structureCore.buildConfiguration(this, table, this.plan);
+        TEMPLATE.buildConfiguration(this, table);
       },
       configured(builder, value) {
-        blk_structureCore.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       draw() {
         this.super$draw();
-        blk_structureCore.draw(this, this.plan);
+        TEMPLATE.draw(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_structureCore.drawSelect(this, this.plan);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.facSep_largeVibrationScreenController = facSep_largeVibrationScreenController;
+  // End
+
+
+  // Part: fac-misc
+    /* <---------------- very specific zone ----------------> */
+
+
+    const facMisc_colossalRouterController = extend(Wall, "fac-misc-colossal-router-controller", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+      drawPlace(x, y, rotation, valid) {
+        this.super$drawPlace(x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
+      },
+    });
+    facMisc_colossalRouterController.buildType = () => extend(Wall.WallBuild, facMisc_colossalRouterController, {
+      cd: 480.0,
+      needCheck: true,
+      plan: new Seq(),
+      showPlan: false,
+      updateTile() {
+        this.super$updateTile();
+        TEMPLATE.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        TEMPLATE.buildConfiguration(this, table);
+      },
+      configured(builder, value) {
+        TEMPLATE.configured(this, builder, value);
+      },
+      draw() {
+        this.super$draw();
+        TEMPLATE.draw(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        TEMPLATE.drawSelect(this);
+      },
+    });
+    exports.facMisc_colossalRouterController = facMisc_colossalRouterController;
   // End
 
 

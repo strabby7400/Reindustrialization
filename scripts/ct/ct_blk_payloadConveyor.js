@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_payloadConveyor = require("reind/blk/blk_payloadConveyor");
+    const TEMPLATE = require("reind/blk/blk_payloadConveyor");
   // End
 
 
@@ -21,18 +21,18 @@
     const payConv_payloadExpressWay = extend(PayloadConveyor, "pay-conv-payload-express-way", {
       setStats() {
         this.super$setStats();
-        blk_payloadConveyor.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     payConv_payloadExpressWay.buildType = () => extend(PayloadConveyor.PayloadConveyorBuild, payConv_payloadExpressWay, {
       updateTile() {
-        blk_payloadConveyor.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       status() {
-        return blk_payloadConveyor.status(this);
+        return TEMPLATE.status(this);
       },
       unitOn(unit) {
-        blk_payloadConveyor.unitOn(this, unit);
+        TEMPLATE.unitOn(this, unit);
       },
     });
     exports.payConv_payloadExpressWay = payConv_payloadExpressWay;

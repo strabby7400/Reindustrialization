@@ -19,7 +19,7 @@ const rc = {
       "category": "special",
       "inputs": new Seq([].concat(gi)),
       "outputs": new Seq([
-        "reind-effc-effc-dust-recycling", 0.05,
+        "reind-effc-effc-dust-recycling", 0.06666667,
       ]),
     },
 
@@ -30,7 +30,7 @@ const rc = {
       "category": "special",
       "inputs": new Seq([].concat(gi)),
       "outputs": new Seq([
-        "reind-effc-effc-dust-recycling", 0.1,
+        "reind-effc-effc-dust-recycling", 0.13333333,
       ]),
       "tooltip": "overdriven",
       "craftScript": function() {

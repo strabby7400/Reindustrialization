@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericDefenseBlock = require("reind/blk/blk_genericDefenseBlock");
+    const PARENT = require("reind/blk/blk_genericDefenseBlock");
   // End
 
 
@@ -19,13 +19,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericDefenseBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericDefenseBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
   // End

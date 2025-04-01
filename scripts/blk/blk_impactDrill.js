@@ -6,12 +6,11 @@
 
 
   // Part: Import
-    const blk_genericDrill = require("reind/blk/blk_genericDrill");
-
-    const ct_blk_impactDrill = require("reind/ct/ct_blk_impactDrill");
+    const PARENT = require("reind/blk/blk_genericDrill");
 
     const frag_attack = require("reind/frag/frag_attack");
 
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
@@ -22,15 +21,24 @@
   // End
 
 
+  // Part: Setting
+    var efficiencyUpdateInterval = 90.0;
+    const set_efficiencyUpdateInterval = function(val) {
+      efficiencyUpdateInterval = val;
+    };
+    exports.set_efficiencyUpdateInterval = set_efficiencyUpdateInterval;
+  // End
+
+
   // Part: Component
     function setStatsComp(blk) {
       blk.stats.remove(db_stat.boostedDrillSpeed);
 
-      var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
-      if(rad != null) blk.stats.add(db_stat.impactRange, rad / Vars.tilesize, StatUnit.blocks);
+      var impactRad = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], blk.name, 40.0);
+      blk.stats.add(db_stat.impactRange, impactRad / Vars.tilesize, StatUnit.blocks);
 
-      var depthMtp = mdl_data.read_1n1v(db_block.depthTierMultiplier, blk.name);
-      if(depthMtp != null) blk.stats.add(db_stat.depthTierMultiplier, depthMtp);
+      var depthMtp = mdl_data.read_1n1v(db_block.db["param"]["depthTierMultiplier"], blk.name, 1.0);
+      blk.stats.add(db_stat.depthTierMultiplier, depthMtp);
     };
 
 
@@ -38,62 +46,54 @@
       var size = b.block.size;
       var time = b.block.drillTime;
 
-      if(b.invertTime == 1.0) {
-        var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
-        if(rad != null) {
-          var dmg = size * time * 1.2;
-          var dur = time * 0.5;
+      // Initialize
+      if(b.needCheck) {
+        b.impactRad = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], b.block.name, 40.0);
 
-          frag_attack.attack_impact(mdl_game._pos(1, b), rad, dmg, dur);
-
-          var cap = Math.pow(size, 2);
-          var rad1 = (size * 0.5 + 1.0) * Vars.tilesize;
-          for(let i = 0; i < cap; i++) {mdl_effect.dustAt_ldm(b, rad1)};
-        };
+        b.needCheck = false;
       };
 
-      var down = ct_blk_impactDrill.accB_down(b, "r");
-      if(down) b.progress = 0.0;
+      // Create Impact Wave
+      if(b.invertTime > 0.9999) {
+        frag_attack.atk_impact(b, b.impactRad, frag_attack._impactDmg(size, time), frag_attack._impactDur(time));
 
-      if(Mathf.chance(0.02)) {
-        var ov = b.tile.overlay();
+        var cap = Math.pow(size, 2);
+        for(let i = 0; i < cap; i++) {mdl_effect.dustAt_ldm(b, frag_attack._impactDustRad(size))};
+      };
+
+      if(b.down) b.progress = 0.0;
+
+      if(b.timerEffc.get(efficiencyUpdateInterval)) {
+        var down = false;
         var b_sc_fi = null;
-        if(ov == null || !ov.name.includes("reind-env-ore-depth-")) {
+
+        if(!mdl_content.isDepthOre(b.tile.overlay())) {
           down = false;
         } else {
-          var b_sc = Vars.indexer.findTile(b.team, b.x, b.y, 999.0, ob => ob.block.name.includes("reind-min-scan-"));
+          var b_sc = mdl_game._oreScanner(b, 9999.0, b.team);
+
           if(b_sc == null) {
             down = true;
           } else {
-            var r_sc = mdl_data.read_1n1v(db_block.genericRange, b_sc.block.name);
-            if(r_sc == null) {
-              down = true;
-            } else {
-              var d = mdl_game._dst(mdl_game._pos(2, b), mdl_game._pos(3, b_sc));
-              var d_cr = (b_sc.block.size / 2 + r_sc) * Vars.tilesize * 1.275;
-              if(d > d_cr) {
-                down = true;
-              } else {
-                down = false;
-                b_sc_fi = b_sc;
-              };
-            };
+            down = false;
+            b_sc_fi = b_sc;
           };
         };
 
-        ct_blk_impactDrill.accB_down(b, "w", down);
-        ct_blk_impactDrill.accB_b_sc(b, "w", b_sc_fi);
+        b.down = down;
+        b.b_sc = b_sc_fi;
       };
     };
 
 
     function canMineComp(blk, t) {
-      if(t.overlay() != null && t.overlay().name.includes("reind-env-ore-depth-")) {
-        var itm = t.overlay().itemDrop;
+      var ov = t.overlay();
+      if(mdl_content.isDepthOre(ov)) {
+        var itm = ov.itemDrop;
         if(itm == blk.blockedItem) return false;
 
-        var hardness = t.overlay().itemDrop.hardness;
-        var tier_depth = blk.tier * mdl_data.read_1n1v(db_block.depthTierMultiplier, blk.name);
+        var hardness = itm.hardness;
+        var tier_depth = blk.tier * mdl_data.read_1n1v(db_block.db["param"]["depthTierMultiplier"], blk.name, 1.0);
         if(hardness > tier_depth) return false;
       };
 
@@ -102,22 +102,20 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_game._pos(1, Vars.world.tile(tx, ty), blk.offset), rad);
+      var impactRad = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], blk.name, 40.0);
+      mdl_draw.drawCirclePulse(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), impactRad);
     };
 
 
     function drawSelectComp(b) {
-      var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_game._pos(1, b), rad);
+      mdl_draw.drawCirclePulse(b, b.impactRad);
 
       var ov = b.tile.overlay();
-      if(ov != null && ov.name.includes("reind-env-ore-depth-")) {
-        var b_sc = ct_blk_impactDrill.accB_b_sc(b, "r");
-        if(b_sc == null) {
+      if(mdl_content.isDepthOre(ov)) {
+        if(b.b_sc == null) {
           mdl_draw.drawSelectText(b, false, Core.bundle.get("info.reind-info-no-ore-scanner.name"));
         } else {
-          mdl_draw.drawBuildRectConnector(b, b_sc);
+          mdl_draw.drawBuildRectConnector(b, b.b_sc);
         };
       };
     };
@@ -133,7 +131,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericDrill.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -141,7 +139,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericDrill.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };

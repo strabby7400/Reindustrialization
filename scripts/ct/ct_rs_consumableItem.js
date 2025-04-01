@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const rs_consumableItem = require("reind/rs/rs_consumableItem");
+    const TEMPLATE = require("reind/rs/rs_consumableItem");
   // End
 
 
@@ -21,7 +21,7 @@
     const itemCons_ballSteel = extend(Item, "item-cons-ball-steel", {
       setStats() {
         this.super$setStats();
-        rs_consumableItem.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     exports.itemCons_ballSteel = itemCons_ballSteel;
@@ -32,7 +32,7 @@
     const itemCons_electrodeCopper = extend(Item, "item-cons-electrode-copper", {
       setStats() {
         this.super$setStats();
-        rs_consumableItem.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     exports.itemCons_electrodeCopper = itemCons_electrodeCopper;
@@ -41,7 +41,7 @@
     const itemCons_electrodeGraphite = extend(Item, "item-cons-electrode-graphite", {
       setStats() {
         this.super$setStats();
-        rs_consumableItem.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     exports.itemCons_electrodeGraphite = itemCons_electrodeGraphite;
@@ -50,7 +50,7 @@
     const itemCons_electrodeLead = extend(Item, "item-cons-electrode-lead", {
       setStats() {
         this.super$setStats();
-        rs_consumableItem.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     exports.itemCons_electrodeLead = itemCons_electrodeLead;
@@ -61,7 +61,7 @@
     const itemCons_pallRingStainlessSteel = extend(Item, "item-cons-pall-ring-stainless-steel", {
       setStats() {
         this.super$setStats();
-        rs_consumableItem.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     exports.itemCons_pallRingStainlessSteel = itemCons_pallRingStainlessSteel;
@@ -70,7 +70,7 @@
     const itemCons_pallRingSteel = extend(Item, "item-cons-pall-ring-steel", {
       setStats() {
         this.super$setStats();
-        rs_consumableItem.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     exports.itemCons_pallRingSteel = itemCons_pallRingSteel;

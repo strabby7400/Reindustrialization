@@ -6,16 +6,7 @@
 
 
   // Part: Import
-    const blk_projectiveMender = require("reind/blk/blk_projectiveMender");
-  // End
-
-
-  // Part: Accessor
-    const accB_down = function(b, mode, val) {
-      if(mode == "r") return b.down;
-      if(mode == "w") b.down = val;
-    };
-    exports.accB_down = accB_down;
+    const TEMPLATE = require("reind/blk/blk_projectiveMender");
   // End
 
 
@@ -30,29 +21,31 @@
     const defProj_basicRepairProjector = extend(RegenProjector, "def-proj-basic-repair-projector", {
       setStats() {
         this.super$setStats();
-        blk_projectiveMender.setStats(this);
+        TEMPLATE.setStats(this);
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
-        blk_projectiveMender.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     defProj_basicRepairProjector.buildType = () => extend(RegenProjector.RegenProjectorBuild, defProj_basicRepairProjector, {
-      down: true,
+      needCheck: true,
+      r: 5,
+      units: new Seq(), repairMap: new ObjectMap(),
       updateTile() {
         this.super$updateTile();
-        blk_projectiveMender.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       shouldConsume() {
-        return this.anyTargets || !this.down;
+        return this.anyTargets || this.units.size > 0;
       },
       draw() {
         this.super$draw();
-        blk_projectiveMender.draw(this);
+        TEMPLATE.draw(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_projectiveMender.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.defProj_basicRepairProjector = defProj_basicRepairProjector;

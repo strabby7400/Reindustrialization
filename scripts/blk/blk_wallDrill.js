@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericDrill = require("reind/blk/blk_genericDrill");
+    const PARENT = require("reind/blk/blk_genericDrill");
   // End
 
 
@@ -19,13 +19,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericDrill.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericDrill.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
   // End

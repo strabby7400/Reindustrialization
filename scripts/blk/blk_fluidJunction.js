@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericLiquidDistributionGate = require("reind/blk/blk_genericLiquidDistributionBlock");
+    const PARENT = require("reind/blk/blk_genericLiquidDistributionBlock");
   // End
 
 
@@ -19,19 +19,19 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericLiquidDistributionGate.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericLiquidDistributionGate.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 
 
     const drawSelect = function(b) {
-      blk_genericLiquidDistributionGate.drawSelect(b);
+      PARENT.drawSelect(b);
     };
     exports.drawSelect = drawSelect;
   // End

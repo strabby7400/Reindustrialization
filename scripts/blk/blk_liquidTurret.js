@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_rotationalTurret = require("reind/blk/blk_rotationalTurret");
+    const PARENT = require("reind/blk/blk_rotationalTurret");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -28,7 +28,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_rotationalTurret.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -36,13 +36,13 @@
 
 
     const updateTile = function(b) {
-      blk_rotationalTurret.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 
 
     const canPlaceOn = function(blk, t, team, rot) {
-      if(!blk_rotationalTurret.canPlaceOn(blk, t, team, rot)) return false;
+      if(!PARENT.canPlaceOn(blk, t, team, rot)) return false;
 
       return true;
     };
@@ -50,7 +50,7 @@
 
 
     const hasAmmo = function(b) {
-      if(!blk_rotationalTurret.hasAmmo(b)) return false;
+      if(!PARENT.hasAmmo(b)) return false;
 
       return true;
     };
@@ -58,19 +58,19 @@
 
 
     const status = function(b) {
-      return blk_rotationalTurret.status(b);
+      return PARENT.status(b);
     };
     exports.status = status;
 
 
     const drawPlace = function(blk, tx, ty, rot, valid) {
-      blk_rotationalTurret.drawPlace(blk, tx, ty, rot, valid);
+      PARENT.drawPlace(blk, tx, ty, rot, valid);
     };
     exports.drawPlace = drawPlace;
 
 
     const drawSelect = function(b) {
-      blk_rotationalTurret.drawSelect(b);
+      PARENT.drawSelect(b);
     };
     exports.drawSelect = drawSelect;
   // End

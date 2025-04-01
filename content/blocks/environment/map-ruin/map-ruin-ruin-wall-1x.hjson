@@ -19,12 +19,12 @@
 
   scaledHealth: 360.0
   armor: 8.0
+  size: 1
   hasItems: false
   itemCapacity: 20
   hasLiquids: false
   liquidCapacity: 5.0
   hasPower: false
-  size: 1
 
 
 /*

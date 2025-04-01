@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericPowerBlock = require("reind/blk/blk_genericPowerBlock");
+    const PARENT = require("reind/blk/blk_genericPowerBlock");
 
     const frag_heat = require("reind/frag/frag_heat");
 
@@ -28,7 +28,7 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      if(blk.explosionDamage != null && blk.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_game._pos(1, Vars.world.tile(tx, ty), blk.offset), blk.explosionRadius * Vars.tilesize);
+      if(blk.explosionDamage != null && blk.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), blk.explosionRadius * Vars.tilesize);
     };
 
 
@@ -38,7 +38,7 @@
 
 
     function drawSelectComp(b) {
-      if(b.block.explosionDamage != null && b.block.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_game._pos(1, b), b.block.explosionRadius * Vars.tilesize);
+      if(b.block.explosionDamage != null && b.block.explosionDamage > 0) mdl_draw.drawWarningDisk(b, b.block.explosionRadius * Vars.tilesize);
     };
   // End
 
@@ -52,7 +52,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericPowerBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -60,7 +60,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericPowerBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 

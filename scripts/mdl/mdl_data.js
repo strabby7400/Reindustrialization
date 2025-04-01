@@ -26,7 +26,7 @@
     exports.write_1n1v = write_1n1v;
 
 
-    const read_1n1v = function(li_tg, nm) {
+    const read_1n1v = function(li_tg, nm, ini) {
       var val = null;
       var cap = li_tg.size;
       if(cap == 0) return val;
@@ -36,6 +36,7 @@
         if(li_tg.get(i) == nm) val = li_tg.get(i + 1);
       };
 
+      if(val == null && ini != null) val = ini;
       return val;
     };
     exports.read_1n1v = read_1n1v;
@@ -58,7 +59,7 @@
     exports.write_2n1v = write_2n1v;
 
 
-    const read_2n1v = function(li_tg, nm1, nm2) {
+    const read_2n1v = function(li_tg, nm1, nm2, ini) {
       var val = null;
       var cap = li_tg.size;
       if(cap == 0) return val;
@@ -67,6 +68,8 @@
 
         if(li_tg.get(i) == nm1 && li_tg.get(i + 1) == nm2) val = li_tg.get(i + 2);
       };
+
+      if(val == null && ini != null) val = ini;
       return val;
     };
     exports.read_2n1v = read_2n1v;
@@ -98,7 +101,7 @@
 
 
     const li_95867122 = new Seq();
-    const readli_1n1v = function(li_tg, nm) {
+    const readLi_1n1v = function(li_tg, nm) {
       var li = li_95867122.clear();
 
       var cap = li_tg.size;
@@ -111,7 +114,7 @@
 
       return li;
     };
-    exports.readli_1n1v = readli_1n1v;
+    exports.readLi_1n1v = readLi_1n1v;
 
 
     const writeli_2n1v = function(li_tg, li_val) {
@@ -129,7 +132,7 @@
 
 
     const li_48722097 = new Seq();
-    const readli_2n1v = function(li_tg, nm1, nm2) {
+    const readLi_2n1v = function(li_tg, nm1, nm2) {
       var li = li_48722097.clear();
 
       var cap = li_tg.size;
@@ -142,7 +145,37 @@
 
       return li;
     };
-    exports.readli_2n1v = readli_2n1v;
+    exports.readLi_2n1v = readLi_2n1v;
+  // End
+
+
+  // Part: Handler
+    const handleConfigured = function(b, builder, val) {
+      if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
+      var val_fi = 0.0;
+      var param = 0.0;
+      var param1 = 0.0;
+
+      if(val instanceof Vec2) {
+        val_fi = val.x;
+        param = val.y;
+
+        return [val_fi, param, -2];
+      } else if(val instanceof Vec3) {
+        val_fi = val.x;
+        param = val.y;
+        param1 = val.z;
+
+        return [val_fi, param, param1];
+      } else if(val instanceof Building) {
+        val_fi = val.config();
+
+        if(val_fi != null && !(val_fi instanceof Building)) b.configured(builder, val_fi);
+      };
+
+      return [-2, -2, -2];
+    };
+    exports.handleConfigured = handleConfigured;
   // End
 
 

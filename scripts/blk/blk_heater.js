@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericHeatBlock = require("reind/blk/blk_genericHeatBlock");
+    const PARENT = require("reind/blk/blk_genericHeatBlock");
   // End
 
 
@@ -19,19 +19,19 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericHeatBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericHeatBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 
 
     const setBars = function(blk) {
-      blk_genericHeatBlock.setBars(blk);
+      PARENT.setBars(blk);
     };
     exports.setBars = setBars;
   // End

@@ -22,8 +22,8 @@
 
   // Part: Setting
     var p3dShadow = true;
-    const set_p3dShadow = function(bool) {
-      p3dShadow = bool;
+    const set_p3dShadow = function(val) {
+      p3dShadow = val;
     };
     exports.set_p3dShadow = set_p3dShadow;
   // End
@@ -38,9 +38,9 @@
     function setStatsComp(utp) {
       utp.stats.remove(Stat.mineTier);
 
-      if(db_unit.nonRobots.contains(utp.name)) utp.stats.add(db_stat.notRobot, true);
+      if(db_unit.db["type"]["nonRobot"].contains(utp.name)) utp.stats.add(db_stat.notRobot, true);
 
-      var polTol = mdl_data.read_1n1v(db_unit.pollutionTolerance, utp.name);
+      var polTol = mdl_data.read_1n1v(db_unit.db["pollution"]["tolerance"], utp.name);
       if(polTol != null) utp.stats.add(db_stat.pollutionTolerance, polTol, db_stat.pollutionUnit);
     };
 
@@ -67,7 +67,7 @@
       try {unit.drawBuilding()} catch(err) {};
 
       // Mining
-      if(unit.mining()) mdl_draw.drawMiningBeam(mdl_game._pos(1, unit), mdl_game._pos(2, unit.mineTile), unit.rotation, utp.hitSize / 2.0);
+      if(unit.mining()) mdl_draw.drawMiningBeam(unit, unit.mineTile, unit.rotation, utp.hitSize / 2.0);
 
       // Control
       var ctrl = null;
@@ -270,10 +270,10 @@
         return;
       };
 
-      var elev = mdl_unit.getElevation(unit);
+      var elev = mdl_unit._elev(unit);
       if(!utp.lowAltitude && unit.flying) elev *= 1.5;
 
-      mdl_draw.drawPseudo3dShadow(mdl_game._pos(1, unit), utp.region, elev, unit.rotation - 90.0);
+      mdl_draw.drawPseudo3dShadow(unit, utp.region, elev, unit.rotation - 90.0);
     };
   // End
 
@@ -296,6 +296,12 @@
       updateComp(utp, unit);
     };
     exports.update = update;
+
+
+    const init = function(utp) {
+
+    };
+    exports.init = init;
 
 
     const killed = function(utp, unit) {

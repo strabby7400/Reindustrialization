@@ -26,6 +26,7 @@
     parent: def-wall-concrete-barricade
     objectives: []
   }
+  researchCostMultiplier: 0.5
 
 
 /*

@@ -29,7 +29,7 @@
 
   variants: 4
   walkEffect: none
-  walkSound: se-step-stone
+  walkSound: se-step-salt
   walkSoundVolume: 0.2
   walkSoundPitchMin: 0.95
   walkSoundPitchMax: 1.05

@@ -9,8 +9,8 @@
   category: crafting
   requirements: [
     item-chem-lead/120
-    item-chem-brass/40
-    item-chem-tin-bronze/60
+    item-chem-brass/80
+    item-chem-tin-bronze/80
     item-chem-steel/60
   ]
   buildCostMultiplier: 2.0

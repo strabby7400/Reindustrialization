@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_randomMiner = require("reind/blk/blk_randomMiner");
+    const TEMPLATE = require("reind/blk/blk_randomMiner");
 
     const ct_rs_genericItem = require("reind/ct/ct_rs_genericItem");
     const ct_rs_oreItem = require("reind/ct/ct_rs_oreItem");
@@ -27,18 +27,18 @@
     const minMisc_placerMiner = extend(Separator, "min-misc-placer-miner", {
       setStats() {
         this.super$setStats();
-        blk_randomMiner.setStats(this);
+        TEMPLATE.setStats(this);
       },
       canPlaceOn(tile, team, rotation) {
         if(!this.super$canPlaceOn(tile, team, rotation)) return false;
-        if(!blk_randomMiner.canPlaceOn(this, tile, team, rotation)) return false;
+        if(!TEMPLATE.canPlaceOn(this, tile, team, rotation)) return false;
         return true;
       },
     });
     minMisc_placerMiner.buildType = () => extend(Separator.SeparatorBuild, minMisc_placerMiner, {
       updateTile() {
         this.super$updateTile();
-        blk_randomMiner.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
     });
     minMisc_placerMiner.results = ItemStack.with(

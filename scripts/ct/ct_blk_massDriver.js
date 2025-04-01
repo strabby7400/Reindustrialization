@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_massDriver = require("reind/blk/blk_massDriver");
+    const TEMPLATE = require("reind/blk/blk_massDriver");
   // End
 
 
@@ -21,48 +21,58 @@
     const disMdr_localMassDriver = extend(MassDriver, "dis-mdr-local-mass-driver", {
       setStats() {
         this.super$setStats();
-        blk_massDriver.setStats(this);
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
-        blk_massDriver.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     disMdr_localMassDriver.buildType = () => extend(MassDriver.MassDriverBuild, disMdr_localMassDriver, {
+      needCheck: true,
+      impactRad: 40.0,
       updateTile() {
         this.super$updateTile();
-        blk_massDriver.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_massDriver.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
-    blk_massDriver.setup(disMdr_localMassDriver);
     exports.disMdr_localMassDriver = disMdr_localMassDriver;
 
 
     const disMdr_standardMassDriver = extend(MassDriver, "dis-mdr-standard-mass-driver", {
       setStats() {
         this.super$setStats();
-        blk_massDriver.setStats(this);
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
-        blk_massDriver.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     disMdr_standardMassDriver.buildType = () => extend(MassDriver.MassDriverBuild, disMdr_standardMassDriver, {
+      needCheck: true,
+      impactRad: 40.0,
       updateTile() {
         this.super$updateTile();
-        blk_massDriver.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_massDriver.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
-    blk_massDriver.setup(disMdr_standardMassDriver);
     exports.disMdr_standardMassDriver = disMdr_standardMassDriver;
   // End
 

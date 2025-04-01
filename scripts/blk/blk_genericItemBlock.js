@@ -6,11 +6,12 @@
 
 
   // Part: Import
-    const blk_genericBlock = require("reind/blk/blk_genericBlock");
+    const PARENT = require("reind/blk/blk_genericBlock");
 
     const frag_item = require("reind/frag/frag_item");
 
-    const db_block = require("reind/db/db_block");
+    const mdl_content = require("reind/mdl/mdl_content");
+
     const db_stat = require("reind/db/db_stat");
   // End
 
@@ -19,7 +20,7 @@
     function setStatsComp(blk) {
       blk.stats.add(db_stat.unloadable, blk.unloadable);
 
-      if(db_block.exposedToAir.contains(blk.name)) blk.stats.add(db_stat.exposedToAir, true);
+      if(mdl_content.isExposed(blk)) blk.stats.add(db_stat.exposedToAir, true);
     };
 
 
@@ -39,7 +40,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -47,7 +48,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericBlock.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };

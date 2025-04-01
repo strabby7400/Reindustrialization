@@ -6,6 +6,8 @@
 
 
   // Part: Import
+    const VAR = require("reind/glb/glb_vars");
+
     const frag_attack = require("reind/frag/frag_attack");
 
     const cfg_update = require("reind/cfg/cfg_update");
@@ -22,8 +24,6 @@
     const db_block = require("reind/db/db_block");
     const db_effect = require("reind/db/db_effect");
     const db_fluid = require("reind/db/db_fluid");
-
-    const glb_vars = require("reind/glb/glb_vars");
   // End
 
 
@@ -37,41 +37,49 @@
 
 
   // Part: Puddle
-    /* NOTE: Fixes puddles with invalid amount value. */
+    /*
+     * NOTE:
+     *
+     * Prevents puddles with an amount of NaN from being there for a long time.
+     */
     const update_fix = function(liq, puddle) {
       if(isNaN(puddle.amount)) puddle.remove();
     };
     exports.update_fix = update_fix;
 
 
-    /* NOTE: Used by some liquids like fuming sulfuric acid. */
+    /*
+     * NOTE:
+     *
+     * Simply visual effects for some fluids.
+     */
     const update_fuming = function(liq, puddle) {
       if(liq.gas) return;
-      if(!Mathf.chance(mdl_effect.getP_frac(0.03, puddle.amount / 24.0))) return;
+      if(!Mathf.chance(mdl_effect._pFrac(0.03, puddle.amount / 24.0))) return;
 
       mdl_effect.showAt(puddle, db_effect._heatSmog());
     };
     exports.update_fuming = update_fuming;
 
 
-    /* NOTE: More reaction triggers. */
     const update_puddleReaction = function(liq, puddle) {
       var t = puddle.tile;
       mdl_game._liTileRect(t, 1).each(ot => {
         var ob = ot.build;
+        var op = Puddles.get(ot);
 
         if(ob != null && ob.items != null && !(ob.block instanceof CoreBlock)) {
-          // Water
-          if(mdl_content.isAqueous(liq)) ob.items.each(itm => mdl_reaction.handleReaction(ob, itm, Vars.content.liquid("reind-liq-ore-water")));
-
           ob.items.each(itm => mdl_reaction.handleReaction(ob, itm, liq));
+        };
+
+        if(op != null) {
+          mdl_reaction.handleReaction(ot, op.liquid, liq);
         };
       });
     };
     exports.update_puddleReaction = update_puddleReaction;
 
 
-    /* NOTE: If the liquid is marked as conductive, damage some blocks in contact with the puddle. */
     const update_shortCircuit = function(liq, puddle) {
       if(cfg_update.isSuppressed()) return;
       if(liq.gas || !mdl_content.isConductive(liq)) return;
@@ -91,7 +99,7 @@
           b.damage(dmg);
 
           mdl_effect.showAtP(0.005, b, db_effect._heatSmog());
-          if(Mathf.chanceDelta(0.001)) frag_attack.attack_lightning_noob(mdl_game._pos(1, b), Team.derelict, 1, 6, 4, glb_vars.shortCircuit_lightningDamage, Pal.accent);
+          if(Mathf.chanceDelta(0.001)) frag_attack.atk_lightning_noob(b, Team.derelict, 1, 6, 4, VAR.shortCircuit_lightningDamage, Pal.accent);
         };
       });
     };
@@ -100,7 +108,6 @@
 
 
   // Part: Transport
-    /* NOTE: Changes the amount of assigned liquid in the building. */
     const addLiquid = function(b, liq, amt) {
       if(b == null) return;
 
@@ -119,11 +126,6 @@
     exports.addLiquid = addLiquid;
 
 
-    /*
-      NOTE:
-      Called to balance the liquid amounts between b_f and b_t.
-      Set {forced} to true to ignore the amount in b_t.
-    */
     const transferLiquid = function(b_f, b_t, liq, forced) {
       if(forced == null) forced = false;
       if(b_f == null || b_t == null || b_f.liquids == null || b_t.liquids == null) return;
@@ -134,7 +136,7 @@
       var cap_t = b_t.block.liquidCapacity;
       var pres = (b_f.block.liquidPressure + b_t.block.liquidPressure) / 2.0;
       var visc = liq.viscosity;
-      var rate = Time.delta * mdl_flow.getFlowRate(amt_f, tmpAmt_t, pres, visc);
+      var rate = b_f.edelta() * mdl_flow._flowRate(amt_f, tmpAmt_t, pres, visc);
       var amt_trans = Math.min(rate, cap_t - amt_t);
 
       if(amt_f > 0.0001) {
@@ -149,7 +151,6 @@
     exports.transferLiquid = transferLiquid;
 
 
-    /* NOTE: For junctions. {b} should be the pipe, and {ob} is to be tested. */
     const getJunctionEnd = function(b, ob) {
       if(b == null || ob == null) return;
       if(!(ob.block instanceof LiquidJunction)) return ob;
@@ -169,7 +170,6 @@
     exports.getJunctionEnd = getJunctionEnd;
 
 
-    /* NOTE: An overhaul to vanilla moveLiquid method. Reaction is disabled. */
     const moveLiquid_pipe = function(b, ob, liq) {
       if(b == null || ob == null) return 0.0;
 
@@ -196,9 +196,8 @@
 
 
   // Start: Efficiency
-    /* NOTE: Kills blocks with efficiency stored. Can be skipped if contained in {db_fluid.effcWhitelist}. */
     const updateTile_efficiency = function(b) {
-      if(db_fluid.effcWhitelist.contains(b.block.name)) return;
+      if(db_fluid.db["efficiency"]["whitelist"].contains(b.block.name)) return;
 
       var invalid = false;
       var liq = b.liquids.current();
@@ -213,11 +212,10 @@
     exports.updateTile_efficiency = updateTile_efficiency;
 
 
-    /* NOTE: Used by cores, simply outputs core effc. */
     const updateTile_coreEffc = function(b, rate) {
       var effc = Vars.content.liquid("reind-effc-effc-core");
 
-      addLiquid(b, effc, rate);
+      addLiquid(b, effc, b.edelta() * rate);
       b.dumpLiquid(effc);
     };
     exports.updateTile_coreEffc = updateTile_coreEffc;
@@ -225,23 +223,22 @@
 
 
   // Part: Durability
-    /* NOTE: Sticky fluids can damage some blocks that are vulnerable to clogging. */
     const updateTile_sticky = function(b) {
       if(cfg_update.isSuppressed() || noob) return;
       if(!Mathf.chanceDelta(0.02)) return;
       if(b.liquids == null) return;
-      if(!mdl_content.vulnerableToClogging(b.block)) return;
+      if(!mdl_content.cloggable(b.block)) return;
 
       var liq = b.liquids.current();
       if(!mdl_content.isReind(liq)) return;
       var visc = liq.viscosity;
-      var visc_clog = glb_vars.clogging_viscosity;
+      var visc_clog = VAR.clogging_viscosity;
       if(visc < visc_clog) return;
       var amt = b.liquids.get(liq);
       if(amt < 0.05) return;
       var cap = b.block.liquidCapacity;
 
-      var dmg = Time.delta * (b.maxHealth * glb_vars.clogging_damageRatio + glb_vars.clogging_minDamage) * Mathf.lerp(0.5, 1.0, amt / cap) * Mathf.lerp(0.5, 1.0, (visc - visc_clog) / 0.25);
+      var dmg = b.edelta() * (b.maxHealth * VAR.clogging_damageRatio + VAR.clogging_minDamage) * Mathf.lerp(0.5, 1.0, amt / cap) * Mathf.lerp(0.5, 1.0, (visc - visc_clog) / 0.25);
       b.damage(dmg);
 
       mdl_effect.showAtP(0.5, b, db_effect._cloggingParticles(b.block, liq));
@@ -249,7 +246,6 @@
     exports.updateTile_sticky = updateTile_sticky;
 
 
-    /* NOTE: Corrosive fluids can damage some blocks. */
     const updateTile_corrosion = function(b) {
       if(cfg_update.isSuppressed() || noob) return;
       if(!Mathf.chanceDelta(0.02)) return;
@@ -258,23 +254,64 @@
       var amt = b.liquids.get(liq);
       if(amt < 0.05) return;
 
-      var cor = mdl_corrosion.getCorrosion(liq);
-      var corScl = mdl_corrosion.getCorrosionScale(b.block, liq);
+      var cor = mdl_corrosion._cor(liq);
+      var corScl = mdl_corrosion._corScl(b.block, liq);
       if(cor < 0.01 && corScl > 1.0) cor = 1.0;        // No corrosion power but has effective fluid tags
       if(cor < 0.01) return;
-      var corRes = mdl_corrosion.getCorrosionResistence(b.block);
+      var corRes = mdl_corrosion._corRes(b.block);
 
-      var dmg = Time.delta * b.maxHealth * glb_vars.corrosion_damageRatio * cor * corScl / corRes;
+      var dmg = b.edelta() * b.maxHealth * VAR.corrosion_damageRatio * cor * corScl / corRes;
       b.damage(dmg);
 
       mdl_effect.showAtP(0.5, b, db_effect._corrosionParticles(b.block, liq));
     };
     exports.updateTile_corrosion = updateTile_corrosion;
+
+
+    const updateTile_flammableContent = function(b) {
+      if(Vars.state.rules.reactorExplosions && Mathf.chance(0.004) && b.liquids != null) {
+        var liq = b.liquids.current();
+        var cond1 = liq.explosiveness > 0.2999 || liq.flammability > 0.2999;
+        var cond2 = false;
+        if(cond1) mdl_game._liTileRect(b.tile, 1, b.block.size).each(ot => {if(Fires.get(ot.x, ot.y)) cond2 = true});
+
+        if(cond1 && cond2) {
+          b.kill();
+
+          var rad = frag_attack._gasExploRad(b.block.size);
+          var dmg = frag_attack._gasExploDmg(b.block.size);
+          var shake = 8.0;
+
+          frag_attack.atk_explosion_noob(b, rad, dmg, shake);
+        };
+      };
+    };
+    exports.updateTile_flammableContent = updateTile_flammableContent;
+
+
+    const updateTile_pressured = function(b) {
+      if(Vars.state.rules.reactorExplosions && Mathf.chance(0.01) && b.liquids != null) {
+        var amt_pres = b.liquids.get(Vars.content.liquid("reind-effc-cond-pressure"));
+        var amt_vac = b.liquids.get(Vars.content.liquid("reind-effc-cond-vacuum"));
+        var cap = b.block.liquidCapacity;
+        var p = Math.max(amt_pres / cap * 0.3, amt_vac / cap * 0.4);
+
+        if(Mathf.chance(p) && b.health / b.maxHealth < 0.5 || b.dead) {
+          if(!b.dead) b.kill();
+
+          var rad = frag_attack._gasExploRad(b.block.size);
+          var dmg = frag_attack._gasExploDmg(b.block.size);
+          var shake = 8.0;
+
+          frag_attack.atk_explosion_noob(b, rad, dmg, shake);
+        };
+      };
+    };
+    exports.updateTile_pressured = updateTile_pressured;
   // End
 
 
   // Part: Misc
-    /* NOTE: The assigned liquid can spill if the building is full of it. */
     const updateTile_overflow = function(b, liq) {
       if(!b.block.hasLiquids || b.efficiency < 0.0001) return;
       if(!Mathf.chanceDelta(0.04)) return;

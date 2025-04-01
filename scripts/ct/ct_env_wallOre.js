@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const env_wallOre = require("reind/env/env_wallOre");
+    const TEMPLATE = require("reind/env/env_wallOre");
   // End
 
 
@@ -21,10 +21,13 @@
     const envOre_wall_crudeGraphite = extend(OreBlock, "env-ore-wall-crude-graphite", {
       setStats() {
         this.super$setStats();
-        env_wallOre.setStats(this);
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
       },
     });
-    env_wallOre.setup(envOre_wall_crudeGraphite);
     exports.envOre_wall_crudeGraphite = envOre_wall_crudeGraphite;
   // End
 
@@ -33,10 +36,13 @@
     const envOre_wall_cuprite = extend(OreBlock, "env-ore-wall-cuprite", {
       setStats() {
         this.super$setStats();
-        env_wallOre.setStats(this);
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
       },
     });
-    env_wallOre.setup(envOre_wall_cuprite);
     exports.envOre_wall_cuprite = envOre_wall_cuprite;
   // End
 
@@ -45,20 +51,26 @@
     const envOre_wall_hematite = extend(OreBlock, "env-ore-wall-hematite", {
       setStats() {
         this.super$setStats();
-        env_wallOre.setStats(this);
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
       },
     });
-    env_wallOre.setup(envOre_wall_hematite);
     exports.envOre_wall_hematite = envOre_wall_hematite;
 
 
     const envOre_wall_magnetite = extend(OreBlock, "env-ore-wall-magnetite", {
       setStats() {
         this.super$setStats();
-        env_wallOre.setStats(this);
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
       },
     });
-    env_wallOre.setup(envOre_wall_magnetite);
     exports.envOre_wall_magnetite = envOre_wall_magnetite;
   // End
 
@@ -67,10 +79,13 @@
     const envOre_wall_anglesite = extend(OreBlock, "env-ore-wall-anglesite", {
       setStats() {
         this.super$setStats();
-        env_wallOre.setStats(this);
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
       },
     });
-    env_wallOre.setup(envOre_wall_anglesite);
     exports.envOre_wall_anglesite = envOre_wall_anglesite;
   // End
 
@@ -79,10 +94,13 @@
     const envOre_wall_smithsonite = extend(OreBlock, "env-ore-wall-smithsonite", {
       setStats() {
         this.super$setStats();
-        env_wallOre.setStats(this);
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
       },
     });
-    env_wallOre.setup(envOre_wall_smithsonite);
     exports.envOre_wall_smithsonite = envOre_wall_smithsonite;
   // End
 

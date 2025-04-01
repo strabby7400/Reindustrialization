@@ -52,5 +52,6 @@
   liquidDrop: liq-ore-water
   liquidMultiplier: 1.0
   attributes: {
+    reind-attr-env-growth: 0.75
     reind-attr-flr-water: 1.5
   }

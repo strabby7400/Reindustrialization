@@ -6,16 +6,16 @@
 
 
   // Part: Import
-    const env_genericOre = require("reind/env/env_genericOre");
+    const PARENT = require("reind/env/env_genericOre");
 
     const mdl_text = require("reind/mdl/mdl_text");
   // End
 
 
   // Part: Component
-    function setupComp(blk) {
-      Events.run(ClientLoadEvent, () => {
-        if(!Vars.headless) blk.localizedName = blk.itemDrop.localizedName + mdl_text.getSpace() + Core.bundle.get("term.reind-term-wall-ore.name");
+    function initComp(blk) {
+      Events.run(MusicRegisterEvent, () => {
+        if(!Vars.headless) blk.localizedName = blk.itemDrop.localizedName + mdl_text._space() + Core.bundle.get("term.reind-term-wall-ore.name");
       });
     };
   // End
@@ -30,15 +30,15 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      env_genericOre.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
-    const setup = function(blk) {
-      setupComp(blk);
+    const init = function(blk) {
+      initComp(blk);
     };
-    exports.setup = setup;
+    exports.init = init;
   // End
 
 

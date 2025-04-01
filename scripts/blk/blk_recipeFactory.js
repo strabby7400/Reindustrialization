@@ -9,22 +9,34 @@
     const lib_base = require("reind/lib/lib_base");
     const lib_tmi = lib_base.hasTmi ? require("reind/lib/lib_tmi") : null;
 
-    const blk_genericFactory = require("reind/blk/blk_genericFactory");
+    const PARENT = require("reind/blk/blk_genericFactory");
 
-    const ct_blk_recipeFactory = require("reind/ct/ct_blk_recipeFactory");
+    const cfg_update = require("reind/cfg/cfg_update");
 
-    const frag_facility = require("reind/frag/frag_facility");
+    const frag_attack = require("reind/frag/frag_attack");
+    const frag_faci = require("reind/frag/frag_faci");
     const frag_recipe = require("reind/frag/frag_recipe");
 
     const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_recipe = require("reind/mdl/mdl_recipe");
     const mdl_table = require("reind/mdl/mdl_table");
 
+    const db_block = require("reind/db/db_block");
     const db_effect = require("reind/db/db_effect");
     const db_stat = require("reind/db/db_stat");
+  // End
+
+
+  // Part: Setting
+    var efficiencyUpdateInterval = 90.0;
+    const set_efficiencyUpdateInterval = function(val) {
+      efficiencyUpdateInterval = val;
+    };
+    exports.set_efficiencyUpdateInterval = set_efficiencyUpdateInterval;
   // End
 
 
@@ -35,93 +47,100 @@
 
 
     function ax_getProgressIncrease(b, time, rcFi, id_rc) {
-      if(b.block.ignoreLiquidFullness) return b.edelta() / time / mdl_recipe.getTimeScale(rcFi, id_rc);
+      var val_fi = 1.0;
 
-      var val = 1.0;
-      var scl = 1.0;
-      var hasLiquidOutput = false;
-      var outputs = mdl_recipe.getOutputs(rcFi, id_rc);
-      var cap = outputs.size;
-      if(b.liquids != null && cap > 0) {
-        val = 0.0;
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
+      if(b.block.ignoreLiquidFullness) {
+        val_fi = b.edelta() / time / mdl_recipe._timeScale(rcFi, id_rc);
+      } else {
+        var val = 1.0;
+        var scl = 1.0;
+        var hasLiquidOutput = false;
+        var outputs = mdl_recipe._outputs(rcFi, id_rc);
+        var cap = outputs.size;
+        if(b.liquids != null && cap > 0) {
+          val = 0.0;
+          for(let i = 0; i < cap; i++) {
+            if(i % 2 != 0) continue;
 
-          var liq = Vars.content.liquid(outputs.get(i));
-          if(liq == null) continue;
-          var amt = outputs.get(i + 1);
-          var tmpVal = (b.block.liquidCapacity - b.liquids.get(liq)) / (amt * b.edelta());
-          val = Math.max(val, tmpVal);
-          scl = Math.min(scl, tmpVal);
-          hasLiquidOutput = true;
+            var liq = Vars.content.liquid(outputs.get(i));
+            if(liq == null) continue;
+            var amt = outputs.get(i + 1);
+            var tmpVal = (b.block.liquidCapacity - b.liquids.get(liq)) / (amt * b.edelta());
+            val = Math.max(val, tmpVal);
+            scl = Math.min(scl, tmpVal);
+            hasLiquidOutput = true;
+          };
         };
+
+        if(!hasLiquidOutput) val = 1.0;
+        val_fi = b.edelta() / time * (b.block.dumpExtraLiquid ? Math.min(val, 1.0) : scl) / mdl_recipe._timeScale(rcFi, id_rc);
       };
 
-      if(!hasLiquidOutput) val = 1.0;
-      return b.edelta() / time * (b.block.dumpExtraLiquid ? Math.min(val, 1.0) : scl) / mdl_recipe.getTimeScale(rcFi, id_rc);
+      return val_fi;
     };
   // End
 
 
   // Part: Component
-    function setStatsComp(blk, rcFi) {
+    function setStatsComp(blk) {
       blk.stats.remove(Stat.productionTime);
       blk.stats.add(Stat.productionTime, blk.craftTime / 60.0, StatUnit.seconds);
 
-      blk.stats.add(db_stat.recipes, ax_buildStats(rcFi));
+      blk.stats.add(db_stat.recipes, ax_buildStats(blk.rcFi));
     };
 
 
-    function updateTileComp(b, rcFi, id_rc, tag) {
-      var isManual = (tag == "manual");
+    function updateTileComp(b) {
+      var isManual = b.tag.includes("<manual>");
+      var isImpact = b.tag.includes("<impact>");
 
       // Prevents invalid recipe
-      if(mdl_recipe.getRecipeSize(rcFi) < id_rc + 0.9999) {
-        ct_blk_recipeFactory.accB_id_rc(b, "w", 0);
+      if(mdl_recipe._rcSize(b.rcFi) < b.id_rc + 0.9999) {
+        b.id_rc = 0;
         return;
       };
 
-      var needCheck = ct_blk_recipeFactory.accB_needCheck(b, "r");
-      var ci = ct_blk_recipeFactory.accB_ci(b, "r");
-      var bi = ct_blk_recipeFactory.accB_bi(b, "r");
-      var opt = ct_blk_recipeFactory.accB_opt(b, "r");
-      var co = ct_blk_recipeFactory.accB_co(b, "r");
-      var bo = ct_blk_recipeFactory.accB_bo(b, "r");
-      var fo = ct_blk_recipeFactory.accB_fo(b, "r");
-      var tmpEffc = ct_blk_recipeFactory.accB_tmpEffc(b, "r");
+      // Initialize
+      if(b.needCheck) {
+        b.param = 0.0;
+        b.param1 = 0.0;
+        b.param2 = 0.0;
 
-      if(needCheck) {
-        ci = frag_recipe.getCI(rcFi, id_rc);
-        bi = frag_recipe.getBI(rcFi, id_rc);
-        opt = frag_recipe.getOpt(rcFi, id_rc);
-        co = frag_recipe.getCO(rcFi, id_rc);
-        bo = frag_recipe.getBO(rcFi, id_rc);
-        fo = frag_recipe.getFO(rcFi, id_rc);
-        tmpEffc = frag_recipe.getEfficiency(b, ci, bi, opt, mdl_recipe.getRequireOptional(rcFi, id_rc));
+        b.craftSound = mdl_data.read_1n1v(db_block.db["param"]["sound"]["craft"], b.block.name, null);
 
-        ct_blk_recipeFactory.accB_ci(b, "w", ci);
-        ct_blk_recipeFactory.accB_bi(b, "w", bi);
-        ct_blk_recipeFactory.accB_opt(b, "w", opt);
-        ct_blk_recipeFactory.accB_co(b, "w", co);
-        ct_blk_recipeFactory.accB_bo(b, "w", bo);
-        ct_blk_recipeFactory.accB_fo(b, "w", fo);
-        ct_blk_recipeFactory.accB_tmpEffc(b, "w", tmpEffc);
+        b.timeScale = mdl_recipe._timeScale(b.rcFi, b.id_rc);
+        b.ci = frag_recipe._ci(b.rcFi, b.id_rc);
+        b.bi = frag_recipe._bi(b.rcFi, b.id_rc);
+        b.opt = frag_recipe._opt(b.rcFi, b.id_rc);
+        b.co = frag_recipe._co(b.rcFi, b.id_rc);
+        b.bo = frag_recipe._bo(b.rcFi, b.id_rc);
+        b.fo = frag_recipe._fo(b.rcFi, b.id_rc);
 
-        ct_blk_recipeFactory.accB_needCheck(b, "w", false);
+        if(isImpact) {
+          b.param1 = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], b.block.name, 40.0)
+        };
+
+        b.needCheck = false;
+      };
+
+      // Update some params occasionally
+      if(b.timerEffc.get(isManual ? 3.0 : efficiencyUpdateInterval)) {
+        b.efficiency = frag_recipe.sumEfficiency(b, b.ci, b.bi, b.opt, mdl_recipe._reqOpt(b.rcFi, b.id_rc));
+        b.tmpEffc = b.efficiency;
+        b.progInc = ax_getProgressIncrease(b, b.block.craftTime, b.rcFi, b.id_rc);
+        b.progInc1 = ax_getProgressIncrease(b, 1.0, b.rcFi, b.id_rc);
+        b.canAdd = frag_recipe.canAddResource(b, b.co, b.bo, b.fo);
       } else {
-        if(Mathf.chance(0.008)) ct_blk_recipeFactory.accB_needCheck(b, "w", true);
+        b.efficiency = b.tmpEffc;
       };
 
-      b.efficiency = tmpEffc;
+      // Extra: manual
       if(isManual) {
-        var param = ct_blk_recipeFactory.accB_param(b, "r");
-        b.efficiency *= param;
-
-        var param_dec = Math.min(0.002, param);
-        ct_blk_recipeFactory.accB_param(b, "w", param - param_dec);
+        b.efficiency *= Mathf.clamp(b.param * 1.25);
+        b.param -= Math.min(0.002, b.param);
       };
 
-      mdl_recipe.getScript(rcFi, id_rc).call(b);
+      mdl_recipe._script(b.rcFi, b.id_rc).call(b);
 
       if(b.efficiency < 0.0001 || !b.shouldConsume()) {
         // Cools down
@@ -130,40 +149,50 @@
         // Warms up
         b.warmup = Mathf.approachDelta(b.warmup, b.warmupTarget(), b.block.warmupSpeed);
 
-        var prog_fi = b.progress + ax_getProgressIncrease(b, b.block.craftTime, rcFi, id_rc);
-        if(prog_fi < 1.0) {
-          b.progress = prog_fi;
-        } else {
-          prog_fi %= 1.0;
-          b.progress = prog_fi;
+        b.progress += b.progInc;
+        if(b.progress > 1.0) {
+          // Finish crafting
+          b.progress %= 1.0;
 
-          frag_recipe.addItems(b, bo, fo, mdl_recipe.getFailProbability(rcFi, id_rc));
-          frag_recipe.consumeItems(b, bi, opt);
+          frag_recipe.addItems(b, b.bo, b.fo, mdl_recipe._failP(b.rcFi, b.id_rc));
+          frag_recipe.consumeItems(b, b.bi, b.opt);
 
           mdl_effect.showAt(b, b.block.craftEffect, 0.0);
+          mdl_effect.playAt(b, b.craftSound, Math.min(b.block.ambientSoundVolume * 2.0, 1.0), 1.0, 0.1);
 
-          mdl_recipe.getCraftScript(rcFi, id_rc).call(b);
+          mdl_recipe._craftScript(b.rcFi, b.id_rc).call(b);
+
+          // Extra: Impact
+          if(isImpact) {
+            var size = b.block.size;
+            var time = b.block.craftTime;
+
+            frag_attack.atk_impact(b, b.param1, frag_attack._impactDmg(size, time), frag_attack._impactDur(time), mdl_data.read_1n1v(db_block.db["param"]["shake"], b.block.name, 0.0));
+
+            var cap = Math.pow(size, 2);
+            for(let i = 0; i < cap; i++) {mdl_effect.dustAt_ldm(b, frag_attack._impactDustRad(size))};
+          };
         };
 
-        frag_recipe.addLiquids(b, co, ax_getProgressIncrease(b, 1.0, rcFi, id_rc), mdl_recipe.getTimeScale(rcFi, id_rc));
-        frag_recipe.consumeLiquids(b, ci, ax_getProgressIncrease(b, 1.0, rcFi, id_rc), mdl_recipe.getTimeScale(rcFi, id_rc));
+        frag_recipe.addLiquids(b, b.co, b.progInc1, b.timeScale);
+        frag_recipe.consumeLiquids(b, b.ci, b.progInc1, b.timeScale);
 
         mdl_effect.showAroundP(b.block.updateEffectChance, b, b.block.updateEffect, b.block.size * Vars.tilesize * 0.5, 0.0);
 
-        mdl_recipe.getUpdateScript(rcFi, id_rc).call(b);
+        mdl_recipe._updateScript(b.rcFi, b.id_rc).call(b);
       };
 
-      b.totalProgress += Time.delta * b.warmup * b.efficiency;
+      b.totalProgress += b.warmup * b.edelta();
 
-      frag_recipe.dumpResource(b, co, bo, fo);
+      frag_recipe.dumpResource(b, b.co, b.bo, b.fo);
     };
 
 
-    function initComp(blk, rcFi) {
-      var cap = mdl_recipe.getRecipeSize(rcFi);
+    function initComp(blk) {
+      var cap = mdl_recipe._rcSize(blk.rcFi);
       var cond_liq = false;
       for(let i = 0; i < cap; i++) {
-        var co = frag_recipe.getCO(rcFi, i);
+        var co = frag_recipe._co(blk.rcFi, i);
         if(frag_recipe.outputsLiquid(co)) cond_liq = true;
       };
       if(cond_liq) blk.outputsLiquid = true;
@@ -171,15 +200,15 @@
       blk.hasConsumers = true;
 
       if(lib_base.hasTmi) {
-        Events.run(MusicRegisterEvent, () => lib_tmi.register_recipeFactory(blk, rcFi));
+        Events.run(MusicRegisterEvent, () => lib_tmi.register_recipeFactory(blk, blk.rcFi));
       };
     };
 
 
-    function setBarsComp(blk, rcFi) {
+    function setBarsComp(blk) {
       blk.removeBar("liquid");
 
-      frag_facility.setBars_was(blk, rcFi);
+      frag_faci.setBars_was(blk, blk.rcFi);
 
       blk.addBar("reind-prog", b => new Bar(
         "term.reind-term-recipe-progress.name",
@@ -189,30 +218,25 @@
     };
 
 
-    const vec2_95321152 = new Vec2();
-    function buildConfigurationComp(b, tb, tag) {
-      var vec2 = vec2_95321152.setZero();
+    function buildConfigurationComp(b, tb) {
+      var vec2 = new Vec2();
 
-      var isManual = (tag == "manual");
-
-      var rcFi = ct_blk_recipeFactory.accB_rcFi(b, "r");
-      var id_rc = ct_blk_recipeFactory.accB_id_rc(b, "r");
+      var isManual = b.tag.includes("<manual>");
 
       if(isManual) {
         mdl_table.setTrigger(tb, function() {
           if(Vars.state.paused) {
             mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-manual-generator-paused.name"));
           } else {
-            var param_fi = Mathf.lerpDelta(ct_blk_recipeFactory.accB_param(b, "r"), 1.0, 0.135);
-            Call.tileConfig(Vars.player, b, vec2.set(-2, param_fi));
+            var param = Mathf.lerpDelta(b.param, 1.0, 0.135);
+            Call.tileConfig(Vars.player, b, vec2.set(-2, param));
           };
         }, Icon.crafting, Core.bundle.get("info.reind-info-manual-crafter.name"), 72.0);
-        tb.row().add("").row();
+        mdl_table.__breakHalf(tb);
       };
 
-      mdl_table.setRecipeSelector(tb, rcFi, id_rc, b, function() {
-        frag_recipe.consumeItems(b, rcFi, id_rc);
-        b.block.lastConfig = this;
+      mdl_table.setRecipeSelector(tb, b.rcFi, b.id_rc, b, function() {
+        b.block.lastConfig = new Point2(this, 0).x;
         Call.tileConfig(Vars.player, b, vec2.set(this, -2));
         b.deselect();
       }, 7);
@@ -222,55 +246,49 @@
     function configuredComp(b, builder, val) {
       if(val == null) return;
 
-      if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
-      var val_fi = -2;
-      var param_fi = -2;
-      if(val instanceof Vec2) {
-        val_fi = val.x;
-        param_fi = val.y;
-      };
-      if(val instanceof Building) val_fi = val.config();
+      var tup = mdl_data.handleConfigured(b, builder, val);
 
-      if(val_fi > -2) {
-        ct_blk_recipeFactory.accB_id_rc(b, "w", val_fi);
-        ct_blk_recipeFactory.accB_needCheck(b, "w", true);
+      if(tup[0] > -2) {
+        b.id_rc = tup[0];
+        b.needCheck = true;
         b.progress = 0.0;
+        b.efficiency = 0.0;
 
         mdl_effect.showAt(b, db_effect._recipeChange(b.block.size, b.team.color), 0.0);
       };
 
-      if(param_fi > -2) {
-        ct_blk_recipeFactory.accB_param(b, "w", param_fi);
+      if(tup[1] > -2) {
+        b.param = tup[1];
 
         mdl_effect.showAt(b, b.block.updateEffect);
       };
     };
 
 
-    function acceptItemComp(b, ob, itm, ci, bi, opt) {
+    function acceptItemComp(b, ob, itm) {
       if(b.items == null) return false;
       if(b.items.get(itm) >= b.getMaximumAccepted(itm)) return false;
-      if(!frag_recipe.hasInput(ci, bi, opt, itm.name)) return false;
+      if(!frag_recipe.hasInput(b.ci, b.bi, b.opt, itm.name)) return false;
 
       return true;
     };
 
 
-    function acceptLiquidComp(b, ob, liq, ci, bi, opt) {
+    function acceptLiquidComp(b, ob, liq) {
       if(b.liquids == null) return false;
       if(b.liquids.get(liq) > b.block.liquidCapacity) return false;
-      if(!frag_recipe.hasInput(ci, bi, opt, liq.name)) return false;
+      if(!frag_recipe.hasInput(b.ci, b.bi, b.opt, liq.name)) return false;
 
       return true;
     };
 
 
-    function outputsItemsComp(blk, rcFi) {
-      var cap = mdl_recipe.getRecipeSize(rcFi);
+    function outputsItemsComp(blk) {
+      var cap = mdl_recipe._rcSize(blk.rcFi);
       var cond = false;
       for(let i = 0; i < cap; i++) {
-        var bo = frag_recipe.getBO(rcFi, i);
-        var fo = frag_recipe.getFO(rcFi, i);
+        var bo = frag_recipe._bo(blk.rcFi, i);
+        var fo = frag_recipe._fo(blk.rcFi, i);
         if(frag_recipe.outputsItem(bo, fo)) cond = true;
       };
 
@@ -278,21 +296,21 @@
     };
 
 
-    function shouldConsumeComp(b, co, bo, fo) {
-      if(!frag_recipe.canAddResource(b, co, bo, fo)) return false;
+    function shouldConsumeComp(b) {
+      if(!b.canAdd) return false;
       if(!b.enabled) return false;
 
       return true;
     };
 
 
-    function consumesLiquidComp(blk, liq, rcFi) {
-      var cap = mdl_recipe.getRecipeSize(rcFi);
+    function consumesLiquidComp(blk, liq) {
+      var cap = mdl_recipe._rcSize(blk.rcFi);
       var cond = false;
       for(let i = 0; i < cap; i++) {
-        var ci = frag_recipe.getCI(rcFi, i);
-        var bi = frag_recipe.getBI(rcFi, i);
-        var opt = frag_recipe.getOpt(rcFi, i);
+        var ci = frag_recipe._ci(blk.rcFi, i);
+        var bi = frag_recipe._bi(blk.rcFi, i);
+        var opt = frag_recipe._opt(blk.rcFi, i);
         if(frag_recipe.hasInput(ci, bi, opt, liq.name)) cond = true;
       };
 
@@ -300,20 +318,24 @@
     };
 
 
-    function drawSelectComp(b, rcFi, id_rc) {
-      var ct = mdl_content.getContent_nm(mdl_recipe.getIconName(rcFi, id_rc));
-      mdl_draw.drawContentIcon(mdl_game._pos(1, b), ct, b.block.size);
+    function drawSelectComp(b) {
+      var isImpact = b.tag.includes("<impact>");
 
-      var tt = mdl_recipe.getRawTooltip(rcFi, id_rc);
-      if(tt == "overdriven") mdl_draw.drawRectPulse(mdl_game._pos(2, b), b.block.size * 0.5 * Vars.tilesize, Pal.remove);
+      var ct = mdl_content._ct_nm(mdl_recipe._iconNm(b.rcFi, b.id_rc));
+      mdl_draw.drawContentIcon(b, ct, b.block.size);
+
+      var tt = mdl_recipe._rawTooltip(b.rcFi, b.id_rc);
+      if(tt == "overdriven") mdl_draw.drawRectPulse(b, b.block.size * 0.5 * Vars.tilesize, Pal.remove);
+
+      if(isImpact) mdl_draw.drawCirclePulse(b, b.param1);
     };
 
 
-    function drawStatusComp(b, tag) {
-      var isManual = (tag == "manual");
+    function drawStatusComp(b) {
+      var isManual = b.tag.includes("<manual>");
 
       var color = b.status().color;
-      if(isManual && b.efficiency > 0.5) color = BlockStatus.active.color;
+      if(isManual && b.efficiency > 0.75) color = BlockStatus.active.color;
 
       if(b.block.enableDrawStatus) mdl_draw.drawBlockStatus(b, color);
     };
@@ -328,36 +350,38 @@
 
 
   // Part: Integration
-    const setStats = function(blk, rcFi) {
-      blk_genericFactory.setStats(blk);
+    const setStats = function(blk) {
+      PARENT.setStats(blk);
 
-      setStatsComp(blk, rcFi);
+      setStatsComp(blk);
     };
     exports.setStats = setStats;
 
 
-    const updateTile = function(b, rcFi, id_rc, tag) {
-      blk_genericFactory.updateTile(b);
+    const updateTile = function(b) {
+      if(cfg_update.isSuppressed()) return;
 
-      updateTileComp(b, rcFi, id_rc, tag);
+      PARENT.updateTile(b);
+
+      updateTileComp(b);
     };
     exports.updateTile = updateTile;
 
 
-    const init = function(blk, rcFi) {
-      initComp(blk, rcFi);
+    const init = function(blk) {
+      initComp(blk);
     };
     exports.init = init;
 
 
-    const setBars = function(blk, rcFi) {
-      setBarsComp(blk, rcFi);
+    const setBars = function(blk) {
+      setBarsComp(blk);
     };
     exports.setBars = setBars;
 
 
-    const buildConfiguration = function(b, tb, tag) {
-      buildConfigurationComp(b, tb, tag);
+    const buildConfiguration = function(b, tb) {
+      buildConfigurationComp(b, tb);
     };
     exports.buildConfiguration = buildConfiguration;
 
@@ -368,50 +392,50 @@
     exports.configured = configured;
 
 
-    const acceptItem = function(b, ob, itm, ci, bi, opt) {
-      if(!acceptItemComp(b, ob, itm, ci, bi, opt)) return false;
+    const acceptItem = function(b, ob, itm) {
+      if(!acceptItemComp(b, ob, itm)) return false;
 
       return true;
     };
     exports.acceptItem = acceptItem;
 
 
-    const acceptLiquid = function(b, ob, liq, ci, bi, opt) {
-      if(!acceptLiquidComp(b, ob, liq, ci, bi, opt)) return false;
+    const acceptLiquid = function(b, ob, liq) {
+      if(!acceptLiquidComp(b, ob, liq)) return false;
 
       return true;
     };
     exports.acceptLiquid = acceptLiquid;
 
 
-    const outputsItems = function(blk, rcFi) {
-      return outputsItemsComp(blk, rcFi);
+    const outputsItems = function(blk) {
+      return outputsItemsComp(blk);
     };
     exports.outputsItems = outputsItems;
 
 
-    const shouldConsume = function(b, co, bo, fo) {
-      if(!shouldConsumeComp(b, co, bo, fo)) return false;
+    const shouldConsume = function(b) {
+      if(!shouldConsumeComp(b)) return false;
 
       return true;
     };
     exports.shouldConsume = shouldConsume;
 
 
-    const consumesLiquid = function(blk, liq, rcFi) {
-      return consumesLiquidComp(blk, liq, rcFi);
+    const consumesLiquid = function(blk, liq) {
+      return consumesLiquidComp(blk, liq);
     };
     exports.consumesLiquid = consumesLiquid;
 
 
-    const drawSelect = function(b, rcFi, id_rc) {
-      drawSelectComp(b, rcFi, id_rc);
+    const drawSelect = function(b) {
+      drawSelectComp(b);
     };
     exports.drawSelect = drawSelect;
 
 
-    const drawStatus = function(b, tag) {
-      drawStatusComp(b, tag);
+    const drawStatus = function(b) {
+      drawStatusComp(b);
     };
     exports.drawStatus = drawStatus;
   // End

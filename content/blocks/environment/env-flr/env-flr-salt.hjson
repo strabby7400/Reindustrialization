@@ -45,5 +45,6 @@
   itemDrop: item-ore-salt
   playerUnmineable: true
   attributes: {
+    reind-attr-env-growth: 0.25
     reind-attr-rock-evaporite: 0.75
   }

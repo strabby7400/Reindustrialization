@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const rs_wasteFluid = require("reind/rs/rs_wasteFluid");
+    const TEMPLATE = require("reind/rs/rs_wasteFluid");
   // End
 
 
@@ -21,11 +21,11 @@
     const liqWas_wasteSlurry = extend(Liquid, "liq-was-waste-slurry", {
       setStats() {
         this.super$setStats();
-        rs_wasteFluid.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(puddle) {
         this.super$update(puddle);
-        rs_wasteFluid.update(this, puddle);
+        TEMPLATE.update(this, puddle);
       },
     });
     exports.liqWas_wasteSlurry = liqWas_wasteSlurry;
@@ -34,11 +34,11 @@
     const liqWas_wasteWater = extend(Liquid, "liq-was-waste-water", {
       setStats() {
         this.super$setStats();
-        rs_wasteFluid.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(puddle) {
         this.super$update(puddle);
-        rs_wasteFluid.update(this, puddle);
+        TEMPLATE.update(this, puddle);
       },
     });
     exports.liqWas_wasteWater = liqWas_wasteWater;
@@ -47,11 +47,11 @@
     const liqWas_wasteWaterAcidic = extend(Liquid, "liq-was-waste-water-acidic", {
       setStats() {
         this.super$setStats();
-        rs_wasteFluid.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(puddle) {
         this.super$update(puddle);
-        rs_wasteFluid.update(this, puddle);
+        TEMPLATE.update(this, puddle);
       },
     });
     exports.liqWas_wasteWaterAcidic = liqWas_wasteWaterAcidic;
@@ -60,11 +60,11 @@
     const liqWas_wasteWaterBasic = extend(Liquid, "liq-was-waste-water-basic", {
       setStats() {
         this.super$setStats();
-        rs_wasteFluid.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(puddle) {
         this.super$update(puddle);
-        rs_wasteFluid.update(this, puddle);
+        TEMPLATE.update(this, puddle);
       },
     });
     exports.liqWas_wasteWaterBasic = liqWas_wasteWaterBasic;

@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericDistributionGate = require("reind/blk/blk_genericDistributionGate");
+    const PARENT = require("reind/blk/blk_genericDistributionGate");
   // End
 
 
@@ -19,13 +19,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericDistributionGate.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericDistributionGate.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
   // End

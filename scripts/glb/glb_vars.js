@@ -6,8 +6,14 @@
 
 
   // Part: Update
-    const update_suppressorTime = 400;
+    const update_suppressorTime = 300.0;
     exports.update_suppressorTime = update_suppressorTime;
+  // End
+
+
+  // Part: Miner
+    const crop_harvestRadius = 128.0;
+    exports.crop_harvestRadius = crop_harvestRadius;
   // End
 
 
@@ -24,11 +30,11 @@
     const clogging_damageRatio = 0.02;
     exports.clogging_damageRatio = clogging_damageRatio;
 
-    const gasCylinder_explosionRadius = 64.0;
-    exports.gasCylinder_explosionRadius = gasCylinder_explosionRadius;
+    const gas_explosionRadius = 64.0;
+    exports.gas_explosionRadius = gas_explosionRadius;
 
-    const gasCylinder_explosionDamage = 2240.0;
-    exports.gasCylinder_explosionDamage = gasCylinder_explosionDamage;
+    const gas_explosionDamage = 2240.0;
+    exports.gas_explosionDamage = gas_explosionDamage;
   // End
 
 

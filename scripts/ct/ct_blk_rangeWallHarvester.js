@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_rangeWallHarvester = require("reind/blk/blk_rangeWallHarvester");
+    const TEMPLATE = require("reind/blk/blk_rangeWallHarvester");
   // End
 
 
@@ -20,28 +20,30 @@
   const minHarv_mycelialHarvester = extend(AttributeCrafter, "min-harv-mycelial-harvester", {
     setStats() {
       this.super$setStats();
-      blk_rangeWallHarvester.setStats(this);
+      TEMPLATE.setStats(this);
     },
     sumAttribute(attr, x, y) {
-      return blk_rangeWallHarvester.sumAttribute(this, attr, x, y);
+      return TEMPLATE.sumAttribute(this, attr, x, y);
     },
     drawPlace(x, y, rotation, valid) {
       this.super$drawPlace(x, y, rotation, valid);
-      blk_rangeWallHarvester.drawPlace(this, x, y, rotation, valid);
+      TEMPLATE.drawPlace(this, x, y, rotation, valid);
     },
   });
   minHarv_mycelialHarvester.buildType = () => extend(AttributeCrafter.AttributeCrafterBuild, minHarv_mycelialHarvester, {
+    needUpdate: true,
+    r: 5, tiles: new Seq(),
     updateTile() {
       this.super$updateTile();
-      blk_rangeWallHarvester.updateTile(this);
+      TEMPLATE.updateTile(this);
     },
     draw() {
       this.super$draw();
-      blk_rangeWallHarvester.draw(this);
+      TEMPLATE.draw(this);
     },
     drawSelect() {
       this.super$drawSelect();
-      blk_rangeWallHarvester.drawSelect(this);
+      TEMPLATE.drawSelect(this);
     },
   });
   exports.minHarv_mycelialHarvester = minHarv_mycelialHarvester;

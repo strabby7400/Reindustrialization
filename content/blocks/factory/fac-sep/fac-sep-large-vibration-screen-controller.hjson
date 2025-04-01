@@ -30,6 +30,7 @@
     parent: fac-sep-vibration-screen
     objectives: []
   }
+  researchCostMultiplier: 0.5
 
 
 /*

@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const unit_infantryUnit = require("reind/unit/unit_infantryUnit");
+    const PARENT = require("reind/unit/unit_infantryUnit");
   // End
 
 
@@ -19,31 +19,37 @@
 
   // Part: Integration
     const setStats = function(utp) {
-      unit_infantryUnit.setStats(utp);
+      PARENT.setStats(utp);
     };
     exports.setStats = setStats;
 
 
     const update = function(utp, unit) {
-      unit_infantryUnit.update(utp, unit);
+      PARENT.update(utp, unit);
     };
     exports.update = update;
 
 
+    const init = function(utp) {
+      PARENT.init(utp);
+    };
+    exports.init = init;
+
+
     const killed = function(utp, unit) {
-      unit_infantryUnit.killed(utp, unit);
+      PARENT.killed(utp, unit);
     };
     exports.killed = killed;
 
 
     const draw = function(utp, unit) {
-      unit_infantryUnit.draw(utp, unit);
+      PARENT.draw(utp, unit);
     };
     exports.draw = draw;
 
 
     const drawShadow = function(utp, unit) {
-      unit_infantryUnit.drawShadow(utp, unit);
+      PARENT.drawShadow(utp, unit);
     };
     exports.drawShadow = drawShadow;
   // End

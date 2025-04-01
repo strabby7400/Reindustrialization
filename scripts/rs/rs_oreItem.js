@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const rs_genericItem = require("reind/rs/rs_genericItem");
+    const PARENT = require("reind/rs/rs_genericItem");
 
     const db_stat = require("reind/db/db_stat");
     const db_table = require("reind/db/db_table");
@@ -14,9 +14,8 @@
 
 
   // Part: Component
-    const li_39572123 = new Seq();
     function setStatsComp(itm) {
-      var li = li_39572123.clear();
+      var li = new Seq();
 
       itm.stats.add(db_stat.isOre, true);
       itm.stats.add(db_stat.hardness, itm.hardness);
@@ -38,7 +37,7 @@
 
   // Part: Integration
     const setStats = function(itm) {
-      rs_genericItem.setStats(itm);
+      PARENT.setStats(itm);
 
       setStatsComp(itm);
     };

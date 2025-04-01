@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const sta_genericStatus = require("reind/sta/sta_genericStatus");
+    const PARENT = require("reind/sta/sta_genericStatus");
   // End
 
 
@@ -19,13 +19,13 @@
 
   // Part: Integration
     const setStats = function(sta) {
-      sta_genericStatus.setStats(sta);
+      PARENT.setStats(sta);
     };
     exports.setStats = setStats;
 
 
     const update = function(sta, unit, time) {
-      sta_genericStatus.update(sta, unit, time);
+      PARENT.update(sta, unit, time);
     };
     exports.update = update;
   // End

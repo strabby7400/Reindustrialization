@@ -6,11 +6,12 @@
 
 
   // Part: Import
-    const blk_genericStorageBlock = require("reind/blk/blk_genericStorageBlock");
+    const PARENT = require("reind/blk/blk_genericStorageBlock");
 
     const frag_fluid = require("reind/frag/frag_fluid");
 
     const mdl_data = require("reind/mdl/mdl_data");
+    const mdl_draw = require("reind/mdl/mdl_draw");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -18,16 +19,31 @@
   // End
 
 
+  // Part: Setting
+    var secretCode = "<ohno>";
+    const set_secretCode = function(val) {
+      secretCode = val;
+    };
+    exports.set_secretCode = set_secretCode;
+  // End
+
+
   // Part: Component
     function setStatsComp(blk) {
-      var rate = mdl_data.read_1n1v(db_block.coreEffcOutput, blk.name);
-      if(rate != null) blk.stats.add(db_stat.coreEffc, rate, StatUnit.perSecond);
+      var speed = mdl_data.read_1n1v(db_block.db["param"]["speed"]["base"], blk.name, 0.0);
+      blk.stats.add(db_stat.coreEffc, speed, StatUnit.perSecond);
     };
 
 
     function updateTileComp(b) {
-      var rate = Time.delta * mdl_data.read_1n1v(db_block.coreEffcOutput, b.block.name) / 60.0;
-      if(rate != null) frag_fluid.updateTile_coreEffc(b, rate);
+      // Initialize
+      if(b.needCheck) {
+        b.rate = mdl_data.read_1n1v(db_block.db["param"]["speed"]["base"], b.block.name, 0.0) / 60.0;
+
+        b.needCheck = false;
+      };
+
+      frag_fluid.updateTile_coreEffc(b, b.rate);
     };
 
 
@@ -39,11 +55,16 @@
     function configuredComp(b, builder, val) {
       if(val == null) return;
 
-      var val_fi = 0.0;
-      if(val instanceof Vec2) val_fi = val.x;
-      if(val instanceof Building) val_fi = val.config();
+      var tup = mdl_data.handleConfigured(b, builder, val);
 
-      Time.setDeltaProvider(() => Core.graphics.getDeltaTime() * 60.0 * val_fi);
+      if(tup[0] > -2) {
+        Time.setDeltaProvider(() => Core.graphics.getDeltaTime() * 60.0 * tup[0]);
+      };
+    };
+
+
+    function drawComp(b) {
+      if(secretCode.includes("<router>")) mdl_draw.drawNormalRegion(b, Vars.content.block("reind-dis-aux-router").region, 0.0, 1.0, b.block.size);
     };
   // End
 
@@ -57,7 +78,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericStorageBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -65,7 +86,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericStorageBlock.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };
@@ -82,6 +103,12 @@
       configuredComp(b, builder, val);
     };
     exports.configured = configured;
+
+
+    const draw = function(b) {
+      drawComp(b);
+    };
+    exports.draw = draw;
   // End
 
 

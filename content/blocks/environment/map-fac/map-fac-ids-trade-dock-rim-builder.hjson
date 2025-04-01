@@ -1,0 +1,367 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: effect
+  buildVisibility: editorOnly
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 400.0
+  armor: 24.0
+  size: 3
+  hasItems: true
+  itemCapacity: 2000
+  hasLiquids: true
+  liquidCapacity: 600.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 16
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-rotator"
+        spinSprite: true
+        rotateSpeed: 6.0
+      }
+
+
+      {
+        type: DrawCrucibleFlame
+        alpha: 0.5
+        fadeMargin: 0.3
+        midColor: ffffff
+        circleSpace: 0.0
+        circleStroke: 0.0
+        particles: 32
+        particleInterp: pow2Out
+        particleLife: 30.0
+        particleRad: 7.0
+        particleSize: 4.0
+        rotateScl: 1.5
+        flameColor: ffd37f
+        flameRad: 3.0
+        flameRadiusScl: 8.0
+        flameRadiusMag: 1.5
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawFade
+        suffix: "-fade"
+      }
+
+
+      {
+        type: DrawFade
+        suffix: "-fade1"
+        scale: 4.0
+      }
+
+
+      {
+        type: DrawFade
+        suffix: "-fade2"
+        scale: 5.0
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+    ]
+  }
+  craftEffect: {
+    type: MultiEffect
+    effects: [
+
+
+      {
+
+        # Template: _impact
+        # Order: 1
+
+        /* <---------------- meta ----------------> */
+
+        type: WaveEffect
+        interp: linear
+        lifetime: 30.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        layer: 15.0
+        sides: -1
+        followParent: true
+        rotWithParent: false
+        colorFrom: ffffff30
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & size & stroke ----------------> */
+
+        baseRotation: 0.0
+        rotation: 0.0
+        sizeFrom: 0.0
+        sizeTo: 80.0
+        strokeFrom: 6.0
+        strokeTo: 4.0
+
+      }
+
+
+      {
+
+        # Template: _impact
+        # Order: 2
+
+        /* <---------------- meta ----------------> */
+
+        type: WaveEffect
+        interp: linear
+        lifetime: 40.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        layer: 15.0
+        sides: -1
+        followParent: true
+        rotWithParent: false
+        colorFrom: ffffff30
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & size & stroke ----------------> */
+
+        baseRotation: 0.0
+        rotation: 0.0
+        sizeFrom: 0.0
+        sizeTo: 80.0
+        strokeFrom: 6.0
+        strokeTo: 4.0
+
+      }
+
+
+      {
+
+        # Template: _tradeDockFlare
+
+        /* <---------------- meta ----------------> */
+
+        type: ParticleEffect
+        interp: pow5Out
+        lifetime: 120.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: reind-efr-flare
+        layer: 110.0
+        particles: 1
+        followParent: true
+        rotWithParent: false
+        useRotation: true
+        colorFrom: ffd37f
+        colorTo: ffd37f
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 45.0
+        offset: 0.0
+        cone: 180.0
+        spin: 0.0
+        randLength: true
+        length: 0.0
+        baseLength: 0.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: linear
+        sizeFrom: 60.0
+        sizeTo: 0.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
+
+
+      {
+
+        # Template: _craftGasLarge
+
+        /* <---------------- meta ----------------> */
+
+        interp: pow2Out
+        lifetime: 480.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: reind-efr-shadow-white
+        layer: 86.0
+        particles: 18
+        followParent: true
+        rotWithParent: false
+        useRotation: true
+        colorFrom: ffffff40
+        colorTo: ffffff00
+        lightScl: 2.0
+        lightOpacity: 0.0
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 0.0
+        offset: 0.0
+        cone: 180.0
+        spin: 0.0
+        randLength: true
+        length: 64.0
+        baseLength: 0.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: pow5Out
+        sizeFrom: 2.0
+        sizeTo: 14.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
+
+
+    ]
+  }
+  updateEffect: {
+
+    # Template: _idsParticles
+
+    /* <---------------- meta ----------------> */
+
+    type: ParticleEffect
+    interp: pow2In
+    lifetime: 180.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: reind-efr-diamond-hollow
+    layer: 69.0
+    particles: 1
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffd37f
+    colorTo: ffd37f
+    lightScl: 2.0
+    lightOpacity: 0.65
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 4.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: sine
+    sizeFrom: 8.0
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffectChance: 0.02
+  ambientSound: se-amb-hum-ids
+  ambientSoundVolume: 0.5
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  configurable: true
+  outputsLiquid: true
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 10000.0
+  consumes: {
+    power: 5.0
+  }

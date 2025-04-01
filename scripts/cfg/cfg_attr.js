@@ -59,5 +59,5 @@
 
 
 Events.run(ClientLoadEvent, () => {
-  Log.info("REIND: cfg_attribute.js loaded.");
+  Log.info("REIND: cfg_attr.js loaded.");
 });

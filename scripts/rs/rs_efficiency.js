@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const rs_genericResource = require("reind/rs/rs_genericResource");
+    const PARENT = require("reind/rs/rs_genericResource");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -39,7 +39,7 @@
 
   // Part: Integration
     const setStats = function(effc) {
-      rs_genericResource.setStats(effc);
+      PARENT.setStats(effc);
 
       setStatsComp(effc);
     };

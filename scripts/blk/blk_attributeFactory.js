@@ -6,18 +6,17 @@
 
 
   // Part: Import
-    const blk_genericFactory = require("reind/blk/blk_genericFactory");
+    const PARENT = require("reind/blk/blk_genericFactory");
+
+    const mdl_attr = require("reind/mdl/mdl_attr");
+
+    const db_stat = require("reind/db/db_stat");
   // End
 
 
   // Part: Component
     function setStatsComp(blk) {
-
-    };
-
-
-    function updateTileComp(b) {
-
+      blk.stats.add(db_stat.attributeRequired, mdl_attr._attrVal(blk.attribute));
     };
   // End
 
@@ -31,7 +30,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericFactory.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -39,9 +38,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericFactory.updateTile(b);
-
-      updateTileComp(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
   // End

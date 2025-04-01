@@ -6,10 +6,9 @@
 
 
   // Part: Import
-    const blk_genericGenerator = require("reind/blk/blk_genericGenerator");
+    const PARENT = require("reind/blk/blk_genericGenerator");
 
-    const ct_blk_manualGenerator = require("reind/ct/ct_blk_manualGenerator");
-
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_table = require("reind/mdl/mdl_table");
     const mdl_ui = require("reind/mdl/mdl_ui");
@@ -23,31 +22,27 @@
 
 
     function updateTileComp(b) {
-      var frac = ct_blk_manualGenerator.accB_frac(b, "r");
       b.totalTime -= b.warmup * Time.delta;
-      b.totalTime += b.warmup * frac * Time.delta;
+      b.totalTime += b.warmup * b.frac * Time.delta;
 
-      var frac_dec = Math.min(0.005, frac);
-      ct_blk_manualGenerator.accB_frac(b, "w", frac - frac_dec);
+      b.frac -= Math.min(0.005, b.frac);
     };
 
 
     function updateEfficiencyMultiplierComp(b) {
-      var frac = ct_blk_manualGenerator.accB_frac(b, "r");
-      b.efficiencyMultiplier = frac;
+      b.efficiencyMultiplier = b.frac;
     };
 
 
-    const vec2_66892251 = new Vec2();
     function buildConfigurationComp(b, tb) {
-      var vec2 = vec2_66892251.setZero();
+      var vec2 = new Vec2();
 
       mdl_table.setTrigger(tb, function() {
         if(Vars.state.paused) {
           mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-manual-generator-paused.name"));
         } else {
-          var frac_fi = Mathf.lerpDelta(ct_blk_manualGenerator.accB_frac(b, "r"), 1.0, 0.135);
-          Call.tileConfig(Vars.player, b, vec2.set(frac_fi, -2));
+          var frac = Mathf.clamp(Mathf.lerpDelta(b.frac, 1.14514, 0.14));
+          Call.tileConfig(Vars.player, b, vec2.set(frac, -2));
         };
       }, Icon.power, Core.bundle.get("info.reind-info-manual-generator.name"), 72.0);
     };
@@ -56,17 +51,10 @@
     function configuredComp(b, builder, val) {
       if(val == null) return;
 
-      if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
-      var val_fi = -2;
-      var param_fi = -2;
-      if(val instanceof Vec2) {
-        val_fi = val.x;
-        param_fi = val.y;
-      };
-      if(val instanceof Building) val_fi = val.config();
+      var tup = mdl_data.handleConfigured(b, builder, val);
 
-      if(val_fi > -2) {
-        ct_blk_manualGenerator.accB_frac(b, "w", val_fi);
+      if(tup[0] > -2) {
+        b.frac = tup[0];
 
         mdl_effect.showAt(b, b.block.generateEffect);
       };
@@ -83,7 +71,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericGenerator.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -91,7 +79,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericGenerator.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };

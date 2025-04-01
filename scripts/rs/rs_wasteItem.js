@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const rs_genericItem = require("reind/rs/rs_genericItem");
+    const PARENT = require("reind/rs/rs_genericItem");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -28,7 +28,7 @@
 
   // Part: Integration
     const setStats = function(itm) {
-      rs_genericItem.setStats(itm);
+      PARENT.setStats(itm);
 
       setStatsComp(itm);
     };

@@ -39,6 +39,12 @@
 
       const stat_flammable = new Stat("reind-stat-flammable.name", StatCat.function);
       exports.flammable = stat_flammable;
+
+      const stat_requiredTerrain = new Stat("reind-stat-required-terrain.name", StatCat.function);
+      exports.requiredTerrain = stat_requiredTerrain;
+
+      const stat_disabledIn = new Stat("reind-stat-disabled-in.name", StatCat.function);
+      exports.disabledIn = stat_disabledIn;
     // End
 
 
@@ -83,8 +89,8 @@
       const stat_corrosionResistence = new Stat("reind-stat-corrosion-resistence.name", StatCat.liquids);
       exports.corrosionResistence = stat_corrosionResistence;
 
-      const stat_vulnerableToClogging = new Stat("reind-stat-vulnerable-to-clogging.name", StatCat.liquids);
-      exports.vulnerableToClogging = stat_vulnerableToClogging;
+      const stat_cloggable = new Stat("reind-stat-cloggable.name", StatCat.liquids);
+      exports.cloggable = stat_cloggable;
 
       const stat_fluidHeatCapacity = new Stat("reind-stat-fluid-heat-capacity.name", StatCat.liquids);
       exports.fluidHeatCapacity = stat_fluidHeatCapacity;
@@ -110,6 +116,12 @@
 
 
     // Part: Power Block
+      const stat_conductsPower = new Stat("reind-stat-conducts-power.name", StatCat.power);
+      exports.conductsPower = stat_conductsPower;
+
+      const stat_connectable = new Stat("reind-stat-connectable.name", StatCat.power);
+      exports.connectable = stat_connectable;
+
       const stat_canShortCircuit = new Stat("reind-stat-can-short-circuit.name", StatCat.power);
       exports.canShortCircuit = stat_canShortCircuit;
 
@@ -121,6 +133,9 @@
     // Part: Factory
       const stat_recipes = new Stat("reind-stat-recipes.name", StatCat.crafting);
       exports.recipes = stat_recipes;
+
+      const stat_attributeRequired = new Stat("reind-stat-attribute-required.name", StatCat.crafting);
+      exports.attributeRequired = stat_attributeRequired;
 
       const stat_factoryFamily = new Stat("reind-stat-factory-family.name", StatCat.function);
       exports.factoryFamily = stat_factoryFamily;
@@ -142,6 +157,17 @@
       exports.extinguishesFire = stat_extinguishesFire;
     // End
 
+
+    // Part: Growth Block
+      const stat_growTime = new Stat("reind-stat-grow-time.name", StatCat.crafting);
+      exports.growTime = stat_growTime;
+
+      const stat_growStages = new Stat("reind-stat-grow-stages.name", StatCat.crafting);
+      exports.growStages = stat_growStages;
+
+      const stat_cropYield = new Stat("reind-stat-crop-yield.name", StatCat.crafting);
+      exports.cropYield = stat_cropYield;
+    // End
 
   /*
     ========================================
@@ -220,6 +246,9 @@
 
       const stat_resourceRelated = new Stat("reind-stat-resource-related.name", StatCat.function);
       exports.resourceRelated = stat_resourceRelated;
+
+      const stat_attributeSupplied = new Stat("reind-stat-attribute-supplied.name", StatCat.function);
+      exports.attributeSupplied = stat_attributeSupplied;
     // End
 
 
@@ -270,6 +299,12 @@
     // End
 
 
+    // Part: File
+      const stat_drama = new Stat("reind-stat-drama.name", StatCat.function);
+      exports.drama = stat_drama;
+    // End
+
+
   /*
     ========================================
     Sub-section: Special
@@ -293,7 +328,7 @@
   */
 
 
-    /* NOTE: Trivial for another .js file. */
+    // NOTE: Trival for another file.
 
 
     const statUnit_perBlock = new StatUnit("reind-statu-per-block.name", false);

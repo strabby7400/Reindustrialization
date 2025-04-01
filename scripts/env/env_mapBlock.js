@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const env_genericBlock = require("reind/env/env_genericBlock");
+    const PARENT = require("reind/env/env_genericBlock");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -28,7 +28,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      env_genericBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };

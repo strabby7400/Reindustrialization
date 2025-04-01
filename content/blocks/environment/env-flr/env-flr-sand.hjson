@@ -45,5 +45,6 @@
   itemDrop: item-ore-sand
   playerUnmineable: true
   attributes: {
+    reind-attr-env-growth: 0.25
     reind-attr-rock-clastic-sedimentary: 0.75
   }

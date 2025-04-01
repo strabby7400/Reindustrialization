@@ -1,0 +1,132 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: power
+  requirements: [
+    item-chem-lead/120
+    item-chem-brass/40
+    item-chem-tin-bronze/80
+    item-chem-steel/60
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: pow-gen-lodestone-turbine-generator
+    objectives: []
+  }
+  researchCostMultiplier: 0.35
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: true
+  liquidCapacity: 0.5
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 16
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-rotator"
+        spinSprite: true
+        rotateSpeed: 6.0
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawFade
+        suffix: "-fade"
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-turbine
+  ambientSoundVolume: 0.3
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  outputsLiquid: true
+  ignoreLiquidFullness: true
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 60.0
+  consumes: {
+    power: 5.33333333
+  }
+  outputLiquids: [
+    effc-cond-torque/0.05
+  ]

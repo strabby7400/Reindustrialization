@@ -10,7 +10,6 @@
 
 
   // Part: Event
-    /* NOTE: Runs a script if the status timer reaches zero. */
     const update_countdown = function(sta, unit, time, scr) {
       if(scr == null) return;
 

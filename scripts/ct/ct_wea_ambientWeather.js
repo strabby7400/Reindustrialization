@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const wea_ambientWeather = require("reind/wea/wea_ambientWeather");
+    const TEMPLATE = require("reind/wea/wea_ambientWeather");
   // End
 
 
@@ -21,7 +21,7 @@
     const weaAmb_aerthNormal = extend(Weather, "wea-amb-aerth-normal", {
       update(state) {
         this.super$update(state);
-        wea_ambientWeather.update(this, state);
+        TEMPLATE.update(this, state);
       },
     });
     const we_weaAmb_aerthNormal = new Weather.WeatherEntry(weaAmb_aerthNormal);
@@ -33,7 +33,7 @@
     const weaAmb_aerthParasite = extend(Weather, "wea-amb-aerth-parasite", {
       update(state) {
         this.super$update(state);
-        wea_ambientWeather.update(this, state);
+        TEMPLATE.update(this, state);
       },
     });
     const we_weaAmb_aerthParasite = new Weather.WeatherEntry(weaAmb_aerthParasite);

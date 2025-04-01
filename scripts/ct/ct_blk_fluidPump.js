@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_fluidPump = require("reind/blk/blk_fluidPump");
+    const TEMPLATE = require("reind/blk/blk_fluidPump");
   // End
 
 
@@ -21,24 +21,24 @@
     const bliqPump_primitiveFluidPump = extend(Pump, "bliq-pump-primitive-fluid-pump", {
       setStats() {
         this.super$setStats();
-        blk_fluidPump.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     bliqPump_primitiveFluidPump.buildType = () => extend(Pump.PumpBuild, bliqPump_primitiveFluidPump, {
       updateTile() {
         this.super$updateTile();
-        blk_fluidPump.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       moveLiquid(next, liquid) {
-        return blk_fluidPump.moveLiquid(this, next, liquid);
+        return TEMPLATE.moveLiquid(this, next, liquid);
       },
       draw() {
         this.super$draw();
-        blk_fluidPump.draw(this);
+        TEMPLATE.draw(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_fluidPump.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.bliqPump_primitiveFluidPump = bliqPump_primitiveFluidPump;
@@ -47,24 +47,24 @@
     const bliqPump_pistonFluidPump = extend(Pump, "bliq-pump-piston-fluid-pump", {
       setStats() {
         this.super$setStats();
-        blk_fluidPump.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     bliqPump_pistonFluidPump.buildType = () => extend(Pump.PumpBuild, bliqPump_pistonFluidPump, {
       updateTile() {
         this.super$updateTile();
-        blk_fluidPump.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       moveLiquid(next, liquid) {
-        return blk_fluidPump.moveLiquid(this, next, liquid);
+        return TEMPLATE.moveLiquid(this, next, liquid);
       },
       draw() {
         this.super$draw();
-        blk_fluidPump.draw(this);
+        TEMPLATE.draw(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_fluidPump.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.bliqPump_pistonFluidPump = bliqPump_pistonFluidPump;

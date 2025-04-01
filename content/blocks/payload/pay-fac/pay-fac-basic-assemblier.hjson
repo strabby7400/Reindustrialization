@@ -1,0 +1,114 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: PayloadConveyor
+  category: units
+  requirements: [
+    item-chem-lead/80
+    item-chem-graphite/100
+    item-chem-brass/60
+    item-chem-tin-bronze/120
+    item-chem-steel/100
+  ]
+  buildCostMultiplier: 1.5
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: pay-conv-payload-express-way
+    objectives: []
+  }
+  researchCostMultiplier: 0.5
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 24.0
+  size: 4
+  hasItems: true
+  itemCapacity: 300
+  hasLiquids: true
+  liquidCapacity: 5.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 20
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.3
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  rotate: true
+  minBlockSize: 1
+  maxBlockSize: 3
+  buildSpeed: 0.33333333
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  consumes: {
+    power: 2.0
+  }
+  filter: [
+    def-wall-wooden-barricade
+    def-wall-concrete-barricade
+    def-wall-brick-wall-clay
+    def-wall-brick-wall-carbon
+    def-wall-brick-wall-high-alumina
+    def-wall-brick-wall-magnesia
+    def-wall-brick-wall-mullite
+    def-wall-brick-wall-silica
+    def-wall-plate-wall-copper
+    def-wall-plate-wall-steel
+    def-wall-tempered-glass-wall
+
+    eff-stor-crate
+    eff-stor-bit-container
+    bliq-stor-liquid-tank
+    bliq-stor-gas-cylinder
+  ]

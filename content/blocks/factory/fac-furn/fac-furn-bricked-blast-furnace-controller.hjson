@@ -30,6 +30,7 @@
     parent: fac-furn-colossal-kiln
     objectives: []
   }
+  researchCostMultiplier: 0.4
 
 
 /*

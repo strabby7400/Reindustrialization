@@ -24,6 +24,7 @@
     parent: def-wall-brick-wall-clay
     objectives: []
   }
+  researchCostMultiplier: 0.5
 
 
 /*

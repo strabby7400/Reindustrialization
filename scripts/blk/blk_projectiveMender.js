@@ -6,9 +6,7 @@
 
 
   // Part: Import
-    const blk_genericProjector = require("reind/blk/blk_genericProjector");
-
-    const ct_blk_projectiveMender = require("reind/ct/ct_blk_projectiveMender");
+    const PARENT = require("reind/blk/blk_genericProjector");
 
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
@@ -24,48 +22,96 @@
       blk.stats.remove(Stat.booster);
       blk.stats.remove(Stat.range);
 
-      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
-      if(r == null) r = 0.0;
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
       blk.stats.add(Stat.range, "[accent]" + Strings.autoFixed((blk.range - blk.size) / 2.0, 2) + " " + StatUnit.blocks.localized() + "[] / [#84f491]" + Strings.autoFixed(r, 2) + " " + StatUnit.blocks.localized() + "[]");
     };
 
 
-    const li_77025514 = new Seq();
     function updateTileComp(b) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
-      if(r != null) {
-        var li_unit = li_77025514.clear();
-        mdl_game._liUnitAllied(mdl_game._pos(1, b), r * Vars.tilesize).each(unit => {if(unit.damaged()) li_unit.add(unit)});
+      // Initialize
+      if(b.needCheck) {
+        var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
+        b.r = r;
 
-        var down = !(li_unit.size > 0);
-        ct_blk_projectiveMender.accB_down(b, "w", down);
+        b.needCheck = false;
+      };
 
-        li_unit.each(unit => unit.healFract(b.block.healPercent / 60.0));
+      if(b.lastChange != Vars.world.tileChanges) {
+        b.lastChange = Vars.world.tileChanges;
+        b.updateTargets();
+      };
+
+      b.units.clear();
+      mdl_game._liUnitAllied(b, b.r * Vars.tilesize).each(unit => {if(unit.damaged() && !b.units.contains(unit)) b.units.add(unit)});
+
+      b.warmup = Mathf.approachDelta(b.warmup, b.didRegen ? 1.0 : 0.0, 1.0 / 120.0);
+      b.totalTime += b.warmup * Time.delta;
+      b.didRegen = false;
+      b.anyTargets = false;
+
+      if(b.checkSuppression()) return;
+
+      if(b.efficiency > 0.0) {
+        if((b.optionalTimer += Time.delta * b.optionalEfficiency) > b.block.optionalUseTime - 0.0001) {
+          b.consume();
+          b.optionalTimer = 0.0;
+        };
+
+        var amt = Mathf.lerp(1.0, b.block.optionalMultiplier, b.optionalEfficiency) * b.block.healPercent;
+        b.targets.each(ob => {
+          if(ob.damaged() && !ob.isHealSuppressed()) {
+            b.didRegen = true;
+
+            var tmpVal = b.repairMap.get(ob);
+            if(tmpVal == null) tmpVal = 0.0;
+
+            b.repairMap.put(ob, Mathf.clamp(tmpVal, amt * b.edelta() * ob.maxHealth * 0.01, ob.maxHealth - ob.health));
+
+            if(tmpVal < 0.0001 && Mathf.chance(b.block.effectChance * Math.pow(ob.block.size, 2))) mdl_effect.showAround(ob, b.block.effect, ob.block.size * Vars.tilesize * 0.5 - 1.0, 0.0);
+          };
+        });
+
+        b.units.each(unit => {
+          if(unit.damaged()) {
+            b.didRegen = true;
+
+            var tmpVal = b.repairMap.get(unit);
+            if(tmpVal == null) tmpVal = 0.0;
+
+            b.repairMap.put(unit, Mathf.clamp(tmpVal, amt * b.edelta() * unit.maxHealth * 0.01, unit.maxHealth - unit.health));
+          };
+        });
+      };
+
+      if(b.lastUpdateFrame != Vars.state.updateId) {
+        b.lastUpdateFrame = Vars.state.updateId;
+
+        b.repairMap.each((key, val) => {
+          if(key != null) {
+            key.heal(val);
+            if(key instanceof Building) key.recentlyHealed();
+          };
+        });
+        b.repairMap.clear();
       };
     };
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
-      if(r != null) mdl_draw.drawPlaceCircle(blk, Vars.world.tile(tx, ty), Pal.heal, r * Vars.tilesize, true);
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
+      mdl_draw.drawPlaceCircle(blk, Vars.world.tile(tx, ty), Pal.heal, r * Vars.tilesize, true);
     };
 
 
-    const li_70254486 = new Seq();
     function drawComp(b) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
-      if(r != null) {
-        var li_unit = li_70254486.clear();
-        mdl_game._liUnitAllied(mdl_game._pos(1, b), r * Vars.tilesize).each(unit => {if(unit.damaged()) li_unit.add(unit)});
+      if(!b.shouldConsume() || b.efficiency < 0.0001) return;
 
-        if(b.shouldConsume()) li_unit.each(unit => mdl_draw.drawFlickerLine(mdl_game._pos(1, b), mdl_game._pos(2, unit), Pal.heal));
-      };
+      b.units.each(unit => mdl_draw.drawFlickerLine(b, unit, Pal.heal));
     };
 
 
     function drawSelectComp(b) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
-      if(r != null) mdl_draw.drawSelectCircle(b, r * Vars.tilesize, true, Pal.heal);
+      mdl_draw.drawSelectCircle(b, b.r * Vars.tilesize, true, Pal.heal);
     };
   // End
 
@@ -79,7 +125,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericProjector.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -87,7 +133,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericProjector.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };

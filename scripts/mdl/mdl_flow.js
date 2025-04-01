@@ -8,18 +8,18 @@
   // Part: Import
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
     const mdl_data = require("reind/mdl/mdl_data");
+    const mdl_math = require("reind/mdl/mdl_math");
 
     const db_fluid = require("reind/db/db_fluid");
   // End
 
 
   // Part: Methods
-    /* NOTE: Reads density of the assigned liquid. The two default values are densities of water and air. */
-    const getDensity = function(liq) {
-      var dens = mdl_data.read_1n1v(db_fluid.density, liq.name);
+    const _dens = function(liq) {
+      var dens = mdl_data.read_1n1v(db_fluid.db["param"]["density"], liq.name);
       if(dens != null) return dens;
 
-      var grp = mdl_corrosion.getGroup(liq);
+      var grp = mdl_corrosion._fGrp(liq);
       switch(grp) {
         case "brine" :
           dens = 1.0;
@@ -29,6 +29,9 @@
           break;
         case "acidicAq" :
           dens = 1.0;
+          break;
+        case "oil" :
+          dens = 0.7;
           break;
         case "basicOil" :
           dens = 0.7;
@@ -62,21 +65,37 @@
 
       return dens;
     };
-    exports.getDensity = getDensity;
+    exports._dens = _dens;
 
 
-    /* Note: Reads viscosity of the assigned liquid, which is based on real data. */
-    const getViscosity = function(liq) {
-      var visc = mdl_data.read_1n1v(db_fluid.viscosity, liq.name);
+    const _temp = function(liq) {
+      var fHeat = mdl_data.read_1n1v(db_fluid.db["param"]["fHeat"], liq.name);
+      var temp;
+
+      if(fHeat != null) {
+        temp = mdl_math._interpHalf_log(fHeat, 26.0, 1500.0);
+      } else {
+        temp = 0.5;
+      };
+
+      return temp;
+    };
+    exports._temp = _temp;
+
+
+    const _visc = function(liq) {
+      var visc = mdl_data.read_1n1v(db_fluid.db["param"]["viscosity"], liq.name);
       var visc_fi;
+
       if(visc != null) {
-        var visc_water = mdl_data.read_1n1v(db_fluid.viscosity, "reind-liq-ore-water");
-        var visc_pitch = mdl_data.read_1n1v(db_fluid.viscosity, "reind-liq-was-pitch");
-        visc_fi = 1.0 - 0.5 * (Math.log(visc_pitch + 1.0) - Math.log(visc + 1.0)) / (Math.log(visc_pitch + 1.0) - Math.log(visc_water + 1.0));
+        var visc_water = mdl_data.read_1n1v(db_fluid.db["param"]["viscosity"], "reind-liq-ore-water");
+        var visc_pitch = mdl_data.read_1n1v(db_fluid.db["param"]["viscosity"], "reind-liq-was-pitch");
+
+        visc_fi = mdl_math._interpHalf_log(visc, visc_water, visc_pitch);
       } else if(liq.gas) {
         visc_fi = 0.15;
       } else {
-        var grp = mdl_corrosion.getGroup(liq);
+        var grp = mdl_corrosion._fGrp(liq);
         switch(grp) {
           case "slurry" :
             visc_fi = 0.7710;
@@ -94,25 +113,29 @@
 
       return visc_fi;
     };
-    exports.getViscosity = getViscosity;
+    exports._visc = _visc;
 
 
-    /* NOTE: A better rate based on real flow rate formula. */
-    const getFlowRate = function(amt_f, amt_t, pres, visc) {
+    const _flowRate = function(amt_f, amt_t, pres, visc) {
       var rate = Time.delta * (1.0 - visc) * (amt_f - amt_t) * pres;
       if(rate < 0.0) rate = 0.0;
       return rate;
     };
-    exports.getFlowRate = getFlowRate;
+    exports._flowRate = _flowRate;
 
 
-    /* NOTE: Calculates Reynold's number of the flow. I don't know what this can do. */
-    const getReynoldsNumber = function(rate, dens, cap, visc) {
+    /*
+     * NOTE:
+     *
+     * See Reynold's Number for more info.
+     * I don't know what this can do.
+     */
+    const _reynoldsNum = function(rate, dens, cap, visc) {
       var param = 85.5821;
       var renum = rate * dens * Math.pow(cap, 0.5) * param / visc;
       return renum;
     };
-    exports.getReynoldsNumber = getReynoldsNumber;
+    exports._reynoldsNum = _reynoldsNum;
   // End
 
 

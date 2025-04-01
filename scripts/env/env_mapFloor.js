@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const env_mapBlock = require("reind/env/env_mapBlock");
+    const PARENT = require("reind/env/env_mapBlock");
   // End
 
 
@@ -19,7 +19,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      env_mapBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
   // End

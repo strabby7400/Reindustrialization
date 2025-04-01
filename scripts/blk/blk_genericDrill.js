@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericMiner = require("reind/blk/blk_genericMiner");
+    const PARENT = require("reind/blk/blk_genericMiner");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -44,7 +44,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericMiner.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -52,7 +52,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericMiner.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
   // End

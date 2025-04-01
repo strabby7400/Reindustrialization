@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericHeatDistributionBlock = require("reind/blk/blk_genericHeatDistributionBlock");
+    const PARENT = require("reind/blk/blk_genericHeatDistributionBlock");
   // End
 
 
@@ -19,25 +19,25 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericHeatDistributionBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericHeatDistributionBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 
 
     const setBars = function(blk) {
-      blk_genericHeatDistributionBlock.setBars(blk);
+      PARENT.setBars(blk);
     };
     exports.setBars = setBars;
 
 
     const acceptLiquid = function(b, ob, liq) {
-      if(!blk_genericHeatDistributionBlock.acceptLiquid(b, ob, liq)) return false;
+      if(!PARENT.acceptLiquid(b, ob, liq)) return false;
 
       return true;
     };
@@ -45,25 +45,25 @@
 
 
     const moveLiquid = function(b, ob, liq) {
-      return blk_genericHeatDistributionBlock.moveLiquid(b, ob, liq);
+      return PARENT.moveLiquid(b, ob, liq);
     };
     exports.moveLiquid = moveLiquid;
 
 
     const draw = function(b) {
-      blk_genericHeatDistributionBlock.draw(b);
+      PARENT.draw(b);
     };
     exports.draw = draw;
 
 
     const drawSelect = function(b) {
-      blk_genericHeatDistributionBlock.drawSelect(b);
+      PARENT.drawSelect(b);
     };
     exports.drawSelect = drawSelect;
 
 
     const onDestroyed = function(b) {
-      blk_genericHeatDistributionBlock.onDestroyed(b);
+      PARENT.onDestroyed(b);
     };
     exports.onDestroyed = onDestroyed;
   // End

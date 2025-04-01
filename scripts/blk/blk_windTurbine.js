@@ -6,21 +6,26 @@
 
 
   // Part: Import
-    const blk_genericGenerator = require("reind/blk/blk_genericGenerator");
+    const PARENT = require("reind/blk/blk_genericGenerator");
 
+    const mdl_attr = require("reind/mdl/mdl_attr");
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
+
+    const db_stat = require("reind/db/db_stat");
   // End
 
 
   // Part: Component
     function setStatsComp(blk) {
       blk.stats.remove(Stat.tiles);
+      blk.stats.add(db_stat.attributeRequired, mdl_attr._attrVal(blk.attribute));
     };
 
 
     function updateTileComp(b) {
-      if(Mathf.chance(0.1)) b.sum = sumAttributeComp(b.block, b.block.attribute, b.tileX(), b.tileY()) - b.block.attribute.env();
+      if(b.timerEffc.get(60.0)) b.sum = b.block.sumAttribute(b.block.attribute, b.tileX(), b.tileY()) - b.block.attribute.env();
     };
 
 
@@ -28,19 +33,22 @@
       var t = Vars.world.tile(tx, ty);
       if(t == null) return 0.0;
 
-      var scl = 6400.0;
-      var attr = (1.0 - Math.pow(Math.sin(Time.time / scl), 2) * 0.7) * blk.attribute.env();
+      var attr = mdl_attr._wind(t);
 
-      var cap = blk.size * 4;
-      var count_solid = 0;
+      var count = 0;
       var li_ot = mdl_game._liTileEdge(t, blk.size);
       li_ot.each(ot => {
-        if(ot.solid()) count_solid += 1;
+        if(ot.solid()) count += 1;
       });
+      attr *= 1.0 - count / blk.size * 4;
 
-      attr *= 1.0 - count_solid / cap;
-
+      if(attr < 0.0) attr = 0.0;
       return attr;
+    };
+
+
+    function totalProgressComp(b) {
+      return (mdl_content.canUpdate(b)) ? Time.time : 0.0;
     };
 
 
@@ -81,7 +89,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericGenerator.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -89,7 +97,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericGenerator.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };
@@ -106,6 +114,12 @@
       return true;
     };
     exports.canPlaceOn = canPlaceOn;
+
+
+    const totalProgress = function(b) {
+      return totalProgressComp(b);
+    };
+    exports.totalProgress = totalProgress;
 
 
     const drawPlace = function(blk, tx, ty, rot, valid) {

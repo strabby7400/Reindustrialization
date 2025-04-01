@@ -62,6 +62,19 @@ const rc = {
     },
 
 
+    // Charcoal : Powdered Biomass
+    {
+      "icon": "reind-item-int-powdered-biomass",
+      "category": "carbonization",
+      "inputs": new Seq([
+        "reind-item-int-powdered-biomass", 20,
+      ]),
+      "randOutputs": new Seq([
+        "reind-item-bio-charcoal", 20, 0.25,
+      ]),
+    },
+
+
     // Charcoal : Charcoal (Uncarbonized)
     {
       "icon": "reind-item-int-charcoal-uncarbonized",

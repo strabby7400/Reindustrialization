@@ -6,13 +6,15 @@
 
 
   // Part: Import
-    const blk_genericHarvester = require("reind/blk/blk_genericHarvester");
+    const PARENT = require("reind/blk/blk_genericHarvester");
 
+    const mdl_attr = require("reind/mdl/mdl_attr");
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
+    const db_stat = require("reind/db/db_stat");
   // End
 
 
@@ -20,9 +22,21 @@
     function setStatsComp(blk) {
       blk.stats.remove(Stat.tiles);
       blk.stats.add(Stat.tiles, StatValues.blocks(blk.attribute, blk.floating, 1.0, true, false));
+      blk.stats.add(db_stat.attributeRequired, mdl_attr._attrVal(blk.attribute));
 
-      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
-      if(r != null) blk.stats.add(Stat.range, r, StatUnit.blocks);
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
+      blk.stats.add(Stat.range, r, StatUnit.blocks);
+    };
+
+
+    function updateTileComp(b) {
+      if(b.needUpdate) {
+        b.r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
+
+        mdl_game._liTileRect(b.tile, b.r, b.block.size).each(ot => {if(ot.block().attributes.get(b.block.attribute) > 0.0) b.tiles.add(ot)});
+
+        b.needUpdate = false;
+      };
     };
 
 
@@ -30,8 +44,7 @@
       if(attribute == null) return 0.0;
       var t = Vars.world.tile(tx, ty);
       if(t == null) return 0.0;
-      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
-      if(r == null) return 0.0;
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
 
       var attr = 0.0;
       mdl_game._liTileRect(t, r, blk.size).each(ot => {
@@ -43,41 +56,34 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
       var t = Vars.world.tile(tx, ty);
-      if(r != null && t != null) {
-        mdl_draw.drawPlaceRect(blk, t, valid, r, true);
-        mdl_game._liTileRect(t, r, blk.size).each(ot => {
-          if(ot.block().attributes.get(blk.attribute) > 0.0) {
-            mdl_draw.drawTileIndicator(ot, true);
-            mdl_draw.drawFlickerLine(mdl_game._pos(1, t, blk.offset), mdl_game._pos(2, ot, ot.block().offset), Pal.accent, 1.0, true);
-          };
-        });
-      };
+
+      mdl_draw.drawPlaceRect(blk, t, valid, r, true);
+      mdl_game._liTileRect(t, r, blk.size).each(ot => {
+        if(ot.block().attributes.get(blk.attribute) > 0.0) {
+          mdl_draw.drawTileIndicator(ot, true);
+          mdl_draw.drawFlickerLine(mdl_game._pos(t, blk.offset), mdl_game._pos(ot, ot.block().offset), Pal.accent, 1.0, true);
+        };
+      });
     };
 
 
     function drawComp(b) {
       if(b.efficiency > 0.0001) {
-        var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
-        if(r != null) mdl_game._liTileRect(b.tile, r, b.block.size).each(ot => {
-          if(ot.block().attributes.get(b.block.attribute) > 0.0) mdl_draw.drawItemTransfer(mdl_game._pos(1, ot, ot.block().offset), mdl_game._pos(2, b), Pal.accent, 1.0)
+        b.tiles.each(ot => {
+          mdl_draw.drawItemTransfer(mdl_game._pos(ot, ot.block().offset), b, Pal.accent, 1.0);
         });
       };
     };
 
 
     function drawSelectComp(b) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
-      if(r != null) {
-        mdl_draw.drawSelectRect(b, r, true);
-        mdl_game._liTileRect(b.tile, r, b.block.size).each(ot => {
-          if(ot.block().attributes.get(b.block.attribute) > 0.0) {
-            mdl_draw.drawTileIndicator(ot, true);
-            mdl_draw.drawFlickerLine(mdl_game._pos(1, b), mdl_game._pos(2, ot, ot.block().offset), Pal.accent, 1.0, true);
-          };
-        });
-      };
+      mdl_draw.drawSelectRect(b, b.r, true);
+      b.tiles.each(ot => {
+        mdl_draw.drawTileIndicator(ot, true);
+        mdl_draw.drawFlickerLine(b, mdl_game._pos(ot, ot.block().offset), Pal.accent, 1.0, true);
+      });
     };
   // End
 
@@ -91,7 +97,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericHarvester.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -99,7 +105,9 @@
 
 
     const updateTile = function(b) {
-      blk_genericHarvester.updateTile(b);
+      PARENT.updateTile(b);
+
+      updateTileComp(b);
     };
     exports.updateTile = updateTile;
 

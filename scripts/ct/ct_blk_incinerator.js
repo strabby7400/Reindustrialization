@@ -6,20 +6,7 @@
 
 
   // Part: Import
-    const blk_incinerator = require("reind/blk/blk_incinerator");
-
-    const mdl_content = require("reind/mdl/mdl_content");
-    const mdl_draw = require("reind/mdl/mdl_draw");
-    const mdl_game = require("reind/mdl/mdl_game");
-  // End
-
-
-  // Part: Accessor
-    const accB_frac = function(b, mode, val) {
-      if(mode == "r") return b.frac;
-      if(mode == "w") b.frac = val;
-    };
-    exports.accB_frac = accB_frac;
+    const TEMPLATE = require("reind/blk/blk_incinerator");
   // End
 
 
@@ -34,27 +21,24 @@
     const disAux_itemIncinerator = extend(ItemIncinerator, "dis-aux-item-incinerator", {
       setStats() {
         this.super$setStats();
-        blk_incinerator.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     disAux_itemIncinerator.buildType = () => extend(ItemIncinerator.ItemIncineratorBuild, disAux_itemIncinerator, {
-      glowReg: mdl_content.getRegion(disAux_itemIncinerator, "-glow"),
-      top3Reg: mdl_content.getRegion(disAux_itemIncinerator, "-top3"),
+      glowReg: null, top3Reg: null,
+      needCheck: true,
       frac: 0.0,
       updateTile() {
         this.super$updateTile();
-        blk_incinerator.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
-      // Specific
       draw() {
         this.super$draw();
-        mdl_draw.drawFlameRegion(mdl_game._pos(1, this), this.top3Reg, this.frac);
-        mdl_draw.drawHeatRegion(mdl_game._pos(2, this), this.power.status, this.glowReg);
+        TEMPLATE.draw(this);
       },
-      // Specific
       drawLight() {
         this.super$drawLight();
-        mdl_draw.drawLight(mdl_game._pos(1, this), this.frac);
+        TEMPLATE.drawLight(this);
       },
     });
     exports.disAux_itemIncinerator = disAux_itemIncinerator;

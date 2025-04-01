@@ -5,11 +5,11 @@
 */
 
 
-  // Part: Local
-    const getLocalPollution = function(t, r) {
+  // Part: Sum
+    const _polLocal = function(t, r) {
       // TODO: Add calculation
     };
-    exports.getPollution_1t = getPollution_1t;
+    exports._polLocal = _polLocal;
   // End
 
 

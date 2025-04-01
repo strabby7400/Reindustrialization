@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const env_genericProp = require("reind/env/env_genericProp");
+    const PARENT = require("reind/env/env_genericProp");
   // End
 
 
@@ -19,7 +19,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      env_genericProp.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
   // End

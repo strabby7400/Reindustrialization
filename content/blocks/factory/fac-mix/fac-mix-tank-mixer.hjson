@@ -1,0 +1,153 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: crafting
+  requirements: [
+    item-chem-lead/120
+    item-chem-graphite/80
+    item-chem-tin-bronze/50
+    item-chem-steel/50
+    item-chem-galvanized-steel/70
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-mix-v-mixer
+    objectives: []
+  }
+  researchCostMultiplier: 0.3
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 3
+  hasItems: true
+  itemCapacity: 250
+  hasLiquids: true
+  liquidCapacity: 600.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawCultivator
+        plantColor: 7898ba
+        plantColorLight: 00000000
+        bottomColor: 7898ba
+      }
+
+
+      {
+        type: DrawBubbles
+        color: cce4ff
+        amount: 12
+        sides: 16
+        strokeMin: 0.0
+        spread: 8.0
+        timeScl: 60.0
+        recurrence: 3.0
+        radius: 3.0
+        fill: false
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-rotator"
+        spinSprite: true
+        rotateSpeed: 4.0
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawFade
+        suffix: "-fade"
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.3
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  configurable: true
+  outputsLiquid: true
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 1200.0
+  consumes: {
+    power: 1.0
+  }

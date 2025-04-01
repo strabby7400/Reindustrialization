@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const rs_intermediateFluid = require("reind/rs/rs_intermediateFluid");
+    const TEMPLATE = require("reind/rs/rs_intermediateFluid");
   // End
 
 
@@ -21,11 +21,11 @@
     const liqInt_melt_glass = extend(Liquid, "liq-int-melt-glass", {
       setStats() {
         this.super$setStats();
-        rs_intermediateFluid.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(puddle) {
         this.super$update(puddle);
-        rs_intermediateFluid.update(this, puddle);
+        TEMPLATE.update(this, puddle);
       },
     });
     exports.liqInt_melt_glass = liqInt_melt_glass;
@@ -36,11 +36,11 @@
     const liqInt_brinePurified = extend(Liquid, "liq-int-brine-purified", {
       setStats() {
         this.super$setStats();
-        rs_intermediateFluid.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(puddle) {
         this.super$update(puddle);
-        rs_intermediateFluid.update(this, puddle);
+        TEMPLATE.update(this, puddle);
       },
     });
     exports.liqInt_brinePurified = liqInt_brinePurified;
@@ -51,11 +51,11 @@
     const gasInt_airClean = extend(Liquid, "gas-int-air-clean", {
       setStats() {
         this.super$setStats();
-        rs_intermediateFluid.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(puddle) {
         this.super$update(puddle);
-        rs_intermediateFluid.update(this, puddle);
+        TEMPLATE.update(this, puddle);
       },
     });
     exports.gasInt_airClean = gasInt_airClean;

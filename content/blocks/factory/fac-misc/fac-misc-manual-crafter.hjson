@@ -1,0 +1,211 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: crafting
+  requirements: [
+    item-chem-lead/220
+    item-buil-tempered-glass/40
+    item-chem-graphite/120
+    item-chem-brass/40
+    item-chem-tin-bronze/40
+    item-chem-steel/60
+  ]
+  buildCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-misc-core-crafter
+    objectives: []
+  }
+  researchCostMultiplier: 0.2
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 3
+  hasItems: true
+  itemCapacity: 960
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 20
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawParticles
+        color: eab678
+        alpha: 1.0
+        particles: 24
+        particleLife: 60.0
+        particleRad: 10.0
+        particleSize: 1.0
+        rotateScl: 4.0
+        reverse: true
+      }
+
+
+      {
+        type: DrawParticles
+        color: bfbfbf
+        alpha: 1.0
+        particles: 36
+        particleLife: 40.0
+        particleRad: 10.5
+        particleSize: 0.5
+        rotateScl: 2.0
+        reverse: true
+      }
+
+
+      {
+        type: DrawWeave
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-rotator"
+        spinSprite: true
+        rotateSpeed: 6.0
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-lid"
+      }
+
+
+    ]
+  }
+  craftEffect: {
+
+    # Template: _craftCrack
+
+    /* <---------------- meta ----------------> */
+
+    interp: pow5Out
+    lifetime: 90.0
+    startDelay: 0.0
+
+    /* <---------------- visual ----------------> */
+
+    region: "reind-efr-diamond"
+    layer: 69.0
+    particles: 5
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffffff
+    colorTo: ffffff
+    lightScl: 2.0
+    lightOpacity: 0.0
+
+    /* <---------------- angle & length ----------------> */
+
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 10.0
+    baseLength: 0.0
+
+    /* <---------------- size & stroke & len ----------------> */
+
+    line: false
+    sizeInterp: pow10In
+    sizeFrom: 4.0
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
+
+  }
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-hum
+  ambientSoundVolume: 0.3
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  configurable: true
+  outputsLiquid: false
+  ignoreLiquidFullness: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 600.0

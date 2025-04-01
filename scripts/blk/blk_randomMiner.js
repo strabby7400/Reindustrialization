@@ -6,30 +6,36 @@
 
 
   // Part: Import
-    const blk_genericMiner = require("reind/blk/blk_genericMiner");
+    const PARENT = require("reind/blk/blk_genericMiner");
 
     const mdl_attr = require("reind/mdl/mdl_attr");
     const mdl_data = require("reind/mdl/mdl_data");
+    const mdl_effect = require("reind/mdl/mdl_effect");
 
     const db_block = require("reind/db/db_block");
+    const db_effect = require("reind/db/db_effect");
+    const db_stat = require("reind/db/db_stat");
   // End
 
 
   // Part: Component
     function setStatsComp(blk) {
-      var nm_attr = mdl_data.read_1n1v(db_block.attrMap, blk.name);
-      if(nm_attr != null) blk.stats.add(Stat.tiles, Attribute.get(nm_attr));
+      var nmAttr = mdl_data.read_1n1v(db_block.db["map"]["attribute"], blk.name);
+      if(nmAttr != null) {
+        blk.stats.add(Stat.tiles, Attribute.get(nmAttr));
+        blk.stats.add(db_stat.attributeRequired, mdl_attr._attrVal(nmAttr));
+      };
     };
 
 
     function updateTileComp(b) {
-      if(b.efficiency > 0.0 && Mathf.chance(0.01)) Vars.content.block("reind-min-dril-mechanical-drill").updateEffect.at(b);
+      if(b.efficiency > 0.0) mdl_effect.showAroundP(mdl_effect._pFrac(0.02, b.efficiency), b, db_effect._drillCrack(), b.block.size * Vars.tilesize * 0.5, 0.0);
     };
 
 
     function canPlaceOnComp(blk, t, team, rot) {
-      var nm_attr = mdl_data.read_1n1v(db_block.attrMap, blk.name);
-      if(!(nm_attr != null && mdl_attr.isEnough_blk(blk, t, nm_attr))) return false;
+      var nmAttr = mdl_data.read_1n1v(db_block.db["map"]["attribute"], blk.name);
+      if(!(nmAttr != null && mdl_attr._sumAttr(blk, t, nmAttr) > mdl_attr._limit(blk) - 0.0001)) return false;
 
       return true;
     };
@@ -45,7 +51,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericMiner.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -53,7 +59,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericMiner.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };

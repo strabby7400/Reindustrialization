@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericBlock = require("reind/blk/blk_genericBlock");
+    const PARENT = require("reind/blk/blk_genericBlock");
 
     const frag_heat = require("reind/frag/frag_heat");
 
@@ -20,19 +20,18 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      var heatLimit = mdl_data.read_1n1v(db_block.heatLimit, blk.name);
+      var heatLimit = mdl_data.read_1n1v(db_block.db["heat"]["limit"], blk.name);
       if(heatLimit != null) blk.stats.add(db_stat.heatLimit, heatLimit);
 
-      var heatLoss = mdl_data.read_1n1v(db_block.heatLoss, blk.name);
+      var heatLoss = mdl_data.read_1n1v(db_block.db["heat"]["loss"], blk.name);
       if(heatLoss != null) blk.stats.add(db_stat.heatLoss, Strings.fixed(heatLoss * 1000.0, 2) + "‰");
 
-      var heatTransCoef = mdl_data.read_1n1v(db_block.heatTransferCoefficient, blk.name);
+      var heatTransCoef = mdl_data.read_1n1v(db_block.db["heat"]["transCoef"], blk.name);
       if(heatTransCoef != null) blk.stats.add(db_stat.heatTransferCoefficient, Strings.fixed(heatTransCoef, 2));
     };
 
 
     function updateTileComp(b) {
-      // Update heat
       frag_heat.updateTile_heat(b);
     };
 
@@ -55,7 +54,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -63,7 +62,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericBlock.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };

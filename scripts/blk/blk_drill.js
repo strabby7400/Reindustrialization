@@ -6,13 +6,15 @@
 
 
   // Part: Import
-    const blk_genericDrill = require("reind/blk/blk_genericDrill");
+    const PARENT = require("reind/blk/blk_genericDrill");
+
+    const mdl_content = require("reind/mdl/mdl_content");
   // End
 
 
   // Part: Component
     function canMineComp(blk, t) {
-      if(t.overlay() != null && t.overlay().name.includes("reind-env-ore-depth-")) return false;
+      if(mdl_content.isDepthOre(t.overlay())) return false;
 
       return true;
     };
@@ -28,13 +30,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericDrill.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericDrill.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 

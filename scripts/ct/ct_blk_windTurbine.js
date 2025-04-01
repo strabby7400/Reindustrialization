@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_windTurbine = require("reind/blk/blk_windTurbine");
+    const TEMPLATE = require("reind/blk/blk_windTurbine");
   // End
 
 
@@ -21,25 +21,30 @@
     const powGen_windTurbine = extend(ThermalGenerator, "pow-gen-wind-turbine", {
       setStats() {
         this.super$setStats();
-        blk_windTurbine.setStats(this);
+        TEMPLATE.setStats(this);
       },
       sumAttribute(attr, x, y) {
-        return blk_windTurbine.sumAttribute(this, attr, x, y);
+        return TEMPLATE.sumAttribute(this, attr, x, y);
       },
       canPlaceOn(tile, team, rotation) {
-        return blk_windTurbine.canPlaceOn(this, tile, team, rotation);
+        if(!TEMPLATE.canPlaceOn(this, tile, team, rotation)) return false;
+        return true;
       },
       drawPlace(x, y, rotation, valid) {
-        blk_windTurbine.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     powGen_windTurbine.buildType = () => extend(ThermalGenerator.ThermalGeneratorBuild, powGen_windTurbine, {
+      timerEffc: new Interval(1),
       updateTile() {
         this.super$updateTile();
-        blk_windTurbine.updateTile(this);
+        TEMPLATE.updateTile(this);
+      },
+      totalProgress() {
+        return TEMPLATE.totalProgress(this);
       },
       drawSelect() {
-        blk_windTurbine.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.powGen_windTurbine = powGen_windTurbine;

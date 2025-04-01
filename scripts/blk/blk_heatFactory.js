@@ -6,8 +6,8 @@
 
 
   // Part: Import
-    const blk_genericFactory = require("reind/blk/blk_genericFactory");
-    const blk_genericHeatBlock = require("reind/blk/blk_genericHeatBlock");
+    const PARENT = require("reind/blk/blk_genericFactory");
+    const PARENT_A = require("reind/blk/blk_genericHeatBlock");
   // End
 
 
@@ -20,19 +20,19 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericFactory.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericFactory.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 
 
     const setBars = function(blk) {
-      blk_genericHeatBlock.setBars(blk);
+      PARENT_A.setBars(blk);
     };
     exports.setBars = setBars;
   // End

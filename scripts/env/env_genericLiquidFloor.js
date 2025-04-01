@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const env_genericFloor = require("reind/env/env_genericFloor");
+    const PARENT = require("reind/env/env_genericFloor");
   // End
 
 
@@ -19,7 +19,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      env_genericFloor.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
   // End

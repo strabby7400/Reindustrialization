@@ -6,11 +6,10 @@
 
 
   // Part: Import
-    const blk_genericMiner = require("reind/blk/blk_genericMiner");
+    const PARENT = require("reind/blk/blk_genericMiner");
     const env_depthOre = require("reind/env/env_depthOre");
 
-    const ct_blk_oreScanner = require("reind/ct/ct_blk_oreScanner");
-
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
@@ -24,62 +23,58 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
-      if(r != null) blk.stats.add(Stat.range, r, StatUnit.blocks);
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
+      blk.stats.add(Stat.range, r, StatUnit.blocks);
     };
 
 
     function updateTileComp(b) {
-      if(b.efficiency <= 0.9999) return;
+      // Initialize
+      if(b.needCheck) {
+        b.r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
+        b.scanColor = mdl_data.read_1n1v(db_block.db["param"]["color"]["base"], b.block.name, Color.white);
 
-      var cd = ct_blk_oreScanner.accB_cd(b, "r");
-      var thr = ct_blk_oreScanner.accB_thr(b, "r");
+        mdl_game._liTileRect(b.tile, b.r, b.block.size).each(ot => {if(mdl_content.isDepthOre(ot.overlay())) b.tiles.add(ot)});
 
-      if(cd >= thr) {
-        cd %= thr;
+        b.needCheck = false;
+      };
 
-        var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
-        if(r != null) {
-          mdl_effect.showAt_ldm(b, db_effect._oreScannerScan(r, b.block.size, ct_blk_oreScanner.accB_scanColor(b, "r")), 0.0);
-          mdl_effect.playAt(b, "se-craft-ore-scanner");
+      if(b.efficiency > 0.9999) {
+        b.prog += b.warmup * b.edelta();
+
+        if(b.prog > b.thr) {
+          b.prog %= b.thr;
+
+          b.a = 1.0;
+
+          mdl_effect.showAt_ldm(b, db_effect._oreScannerScan(b.r, b.block.size, b.scanColor), 0.0);
+          mdl_effect.playAt(b, "se-craft-ore-scanner", 1.0, 1.0, 0.1);
         };
       };
 
-      cd += 1;
-      ct_blk_oreScanner.accB_cd(b, "w", cd);
+      b.a = Mathf.approachDelta(b.a, 0.0, 0.008);
     };
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, blk.name);
-      if(r != null) mdl_draw.drawPlaceRect(blk, Vars.world.tile(tx, ty), valid, r, true);
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
+      mdl_draw.drawPlaceRect(blk, Vars.world.tile(tx, ty), valid, r, true);
     };
 
 
     function drawComp(b) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
-      if(r == null) return;
+      if(b.a > 0.01) {
+        b.tiles.each(ot => {
+          var ov = ot.overlay();
 
-      if(b.efficiency < 0.9999) return;
-
-      var cd = ct_blk_oreScanner.accB_cd(b, "r");
-      var thr = ct_blk_oreScanner.accB_thr(b, "r");
-      var a = Math.pow(1.0 - cd / thr, 2);
-
-      var li_ot = mdl_game._liTileRect(b.tile, r, b.block.size);
-      li_ot.each(ot => {
-        var ov = ot.overlay();
-
-        if(ov != null && ov.name.includes("reind-env-ore-depth-")) {
-          env_depthOre.drawBase(ov, ot, a);
-        };
-      });
+          if(mdl_content.isDepthOre(ov)) env_depthOre.drawBase(ov, ot, b.a);
+        });
+      };
     };
 
 
     function drawSelectComp(b) {
-      var r = mdl_data.read_1n1v(db_block.genericRange, b.block.name);
-      if(r != null) mdl_draw.drawSelectRect(b, r, true);
+      mdl_draw.drawSelectRect(b, b.r, true);
     };
   // End
 
@@ -93,7 +88,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericMiner.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -101,7 +96,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericMiner.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };

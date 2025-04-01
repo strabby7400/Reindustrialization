@@ -9,7 +9,7 @@
 
     /* <---------------- config ----------------> */
 
-    const cfg_attribute = require("reind/cfg/cfg_attribute");
+    const cfg_attr = require("reind/cfg/cfg_attr");
     const cfg_content = require("reind/cfg/cfg_content");
     const cfg_hidden = require("reind/cfg/cfg_hidden");
     const cfg_setting = require("reind/cfg/cfg_setting");
@@ -60,6 +60,7 @@
     const ct_blk_wallHarvester = require("reind/ct/ct_blk_wallHarvester");
     const ct_blk_rangeWallHarvester = require("reind/ct/ct_blk_rangeWallHarvester");
     const ct_blk_randomMiner = require("reind/ct/ct_blk_randomMiner");
+    const ct_blk_crop = require("reind/ct/ct_blk_crop");
 
     /* <---------------- distribution & item blocks ----------------> */
 
@@ -122,6 +123,7 @@
     /* <---------------- payload ----------------> */
 
     const ct_blk_payloadConveyor = require("reind/ct/ct_blk_payloadConveyor");
+    const ct_blk_blockCrafter = require("reind/ct/ct_blk_blockCrafter");
 
     /* <---------------- logic ----------------> */
 
@@ -131,6 +133,8 @@
 
     const ct_env_restrictionZone = require("reind/ct/ct_env_restrictionZone");
     const ct_env_ruin = require("reind/ct/ct_env_ruin");
+    const ct_env_occupiedWall = require("reind/ct/ct_env_occupiedWall");
+    const ct_env_tradeFactory = require("reind/ct/ct_env_tradeFactory");
 
     /* <---------------- environment ----------------> */
 
@@ -150,6 +154,7 @@
 
     const ct_sta_genericStatus = require("reind/ct/ct_sta_genericStatus");
     const ct_sta_liquidStatus = require("reind/ct/ct_sta_liquidStatus");
+    const ct_sta_file = require("reind/ct/ct_sta_file");
 
     /* <---------------- units ----------------> */
 
@@ -175,7 +180,7 @@
 
 
     function getRandomTip() {
-      return getTip(mdl_math.randInt(li_tips.size - 1));
+      return getTip(mdl_math._randInt(li_tips.size - 1));
     };
   // End
 
@@ -183,6 +188,10 @@
   // Part: Dialog
     function setDialog_welcome() {
       if(Vars.headless) return;
+      if(!Core.settings.getBool("reind-welcome-dialog", true)) {
+        Sounds.door.play();
+        return;
+      };
 
       Sounds.wave.play();
       var dial = new BaseDialog("@info.reind-info-dial-welcome.name");
@@ -207,6 +216,12 @@
         btns.button("@ok", run(() => {
           Sounds.door.play();
           dial.hide();
+
+          mdl_ui._te(0.0, "reind-dial-te-err", 0.5, false, 1.0, "up");
+          mdl_ui._te(1.0, "reind-dial-te-err", 0.5, false, 0.75, "jump");
+          mdl_ui._te(1.75, "reind-dial-te-err", 0.5, false, 2.25, "jump");
+          mdl_ui._te(4.0, "reind-dial-te-err", 0.5, false, 1.0, "down");
+          mdl_ui._dial_boxToast(0.0, mdl_ui._dialCtRand("earlan", "welcome"), mdl_ui._speaker("earlan"));
         })).size(200.0, 50.0).center().pad(12.0);
 
         btns.button("@term.reind-term-credits.name", db_dialog._credits()).size(200.0, 50.0).center().pad(12.0);
@@ -250,6 +265,7 @@
 
     Events.run(MusicRegisterEvent, () => {
       cfg_setting.loadSettings();
+      db_dialog.setReindManual();
       db_dialog.setSettings();
       setDialog_welcome();
       cfg_hidden.setup_hiddenItems();

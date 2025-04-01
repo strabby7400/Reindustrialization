@@ -7,16 +7,19 @@
 
   // Part: Import
     const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_recipe = require("reind/mdl/mdl_recipe");
+
+    const db_effect = require("reind/db/db_effect");
   // End
 
 
   // Part: Parse
-    const getCI = function(rcFi, id_rc) {
+    const _ci = function(rcFi, id_rc) {
       var ci = new Seq();
 
       // Input
-      var li = mdl_recipe.getInputs(rcFi, id_rc);
+      var li = mdl_recipe._inputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -36,14 +39,14 @@
 
       return ci;
     };
-    exports.getCI = getCI;
+    exports._ci = _ci;
 
 
-    const getBI = function(rcFi, id_rc) {
+    const _bi = function(rcFi, id_rc) {
       var bi = new Seq();
 
       // Input
-      var li = mdl_recipe.getInputs(rcFi, id_rc);
+      var li = mdl_recipe._inputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -60,7 +63,7 @@
       };
 
       // Random Input
-      var li = mdl_recipe.getRandInputs(rcFi, id_rc);
+      var li = mdl_recipe._randInputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -78,7 +81,7 @@
       };
 
       // Batch Fluid Input
-      var li = mdl_recipe.getBatchFluidInputs(rcFi, id_rc);
+      var li = mdl_recipe._bfInputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -96,14 +99,14 @@
 
       return bi;
     };
-    exports.getBI = getBI;
+    exports._bi = _bi;
 
 
-    const getOpt = function(rcFi, id_rc) {
+    const _opt = function(rcFi, id_rc) {
       var opt = new Seq();
 
       // Optional Input
-      var li = mdl_recipe.getOptionalInputs(rcFi, id_rc);
+      var li = mdl_recipe._optInputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -124,10 +127,10 @@
 
       return opt;
     };
-    exports.getOpt = getOpt;
+    exports._opt = _opt;
 
 
-    const getOptCur = function(b, opt) {
+    const _optCur = function(b, opt) {
       var optCur = null;
       var tmpMtp = 0.0;
 
@@ -151,14 +154,14 @@
 
       return optCur;
     };
-    exports.getOptCur = getOptCur;
+    exports._optCur = _optCur;
 
 
-    const getCO = function(rcFi, id_rc) {
+    const _co = function(rcFi, id_rc) {
       var co = new Seq();
 
       // Output
-      var li = mdl_recipe.getOutputs(rcFi, id_rc);
+      var li = mdl_recipe._outputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -175,14 +178,14 @@
 
       return co;
     };
-    exports.getCO = getCO;
+    exports._co = _co;
 
 
-    const getBO = function(rcFi, id_rc) {
+    const _bo = function(rcFi, id_rc) {
       var bo = new Seq();
 
       // Input
-      var li = mdl_recipe.getOutputs(rcFi, id_rc);
+      var li = mdl_recipe._outputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -199,7 +202,7 @@
       };
 
       // Random Output
-      var li = mdl_recipe.getRandOutputs(rcFi, id_rc);
+      var li = mdl_recipe._randOutputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -217,7 +220,7 @@
       };
 
       // Batch Fluid Output
-      var li = mdl_recipe.getBatchFluidOutputs(rcFi, id_rc);
+      var li = mdl_recipe._bfOutputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -234,14 +237,14 @@
       };
       return bo;
     };
-    exports.getBO = getBO;
+    exports._bo = _bo;
 
 
-    const getFO = function(rcFi, id_rc) {
+    const _fo = function(rcFi, id_rc) {
       var fo = new Seq();
 
       // Fail Outputs
-      var li = mdl_recipe.getFailOutputs(rcFi, id_rc);
+      var li = mdl_recipe._failOutputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
         for(let i = 0; i < cap; i++) {
@@ -258,7 +261,7 @@
 
       return fo;
     };
-    exports.getFO = getFO;
+    exports._fo = _fo;
   // End
 
 
@@ -346,7 +349,7 @@
           };
 
           if(b.liquids != null && ct instanceof Liquid) {
-            if(b.liquids.get(ct) > b.block.liquidCapacity - 0.01) cond = false;
+            if(!b.block.ignoreLiquidFullness && b.liquids.get(ct) / b.block.liquidCapacity > 0.98) cond = false;
           };
         };
       };
@@ -374,7 +377,7 @@
 
 
   // Part: Craft
-    const getEfficiency = function(b, ci, bi, opt, reqOpt) {
+    const sumEfficiency = function(b, ci, bi, opt, reqOpt) {
       var val = 1.0;
       var mtp = 1.0;
       if(b.power != null) val *= b.power.status;
@@ -418,7 +421,7 @@
       };
 
       // Opt
-      var optCur = getOptCur(b, opt);
+      var optCur = _optCur(b, opt);
       if(reqOpt && optCur == null) val = 0.0;
       if(optCur != null) {
         val *= optCur[3];
@@ -428,7 +431,7 @@
 
       return val;
     };
-    exports.getEfficiency = getEfficiency;
+    exports.sumEfficiency = sumEfficiency;
 
 
     const consumeItems = function(b, bi, opt) {
@@ -447,7 +450,7 @@
             if(p > 0.9999) {
               b.items.remove(ct, amt);
             } else {
-              for(let j = 0; j < amt; j++) {if(Mathf.chanceDelta(p)) b.items.remove(ct, 1)};
+              for(let j = 0; j < amt; j++) {if(Mathf.chance(p)) b.items.remove(ct, 1)};
             };
           };
 
@@ -458,7 +461,7 @@
       };
 
       // Opt
-      var optCur = getOptCur(b, opt);
+      var optCur = _optCur(b, opt);
       if(b.items != null && optCur != null) {
         var ct = optCur[0];
         var amt = optCur[1];
@@ -467,7 +470,7 @@
         if(p > 0.9999) {
           b.items.remove(ct, amt);
         } else {
-          for(let i = 0; i < amt; i++) {if(Mathf.chanceDelta(p)) b.items.remove(ct, 1)};
+          for(let i = 0; i < amt; i++) {if(Mathf.chance(p)) b.items.remove(ct, 1)};
         };
       };
     };
@@ -521,15 +524,19 @@
       // FO
       var li = fo;
       var cap = li.size;
-      if(failed && cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
+      if(failed) {
+        for(let i = 0; i < 6; i++) {mdl_effect.showAt(b, db_effect._craftBlackSmog())};
 
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
+        if(cap > 0) {
+          for(let i = 0; i < cap; i++) {
+            if(i % 2 != 0) continue;
 
-          if(b.items != null) {
-            for(let j = 0; j < amt; j++) b.offload(ct);
+            var ct = li.get(i);
+            var amt = li.get(i + 1);
+
+            if(b.items != null) {
+              for(let j = 0; j < amt; j++) {b.offload(ct)};
+            };
           };
         };
       };
@@ -537,7 +544,7 @@
     exports.addItems = addItems;
 
 
-    const addLiquids = function(b, co, progInc, timeScale) {
+    const addLiquids = function(b, co, progInc1, timeScale) {
       // CO
       var li = co;
       var cap = li.size;
@@ -549,7 +556,7 @@
           var amt = li.get(i + 1);
 
           if(b.liquids != null) {
-            b.handleLiquid(b, ct, Math.min(amt * progInc * timeScale, b.block.liquidCapacity - b.liquids.get(ct)));
+            b.handleLiquid(b, ct, Math.min(amt * progInc1 * timeScale, b.block.liquidCapacity - b.liquids.get(ct)));
           };
         };
       };

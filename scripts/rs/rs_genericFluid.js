@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const rs_genericResource = require("reind/rs/rs_genericResource");
+    const PARENT = require("reind/rs/rs_genericResource");
 
     const frag_fluid = require("reind/frag/frag_fluid");
 
@@ -30,12 +30,13 @@
 
       if(liq.explosiveness > 0.0) liq.stats.addPercent(Stat.explosiveness, liq.explosiveness);
       if(liq.flammability > 0.0) liq.stats.addPercent(Stat.flammability, liq.flammability);
+      if(Math.abs(liq.temperature - 0.5) > 0.0001) liq.stats.add(Stat.temperature, Strings.fixed(liq.temperature * 100.0, 2) + "%");
       if(Math.abs(liq.heatCapacity - 0.5) > 0.0001) liq.stats.addPercent(Stat.heatCapacity, liq.heatCapacity);
       if(!liq.gas && Math.abs(liq.viscosity - 0.5) > 0.0001) liq.stats.add(Stat.viscosity, Strings.fixed(liq.viscosity * 100.0, 2) + "%");
 
-      var dens = mdl_flow.getDensity(liq);
+      var dens = mdl_flow._dens(liq);
       if(liq.gas) {
-        liq.stats.add(db_stat.density, Strings.fixed(dens * 1000.0, 2) + "e-3");
+        liq.stats.add(db_stat.density, Strings.fixed(dens * 1000.0, 2) + " × 10^-3");
       } else {
         liq.stats.add(db_stat.density, Strings.fixed(dens, 2));
       };
@@ -44,16 +45,16 @@
         liq.stats.add(db_stat.conductive, true);
       };
 
-      var grpVal = mdl_corrosion.getGroupValue(liq);
+      var grpVal = mdl_corrosion._fGrpVal(liq);
       if(grpVal != null) liq.stats.add(db_stat.fluidGroup, grpVal);
 
-      var tagVal = mdl_corrosion.getTagValue(liq);
+      var tagVal = mdl_corrosion._fTagVal(liq);
       if(tagVal != null) liq.stats.add(db_stat.fluidTags, tagVal);
 
       if(liq.effect != StatusEffects.none) liq.stats.add(db_stat.fluidStatus, liq.effect.localizedName);
 
-      var liqHeat = mdl_data.read_1n1v(db_fluid.fluidHeat, liq.name);
-      if(liqHeat != null) liq.stats.add(db_stat.fluidHeat, liqHeat);
+      var fHeat = mdl_data.read_1n1v(db_fluid.db["param"]["fHeat"], liq.name);
+      if(fHeat != null) liq.stats.add(db_stat.fluidHeat, fHeat);
     };
 
 
@@ -74,7 +75,7 @@
 
   // Part: Integration
     const setStats = function(liq) {
-      rs_genericResource.setStats(liq);
+      PARENT.setStats(liq);
 
       setStatsComp(liq);
     };

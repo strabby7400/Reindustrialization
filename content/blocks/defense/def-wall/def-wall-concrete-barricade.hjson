@@ -28,6 +28,7 @@
     parent: def-wall-wooden-barricade
     objectives: []
   }
+  researchCostMultiplier: 0.5
 
 
 /*

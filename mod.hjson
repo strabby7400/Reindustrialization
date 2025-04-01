@@ -3,7 +3,7 @@ displayName: Reindustrialization
 subtitle: "0.1.1: Local Geology (Test)"
 
 
-author: MaboroshiX
+author: MaboroshiX (and more...)
 repo: HuanXefh/Reindustrialization
 minGameVersion: 146
 dependencies: []
@@ -15,26 +15,13 @@ softDependencies: [
 description:
 '''
 
-If you are downloading the mod with in-game mod browser, and you don't want to install the test versions that may crash the game, choose View Releases and install the latest version instead.
+A simple javascript mod that adds a hell amount of contents and mechanics to the game.
 
+Tech tree, environment and gameplay totally separated from vanilla game.
 
-The mod used to rely on MultiCrafter Lib mod by Liplum & Jojo. If you are playing those versions (before t25021401, including 0.1.0), remember to install it! If you're updating the mod from those versions, remove all multi-crafters in your map first since they will cause loading failure.
+Designed for Greg Tech-styled mod enjoyers, not typical Mindustry players.
 
-
-------------------------------
-
-
-A javascript mod aimed to bring real (or surreal, sometimes) chemical engineering into Mindustry, where tin is definitely tin. Expected to be WIP for a very long time.
-
-
-The mod adds a new tech tree with totally different style to the game, along with a bunch of new mechanics including fluid corrosion, heat transfer, recipe selection and ore scanning.
-
-
-Do not launch to numbered sectors since sector generator is not used.
-
-
-------------------------------
-
+Will be WIP forever.
 
 See the complete credits in game!
 
@@ -42,4 +29,4 @@ See the complete credits in game!
 
 
 /* v0.1.1: Local Geology */
-version: t25031201
+version: t25040101

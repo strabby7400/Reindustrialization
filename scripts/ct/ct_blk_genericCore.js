@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericCore = require("reind/blk/blk_genericCore");
+    const TEMPLATE = require("reind/blk/blk_genericCore");
   // End
 
 
@@ -20,20 +20,26 @@
   const effCore_ash = extend(CoreBlock, "eff-core-ash", {
     setStats() {
       this.super$setStats();
-      blk_genericCore.setStats(this);
+      TEMPLATE.setStats(this);
     },
   });
   effCore_ash.buildType = () => extend(CoreBlock.CoreBuild, effCore_ash, {
+    needCheck: true,
+    rate: 0.0,
     updateTile() {
       this.super$updateTile();
-      blk_genericCore.updateTile(this);
+      TEMPLATE.updateTile(this);
     },
     buildConfiguration(table) {
       this.super$buildConfiguration(table);
-      blk_genericCore.buildConfiguration(this, table);
+      TEMPLATE.buildConfiguration(this, table);
     },
     configured(builder, value) {
-      blk_genericCore.configured(this, builder, value);
+      TEMPLATE.configured(this, builder, value);
+    },
+    draw() {
+      this.super$draw();
+      TEMPLATE.draw(this);
     },
   });
   exports.effCore_ash = effCore_ash;

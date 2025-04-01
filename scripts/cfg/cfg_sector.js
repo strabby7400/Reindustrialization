@@ -11,29 +11,12 @@
   // End
 
 
-  // Part: Setting
-    var ldm = false;
-    const set_ldm = function(bool) {
-      ldm = bool;
-    };
-    exports.set_ldm = set_ldm;
-  // End
-
-
   // Part: Weather Presets
-    const wp_aerthStorm_ldm = new Seq([
-      ct_wea_ambientWeather.we_weaAmb_aerthNormal,
-    ]);
-
     const wp_aerthStorm = new Seq([
       ct_wea_ambientWeather.we_weaAmb_aerthNormal,
       ct_wea_decorativeWeather.we_weaDeco_heavyRain,
       ct_wea_decorativeWeather.we_weaDeco_steamFlow,
       ct_wea_decorativeWeather.we_weaDeco_fogBlack,
-    ]);
-
-    const wp_aerthStormLeaves_ldm = new Seq([
-      ct_wea_ambientWeather.we_weaAmb_aerthNormal,
     ]);
 
     const wp_aerthStormLeaves = new Seq([
@@ -47,14 +30,14 @@
 
 
   // Part: Methods
-    var needUpdate = false;
+    var needCheck = false;
     function update_sector() {
       var sector = Vars.state.sector;
 
-      if(sector == null) needUpdate = true;
-      if(sector != null && needUpdate) {
+      if(sector == null) needCheck = true;
+      if(sector != null && needCheck) {
         Groups.weather.clear();
-        needUpdate = false;
+        needCheck = false;
       };
 
       if(sector != null) {
@@ -64,14 +47,17 @@
 
         if(pla == "reind-pla-ter-aerth") {
           switch(id) {
+
             case 0 :
-              // Sector Alpha
-              li_we = ldm ? wp_aerthStormLeaves_ldm : wp_aerthStormLeaves;
+              // 001: Sector Alpha
+              li_we = wp_aerthStormLeaves;
               break;
+
             case 94 :
-              // Crab Cliff
-              li_we = ldm ? wp_aerthStorm_ldm : wp_aerthStorm;
+              // 002: Crab Cliff
+              li_we = wp_aerthStorm;
               break;
+
           };
         };
 

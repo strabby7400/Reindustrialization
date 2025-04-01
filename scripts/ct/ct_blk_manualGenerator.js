@@ -6,16 +6,7 @@
 
 
   // Part: Import
-    const blk_manualGenerator = require("reind/blk/blk_manualGenerator");
-  // End
-
-
-  // Part: Accessor
-    const accB_frac = function(b, mode, val) {
-      if(mode == "r") return b.frac;
-      if(mode == "w") b.frac = val;
-    };
-    exports.accB_frac = accB_frac;
+    const TEMPLATE = require("reind/blk/blk_manualGenerator");
   // End
 
 
@@ -30,24 +21,24 @@
     const powGen_manualGenerator = extend(ConsumeGenerator, "pow-gen-manual-generator", {
       setStats() {
         this.super$setStats();
-        blk_manualGenerator.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     powGen_manualGenerator.buildType = () => extend(ConsumeGenerator.ConsumeGeneratorBuild, powGen_manualGenerator, {
       frac: 0.0,
       updateTile() {
         this.super$updateTile();
-        blk_manualGenerator.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       updateEfficiencyMultiplier() {
-        blk_manualGenerator.updateEfficiencyMultiplier(this);
+        TEMPLATE.updateEfficiencyMultiplier(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_manualGenerator.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       configured(builder, value) {
-        blk_manualGenerator.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
     });
     exports.powGen_manualGenerator = powGen_manualGenerator;

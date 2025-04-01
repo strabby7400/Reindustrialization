@@ -14,20 +14,23 @@
     ]);
 
 
-    /* NOTE: Used when the space is dependent on current language. */
-    const getSpace = function() {
+    /*
+     * NOTE:
+     *
+     * Adds a space character base on current language.
+     */
+    const _space = function() {
       var lang = Core.settings.getString("locale");
 
       if(li_removeSpace.contains(lang)) return "";
 
       return " ";
     };
-    exports.getSpace = getSpace;
+    exports._space = _space;
   // End
 
 
   // Part: Condition
-    /* NOTE: A batch alternative of {includes} method. */
     const includes_ex = function() {
       var nm_tg;
       for(let i = 0; i < arguments.length; i++) {
@@ -45,7 +48,7 @@
 
 
   // Part: Stat
-    const getStatText = function(str_tg, str_val, str_unit) {
+    const _statText = function(str_tg, str_val, str_unit) {
       var str1 = (str_tg == null) ? "" : ("[lightgray]" + str_tg + ": []");
       var str2 = (str_val == null) ? "" : str_val;
       var str3 = (str_unit == null) ? "" : (" " + str_unit);
@@ -53,17 +56,17 @@
 
       return str_fi;
     };
-    exports.getStatText = getStatText;
+    exports._statText = _statText;
 
 
-    const getTagText = function(li_str) {
+    const _tagText = function(li_str) {
       var str_fi = "";
       li_str.each(str => str_fi += str + "; ");
 
       if(str_fi == "") return null;
       return str_fi;
     };
-    exports.getTagText = getTagText;
+    exports._tagText = _tagText;
   // End
 
 

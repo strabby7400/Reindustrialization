@@ -10,15 +10,12 @@
     const mdl_game = require("reind/mdl/mdl_game");
 
     const db_effect = require("reind/db/db_effect");
-
-    const glb_vars = require("reind/glb/glb_vars");
   // End
 
 
   // Part: Gas
-    /* NOTE: Creates a gas ejection effect with assigned rotation. Cancels if blocked. */
     const updateTile_gasSideRelease = function(p, b, offRot, rad, cone, scl, size, rev) {
-      if(!Mathf.chance(mdl_effect.getP_frac(p, b.efficiency))) return;
+      if(!Mathf.chance(mdl_effect._pFrac(p, b.efficiency))) return;
 
       var rot_fi = mdl_game._rotDiv(b.rotation, offRot);
       var blocked = false;

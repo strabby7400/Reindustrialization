@@ -1,5 +1,5 @@
 const gi = [
-  "reind-effc-cond-torque", 0.05,
+  "reind-effc-cond-torque", 0.025,
   "reind-liq-ore-water", 0.1,
 ];
 

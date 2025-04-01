@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_attributeFactory = require("reind/blk/blk_attributeFactory");
+    const TEMPLATE = require("reind/blk/blk_attributeFactory");
 
     const frag_fluid = require("reind/frag/frag_fluid");
   // End
@@ -24,7 +24,7 @@
       // Specific
       setStats() {
         this.super$setStats();
-        blk_attributeFactory.setStats(this);
+        TEMPLATE.setStats(this);
         this.stats.remove(Stat.tiles);
       },
     });
@@ -32,7 +32,7 @@
       // Specific
       updateTile() {
         this.super$updateTile();
-        blk_attributeFactory.updateTile(this);
+        TEMPLATE.updateTile(this);
         frag_fluid.updateTile_overflow(this, Vars.content.liquid("reind-liq-ore-water"));
       },
     });

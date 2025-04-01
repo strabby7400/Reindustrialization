@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const env_genericOre = require("reind/env/env_genericOre");
+    const PARENT = require("reind/env/env_genericOre");
   // End
 
 
@@ -34,7 +34,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      env_genericOre.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 

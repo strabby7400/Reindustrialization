@@ -6,7 +6,8 @@
 
 
   // Part: Import
-    const blk_genericLiquidStorageBlock = require("reind/blk/blk_genericLiquidStorageBlock");
+    const PARENT = require("reind/blk/blk_genericLiquidStorageBlock");
+    const VAR = require("reind/glb/glb_vars");
 
     const frag_attack = require("reind/frag/frag_attack");
 
@@ -18,8 +19,6 @@
 
     const db_effect = require("reind/db/db_effect");
     const db_stat = require("reind/db/db_stat");
-
-    const glb_vars = require("reind/glb/glb_vars");
   // End
 
 
@@ -28,7 +27,7 @@
       blk.stats.add(db_stat.storageType, "@term.reind-term-gas.name");
 
       blk.stats.add(db_stat.canExplode, true);
-      blk.stats.add(db_stat.explosionRadius, blk.size / 2 * glb_vars.gasCylinder_explosionRadius / Vars.tilesize, StatUnit.blocks);
+      blk.stats.add(db_stat.explosionRadius, frag_attack._gasExploRad(blk.size) / Vars.tilesize, StatUnit.blocks);
     };
 
 
@@ -50,14 +49,12 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var rad = blk.size / 2 * glb_vars.gasCylinder_explosionRadius;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_game._pos(1, Vars.world.tile(tx, ty), blk.offset), rad);
+      mdl_draw.drawWarningDisk(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), frag_attack._gasExploRad(blk.size));
     };
 
 
     function drawSelectComp(b) {
-      var rad = b.block.size / 2 * glb_vars.gasCylinder_explosionRadius;
-      if(rad != null) mdl_draw.drawWarningDisk(mdl_game._pos(1, b), rad);
+      mdl_draw.drawWarningDisk(b, frag_attack._gasExploRad(b.block.size));
     };
 
 
@@ -66,11 +63,11 @@
         var liq = b.liquids.current();
         if(!mdl_content.isGas(liq)) return;
 
-        var rad = b.block.size / 2 * glb_vars.gasCylinder_explosionRadius;
-        var dmg = glb_vars.gasCylinder_explosionDamage;
+        var rad = frag_attack._gasExploRad(b.block.size);
+        var dmg = frag_attack._gasExploDmg(b.block.size);
         var shake = 8.0;
 
-        frag_attack.attack_explosion_noob(mdl_game._pos(1, b), rad, dmg, shake);
+        frag_attack.atk_explosion_noob(b, rad, dmg, shake);
       };
     };
   // End
@@ -85,7 +82,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericLiquidStorageBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -93,7 +90,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericLiquidStorageBlock.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };
@@ -115,13 +112,13 @@
 
 
     const draw = function(b) {
-      blk_genericLiquidStorageBlock.draw(b);
+      PARENT.draw(b);
     };
     exports.draw = draw;
 
 
     const drawSelect = function(b) {
-      blk_genericLiquidStorageBlock.drawSelect(b);
+      PARENT.drawSelect(b);
 
       drawSelectComp(b);
     };

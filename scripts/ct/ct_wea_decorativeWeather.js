@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const wea_decorativeWeather = require("reind/wea/wea_decorativeWeather");
+    const TEMPLATE = require("reind/wea/wea_decorativeWeather");
   // End
 
 
@@ -21,7 +21,7 @@
     const weaDeco_heavyRain = extend(RainWeather, "wea-deco-heavy-rain", {
       update(state) {
         this.super$update(state);
-        wea_decorativeWeather.update(this, state);
+        TEMPLATE.update(this, state);
       },
     });
     const we_weaDeco_heavyRain = new Weather.WeatherEntry(weaDeco_heavyRain);
@@ -35,7 +35,7 @@
     const weaDeco_steamFlow = extend(ParticleWeather, "wea-deco-steam-flow", {
       update(state) {
         this.super$update(state);
-        wea_decorativeWeather.update(this, state);
+        TEMPLATE.update(this, state);
       },
     });
     const we_weaDeco_steamFlow = new Weather.WeatherEntry(weaDeco_steamFlow);
@@ -47,7 +47,7 @@
     const weaDeco_flyingLeaves = extend(ParticleWeather, "wea-deco-flying-leaves", {
       update(state) {
         this.super$update(state);
-        wea_decorativeWeather.update(this, state);
+        TEMPLATE.update(this, state);
       },
     });
     const we_weaDeco_flyingLeaves = new Weather.WeatherEntry(weaDeco_flyingLeaves);
@@ -59,7 +59,7 @@
     const weaDeco_carnageStorm = extend(ParticleWeather, "wea-deco-carnage-storm", {
       update(state) {
         this.super$update(state);
-        wea_decorativeWeather.update(this, state);
+        TEMPLATE.update(this, state);
       },
     });
     const we_weaDeco_carnageStorm = new Weather.WeatherEntry(weaDeco_carnageStorm);
@@ -73,7 +73,7 @@
     const weaDeco_fogBlack = extend(ParticleWeather, "wea-deco-fog-black", {
       update(state) {
         this.super$update(state);
-        wea_decorativeWeather.update(this, state);
+        TEMPLATE.update(this, state);
       },
     });
     const we_weaDeco_fogBlack = new Weather.WeatherEntry(weaDeco_fogBlack);
@@ -85,7 +85,7 @@
     const weaDeco_fogRed = extend(ParticleWeather, "wea-deco-fog-red", {
       update(state) {
         this.super$update(state);
-        wea_decorativeWeather.update(this, state);
+        TEMPLATE.update(this, state);
       },
     });
     const we_weaDeco_fogRed = new Weather.WeatherEntry(weaDeco_fogRed);

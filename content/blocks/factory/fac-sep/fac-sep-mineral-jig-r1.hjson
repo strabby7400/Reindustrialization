@@ -8,9 +8,9 @@
   # type: GenericCrafter
   category: crafting
   requirements: [
-    item-chem-graphite/60
-    item-chem-brass/40
-    item-chem-tin-bronze/60
+    item-chem-graphite/100
+    item-chem-brass/80
+    item-chem-tin-bronze/40
     item-chem-steel/80
   ]
   buildCostMultiplier: 2.0
@@ -27,7 +27,7 @@
     parent: fac-sep-mineral-jig-m
     objectives: []
   }
-  researchCostMultiplier: 0.3
+  researchCostMultiplier: 0.0
 
 
 /*

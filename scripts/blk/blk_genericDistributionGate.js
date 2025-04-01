@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericDistributionBlock = require("reind/blk/blk_genericDistributionBlock");
+    const PARENT = require("reind/blk/blk_genericDistributionBlock");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -28,7 +28,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericDistributionBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -36,7 +36,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericDistributionBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
   // End

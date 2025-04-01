@@ -78,6 +78,7 @@
 */
 
 
+  update: true
   consumesPower: true
   conductivePower: true
   connectedPower: false

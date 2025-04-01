@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_heatFactory = require("reind/blk/blk_heatFactory");
+    const TEMPLATE = require("reind/blk/blk_heatFactory");
   // End
 
 
@@ -21,17 +21,17 @@
     const facFurn_primitiveGlassKiln = extend(GenericCrafter, "fac-furn-primitive-glass-kiln", {
       setStats() {
         this.super$setStats();
-        blk_heatFactory.setStats(this);
+        TEMPLATE.setStats(this);
       },
       setBars() {
         this.super$setBars();
-        blk_heatFactory.setBars(this);
+        TEMPLATE.setBars(this);
       },
     });
     facFurn_primitiveGlassKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveGlassKiln, {
       updateTile() {
         this.super$updateTile();
-        blk_heatFactory.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
     });
     exports.facFurn_primitiveGlassKiln = facFurn_primitiveGlassKiln;

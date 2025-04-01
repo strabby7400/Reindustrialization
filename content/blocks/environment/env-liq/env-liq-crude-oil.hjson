@@ -1,0 +1,53 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Floor
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  speedMultiplier: 0.05
+  dragMultiplier: 1.0
+  damageTaken: 0.0
+  isLiquid: true
+  shallow: false
+  drownTime: 300.0
+  status: tarred
+  statusDuration: 300.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  variants: 0
+  cacheLayer: tar
+  albedo: 0.5
+  walkEffect: ripple
+  walkSound: splash
+  walkSoundVolume: 0.2
+  walkSoundPitchMin: 0.95
+  walkSoundPitchMax: 1.05
+
+
+/*
+  ========================================
+  Section: Resource
+  ========================================
+*/
+
+
+  liquidDrop: liq-ore-crude-oil
+  liquidMultiplier: 0.25

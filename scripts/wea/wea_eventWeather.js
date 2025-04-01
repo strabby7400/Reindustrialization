@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const wea_genericWeather = require("reind/wea/wea_genericWeather");
+    const PARENT = require("reind/wea/wea_genericWeather");
   // End
 
 
@@ -19,7 +19,7 @@
 
   // Part: Integration
     const update = function(wea, state) {
-      wea_genericWeather.update(wea, state);
+      PARENT.update(wea, state);
     };
     exports.update = update;
   // End

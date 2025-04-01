@@ -6,12 +6,13 @@
 
 
   // Part: Import
-    const blk_genericDistributionBlock = require("reind/blk/blk_genericDistributionBlock");
+    const PARENT = require("reind/blk/blk_genericDistributionBlock");
 
     const frag_attack = require("reind/frag/frag_attack");
 
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
@@ -21,53 +22,54 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      // Get bullet damage
-      var damage = mdl_data.read_1n1v(db_block.massDriverBulletDamage, blk.name);
-      if(damage != null) blk.stats.add(Stat.damage, damage);
+      var damage = mdl_data.read_1n1v(db_block.db["param"]["damage"]["base"], blk.name, 0.0);
+      blk.stats.add(Stat.damage, damage);
 
-      // Get impact range
-      var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
-      if(rad != null) blk.stats.add(db_stat.impactRange, rad / Vars.tilesize, StatUnit.blocks);
+      var rad = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], blk.name, 40.0);
+      blk.stats.add(db_stat.impactRange, rad / Vars.tilesize, StatUnit.blocks);
     };
 
 
     function updateTileComp(b) {
-      // Update impact
-      if(b.reloadCounter >= 0.9999) {
-        var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
-        if(rad != null) {
-          var dmg = b.block.size * b.block.reload * 0.7;
-          var dur = b.block.reload * 0.5;
+      // Initialize
+      if(b.needCheck) {
+        b.impactRad = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], b.block.name, 40.0);
 
-          frag_attack.attack_impact(mdl_game._pos(1, b), rad, dmg, dur);
-        };
+        b.needCheck = false;
+      };
+
+      // Create impact wave
+      if(b.reloadCounter > 0.9999) {
+        var size = b.block.size;
+        var time = b.block.reload;
+
+        frag_attack.atk_impact(b, b.impactRad, frag_attack._impactDmg(size, time), frag_attack._impactDur(time));
+
+        var cap = Math.pow(size, 2);
+        for(let i = 0; i < cap; i++) {mdl_effect.dustAt_ldm(b, frag_attack._impactDustRad(size))};
       };
     };
 
 
+    function initComp(blk) {
+      Events.run(MusicRegisterEvent, () => {
+        var damage = mdl_data.read_1n1v(db_block.db["param"]["damage"]["base"], blk.name, 0.0);
+        blk.bullet.damage = damage;
+        blk.bullet.collidesAir = false;
+      });
+    };
+
+
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      // Draw impact range
-      var rad = mdl_data.read_1n1v(db_block.impactRange, blk.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_game._pos(1, Vars.world.tile(tx, ty), blk.offset), rad);
+      var impactRad = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], blk.name, 40.0);
+      mdl_draw.drawCirclePulse(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), impactRad);
     };
 
 
     function drawSelectComp(b) {
-      // Draw impact range
-      var rad = mdl_data.read_1n1v(db_block.impactRange, b.block.name);
-      if(rad != null) mdl_draw.drawCirclePulse(mdl_game._pos(1, b), rad);
+      mdl_draw.drawCirclePulse(b, b.impactRad);
 
-      // Draw reload progress
-      mdl_draw.drawProgressBar(mdl_game._pos(2, b), Math.min(1.0 - b.reloadCounter, 1.0), Pal.accent, b.block.size);
-    };
-
-
-    function setupComp(blk) {
-      Events.run(ClientLoadEvent, () => {
-        var damage = mdl_data.read_1n1v(db_block.massDriverBulletDamage, blk.name);
-        if(damage != null) blk.bullet.damage = damage;
-        blk.bullet.collidesAir = false;
-      });
+      mdl_draw.drawProgressCircle(b, 1.0 - b.reloadCounter, mdl_game._radSize(b.block.size), Pal.accent);
     };
   // End
 
@@ -81,7 +83,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericDistributionBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -89,11 +91,17 @@
 
 
     const updateTile = function(b) {
-      blk_genericDistributionBlock.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };
     exports.updateTile = updateTile;
+
+
+    const init = function(blk) {
+      initComp(blk);
+    };
+    exports.init = init;
 
 
     const drawPlace = function(blk, tx, ty, rot, valid) {
@@ -106,12 +114,6 @@
       drawSelectComp(b);
     };
     exports.drawSelect = drawSelect;
-
-
-    const setup = function(blk) {
-      setupComp(blk);
-    };
-    exports.setup = setup;
   // End
 
 

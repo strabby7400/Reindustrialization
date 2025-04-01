@@ -6,27 +6,9 @@
 
 
   // Part: Import
-    const blk_impactDrill = require("reind/blk/blk_impactDrill");
+    const TEMPLATE = require("reind/blk/blk_impactDrill");
 
-    const frag_facility = require("reind/frag/frag_facility");
-  // End
-
-
-  // Part: Accessor
-    const accB_down = function(b, mode, val) {
-      if(mode == "r") return b.down;
-      if(mode == "w") b.down = val;
-    };
-    exports.accB_down = accB_down;
-
-
-    const accB_b_sc = function(b, mode, val) {
-      if(val === undefined) val = 0;
-
-      if(mode == "r") return b.b_sc;
-      if(mode == "w") b.b_sc = val;
-    };
-    exports.accB_b_sc = accB_b_sc;
+    const frag_faci = require("reind/frag/frag_faci");
   // End
 
 
@@ -41,24 +23,26 @@
     const minDril_basicImpactDrill = extend(BurstDrill, "min-dril-basic-impact-drill", {
       setStats() {
         this.super$setStats();
-        blk_impactDrill.setStats(this);
+        TEMPLATE.setStats(this);
       },
       canMine(tile) {
         if(!this.super$canMine(tile)) return false;
-        if(!blk_impactDrill.canMine(this, tile)) return false;
+        if(!TEMPLATE.canMine(this, tile)) return false;
         return true;
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
-        blk_impactDrill.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     minDril_basicImpactDrill.buildType = () => extend(BurstDrill.BurstDrillBuild, minDril_basicImpactDrill, {
-      down: true,
-      b_sc: null,
+      needCheck: true,
+      impactRad: 40.0,
+      down: true, b_sc: null,
+      timerEffc: new Interval(1),
       updateTile() {
         this.super$updateTile();
-        blk_impactDrill.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       shouldConsume() {
         if(!this.super$shouldConsume()) return false;
@@ -71,7 +55,7 @@
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_impactDrill.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.minDril_basicImpactDrill = minDril_basicImpactDrill;
@@ -81,52 +65,54 @@
       // Specific
       setStats() {
         this.super$setStats();
-        blk_impactDrill.setStats(this);
-        frag_facility.setStats_ep(this);
+        TEMPLATE.setStats(this);
+        frag_faci.setStats_ep(this);
       },
       // Specific
       setBars() {
         this.super$setBars();
-        frag_facility.setBars_ep(this);
+        frag_faci.setBars_ep(this);
       },
       canMine(tile) {
         if(!this.super$canMine(tile)) return false;
-        if(!blk_impactDrill.canMine(this, tile)) return false;
+        if(!TEMPLATE.canMine(this, tile)) return false;
         return true;
       },
       drawPlace(x, y, rotation, valid) {
         this.super$drawPlace(x, y, rotation, valid);
-        blk_impactDrill.drawPlace(this, x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
       },
     });
     minDril_titanImpactDrill.buildType = () => extend(BurstDrill.BurstDrillBuild, minDril_titanImpactDrill, {
-      down: true,
-      b_sc: null,
+      needCheck: true,
+      impactRad: 40.0,
+      down: true, b_sc: null,
+      timerEffc: new Interval(1),
       updateTile() {
         this.super$updateTile();
-        blk_impactDrill.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       // Specific
       shouldConsume() {
         if(!this.super$shouldConsume()) return false;
         if(this.down) return false;
-        if(!frag_facility.isActive_ep(this)) return false;
+        if(!frag_faci.isActive_ep(this)) return false;
         return true;
       },
       // Specific
       status() {
         if(this.down) return BlockStatus.noInput;
-        if(!frag_facility.isActive_ep(this)) return BlockStatus.noInput;
+        if(!frag_faci.isActive_ep(this)) return BlockStatus.noInput;
         return this.super$status();
       },
       // Specific
       draw() {
         this.super$draw();
-        frag_facility.draw_ep(this);
+        frag_faci.draw_ep(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_impactDrill.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.minDril_titanImpactDrill = minDril_titanImpactDrill;

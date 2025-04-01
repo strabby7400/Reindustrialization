@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericStorageBlock = require("reind/blk/blk_genericStorageBlock");
+    const PARENT = require("reind/blk/blk_genericStorageBlock");
   // End
 
 
@@ -19,13 +19,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericStorageBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericStorageBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
   // End

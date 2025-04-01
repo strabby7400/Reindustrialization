@@ -6,13 +6,12 @@
 
 
   // Part: Import
-    const blk_genericLiquidDistributionGate = require("reind/blk/blk_genericLiquidDistributionBlock");
-
-    const ct_blk_fluidUnloader = require("reind/ct/ct_blk_fluidUnloader");
+    const PARENT = require("reind/blk/blk_genericLiquidDistributionBlock");
 
     const frag_fluid = require("reind/frag/frag_fluid");
 
     const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -25,8 +24,7 @@
   // Part: Component
     function updateTileComp(b) {
       var liq = b.liquids.current();
-      var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
-      var liq_sel = mdl_content.getContent_id("fluid", id_sel);
+      var liq_sel = mdl_content._ct_id("fluid", b.id_sel);
       if(liq_sel == null) return;
 
       if(liq != liq_sel) b.liquids.clear();
@@ -37,17 +35,13 @@
     };
 
 
-    const vec2_55128562 = new Vec2();
     function buildConfigurationComp(b, tb) {
-      var vec2 = vec2_55128562.setZero();
+      var vec2 = new Vec2();
 
-      var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
+      db_table.__contentSelected(tb, "fluid", b.id_sel);
 
-      db_table.__contentSelected(tb, "fluid", id_sel);
-      tb.row();
-
-      db_table.__contentSelector(tb, "fluid", id_sel, function() {
-        b.block.lastConfig = this;
+      db_table.__contentSelector(tb, "fluid", b.id_sel, function() {
+        b.block.lastConfig = new Point2(this, 0).x;
         Call.tileConfig(Vars.player, b, vec2.set(this, -2));
         b.deselect();
       }, 7);
@@ -57,17 +51,10 @@
     function configuredComp(b, builder, val) {
       if(val == null) return;
 
-      if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
-      var val_fi = -2;
-      var param_fi = -2;
-      if(val instanceof Vec2) {
-        val_fi = val.x;
-        param_fi = val.y;
-      };
-      if(val instanceof Building) val_fi = val.config();
+      var tup = mdl_data.handleConfigured(b, builder, val);
 
-      if(val_fi > -2) {
-        ct_blk_fluidUnloader.accB_id_sel(b, "w", val_fi);
+      if(tup[0] > -2) {
+        b.id_sel = tup[0];
 
         mdl_effect.showAt(b, db_effect._recipeChange(b.block.size, b.team.color), 0.0);
       };
@@ -75,9 +62,8 @@
 
 
     function drawSelectComp(b) {
-      var id_sel = ct_blk_fluidUnloader.accB_id_sel(b, "r");
-      var liq_sel = mdl_content.getContent_id("fluid", id_sel);
-      mdl_draw.drawContentIcon(mdl_game._pos(1, b), liq_sel, b.block.size);
+      var liq_sel = mdl_content._ct_id("fluid", b.id_sel);
+      mdl_draw.drawContentIcon(b, liq_sel, b.block.size);
     };
   // End
 
@@ -91,13 +77,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericLiquidDistributionGate.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericLiquidDistributionGate.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };
@@ -117,19 +103,19 @@
 
 
     const moveLiquid = function(b, ob, liq) {
-      return blk_genericLiquidDistributionGate.moveLiquid(b, ob, liq);
+      return PARENT.moveLiquid(b, ob, liq);
     };
     exports.moveLiquid = moveLiquid;
 
 
     const draw = function(b) {
-      blk_genericLiquidDistributionGate.draw(b);
+      PARENT.draw(b);
     };
     exports.draw = draw;
 
 
     const drawSelect = function(b) {
-      blk_genericLiquidDistributionGate.drawSelect(b);
+      PARENT.drawSelect(b);
 
       drawSelectComp(b);
     };

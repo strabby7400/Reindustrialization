@@ -25,6 +25,7 @@
     parent: def-wall-plate-wall-copper
     objectives: []
   }
+  researchCostMultiplier: 0.5
 
 
 /*

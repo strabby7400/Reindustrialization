@@ -6,29 +6,31 @@
 
 
   // Part: Import
-    const blk_genericFactory = require("reind/blk/blk_genericFactory");
-
-    const ct_blk_fragmentFactory = require("reind/ct/ct_blk_fragmentFactory");
+    const PARENT = require("reind/blk/blk_genericFactory");
 
     const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
   // Part: Component
-    const li_22856458 = new Seq();
     function updateTileComp(b) {
-      var invalid = false;
-      var tmpLi = li_22856458.clear();
-      mdl_game._liTileRot(b.tile, b.block.liquidOutputDirections[0], b.block.size).each(ot => {
-        if(ot.build == null) {
-          invalid = true
-        } else if(!tmpLi.contains(ot.build)) {
-          tmpLi.add(ot.build)
-        };
-      });
-      if(tmpLi.size > 1) invalid = true;
+      if(b.timerEffc.get(60.0)) {
+        var cond = false;
+        var tmpLi = new Seq();
+        mdl_game._liTileRot(b.tile, b.block.liquidOutputDirections[0], b.block.size).each(ot => {
+          if(ot.build == null) {cond = true} else if(!tmpLi.contains(ot.build)) {tmpLi.add(ot.build)};
+          if(tmpLi.size > 1) cond = true;
+        });
 
-      ct_blk_fragmentFactory.accB_down(b, "w", invalid);
+        b.down = cond;
+      };
+
+      if(!b.down) b.super$updateTile();
+    };
+
+
+    function statusComp(b) {
+      return b.down ? BlockStatus.noInput : b.super$status();
     };
   // End
 
@@ -42,17 +44,23 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericFactory.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericFactory.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };
     exports.updateTile = updateTile;
+
+
+    const status = function(b) {
+      return statusComp(b);
+    };
+    exports.status = status;
   // End
 
 

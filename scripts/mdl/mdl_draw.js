@@ -12,6 +12,15 @@
   // End
 
 
+  // Part: Setting
+    var ldm = false;
+    const set_ldm = function(val) {
+      ldm = val;
+    };
+    exports.set_ldm = set_ldm;
+  // End
+
+
   // Part: Element
     const _scl = function(scl) {
       if(scl == null) scl = 1.0;
@@ -24,7 +33,7 @@
 
 
   // Part: Color
-    const palette_gn = function(color_gn) {
+    const _color = function(color_gn) {
       if(color_gn == null) return;
       if(color_gn instanceof Color) return color_gn;
 
@@ -38,7 +47,7 @@
 
       return color;
     };
-    exports.palette_gn = palette_gn;
+    exports._color = _color;
   // End
 
 
@@ -48,14 +57,14 @@
     /* <---------------- drawNormalRegion ----------------> */
 
 
-    /* NOTE: Simply DrawRegion with more arguments. */
-    const drawNormalRegion = function(pos, reg, ang, a, regScl, color, z) {
+    const drawNormalRegion = function(pos_gn, reg, ang, a, regScl, color, z) {
       if(ang == null) ang = 0.0;
       if(a == null) a = 1.0;
       if(regScl == null) regScl = 1.0;
       if(color == null) color = Color.white;
-      if(Vars.headless || pos == null || reg == null) return;
+      if(Vars.headless || pos_gn == null || reg == null) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var x = pos.x;
       var y = pos.y;
       var w = reg.width * 2.0 * regScl / Vars.tilesize;
@@ -73,9 +82,10 @@
     /* <---------------- drawShadowRegion ----------------> */
 
 
-    const drawSimpleShadow = function(pos, reg, ang, a, regScl, color, z) {
+    const drawSimpleShadow = function(pos_gn, reg, ang, a, regScl, color, z) {
       if(Vars.headless) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var flr = Vars.world.floorWorld(pos.x, pos.y);
       if(flr == null || !flr.canShadow) return;
 
@@ -85,9 +95,10 @@
     exports.drawSimpleShadow = drawSimpleShadow;
 
 
-    const drawBlurredShadow = function(pos, reg, ang, a, regScl, color, z) {
+    const drawBlurredShadow = function(pos_gn, reg, ang, a, regScl, color, z) {
       if(Vars.headless) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var flr = Vars.world.floorWorld(pos.x, pos.y);
       if(flr == null || !flr.canShadow) return;
 
@@ -103,20 +114,25 @@
     exports.drawBlurredShadow = drawBlurredShadow;
 
 
-    /* NOTE: Inspired by Miscellaneous Concepts mod by MEEPofFaith. */
-    const drawPseudo3dShadow = function(pos, reg, elev, ang, a, regScl, color, z) {
+    /*
+     * NOTE:
+     *
+     * Inspired by Meepscellaneous Concepts mod by MEEPofFaith.
+     */
+    const drawPseudo3dShadow = function(pos_gn, reg, elev, ang, a, regScl, color, z) {
       if(elev == null) elev = 0.0;
       if(ang == null) ang = 0.0;
       if(a == null) a = 1.0;
       if(regScl == null) regScl = 1.0;
       if(color == null) color = Color.white;
-      if(Vars.headless || pos == null || reg == null) return;
+      if(Vars.headless || pos_gn == null || reg == null) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var x = pos.x;
       var y = pos.y;
       var w = reg.width * 2.0 * regScl / Vars.tilesize;
       var h = reg.height * 2.0 * regScl / Vars.tilesize;
-      var pos1 = mdl_game._posP3d(1, pos, elev);
+      var pos1 = mdl_game._posP3d(pos, elev);
       var x_fi = pos1.x;
       var y_fi = pos1.y;
 
@@ -140,12 +156,12 @@
     /* <---------------- drawFadeRegion ----------------> */
 
 
-    /* NOTE: DrawFade. */
-    const drawFadeRegion = function(pos, reg, ang, a, regScl, fadeScl, color, z) {
+    const drawFadeRegion = function(pos_gn, reg, ang, a, regScl, fadeScl, color, z) {
       if(a == null) a = 1.0;
       if(fadeScl == null) fadeScl = 1.0;
-      if(Vars.headless || pos == null || reg == null) return;
+      if(Vars.headless || pos_gn == null || reg == null) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var a_fi = a * Math.abs(Math.sin(Time.time / 15.0 / fadeScl));
 
       drawNormalRegion(pos, reg, ang, a_fi, regScl, color, z);
@@ -153,11 +169,11 @@
     exports.drawFadeRegion = drawFadeRegion;
 
 
-    /* NOTE: Draws a flickering region, used for warning lights. */
-    const drawFadeAlert = function(pos, reg, frac, ang, a, regScl, color, z) {
+    const drawFadeAlert = function(pos_gn, reg, frac, ang, a, regScl, color, z) {
       if(frac == null) frac = 0.0;
       if(Vars.headless) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var a_fi = 1.0 - Math.pow(Math.min(frac, 1.0) - 1.0, 2);
 
       drawFadeRegion(pos, reg, ang, a_fi, regScl, 0.2, color, z);
@@ -168,13 +184,13 @@
     /* <---------------- drawRotatorRegion ----------------> */
 
 
-    /* NOTE: The sprite rotates. */
-    const drawRotatorRegion = function(pos, reg, tprog, ang, rate, sides) {
+    const drawRotatorRegion = function(pos_gn, reg, tprog, ang, rate, sides) {
       if(ang == null) ang = 0.0;
       if(rate == null) rate = 0.0;
       if(sides == null) sides = 4;
-      if(Vars.headless || pos == null || reg == null || tprog == null) return;
+      if(Vars.headless || pos_gn == null || reg == null || tprog == null) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var x = pos.x;
       var y = pos.y;
       var ang_fd = 360.0 / sides;
@@ -192,7 +208,7 @@
     /* <---------------- drawWobbleRegion ----------------> */
 
 
-    const drawWobbleRegion = function(pos, reg, ang, a, regScl, color, scl, mag, wobSclX, wobSclY, z) {
+    const drawWobbleRegion = function(pos_gn, reg, ang, a, regScl, color, scl, mag, wobSclX, wobSclY, z) {
       if(ang == null) ang = 0.0;
       if(a == null) a = 1.0;
       if(regScl == null) regScl = 1.0;
@@ -201,19 +217,26 @@
       if(mag == null) mag = 1.0;
       if(wobSclX == null) wobSclX = 1.0;
       if(wobSclY == null) wobSclY = 1.0;
-      if(Vars.headless || pos == null || reg == null) return;
+      if(Vars.headless || pos_gn == null || reg == null) return;
 
-      var w = reg.width * reg.scl();
-      var h = reg.height * reg.scl();
+      var pos = mdl_game._pos(pos_gn);
 
-      if(z != null) Draw.z(z);
-      Draw.color(color);
-      Draw.alpha(a);
-      Draw.rectv(reg, pos.x, pos.y, w, h, ang, vec => vec.add(
-        (Mathf.sin(vec.y * 3.0 + Time.time, 60.0 * scl, 0.5 * mag) + Mathf.sin(vec.x * 3.0 - Time.time, 70.0 * scl, 0.8 * mag)) * 1.5 * wobSclX,
-        (Mathf.sin(vec.x * 3.0 + Time.time + 8.0, 66.0 * scl, 0.55 * mag) + Mathf.sin(vec.y * 3.0 - Time.time, 50.0 * scl, 0.2 * mag)) * 1.5 * wobSclY,
-      ));
-      Draw.reset();
+      if(ldm) {
+        drawNormalRegion(pos, reg, ang, a, regScl, color, z);
+      } else {
+        var w = reg.width * reg.scl();
+        var h = reg.height * reg.scl();
+        var ang_fi = ang + Mathf.sin(Time.time + pos.x, 50.0, 0.5) + Mathf.sin(Time.time - pos.y, 65.0, 0.9) + Mathf.sin(Time.time + pos.y - pos.x, 85.0, 0.9)
+
+        if(z != null) Draw.z(z);
+        Draw.color(color);
+        Draw.alpha(a);
+        Draw.rectv(reg, pos.x, pos.y, w, h, ang_fi, vec => vec.add(
+          (Mathf.sin(vec.y * 3.0 + Time.time, 60.0 * scl, 0.5 * mag) + Mathf.sin(vec.x * 3.0 - Time.time, 70.0 * scl, 0.8 * mag)) * 1.5 * wobSclX,
+          (Mathf.sin(vec.x * 3.0 + Time.time + 8.0, 66.0 * scl, 0.55 * mag) + Mathf.sin(vec.y * 3.0 - Time.time, 50.0 * scl, 0.2 * mag)) * 1.5 * wobSclY,
+        ));
+        Draw.reset();
+      };
     };
     exports.drawWobbleRegion = drawWobbleRegion;
 
@@ -221,7 +244,7 @@
     /* <---------------- drawFlameRegion ----------------> */
 
 
-    const drawFlameRegion = function(pos, reg, frac, rad, radIn, radScl, radMag, radInMag, color) {
+    const drawFlameRegion = function(pos_gn, reg, frac, rad, radIn, radScl, radMag, radInMag, color) {
       if(frac == null) frac = 1.0;
       if(rad == null) rad = 2.5;
       if(radIn == null) radIn = 1.5;
@@ -229,8 +252,9 @@
       if(radMag == null) radMag = 2.0;
       if(radInMag == null) radInMag = 1.0;
       if(color == null) color = Color.valueOf("ffc999");
-      if(Vars.headless || pos == null || reg == null || frac < 0.0001) return;
+      if(Vars.headless || pos_gn == null || reg == null || frac < 0.0001) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var param1 = 0.3;
       var param2 = 0.06;
       var param3 = Mathf.random(0.1);
@@ -257,14 +281,14 @@
     /* <---------------- drawGlowRegion ----------------> */
 
 
-    /* NOTE: DrawGlowRegion but integrated. */
-    const drawGlowRegion = function(pos, reg, a, color, pulse, pulseScl) {
+    const drawGlowRegion = function(pos_gn, reg, a, color, pulse, pulseScl) {
       if(a == null) a = 1.0;
       if(color == null) color = Color.valueOf("ff3838");
       if(pulse == null) pulse = 0.3;
       if(pulseScl == null) pulseScl = 10.0;
-      if(Vars.headless || pos == null || reg == null) return;
+      if(Vars.headless || pos_gn == null || reg == null) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var x = pos.x;
       var y = pos.y;
       var a_fi = a * (1.0 - pulse + Mathf.absin(pulseScl, pulse));
@@ -280,12 +304,12 @@
     exports.drawGlowRegion = drawGlowRegion;
 
 
-    /* NOTE: {reg} is optional. */
-    const drawHeatRegion = function(pos, frac, reg, size) {
+    const drawHeatRegion = function(pos_gn, frac, reg, size) {
       if(size == null) size = 1;
       if(Vars.headless) return;
 
-      if(reg == null) reg = mdl_heat.getHeatRegion(size);
+      var pos = mdl_game._pos(pos_gn);
+      if(reg == null) reg = mdl_heat._heatReg(size);
       drawGlowRegion(pos, reg, frac);
     };
     exports.drawHeatRegion = drawHeatRegion;
@@ -294,8 +318,7 @@
     /* <---------------- drawLight ----------------> */
 
 
-    /* NOTE: Regular DrawLight. */
-    const drawLight = function(pos, frac, size, rad, a, sinScl, sinMag, color) {
+    const drawLight = function(pos_gn, frac, size, rad, a, sinScl, sinMag, color) {
       if(frac == null) frac = 1.0;
       if(size == null) size = 1;
       if(rad == null) rad = 48.0;
@@ -303,8 +326,9 @@
       if(sinScl == null) sinScl = 16.0;
       if(sinMag == null) sinMag = 6.0;
       if(color == null) color = Color.valueOf("ffc999");
-      if(Vars.headless || pos == null || frac < 0.0001) return;
+      if(Vars.headless || pos_gn == null || frac < 0.0001) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var x = pos.x;
       var y = pos.y;
 
@@ -316,14 +340,15 @@
     /* <---------------- drawPlanRegion ----------------> */
 
 
-    const drawPlanRegion = function(pos, reg, color_gn) {
+    const drawPlanRegion = function(pos_gn, reg, color_gn) {
       if(color_gn == null) color_gn = Color.white;
-      if(Vars.headless || pos == null || reg == null) return;
+      if(Vars.headless || pos_gn == null || reg == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos = mdl_game._pos(pos_gn);
+      var color = _color(color_gn);
       var x = pos.x;
       var y = pos.y;
-      var regScl = 0.75 + Math.sin(Time.time / 15.0) * 0.15;
+      var regScl = 0.825 + Math.sin(Time.time / 15.0) * 0.075;
       var w = reg.width * 2.0 * regScl / Vars.tilesize;
       var h = reg.height * 2.0 * regScl / Vars.tilesize;
 
@@ -338,8 +363,8 @@
     const drawPlaceRegion = function(blk, t, color_gn) {
       if(Vars.headless || blk == null || t == null) return;
 
-      var pos = mdl_game._pos(9, t, blk.offset);
-      var reg = mdl_content.getBuildRegion(blk);
+      var pos = mdl_game._pos(t, blk.offset);
+      var reg = mdl_content._buildReg(blk);
 
       drawPlanRegion(pos, reg, color_gn)
     };
@@ -353,19 +378,21 @@
     /* <---------------- drawLine ----------------> */
 
 
-    /* NOTE: Simply draws a line. */
-    const drawLine = function(pos1, pos2, color_gn, dashed) {
+    const drawLine = function(pos_gn1, pos_gn2, color_gn, dashed) {
       if(color_gn == null) color_gn = Pal.accent;
       if(dashed == null) dashed = false;
-      if(Vars.headless || pos1 == null || pos2 == null) return;
+      if(Vars.headless || pos_gn1 == null || pos_gn2 == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos1 = mdl_game._pos(pos_gn1);
+      var pos2 = mdl_game._pos(pos_gn2);
+      var color = _color(color_gn);
       var x1 = pos1.x;
       var y1 = pos1.y;
       var x2 = pos2.x;
       var y2 = pos2.y;
       var seg = Math.round(Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1)) / Vars.tilesize * 2.0);
 
+      Draw.z(Layer.effect + 6.1);
       Lines.stroke(3.0, Pal.gray);
       dashed ? (Lines.dashLine(x1, y1, x2, y2, seg)) : (Lines.line(x1, y1, x2, y2));
       Lines.stroke(1.0, color);
@@ -378,14 +405,15 @@
     /* <---------------- drawFlickerLine ----------------> */
 
 
-    /* NOTE: Draws a pulsing line between two positions. */
-    const drawFlickerLine = function(pos1, pos2, color_gn, scl, dashed) {
+    const drawFlickerLine = function(pos_gn1, pos_gn2, color_gn, scl, dashed) {
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
       if(dashed == null) dashed = false;
-      if(Vars.headless || pos1 == null || pos2 == null) return;
+      if(Vars.headless || pos_gn1 == null || pos_gn2 == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos1 = mdl_game._pos(pos_gn1);
+      var pos2 = mdl_game._pos(pos_gn2);
+      var color = _color(color_gn);
       var x1 = pos1.x;
       var y1 = pos1.y;
       var x2 = pos2.x;
@@ -394,6 +422,7 @@
       var seg = Math.round(Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1)) / Vars.tilesize * 2.0);
       var a = 0.3 + Math.sin(Time.time / scl_fi) * 0.2;
 
+      Draw.z(Layer.effect + 6.1);
       Lines.stroke(1.5, color);
       Draw.alpha(a);
       dashed ? (Lines.dashLine(x1, y1, x2, y2, seg)) : (Lines.line(x1, y1, x2, y2));
@@ -405,13 +434,14 @@
     /* <---------------- drawLaser ----------------> */
 
 
-    /* NOTE: The line is now a laser beam in vanilla style. */
-    const drawLaser = function(pos1, pos2, color_gn, hasLight) {
+    const drawLaser = function(pos_gn1, pos_gn2, color_gn, hasLight) {
       if(color_gn == null) color_gn = Pal.accent;
       if(hasLight == null) hasLight = false;
-      if(Vars.headless || pos1 == null || pos2 == null) return;
+      if(Vars.headless || pos_gn1 == null || pos_gn2 == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos1 = mdl_game._pos(pos_gn1);
+      var pos2 = mdl_game._pos(pos_gn2);
+      var color = _color(color_gn);
       var x1 = pos1.x;
       var y1 = pos1.y;
       var x2 = pos2.x;
@@ -419,6 +449,7 @@
 
       var scl = 1.0 + Math.sin(Time.time / 15.0) * 0.3;
 
+      Draw.z(Layer.effect + 6.1);
       Lines.stroke(3.0 * scl, color);
       Lines.line(x1, y1, x2, y2);
       Fill.circle(x1, y1, 8.0 * scl * 0.3);
@@ -432,11 +463,13 @@
     exports.drawLaser = drawLaser;
 
 
-    const drawMiningBeam = function(pos_f, pos_t, ang, off) {
+    const drawMiningBeam = function(pos_gn_f, pos_gn_t, ang, off) {
       if(ang == null) ang = 0.0;
       if(off == null) off = 4.0;
-      if(Vars.headless || pos_f == null || pos_t == null) return;
+      if(Vars.headless || pos_gn_f == null || pos_gn_t == null) return;
 
+      var pos_f = mdl_game._pos(pos_gn_f);
+      var pos_t = mdl_game._pos(pos_gn_t);
       var len = off + Mathf.absin(Time.time, 1.1, 0.5);
       var swingScl = 12.0;
       var swingMag = 1.1;
@@ -467,19 +500,20 @@
     /* <---------------- drawRect ----------------> */
 
 
-    /* NOTE: The classic rectangular range. */
-    const drawRect = function(pos, r, color_gn, size, dashed) {
+    const drawRect = function(pos_gn, r, color_gn, size, dashed) {
       if(color_gn == null) color_gn = Pal.accent;
       if(size == null) size = 1;
       if(dashed == null) dashed = false;
-      if(Vars.headless || pos == null) return;
+      if(Vars.headless || pos_gn == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos = mdl_game._pos(pos_gn);
+      var color = _color(color_gn);
       var x = pos.x;
       var y = pos.y;
       var hw = (size / 2 + r) * Vars.tilesize;
       var seg = (size + r * 2) * 2;
 
+      Draw.z(Layer.effect + 6.1);
       Lines.stroke(3.0, Pal.gray);
       if(dashed) {
         Lines.dashLine(x - hw, y - hw, x + hw, y - hw, seg);
@@ -512,7 +546,7 @@
     const drawPlaceRect = function(blk, t, color_gn, r, dashed) {
       if(Vars.headless || blk == null || t == null) return;
 
-      drawRect(mdl_game._pos(9, t, blk.offset), r, color_gn, blk.size, dashed);
+      drawRect(mdl_game._pos(t, blk.offset), r, color_gn, blk.size, dashed);
     };
     exports.drawPlaceRect = drawPlaceRect;
 
@@ -526,7 +560,6 @@
     exports.drawSelectRect = drawSelectRect;
 
 
-    /* NOTE: This rect only contains the building. */
     const drawBuildRect = function(b, valid, dashed) {
       if(valid == null) valid = true;
       if(dashed == null) dashed = false;
@@ -542,7 +575,7 @@
 
       drawBuildRect(b);
       drawBuildRect(ob);
-      drawLine(mdl_game._pos(9, b), mdl_game._pos(8, ob));
+      drawLine(b, ob);
     };
     exports.drawBuildRectConnector = drawBuildRectConnector;
   // End
@@ -554,16 +587,17 @@
     /* <---------------- drawCircle ----------------> */
 
 
-    /* NOTE: The classic circular range. */
-    const drawCircle = function(pos, rad, color_gn, dashed) {
+    const drawCircle = function(pos_gn, rad, color_gn, dashed) {
       if(color_gn == null) color_gn = Pal.accent;
       if(dashed == null) dashed = false;
-      if(Vars.headless || pos == null) return;
+      if(Vars.headless || pos_gn == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos = mdl_game._pos(pos_gn);
+      var color = _color(color_gn);
       var x = pos.x;
       var y = pos.y;
 
+      Draw.z(Layer.effect + 6.1);
       Lines.stroke(3.0, Pal.gray);
       dashed ? Lines.dashCircle(x, y, rad) : Lines.circle(x, y, rad);
       Lines.stroke(1.0, color);
@@ -576,7 +610,7 @@
     const drawPlaceCircle = function(blk, t, color_gn, rad, dashed) {
       if(Vars.headless || blk == null || t == null) return;
 
-      drawCircle(mdl_game._pos(9, t, blk.offset), rad, color_gn, dashed);
+      drawCircle(mdl_game._pos(t, blk.offset), rad, color_gn, dashed);
     };
     exports.drawPlaceCircle = drawPlaceCircle;
 
@@ -593,18 +627,19 @@
     /* <---------------- drawWarningDisk ----------------> */
 
 
-    /* NOTE: Draws a pulsing filled circle, usually indicative of explosion. */
-    const drawWarningDisk = function(pos, rad, color_gn, scl) {
+    const drawWarningDisk = function(pos_gn, rad, color_gn, scl) {
       if(color_gn == null) color_gn = Pal.remove;
       if(scl == null) scl = 1.0;
-      if(Vars.headless || pos == null) return;
+      if(Vars.headless || pos_gn == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos = mdl_game._pos(pos_gn);
+      var color = _color(color_gn);
       var x = pos.x;
       var y = pos.y;
       var scl_fi = scl * 15.0;
       var a = 0.15 + Math.sin(Time.time / scl_fi) * 0.15;
 
+      Draw.z(Layer.effect + 6.1);
       Draw.color(color);
       Draw.alpha(a);
       Fill.circle(x, y, rad);
@@ -620,16 +655,15 @@
     /* <---------------- drawTileArea ----------------> */
 
 
-    /* NOTE: Draws a tiny filled square in a tile. */
     const drawTileArea = function(t, color_gn, a, size) {
       if(color_gn == null) color_gn = Pal.accent;
       if(a == null) a = 0.7;
       if(size == null) size = 1.0;
       if(Vars.headless || t == null) return;
 
-      var color = palette_gn(color_gn);
+      var color = _color(color_gn);
 
-      Draw.z(Layer.effect + 0.01);
+      Draw.z(Layer.effect + 6.1);
       Draw.color(color);
       Draw.alpha(a);
       Fill.rect(t.worldx(), t.worldy(), Vars.tilesize * size, Vars.tilesize * size);
@@ -638,7 +672,6 @@
     exports.drawTileArea = drawTileArea;
 
 
-    /* NOTE: Draws an animated square instead. Treats {color_gn} as color if it's not a boolean. */
     const drawTileIndicator = function(t, color_gn) {
       var size = 0.75 + Math.sin(Time.time / 15.0) * 0.15;
       drawTileArea(t, color_gn, 0.7, size);
@@ -646,18 +679,17 @@
     exports.drawTileIndicator = drawTileIndicator;
 
 
-    /* NOTE: Like {drawTileArea} but a building is used. */
     const drawBuildArea = function(b, color_gn, a, pad) {
       if(color_gn == null) color_gn = Pal.accent;
       if(a == null) a = 0.5;
       if(pad == null) pad = 0.0;
       if(Vars.headless || b == null) return;
 
-      var pos = mdl_game._pos(9, b);
+      var pos = mdl_game._pos(b);
       var w = b.block.size * Vars.tilesize - pad;
-      var color = palette_gn(color_gn);
+      var color = _color(color_gn);
 
-      Draw.z(Layer.effect + 0.01);
+      Draw.z(Layer.effect + 6.1);
       Draw.color(color);
       Draw.alpha(a);
       Fill.rect(pos.x, pos.y, w, w);
@@ -673,14 +705,14 @@
     /* <---------------- drawCirclePulse ----------------> */
 
 
-    /* NOTE: Used for impact wave indication. */
-    const drawCirclePulse = function(pos, rad, color_gn, scl, a) {
+    const drawCirclePulse = function(pos_gn, rad, color_gn, scl, a) {
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
       if(a == null) a = 0.5;
-      if(Vars.headless || pos == null) return;
+      if(Vars.headless || pos_gn == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos = mdl_game._pos(pos_gn);
+      var color = _color(color_gn);
       var x = pos.x;
       var y = pos.y;
       var scl_fi = scl * 150.0;
@@ -698,6 +730,7 @@
         Math.min(1.0 + (1.0 - frac4) * rad, rad),
       ];
 
+      Draw.z(Layer.effect + 6.1);
       Draw.color(color);
       Draw.alpha(a);
       for(let i = 0; i < 4; i++) {
@@ -709,14 +742,14 @@
     exports.drawCirclePulse = drawCirclePulse;
 
 
-    /* NOTE: Used for overdriven mode indication. */
-    const drawRectPulse = function(pos, rad, color_gn, scl, a) {
+    const drawRectPulse = function(pos_gn, rad, color_gn, scl, a) {
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
       if(a == null) a = 0.7;
-      if(Vars.headless || pos == null) return;
+      if(Vars.headless || pos_gn == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos = mdl_game._pos(pos_gn);
+      var color = _color(color_gn);
       var x = pos.x;
       var y = pos.y;
       var scl_fi = scl * 150.0;
@@ -730,6 +763,7 @@
         Math.min(1.0 + Math.pow(1.0 - frac2, 0.5) * rad, rad),
       ];
 
+      Draw.z(Layer.effect + 6.1);
       Draw.color(color);
       Draw.alpha(a);
       for(let i = 0; i < 2; i++) {
@@ -751,20 +785,22 @@
     /* <---------------- drawProgressBar ----------------> */
 
 
-    /* NOTE: Draws a progress bar over the block. */
-    const drawProgressBar = function(pos, frac, color_gn, size, offW, offTy) {
+    const drawProgressBar = function(pos_gn, frac, color_gn, size, offW, offTy) {
       if(color_gn == null) color_gn = Pal.accent;
       if(size == null) size = 1;
       if(offW == null) offW = 0.0;
       if(offTy == null) offTy = 0;
-      if(Vars.headless || pos == null) return;
+      if(Vars.headless || pos_gn == null || frac == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos = mdl_game._pos(pos_gn);
+      var frac_fi = Mathf.clamp(frac);
+      var color = _color(color_gn);
       var x = pos.x;
       var y = pos.y;
       var w = (size + 1) * Vars.tilesize + offW;
       var offTy_fi = (offTy + size * 0.5 + 0.5) * Vars.tilesize;
 
+      Draw.z(Layer.effect + 6.1);
       Lines.stroke(5.0, Pal.gray);
       Draw.alpha(0.7);
       Lines.line(x - w * 0.5, y + offTy_fi, x + w * 0.5, y + offTy_fi);
@@ -772,10 +808,73 @@
       Draw.alpha(0.2);
       Lines.line(x - w * 0.5, y + offTy_fi, x + w * 0.5, y + offTy_fi);
       Draw.alpha(0.7);
-      Lines.line(x - w * 0.5, y + offTy_fi, Mathf.lerp(x - w * 0.5, x + w * 0.5, frac), y + offTy_fi);
+      Lines.line(x - w * 0.5, y + offTy_fi, Mathf.lerp(x - w * 0.5, x + w * 0.5, frac_fi), y + offTy_fi);
       Draw.reset();
     };
     exports.drawProgressBar = drawProgressBar;
+
+
+    /* <---------------- drawProgressCircle ----------------> */
+
+
+    /*
+     * NOTE:
+     *
+     * Inspired by New Horizon mod by Yuria.
+     * Speechless...
+     */
+    const drawProgressCircle = function(pos_gn, frac, rad, color_gn, ang, hideBottom) {
+      if(rad == null) rad = 24.0;
+      if(color_gn == null) color_gn = Pal.accent;
+      if(ang == null) ang = 0.0;
+      if(hideBottom == null) hideBottom = false;
+      if(Vars.headless || pos_gn == null || frac == null) return;
+
+      var pos = mdl_game._pos(pos_gn);
+      var frac_fi = Mathf.clamp(frac);
+      var color = _color(color_gn);
+      var x = pos.x;
+      var y = pos.y;
+      var sides = Lines.circleVertices(rad) * (hideBottom ? 2 : 1);
+      var ang_side = 360.0 / sides;
+      var cap = Math.round(sides * frac_fi);
+
+      var stroke = 5.0;
+      var radIn = rad - stroke * 0.5 * (hideBottom ? 1.0 : 0.6);
+      var radOut = rad + stroke * 0.5 * (hideBottom ? 1.0 : 0.6);
+
+      if(!hideBottom) {
+        Draw.z(Layer.effect + 6.1);
+        Lines.stroke(stroke, Pal.gray);
+        Draw.alpha(0.7);
+        Lines.circle(x, y, rad);
+        Lines.stroke(stroke * 0.6, color);
+        Draw.alpha(0.2);
+        Lines.circle(x, y, rad);
+      };
+
+      for(let i = 0; i < cap; i++) {
+        var ang_i = ang_side * i + ang
+
+        Draw.color(color);
+        Draw.alpha(hideBottom ? 1.0 : 0.7);
+        Fill.quad(
+          x + radIn * Mathf.cosDeg(ang_i),
+          y + radIn * Mathf.sinDeg(ang_i),
+          x + radIn * Mathf.cosDeg(ang_i + ang_side),
+          y + radIn * Mathf.sinDeg(ang_i + ang_side),
+          x + radOut * Mathf.cosDeg(ang_i + ang_side),
+          y + radOut * Mathf.sinDeg(ang_i + ang_side),
+          x + radOut * Mathf.cosDeg(ang_i),
+          y + radOut * Mathf.sinDeg(ang_i),
+        );
+      };
+
+      Draw.reset();
+    };
+    exports.drawProgressCircle = drawProgressCircle;
+
+
   // End
 
 
@@ -785,13 +884,14 @@
     /* <---------------- drawItem ----------------> */
 
 
-    /* NOTE: Draws a series of light orbs which represent the items. */
-    const drawItemTransfer = function(pos_f, pos_t, color_gn, scl) {
+    const drawItemTransfer = function(pos_gn_f, pos_gn_t, color_gn, scl) {
       if(color_gn == null) color_gn = Pal.accent;
       if(scl == null) scl = 1.0;
-      if(Vars.headless || pos_f == null || pos_t == null) return;
+      if(Vars.headless || pos_gn_f == null || pos_gn_t == null) return;
 
-      var color = palette_gn(color_gn);
+      var pos_f = mdl_game._pos(pos_gn_f);
+      var pos_t = mdl_game._pos(pos_gn_t);
+      var color = _color(color_gn);
       var x_f = pos_f.x;
       var y_f = pos_f.y;
       var x_t = pos_t.x;
@@ -811,7 +911,7 @@
       var rad_2 = 1.5 - Math.pow(frac2, 10) * 0.5;
       var rad_3 = 1.5 - Math.pow(frac3, 10) * 0.5;
 
-      Draw.z(Layer.effect + 0.01);
+      Draw.z(Layer.effect + 6.1);
       Draw.color(color);
       Fill.circle(x_1, y_1, rad_1);
       Fill.circle(x_2, y_2, rad_2);
@@ -828,16 +928,17 @@
     /* <---------------- drawIcon ----------------> */
 
 
-    /* NOTE: Draws the content icon at the left-upper corner of the block. */
-    const drawContentIcon = function(pos, ct, size) {
+    const drawContentIcon = function(pos_gn, ct, size) {
       if(size == null) size = 1;
-      if(Vars.headless || pos == null || ct == null) return;
+      if(Vars.headless || pos_gn == null || ct == null) return;
 
+      var pos = mdl_game._pos(pos_gn);
       var x = pos.x - Vars.tilesize * 0.5 * size;
       var y = pos.y + Vars.tilesize * 0.5 * size;
       var offY = -1.0;
       var w = 6.0;
 
+      Draw.z(Layer.effect + 6.1);
       Draw.mixcol(Color.darkGray, 1.0);
       Draw.rect(ct.uiIcon, x, y + offY, w, w);
       Draw.reset();
@@ -874,22 +975,54 @@
     /* <---------------- drawFadeStatus ----------------> */
 
 
-    /* NOTE: Draws a pulsing region on {e}, the size is dynamic. */
     const drawFadeStatus = function(e, reg, color) {
       if(color == null) color = Color.white;
       if(Vars.headless || e == null || reg == null) return;
 
-      var pos = mdl_game._pos(9, e);
       var scl = (e instanceof Unit) ? (0.1 * e.type.hitSize) : (0.1 * e.block.size * Vars.tilesize);
 
-      drawFadeRegion(pos, reg, 0.0, 0.5, scl, 0.5, color, 110.0)
+      drawFadeRegion(e, reg, 0.0, 0.5, scl, 0.5, color, 111.0)
     };
     exports.drawFadeStatus = drawFadeStatus;
   // End
 
 
   // Part: Text
-    /* NOTE: Draws a text line over the block. */
+    const drawText = function(pos_gn, str, color_gn, sizeScl, align, offX, offY, offZ) {
+      if(color_gn == null) color_gn = Color.white;
+      if(sizeScl == null) sizeScl = 1.0;
+      if(align == null) align = Align.center;
+      if(offX == null) offX = 0.0;
+      if(offY == null) offY = 0.0;
+      if(offZ == null) offZ = 0.0;
+      if(Vars.headless || pos_gn == null || str == null) return;
+
+      var pos = mdl_game._pos(pos_gn);
+      var color = _color(color_gn);
+      var z = Drawf.text();
+
+      var font = Fonts.outline;
+      var layout = Pools.obtain(GlyphLayout, () => new GlyphLayout());
+      var useInt = font.usesIntegerPositions();
+
+      Draw.z(Layer.playerName + 0.5 + offZ);
+      font.setUseIntegerPositions(false);
+      font.getData().setScale(0.25 / Scl.scl(1.0) * sizeScl);
+      layout.setText(font, str);
+      font.setColor(color);
+      font.draw(str, pos.x + offX, pos.y + offY, 0, align, false);
+
+      Draw.reset();
+      Pools.free(layout);
+      font.getData().setScale(1.0);
+      font.setColor(Color.white);
+      font.setUseIntegerPositions(useInt);
+
+      Draw.z(z);
+    };
+    exports.drawText = drawText;
+
+
     const drawPlaceText = function(blk, t, valid, str, offTy) {
       if(valid == null) valid = true;
       if(offTy == null) offTy = 0;

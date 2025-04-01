@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_fluidJunction = require("reind/blk/blk_fluidJunction");
+    const TEMPLATE = require("reind/blk/blk_fluidJunction");
   // End
 
 
@@ -21,17 +21,17 @@
     const bliqAux_fluidJunction = extend(LiquidJunction, "bliq-aux-fluid-junction", {
       setStats() {
         this.super$setStats();
-        blk_fluidJunction.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     bliqAux_fluidJunction.buildType = () => extend(LiquidJunction.LiquidJunctionBuild, bliqAux_fluidJunction, {
       updateTile() {
         this.super$updateTile();
-        blk_fluidJunction.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_fluidJunction.drawSelect(this);
+        TEMPLATE.drawSelect(this);
       },
     });
     exports.bliqAux_fluidJunction = bliqAux_fluidJunction;

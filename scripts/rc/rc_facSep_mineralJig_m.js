@@ -25,9 +25,10 @@ const rc = {
       "inputs": new Seq([
         "reind-item-int-dust-raw-coal", 20,
       ].concat(gi)),
-      "outputs": new Seq([].concat(go)),
+      "outputs": new Seq([
+        "reind-item-chem-coal", 10,
+      ].concat(go)),
       "randOutputs": new Seq([
-        "reind-item-chem-coal", 10, 0.75,
         "reind-item-ore-lignite", 10, 0.25,
         "reind-item-ore-crude-graphite", 10, 0.25,
         "reind-item-was-gangue", 10, 0.5,
@@ -49,9 +50,10 @@ const rc = {
       "inputs": new Seq([
         "reind-item-int-chunks-crude-sulfur", 20,
       ].concat(gi)),
-      "outputs": new Seq([].concat(go)),
+      "outputs": new Seq([
+        "reind-item-chem-sulfur", 10,
+      ].concat(go)),
       "randOutputs": new Seq([
-        "reind-item-chem-sulfur", 10, 0.75,
         "reind-item-ore-cinnabar", 10, 0.5,
         "reind-item-ore-pyrite", 10, 0.25,
         "reind-item-was-gangue", 10, 0.5,
@@ -69,9 +71,10 @@ const rc = {
       "inputs": new Seq([
         "reind-item-int-dust-bauxite", 20,
       ].concat(gi)),
-      "outputs": new Seq([].concat(go)),
+      "outputs": new Seq([
+        "reind-item-int-dust-p1-bauxite", 10,
+      ].concat(go)),
       "randOutputs": new Seq([
-        "reind-item-int-dust-p1-bauxite", 10, 0.75,
         "reind-item-ore-clay", 10, 0.25,
         "reind-item-was-gangue", 10, 0.5,
       ]),

@@ -9,12 +9,11 @@
     const lib_base = require("reind/lib/lib_base");
     const lib_tmi = lib_base.hasTmi ? require("reind/lib/lib_tmi") : null;
 
-    const blk_genericFactory = require("reind/blk/blk_genericFactory");
+    const PARENT = require("reind/blk/blk_genericFactory");
 
-    const ct_blk_structureCore = require("reind/ct/ct_blk_structureCore");
+    const frag_faci = require("reind/frag/frag_faci");
 
-    const frag_facility = require("reind/frag/frag_facility");
-
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -24,6 +23,7 @@
     const db_dialog = require("reind/db/db_dialog");
     const db_effect = require("reind/db/db_effect");
     const db_stat = require("reind/db/db_stat");
+    const db_table = require("reind/db/db_table");
   // End
 
 
@@ -38,24 +38,18 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      blk.stats.add(db_stat.targetBlock, ax_buildStats(frag_facility.getStructurePair(blk)[0]));
+      blk.stats.add(db_stat.targetBlock, ax_buildStats(frag_faci._structPair(blk)[0]));
     };
 
 
     function updateComp(b) {
-      var needCheck = ct_blk_structureCore.accB_needCheck(b, "r");
+      if(b.needCheck) {
+        b.plan = frag_faci._structPair(b.block)[1];
 
-      if(needCheck) {
-        var plan = frag_facility.getStructurePair(b.block)[1];
-        ct_blk_structureCore.accB_plan(b, "w", plan);
-
-        ct_blk_structureCore.accB_needCheck(b, "w", false);
-      } else {
-        if(Mathf.chance(0.01)) ct_blk_structureCore.accB_needCheck(b, "w", true);
+        b.needCheck = false;
       };
 
-      var cooldown = ct_blk_structureCore.accB_cooldown(b, "r");
-      if(cooldown > 0.0) {ct_blk_structureCore.accB_cooldown(b, "w", cooldown - 1.0)} else {ct_blk_structureCore.accB_cooldown(b, "w", 0.0)}
+      if(b.cd > 0.0) {b.cd -= 1.0} else {b.cd = 0.0};
     };
 
 
@@ -66,15 +60,16 @@
     };
 
 
-    const vec2_55691745 = new Vec2();
-    function buildConfigurationComp(b, tb, plan) {
-      var vec2 = vec2_55691745.setZero();
+    function buildConfigurationComp(b, tb) {
+      var vec2 = new Vec2();
+
+      db_table.__toggle(tb, b, b.showPlan, "eye");
 
       mdl_table.setTrigger(tb, function() {
         if(Vars.state.paused) {
           mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-large-building-paused.name"));
         } else {
-          if(frag_facility.isStructureComplete(b.tile, plan) && ct_blk_structureCore.accB_cooldown(b, "r") < 0.0001) Call.tileConfig(Vars.player, b, vec2.set(1, -2));
+          if(frag_faci.isStructureComplete(b.tile, b.plan) && b.cd < 0.0001) Call.tileConfig(Vars.player, b, vec2.set(1, -2));
         };
       }, Icon.hammer, Core.bundle.get("info.reind-info-large-building.name"), 72.0);
     };
@@ -83,36 +78,34 @@
     function configuredComp(b, builder, val) {
       if(val == null) return;
 
-      if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
-      var val_fi = 0.0;
-      if(val instanceof Vec2) val_fi = val.x;
-      if(val instanceof Building) val_fi = val.config();
+      var tup = mdl_data.handleConfigured(b, builder, val);
 
-      if(Math.abs(val_fi - 1.0) < 0.0001) {
-        var blk_tg = frag_facility.getStructurePair(b.block)[0];
-        mdl_effect.showAt(mdl_game._pos(1, b.tile, blk_tg.offset), db_effect._recipeChange(blk_tg.size, b.team.color), 0.0);
+      if(tup[0] > -2) {
+        var blk_tg = frag_faci._structPair(b.block)[0];
+        mdl_effect.showAt(mdl_game._pos(b.tile, blk_tg.offset), db_effect._recipeChange(blk_tg.size, b.team.color), 0.0);
         b.tile.setBlock(blk_tg, b.team);
+      };
+
+      if(tup[1] > -2) {
+        b.showPlan = Boolean(tup[1]);
       };
     };
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      var t = Vars.world.tile(tx, ty);
-      if(t != null) {
-        var plan = frag_facility.getStructurePair(blk)[1];
-        frag_facility.draw_structure(t, plan);
-      };
+      var plan = frag_faci._structPair(blk)[1];
+      frag_faci.draw_structure(Vars.world.tile(tx, ty), plan);
     };
 
 
-    function drawComp(b, plan) {
-      frag_facility.draw_structure(b.tile, plan);
+    function drawComp(b) {
+      if(b.showPlan) frag_faci.draw_structure(b.tile, b.plan);
     };
 
 
-    function drawSelectComp(b, plan) {
-      var cond1 = ct_blk_structureCore.accB_cooldown(b, "r") < 0.0001;
-      var cond2 = frag_facility.isStructureComplete(b.tile, plan);
+    function drawSelectComp(b) {
+      var cond1 = b.cd < 0.0001;
+      var cond2 = frag_faci.isStructureComplete(b.tile, b.plan);
       var valid = false;
       var str = "";
       if(!cond1) {
@@ -138,7 +131,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericFactory.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -146,7 +139,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericFactory.updateTile(b);
+      PARENT.updateTile(b);
 
       updateComp(b);
     };
@@ -159,8 +152,8 @@
     exports.init = init;
 
 
-    const buildConfiguration = function(b, tb, plan) {
-      buildConfigurationComp(b, tb, plan);
+    const buildConfiguration = function(b, tb) {
+      buildConfigurationComp(b, tb);
     };
     exports.buildConfiguration = buildConfiguration;
 
@@ -177,14 +170,14 @@
     exports.drawPlace = drawPlace;
 
 
-    const draw = function(b, plan) {
-      drawComp(b, plan);
+    const draw = function(b) {
+      drawComp(b);
     };
     exports.draw = draw;
 
 
-    const drawSelect = function(b, plan) {
-      drawSelectComp(b, plan);
+    const drawSelect = function(b) {
+      drawSelectComp(b);
     };
     exports.drawSelect = drawSelect;
   // End

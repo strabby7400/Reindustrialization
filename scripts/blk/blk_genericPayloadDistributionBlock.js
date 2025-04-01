@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericPayloadBlock = require("reind/blk/blk_genericPayloadBlock");
+    const PARENT = require("reind/blk/blk_genericPayloadBlock");
   // End
 
 
@@ -19,13 +19,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericPayloadBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericPayloadBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
   // End

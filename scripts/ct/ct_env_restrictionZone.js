@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const env_restrictionZone = require("reind/env/env_restrictionZone");
+    const TEMPLATE = require("reind/env/env_restrictionZone");
   // End
 
 
@@ -21,7 +21,7 @@
     const mapMisc_restrictionZone = extend(Floor, "map-misc-restriction-zone", {
       setStats() {
         this.super$setStats();
-        env_restrictionZone.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     exports.mapMisc_restrictionZone = mapMisc_restrictionZone;

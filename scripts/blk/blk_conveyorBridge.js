@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericDistributionBlock = require("reind/blk/blk_genericDistributionBlock");
+    const PARENT = require("reind/blk/blk_genericDistributionBlock");
 
     const mdl_data = require("reind/mdl/mdl_data");
 
@@ -18,13 +18,13 @@
     function setStatsComp(blk) {
       blk.stats.add(Stat.range, blk.range, StatUnit.blocks);
 
-      var speed = mdl_data.read_1n1v(db_block.transportSpeed, blk.name);
+      var speed = mdl_data.read_1n1v(db_block.db["param"]["speed"]["base"], blk.name);
       blk.stats.add(Stat.speed, speed, StatUnit.itemsSecond);
     };
 
 
-    function setupComp(blk) {
-      Events.run(ClientLoadEvent, () => {
+    function initComp(blk) {
+      Events.run(MusicRegisterEvent, () => {
         blk.unloadable = true;
         blk.allowConfigInventory = true;
       });
@@ -41,7 +41,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericDistributionBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -49,15 +49,15 @@
 
 
     const updateTile = function(b) {
-      blk_genericDistributionBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 
 
-    const setup = function(blk) {
-      setupComp(blk);
+    const init = function(blk) {
+      initComp(blk);
     };
-    exports.setup = setup;
+    exports.init = init;
   // End
 
 

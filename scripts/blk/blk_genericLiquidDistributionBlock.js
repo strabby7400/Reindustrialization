@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericLiquidBlock = require("reind/blk/blk_genericLiquidBlock");
+    const PARENT = require("reind/blk/blk_genericLiquidBlock");
 
     const mdl_content = require("reind/mdl/mdl_content");
   // End
@@ -31,13 +31,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericLiquidBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericLiquidBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 
@@ -51,19 +51,19 @@
 
 
     const moveLiquid = function(b, ob, liq) {
-      return blk_genericLiquidBlock.moveLiquid(b, ob, liq);
+      return PARENT.moveLiquid(b, ob, liq);
     };
     exports.moveLiquid = moveLiquid;
 
 
     const draw = function(b) {
-      blk_genericLiquidBlock.draw(b);
+      PARENT.draw(b);
     };
     exports.draw = draw;
 
 
     const drawSelect = function(b) {
-      blk_genericLiquidBlock.drawSelect(b);
+      PARENT.drawSelect(b);
     };
     exports.drawSelect = drawSelect;
   // End

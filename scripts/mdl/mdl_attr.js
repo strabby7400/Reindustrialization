@@ -10,103 +10,150 @@
   // End
 
 
+  // Part: Base
+    const _attr = function(attr_gn) {
+      var val = null;
+
+      if(typeof attr_gn == "string") val = attr_gn;
+      if(attr_gn instanceof Attribute) val = attr_gn.toString();
+
+      return val;
+    };
+    exports._attr = _attr;
+  // End
+
+
+  // Part: Stat
+    /*
+     * NOTE:
+     *
+     * Returns the localized name for attribute, used mainly for stats.
+     * Attributes have no translation in vanilla game, since there's no need.
+     */
+    const _attrVal = function(attr_gn) {
+      var nmAttr = _attr(attr_gn);
+
+      return Core.bundle.get("attr." + nmAttr + ".name");
+    };
+    exports._attrVal = _attrVal;
+  // End
+
+
   // Part: Sum
-    const getAttr_blk = function(blk, t, nm_attr) {
-      var attr = blk.sumAttribute(Attribute.get(nm_attr), t.x, t.y);
+    const _sumAttr = function(blk, t, attr_gn) {
+      var nmAttr = _attr(attr_gn);
+
+      return blk.sumAttribute(Attribute.get(nmAttr), t.x, t.y);
+    };
+    exports._sumAttr = _sumAttr;
+
+
+    const _sumAttr_li = function(li_ot, attr_gn) {
+      var attr = 0.0;
+      var nmAttr = _attr(attr_gn);
+
+      li_ot.each(ot => attr += ot.floor().attributes.get(Attribute.get(nmAttr)));
+
       return attr;
     };
-    exports.getAttr_blk = getAttr_blk;
+    exports._sumAttr_li = _sumAttr_li;
 
 
-    const getAttr_b = function(b, nm_attr) {
-      var attr = getAttr_blk(b.block, b.tile, nm_attr);
-      return attr;
+    const _sumAttr_rect = function(blk, t, attr_gn, r) {
+      if(r == null) r = 0;
+
+      var nmAttr = _attr(attr_gn);
+
+      return _sumAttr_li(mdl_game._liTileRect(t, r, blk.size), nmAttr);
     };
-    exports.getAttr_b = getAttr_b;
-
-
-    const getAttr_li = function(li_ot, nm_attr) {
-      var attr = 0;
-      li_ot.each(ot => {
-        if(!ot.floor().isDeep()) attr += ot.floor().attributes.get(Attribute.get(nm_attr));
-      });
-      return attr;
-    };
-    exports.getAttr_li = getAttr_li;
+    exports._sumAttr_rect = _sumAttr_rect;
   // End
 
 
   // Part: Condition
-    const isEnough_blk = function(blk, t, nm_attr, val) {
-      if(val == null) val = 1.0;
+    const _limit = function(blk, avLimit) {
+      if(avLimit == null) avLimit = 1.0;
 
-      var attr = getAttr_blk(blk, t, nm_attr);
-      var limit = Math.pow(blk.size, 2) * val;
-
-      return attr >= limit;
+      return Math.pow(blk.size, 2) * avLimit;
     };
-    exports.isEnough_blk = isEnough_blk;
+    exports._limit = _limit;
   // End
 
 
   // Part: Pair
     /*
-      NOTE:
-      The generic method to get the highest attribute value among a mapper list, within a list of tiles.
-      An attribute pair is returned as an array of attribute name and sum value.
-      Available mapper lists:
-      {db_item.rockMap} ... For rock impact drills.
-      {db_item.bushMap} ... For bush harvesters.
-      {db_fluid.ventMap} ... For vent collectors.
-    */
-    const getAttrPair_li = function(map, li_ot) {
-      if(map == null || map.size == 0) return;
-
-      var nm_attr;
+     * NOTE:
+     *
+     * Gets the highest attribute sum in a mapper list, from a list of tiles.
+     * Returns an attribute pair as {[nmAttr, attr]}.
+     *
+     * Available mapper lists:
+     * {db_item.db["map"]["rock"]} ... attribute -> rock floor
+     * {db_item.db["map"]["bush"]} ... attribute -> bush
+     * {db_fluid.db["map"]["vent"]} ... attribute -> vent
+     */
+    const _attrPair = function(map, li_ot) {
       var attr = 0.0;
+      var nmAttr = null;
       var cap = map.size;
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
+      if(cap > 0) {
+        for(let i = 0; i < cap; i++) {
+          if(i % 2 != 0) continue;
 
-        var tmpAttr = getAttr_li(li_ot, map.get(i));
-        if(tmpAttr > attr) {
-          nm_attr = map.get(i);
-          attr = tmpAttr;
+          var tmpNmAttr = map.get(i);
+          var tmpAttr = _sumAttr_li(li_ot, tmpNmAttr);
+          if(tmpAttr > attr) {
+            nmAttr = tmpNmAttr;
+            attr = tmpAttr;
+          };
         };
       };
 
-      if(nm_attr != null) {
-        return [nm_attr, attr];
-      } else {
-        return;
-      };
+      return (nmAttr == null) ? null : [nmAttr, attr];
     };
-    exports.getAttrPair_li = getAttrPair_li;
+    exports._attrPair = _attrPair;
   // End
 
 
   // Part: List
-    const li_76000210 = new Seq();
-    const getAttrli_li = function(map, li_ot) {
-      var li = li_76000210.clear();
-
-      if(map == null) return li;
+    /*
+     * NOTE:
+     *
+     * Gets attribute sum for each attribute in a mapper list.
+     * Returns a list of {nmAttr} and {attr}.
+     */
+    const _liSumAttr = function(map, li_ot) {
+      var li = new Seq();
 
       var cap = map.size;
-      if(cap == 0) return li;
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
+      if(cap > 0) {
+        for(let i = 0; i < cap; i++) {
+          if(i % 2 != 0) continue;
 
-        var nm_attr = map.get(i);
-        var attr = getAttr_li(li_ot, nm_attr);
+          var nmAttr = map.get(i);
+          var attr = sumAttr_li(li_ot, nmAttr);
 
-        li.add(nm_attr);
-        li.add(attr);
+          li.add(nmAttr, attr);
+        };
       };
 
       return li;
     };
-    exports.getAttrli_li = getAttrli_li;
+    exports._liSumAttr = _liSumAttr;
+  // End
+
+
+  // Part: Special
+    const _wind = function(t, scl) {
+      if(scl == null) scl = 1.0;
+
+      var attr = (1.0 - Math.pow(Math.sin(Time.time / 6400.0 / scl), 2) * 0.7) * Attribute.get("reind-attr-env-wind").env();
+      if(t != null && attr > 0.0) attr += Mathf.randomSeed(t.pos(), -2, 2) * 0.1;
+
+      if(attr < 0.0) attr = 0.0;
+      return attr;
+    };
+    exports._wind = _wind;
   // End
 
 

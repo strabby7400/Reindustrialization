@@ -6,11 +6,12 @@
 
 
   // Part: Import
-    const env_genericProp = require("reind/env/env_genericProp");
+    const PARENT = require("reind/env/env_genericProp");
 
     const db_env = require("reind/db/db_env");
     const db_stat = require("reind/db/db_stat");
 
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -18,9 +19,9 @@
 
 
   // Part: Setting
-    var treeAlpha = 20;
-    const set_treeAlpha = function(int) {
-      treeAlpha = int;
+    var treeAlpha = 1.0;
+    const set_treeAlpha = function(val) {
+      treeAlpha = val;
     };
     exports.set_treeAlpha = set_treeAlpha;
   // End
@@ -34,14 +35,13 @@
 
 
     function drawBaseComp(blk, t) {
-      var z = mdl_data.read_1n1v(db_env.treeLayers, blk.name);
+      var z = mdl_data.read_1n1v(db_env.db["map"]["treeLayer"], blk.name);
       if(z == null) return;
       var z_sha = z - 0.0005;
 
-      var pos = mdl_game._pos(1, t);
-      var pos_sha = mdl_game._pos(2, t, blk.shadowOffset);
+      var pos_sha = mdl_game._pos(t, blk.shadowOffset);
       var reg = blk.region;
-      var ang = Mathf.randomSeed(t.pos(), 0, 4) * 90.0 + Mathf.sin(Time.time + pos.x, 50.0, 0.5) + Mathf.sin(Time.time - pos.y, 65.0, 0.9) + Mathf.sin(Time.time + pos.y - pos.x, 85.0, 0.9);
+      var ang = Mathf.randomSeed(t.pos(), 0, 4) * 90.0;
       var scl = 1.0;
       var mag = 1.0;
       var wobScl = 1.0;
@@ -56,17 +56,17 @@
         wobScl = 0.3;
       };
 
-      var a = (Groups.player.size() > 1) ? 1.0 : treeAlpha / 20.0;
-      if(Vars.player.unit() != null && !Vars.player.unit().flying && Vars.player.unit().type.groundLayer < 76.0) {
-        var pos_pl = mdl_game._pos(3, "player");
+      var a = (Groups.player.size() > 1) ? 1.0 : treeAlpha;
+      if(mdl_content.isCoverable(Vars.player.unit())) {
+        var pos_pl = mdl_game._pos("player");
         if(pos_pl != null) {
-          var d = mdl_game._dst(pos, pos_pl);
+          var d = mdl_game._dst(t, pos_pl);
           if(d < reg.width * 0.15) a *= 0.37;
         };
       };
 
       mdl_draw.drawBlurredShadow(pos_sha, reg, ang, a, 1.05, Color.white, z_sha);
-      mdl_draw.drawWobbleRegion(pos, reg, ang, a, 1.0, Color.white, scl, mag, wobScl, wobScl, z);
+      mdl_draw.drawWobbleRegion(t, reg, ang, a, 1.0, Color.white, scl, mag, wobScl, wobScl, z);
     };
   // End
 
@@ -80,7 +80,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      env_genericProp.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };

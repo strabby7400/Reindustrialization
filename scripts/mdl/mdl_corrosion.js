@@ -15,242 +15,249 @@
 
 
   // Part: Methods
-    const getGroup = function(liq) {
+    const arr_fGrp = [
+      "brine", "brine",
+      "basicAq", "basic-solution",
+      "acidicAq", "acidic-solution",
+      "alcohol", "alcohol",
+      "basicAlc", "basic-alcohol",
+      "acidicAlc", "acidic-alcohol",
+      "oil", "oil",
+      "basicOil", "basic-oil",
+      "acidicOil", "acidic-oil",
+      "basicSub", "basic-substance",
+      "acidicSub", "acidic-substance",
+      "basicGas", "basic-gas",
+      "acidicGas", "acidic-gas",
+      "slurry", "slurry",
+      "melt", "melt",
+      "stickyMelt", "sticky-melt",
+    ];
+
+
+    const _fGrp = function(liq) {
       var nm = liq.name;
+      var val = null;
+      var obj = db_fluid.db;
+      var arr = arr_fGrp;
+      var cap = arr.length;
 
-      if(db_fluid.grp_brine.contains(nm)) return "brine";
-      if(db_fluid.grp_basicAq.contains(nm)) return "basicAq";
-      if(db_fluid.grp_acidicAq.contains(nm)) return "acidicAq";
-      if(db_fluid.grp_basicOil.contains(nm)) return "basicOil";
-      if(db_fluid.grp_acidicOil.contains(nm)) return "acidicOil";
-      if(db_fluid.grp_basicSub.contains(nm)) return "basicSub";
-      if(db_fluid.grp_acidicSub.contains(nm)) return "acidicSub";
-      if(db_fluid.grp_basicGas.contains(nm)) return "basicGas";
-      if(db_fluid.grp_acidicGas.contains(nm)) return "acidicGas";
-      if(db_fluid.grp_slurry.contains(nm)) return "slurry";
-      if(db_fluid.grp_melt.contains(nm)) return "melt";
-      if(db_fluid.grp_stickyMelt.contains(nm)) return "stickyMelt";
-      return null;
+      for(let i = 0; i < cap; i++) {
+        if(i % 2 != 0) continue;
+
+        if(obj["group"][arr[i]].contains(nm)) {
+          val = arr[i];
+          break;
+        };
+      };
+
+      return val;
     };
-    exports.getGroup = getGroup;
+    exports._fGrp = _fGrp;
 
 
-    const groupToValue = function(grp) {
+    const _fGrpVal_grp = function(grp) {
       if(Vars.headless) return;
 
-      var grpVal = null;
+      var val = null;
+      var arr = arr_fGrp;
+      var cap = arr.length;
 
-      switch(grp) {
-        case "brine" :
-          grpVal = Core.bundle.get("term.reind-term-brine.name");
+      for(let i = 0; i < cap; i++) {
+        if(i % 2 != 0) continue;
+
+        if(grp == arr[i]) {
+          val = Core.bundle.get("term.reind-term-" + arr[i + 1] + ".name");
           break;
-        case "basicAq" :
-          grpVal = Core.bundle.get("term.reind-term-basic-solution.name");
-          break;
-        case "acidicAq" :
-          grpVal = Core.bundle.get("term.reind-term-acidic-solution.name");
-          break;
-        case "basicOil" :
-          grpVal = Core.bundle.get("term.reind-term-basic-oil.name");
-          break;
-        case "acidicOil" :
-          grpVal = Core.bundle.get("term.reind-term-acidic-oil.name");
-          break;
-        case "basicSub" :
-          grpVal = Core.bundle.get("term.reind-term-basic-substance.name");
-          break;
-        case "acidicSub" :
-          grpVal = Core.bundle.get("term.reind-term-acidic-substance.name");
-          break;
-        case "basicGas" :
-          grpVal = Core.bundle.get("term.reind-term-basic-gas.name");
-          break;
-        case "acidicGas" :
-          grpVal = Core.bundle.get("term.reind-term-acidic-gas.name");
-          break;
-        case "slurry" :
-          grpVal = Core.bundle.get("term.reind-term-slurry.name");
-          break;
-        case "melt" :
-          grpVal = Core.bundle.get("term.reind-term-melt.name");
-          break;
-        case "stickyMelt" :
-          grpVal = Core.bundle.get("term.reind-term-sticky-melt.name");
-          break;
+        };
       };
 
-      return grpVal;
+      return val;
     };
-    exports.groupToValue = groupToValue;
+    exports._fGrpVal_grp = _fGrpVal_grp;
 
 
-    const getGroupValue = function(liq) {
-      var grp = getGroup(liq);
-      var grpVal = groupToValue(grp);
-      return grpVal;
+    const _fGrpVal = function(liq) {
+      return _fGrpVal_grp(_fGrp(liq));
     };
-    exports.getGroupValue = getGroupValue;
+    exports._fGrpVal = _fGrpVal;
 
 
-    const getMaterialGroup = function(blk) {
+    const arr_matGrp = [
+      "wood", "wood",
+      "copper", "copper",
+      "steel", "steel",
+      // TODO                 "stainlessSteel", "stainless-steel",
+      "glass", "glass,"
+    ];
+
+
+    const _matGrp = function(blk) {
       var nm = blk.name;
+      var val = null;
+      var obj = db_block.db;
+      var arr = arr_matGrp;
+      var cap = arr.length;
 
-      if(db_block.grp_wood.contains(nm)) return "wood";
-      if(db_block.grp_copper.contains(nm)) return "copper";
-      if(db_block.grp_steel.contains(nm)) return "steel";
-      if(db_block.grp_stainlessSteel.contains(nm)) return "stainlessSteel";
-      if(db_block.grp_glass.contains(nm)) return "glass";
-      return null;
-    };
-    exports.getMaterialGroup = getMaterialGroup;
+      for(let i = 0; i < cap; i++) {
+        if(i % 2 != 0) continue;
 
-
-    const materialGroupToValue = function(matGrp) {
-      var matGrpVal;
-
-      switch(matGrp) {
-        case "wood" :
-          matGrpVal = Core.bundle.get("term.reind-term-wood.name");
+        if(obj["group"][arr[i]].contains(nm)) {
+          val = arr[i];
           break;
-        case "copper" :
-          matGrpVal = Core.bundle.get("term.reind-term-copper.name");
-          break;
-        case "steel" :
-          matGrpVal = Core.bundle.get("term.reind-term-steel.name");
-          break;
-        case "stainlessSteel" :
-          matGrpVal = Core.bundle.get("term.reind-term-stainless-steel.name");
-          break;
-        case "glass" :
-          matGrpVal = Core.bundle.get("term.reind-term-glass.name");
-          break;
-        default:
-          matGrpVal = null;
+        };
       };
 
-      return matGrpVal;
+      return val;
     };
-    exports.materialGroupToValue = materialGroupToValue;
+    exports._matGrp = _matGrp;
 
 
-    const getMaterialGroupValue = function(blk) {
-      var matGrp = getMaterialGroup(blk);
-      var matGrpVal = materialGroupToValue(matGrp);
-      return matGrpVal;
+    const _matGrpVal_grp = function(matGrp) {
+      if(Vars.headless) return;
+
+      var val = null;
+      var arr = arr_matGrp;
+      var cap = arr.length;
+
+      for(let i = 0; i < cap; i++) {
+        if(i % 2 != 0) continue;
+
+        if(matGrp == arr[i]) {
+          val = Core.bundle.get("term.reind-term-" + arr[i + 1] + ".name");
+          break;
+        };
+      };
+
+      return val;
     };
-    exports.getMaterialGroupValue = getMaterialGroupValue;
+    exports._matGrpVal_grp = _matGrpVal_grp;
+
+
+    const _matGrpVal = function(blk) {
+      return _matGrpVal_grp(_matGrp(blk));
+    };
+    exports._matGrpVal = _matGrpVal;
+
+
+    const arr_fTag = [
+      "ammoniacal", "ammoniacal",
+      "chloric", "chloric",
+      "fluoric", "fluoric",
+      "oxidative", "oxidative",
+    ];
 
 
     const li_94077784 = new Seq();
-    const getTags = function(liq) {
+    const _liFTag = function(liq) {
       var li = li_94077784.clear();
-      
-      var nm = liq.name;
 
-      if(db_fluid.tag_ammoniacal.contains(nm)) li.add("ammoniacal");
-      if(db_fluid.tag_chloric.contains(nm)) li.add("chloric");
-      if(db_fluid.tag_fluoric.contains(nm)) li.add("fluoric");
-      if(db_fluid.tag_oxidative.contains(nm)) li.add("oxidative");
+      var nm = liq.name;
+      var obj = db_fluid.db;
+      var arr = arr_fTag;
+      var cap = arr.length;
+
+      for(let i = 0; i < cap; i++) {
+        if(i % 2 != 0) continue;
+
+        if(obj["fTag"][arr[i]].contains(nm)) {
+          li.add(arr[i]);
+          break;
+        };
+      };
 
       return li;
     };
-    exports.getTags = getTags;
+    exports._liFTag = _liFTag;
 
 
-    const tagToValue = function(tag) {
-      var tagVal;
+    const _fTagVal_tag = function(tag) {
+      if(Vars.headless) return;
 
-      switch(tag) {
-        case "ammoniacal" :
-          tagVal = Core.bundle.get("term.reind-term-ammoniacal.name");
+      var val = null;
+      var arr = arr_fTag;
+      var cap = arr.length;
+
+      for(let i = 0; i < cap; i++) {
+        if(i % 2 != 0) continue;
+
+        if(tag == arr[i]) {
+          val = Core.bundle.get("term.reind-term-" + arr[i + 1] + ".name");
           break;
-        case "chloric" :
-          tagVal = Core.bundle.get("term.reind-term-chloric.name");
-          break;
-        case "fluoric" :
-          tagVal = Core.bundle.get("term.reind-term-fluoric.name");
-          break;
-        case "oil" :
-          tagVal = Core.bundle.get("term.reind-term-oil.name");
-          break;
-        case "oxidative" :
-          tagVal = Core.bundle.get("term.reind-term-oxidative.name");
-          break;
-        default:
-          tagVal = null;
+        };
       };
 
-      return tagVal;
+      return val;
     };
-    exports.tagToValue = tagToValue;
+    exports._fTagVal_tag = _fTagVal_tag;
 
 
     const li_99387709 = new Seq();
-    const getTagValue = function(liq) {
+    const _fTagVal = function(liq) {
       var li = li_99387709.clear();
 
-      var tags = getTags(liq);
-      tags.each(tag => li.add(tagToValue(tag)));
-      var tagVal = mdl_text.getTagText(li);
+      _liFTag(liq).each(tag => li.add(_fTagVal_tag(tag)));
 
-      return tagVal;
+      return mdl_text._tagText(li);
     };
-    exports.getTagValue = getTagValue;
+    exports._fTagVal = _fTagVal;
 
 
-    const getCorrosion = function(liq) {
+    const _cor = function(liq) {
       if(liq == null) return 0.0;
 
-      var cor = mdl_data.read_1n1v(db_fluid.specificCorrosion, liq.name);
+      var obj = db_fluid.db["corrosion"];
+
+      var cor = mdl_data.read_1n1v(obj["specific"], liq.name);
       if(cor == null) {
-        var grp = getGroup(liq);
-        if(grp != null) cor = mdl_data.read_1n1v(db_fluid.baseCorrosion, grp);
+        var grp = _fGrp(liq);
+        if(grp != null) cor = mdl_data.read_1n1v(obj["base"], grp);
       };
-      if(cor == null) return 0.0;
 
-      return cor;
+      return (cor == null) ? 0.0 : cor;
     };
-    exports.getCorrosion = getCorrosion;
+    exports._cor = _cor;
 
 
-    const getCorrosionScale = function(blk, liq) {
+    const _corScl = function(blk, liq) {
       if(blk == null || liq == null) return 1.0;
 
-      var grp = getGroup(liq);
-      var matGrp = getMaterialGroup(blk);
-
+      var obj = db_fluid.db["corrosion"];
+      var grp = _fGrp(liq);
+      var matGrp = _matGrp(blk);
       var corScl = 1.0;
+
       if(grp != null && matGrp != null) {
-        var corSclTemp = mdl_data.read_2n1v(db_fluid.corrosionScale, matGrp, grp);
-        if(corSclTemp != null) corScl = corSclTemp;
+        var tmpCorScl = mdl_data.read_2n1v(obj["scale"], matGrp, grp);
+        if(tmpCorScl != null) corScl = tmpCorScl;
       };
 
       if(matGrp != null) {
-        var tags = getTags(liq);
-        tags.each(tag => {
-          var tagScl = mdl_data.read_2n1v(db_fluid.specificCorrosionScale, matGrp, tag);
+        _liFTag(liq).each(tag => {
+          var tagScl = mdl_data.read_2n1v(obj["tagScale"], matGrp, tag);
           if(tagScl != null) corScl *= tagScl;
         });
       };
 
       return corScl;
     };
-    exports.getCorrosionScale = getCorrosionScale;
+    exports._corScl = _corScl;
 
 
-    const getCorrosionResistence = function(blk) {
+    const _corRes = function(blk) {
       if(blk == null) return 1.0;
 
-      var corRes = mdl_data.read_1n1v(db_block.specificCorrosionResistence, blk.name);
-      if(corRes == null) {
-        var grp = getMaterialGroup(blk);
-        if(grp != null) corRes = mdl_data.read_1n1v(db_block.baseCorrosionResistence, grp);
-      };
-      if(corRes == null) return 1.0;
+      var obj = db_block.db["durability"]["corrosion"];
 
-      return corRes;
+      var corRes = mdl_data.read_1n1v(obj["specific"], blk.name);
+      if(corRes == null) {
+        var grp = _matGrp(blk);
+        if(grp != null) corRes = mdl_data.read_1n1v(obj["base"], grp);
+      };
+
+      return (corRes == null) ? 1.0 : corRes;
     };
-    exports.getCorrosionResistence = getCorrosionResistence;
+    exports._corRes = _corRes;
   // End
 
 

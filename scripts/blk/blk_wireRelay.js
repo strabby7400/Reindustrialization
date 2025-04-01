@@ -6,23 +6,30 @@
 
 
   // Part: Import
-    const blk_genericWireBlock = require("reind/blk/blk_genericWireBlock");
+    const PARENT = require("reind/blk/blk_genericWireBlock");
 
     const frag_power = require("reind/frag/frag_power");
+
+    const mdl_data = require("reind/mdl/mdl_data");
+
+    const db_block = require("reind/db/db_block");
   // End
 
 
   // Part: Component
-    function canPlaceOnComp(blk, t, team, rot) {
-      return frag_power.canPlaceOn_shortCircuit(blk, t, team, rot);
+    function initComp(blk) {
+      Events.run(MusicRegisterEvent, () => {
+        var cons = mdl_data.read_1n1v(db_block.db["power"]["consumption"], blk.name);
+        if(cons != null) {
+          blk.consumePower(cons / 60.0);
+          blk.stats.add(Stat.powerUse, cons, StatUnit.perSecond);
+        };
+      });
     };
 
 
-    function setupComp(blk, cons) {
-      Events.run(ClientLoadEvent, () => {
-        blk.consumePower(cons);
-        blk.stats.add(Stat.powerUse, cons * 60.0, StatUnit.perSecond);
-      });
+    function canPlaceOnComp(blk, t, team, rot) {
+      return frag_power.canPlaceOn_shortCircuit(blk, t, team, rot);
     };
   // End
 
@@ -36,27 +43,27 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericWireBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericWireBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
+
+
+    const init = function(blk) {
+      initComp(blk);
+    };
+    exports.init = init;
 
 
     const canPlaceOn = function(blk, t, team, rot) {
       return canPlaceOnComp(blk, t, team, rot);
     };
     exports.canPlaceOn = canPlaceOn;
-
-
-    const setup = function(blk, cons) {
-      setupComp(blk, cons);
-    };
-    exports.setup = setup;
   // End
 
 

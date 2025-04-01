@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericLiquidStorageBlock = require("reind/blk/blk_genericLiquidStorageBlock");
+    const PARENT = require("reind/blk/blk_genericLiquidStorageBlock");
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_effect = require("reind/mdl/mdl_effect");
@@ -50,7 +50,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericLiquidStorageBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -58,7 +58,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericLiquidStorageBlock.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };
@@ -74,13 +74,13 @@
 
 
     const draw = function(b) {
-      blk_genericLiquidStorageBlock.draw(b);
+      PARENT.draw(b);
     };
     exports.draw = draw;
 
 
     const drawSelect = function(b) {
-      blk_genericLiquidStorageBlock.drawSelect(b);
+      PARENT.drawSelect(b);
     };
     exports.drawSelect = drawSelect;
   // End

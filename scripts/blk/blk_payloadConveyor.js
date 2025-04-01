@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericPayloadDistributionBlock = require("reind/blk/blk_genericPayloadDistributionBlock");
+    const PARENT = require("reind/blk/blk_genericPayloadDistributionBlock");
   // End
 
 
@@ -33,7 +33,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericPayloadDistributionBlock.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
@@ -42,7 +42,7 @@
       if(b.power != null && b.power.status < 0.9999) return;
 
       b.super$updateTile();
-      blk_genericPayloadDistributionBlock.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 

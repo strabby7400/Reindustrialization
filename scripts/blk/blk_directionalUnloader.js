@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericDistributionGate = require("reind/blk/blk_genericDistributionGate");
+    const PARENT = require("reind/blk/blk_genericDistributionGate");
 
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -15,7 +15,7 @@
 
   // Part: Component
     function drawSelectComp(b) {
-      if(b.unloadItem != null) mdl_draw.drawContentIcon(mdl_game._pos(1, b), b.unloadItem, b.block.size);
+      if(b.unloadItem != null) mdl_draw.drawContentIcon(b, b.unloadItem, b.block.size);
     };
   // End
 
@@ -29,13 +29,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericDistributionGate.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericDistributionGate.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 

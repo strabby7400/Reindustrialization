@@ -84,6 +84,20 @@
 
 
       {
+        type: DrawBubbles
+        color: cce4ff
+        amount: 12
+        sides: 16
+        strokeMin: 0.0
+        spread: 8.0
+        timeScl: 60.0
+        recurrence: 3.0
+        radius: 3.0
+        fill: false
+      }
+
+
+      {
         type: DrawDefault
       }
 

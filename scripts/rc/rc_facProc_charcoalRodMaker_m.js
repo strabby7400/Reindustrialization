@@ -13,6 +13,19 @@ const rc = {
     ======================================== */
 
 
+    // Charcoal (Uncarbonized) : Powdered Biomass (Dried)
+    {
+      "icon": "reind-item-int-powdered-biomass-dried",
+      "category": "special",
+      "inputs": new Seq([
+        "reind-item-int-powdered-biomass-dried", 20,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-charcoal-uncarbonized", 20,
+      ]),
+    },
+
+
     // Charcoal (Uncarbonized) : Sawdust (Dried)
     {
       "icon": "reind-item-int-sawdust-dried",

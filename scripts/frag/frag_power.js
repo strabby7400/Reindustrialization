@@ -15,7 +15,6 @@
 
 
   // Part: Short Circuit
-    /* NOTE: If the building can short-circuit, it cannot be placed in conductive liquids. */
     const canPlaceOn_shortCircuit = function(blk, t, team, rot) {
       if(mdl_content.canShortCircuit(blk) && t != null && t.floor().liquidDrop != null && mdl_content.isConductive(t.floor().liquidDrop)) {
         mdl_draw.drawPlaceText(blk, t, false, Core.bundle.get("info.reind-info-short-circuit-placement.name"), 0.0);
@@ -29,19 +28,19 @@
 
 
   // Part: Voltage Tier
-    const getTier = function(blk) {
+    const _voltTier = function(blk) {
       var tier = "none";
       var nm = blk.name;
 
       if(blk.hasPower) {
-        if(db_block.tierHV.contains(nm)) {tier = "hv"}
-        else if(db_block.tierEHV.contains(nm)) {tier = "ehv"}
+        if(db_block.db["power"]["tier"]["hv"].contains(nm)) {tier = "hv"}
+        else if(db_block.db["power"]["tier"]["ehv"].contains(nm)) {tier = "ehv"}
         else {tier = "lv"};
       };
 
       return tier;
     };
-    exports.getTier = getTier;
+    exports._voltTier = _voltTier;
   // End
 
 

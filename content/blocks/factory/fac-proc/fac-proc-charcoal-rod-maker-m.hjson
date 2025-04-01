@@ -27,7 +27,7 @@
     parent: fac-proc-sawmill
     objectives: []
   }
-  researchCostMultiplier: 0.3
+  researchCostMultiplier: 0.4
 
 
 /*

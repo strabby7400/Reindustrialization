@@ -1,0 +1,40 @@
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  alwaysUnlocked: true
+  research: {
+    parent: camp-aerth-001-sector-alpha
+    objectives: []
+  }
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  damage: 0.0
+  damageMultiplier: 1.0
+  healthMultiplier: 1.0
+  speedMultiplier: 1.0
+  reloadMultiplier: 1.0
+  buildSpeedMultiplier: 1.0
+  dragMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  color: ffffff
+  effect: none
+  effectChance: 0.02

@@ -6,13 +6,13 @@
 
 
   // Part: Import
-    const blk_conveyor = require("reind/blk/blk_conveyor");
+    const PARENT = require("reind/blk/blk_conveyor");
   // End
 
 
   // Part: Component
-    function setupComp(blk) {
-      Events.run(ClientLoadEvent, () => {
+    function initComp(blk) {
+      Events.run(MusicRegisterEvent, () => {
         blk.unloadable = true;
       });
     };
@@ -28,21 +28,21 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_conveyor.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_conveyor.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 
 
-    const setup = function (blk) {
-      setupComp(blk);
+    const init = function(blk) {
+      initComp(blk);
     };
-    exports.setup = setup;
+    exports.init = init;
   // End
 
 

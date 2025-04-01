@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericTurret = require("reind/blk/blk_genericTurret");
+    const PARENT = require("reind/blk/blk_genericTurret");
 
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -69,13 +69,13 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericTurret.setStats(blk);
+      PARENT.setStats(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_genericTurret.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 

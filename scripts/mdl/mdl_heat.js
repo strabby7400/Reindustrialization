@@ -15,8 +15,9 @@
 
 
   // Part: Block Heat
-    /* NOTE: If no specific regions provided, use these. */
-    const getHeatRegion = function(size) {
+    const _heatReg = function(size) {
+      if(Vars.headless) return;
+
       var reg;
 
       switch(size) {
@@ -38,94 +39,74 @@
 
       return reg;
     };
-    exports.getHeatRegion = getHeatRegion;
+    exports._heatReg = _heatReg;
 
 
-    /* NOTE: If I continue using vanilla heat mechanics, multi-crafters will break the game. */
-    const getHeat = function(b) {
+    const _heat = function(b) {
       if(b.liquids == null) return 0.0;
 
       var heat = b.liquids.get(Vars.content.liquid("reind-effc-cond-heat"));
 
       return heat;
     };
-    exports.getHeat = getHeat;
+    exports._heat = _heat;
 
 
-    /* NOTE: Heat from nearby buildings, not accepted yet. */
-    const getSparedHeat = function(b) {
-      var sheat = 0.0;
+    const _sHeat = function(b) {
+      var sHeat = 0.0;
 
       b.proximity.each(ob => {
         var cond = true;
         mdl_game._liTileRot(b.tile, b.rotation, b.block.size).each(ot => {
           if(ot.build == ob) cond = false;
         });
-        if(cond) sheat += getHeat(ob) * mdl_game._fracSide(ob, b);
+        if(cond) sHeat += _heat(ob) * mdl_game._fracSide(ob, b);
       });
 
-      return sheat;
+      return sHeat;
     };
-    exports.getSparedHeat = getSparedHeat;
+    exports._sHeat = _sHeat;
 
 
-    /* NOTE: No need to note. */
-    const getTotalHeat = function(b) {
-      return getHeat(b) + getSparedHeat(b);
+    const _tHeat = function(b) {
+      return _heat(b) + _sHeat(b);
     };
-    exports.getTotalHeat = getTotalHeat;
+    exports._tHeat = _tHeat;
 
 
-    /* NOTE: A limit over which the block melts. */
-    const getHeatLimit = function(blk) {
-      var limit = mdl_data.read_1n1v(db_block.heatLimit, blk.name);
-      if(limit == null) limit = 30.0;
-
-      return limit;
+    const _heatLimit = function(blk) {
+      return mdl_data.read_1n1v(db_block.db["heat"]["limit"], blk.name, 30.0);
     };
-    exports.getHeatLimit = getHeatLimit;
+    exports._heatLimit = _heatLimit;
 
 
-    /* NOTE: The rate at which heat dissipates. */
-    const getHeatLoss = function(blk) {
-      var loss = mdl_data.read_1n1v(db_block.heatLoss, blk.name);
-      if(loss == null) loss = 0.01;
-
-      return loss;
+    const _heatLoss = function(blk) {
+      return mdl_data.read_1n1v(db_block.db["heat"]["loss"], blk.name, 0.01);
     };
-    exports.getHeatLoss = getHeatLoss;
+    exports._heatLoss = _heatLoss;
 
 
-    /* NOTE: Fraction of the heat to limit. Mostly used for visual effects. */
-    const getHeatFrac = function(b) {
-      return Math.min(getTotalHeat(b) / getHeatLimit(b.block), 1.0);
+    const _heatFrac = function(b) {
+      return Math.min(_tHeat(b) / _heatLimit(b.block), 1.0);
     };
-    exports.getHeatFrac = getHeatFrac;
+    exports._heatFrac = _heatFrac;
 
 
-    /* NOTE: The param k in heat transfer formula. */
-    const getHeatTransferCoefficient = function(blk) {
-      var coef = mdl_data.read_1n1v(db_block.heatTransferCoefficient, blk.name);
-      if(coef == null) coef = 1.0;
-
-      return coef;
+    const _transferCoef = function(blk) {
+      return mdl_data.read_1n1v(db_block.db["heat"]["transCoef"], blk.name, 1.0);
     };
-    exports.getHeatTransferCoefficient = getHeatTransferCoefficient;
+    exports._transferCoef = _transferCoef;
 
 
-    /* NOTE: Actually another flow rate. */
-    const getHeatTransferRate = function(heat_f, heat_t, coef) {
-      var rate = Time.delta * (heat_f - heat_t) * coef / 60.0;
-
-      return rate;
+    const _transferRate = function(heat_f, heat_t, coef) {
+      return Time.delta * (heat_f - heat_t) * coef / 60.0;
     };
-    exports.getHeatTransferRate = getHeatTransferRate;
+    exports._transferRate = _transferRate;
   // End
 
 
   // Part: Fluid Heat
-    /* NOTE: The total heat carried by the stored fluid. */
-    const getFluidHeat = function(b) {
+    const _fHeat = function(b) {
       if(b.liquids == null) return 0.0;
 
       var liq = b.liquids.current();
@@ -133,18 +114,17 @@
       var amt = b.liquids.get(liq);
       if(amt < 0.01) return 0.0;
       var cap = b.block.liquidCapacity;
-      var fheat = mdl_data.read_1n1v(db_fluid.fluidHeat, liq.name);
+      var fHeat = mdl_data.read_1n1v(db_fluid.db["param"]["fHeat"], liq.name);
 
-      var heat = fheat * (amt / cap * 0.75 + 0.75) * (cap / 300.0 * 0.15 + 0.75);
+      var heat = fHeat * (amt / cap * 0.75 + 0.75) * (cap / 300.0 * 0.15 + 0.75);
       return heat;
     };
-    exports.getFluidHeat = getFluidHeat;
+    exports._fHeat = _fHeat;
   // End
 
 
   // Part: Range Heat
-    /* NOTE: Average heat in the 3*3 range. */
-    const getRangeHeat = function(t) {
+    const _rangeHeat = function(t) {
       var heat = 0.0;
       var li_ot = mdl_game._liTileRect(t, 1);
       li_ot.each(ot => {
@@ -152,15 +132,15 @@
         heat += ot.floor().attributes.get(Attribute.get("reind-attr-env-heat")) * 16.0;
 
         // Get fluid heat
-        if(ot.build != null) heat += getFluidHeat(ot.build) * 0.05;
+        if(ot.build != null) heat += _fHeat(ot.build) * 0.05;
 
         // Get block heat
-        if(ot.build != null) heat += getHeat(ot.build) * 1.5;
+        if(ot.build != null) heat += _heat(ot.build) * 1.5;
       });
       heat /= 6.0;
       return heat;
     };
-    exports.getRangeHeat = getRangeHeat;
+    exports._rangeHeat = _rangeHeat;
   // End
 
 

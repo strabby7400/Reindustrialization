@@ -6,14 +6,35 @@
 
 
   // Part: Function Base
+
+
+    /* <---------------- polynomial ----------------> */
+
+
     const _linear = function(x, coefs) {
       return coefs[0] * x + coefs[1];
     };
     exports._linear = _linear;
 
 
-    const _binoDistri = function(x, cap, p) {
-      return binoCoef(x, cap) * Math.pow(p, x) * Math.pow(1.0 - p, cap - x);
+    /* <---------------- interp ----------------> */
+
+
+    const _interpHalf_log = function(x, a, b, base) {
+      if(base == null) {
+        return 1.0 - 0.5 * (Math.log(b + 1.0) - Math.log(x + 1.0)) / (Math.log(b + 1.0) - Math.log(a + 1.0));
+      } else {
+        return 1.0 - 0.5 * (Mathf.log(base, b + 1.0) - Mathf.log(base, x + 1.0)) / (Mathf.log(base, b + 1.0) - Mathf.log(base, a + 1.0));
+      };
+    };
+    exports._interpHalf_log = _interpHalf_log;
+
+
+    /* <---------------- distribution ----------------> */
+
+
+    const _binoDistri = function(x, n, p) {
+      return _binoCoef(x, n) * Math.pow(p, x) * Math.pow(1.0 - p, n - x);
     };
     exports._binoDistri = _binoDistri;
 
@@ -80,10 +101,10 @@
     exports.facto = facto;
 
 
-    const binoCoef = function(x, cap) {
-      return facto(cap) / facto(x) / facto(cap - x);
+    const _binoCoef = function(x, n) {
+      return facto(n) / facto(x) / facto(n - x);
     };
-    exports.binoCoef = binoCoef;
+    exports._binoCoef = _binoCoef;
   // End
 
 
@@ -91,13 +112,21 @@
   // End
 
 
+  // Part: Boolean
+    const _boolConj = function(bool) {
+      return bool ? false : true;
+    };
+    exports._boolConj = _boolConj;
+  // End
+
+
   // Part: Probability
-    const randInt = function(cap, base) {
+    const _randInt = function(cap, base) {
       if(base == null) base = 0.0;
 
       return Math.floor(Math.random() * (cap + 1.0 - base) + base);
     };
-    exports.randInt = randInt;
+    exports._randInt = _randInt;
   // End
 
 
@@ -108,33 +137,33 @@
     exports.mean = mean;
 
 
-    const rms = function(xs) {
+    const _rms = function(xs) {
       return Math.sqrt(powSum(xs, 2) / xs.length);
     };
-    exports.rms = rms;
+    exports._rms = _rms;
 
 
-    const geoMean = function(xs) {
+    const _geoMean = function(xs) {
       return Math.pow(prod(xs), 1.0 / xs.length);
     };
-    exports.geoMean = geoMean;
+    exports._geoMean = _geoMean;
 
 
-    const hmMean = function(xs) {
+    const _hmMean = function(xs) {
       return xs.length / powSum(xs, -1);
     };
-    exports.hmMean = hmMean;
+    exports._hmMean = _hmMean;
 
 
-    const powMean = function(xs, pow) {
+    const _powMean = function(xs, pow) {
       if(pow == null) pow = 1.0;
 
       return Math.pow(powSum(xs, pow) / xs.length, 1.0 / pow);
     };
-    exports.powMean = powMean;
+    exports._powMean = _powMean;
 
 
-    const variance = function(xs, isParent) {
+    const _vari = function(xs, isParent) {
       if(isParent == null) isParent = false;
 
       var mean = mean(xs);
@@ -143,31 +172,31 @@
 
       return val;
     };
-    exports.variance = variance;
+    exports._vari = _vari;
 
 
-    const covariance = function(vs, isParent) {
+    const _cov = function(vs, isParent) {
       if(isParent == null) isParent = false;
 
-      var meanX = mean(getXs(vs));
-      var meanY = mean(getYs(vs));
+      var meanX = mean(_vecXs(vs));
+      var meanY = mean(_vecYs(vs));
       for(let v in vs) {val += (v.x - meanX) * (v.y - meanY)};
       val /= (isParent) ? (vs.length - 1) : vs.length;
 
       return val;
     };
-    exports.covariance = covariance;
+    exports._cov = _cov;
 
 
-    const standardDeviation = function(xs, isParent) {
-      return Math.sqrt(variance(xs, isParent));
+    const _stdDev = function(xs, isParent) {
+      return Math.sqrt(_vari(xs, isParent));
     };
-    exports.standardDeviation = standardDeviation;
+    exports._stdDev = _stdDev;
 
 
     const linearReg = function(vs) {
-      var xs = getXs(vs);
-      var ys = getYs(vs);
+      var xs = _vecXs(vs);
+      var ys = _vecYs(vs);
       var meanX = mean(xs);
       var meanY = mean(ys);
 
@@ -189,31 +218,31 @@
 
 
   // Part: Vector
-    const getXs = function(vs) {
+    const _vecXs = function(vs) {
       var xs = [];
       for(let v in vs) {xs.push(v.x)};
 
       return xs;
     };
-    exports.getXs = getXs;
+    exports._vecXs = _vecXs;
 
 
-    const getYs = function(vs) {
+    const _vecYs = function(vs) {
       var ys = [];
       for(let v in vs) {ys.push(v.y)};
 
       return ys;
     };
-    exports.getYs = getYs;
+    exports._vecYs = _vecYs;
 
 
-    const getZs = function(vs) {
+    const _vecZs = function(vs) {
       var zs = [];
       for(let v in vs) {zs.push(v.z)};
 
       return zs;
     };
-    exports.getZs = getZs;
+    exports._vecZs = _vecZs;
 
 
     /* <---------------- vec2 ----------------> */

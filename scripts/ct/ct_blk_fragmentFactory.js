@@ -6,16 +6,7 @@
 
 
   // Part: Import
-    const blk_fragmentFactory = require("reind/blk/blk_fragmentFactory");
-  // End
-
-
-  // Part: Accessor
-    const accB_down = function(b, mode, val) {
-      if(mode == "r") return b.down;
-      if(mode == "w") b.down = val;
-    };
-    exports.accB_down = accB_down;
+    const TEMPLATE = require("reind/blk/blk_fragmentFactory");
   // End
 
 
@@ -30,19 +21,17 @@
     const facProc_charcoalRodMaker_r1 = extend(GenericCrafter, "fac-proc-charcoal-rod-maker-r1", {
       setStats() {
         this.super$setStats();
-        blk_fragmentFactory.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     facProc_charcoalRodMaker_r1.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_charcoalRodMaker_r1, {
       down: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_fragmentFactory.updateTile(this);
-        if(this.down) return;
-        this.super$updateTile();
+        TEMPLATE.updateTile(this);
       },
       status() {
-        if(this.down) return BlockStatus.noInput;
-        return this.super$status();
+        return TEMPLATE.status(this);
       },
     });
     exports.facProc_charcoalRodMaker_r1 = facProc_charcoalRodMaker_r1;
@@ -53,19 +42,17 @@
     const facSep_mineralJig_r1 = extend(GenericCrafter, "fac-sep-mineral-jig-r1", {
       setStats() {
         this.super$setStats();
-        blk_fragmentFactory.setStats(this);
+        TEMPLATE.setStats(this);
       },
     });
     facSep_mineralJig_r1.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_mineralJig_r1, {
       down: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_fragmentFactory.updateTile(this);
-        if(this.down) return;
-        this.super$updateTile();
+        TEMPLATE.updateTile(this);
       },
       status() {
-        if(this.down) return BlockStatus.noInput;
-        return this.super$status();
+        return TEMPLATE.status(this);
       },
     });
     exports.facSep_mineralJig_r1 = facSep_mineralJig_r1;

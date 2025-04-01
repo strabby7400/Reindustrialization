@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const rs_genericFluid = require("reind/rs/rs_genericFluid");
+    const PARENT = require("reind/rs/rs_genericFluid");
 
     const db_stat = require("reind/db/db_stat");
   // End
@@ -28,7 +28,7 @@
 
   // Part: Integration
     const setStats = function(liq) {
-      rs_genericFluid.setStats(liq);
+      PARENT.setStats(liq);
 
       setStatsComp(liq);
     };
@@ -36,7 +36,7 @@
 
 
     const update = function(liq, puddle) {
-      rs_genericFluid.update(liq, puddle);
+      PARENT.update(liq, puddle);
     };
     exports.update = update;
   // End

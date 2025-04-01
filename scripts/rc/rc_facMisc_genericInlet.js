@@ -9,7 +9,7 @@ const rc = {
     ======================================== */
 
 
-    /* <---------------- ball impact efficiency ----------------> */
+    /* <---------------- ball impact effc ----------------> */
 
 
     // Steel Ball
@@ -17,7 +17,7 @@ const rc = {
       "icon": "reind-effc-effc-ball-impact",
       "category": "special",
       "randInputs": new Seq([
-        "reind-item-cons-ball-steel", 1, 0.2,
+        "reind-item-cons-ball-steel", 1, 0.1,
       ]),
       "outputs": new Seq([
         "reind-effc-effc-ball-impact", 0.01666667,
@@ -27,7 +27,7 @@ const rc = {
     },
 
 
-    /* <---------------- gas filter efficiency ----------------> */
+    /* <---------------- gas filter effc ----------------> */
 
 
     // Charcoal
@@ -58,7 +58,7 @@ const rc = {
     },
 
 
-    /* <---------------- packed tower efficiency ----------------> */
+    /* <---------------- packed tower effc ----------------> */
 
 
     // Steel Pall Ring
@@ -66,7 +66,7 @@ const rc = {
       "icon": "reind-effc-effc-packed-tower",
       "category": "special",
       "randInputs": new Seq([
-        "reind-item-cons-pall-ring-steel", 1, 0.5,
+        "reind-item-cons-pall-ring-steel", 1, 0.2,
       ]),
       "outputs": new Seq([
         "reind-effc-effc-packed-tower", 0.01666667,
@@ -81,7 +81,7 @@ const rc = {
       "icon": "reind-effc-effc-packed-tower",
       "category": "special",
       "randInputs": new Seq([
-        "reind-item-cons-pall-ring-stainless-steel", 1, 0.25,
+        "reind-item-cons-pall-ring-stainless-steel", 1, 0.1,
       ]),
       "outputs": new Seq([
         "reind-effc-effc-packed-tower", 0.01666667,

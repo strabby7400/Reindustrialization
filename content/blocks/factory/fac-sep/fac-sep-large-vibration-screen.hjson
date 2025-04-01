@@ -104,6 +104,8 @@
   configurable: true
   outputsLiquid: true
   ignoreLiquidFullness: true
+  conductivePower: true
+  connectedPower: false
 
 
 /*

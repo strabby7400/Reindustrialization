@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const sta_liquidStatus = require("reind/sta/sta_liquidStatus");
+    const TEMPLATE = require("reind/sta/sta_liquidStatus");
 
     const mdl_content = require("reind/mdl/mdl_content");
   // End
@@ -23,11 +23,11 @@
     const staLiq_slurrySlowed = extend(StatusEffect, "sta-liq-slurry-slowed", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     exports.staLiq_slurrySlowed = staLiq_slurrySlowed;
@@ -36,11 +36,11 @@
     const staLiq_brineCorrosion = extend(StatusEffect, "sta-liq-brine-corrosion", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     exports.staLiq_brineCorrosion = staLiq_brineCorrosion;
@@ -49,11 +49,11 @@
     const staLiq_seaWaterCorrosion = extend(StatusEffect, "sta-liq-sea-water-corrosion", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     exports.staLiq_seaWaterCorrosion = staLiq_seaWaterCorrosion;
@@ -65,11 +65,11 @@
     const staLiq_acid = extend(StatusEffect, "sta-liq-acid", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     mdl_content.callInit(staLiq_acid, function() {
@@ -82,11 +82,11 @@
     const staLiq_acidII = extend(StatusEffect, "sta-liq-acid-ii", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     mdl_content.callInit(staLiq_acidII, function() {
@@ -99,11 +99,11 @@
     const staLiq_acidIII = extend(StatusEffect, "sta-liq-acid-iii", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     mdl_content.callInit(staLiq_acidIII, function() {
@@ -116,11 +116,11 @@
     const staLiq_acidIV = extend(StatusEffect, "sta-liq-acid-iv", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     mdl_content.callInit(staLiq_acidIV, function() {
@@ -133,11 +133,11 @@
     const staLiq_base = extend(StatusEffect, "sta-liq-base", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     mdl_content.callInit(staLiq_base, function() {
@@ -150,11 +150,11 @@
     const staLiq_baseII = extend(StatusEffect, "sta-liq-base-ii", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     mdl_content.callInit(staLiq_baseII, function() {
@@ -167,11 +167,11 @@
     const staLiq_baseIII = extend(StatusEffect, "sta-liq-base-iii", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     mdl_content.callInit(staLiq_baseIII, function() {
@@ -184,11 +184,11 @@
     const staLiq_baseIV = extend(StatusEffect, "sta-liq-base-iv", {
       setStats() {
         this.super$setStats();
-        sta_liquidStatus.setStats(this);
+        TEMPLATE.setStats(this);
       },
       update(unit, time) {
         this.super$update(unit, time);
-        sta_liquidStatus.update(this, unit, time);
+        TEMPLATE.update(this, unit, time);
       },
     });
     mdl_content.callInit(staLiq_baseIV, function() {

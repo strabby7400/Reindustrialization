@@ -6,90 +6,11 @@
 
 
   // Part: Import
-    const blk_recipeFactory = require("reind/blk/blk_recipeFactory");
+    const TEMPLATE = require("reind/blk/blk_recipeFactory");
 
-    const frag_facility = require("reind/frag/frag_facility");
+    const frag_faci = require("reind/frag/frag_faci");
 
     const mdl_content = require("reind/mdl/mdl_content");
-  // End
-
-
-  // Part: Accessor
-    const accB_param = function(b, mode, val) {
-      if(mode == "r") return b.param;
-      if(mode == "w") b.param = val;
-    };
-    exports.accB_param = accB_param;
-
-
-    const accB_rcFi = function(b, mode, val) {
-      if(mode == "r") return b.rcFi;
-      if(mode == "w") b.rcFi = val;
-    };
-    exports.accB_rcFi = accB_rcFi;
-
-
-    const accB_id_rc = function(b, mode, val) {
-      if(mode == "r") return b.id_rc;
-      if(mode == "w") b.id_rc = val;
-    };
-    exports.accB_id_rc = accB_id_rc;
-
-
-    const accB_needCheck = function(b, mode, val) {
-      if(mode == "r") return b.needCheck;
-      if(mode == "w") b.needCheck = val;
-    };
-    exports.accB_needCheck = accB_needCheck;
-
-
-    const accB_ci = function(b, mode, val) {
-      if(mode == "r") return b.ci;
-      if(mode == "w") b.ci = val;
-    };
-    exports.accB_ci = accB_ci;
-
-
-    const accB_bi = function(b, mode, val) {
-      if(mode == "r") return b.bi;
-      if(mode == "w") b.bi = val;
-    };
-    exports.accB_bi = accB_bi;
-
-
-    const accB_opt = function(b, mode, val) {
-      if(mode == "r") return b.opt;
-      if(mode == "w") b.opt = val;
-    };
-    exports.accB_opt = accB_opt;
-
-
-    const accB_co = function(b, mode, val) {
-      if(mode == "r") return b.co;
-      if(mode == "w") b.co = val;
-    };
-    exports.accB_co = accB_co;
-
-
-    const accB_bo = function(b, mode, val) {
-      if(mode == "r") return b.bo;
-      if(mode == "w") b.bo = val;
-    };
-    exports.accB_bo = accB_bo;
-
-
-    const accB_fo = function(b, mode, val) {
-      if(mode == "r") return b.fo;
-      if(mode == "w") b.fo = val;
-    };
-    exports.accB_fo = accB_fo;
-
-
-    const accB_tmpEffc = function(b, mode, val) {
-      if(mode == "r") return b.tmpEffc;
-      if(mode == "w") b.tmpEffc = val;
-    };
-    exports.accB_tmpEffc = accB_tmpEffc;
   // End
 
 
@@ -101,7 +22,7 @@
 
 
   // Part: fac-heat
-    /* NOTE: Keep this on top! */
+    // NOTE: Keep this on top!
 
 
     /* <---------------- auxiliary ----------------> */
@@ -111,66 +32,63 @@
       rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facHeat_temperatureControlUnit.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facHeat_temperatureControlUnit, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
-      id_rc: mdl_content.getConfig(facHeat_temperatureControlUnit, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facHeat_temperatureControlUnit, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -193,66 +111,63 @@
       rcFi: require("reind/rc/rc_facHeat_furnaceHeater"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facHeat_furnaceHeater.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facHeat_furnaceHeater, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facHeat_furnaceHeater"),
-      id_rc: mdl_content.getConfig(facHeat_furnaceHeater, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facHeat_furnaceHeater, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -284,66 +199,63 @@
       rcFi: require("reind/rc/rc_facAir_liquidRingPressurePump"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facAir_liquidRingPressurePump.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facAir_liquidRingPressurePump, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facAir_liquidRingPressurePump"),
-      id_rc: mdl_content.getConfig(facAir_liquidRingPressurePump, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facAir_liquidRingPressurePump, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -372,66 +284,63 @@
       rcFi: require("reind/rc/rc_facFurn_carbonizationKiln"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facFurn_carbonizationKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_carbonizationKiln, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_carbonizationKiln"),
-      id_rc: mdl_content.getConfig(facFurn_carbonizationKiln, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facFurn_carbonizationKiln, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -451,66 +360,63 @@
       rcFi: require("reind/rc/rc_facFurn_primitiveBrickKiln"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facFurn_primitiveBrickKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveBrickKiln, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveBrickKiln"),
-      id_rc: mdl_content.getConfig(facFurn_primitiveBrickKiln, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facFurn_primitiveBrickKiln, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -530,66 +436,63 @@
       rcFi: require("reind/rc/rc_facFurn_electrodeMelter"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facFurn_electrodeMelter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_electrodeMelter, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_electrodeMelter"),
-      id_rc: mdl_content.getConfig(facFurn_electrodeMelter, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facFurn_electrodeMelter, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -612,66 +515,63 @@
       rcFi: require("reind/rc/rc_facFurn_kiln"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facFurn_kiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_kiln, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_kiln"),
-      id_rc: mdl_content.getConfig(facFurn_kiln, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facFurn_kiln, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -691,66 +591,63 @@
       rcFi: require("reind/rc/rc_facFurn_bloomery"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facFurn_bloomery.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_bloomery, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_bloomery"),
-      id_rc: mdl_content.getConfig(facFurn_bloomery, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facFurn_bloomery, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -774,66 +671,63 @@
       },
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facFurn_brickedBlastFurnace.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_brickedBlastFurnace, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_brickedBlastFurnace"),
-      id_rc: mdl_content.getConfig(facFurn_brickedBlastFurnace, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facFurn_brickedBlastFurnace, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -856,66 +750,63 @@
       rcFi: require("reind/rc/rc_facFurn_primitiveSinteringFurnace"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facFurn_primitiveSinteringFurnace.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveSinteringFurnace, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveSinteringFurnace"),
-      id_rc: mdl_content.getConfig(facFurn_primitiveSinteringFurnace, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facFurn_primitiveSinteringFurnace, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -938,66 +829,63 @@
       rcFi: require("reind/rc/rc_facFurn_colossalKiln"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facFurn_colossalKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_colossalKiln, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_colossalKiln"),
-      id_rc: mdl_content.getConfig(facFurn_colossalKiln, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facFurn_colossalKiln, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1020,66 +908,63 @@
       rcFi: require("reind/rc/rc_facFurn_primitiveCokeOven"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facFurn_primitiveCokeOven.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveCokeOven, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveCokeOven"),
-      id_rc: mdl_content.getConfig(facFurn_primitiveCokeOven, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facFurn_primitiveCokeOven, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1108,66 +993,63 @@
       rcFi: require("reind/rc/rc_facMill_jawCrusher"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facMill_jawCrusher.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_jawCrusher, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_jawCrusher"),
-      id_rc: mdl_content.getConfig(facMill_jawCrusher, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facMill_jawCrusher, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1191,66 +1073,63 @@
       },
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facMill_hammerCrusher.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_hammerCrusher, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_hammerCrusher"),
-      id_rc: mdl_content.getConfig(facMill_hammerCrusher, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facMill_hammerCrusher, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1273,66 +1152,63 @@
       rcFi: require("reind/rc/rc_facMill_mechanicalMill"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facMill_mechanicalMill.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_mechanicalMill, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_mechanicalMill"),
-      id_rc: mdl_content.getConfig(facMill_mechanicalMill, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facMill_mechanicalMill, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1356,66 +1232,63 @@
       },
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facMill_ballMill.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_ballMill, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_ballMill"),
-      id_rc: mdl_content.getConfig(facMill_ballMill, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facMill_ballMill, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1444,66 +1317,63 @@
       rcFi: require("reind/rc/rc_facMix_vMixer"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facMix_vMixer.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMix_vMixer, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMix_vMixer"),
-      id_rc: mdl_content.getConfig(facMix_vMixer, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facMix_vMixer, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1519,79 +1389,70 @@
     exports.facMix_vMixer = facMix_vMixer;
 
 
-  // End
+    /* <---------------- liquid mixer ----------------> */
 
 
-  // Part: fac-proc
-
-
-    /* <---------------- misc ----------------> */
-
-
-    const facProc_brickPress = extend(GenericCrafter, "fac-proc-brick-press", {
-      rcFi: require("reind/rc/rc_facProc_brickPress"),
+    const facMix_tankMixer = extend(GenericCrafter, "fac-mix-tank-mixer", {
+      rcFi: require("reind/rc/rc_facMix_tankMixer"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
-    facProc_brickPress.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_brickPress, {
-      param: 0.0,
-      rcFi: require("reind/rc/rc_facProc_brickPress"),
-      id_rc: mdl_content.getConfig(facProc_brickPress, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+    facMix_tankMixer.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMix_tankMixer, {
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
+      rcFi: require("reind/rc/rc_facMix_tankMixer"),
+      id_rc: mdl_content._config(facMix_tankMixer, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1604,73 +1465,155 @@
         this.id_rc = read.f();
       },
     });
-    exports.facProc_brickPress = facProc_brickPress;
+    exports.facMix_tankMixer = facMix_tankMixer;
+
+
+  // End
+
+
+  // Part: fac-proc
+
+
+    /* <---------------- biotic ----------------> */
+
+
+    const facProc_shredder = extend(GenericCrafter, "fac-proc-shredder", {
+      rcFi: require("reind/rc/rc_facProc_shredder"),
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+      setBars() {
+        this.super$setBars();
+        TEMPLATE.setBars(this);
+      },
+      outputsItems() {
+        return TEMPLATE.outputsItems(this);
+      },
+      consumesLiquid(liquid) {
+        return TEMPLATE.consumesLiquid(this, liquid);
+      },
+    });
+    facProc_shredder.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_shredder, {
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
+      rcFi: require("reind/rc/rc_facProc_shredder"),
+      id_rc: mdl_content._config(facProc_shredder, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
+      updateTile() {
+        TEMPLATE.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        TEMPLATE.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        TEMPLATE.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!TEMPLATE.shouldConsume(this)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        TEMPLATE.drawSelect(this);
+      },
+      drawStatus() {
+        TEMPLATE.drawStatus(this);
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.facProc_shredder = facProc_shredder;
 
 
     const facProc_charcoalRodMaker_m = extend(GenericCrafter, "fac-proc-charcoal-rod-maker-m", {
       rcFi: require("reind/rc/rc_facProc_charcoalRodMaker_m"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facProc_charcoalRodMaker_m.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_charcoalRodMaker_m, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facProc_charcoalRodMaker_m"),
-      id_rc: mdl_content.getConfig(facProc_charcoalRodMaker_m, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facProc_charcoalRodMaker_m, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1686,6 +1629,85 @@
     exports.facProc_charcoalRodMaker_m = facProc_charcoalRodMaker_m;
 
 
+    /* <---------------- misc ----------------> */
+
+
+    const facProc_brickPress = extend(GenericCrafter, "fac-proc-brick-press", {
+      rcFi: require("reind/rc/rc_facProc_brickPress"),
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+      setBars() {
+        this.super$setBars();
+        TEMPLATE.setBars(this);
+      },
+      outputsItems() {
+        return TEMPLATE.outputsItems(this);
+      },
+      consumesLiquid(liquid) {
+        return TEMPLATE.consumesLiquid(this, liquid);
+      },
+    });
+    facProc_brickPress.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_brickPress, {
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
+      rcFi: require("reind/rc/rc_facProc_brickPress"),
+      id_rc: mdl_content._config(facProc_brickPress, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
+      updateTile() {
+        TEMPLATE.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        TEMPLATE.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        TEMPLATE.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!TEMPLATE.shouldConsume(this)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        TEMPLATE.drawSelect(this);
+      },
+      drawStatus() {
+        TEMPLATE.drawStatus(this);
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.facProc_brickPress = facProc_brickPress;
+
+
   // End
 
 
@@ -1699,66 +1721,63 @@
       rcFi: require("reind/rc/rc_facRmv_hotAirDryer"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facRmv_hotAirDryer.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facRmv_hotAirDryer, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facRmv_hotAirDryer"),
-      id_rc: mdl_content.getConfig(facRmv_hotAirDryer, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facRmv_hotAirDryer, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1787,66 +1806,63 @@
       rcFi: require("reind/rc/rc_facSep_highPressureCycloneSeparator"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facSep_highPressureCycloneSeparator.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_highPressureCycloneSeparator, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_highPressureCycloneSeparator"),
-      id_rc: mdl_content.getConfig(facSep_highPressureCycloneSeparator, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facSep_highPressureCycloneSeparator, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1864,68 +1880,69 @@
 
     const facSep_largeVibrationScreen = extend(GenericCrafter, "fac-sep-large-vibration-screen", {
       rcFi: require("reind/rc/rc_facSep_largeVibrationScreen"),
+      // Specific
+      icons: function() {
+        return [Core.atlas.find(this.name + "-icon")];
+      },
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facSep_largeVibrationScreen.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_largeVibrationScreen, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_largeVibrationScreen"),
-      id_rc: mdl_content.getConfig(facSep_largeVibrationScreen, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facSep_largeVibrationScreen, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -1953,80 +1970,77 @@
       // Specific
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
-        frag_facility.setStats_restrict(this);
+        TEMPLATE.setStats(this);
+        frag_faci.setStats_restrict(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
       // Specific
       canPlaceOn(tile, team, rotation) {
         if(!this.super$canPlaceOn(tile, team, rotation)) return false;
-        if(!frag_facility.canPlaceOn_restrict(this, tile, team, rotation)) return false;
+        if(!frag_faci.canPlaceOn_restrict(this, tile, team, rotation)) return false;
         return true;
       },
       // Specific
       drawPlace(tx, ty, rotation, valid) {
         this.super$drawPlace(tx, ty, rotation, valid);
-        frag_facility.drawPlace_restrict(this, tx, ty, rotation, valid);
+        frag_faci.drawPlace_restrict(this, tx, ty, rotation, valid);
       },
     });
     facSep_dryMagneticSeparator.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_dryMagneticSeparator, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_dryMagneticSeparator"),
-      id_rc: mdl_content.getConfig(facSep_dryMagneticSeparator, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facSep_dryMagneticSeparator, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       // Specific
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
-        frag_facility.drawSelect_restrict(this);
+        TEMPLATE.drawSelect(this);
+        frag_faci.drawSelect_restrict(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -2046,66 +2060,63 @@
       rcFi: require("reind/rc/rc_facSep_mineralJig_m"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facSep_mineralJig_m.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_mineralJig_m, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_mineralJig_m"),
-      id_rc: mdl_content.getConfig(facSep_mineralJig_m, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facSep_mineralJig_m, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -2134,66 +2145,63 @@
       rcFi: require("reind/rc/rc_facMisc_mechanicalCrank"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facMisc_mechanicalCrank.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_mechanicalCrank, {
-      param: 0.0,
+      tag: "<manual>", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_mechanicalCrank"),
-      id_rc: mdl_content.getConfig(facMisc_mechanicalCrank, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facMisc_mechanicalCrank, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc, "manual");
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table, "manual");
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this, "manual");
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -2212,71 +2220,68 @@
     /* <---------------- inlet ----------------> */
 
 
-    /* NOTE: Keep this on top! */
+    // NOTE: Keep this on top!
     const facMisc_genericInlet = extend(GenericCrafter, "fac-misc-generic-inlet", {
       rcFi: require("reind/rc/rc_facMisc_genericInlet"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facMisc_genericInlet.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_genericInlet, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_genericInlet"),
-      id_rc: mdl_content.getConfig(facMisc_genericInlet, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facMisc_genericInlet, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -2296,66 +2301,63 @@
       rcFi: require("reind/rc/rc_facMisc_fuelInlet"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facMisc_fuelInlet.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_fuelInlet, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_fuelInlet"),
-      id_rc: mdl_content.getConfig(facMisc_fuelInlet, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facMisc_fuelInlet, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -2378,66 +2380,63 @@
       rcFi: require("reind/rc/rc_facMisc_coreCrafter"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     facMisc_coreCrafter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_coreCrafter, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_coreCrafter"),
-      id_rc: mdl_content.getConfig(facMisc_coreCrafter, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(facMisc_coreCrafter, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {
@@ -2453,6 +2452,175 @@
     exports.facMisc_coreCrafter = facMisc_coreCrafter;
 
 
+    const facMisc_manualCrafter = extend(GenericCrafter, "fac-misc-manual-crafter", {
+      rcFi: require("reind/rc/rc_facMisc_manualCrafter"),
+      // Specific
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+        frag_faci.setStats_terrain(this, "sand", "disable");
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+      setBars() {
+        this.super$setBars();
+        TEMPLATE.setBars(this);
+      },
+      outputsItems() {
+        return TEMPLATE.outputsItems(this);
+      },
+      consumesLiquid(liquid) {
+        return TEMPLATE.consumesLiquid(this, liquid);
+      },
+      // Specific
+      canPlaceOn(tile, team, rotation) {
+        if(!this.super$canPlaceOn(tile, team, rotation)) return false;
+        if(!frag_faci.canPlaceOn_terrain(this, "sand", "disable", tile, team, rotation)) return false;
+        return true;
+      },
+    });
+    facMisc_manualCrafter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_manualCrafter, {
+      tag: "<manual>", param: 0.0, param1: 0.0, param2: 0.0,
+      rcFi: require("reind/rc/rc_facMisc_manualCrafter"),
+      id_rc: mdl_content._config(facMisc_manualCrafter, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
+      updateTile() {
+        TEMPLATE.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        TEMPLATE.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        TEMPLATE.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!TEMPLATE.shouldConsume(this)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        TEMPLATE.drawSelect(this);
+      },
+      drawStatus() {
+        TEMPLATE.drawStatus(this);
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.facMisc_manualCrafter = facMisc_manualCrafter;
+
+
+  // End
+
+
+  // Part: ilfac-misc
+
+
+    /* <---------------- special ----------------> */
+
+
+    const ilfacMisc_oreDictionaryConverter = extend(GenericCrafter, "ilfac-misc-ore-dictionary-converter", {
+      rcFi: require("reind/rc/rc_ilfacMisc_oreDictionaryConverter"),
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+      setBars() {
+        this.super$setBars();
+        TEMPLATE.setBars(this);
+      },
+      outputsItems() {
+        return TEMPLATE.outputsItems(this);
+      },
+      consumesLiquid(liquid) {
+        return TEMPLATE.consumesLiquid(this, liquid);
+      },
+    });
+    ilfacMisc_oreDictionaryConverter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, ilfacMisc_oreDictionaryConverter, {
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
+      rcFi: require("reind/rc/rc_ilfacMisc_oreDictionaryConverter"),
+      id_rc: mdl_content._config(ilfacMisc_oreDictionaryConverter, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
+      updateTile() {
+        TEMPLATE.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        TEMPLATE.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        TEMPLATE.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!TEMPLATE.shouldConsume(this)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        TEMPLATE.drawSelect(this);
+      },
+      drawStatus() {
+        TEMPLATE.drawStatus(this);
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.ilfacMisc_oreDictionaryConverter = ilfacMisc_oreDictionaryConverter;
+
+
   // End
 
 
@@ -2466,66 +2634,63 @@
       rcFi: require("reind/rc/rc_ileffMisc_bitBank"),
       setStats() {
         this.super$setStats();
-        blk_recipeFactory.setStats(this, this.rcFi);
+        TEMPLATE.setStats(this);
       },
       init() {
         this.super$init();
-        blk_recipeFactory.init(this, this.rcFi);
+        TEMPLATE.init(this);
       },
       setBars() {
         this.super$setBars();
-        blk_recipeFactory.setBars(this, this.rcFi);
+        TEMPLATE.setBars(this);
       },
       outputsItems() {
-        return blk_recipeFactory.outputsItems(this, this.rcFi);
+        return TEMPLATE.outputsItems(this);
       },
       consumesLiquid(liquid) {
-        return blk_recipeFactory.consumesLiquid(this, liquid, this.rcFi);
+        return TEMPLATE.consumesLiquid(this, liquid);
       },
     });
     ileffMisc_bitBank.buildType = () => extend(GenericCrafter.GenericCrafterBuild, ileffMisc_bitBank, {
-      param: 0.0,
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_ileffMisc_bitBank"),
-      id_rc: mdl_content.getConfig(ileffMisc_bitBank, 0),
-      needCheck: true,
-      ci: new Seq(),
-      bi: new Seq(),
-      opt: new Seq(),
-      co: new Seq(),
-      bo: new Seq(),
-      fo: new Seq(),
-      tmpEffc: 0.0,
+      id_rc: mdl_content._config(ileffMisc_bitBank, 0),
+      needCheck: true, craftSound: null, timeScale: 1.0,
+      ci: new Seq(), bi: new Seq(), opt: new Seq(),
+      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
       updateTile() {
-        blk_recipeFactory.updateTile(this, this.rcFi, this.id_rc);
+        TEMPLATE.updateTile(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
-        blk_recipeFactory.buildConfiguration(this, table);
+        TEMPLATE.buildConfiguration(this, table);
       },
       config() {
         return this.id_rc;
       },
       configured(builder, value) {
-        blk_recipeFactory.configured(this, builder, value);
+        TEMPLATE.configured(this, builder, value);
       },
       acceptItem(source, item) {
-        if(!blk_recipeFactory.acceptItem(this, source, item, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
         return true;
       },
       acceptLiquid(source, liquid) {
-        if(!blk_recipeFactory.acceptLiquid(this, source, liquid, this.ci, this.bi, this.opt)) return false;
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
       shouldConsume() {
-        if(!blk_recipeFactory.shouldConsume(this, this.co, this.bo, this.fo)) return false;
+        if(!TEMPLATE.shouldConsume(this)) return false;
         return true;
       },
       drawSelect() {
         this.super$drawSelect();
-        blk_recipeFactory.drawSelect(this, this.rcFi, this.id_rc);
+        TEMPLATE.drawSelect(this);
       },
       drawStatus() {
-        blk_recipeFactory.drawStatus(this);
+        TEMPLATE.drawStatus(this);
       },
       // RW
       write(write) {

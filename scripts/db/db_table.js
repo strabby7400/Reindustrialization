@@ -6,17 +6,33 @@
 
 
   // Part: Import
-    const mdl_content = require("reind/mdl/mdl_content");
-    const mdl_table = require("reind/mdl/mdl_table");
+    const VAR = require("reind/glb/glb_vars");
 
-    const glb_vars = require("reind/glb/glb_vars");
+    const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_math = require("reind/mdl/mdl_math");
+    const mdl_table = require("reind/mdl/mdl_table");
+  // End
+
+
+  // Part: Control
+    const __toggle = function(tb, b, bool, icon_gn) {
+      var icon;
+      if(icon_gn == null) icon = Icon.cancel;
+      if(icon_gn == "eye") icon = bool ? Icon.eyeOff : Icon.eye;
+      if(icon_gn == "lock") icon = bool ? Icon.lock : Icon.lockOpen;
+
+      tb.button(icon, 24.0, run(() => {
+        Call.tileConfig(Vars.player, b, new Vec2(-2, Number(mdl_math._boolConj(bool))));
+        b.deselect();
+      })).left().row();
+    };
+    exports.__toggle = __toggle;
   // End
 
 
   // Part: Content
-    /* NOTE: Displays the name of currently selected content. */
     const __contentSelected = function(tb, tp_ct, id_sel) {
-      var ct_sel = mdl_content.getContent_id(tp_ct, id_sel);
+      var ct_sel = mdl_content._ct_id(tp_ct, id_sel);
       var str_ct = (ct_sel == null) ? "-" : ct_sel.localizedName;
 
       mdl_table.setHeadline(tb, Core.bundle.get("term.reind-term-selected.name") + ": " + str_ct);
@@ -24,10 +40,9 @@
     exports.__contentSelected = __contentSelected;
 
 
-    /* NOTE: A selector UI for Reind contents. */
-    const li_58693334 = new Seq();
     const __contentSelector = function(tb, tp_ct, id_sel, scr, col) {
-      var li_ct = li_58693334.clear();
+      var li_ct = new Seq();
+
       switch(tp_ct) {
         case "item" :
           Vars.content.items().each(itm => {
@@ -48,21 +63,21 @@
 
 
   // Part: Special
-    const vec2_12576628 = new Vec2();
     const __timeController = function(tb, b) {
-      var vec2 = vec2_12576628.setZero();
+      var vec2 = new Vec2();
 
-      var delta_max = glb_vars.time_maxTimeDelta / 0.5 - 1.0;
-      var delta_cur = Time.delta / 0.5 - 1.0;
+      var valMax = VAR.time_maxTimeDelta * 4.0 - 1.0;
+      var valCur = Time.delta * 4.0 - 1.0;
 
       mdl_table.setHeadline(tb, Core.bundle.get("term.reind-term-time-controller.name"));
-      tb.row();
 
       tb.table(Tex.button, tb1 => {
-        mdl_table.setSlider(tb1, function() {
-          var val = (this + 1.0) * 0.5;
-          Call.tileConfig(Vars.player, b, vec2.set(val, 0));
-        }, 0.0, delta_max, 1.0, delta_cur);
+        var scr = function() {
+          var delta = (this + 1.0) * 0.25;
+          Call.tileConfig(Vars.player, b, vec2.set(delta, -2));
+        };
+
+        mdl_table.__slider(tb1, scr, 0, valMax, 1, valCur);
       });
     };
     exports.__timeController = __timeController;

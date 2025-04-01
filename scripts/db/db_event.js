@@ -13,67 +13,71 @@
   // End
 
 
+  // Part: Auxilliary
+    function ax_local(scr, args) {
+      if(Groups.player.size() > 1) {Log.warn("LOCAL")} else {scr.call(args)};
+    };
+
+
+    function ax_bool(args, ord, ini) {
+      if(ord == null) ord = 0;
+      if(ini == null) ini = false;
+
+      var bool = args[ord];
+      if(bool = null) bool = ini;
+      if(bool = "true") {bool = true} else if(bool = "false") {bool = false} else {Log.warn("INVALID")};
+      return bool;
+    };
+  // End
+
+
   // Part: Console
     const li_commands = new Seq([
 
+
       /* <---------------- local ----------------> */
 
+
       "ohno", "", function() {
-        if(Groups.player.size() > 1) {
-          Log.warn("LOCAL");
-        } else {
-          Log.info("ohno");
-        };
+        var scr = function() {Log.info("ohno")};
+
+        ax_local(scr, this);
       },
+
 
       "crash", "", function() {
-        if(Groups.player.size() > 1) {
-          Log.warn("LOCAL");
-        } else {
-          new TheUltimateSuperDuperGameCrasherClass();
-        };
+        var scr = function() {new TheUltimateSuperDuperGameCrasherClass()};
+
+        ax_local(scr, this);
       },
+
 
       "ldm", "[bool]", function() {
-        if(Groups.player.size() > 1) {
-          Log.warn("LOCAL");
-        } else {
-          var bool = this[0];
-          if(bool == null) bool = "true";
-          if(bool == "true") {bool = true}
-          else if(bool == "false") {bool = false}
-          else {Log.warn("INVALID")};
-          if(typeof bool != "boolean") return;
-          cfg_setting.set_ldm(bool);
+        var scr = function() {
+          cfg_setting.set_ldm(ax_bool(this));
           Log.info("LDM: " + (bool ? "on" : "off"));
         };
+
+        ax_local(scr, this);
       },
+
 
       "p3dshadow", "[bool]", function() {
-        if(Groups.player.size() > 1) {
-          Log.warn("LOCAL");
-        } else {
-          var bool = this[0];
-          if(bool == null) bool = "true";
-          if(bool == "true") {bool = true}
-          else if(bool == "false") {bool = false}
-          else {Log.warn("INVALID")};
-          if(typeof bool != "boolean") return;
-          cfg_setting.set_p3dShadow(bool);
-          Log.info("P3dShadow: " + (bool ? "on" : "off"));
+        var scr = function() {
+          cfg_setting.set_p3dShadow(ax_bool(this));
+          Log.info("P3DShadow: " + (bool ? "on" : "off"));
         };
+
+        ax_local(scr, this);
       },
 
+
       "printliq", "[tx] [ty]", function() {
-        if(Groups.player.size() > 1) {
-          Log.warn("LOCAL");
-        } else {
+        var scr = function() {
           var tx = this[0];
           var ty = this[1];
           var b = Vars.world.build(tx, ty);
-          if(b == null || b.liquids == null) {
-            Log.warn("INVALID");
-          } else {
+          if(b == null || b.liquids == null) {Log.warn("INVALID")} else {
             var str = "[orange]" + b.block.localizedName + " (" + tx + ", " + ty + ")[]";
             b.liquids.each(liq => {
               var nm_l = liq.localizedName;
@@ -81,10 +85,14 @@
               var tmpStr = "\n    > " + nm_l + ": " + Strings.fixed(amt, 4);
               str += tmpStr;
             });
+
             Log.info(str);
           };
         };
+
+        ax_local(scr, this);
       },
+
 
     ]);
     exports.commands = li_commands;

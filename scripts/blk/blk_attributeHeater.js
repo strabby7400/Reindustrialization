@@ -6,7 +6,18 @@
 
 
   // Part: Import
-    const blk_heater = require("reind/blk/blk_heater");
+    const PARENT = require("reind/blk/blk_heater");
+
+    const mdl_attr = require("reind/mdl/mdl_attr");
+
+    const db_stat = require("reind/db/db_stat");
+  // End
+
+
+  // Part: Component
+    function setStatsComp(blk) {
+      blk.stats.add(db_stat.attributeRequired, mdl_attr._attrVal(blk.attribute));
+    };
   // End
 
 
@@ -19,19 +30,21 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_heater.setStats(blk);
+      PARENT.setStats(blk);
+
+      setStatsComp(blk);
     };
     exports.setStats = setStats;
 
 
     const updateTile = function(b) {
-      blk_heater.updateTile(b);
+      PARENT.updateTile(b);
     };
     exports.updateTile = updateTile;
 
 
     const setBars = function(blk) {
-      blk_heater.setBars(blk);
+      PARENT.setBars(blk);
     };
     exports.setBars = setBars;
   // End

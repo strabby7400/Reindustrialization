@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_wireRelay = require("reind/blk/blk_wireRelay");
+    const TEMPLATE = require("reind/blk/blk_wireRelay");
   // End
 
 
@@ -21,21 +21,24 @@
     const powWire_copperWireRelay = extend(BeamNode, "pow-wire-copper-wire-relay", {
       setStats() {
         this.super$setStats();
-        blk_wireRelay.setStats(this);
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
       },
       canPlaceOn(tile, team, rotation) {
         if(!this.super$canPlaceOn(tile, team, rotation)) return false;
-        if(!blk_wireRelay.canPlaceOn(this, tile, team, rotation)) return false;
+        if(!TEMPLATE.canPlaceOn(this, tile, team, rotation)) return false;
         return true;
       },
     });
     powWire_copperWireRelay.buildType = () => extend(BeamNode.BeamNodeBuild, powWire_copperWireRelay, {
       updateTile() {
         this.super$updateTile();
-        blk_wireRelay.updateTile(this);
+        TEMPLATE.updateTile(this);
       },
     });
-    blk_wireRelay.setup(powWire_copperWireRelay, 25.0 / 60.0);
     exports.powWire_copperWireRelay = powWire_copperWireRelay;
   // End
 

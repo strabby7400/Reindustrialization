@@ -87,54 +87,48 @@
   craftEffect: none
   updateEffect: {
 
+    # Template: _idsParticles
 
-    /* effect_idsParticles */
+    /* <---------------- meta ----------------> */
 
+    type: ParticleEffect
+    interp: pow2In
+    lifetime: 180.0
+    startDelay: 0.0
 
-    // Part: Meta
-      type: ParticleEffect
-      interp: pow2In
-      lifetime: 180.0
-      startDelay: 0.0
-    // End
+    /* <---------------- visual ----------------> */
 
+    region: reind-efr-diamond-hollow
+    layer: 69.0
+    particles: 1
+    followParent: true
+    rotWithParent: false
+    useRotation: true
+    colorFrom: ffd37f
+    colorTo: ffd37f
+    lightScl: 2.0
+    lightOpacity: 0.65
 
-    // Part: Visual
-      region: reind-efr-diamond-hollow
-      layer: 69.0
-      particles: 1
-      followParent: true
-      rotWithParent: false
-      useRotation: true
-      colorFrom: ffd37f
-      colorTo: ffd37f
-      lightScl: 2.0
-      lightOpacity: 0.65
-    // End
+    /* <---------------- angle & length ----------------> */
 
+    baseRotation: 0.0
+    offset: 0.0
+    cone: 180.0
+    spin: 0.0
+    randLength: true
+    length: 4.0
+    baseLength: 0.0
 
-    // Part: Angle & Length
-      baseRotation: 0.0
-      offset: 0.0
-      cone: 180.0
-      spin: 0.0
-      randLength: true
-      length: 4.0
-      baseLength: 0.0
-    // End
+    /* <---------------- size & stroke & len ----------------> */
 
-
-    // Part: Size & Stroke & Len
-      line: false
-      sizeInterp: sine
-      sizeFrom: 8.0
-      sizeTo: 0.0
-      strokeFrom: 0.0
-      strokeTo: 0.0
-      lenFrom: 0.0
-      lenTo: 0.0
-    // End
-
+    line: false
+    sizeInterp: sine
+    sizeFrom: 8.0
+    sizeTo: 0.0
+    strokeFrom: 0.0
+    strokeTo: 0.0
+    lenFrom: 0.0
+    lenTo: 0.0
 
   }
   updateEffectChance: 0.02

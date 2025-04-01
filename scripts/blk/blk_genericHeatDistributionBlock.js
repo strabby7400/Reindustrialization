@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const blk_genericHeatBlock = require("reind/blk/blk_genericHeatBlock");
+    const PARENT = require("reind/blk/blk_genericHeatBlock");
 
     const frag_heat = require("reind/frag/frag_heat");
 
@@ -38,20 +38,18 @@
 
 
     function drawComp(b) {
-      // Draw heat
       frag_heat.draw_heat(b);
     };
 
 
     function drawSelectComp(b) {
-      // Draw heat amount
       frag_heat.drawSelect_heat(b);
     };
 
 
     function onDestroyedComp(b) {
       if(b.sound != null) b.sound.stop();
-      Damage.dynamicExplosion(b.x, b.y, mdl_heat.getHeatFrac(b) * 0.15, mdl_heat.getHeatFrac(b) * 1.5, 0.0, b.block.size * Vars.tilesize / 2.0, Vars.state.rules.damageExplosions, b.block.destroyEffect);
+      Damage.dynamicExplosion(b.x, b.y, mdl_heat._heatFrac(b) * 0.15, mdl_heat._heatFrac(b) * 1.5, 0.0, b.block.size * Vars.tilesize / 2.0, Vars.state.rules.damageExplosions, b.block.destroyEffect);
       if(b.block.createRubble && !b.floor().solid && !b.floor().isLiquid) Effect.rubble(b.x, b.y, b.block.size);
     };
   // End
@@ -66,7 +64,7 @@
 
   // Part: Integration
     const setStats = function(blk) {
-      blk_genericHeatBlock.setStats(blk);
+      PARENT.setStats(blk);
 
       setStatsComp(blk);
     };
@@ -74,7 +72,7 @@
 
 
     const updateTile = function(b) {
-      blk_genericHeatBlock.updateTile(b);
+      PARENT.updateTile(b);
 
       updateTileComp(b);
     };
@@ -82,7 +80,7 @@
 
 
     const setBars = function(blk) {
-      blk_genericHeatBlock.setBars(blk);
+      PARENT.setBars(blk);
     };
     exports.setBars = setBars;
 

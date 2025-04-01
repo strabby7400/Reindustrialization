@@ -26,6 +26,7 @@
     parent: fac-sep-cyclone-separator
     objectives: []
   }
+  researchCostMultiplier: 0.6
 
 
 /*

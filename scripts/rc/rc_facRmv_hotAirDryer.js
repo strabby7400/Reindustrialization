@@ -13,6 +13,22 @@ const rc = {
     ======================================== */
 
 
+    /* <---------------- biotic ----------------> */
+
+
+    // Powdered Biomass
+    {
+      "icon": "reind-item-int-powdered-biomass",
+      "category": "drying",
+      "inputs": new Seq([
+        "reind-item-int-powdered-biomass", 10,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-powdered-biomass-dried", 10,
+      ]),
+    },
+
+
     // Sawdust
     {
       "icon": "reind-item-bio-sawdust",
@@ -24,6 +40,9 @@ const rc = {
         "reind-item-int-sawdust-dried", 10,
       ]),
     },
+
+
+    /* <---------------- chemical ----------------> */
 
 
   ]),

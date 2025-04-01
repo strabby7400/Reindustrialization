@@ -6,7 +6,7 @@
 
 
   // Part: Import
-    const unit_airUnit = require("reind/unit/unit_airUnit");
+    const PARENT = require("reind/unit/unit_airUnit");
 
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
@@ -28,8 +28,8 @@
       };
 
       if(!Vars.headless && Mathf.chance(0.25)) {
-        var elev = mdl_unit.getElevation(unit);
-        var pos_p3d = mdl_game._posP3d(1, mdl_game._pos(1, unit), elev);
+        var elev = mdl_unit._elev(unit);
+        var pos_p3d = mdl_game._posP3d(unit, elev);
         var flr = Vars.world.floorWorld(pos_p3d.x, pos_p3d.y);
 
         if(flr != null) {
@@ -50,33 +50,39 @@
 
   // Part: Integration
     const setStats = function(utp) {
-      unit_airUnit.setStats(utp);
+      PARENT.setStats(utp);
     };
     exports.setStats = setStats;
 
 
     const update = function(utp, unit) {
-      unit_airUnit.update(utp, unit);
+      PARENT.update(utp, unit);
 
       updateComp(utp, unit);
     };
     exports.update = update;
 
 
+    const init = function(utp) {
+      PARENT.init(utp);
+    };
+    exports.init = init;
+
+
     const killed = function(utp, unit) {
-      unit_airUnit.killed(utp, unit);
+      PARENT.killed(utp, unit);
     };
     exports.killed = killed;
 
 
     const draw = function(utp, unit) {
-      unit_airUnit.draw(utp, unit);
+      PARENT.draw(utp, unit);
     };
     exports.draw = draw;
 
 
     const drawShadow = function(utp, unit) {
-      unit_airUnit.drawShadow(utp, unit);
+      PARENT.drawShadow(utp, unit);
     };
     exports.drawShadow = drawShadow;
   // End
