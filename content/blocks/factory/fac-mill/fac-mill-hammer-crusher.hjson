@@ -8,8 +8,9 @@
   # type: GenericCrafter
   category: crafting
   requirements: [
-    item-chem-lead/50
-    item-chem-tin-bronze/30
+    item-chem-copper/90
+    item-chem-lead/90
+    item-chem-tin-bronze/50
     item-chem-steel/30
     item-chem-mangalloy/50
   ]

@@ -348,6 +348,29 @@ const db = {
     ]),
 
 
+    "dehydrative": new Seq([
+
+      /* <---------------- liq-chem ----------------> */
+
+      "reind-liq-chem-sulfuric-acid-conc",
+      "reind-liq-chem-sulfuric-acid-fuming",
+
+      /* <---------------- gas-chem ----------------> */
+
+      "reind-gas-chem-sulfur-trioxide",
+
+    ]),
+
+
+    "oil": new Seq([
+
+      /* <---------------- liq-chem ----------------> */
+
+      "reind-liq-chem-tolunene",
+
+    ]),
+
+
   },
 
 
@@ -386,10 +409,16 @@ const db = {
       "wood", "acidicAq", 5.0,
       "wood", "basicOil", 7.0,
       "wood", "acidicOil", 7.0,
-      "wood", "aicidicSub", 5.0,
+      "wood", "acidicSub", 5.0,
       "wood", "basicSub", 5.0,
       "wood", "basicGas", 5.0,
       "wood", "acidicGas", 5.0,
+
+      "iron", "brine", 9.0,
+      "iron", "acidicAq", 2.0,
+      "iron", "acidicOil", 2.0,
+      "iron", "acidicSub", 2.0,
+      "iron", "acidicGas", 3.0,
 
       "steel", "brine", 4.0,
       "steel", "acidicAq", 1.5,
@@ -397,7 +426,23 @@ const db = {
       "steel", "acidicSub", 1.5,
       "steel", "acidicGas", 2.0,
 
+      "galvanizedSteel", "acidicAq", 1.5,
+      "galvanizedSteel", "acidicOil", 1.5,
+      "galvanizedSteel", "acidicSub", 1.5,
+      "galvanizedSteel", "acidicGas", 2.0,
+
       "stainlessSteel", "brine", 4.0,
+
+      "cement", "brine", 5.0,
+      "cement", "acidicAq", 2.0,
+      "cement", "acidicOil", 2.0,
+      "cement", "acidicSub", 2.0,
+      "cement", "acidicGas", 3.0,
+
+      "rubber", "acidicSub", 1.5,
+      "rubber", "acidicGas", 2.0,
+      "rubber", "basicSub", 1.5,
+      "rubber", "basicGas", 2.0,
     ]),
 
 
@@ -408,12 +453,19 @@ const db = {
      * Format: {matGrp}, {fTag}, {scl}.
      */
     "tagScale": new Seq([
-      "wood", "oxidative", 12.0,
+      "wood", "oxidative", 5.0,
+      "wood", "dehydrative", 5.0,
 
       "copper", "ammoniacal", 4.0,
       "copper", "chloric", 4.0,
 
-      "glass", "fluoric", 9.0,
+      "lead", "oxidative", 3.0,
+
+      "glass", "fluoric", 12.0,
+
+      "rubber", "oxidative", 4.0,
+      "rubber", "fluoric", 6.0,
+      "rubber", "oil", 12.0,
     ]),
 
 
@@ -434,7 +486,7 @@ const db = {
       "reind-liq-chem-hydrochloric-acid", 1.7,
 
       "reind-liq-chem-sulfuric-acid", 1.7,
-      "reind-liq-chem-sulfuric-acid-conc", 1.35,
+      "reind-liq-chem-sulfuric-acid-conc", 0.7,
       "reind-liq-chem-sulfuric-acid-fuming", 2.1,
       "reind-liq-chem-sulfurous-acid", 1.5,
 

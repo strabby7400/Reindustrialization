@@ -166,9 +166,7 @@
         if(!Vars.headless) {
           var li = db_block.db["pollution"]["value"];
           var cap = li.size;
-          for(let i = 0; i < cap; i++) {
-            if(i % 2 != 0) continue;
-
+          for(let i = 0; i < cap; i += 2) {
             var blk = Vars.content.block(li.get(i));
             if(blk == null) continue;
             var pol = li.get(i + 1);
@@ -227,6 +225,19 @@
             };
 
             if(val != null) blk.stats.add(db_stat.voltageTier, val);
+          });
+        };
+
+
+      /* ========================================
+        Section: Power
+      ======================================== */
+
+
+        // Magnetic
+        if(!Vars.headless) {
+          li_blk.each(blk => {
+            if(mdl_content.isMagnetic(blk)) blk.stats.add(db_stat.magneticDisturbance, true);
           });
         };
 

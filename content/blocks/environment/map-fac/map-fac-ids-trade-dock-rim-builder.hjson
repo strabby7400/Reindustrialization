@@ -202,7 +202,7 @@
 
         type: ParticleEffect
         interp: pow5Out
-        lifetime: 120.0
+        lifetime: 180.0
         startDelay: 0.0
 
         /* <---------------- visual ----------------> */
@@ -232,7 +232,7 @@
 
         line: false
         sizeInterp: linear
-        sizeFrom: 60.0
+        sizeFrom: 120.0
         sizeTo: 0.0
         strokeFrom: 0.0
         strokeTo: 0.0
@@ -281,6 +281,130 @@
         sizeInterp: pow5Out
         sizeFrom: 2.0
         sizeTo: 14.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
+
+
+      {
+
+        /* <---------------- meta ----------------> */
+
+        type: WaveEffect
+        interp: linear
+        lifetime: 40.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        layer: 69.0
+        sides: -1
+        followParent: false
+        rotWithParent: false
+        colorFrom: ffd37f
+        colorTo: ffd37f
+        lightScl: 2.0
+        lightOpacity: 0.65
+
+        /* <---------------- angle & size & stroke ----------------> */
+
+        baseRotation: 0.0
+        rotation: 0.0
+        sizeFrom: 0.0
+        sizeTo: 80.0
+        strokeFrom: 6.0
+        strokeTo: 0.0
+
+      }
+
+
+      {
+
+        /* <---------------- meta ----------------> */
+
+        type: ParticleEffect
+        interp: reverse
+        lifetime: 180.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: circle
+        layer: 110.0
+        particles: 256
+        followParent: false
+        rotWithParent: false
+        useRotation: true
+        colorFrom: ffd37f
+        colorTo: ffd37f
+        lightScl: 1.0
+        lightOpacity: 0.65
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 90.0
+        offset: 0.0
+        cone: 4.5
+        spin: 0.0
+        randLength: true
+        length: 60.0
+        baseLength: 480.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: pow5In
+        sizeFrom: 4.0
+        sizeTo: 0.0
+        strokeFrom: 0.0
+        strokeTo: 0.0
+        lenFrom: 0.0
+        lenTo: 0.0
+
+      }
+
+
+      {
+
+        /* <---------------- meta ----------------> */
+
+        type: ParticleEffect
+        interp: reverse
+        lifetime: 180.0
+        startDelay: 0.0
+
+        /* <---------------- visual ----------------> */
+
+        region: circle
+        layer: 110.0
+        particles: 64
+        followParent: false
+        rotWithParent: false
+        useRotation: true
+        colorFrom: ffd37f
+        colorTo: ffd37f
+        lightScl: 1.0
+        lightOpacity: 0.65
+
+        /* <---------------- angle & length ----------------> */
+
+        baseRotation: 90.0
+        offset: 0.0
+        cone: 4.5
+        spin: 0.0
+        randLength: true
+        length: 60.0
+        baseLength: 480.0
+
+        /* <---------------- size & stroke & len ----------------> */
+
+        line: false
+        sizeInterp: pow5In
+        sizeFrom: 8.0
+        sizeTo: 0.0
         strokeFrom: 0.0
         strokeTo: 0.0
         lenFrom: 0.0

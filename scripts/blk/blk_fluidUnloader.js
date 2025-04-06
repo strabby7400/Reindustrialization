@@ -23,6 +23,13 @@
 
   // Part: Component
     function updateTileComp(b) {
+      // Initialize
+      if(b.needCheck) {
+        b.id_sel = mdl_data._config(b, -1);
+
+        b.needCheck = false;
+      };
+
       var liq = b.liquids.current();
       var liq_sel = mdl_content._ct_id("fluid", b.id_sel);
       if(liq_sel == null) return;

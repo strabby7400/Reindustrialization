@@ -1,15 +1,14 @@
 const gi = [
   "reind-effc-effc-core", 0.01666667,
 ];
-
 const gi1 = [
   "reind-effc-effc-core", 0.01666667,
   "reind-liq-ore-water", 0.1,
 ];
-
 const go1 = [
   "reind-liq-was-waste-slurry", 0.1,
 ];
+
 
 const rc = {
   "parent": "reind-fac-misc-core-crafter",

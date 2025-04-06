@@ -63,10 +63,11 @@
 
 
     const atk_explosion = function(pos_gn, rad, dmg, shake) {
-      if(rad == null) rad = 40.0;
       if(dmg == null) dmg = 0.0;
-      if(shake == null) shake = 0.0;
       if(pos_gn == null || dmg < 0.01) return;
+
+      if(rad == null) rad = 40.0;
+      if(shake == null) shake = 0.0;
 
       var pos = mdl_game._pos(pos_gn);
 
@@ -91,11 +92,12 @@
 
 
     const atk_impact = function(pos_gn, rad, dmg, dur, shake, caller) {
+      if(pos_gn == null) return;
+
       if(rad == null) rad = 40.0;
       if(dmg == null) dmg = 20.0;
       if(dur == null) dur = 120.0;
       if(shake == null) shake = 0.0;
-      if(pos_gn == null) return;
 
       var pos = mdl_game._pos(pos_gn);
 
@@ -106,6 +108,8 @@
 
           unit.damage(dmg_fi);
           if(Mathf.chance(Math.max(1.0 - d / rad, 0.15))) unit.apply(Vars.content.statusEffect("reind-sta-spec-stunned"), dur);
+
+          mdl_effect.showAt(unit, db_effect._impactDrillCrack(), 0.0);
         };
       });
 
@@ -117,14 +121,18 @@
     /* <---------------- lightning ----------------> */
 
 
-    const atk_lightning = function(pos_gn, team, amt, r, off_r, dmg, color) {
+    const atk_lightning = function(pos_gn, team, amt, r, off_r, dmg, color, hasSound) {
+      if(pos_gn == null) return;
+
       if(team == null) team = Team.derelict;
       if(amt == null) amt = 1;
       if(r == null) r = 5;
       if(off_r == null) off_r = 0;
       if(dmg == null) dmg = VAR.shortCircuit_lightningDamage;
       if(color == null) color = Pal.techBlue;
-      if(pos_gn == null) return;
+      if(hasSound == null) hasSound = true;
+
+      if(amt == 0) return;
 
       var pos = mdl_game._pos(pos_gn);
 
@@ -133,15 +141,15 @@
         Lightning.create(team, color, dmg, pos.x, pos.y, Mathf.random(360.0), r_fi)
       };
 
-      Sounds.spark.at(pos.x, pos.y);
+      if(hasSound) mdl_effect.playAt(pos, Sounds.spark);
     };
     exports.atk_lightning = atk_lightning;
 
 
-    const atk_lightning_noob = function(pos_gn, team, amt, r, off_r, dmg, color) {
+    const atk_lightning_noob = function(pos_gn, team, amt, r, off_r, dmg, color, hasSound) {
       if(noob) return;
 
-      atk_lightning(pos_gn, team, amt, r, off_r, dmg, color);
+      atk_lightning(pos_gn, team, amt, r, off_r, dmg, color, hasSound);
     };
     exports.atk_lightning_noob = atk_lightning_noob;
   // End

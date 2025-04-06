@@ -8,6 +8,8 @@
   // Part: Import
     const VAR = require("reind/glb/glb_vars");
 
+    const cfg_update = require("reind/cfg/cfg_update");
+
     const frag_item = require("reind/frag/frag_item");
     const frag_recipe = require("reind/frag/frag_recipe");
 
@@ -15,6 +17,7 @@
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
+    const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_heat = require("reind/mdl/mdl_heat");
     const mdl_recipe = require("reind/mdl/mdl_recipe");
@@ -118,9 +121,7 @@
       var li = db_block.db["map"]["growth"];
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 5 != 0) continue;
-
+        for(let i = 0; i < cap; i += 5) {
           var nm = li.get(i);
           if(blk.name != nm) continue;
           var growTime = li.get(i + 1);
@@ -142,9 +143,7 @@
       var li = cropYield;
       var cap = li.size;
       if(cap == 0) return val;
-      for(let i = 0; i < cap; i++) {
-        if(i % 4 != 0) continue;
-
+      for(let i = 0; i < cap; i += 4) {
         var stage = li.get(i);
         if(growStage != stage) continue;
         var backTo = li.get(i + 1);
@@ -190,9 +189,7 @@
 
       var cap = li.size;
       if(cap == 0) return li;
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         li1.add(li.get(i));
       };
 
@@ -210,9 +207,7 @@
       var ep_fi = 0.0;
       var cap = li.size;
       if(cap == 0) return ep_fi;
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         ep_fi += li.get(i + 1);
       };
 
@@ -227,12 +222,7 @@
       var ep_req = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], e.type.name) : mdl_data.read_1n1v(db_block.db["ep"]["requirement"], e.block.name);
       if(ep_req == null) return true;
 
-      var ep = _epCount(
-        e,
-        r * Vars.tilesize,
-        e.team,
-        (e instanceof Unit) ? e : null,
-      );
+      var ep = _epCount(e, r * Vars.tilesize, e.team, (e instanceof Unit) ? e : null);
 
       return ep / ep_req;
     };
@@ -269,17 +259,13 @@
       var r = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.db["ep"]["range"], e.type.name) : mdl_data.read_1n1v(db_block.db["ep"]["range"], e.block.name);
       if(r == null) return;
 
-      _epLiUnit(
-        e,
-        r * Vars.tilesize,
-        e.team,
-        (e instanceof Unit) ? e : null,
-      ).each(unit => {
-        mdl_draw.drawFlickerLine(
-          unit,
-          e,
-          Pal.techBlue,
-        );
+      _epLiUnit(e, r * Vars.tilesize, e.team, (e instanceof Unit) ? e : null).each(unit => {
+        if(e instanceof Unit) {
+          mdl_draw.drawFlickerLine(unit, e, Pal.techBlue, 0.5, false, 0.75, 58.88);
+        } else if(cfg_update.state_drawLightning) {
+          mdl_effect.flashAt(unit, Color.valueOf("ffffff80"));
+          mdl_effect.chainLightning(unit, e, Pal.techBlue);
+        };
       });
     };
     exports.draw_ep = draw_ep;
@@ -307,39 +293,84 @@
   // End
 
 
+  // Part: Magnetic
+    const setStats_magnetic = function(blk) {
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["magnetic"], blk.name, 2);
+      blk.stats.add(db_stat.magneticallyVulnerable, true);
+      blk.stats.add(db_stat.magneticRange, r, StatUnit.blocks);
+    };
+    exports.setStats_magnetic = setStats_magnetic;
+
+
+    const updateTile_magnetic = function(b) {
+      if(b.status() != BlockStatus.active || Mathf.chance(0.98)) return;
+
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["magnetic"], b.block.name, 2)
+      var count = 0;
+      mdl_game._liBuild(mdl_game._liTileRect(b.tile, r, b.block.size)).each(ob => {
+        if(ob != b && mdl_content.isMagnetic(ob.block) && ob.status() == BlockStatus.active) count += Math.pow(ob.block.size, 2);
+      });
+
+      if(count == 0) return;
+      var dmg = b.maxHealth * 0.005 * count + 5.0;
+      b.damagePierce(dmg);
+      mdl_effect.damageAt(b, dmg);
+      mdl_effect.flashAt(b);
+    };
+    exports.updateTile_magnetic = updateTile_magnetic;
+
+
+    const drawPlace_magnetic = function(blk, tx, ty, rot, valid) {
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["magnetic"], blk.name, 2);
+      var t = Vars.world.tile(tx, ty);
+      mdl_draw.drawPlaceRect(blk, t, Pal.techBlue, r, true);
+      mdl_game._liBuild(mdl_game._liTileRect(t, r, blk.size)).each(ob => {
+        if(mdl_content.isMagnetic(ob.block)) mdl_draw.drawBuildArea(ob, Pal.techBlue);
+      });
+    };
+    exports.drawPlace_magnetic = drawPlace_magnetic;
+
+
+    const drawSelect_magnetic = function(b) {
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["magnetic"], b.block.name, 2);
+      mdl_draw.drawSelectRect(b, r, true, Pal.techBlue);
+      mdl_game._liBuild(mdl_game._liTileRect(b.tile, r, b.block.size)).each(ob => {
+        if(ob != b && mdl_content.isMagnetic(ob.block)) mdl_draw.drawBuildArea(ob, Pal.techBlue);
+      });
+    };
+    exports.drawSelect_magnetic = drawSelect_magnetic
+  // End
+
+
   // Part: Restriction Range
-    const setStats_restrict = function(blk, r) {
-      var r_fi = (r == null) ? mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name) : r;
-      if(r_fi != null) blk.stats.add(db_stat.restrictionRange, r_fi, StatUnit.blocks);
+    const setStats_restrict = function(blk) {
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
+      blk.stats.add(db_stat.restrictionRange, r, StatUnit.blocks);
     };
     exports.setStats_restrict = setStats_restrict;
 
 
-    const canPlaceOn_restrict = function(blk, t, team, rot, r) {
-      var r_fi = (r == null) ? mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name) : r;
-      if(r_fi != null && mdl_game._liBuildSame(mdl_game._liTileRect(t, r_fi, blk.size), blk.name, Vars.player.team()).size > 0) return false;
+    const canPlaceOn_restrict = function(blk, t, team, rot) {
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
+      if(mdl_game._liBuildSame(mdl_game._liTileRect(t, r, blk.size), blk.name, Vars.player.team()).size > 0) return false;
 
       return true;
     };
     exports.canPlaceOn_restrict = canPlaceOn_restrict;
 
 
-    const drawPlace_restrict = function(blk, tx, ty, rot, valid, r) {
-      var r_fi = (r == null) ? mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name) : r;
-      if(r_fi != null) {
-        var t = Vars.world.tile(tx, ty);
-        mdl_draw.drawPlaceRect(blk, t, valid, r_fi, true);
-        mdl_game._liBuildSame(mdl_game._liTileRect(t, r_fi, blk.size), blk.name, Vars.player.team()).each(ob => mdl_draw.drawBuildArea(ob, valid));
-      };
+    const drawPlace_restrict = function(blk, tx, ty, rot, valid) {
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
+      var t = Vars.world.tile(tx, ty);
+      mdl_draw.drawPlaceRect(blk, t, valid, r, true);
+      mdl_game._liBuildSame(mdl_game._liTileRect(t, r, blk.size), blk.name, Vars.player.team()).each(ob => mdl_draw.drawBuildArea(ob, valid));
     };
     exports.drawPlace_restrict = drawPlace_restrict;
 
 
-    const drawSelect_restrict = function(b, r) {
-      var r_fi = (r == null) ? mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name) : r;
-      if(r_fi != null) {
-        mdl_draw.drawSelectRect(b, r_fi, true);
-      };
+    const drawSelect_restrict = function(b) {
+      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
+      mdl_draw.drawSelectRect(b, r, true);
     };
     exports.drawSelect_restrict = drawSelect_restrict;
   // End
@@ -351,9 +382,7 @@
       var li = db_block.db["matrix"]["multiBlock"];
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           var nm = li.get(i);
           var nm_tg = li.get(i + 1);
           var plan = li.get(i + 2);
@@ -389,9 +418,7 @@
       var li = plan;
       var cap = plan.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var rPos = li.get(i);
           var nm = li.get(i + 1);
           var ot = t.nearby(rPos);
@@ -415,9 +442,7 @@
       var li = plan;
       var cap = plan.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var rPos = li.get(i);
           var nm = li.get(i + 1);
           var blk = mdl_content._ct_nm(nm);
@@ -517,30 +542,46 @@
     exports._terrainVal = _terrainVal;
 
 
-    const setStats_terrain = function(blk, ter_sel, mode) {
-      if(blk == null || ter_sel == null) return;
+    const _liTer = function(li_ter_gn, shouldReturnVal) {
+      var li = new Seq();
+      if(li_ter_gn == null) return li;
+
+      if(shouldReturnVal == null) shouldReturnVal = false;
+
+      if(li_ter_gn instanceof Seq) {
+        li_ter_gn.each(ter => li.add(shouldReturnVal ? _terrainVal(ter) : ter));
+      } else {li.add(shouldReturnVal ? _terrainVal(li_ter_gn) : li_ter_gn)};
+
+      return li;
+    };
+    exports._liTer = _liTer;
+
+
+    const setStats_terrain = function(blk, li_ter_gn, mode) {
+      if(blk == null || li_ter_gn == null) return;
       if(mode != "enable" && mode != "disable") return;
 
-      blk.stats.add((mode == "enable") ? db_stat.requiredTerrain : db_stat.disabledIn, _terrainVal(ter_sel));
+      blk.stats.add((mode == "enable") ? db_stat.requiredTerrain : db_stat.disabledIn, mdl_text._tagText(_liTer(li_ter_gn, true)));
     };
     exports.setStats_terrain = setStats_terrain;
 
 
-    const canPlaceOn_terrain = function(blk, ter_sel, mode, t, team, rot, offTy) {
+    const canPlaceOn_terrain = function(blk, li_ter_gn, mode, t, team, rot, offTy) {
       if(offTy == null) offTy = 0;
       if(t == null) return false;
       if(mode != "enable" && mode != "disable") return false;
 
       var ter = _terrain(t, blk.size);
       var terVal = _terrainVal(ter);
+      var li_ter = _liTer(li_ter_gn);
       var valid = true;
       if(mode == "disable") {
-        if(ter == ter_sel) {
+        if(ter != null && li_ter.contains(ter)) {
           mdl_draw.drawPlaceText(blk, t, false, Core.bundle.get("info.reind-info-terrain-disabled.name") + mdl_text._space() + terVal, offTy);
           valid = false;
         };
       } else {
-        if(ter != ter_sel) {
+        if(ter == null || !li_ter.contains(ter)) {
           mdl_draw.drawPlaceText(blk, t, false, Core.bundle.get("info.reind-info-terrain-mismatched.name") + mdl_text._space() + terVal, offTy);
           valid = false;
         };

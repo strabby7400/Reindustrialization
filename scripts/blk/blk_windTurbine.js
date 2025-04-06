@@ -25,7 +25,10 @@
 
 
     function updateTileComp(b) {
-      if(b.timerEffc.get(60.0)) b.sum = b.block.sumAttribute(b.block.attribute, b.tileX(), b.tileY()) - b.block.attribute.env();
+      if(b.timerEffc.get(60.0)) b.tmpSum = b.block.sumAttribute(b.block.attribute, b.tileX(), b.tileY()) - b.block.attribute.env();
+      b.sum = b.tmpSum;
+
+      b.tprog += Math.min(b.edelta() * (1.0 + b.sum), 3.0);
     };
 
 
@@ -36,11 +39,10 @@
       var attr = mdl_attr._wind(t);
 
       var count = 0;
-      var li_ot = mdl_game._liTileEdge(t, blk.size);
-      li_ot.each(ot => {
+      mdl_game._liTileEdge(t, blk.size).each(ot => {
         if(ot.solid()) count += 1;
       });
-      attr *= 1.0 - count / blk.size * 4;
+      attr *= 1.0 - count / blk.size / 4;
 
       if(attr < 0.0) attr = 0.0;
       return attr;
@@ -48,7 +50,7 @@
 
 
     function totalProgressComp(b) {
-      return (mdl_content.canUpdate(b)) ? Time.time : 0.0;
+      return (mdl_content.canUpdate(b)) ? b.tprog : 0.0;
     };
 
 

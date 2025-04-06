@@ -35,7 +35,8 @@
       },
     });
     powGen_windTurbine.buildType = () => extend(ThermalGenerator.ThermalGeneratorBuild, powGen_windTurbine, {
-      timerEffc: new Interval(1),
+      tprog: 0.0,
+      timerEffc: new Interval(1), tmpSum: 0.0,
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);

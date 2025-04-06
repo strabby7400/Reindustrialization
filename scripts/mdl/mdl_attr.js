@@ -97,9 +97,7 @@
       var nmAttr = null;
       var cap = map.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var tmpNmAttr = map.get(i);
           var tmpAttr = _sumAttr_li(li_ot, tmpNmAttr);
           if(tmpAttr > attr) {
@@ -127,9 +125,7 @@
 
       var cap = map.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var nmAttr = map.get(i);
           var attr = sumAttr_li(li_ot, nmAttr);
 

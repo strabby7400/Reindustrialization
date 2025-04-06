@@ -22,8 +22,7 @@
       for(let i = 0; i < cap; i++) {
         var mt = unit.mounts[i];
         if(mt.weapon.name.includes("-rotator")) {
-          var rot_fi = (mt.rotation + Time.delta * 15.0) % 360.0;
-          mt.rotation = rot_fi;
+          mt.rotation = (mt.rotation + Time.delta * 15.0) % 360.0;
         };
       };
 

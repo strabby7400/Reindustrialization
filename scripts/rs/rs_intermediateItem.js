@@ -33,6 +33,18 @@
       setStatsComp(itm);
     };
     exports.setStats = setStats;
+
+
+    const loadIcon = function(itm) {
+      PARENT.loadIcon(itm);
+    };
+    exports.loadIcon = loadIcon
+
+
+    const createIcons = function(itm, packer) {
+      PARENT.createIcons(itm, packer);
+    };
+    exports.createIcons = createIcons;
   // End
 
 

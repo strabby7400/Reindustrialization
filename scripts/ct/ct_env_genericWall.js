@@ -54,6 +54,15 @@
     exports.envWall_sand = envWall_sand;
 
 
+    const envWall_sandCaustic = extend(StaticWall, "env-wall-sand-caustic", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+    });
+    exports.envWall_sandCaustic = envWall_sandCaustic;
+
+
     const envWall_sandDark = extend(StaticWall, "env-wall-sand-dark", {
       setStats() {
         this.super$setStats();

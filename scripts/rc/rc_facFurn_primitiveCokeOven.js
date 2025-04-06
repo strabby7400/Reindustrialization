@@ -2,10 +2,10 @@ const gi = [
   "reind-effc-effc-smoke-exhaust", 0.01666667,
   "reind-liq-ore-water", 0.1
 ];
-
 const go = [
   "reind-liq-was-waste-water", 0.1,
 ];
+
 
 const rc = {
   "parent": "reind-fac-furn-primitive-coke-oven",

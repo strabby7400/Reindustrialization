@@ -141,7 +141,7 @@
 
   }
   effectChance: 0.002
-  ambientSound: se-amb-hum
+  ambientSound: se-amb-regen
   ambientSoundVolume: 0.15
 
 
@@ -155,7 +155,7 @@
   range: 22
   healPercent: 0.03
   optionalMultiplier: 1.0
-  optionalUseTime: 120.0
+  optionalUseTime: 180.0
 
 
 /*

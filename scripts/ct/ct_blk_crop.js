@@ -26,7 +26,7 @@
 
 
     const minCrop_aerthSmallShiitake = extend(Wall, "min-crop-aerth-small-shiitake", {
-      ter: "dirt",
+      ter: new Seq(["dirt", "sand"]),
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);

@@ -52,8 +52,8 @@
     facHeat_temperatureControlUnit.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facHeat_temperatureControlUnit, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
-      id_rc: mdl_content._config(facHeat_temperatureControlUnit, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -131,8 +131,8 @@
     facHeat_furnaceHeater.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facHeat_furnaceHeater, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facHeat_furnaceHeater"),
-      id_rc: mdl_content._config(facHeat_furnaceHeater, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -219,8 +219,8 @@
     facAir_liquidRingPressurePump.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facAir_liquidRingPressurePump, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facAir_liquidRingPressurePump"),
-      id_rc: mdl_content._config(facAir_liquidRingPressurePump, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -304,8 +304,8 @@
     facFurn_carbonizationKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_carbonizationKiln, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_carbonizationKiln"),
-      id_rc: mdl_content._config(facFurn_carbonizationKiln, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -380,8 +380,8 @@
     facFurn_primitiveBrickKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveBrickKiln, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveBrickKiln"),
-      id_rc: mdl_content._config(facFurn_primitiveBrickKiln, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -456,8 +456,8 @@
     facFurn_electrodeMelter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_electrodeMelter, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_electrodeMelter"),
-      id_rc: mdl_content._config(facFurn_electrodeMelter, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -535,8 +535,8 @@
     facFurn_kiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_kiln, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_kiln"),
-      id_rc: mdl_content._config(facFurn_kiln, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -611,8 +611,8 @@
     facFurn_bloomery.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_bloomery, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_bloomery"),
-      id_rc: mdl_content._config(facFurn_bloomery, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -691,8 +691,8 @@
     facFurn_brickedBlastFurnace.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_brickedBlastFurnace, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_brickedBlastFurnace"),
-      id_rc: mdl_content._config(facFurn_brickedBlastFurnace, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -770,8 +770,8 @@
     facFurn_primitiveSinteringFurnace.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveSinteringFurnace, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveSinteringFurnace"),
-      id_rc: mdl_content._config(facFurn_primitiveSinteringFurnace, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -849,8 +849,8 @@
     facFurn_colossalKiln.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_colossalKiln, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_colossalKiln"),
-      id_rc: mdl_content._config(facFurn_colossalKiln, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -928,8 +928,8 @@
     facFurn_primitiveCokeOven.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facFurn_primitiveCokeOven, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveCokeOven"),
-      id_rc: mdl_content._config(facFurn_primitiveCokeOven, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1013,8 +1013,8 @@
     facMill_jawCrusher.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_jawCrusher, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_jawCrusher"),
-      id_rc: mdl_content._config(facMill_jawCrusher, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1093,8 +1093,8 @@
     facMill_hammerCrusher.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_hammerCrusher, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_hammerCrusher"),
-      id_rc: mdl_content._config(facMill_hammerCrusher, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1172,8 +1172,8 @@
     facMill_mechanicalMill.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_mechanicalMill, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_mechanicalMill"),
-      id_rc: mdl_content._config(facMill_mechanicalMill, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1252,8 +1252,8 @@
     facMill_ballMill.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMill_ballMill, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_ballMill"),
-      id_rc: mdl_content._config(facMill_ballMill, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1337,8 +1337,8 @@
     facMix_vMixer.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMix_vMixer, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMix_vMixer"),
-      id_rc: mdl_content._config(facMix_vMixer, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1416,8 +1416,8 @@
     facMix_tankMixer.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMix_tankMixer, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMix_tankMixer"),
-      id_rc: mdl_content._config(facMix_tankMixer, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1501,8 +1501,8 @@
     facProc_shredder.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_shredder, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facProc_shredder"),
-      id_rc: mdl_content._config(facProc_shredder, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1577,8 +1577,8 @@
     facProc_charcoalRodMaker_m.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_charcoalRodMaker_m, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facProc_charcoalRodMaker_m"),
-      id_rc: mdl_content._config(facProc_charcoalRodMaker_m, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1656,8 +1656,8 @@
     facProc_brickPress.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facProc_brickPress, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facProc_brickPress"),
-      id_rc: mdl_content._config(facProc_brickPress, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1741,8 +1741,8 @@
     facRmv_hotAirDryer.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facRmv_hotAirDryer, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facRmv_hotAirDryer"),
-      id_rc: mdl_content._config(facRmv_hotAirDryer, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1826,8 +1826,8 @@
     facSep_highPressureCycloneSeparator.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_highPressureCycloneSeparator, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_highPressureCycloneSeparator"),
-      id_rc: mdl_content._config(facSep_highPressureCycloneSeparator, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1906,8 +1906,8 @@
     facSep_largeVibrationScreen.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_largeVibrationScreen, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_largeVibrationScreen"),
-      id_rc: mdl_content._config(facSep_largeVibrationScreen, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1971,7 +1971,7 @@
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
-        frag_faci.setStats_restrict(this);
+        frag_faci.setStats_magnetic(this);
       },
       init() {
         this.super$init();
@@ -1988,28 +1988,24 @@
         return TEMPLATE.consumesLiquid(this, liquid);
       },
       // Specific
-      canPlaceOn(tile, team, rotation) {
-        if(!this.super$canPlaceOn(tile, team, rotation)) return false;
-        if(!frag_faci.canPlaceOn_restrict(this, tile, team, rotation)) return false;
-        return true;
-      },
-      // Specific
       drawPlace(tx, ty, rotation, valid) {
         this.super$drawPlace(tx, ty, rotation, valid);
-        frag_faci.drawPlace_restrict(this, tx, ty, rotation, valid);
+        frag_faci.drawPlace_magnetic(this, tx, ty, rotation, valid);
       },
     });
     facSep_dryMagneticSeparator.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_dryMagneticSeparator, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_dryMagneticSeparator"),
-      id_rc: mdl_content._config(facSep_dryMagneticSeparator, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
       timerEffc: new Interval(1),
+      // Specific
       updateTile() {
         TEMPLATE.updateTile(this);
+        frag_faci.updateTile_magnetic(this);
       },
       buildConfiguration(table) {
         this.super$buildConfiguration(table);
@@ -2037,7 +2033,7 @@
       drawSelect() {
         this.super$drawSelect();
         TEMPLATE.drawSelect(this);
-        frag_faci.drawSelect_restrict(this);
+        frag_faci.drawSelect_magnetic(this);
       },
       drawStatus() {
         TEMPLATE.drawStatus(this);
@@ -2080,8 +2076,8 @@
     facSep_mineralJig_m.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facSep_mineralJig_m, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_mineralJig_m"),
-      id_rc: mdl_content._config(facSep_mineralJig_m, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2165,8 +2161,8 @@
     facMisc_mechanicalCrank.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_mechanicalCrank, {
       tag: "<manual>", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_mechanicalCrank"),
-      id_rc: mdl_content._config(facMisc_mechanicalCrank, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2245,8 +2241,8 @@
     facMisc_genericInlet.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_genericInlet, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_genericInlet"),
-      id_rc: mdl_content._config(facMisc_genericInlet, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2321,8 +2317,8 @@
     facMisc_fuelInlet.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_fuelInlet, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_fuelInlet"),
-      id_rc: mdl_content._config(facMisc_fuelInlet, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2400,8 +2396,8 @@
     facMisc_coreCrafter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_coreCrafter, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_coreCrafter"),
-      id_rc: mdl_content._config(facMisc_coreCrafter, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2484,8 +2480,8 @@
     facMisc_manualCrafter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facMisc_manualCrafter, {
       tag: "<manual>", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_manualCrafter"),
-      id_rc: mdl_content._config(facMisc_manualCrafter, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2569,8 +2565,8 @@
     ilfacMisc_oreDictionaryConverter.buildType = () => extend(GenericCrafter.GenericCrafterBuild, ilfacMisc_oreDictionaryConverter, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_ilfacMisc_oreDictionaryConverter"),
-      id_rc: mdl_content._config(ilfacMisc_oreDictionaryConverter, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2654,8 +2650,8 @@
     ileffMisc_bitBank.buildType = () => extend(GenericCrafter.GenericCrafterBuild, ileffMisc_bitBank, {
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_ileffMisc_bitBank"),
-      id_rc: mdl_content._config(ileffMisc_bitBank, 0),
-      needCheck: true, craftSound: null, timeScale: 1.0,
+      id_rc: 0,
+      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
       ci: new Seq(), bi: new Seq(), opt: new Seq(),
       co: new Seq(), bo: new Seq(), fo: new Seq(),
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,

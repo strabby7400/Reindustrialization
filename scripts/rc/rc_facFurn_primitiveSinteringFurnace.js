@@ -3,6 +3,7 @@ const gi = [
   "reind-effc-effc-smoke-exhaust", 0.03333333,
 ];
 
+
 const rc = {
   "parent": "reind-fac-furn-primitive-sintering-furnace",
 
@@ -49,6 +50,32 @@ const rc = {
     /* <---------------- pyrite ----------------> */
 
 
+    // Dust (P1 : Hematite)
+    {
+      "icon": "reind-item-int-dust-p1-hematite",
+      "category": "concentrate-sintering",
+      "inputs": new Seq([
+        "reind-item-int-dust-p1-hematite", 20,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-concentrate-hematite", 20,
+      ]),
+    },
+
+
+    // Dust (P1 : Magnetite)
+    {
+      "icon": "reind-item-int-dust-p1-magnetite",
+      "category": "concentrate-sintering",
+      "inputs": new Seq([
+        "reind-item-int-dust-p1-magnetite", 20,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-concentrate-magnetite", 20,
+      ]),
+    },
+
+
     // Dust (P1 : Pyrite)
     {
       "icon": "reind-item-int-dust-p1-pyrite",
@@ -74,6 +101,64 @@ const rc = {
       ].concat(gi)),
       "outputs": new Seq([
         "reind-item-int-concentrate-galena", 20,
+      ]),
+    },
+
+
+    /* <---------------- manganese ----------------> */
+
+
+    // Dust (P1 : Psilomelane)
+    {
+      "icon": "reind-item-int-dust-p1-psilomelane",
+      "category": "concentrate-sintering",
+      "inputs": new Seq([
+        "reind-item-int-dust-p1-psilomelane", 20,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-concentrate-psilomelane", 20,
+      ]),
+    },
+
+
+    // Dust (P1 : Pyrolusite)
+    {
+      "icon": "reind-item-int-dust-p1-pyrolusite",
+      "category": "concentrate-sintering",
+      "inputs": new Seq([
+        "reind-item-int-dust-p1-pyrolusite", 20,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-concentrate-pyrolusite", 20,
+      ]),
+    },
+
+
+    /* <---------------- titanium ----------------> */
+
+
+    // Dust (P1 : Ilmenite)
+    {
+      "icon": "reind-item-int-dust-p1-ilmenite",
+      "category": "concentrate-sintering",
+      "inputs": new Seq([
+        "reind-item-int-dust-p1-ilmenite", 20,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-concentrate-ilmenite", 20,
+      ]),
+    },
+
+
+    // Dust (P1 : Rutile)
+    {
+      "icon": "reind-item-int-dust-p1-rutile",
+      "category": "concentrate-sintering",
+      "inputs": new Seq([
+        "reind-item-int-dust-p1-rutile", 20,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-concentrate-rutile", 20,
       ]),
     },
 

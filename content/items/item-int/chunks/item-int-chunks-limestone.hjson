@@ -19,8 +19,8 @@
 
 
   color: bcc8bd
-  frames: 2
-  transitionFrames: 8
+  frames: 0
+  transitionFrames: 0
   frameTime: 5.0
 
 

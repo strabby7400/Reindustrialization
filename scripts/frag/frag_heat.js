@@ -93,7 +93,7 @@
 
         if(tHeat > limit && mdl_content.isHcond(b.block)) {
           var dmg = b.edelta() * b.maxHealth * VAR.overheat_damageRatio * (tHeat - limit) * VAR.overheat_damageScale;
-          var dmg_fi = Math.min(dmg, 4.0);
+          var dmg_fi = Math.min(dmg, 6.0);
           b.damage(dmg_fi);
 
           mdl_effect.showAtP(0.5, b, db_effect._heatSmog());
@@ -153,7 +153,7 @@
     const moveLiquid_hcond = function(b, ob) {
       if(b == null || ob == null) return 0.0;
       if(b.team != ob.team || b.liquids == null || ob.liquids == null) return 0.0;
-      if(!ob.acceptLiquid(b, heatEffc) || mdl_content.isConduit(ob.block) || mdl_content.isTank(ob.block)) return 0.0;
+      if(!ob.acceptLiquid(b, heatEffc) || mdl_content.isCond(ob.block) || mdl_content.isTank(ob.block)) return 0.0;
 
       return transferHeat(b, ob, !mdl_content.isHcond(ob.block));
     };

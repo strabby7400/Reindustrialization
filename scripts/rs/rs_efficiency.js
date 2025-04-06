@@ -50,6 +50,18 @@
       updateComp(effc);
     };
     exports.update = update;
+
+
+    const loadIcon = function(liq) {
+      PARENT.loadIcon(liq);
+    };
+    exports.loadIcon = loadIcon
+
+
+    const createIcons = function(liq, packer) {
+      PARENT.createIcons(liq, packer);
+    };
+    exports.createIcons = createIcons;
   // End
 
 

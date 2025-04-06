@@ -146,6 +146,24 @@
     exports.envFlr_dirt = envFlr_dirt;
 
 
+    const envFlr_dirtCaustic = extend(Floor, "env-flr-dirt-caustic", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+    });
+    exports.envFlr_dirtCaustic = envFlr_dirtCaustic;
+
+
+    const envFlr_dirtSandy = extend(Floor, "env-flr-dirt-sandy", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+    });
+    exports.envFlr_dirtSandy = envFlr_dirtSandy;
+
+
     const envFlr_grass = extend(Floor, "env-flr-grass", {
       setStats() {
         this.super$setStats();
@@ -191,6 +209,15 @@
     exports.envFlr_sandBasaltic = envFlr_sandBasaltic;
 
 
+    const envFlr_sandCaustic = extend(Floor, "env-flr-sand-caustic", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+    });
+    exports.envFlr_sandCaustic = envFlr_sandCaustic;
+
+
     const envFlr_sandDark = extend(Floor, "env-flr-sand-dark", {
       setStats() {
         this.super$setStats();
@@ -207,6 +234,15 @@
       },
     });
     exports.envFlr_sandstone = envFlr_sandstone;
+
+
+    const envFlr_sandstoneCracked = extend(Floor, "env-flr-sandstone-cracked", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+    });
+    exports.envFlr_sandstoneCracked = envFlr_sandstoneCracked;
   // End
 
 

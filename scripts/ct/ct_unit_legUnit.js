@@ -33,6 +33,7 @@
       init(unit) {
         this.super$init();
         TEMPLATE.init(this);
+        db_ability.__lightningCore(this);
         db_ability.__energizer(this);
       },
       killed(unit) {

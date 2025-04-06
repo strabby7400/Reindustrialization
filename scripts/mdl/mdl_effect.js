@@ -8,6 +8,7 @@
   // Part: Import
     const VAR = require("reind/glb/glb_vars");
 
+    const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
 
@@ -263,6 +264,7 @@
         color: Color.valueOf("606060"),
         region: Core.atlas.find(unit.type.name + "-icon", unit.type.region),
         offTime: Mathf.random(1200.0),
+        isHot: mdl_content.isHot(unit),
         draw() {
           var x = this.x;
           var y = this.y;
@@ -290,10 +292,23 @@
           };
 
           Draw.z(z);
-          if(tintColor != null) {Draw.tint(this.color, tintColor, 0.5)} else {Draw.color(this.color)};
+          if(tintColor != null) {Draw.tint(this.color, tintColor, 0.5)} else {
+            if(!this.isHot) {Draw.color(this.color)} else {
+              Draw.color(Tmp.c1.set(Color.valueOf("ea8878")).lerp(this.color, Interp.pow2Out.apply(this.fin())));
+            };
+          };
 
           Draw.alpha(a - Mathf.curve(this.fin(), 0.98) * a);
           Draw.rect(this.region, x, y, this.rotation);
+
+          if(this.isHot) {
+            Draw.blend(Blending.additive);
+            Draw.mixcol(Color.valueOf("ff3838"), 1.0);
+            Draw.alpha((0.5 + Mathf.absin(10.0, 0.5)) * (0.5 - Interp.pow2Out.apply(this.fin()) * 0.5));
+            Draw.rect(this.region, x, y, this.rotation);
+            Draw.blend();
+          };
+
           Draw.reset();
 
           showAtP_ldm(0.02, unit, db_effect._craftBlackSmog());
@@ -304,16 +319,46 @@
     exports.remainsAt = remainsAt;
 
 
+    const eff_flash = new Effect(20.0, eff => {
+      var e = eff.data;
+      var color = eff.color;
+
+      var a = eff.fout() * color.a;
+      var reg;
+      var ang;
+      if(e instanceof Building) {
+        reg = Core.atlas.find(e.block.name + "-icon", e.block.region);
+        ang = 0.0;                // NOTE: No need to rotate, which bugs on turrets.
+      } else {
+        reg = Core.atlas.find(e.type.name + "-icon", e.type.region);
+        ang = e.rotation - 90.0;
+      };
+
+      mdl_draw.drawNormalRegion(e, reg, ang, a, 1.0, color, Layer.effect + 0.44, true);
+    });
+
+
+    const flashAt = function(e, color_gn) {
+      if(color_gn == null) color_gn = Color.white;
+      if(e == null) return;
+
+      var color = mdl_draw._color(color_gn);
+
+      showAt("player", eff_flash, 0.0, color, e);
+    };
+    exports.flashAt = flashAt;
+
+
     /*
      * NOTE:
      *
      * Creates damage indicator effect at {pos_gn}.
      */
-    const eff_showDmg = new Effect(40.0, e => {
-      var dmg = e.data;
+    const eff_showDmg = new Effect(40.0, eff => {
+      var dmg = eff.data;
       var sizeScl = Math.max(Math.log((dmg + 10.0) / 10.0), 0.7);
 
-      mdl_draw.drawText(new Vec2(e.x, e.y), Strings.autoFixed(e.data, 2), e.color, sizeScl - Interp.pow3In.apply(e.fin()) * sizeScl, Align.center, 0.0, 8.0 * e.fin(), Math.min(dmg / 10000.0), 10.0);
+      mdl_draw.drawText(new Vec2(eff.x, eff.y), Strings.autoFixed(dmg, 2), eff.color, sizeScl - Interp.pow3In.apply(eff.fin()) * sizeScl, Align.center, 0.0, 8.0 * eff.fin(), Math.min(dmg / 10000.0), 10.0);
     });
 
 
@@ -341,6 +386,19 @@
       for(let i = 0; i < repeat; i++) {showAt(pos_gn_f, Fx.itemTransfer, 0.0, color, pos_gn_t)};
     };
     exports.itemTransfer = itemTransfer;
+
+
+    const chainLightning = function(pos_gn, e, color_gn, hasSound) {
+      if(color_gn == null) color_gn = Pal.accent;
+      if(hasSound == null) hasSound = false;
+      if(pos_gn == null || e == null) return;
+
+      var color = mdl_draw._color(color_gn);
+
+      showAt(pos_gn, Fx.chainLightning, 0.0, color, e);
+      if(hasSound) playAt(pos_gn, Sounds.spark);
+    };
+    exports.chainLightning = chainLightning;
   // End
 
 

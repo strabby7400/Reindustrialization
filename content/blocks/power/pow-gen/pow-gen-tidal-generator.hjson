@@ -8,12 +8,12 @@
   # type: ThermalGenerator
   category: power
   requirements: [
-    item-chem-lead/60
-    item-chem-brass/30
-    item-chem-tin-bronze/30
-    item-chem-steel/40
-    item-chem-galvanized-steel/60
-    item-ore-magnetite/40
+    item-chem-lead/120
+    item-chem-brass/60
+    item-chem-tin-bronze/100
+    item-chem-steel/80
+    item-chem-galvanized-steel/160
+    item-ore-magnetite/90
   ]
   buildCostMultiplier: 2.0
 
@@ -370,4 +370,4 @@
 
 
   attribute: reind-attr-env-tide
-  powerProduction: 0.51851852
+  powerProduction: 1.03703704

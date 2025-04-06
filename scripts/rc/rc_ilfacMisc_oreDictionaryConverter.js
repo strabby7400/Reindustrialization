@@ -1,8 +1,10 @@
 const lib_base = require("reind/lib/lib_base");
 
+
 const gi = [
   "reind-ileffc-effc-ids", 0.03333333,
 ];
+
 
 const rc = {
   "parent": "reind-ilfac-misc-ore-dictionary-converter",

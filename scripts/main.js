@@ -247,9 +247,7 @@
       const li_commands = db_event.commands;
       var cap = li_commands.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           (function(i) {
             var str_nm = li_commands.get(i);
             var str_param = li_commands.get(i + 1);

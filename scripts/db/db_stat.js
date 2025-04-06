@@ -37,6 +37,15 @@
       const stat_restrictionRange = new Stat("reind-stat-restriction-range.name", StatCat.function);
       exports.restrictionRange = stat_restrictionRange;
 
+      const stat_magneticDisturbance = new Stat("reind-stat-magnetic-disturbance.name", StatCat.function);
+      exports.magneticDisturbance = stat_magneticDisturbance;
+
+      const stat_magneticallyVulnerable = new Stat("reind-stat-magnetically-vulnerable.name", StatCat.function);
+      exports.magneticallyVulnerable = stat_magneticallyVulnerable;
+
+      const stat_magneticRange = new Stat("reind-stat-magnetic-range.name", StatCat.function);
+      exports.magneticRange = stat_magneticRange;
+
       const stat_flammable = new Stat("reind-stat-flammable.name", StatCat.function);
       exports.flammable = stat_flammable;
 
@@ -79,6 +88,12 @@
     // Part: Liquid Block
       const stat_standardPumpSpeed = new Stat("reind-stat-standard-pump-speed.name", StatCat.liquids);
       exports.standardPumpSpeed = stat_standardPumpSpeed;
+
+      const stat_pipeDiameter = new Stat("reind-stat-pipe-diameter.name", StatCat.liquids);
+      exports.pipeDiameter = stat_pipeDiameter;
+
+      const stat_pipeRoughness = new Stat("reind-stat-pipe-roughness.name", StatCat.liquids);
+      exports.pipeRoughness = stat_pipeRoughness;
 
       const stat_fluidPressure = new Stat("reind-stat-fluid-pressure.name", StatCat.liquids);
       exports.fluidPressure = stat_fluidPressure;
@@ -194,6 +209,9 @@
 
       const stat_hardness = new Stat("reind-stat-hardness.name", StatCat.function);
       exports.hardness = stat_hardness;
+
+      const stat_resourceTag = new Stat("reind-stat-resource-tag.name", StatCat.function);
+      exports.resourceTag = stat_resourceTag;
     // End
 
 

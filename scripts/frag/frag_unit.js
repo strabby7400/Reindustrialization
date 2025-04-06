@@ -9,7 +9,6 @@
     const VAR = require("reind/glb/glb_vars");
 
     const mdl_content = require("reind/mdl/mdl_content");
-    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_game = require("reind/mdl/mdl_game");
 
     const db_block = require("reind/db/db_block");
@@ -19,12 +18,12 @@
 
   // Part: Surrounding
     const update_surrounding = function(utp, unit) {
-      if(Mathf.chance(0.98)) return;
+      if(Mathf.chance(0.96)) return;
       var t = unit.tileOn();
       if(t == null) return;
 
       var count_wall = 0.0;
-      var staTime = 240.0;
+      var staTime = 150.0;
 
       // Beneath
       if(mdl_content.isOnFloor(unit)) {
@@ -41,7 +40,7 @@
         var ob = ot.build;
 
         if(mdl_content.isCoverable(unit, true) && mdl_content.isTree(oblk)) {
-          var z = mdl_data.read_1n1v(db_env.db["map"]["treeLayer"], ot.block().name);
+          var z = oblk.armor;
           if(z > 75.9999 && z < 80.0001 && d < oblk.region.width * 0.15) {
             unit.apply(Vars.content.statusEffect("reind-sta-spec-hidden-well"), staTime);
             ot.block().drawBase(ot);

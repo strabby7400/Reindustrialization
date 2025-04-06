@@ -2,6 +2,7 @@ const gri = [
   "reind-item-bio-charcoal", 30, 0.5,
 ];
 
+
 const rc = {
   "parent": "reind-fac-furn-primitive-brick-kiln",
 

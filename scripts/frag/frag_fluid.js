@@ -126,27 +126,21 @@
     exports.addLiquid = addLiquid;
 
 
-    const transferLiquid = function(b_f, b_t, liq, forced) {
-      if(forced == null) forced = false;
+    const transferLiquid = function(b_f, b_t, liq, rate) {
+      if(rate == null) rate = 0.0;
       if(b_f == null || b_t == null || b_f.liquids == null || b_t.liquids == null) return;
 
       var amt_f = b_f.liquids.get(liq);
       var amt_t = b_t.liquids.get(liq);
-      var tmpAmt_t = forced ? 0.0 : amt_t;
+      if(amt_f < 0.0001) return 0.0;
+
       var cap_t = b_t.block.liquidCapacity;
-      var pres = (b_f.block.liquidPressure + b_t.block.liquidPressure) / 2.0;
-      var visc = liq.viscosity;
-      var rate = b_f.edelta() * mdl_flow._flowRate(amt_f, tmpAmt_t, pres, visc);
-      var amt_trans = Math.min(rate, cap_t - amt_t);
+      var amt_trans = Mathf.clamp(b_f.edelta() * rate, 0.0, cap_t - amt_t);
 
-      if(amt_f > 0.0001) {
-        b_t.handleLiquid(b_f, liq, amt_trans);
-        b_f.liquids.remove(liq, amt_trans);
+      b_t.handleLiquid(b_f, liq, amt_trans);
+      b_f.liquids.remove(liq, amt_trans);
 
-        return amt_trans;
-      };
-
-      return 0.0;
+      return amt_trans;
     };
     exports.transferLiquid = transferLiquid;
 
@@ -176,16 +170,22 @@
       var ob_fi = getJunctionEnd(b, ob);
       if(ob_fi == null) return 0.0;
 
+      if(b.timerEffc.get(10.0)) {
+        var amt_f = b.liquids.get(liq);
+        var amt_t = mdl_content.isCond(ob_fi.block) ? ob_fi.liquids.get(liq) : 0.0;
+        var pres = (b.block.liquidPressure + ob_fi.block.liquidPressure) / 2.0;
+        var visc = liq.viscosity;
+
+        b.tmpRate = mdl_flow._flowRate(b, ob_fi, amt_f, amt_t, pres, visc);
+      };
+
       if(b.team == ob_fi.team && b.liquids != null && ob_fi.liquids != null && ob_fi.acceptLiquid(b, liq)) {
-        return transferLiquid(b, ob_fi, liq, !mdl_content.isConduit(ob_fi.block));
+        return transferLiquid(b, ob_fi, liq, b.tmpRate);
       } else if (!ob_fi.block.consumesLiquid(liq) && ob_fi.liquids != null && ob_fi.liquids.currentAmount() / ob_fi.block.liquidCapacity > 0.1 && b.liquids != null && b.liquids.currentAmount() / b.block.liquidCapacity > 0.1) {
         mdl_reaction.handleReaction(ob_fi, b.liquids.current(), ob_fi.liquids.current());
       };
 
       if(b.team == ob_fi.team && ob_fi.items != null && !(ob_fi.block instanceof CoreBlock) && !ob_fi.block.consumesLiquid(liq)) {
-        // Water
-        if(mdl_content.isAqueous(liq)) ob.items.each(itm => mdl_reaction.handleReaction(ob, itm, Vars.content.liquid("reind-liq-ore-water")));
-
         ob_fi.items.each(itm => mdl_reaction.handleReaction(ob, itm, liq));
       };
 

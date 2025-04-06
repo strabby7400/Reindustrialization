@@ -241,19 +241,109 @@
       return Core.atlas.find(blk.name + "-icon", Core.atlas.find(blk.name));
     };
     exports._buildReg = _buildReg;
-
-
-    const _config = function(ct, val_ini) {
-      var cfg = null;
-      if(ct instanceof Block) cfg = ct.lastConfig;
-
-      return (cfg == null) ? val_ini : cfg;
-    };
-    exports._config = _config;
   // End
 
 
   // Part: Setting
+    const rsTagExc = {
+      "p1": [],
+      "p2": [],
+
+      "accumulated": [],
+      "dried": [],
+      "roasted": [],
+      "unannealed": [],
+      "unbaked": [],
+
+      "blend": [],
+      "chunks": [],
+      "concentrate": [],
+      "dust": [
+        "reind-item-was-dust",
+
+        "reind-effc-effc-dust-recycling"
+      ],
+
+      "acidic": [],
+      "basic": [],
+
+      "clean": [],
+      "conc": [],
+      "fuming": [],
+      "purified": [],
+      "thickened": [],
+
+      "slurry": [
+        "reind-liq-was-waste-slurry",
+      ],
+      "solution": [],
+      "suspension": [],
+    };
+
+
+    const rsTagInc = {
+
+    };
+
+
+    const _rsTag = function(ct) {
+      if(ct == null || !isReind(ct)) return;
+
+      var nm = ct.name;
+      const li = new Seq();
+
+      // Automatically add tags by name
+      var keys = Object.keys(rsTagExc);
+      var cap = keys.length;
+      for(let i = 0; i < cap; i++) {
+        var tag = keys[i];
+
+        if(!rsTagExc[tag].includes(nm) && !li.contains(tag)) {
+          var cond = false;
+
+          // This is horrible
+          if(nm.includes(tag)) {
+            if(new RegExp("-" + tag + "[^0-z]", "i").test(nm)) {cond = true} else {
+              if(!(new RegExp("-" + tag + "\\w", "i").test(nm)) && new RegExp("-" + tag, "i").test(nm)) cond = true;
+            };
+          };
+
+          if(cond) li.add(tag);
+        };
+      };
+
+      // Manually add tags
+      var tags = rsTagInc[nm];
+      if(tags != null) {
+        var cap = tags.length;
+        if(cap > 0) {
+          for(let i = 0; i < cap; i++) {
+            var tag = tags[i];
+
+            if(!li.contains(tag)) li.add(tag);
+          };
+        };
+      };
+
+      return li;
+    };
+    exports._rsTag = _rsTag;
+
+
+    const _rsTagVal = function(ct, noColor) {
+      if(noColor == null) noColor = false;
+      if(ct == null || !isReind(ct)) return;
+
+      var tags = _rsTag(ct);
+      var val = "";
+
+      tags.each(tag => val += "<" + tag + ">");
+
+      return (val == "") ? null : (noColor ? val : ("[gray]" + val + "[]"));
+    };
+    exports._rsTagVal = _rsTagVal;
+
+
     const _faction = function(ct) {
       if(ct == null || !isReind(ct)) return;
 
@@ -534,7 +624,7 @@
     exports.isCore = isCore;
 
 
-    const isConduit = function(ct_gn) {
+    const isCond = function(ct_gn) {
       var nmCt = _nmCt_gn(ct_gn);
 
       return mdl_text.includes_ex(
@@ -547,7 +637,7 @@
         "reind-ilbliq-cond-",
       );
     };
-    exports.isConduit = isConduit;
+    exports.isCond = isCond;
 
 
     const isTank = function(ct_gn) {
@@ -596,6 +686,12 @@
       return db_block.db["power"]["shortCircuit"].contains(_nmCt_gn(ct_gn));
     };
     exports.canShortCircuit = canShortCircuit;
+
+
+    const isMagnetic = function(ct_gn) {
+      return db_block.db["group"]["magnetic"].contains(_nmCt_gn(ct_gn));
+    };
+    exports.isMagnetic = isMagnetic;
 
 
     const isFactory = function(ct_gn) {
@@ -790,6 +886,15 @@
       return true;
     };
     exports.isIdle = isIdle;
+
+
+    const isHot = function(unit) {
+      if(unit == null) return false;
+      if(unit.hasEffect(StatusEffects.burning) || unit.hasEffect(StatusEffects.melting)) return true;
+
+      return false;
+    };
+    exports.isHot = isHot;
   // End
 
 

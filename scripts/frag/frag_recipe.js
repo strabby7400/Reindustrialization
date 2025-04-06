@@ -22,9 +22,7 @@
       var li = mdl_recipe._inputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var liq = Vars.content.liquid(li.get(i));
           if(liq == null) continue;
           var amt = li.get(i + 1);
@@ -49,9 +47,7 @@
       var li = mdl_recipe._inputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var itm = Vars.content.item(li.get(i));
           if(itm == null) continue;
           var amt = li.get(i + 1);
@@ -66,9 +62,7 @@
       var li = mdl_recipe._randInputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           var itm = Vars.content.item(li.get(i));
           if(itm == null) continue;
           var amt = li.get(i + 1);
@@ -84,9 +78,7 @@
       var li = mdl_recipe._bfInputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var liq = Vars.content.liquid(li.get(i));
           if(liq == null) continue;
           var amt = li.get(i + 1);
@@ -109,9 +101,7 @@
       var li = mdl_recipe._optInputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 4 != 0) continue;
-
+        for(let i = 0; i < cap; i += 4) {
           var itm = Vars.content.item(li.get(i));
           if(itm == null) continue;
           var amt = li.get(i + 1);
@@ -137,9 +127,7 @@
       var li = opt;
       var cap = opt.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 4 != 0) continue;
-
+        for(let i = 0; i < cap; i += 4) {
           var ct = opt.get(i);
           var amt = opt.get(i + 1);
           var p = opt.get(i + 2);
@@ -164,9 +152,7 @@
       var li = mdl_recipe._outputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var liq = Vars.content.liquid(li.get(i));
           if(liq == null) continue;
           var amt = li.get(i + 1);
@@ -188,9 +174,7 @@
       var li = mdl_recipe._outputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var itm = Vars.content.item(li.get(i));
           if(itm == null) continue;
           var amt = li.get(i + 1);
@@ -205,9 +189,7 @@
       var li = mdl_recipe._randOutputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           var itm = Vars.content.item(li.get(i));
           if(itm == null) continue;
           var amt = li.get(i + 1);
@@ -223,9 +205,7 @@
       var li = mdl_recipe._bfOutputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var liq = Vars.content.liquid(li.get(i));
           if(liq == null) continue;
           var amt = li.get(i + 1);
@@ -247,9 +227,7 @@
       var li = mdl_recipe._failOutputs(rcFi, id_rc);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var itm = Vars.content.item(li.get(i));
           if(itm == null) continue;
           var amt = li.get(i + 1);
@@ -319,9 +297,7 @@
       var cap = li.size;
       if(cap > 0) {
         var allFull = true;
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var ct = li.get(i);
           var amt = li.get(i + 1);
 
@@ -337,9 +313,7 @@
       var li = bo;
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           var ct = li.get(i);
           var amt = li.get(i + 1);
           var p = li.get(i + 2);
@@ -358,9 +332,7 @@
       var li = fo;
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var ct = li.get(i);
           var amt = li.get(i + 1);
 
@@ -386,9 +358,7 @@
       var li = ci;
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var ct = li.get(i);
           var amt = li.get(i + 1);
 
@@ -403,9 +373,7 @@
       var li = bi;
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           var ct = li.get(i);
           var amt = li.get(i + 1);
           var p = li.get(i + 2);
@@ -439,9 +407,7 @@
       var li = bi;
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           var ct = li.get(i);
           var amt = li.get(i + 1);
           var p = li.get(i + 2);
@@ -482,9 +448,7 @@
       var li = ci;
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var ct = li.get(i);
           var amt = li.get(i + 1);
 
@@ -504,9 +468,7 @@
       var li = bo;
       var cap = li.size;
       if(!failed && cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           var ct = li.get(i);
           var amt = li.get(i + 1);
           var p = li.get(i + 2);
@@ -528,9 +490,7 @@
         for(let i = 0; i < 6; i++) {mdl_effect.showAt(b, db_effect._craftBlackSmog())};
 
         if(cap > 0) {
-          for(let i = 0; i < cap; i++) {
-            if(i % 2 != 0) continue;
-
+          for(let i = 0; i < cap; i += 2) {
             var ct = li.get(i);
             var amt = li.get(i + 1);
 
@@ -549,9 +509,7 @@
       var li = co;
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var ct = li.get(i);
           var amt = li.get(i + 1);
 
@@ -568,9 +526,7 @@
       var li = co;
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var ct = li.get(i);
           var dir = (b.block.liquidOutputDirections.length > i / 2) ? b.block.liquidOutputDirections[i / 2] : -1;
 

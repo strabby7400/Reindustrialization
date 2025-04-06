@@ -106,9 +106,7 @@
       var li = cropYield;
       var cap = li.size;
       if(cap == 0) return;
-      for(let i = 0; i < cap; i++) {
-        if(i % 4 != 0) continue;
-
+      for(let i = 0; i < cap; i += 4) {
         var stage = cropYield.get(i);
         var batch = cropYield.get(i + 2);
         var growTime_fi = stage / growStages * growTime;
@@ -143,9 +141,7 @@
       var li = frag_faci._structLiPlan(plan);
       var cap = li.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 2 != 0) continue;
-
+        for(let i = 0; i < cap; i += 2) {
           var blk1 = li.get(i);
           var amt = li.get(i + 1);
 

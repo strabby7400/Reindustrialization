@@ -368,12 +368,13 @@
 */
 
 
-  powerProduction: 53.33333333
+  powerProduction: 58.33333333
   itemDuration: 120.0
   outputLiquid: gas-misc-steam/0.5
   consumes: {
     liquids: [
       liq-ore-water/0.5
+      effc-cond-pressure/0.03333333
       effc-effc-temperature-control/0.03333333
     ]
   }

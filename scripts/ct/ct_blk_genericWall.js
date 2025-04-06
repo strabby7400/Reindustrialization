@@ -200,6 +200,28 @@
 
 
   // Part: def-wall[misc]
+    const defWall_woodenPlaceholder = extend(Wall, "def-wall-wooden-placeholder", {
+      // Specific
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+        frag_faci.setStats_flammable(this);
+      },
+    });
+    defWall_woodenPlaceholder.buildType = () => extend(Wall.WallBuild, defWall_woodenPlaceholder, {
+      // Specific
+      updateTile() {
+        this.super$updateTile();
+        TEMPLATE.updateTile(this);
+        frag_faci.updateTile_flammable(this);
+      },
+    });
+    exports.defWall_woodenPlaceholder = defWall_woodenPlaceholder;
+
+
+    /* <---------------- very specific zone ----------------> */
+
+
     const defWall_compressedThoriumReactorBarricade = extend(Wall, "def-wall-compressed-thorium-reactor-barricade", {
       setStats() {
         this.super$setStats();

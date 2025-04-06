@@ -102,9 +102,7 @@
           mdl_table.__margin(pn);
 
           var cap = rcLi.size;
-          for(let i = 0; i < cap; i++) {
-            if(i % 4 != 0) continue;
-
+          for(let i = 0; i < cap; i += 4) {
             var itm = Vars.content.item(rcLi.get(i));
             if(itm == null) continue;
             var amt = rcLi.get(i + 1);
@@ -190,9 +188,7 @@
           mdl_table.__margin(pn);
 
           var arr = arr_manualPages;
-          for(let i = 0; i < arr.length; i++) {
-            if(i % 2 != 0) continue;
-
+          for(let i = 0; i < arr.length; i += 2) {
             var title = arr[i];
             var page = i / 2;
 
@@ -504,7 +500,7 @@
 
         tb.checkPref("reind-ldm", false);
         tb.checkPref("reind-p3d-shadow", true);
-        tb.sliderPref("reind-efficiency-update-interval", 4, 1, 12, function(val) {return Strings.fixed(val * 0.25, 2) + "s"});
+        tb.sliderPref("reind-efficiency-update-interval", 3, 0, 11, function(val) {return Strings.fixed((val + 1) * 0.25, 2) + "s"});
 
         tb.checkPref("reind-welcome-dialog", true);
         tb.checkPref("reind-core-time-control", true);
@@ -512,6 +508,8 @@
 
         tb.sliderPref("reind-tree-alpha", 20, 0, 20, function(val) {return Strings.fixed(val * 5.0, 0) + "%"});
         tb.sliderPref("reind-decal-lifetime", 60, 0, 480, function(val) {return Strings.fixed(val, 0) + "s"});
+        tb.checkPref("reind-show-icon-tag", true);
+        tb.sliderPref("reind-icon-tag-interval", 1, 0, 11, function(val) {return Strings.fixed((val + 1) * 0.25, 2) + "s"});
 
         tb.textPref("reind-secret-code", "<ohno>");
       });

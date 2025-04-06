@@ -12,7 +12,6 @@
     const db_stat = require("reind/db/db_stat");
 
     const mdl_content = require("reind/mdl/mdl_content");
-    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
   // End
@@ -35,13 +34,16 @@
 
 
     function drawBaseComp(blk, t) {
-      var z = mdl_data.read_1n1v(db_env.db["map"]["treeLayer"], blk.name);
-      if(z == null) return;
+      if(treeAlpha < 0.0001) return;
+      
+      // NOTE: {treeLayer} is stored in {armor}, well that sucks.
+      var z = blk.armor;
       var z_sha = z - 0.0005;
 
       var pos_sha = mdl_game._pos(t, blk.shadowOffset);
       var reg = blk.region;
       var ang = Mathf.randomSeed(t.pos(), 0, 4) * 90.0;
+
       var scl = 1.0;
       var mag = 1.0;
       var wobScl = 1.0;
@@ -57,6 +59,7 @@
       };
 
       var a = (Groups.player.size() > 1) ? 1.0 : treeAlpha;
+      if(a < 0.0001) return;
       if(mdl_content.isCoverable(Vars.player.unit())) {
         var pos_pl = mdl_game._pos("player");
         if(pos_pl != null) {

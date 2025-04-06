@@ -8,6 +8,7 @@
   // Part: Import
     const env_depthOre = require("reind/env/env_depthOre");
 
+    const frag_attack = require("reind/frag/frag_attack");
     const frag_faci = require("reind/frag/frag_faci");
 
     const mdl_content = require("reind/mdl/mdl_content");
@@ -105,6 +106,63 @@
       Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_deathExplosion));
     };
     exports.__deathExplosion = __deathExplosion;
+
+
+    const __lightningCore = function(utp, p, r, off_r, dmg, color) {
+      if(p == null) p = 0.03333333;
+      if(r == null) r = 5;
+      if(off_r == null) off_r = 5;
+      if(dmg == null) dmg = 20.0;
+      if(color == null) color = Pal.techBlue;
+
+      var abi_lightningCore = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-lightning-core.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text._statText(
+            Stat.damage.localized(),
+            Strings.autoFixed(dmg, 2),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Stat.range.localized(),
+            Strings.autoFixed(r + off_r * 0.5, 2),
+            StatUnit.blocks.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Core.bundle.get("term.reind-term-frequency.name"),
+            Strings.autoFixed(p * 60.0, 2),
+            StatUnit.perSecond.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Core.bundle.get("term.reind-term-status.name"),
+            StatusEffects.shocked.localizedName,
+          ));
+        },
+
+
+        update(unit) {
+          if(mdl_content.isMoving(unit)) return;
+
+          var p_fi = Time.delta * p * unit.reloadMultiplier;
+          if(Mathf.chance(p % 1.0)) frag_attack.atk_lightning(unit, unit.team, Math.ceil(p_fi), r, off_r, Math.max(dmg * unit.damageMultiplier, 0.1), color, false);
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-lightning-core.name");
+        },
+
+
+      });
+
+      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_lightningCore));
+    };
+    exports.__lightningCore = __lightningCore;
   // End
 
 

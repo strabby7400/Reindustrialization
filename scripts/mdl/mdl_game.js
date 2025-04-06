@@ -57,7 +57,7 @@
         return vec2;
       };
 
-      if(pos_gn instanceof Bullet) return vec2.set(pos_gn.x, pos_gn.y); 
+      if(pos_gn instanceof Bullet) return vec2.set(pos_gn.x, pos_gn.y);
       if(pos_gn instanceof Puddle) return vec2.set(pos_gn.x, pos_gn.y);
 
       if(typeof pos_gn == "string") {
@@ -293,11 +293,9 @@
     /* <---------------- liTile ----------------> */
 
 
-    const pon2_55875521 = new Point2();
-    const li_70224930 = new Seq();
     const _liTileRot = function(t, rot, size) {
-      var pon2 = pon2_55875521.set(0, 0);
-      var li = li_70224930.clear();
+      var pon2 = new Point2();
+      var li = new Seq();
 
       if(rot == null) rot = 0;
       if(size == null) size = 1;
@@ -331,9 +329,8 @@
     exports._liTileRot = _liTileRot;
 
 
-    const li_26854444 = new Seq();
     const _liTileRot_2side = function(t, rot, size) {
-      var li = li_26854444.clear();
+      var li = new Seq();
 
       if(rot == null) rot = 0;
       if(size == null) size = 1;
@@ -347,9 +344,8 @@
     exports._liTileRot_2side = _liTileRot_2side;
 
 
-    const li_26885125 = new Seq();
     const _liTileEdge = function(t, size) {
-      var li = li_26885125.clear();
+      var li = new Seq();
 
       if(size == null) size = 1;
       if(t == null) return li;
@@ -367,9 +363,8 @@
     exports._liTileEdge = _liTileEdge;
 
 
-    const li_28885542 = new Seq();
     const _liTileEdgeIns = function(t, size) {
-      var li = li_28885542.clear();
+      var li = new Seq();
 
       if(size == null) size = 1;
       if(t == null) return li;
@@ -387,9 +382,8 @@
     exports._liTileEdgeIns = _liTileEdgeIns;
 
 
-    const li_87558861 = new Seq();
     const _liTileLinked = function(t) {
-      var li = li_87558861.clear();
+      var li = new Seq();
 
       if(t == null) return li;
 
@@ -400,9 +394,8 @@
     exports._liTileLinked = _liTileLinked;
 
 
-    const li_26268851 = new Seq();
     const _liTileRect = function(t, r, size) {
-      var li = li_26268851.clear();
+      var li = new Seq();
 
       if(r == null) r = 0;
       if(size == null) size = 1;
@@ -430,9 +423,8 @@
     exports._liTileRect = _liTileRect;
 
 
-    const li_77921834 = new Seq();
     const _liTileRectRot = function(t, r, rot, size) {
-      var li = li_77921834.clear();
+      var li = new Seq();
 
       if(r == null) r = 0;
       if(rot == null) rot = 0;
@@ -472,9 +464,8 @@
     exports._liTileRectRot = _liTileRectRot;
 
 
-    const li_76214589 = new Seq();
     const _liTileCircle = function(t, r, size) {
-      var li = li_76214589.clear();
+      var li = new Seq();
 
       if(r == null) r = 0;
       if(size == null) size = 1;

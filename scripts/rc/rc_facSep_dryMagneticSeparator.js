@@ -4,6 +4,7 @@ const gi = [
   "reind-gas-misc-air", 0.2,
 ];
 
+
 const rc = {
   "parent": "reind-fac-sep-dry-magnetic-separator",
 
@@ -115,39 +116,19 @@ const rc = {
     /* <---------------- iron ----------------> */
 
 
-    // Dust (Pyrite)
+    // Dust (Magnetite)
     {
-      "icon": "reind-item-int-dust-pyrite",
+      "icon": "reind-item-int-dust-magnetite",
       "category": "purification",
       "inputs": new Seq([
-        "reind-item-int-dust-pyrite", 8,
+        "reind-item-int-dust-magnetite", 8,
       ].concat(gi)),
       "outputs": new Seq([
-        "reind-item-int-dust-p1-pyrite", 4,
+        "reind-item-int-dust-p1-magnetite", 4,
         "reind-item-was-gangue", 4,
       ]),
       "randOutputs": new Seq([
         "reind-item-ore-raw-coal", 4, 0.5,
-      ]),
-    },
-
-
-    /* <---------------- lead ----------------> */
-
-
-    // Dust (Galena)
-    {
-      "icon": "reind-item-int-dust-galena",
-      "category": "purification",
-      "inputs": new Seq([
-        "reind-item-int-dust-galena", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
-        "reind-item-int-dust-p1-galena", 4,
-        "reind-item-was-gangue", 4,
-      ]),
-      "randOutputs": new Seq([
-        "reind-item-ore-pyrite", 4, 0.5,
       ]),
     },
 

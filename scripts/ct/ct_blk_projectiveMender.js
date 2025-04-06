@@ -31,13 +31,12 @@
     defProj_basicRepairProjector.buildType = () => extend(RegenProjector.RegenProjectorBuild, defProj_basicRepairProjector, {
       needCheck: true,
       r: 5,
-      units: new Seq(), repairMap: new ObjectMap(),
+      prog: 0.0, builds: new Seq(), units: new Seq(), repairMap: new ObjectMap(),
       updateTile() {
-        this.super$updateTile();
         TEMPLATE.updateTile(this);
       },
       shouldConsume() {
-        return this.anyTargets || this.units.size > 0;
+        return TEMPLATE.shouldConsume(this);
       },
       draw() {
         this.super$draw();

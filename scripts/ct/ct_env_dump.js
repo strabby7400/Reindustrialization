@@ -66,6 +66,18 @@
     exports.envDump_sand = envDump_sand;
 
 
+    const envDump_sandCaustic = extend(TallBlock, "env-dump-sand-caustic", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      drawBase(tile) {
+        TEMPLATE.drawBase(this, tile);
+      },
+    });
+    exports.envDump_sandCaustic = envDump_sandCaustic;
+
+
     const envDump_sandDark = extend(TallBlock, "env-dump-sand-dark", {
       setStats() {
         this.super$setStats();

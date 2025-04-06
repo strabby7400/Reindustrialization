@@ -89,9 +89,7 @@
 
       var cap = batch.size;
       if(cap == 0) return false;
-      for(let i = 0; i < cap; i++) {
-        if(i % 3 != 0) continue;
-
+      for(let i = 0; i < cap; i += 3) {
         var itm = mdl_content._ct_gn(batch.get(i));
         var amt = batch.get(i + 1);
         var p = batch.get(i + 2);

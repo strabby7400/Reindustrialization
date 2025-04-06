@@ -29,6 +29,7 @@
       },
     });
     bliqCond_woodenFluidPipe.buildType = () => extend(Conduit.ConduitBuild, bliqCond_woodenFluidPipe, {
+      timerEffc: new Interval(1), tmpRate: 0.0,
       // Specific
       updateTile() {
         this.super$updateTile();
@@ -62,6 +63,7 @@
       },
     });
     bliqCond_bronzeFluidPipe.buildType = () => extend(Conduit.ConduitBuild, bliqCond_bronzeFluidPipe, {
+      timerEffc: new Interval(1), tmpRate: 0.0,
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);
@@ -93,6 +95,7 @@
       },
     });
     bliqCond_steelFluidPipe.buildType = () => extend(ArmoredConduit.ArmoredConduitBuild, bliqCond_steelFluidPipe, {
+      timerEffc: new Interval(1), tmpRate: 0.0,
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);
@@ -124,6 +127,7 @@
       },
     });
     bliqCond_temperedGlassFluidPipe.buildType = () => extend(Conduit.ConduitBuild, bliqCond_temperedGlassFluidPipe, {
+      timerEffc: new Interval(1), tmpRate: 0.0,
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);

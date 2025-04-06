@@ -31,6 +31,7 @@
 
   // Part: Methods
     var needCheck = false;
+    const timerCall = new Interval(1);
     function update_sector() {
       var sector = Vars.state.sector;
 
@@ -40,7 +41,7 @@
         needCheck = false;
       };
 
-      if(sector != null) {
+      if(sector != null && timerCall.get(120.0)) {
         var id = sector.id;
         var pla = Vars.state.planet.name;
         var li_we = null;

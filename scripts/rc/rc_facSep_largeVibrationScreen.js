@@ -1,3 +1,6 @@
+const mdl_effect = require("reind/mdl/mdl_effect");
+
+
 const rc = {
   "parent": "reind-fac-sep-large-vibration-screen",
 
@@ -28,7 +31,10 @@ const rc = {
       ]),
       "tooltip": "overdriven",
       "craftScript": function() {
-        this.damage(this.maxHealth * 0.0225);
+        var dmg = this.maxHealth * 0.0225;
+        this.damagePierce(dmg);
+        mdl_effect.damageAt(this, dmg);
+        mdl_effect.flashAt(this);
       },
     },
 

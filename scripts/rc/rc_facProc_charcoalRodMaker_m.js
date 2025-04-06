@@ -2,6 +2,7 @@ const gi = [
   "reind-effc-link-charcoal-rod-maker-r1", 0.01666667,
 ];
 
+
 const rc = {
   "parent": "reind-fac-proc-charcoal-rod-maker-m",
 

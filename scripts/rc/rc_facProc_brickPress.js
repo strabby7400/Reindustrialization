@@ -2,10 +2,10 @@ const gi = [
   "reind-effc-effc-pump", 0.01666667,
   "reind-liq-ore-water", 0.15,
 ];
-
 const go = [
   "reind-liq-was-waste-slurry", 0.15,
 ];
+
 
 const rc = {
   "parent": "reind-fac-proc-brick-press",

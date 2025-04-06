@@ -96,6 +96,19 @@
 
 
       {
+        type: DrawParticles
+        color: bfbfbf
+        alpha: 0.6
+        particles: 15
+        particleLife: 90.0
+        particleRad: 8.0
+        particleSize: 3.0
+        rotateScl: 3.0
+        reverse: true
+      }
+
+
+      {
         type: DrawGlowRegion
         color: ff3838
         suffix: "-glow"

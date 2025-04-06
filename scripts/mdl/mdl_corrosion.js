@@ -42,9 +42,7 @@
       var arr = arr_fGrp;
       var cap = arr.length;
 
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         if(obj["group"][arr[i]].contains(nm)) {
           val = arr[i];
           break;
@@ -63,9 +61,7 @@
       var arr = arr_fGrp;
       var cap = arr.length;
 
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         if(grp == arr[i]) {
           val = Core.bundle.get("term.reind-term-" + arr[i + 1] + ".name");
           break;
@@ -86,9 +82,14 @@
     const arr_matGrp = [
       "wood", "wood",
       "copper", "copper",
+      "lead", "lead",
+      "iron", "iron",
       "steel", "steel",
-      // TODO                 "stainlessSteel", "stainless-steel",
-      "glass", "glass,"
+      "galvanizedSteel", "galvanized-steel",
+      "stainlessSteel", "stainless-steel",
+      "glass", "glass",
+      "cement", "cement",
+      "rubber", "rubber",
     ];
 
 
@@ -99,9 +100,7 @@
       var arr = arr_matGrp;
       var cap = arr.length;
 
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         if(obj["group"][arr[i]].contains(nm)) {
           val = arr[i];
           break;
@@ -120,9 +119,7 @@
       var arr = arr_matGrp;
       var cap = arr.length;
 
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         if(matGrp == arr[i]) {
           val = Core.bundle.get("term.reind-term-" + arr[i + 1] + ".name");
           break;
@@ -145,6 +142,8 @@
       "chloric", "chloric",
       "fluoric", "fluoric",
       "oxidative", "oxidative",
+      "dehydrative", "dehydrative",
+      "oil", "oil",
     ];
 
 
@@ -157,9 +156,7 @@
       var arr = arr_fTag;
       var cap = arr.length;
 
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         if(obj["fTag"][arr[i]].contains(nm)) {
           li.add(arr[i]);
           break;
@@ -178,9 +175,7 @@
       var arr = arr_fTag;
       var cap = arr.length;
 
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         if(tag == arr[i]) {
           val = Core.bundle.get("term.reind-term-" + arr[i + 1] + ".name");
           break;

@@ -25,13 +25,13 @@
       var reac = null;
 
       if(reac == null) reac = mdl_data.read_2n1v(db_item.db["reaction"]["map"], nm1, nm2);
-      if(reac == null && mdl_content.isAqueous(nm2)) reac = mdl_data.read_2n1v(db_item.db["reaction"]["map"], nm1, "ANY: Water");
+      if(reac == null && mdl_content.isAqueous(nm2)) reac = mdl_data.read_2n1v(db_item.db["reaction"]["map"], nm1, "ANY: water");
 
       if(reac == null) reac = mdl_data.read_2n1v(db_fluid.db["reaction"]["map"], nm1, nm2);
-      if(reac == null && mdl_content.isAqueous(nm2)) reac = mdl_data.read_2n1v(db_fluid.db["reaction"]["map"], nm1, "ANY: Water");
+      if(reac == null && mdl_content.isAqueous(nm2)) reac = mdl_data.read_2n1v(db_fluid.db["reaction"]["map"], nm1, "ANY: water");
 
       if(reac == null) reac = mdl_data.read_2n1v(db_fluid.db["reaction"]["map"], nm2, nm1);
-      if(reac == null && mdl_content.isAqueous(nm1)) reac = mdl_data.read_2n1v(db_fluid.db["reaction"]["map"], nm2, "ANY: Water");
+      if(reac == null && mdl_content.isAqueous(nm1)) reac = mdl_data.read_2n1v(db_fluid.db["reaction"]["map"], nm2, "ANY: water");
 
       return reac;
     };

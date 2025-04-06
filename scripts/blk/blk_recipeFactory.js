@@ -50,7 +50,7 @@
       var val_fi = 1.0;
 
       if(b.block.ignoreLiquidFullness) {
-        val_fi = b.edelta() / time / mdl_recipe._timeScale(rcFi, id_rc);
+        val_fi = b.edelta() / time / b.rcTimeScale;
       } else {
         var val = 1.0;
         var scl = 1.0;
@@ -59,9 +59,7 @@
         var cap = outputs.size;
         if(b.liquids != null && cap > 0) {
           val = 0.0;
-          for(let i = 0; i < cap; i++) {
-            if(i % 2 != 0) continue;
-
+          for(let i = 0; i < cap; i += 2) {
             var liq = Vars.content.liquid(outputs.get(i));
             if(liq == null) continue;
             var amt = outputs.get(i + 1);
@@ -73,7 +71,7 @@
         };
 
         if(!hasLiquidOutput) val = 1.0;
-        val_fi = b.edelta() / time * (b.block.dumpExtraLiquid ? Math.min(val, 1.0) : scl) / mdl_recipe._timeScale(rcFi, id_rc);
+        val_fi = b.edelta() / time * (b.block.dumpExtraLiquid ? Math.min(val, 1.0) : scl) / b.rcTimeScale;
       };
 
       return val_fi;
@@ -106,9 +104,11 @@
         b.param1 = 0.0;
         b.param2 = 0.0;
 
+        b.id_rc = mdl_data._config(b, 0);
+
         b.craftSound = mdl_data.read_1n1v(db_block.db["param"]["sound"]["craft"], b.block.name, null);
 
-        b.timeScale = mdl_recipe._timeScale(b.rcFi, b.id_rc);
+        b.rcTimeScale = mdl_recipe._timeScale(b.rcFi, b.id_rc);
         b.ci = frag_recipe._ci(b.rcFi, b.id_rc);
         b.bi = frag_recipe._bi(b.rcFi, b.id_rc);
         b.opt = frag_recipe._opt(b.rcFi, b.id_rc);
@@ -174,8 +174,8 @@
           };
         };
 
-        frag_recipe.addLiquids(b, b.co, b.progInc1, b.timeScale);
-        frag_recipe.consumeLiquids(b, b.ci, b.progInc1, b.timeScale);
+        frag_recipe.addLiquids(b, b.co, b.progInc1, b.rcTimeScale);
+        frag_recipe.consumeLiquids(b, b.ci, b.progInc1, b.rcTimeScale);
 
         mdl_effect.showAroundP(b.block.updateEffectChance, b, b.block.updateEffect, b.block.size * Vars.tilesize * 0.5, 0.0);
 

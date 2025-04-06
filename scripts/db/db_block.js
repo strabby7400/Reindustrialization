@@ -84,7 +84,9 @@ const db = {
 
         /* <---------------- min-crop ----------------> */
 
+        "reind-min-crop-aerth-small-shiitake", 1,
         "reind-min-crop-ink-corn", 1,
+        "reind-min-crop-thorium-reactor-mine", 2,
 
         /* <---------------- pow-gen ----------------> */
 
@@ -98,10 +100,6 @@ const db = {
         /* <---------------- def-proj ----------------> */
 
         "reind-def-proj-basic-repair-projector", 8,
-
-        /* <---------------- fac-sep ----------------> */
-
-        "reind-fac-sep-dry-magnetic-separator", 2,
 
       ]),
 
@@ -123,6 +121,19 @@ const db = {
         "reind-map-fac-ids-trade-dock-rim-builder", 80.0,
 
       ]),
+
+
+      "magnetic": new Seq([
+
+        /* <---------------- dis-mdr ----------------> */
+
+        "reind-dis-mdr-standard-mass-driver", 3,
+
+        /* <---------------- fac-sep ----------------> */
+
+        "reind-fac-sep-dry-magnetic-separator", 2,
+
+      ])
 
 
     },
@@ -168,10 +179,25 @@ const db = {
 
       "craft": new Seq([
 
+        /* <---------------- fac-heat ----------------> */
+
+        "reind-fac-heat-furnace-heater", "se-craft-gas-release",
+
         /* <---------------- fac-furn ----------------> */
 
-        "reind-fac-furn-colossal-kiln", "se-craft-gas-release",
+        "reind-fac-furn-carbonization-kiln", "se-craft-gas-release",
+        "reind-fac-furn-primitive-brick-kiln", "se-craft-gas-release",
+        "reind-fac-furn-electrode-smelter", "se-craft-gas-release",
+        "reind-fac-furn-kiln", "se-craft-gas-release",
+        "reind-fac-furn-bloomery", "se-craft-gas-release",
         "reind-fac-furn-bricked-blast-furnace", "se-craft-gas-release",
+        "reind-fac-furn-primitive-sintering-furnace", "se-craft-gas-release",
+        "reind-fac-furn-colossal-kiln", "se-craft-gas-release",
+        "reind-fac-furn-primitive-coke-oven", "se-craft-gas-release",
+
+        /* <---------------- fac-proc ----------------> */
+
+        "reind-fac-proc-charcoal-rod-maker-m", "se-craft-gas-release",
 
         /* <---------------- map-fac ----------------> */
 
@@ -389,6 +415,17 @@ const db = {
       /* <---------------- pow-econd ----------------> */
 
       "reind-pow-econd-transmission-box", "reind-effc-cond-torque",
+
+    ]),
+
+
+    "diameter": new Seq([
+
+      /* <---------------- bliq-cond ----------------> */
+
+      "reind-bliq-cond-wooden-fluid-pipe", 0.75,
+      "reind-bliq-cond-steel-fluid-pipe", 1.25,
+      "reind-bliq-cond-tempered-glass-fluid-pipe", 0.75,
 
     ]),
 
@@ -624,9 +661,14 @@ const db = {
       "base": new Seq([
         "wood", 1.0,
         "copper", 1.5,
+        "lead", 1.5,
+        "iron", 1.5,
         "steel", 2.0,
+        "galvanizedSteel", 4.0,
         "stainlessSteel", 6.0,
         "glass", 10.0,
+        "cement", 3.0,
+        "rubber", 8.0,
       ]),
 
 
@@ -647,6 +689,19 @@ const db = {
 
     },
 
+
+    "roughness": new Seq([
+      "wood", 0.7,
+      "copper", 0.02,
+      "lead", 0.04,
+      "iron", 0.5,
+      "steel", 0.25,
+      "galvanizedSteel", 0.25,
+      "stainlessSteel", 0.25,
+      "glass", 0.01,
+      "cement", 0.4,
+      "rubber", 0.02,
+    ]),
 
 
   },
@@ -692,6 +747,12 @@ const db = {
     ]),
 
 
+    "lead": new Seq(),
+
+
+    "iron": new Seq(),
+
+
     "steel": new Seq([
 
       /* <---------------- bliq-pump ----------------> */
@@ -714,11 +775,47 @@ const db = {
     ]),
 
 
+    "galvanizedSteel": new Seq(),
+
+
+    "stainlessSteel": new Seq(),
+
+
     "glass": new Seq([
 
       /* <---------------- bliq-cond ----------------> */
 
       "reind-bliq-cond-tempered-glass-fluid-pipe",
+
+    ]),
+
+
+    "cement": new Seq(),
+
+
+    "rubber": new Seq(),
+
+
+    "magnetic": new Seq([
+
+      /* <---------------- dis-mdr ----------------> */
+
+      "reind-dis-mdr-local-mass-driver",
+      "reind-dis-mdr-standard-mass-driver",
+
+      /* <---------------- pow-gen ----------------> */
+
+      "reind-pow-gen-core-generator",
+      "reind-pow-gen-energizer-generator",
+      "reind-pow-gen-lodestone-turbine-generator",
+
+      /* <---------------- pow-turb ----------------> */
+
+      "reind-pow-turb-basic-electric-motor",
+
+      /* <---------------- fac-sep ----------------> */
+
+      "reind-fac-sep-dry-magnetic-separator",
 
     ]),
 

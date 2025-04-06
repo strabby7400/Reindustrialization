@@ -1,6 +1,10 @@
+const mdl_effect = require("reind/mdl/mdl_effect");
+
+
 const gi = [
   "reind-effc-cond-pressure", 0.01666667,
 ];
+
 
 const rc = {
   "parent": "reind-fac-sep-high-pressure-cyclone-separator",
@@ -34,7 +38,10 @@ const rc = {
       ]),
       "tooltip": "overdriven",
       "craftScript": function() {
-        this.damage(this.maxHealth * 0.0225);
+        var dmg = this.maxHealth * 0.0225;
+        this.damagePierce(dmg);
+        mdl_effect.damageAt(this, dmg);
+        mdl_effect.flashAt(this);
       },
     },
 

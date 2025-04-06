@@ -3,12 +3,10 @@ const gi = [
   "reind-effc-effc-bf-fuel", 0.03333333,
   "reind-gas-misc-air", 0.4,
 ];
-
-
 const opt = [
   "reind-item-chem-coal", 150, 0.5, 1.0,
-  "reind-item-chem-semicoke", 120, 0.5, 1.0,
-  "reind-item-chem-coke", 90, 0.5, 1.0,
+  "reind-item-chem-semicoke", 90, 0.5, 1.0,
+  "reind-item-chem-coke", 60, 0.5, 1.0,
 ]
 
 
@@ -84,12 +82,12 @@ const rc = {
       "icon": "reind-item-int-concentrate-malachite",
       "category": "smelting",
       "inputs": new Seq([
-        "reind-item-int-concentrate-malachite", 120,
+        "reind-item-int-concentrate-malachite", 90,
       ].concat(gi)),
       "optInputs": new Seq([].concat(opt)),
       "requireOptional": true,
       "outputs": new Seq([
-        "reind-item-chem-copper", 240,
+        "reind-item-chem-copper", 195,
       ]),
     },
 
@@ -98,11 +96,39 @@ const rc = {
 
 
     // Pig Iron : Concentrate (Hematite)
-    // TODO
+    {
+      "icon": "reind-item-int-concentrate-hematite",
+      "category": "smelting",
+      "inputs": new Seq([
+        "reind-item-int-concentrate-hematite", 90,
+      ].concat(gi)),
+      "optInputs": new Seq([].concat(opt)),
+      "requireOptional": true,
+      "outputs": new Seq([
+        "reind-item-chem-pig-iron", 195,
+      ]),
+      "randOutputs": new Seq([
+        "reind-item-was-slag", 180, 0.5,
+      ]),
+    },
 
 
     // Pig Iron : Concentrate (Magnetite)
-    // TODO
+    {
+      "icon": "reind-item-int-concentrate-magnetite",
+      "category": "smelting",
+      "inputs": new Seq([
+        "reind-item-int-concentrate-magnetite", 90,
+      ].concat(gi)),
+      "optInputs": new Seq([].concat(opt)),
+      "requireOptional": true,
+      "outputs": new Seq([
+        "reind-item-chem-pig-iron", 195,
+      ]),
+      "randOutputs": new Seq([
+        "reind-item-was-slag", 180, 0.5,
+      ]),
+    },
 
 
     /* <---------------- lead ----------------> */
@@ -113,12 +139,12 @@ const rc = {
       "icon": "reind-item-int-concentrate-galena",
       "category": "smelting",
       "inputs": new Seq([
-        "reind-item-int-concentrate-galena", 120,
+        "reind-item-int-concentrate-galena", 90,
       ].concat(gi)),
       "optInputs": new Seq([].concat(opt)),
       "requireOptional": true,
       "outputs": new Seq([
-        "reind-item-chem-lead", 180,
+        "reind-item-chem-lead", 130,
       ]),
     },
 

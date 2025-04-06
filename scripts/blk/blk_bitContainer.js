@@ -7,6 +7,8 @@
 
   // Part: Import
     const PARENT = require("reind/blk/blk_container");
+
+    const mdl_content = require("reind/mdl/mdl_content");
   // End
 
 

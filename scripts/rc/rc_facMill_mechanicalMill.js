@@ -2,10 +2,10 @@ const gi = [
   "reind-effc-cond-torque", 0.025,
   "reind-liq-ore-water", 0.1,
 ];
-
 const go = [
   "reind-liq-was-waste-slurry", 0.1,
 ];
+
 
 const rc = {
   "parent": "reind-fac-mill-mechanical-mill",

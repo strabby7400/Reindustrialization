@@ -24,6 +24,7 @@
 
 
     const envTree_shellTree = extend(TreeBlock, "env-tree-shell-tree", {
+      armor: 72.16,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -36,6 +37,7 @@
 
 
     const envTree_darkCrabTree = extend(TreeBlock, "env-tree-dark-crab-tree", {
+      armor: 78.88,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -51,6 +53,7 @@
 
 
     const envTree_campfireTree = extend(TreeBlock, "env-tree-campfire-tree", {
+      armor: 79.72,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -66,6 +69,7 @@
 
 
     const envTree_duneShield = extend(TreeBlock, "env-tree-dune-shield", {
+      armor: 72.1,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -78,6 +82,7 @@
 
 
     const envTree_depthSeeker = extend(TreeBlock, "env-tree-depth-seeker", {
+      armor: 78.75,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -93,6 +98,7 @@
 
 
     const envTree_brownSnake = extend(TreeBlock, "env-tree-brown-snake", {
+      armor: 72.15,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -105,6 +111,7 @@
 
 
     const envTree_bleeder = extend(TreeBlock, "env-tree-bleeder", {
+      armor: 77.62,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -117,6 +124,7 @@
 
 
     const envTree_umbrellaTree = extend(TreeBlock, "env-tree-umbrella-tree", {
+      armor: 78.8,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -132,6 +140,7 @@
 
 
     const envTree_greenScale = extend(TreeBlock, "env-tree-green-scale", {
+      armor: 72.2,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -144,6 +153,7 @@
 
 
     const envTree_aerthCyst = extend(TreeBlock, "env-tree-aerth-cyst", {
+      armor: 78.05,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -156,6 +166,7 @@
 
 
     const envTree_marshCloud = extend(TreeBlock, "env-tree-marsh-cloud", {
+      armor: 78.1,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -168,6 +179,7 @@
 
 
     const envTree_redRoot = extend(TreeBlock, "env-tree-red-root", {
+      armor: 78.91,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -180,6 +192,7 @@
 
 
     const envTree_saladTree = extend(TreeBlock, "env-tree-salad-tree", {
+      armor: 79.1,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -193,6 +206,7 @@
 
     // Aquatic
     const envTree_aquaticCloud = extend(TreeBlock, "env-tree-aquatic-cloud", {
+      armor: 78.32,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -208,6 +222,7 @@
 
 
     const envTree_cyanofall = extend(TreeBlock, "env-tree-cyanofall", {
+      armor: 72.14,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -220,6 +235,7 @@
 
 
     const envTree_algasus = extend(TreeBlock, "env-tree-algasus", {
+      armor: 78.4,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -232,6 +248,7 @@
 
 
     const envTree_zenith = extend(TreeBlock, "env-tree-zenith", {
+      armor: 79.4,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -248,6 +265,7 @@
 
     // Dump
     const envTree_cliffsider = extend(TreeBlock, "env-tree-cliffsider", {
+      armor: 72.3,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -261,6 +279,7 @@
 
     // Dump (Sea)
     const envTree_nester = extend(TreeBlock, "env-tree-nester", {
+      armor: 78.13,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -273,6 +292,7 @@
 
 
     const envTree_elderGemTree = extend(TreeBlock, "env-tree-elder-gem-tree", {
+      armor: 78.87,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -292,6 +312,7 @@
 
 
     const envTree_bush_rockFern = extend(TreeBlock, "env-tree-bush-rock-fern", {
+      armor: 71.88,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -311,6 +332,7 @@
 
 
     const envTree_fungi_aerthShiitake = extend(TreeBlock, "env-tree-fungi-aerth-shiitake", {
+      armor: 72.13,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -323,6 +345,7 @@
 
 
     const envTree_fungi_wormMushroom = extend(TreeBlock, "env-tree-fungi-worm-mushroom", {
+      armor: 77.2,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -338,6 +361,7 @@
 
 
     const envTree_fungi_blueSpark = extend(TreeBlock, "env-tree-fungi-blue-spark", {
+      armor: 77.1,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -350,6 +374,7 @@
 
 
     const envTree_fungi_ghostsEye = extend(TreeBlock, "env-tree-fungi-ghosts-eye", {
+      armor: 77.86,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -362,6 +387,7 @@
 
 
     const envTree_fungi_dottedRedUmbrella = extend(TreeBlock, "env-tree-fungi-dotted-red-umbrella", {
+      armor: 77.93,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -377,6 +403,7 @@
 
 
     const envTree_fungi_parasiticAntenna = extend(TreeBlock, "env-tree-fungi-parasitic-antenna", {
+      armor: 80.5,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -392,6 +419,7 @@
 
 
     const envTree_fungi_aquaticNightmare = extend(TreeBlock, "env-tree-fungi-aquatic-nightmare", {
+      armor: 78.12,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -404,6 +432,7 @@
 
 
     const envTree_fungi_jellyfishCrown = extend(TreeBlock, "env-tree-fungi-jellyfish-crown", {
+      armor: 79.85,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);

@@ -1,0 +1,86 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Wall
+  category: defense
+  requirements: [
+    item-bio-timber/5
+  ]
+  buildCostMultiplier: 2.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: def-wall-wooden-barricade
+    objectives: []
+  }
+  researchCostMultiplier: 5.0
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 0.0
+  size: 1
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  flashHit: true
+  flashColor: ffffff
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  solid: false
+  underBullets: true
+  update: true
+  lightningChance: -1.0
+  lightningDamage: 20.0
+  lightningLength: 17
+  lightningColor: ffd37f
+  lightningSound: spark
+  chanceDeflect: -1.0
+  deflectSound: none

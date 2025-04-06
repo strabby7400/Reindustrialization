@@ -41,9 +41,7 @@
           var li = cropYield;
           var cap = li.size;
           if(cap == 0) return;
-          for(let i = 0; i < cap; i++) {
-            if(i % 4 != 0) continue;
-
+          for(let i = 0; i < cap; i += 4) {
             var stage = li.get(i);
             var backTo = li.get(i + 1);
             var batch = li.get(i + 2);
@@ -68,6 +66,7 @@
     function setStatsComp(blk) {
       frag_faci.setStats_flammable(blk);
       frag_faci.setStats_terrain(blk, blk.ter, "enable");
+      frag_faci.setStats_restrict(blk);
 
       var tup = frag_faci._cropTuple(blk);
       if(tup != null) {
@@ -100,9 +99,7 @@
       if(b.timerCall.get(90.0)) {
         var cap = b.stageScr.size;
         if(cap > 0) {
-          for(let i = 0; i < cap; i++) {
-            if(i % 2 != 0) continue;
-
+          for(let i = 0; i < cap; i += 2) {
             var stage = b.stageScr.get(i);
             if(b.growStage != stage) continue;
             var scr = b.stageScr.get(i + 1);
@@ -124,9 +121,7 @@
     function canPlaceOnComp(blk, t, team, rot, ter) {
       if(!frag_faci.canPlaceOn_terrain(blk, blk.ter, "enable", t, team, rot, 2)) return false;
       if(frag_faci.sumGrowthEffc(blk, t) < 0.0001) return false;
-
-      var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 1);
-      if(!frag_faci.canPlaceOn_restrict(blk, t, team, rot, r)) return false;
+      if(!frag_faci.canPlaceOn_restrict(blk, t, team, rot)) return false;
 
       return true;
     };
@@ -205,8 +200,8 @@
       var offSha = (b.growStage == 1) ? -0.5 : -1.5;
       var pos_sha = mdl_game._pos(b.tile, b.block.offset + offSha);
       var ang = (b.growStage == 1) ? 0.0 : Mathf.randomSeed(b.pos(), 0, 4) * 90.0;
-      var wobbleScl = (b.growStage == 1) ? 0.0 : 1.0;
-      var z = (b.growStage < 3) ? 12.2 : 72.102;
+      var wobbleScl = (b.growStage == b.growStages) ? 1.0 : ((b.growStage - 1) / b.growStages);
+      var z = (b.growStage < 3 && b.growStage != 0) ? 12.2 : 72.102;
       var z_sha = z - 0.0005;
 
       mdl_draw.drawBlurredShadow(pos_sha, reg, ang, 1.0, 1.05, Color.white, z_sha);

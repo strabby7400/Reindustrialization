@@ -41,24 +41,29 @@
         b.updateTargets();
       };
 
+      b.builds.clear();
+      b.targets.each(ob => {if(ob.damaged() && !ob.isHealSuppressed() && !b.builds.contains(ob)) b.builds.add(ob)});
+
       b.units.clear();
       mdl_game._liUnitAllied(b, b.r * Vars.tilesize).each(unit => {if(unit.damaged() && !b.units.contains(unit)) b.units.add(unit)});
 
       b.warmup = Mathf.approachDelta(b.warmup, b.didRegen ? 1.0 : 0.0, 1.0 / 120.0);
       b.totalTime += b.warmup * Time.delta;
       b.didRegen = false;
-      b.anyTargets = false;
 
       if(b.checkSuppression()) return;
 
       if(b.efficiency > 0.0) {
-        if((b.optionalTimer += Time.delta * b.optionalEfficiency) > b.block.optionalUseTime - 0.0001) {
+        b.prog += Time.delta * b.optionalEfficiency;
+        if(b.prog - b.block.optionalUseTime > -0.0001) {
           b.consume();
-          b.optionalTimer = 0.0;
+          print("consume time!")
+          b.prog %= 1.0;
         };
 
         var amt = Mathf.lerp(1.0, b.block.optionalMultiplier, b.optionalEfficiency) * b.block.healPercent;
-        b.targets.each(ob => {
+
+        b.builds.each(ob => {
           if(ob.damaged() && !ob.isHealSuppressed()) {
             b.didRegen = true;
 
@@ -94,6 +99,11 @@
         });
         b.repairMap.clear();
       };
+    };
+
+
+    function shouldConsumeComp(b) {
+      return b.enabled && (b.builds.size > 0 || b.units.size > 0);
     };
 
 
@@ -138,6 +148,12 @@
       updateTileComp(b);
     };
     exports.updateTile = updateTile;
+
+
+    const shouldConsume = function(b) {
+      return shouldConsumeComp(b);
+    };
+    exports.shouldConsume = shouldConsume;
 
 
     const drawPlace = function(blk, tx, ty, rot, valid) {

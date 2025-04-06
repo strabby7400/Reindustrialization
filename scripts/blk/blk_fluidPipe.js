@@ -7,6 +7,21 @@
 
   // Part: Import
     const PARENT = require("reind/blk/blk_genericLiquidDistributionBlock");
+
+    const mdl_flow = require("reind/mdl/mdl_flow");
+
+    const db_stat = require("reind/db/db_stat");
+  // End
+
+
+  // Part: Component
+    function setStatsComp(blk) {
+      var pipeDm = mdl_flow._pipeDm(blk);
+      blk.stats.add(db_stat.pipeDiameter, pipeDm);
+
+      var rough = mdl_flow._rough(blk);
+      blk.stats.add(db_stat.pipeRoughness, rough);
+    };
   // End
 
 
@@ -20,6 +35,8 @@
   // Part: Integration
     const setStats = function(blk) {
       PARENT.setStats(blk);
+
+      setStatsComp(blk);
     };
     exports.setStats = setStats;
 

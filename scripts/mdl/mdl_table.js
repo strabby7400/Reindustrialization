@@ -153,14 +153,18 @@
     exports.setHeadline = setHeadline;
 
 
-    const setNoteStat = function(tb, str) {
+    const setNoteStat = function(tb, str, order, padLeft) {
+      if(order == null) order = 1;
+      if(padLeft == null) padLeft = 0.0;
+      if(tb == null || str == null) return;
+
       tb.row();
 
       tb.table(Tex.whiteui, tb1 => {
         tb1.center().setColor(Pal.darkestGray);
         __margin(tb1);
 
-        __wrapLine(tb1, str, Align.center, 1, 48.0);
+        __wrapLine(tb1, str, Align.center, order, padLeft);
       }).padTop(8.0).padBottom(8.0).growX().row();
     };
     exports.setNoteStat = setNoteStat;
@@ -233,9 +237,7 @@
       tb.table(Styles.none, tb1 => {
         __margin(tb1, 0.5);
 
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           var itm = mdl_content._ct_gn(batch.get(i));
           var amt = batch.get(i + 1);
           var p = batch.get(i + 2);

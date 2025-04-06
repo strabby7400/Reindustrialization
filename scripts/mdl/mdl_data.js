@@ -30,9 +30,7 @@
       var val = null;
       var cap = li_tg.size;
       if(cap == 0) return val;
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         if(li_tg.get(i) == nm) val = li_tg.get(i + 1);
       };
 
@@ -46,9 +44,7 @@
       var dup = false;
       var cap = li_tg.size;
       if(cap > 0) {
-        for(let i = 0; i < cap; i++) {
-          if(i % 3 != 0) continue;
-
+        for(let i = 0; i < cap; i += 3) {
           if(li_tg.get(i) == nm1 && li_tg.get(i + 1) == nm2) dup = true;
         };
       };
@@ -63,9 +59,7 @@
       var val = null;
       var cap = li_tg.size;
       if(cap == 0) return val;
-      for(let i = 0; i < cap; i++) {
-        if(i % 3 != 0) continue;
-
+      for(let i = 0; i < cap; i += 3) {
         if(li_tg.get(i) == nm1 && li_tg.get(i + 1) == nm2) val = li_tg.get(i + 2);
       };
 
@@ -91,9 +85,7 @@
     const writeli_1n1v = function(li_tg, li_val) {
       var cap = li_val.size;
       if(cap == 0) return;
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         write_1n1v(li_tg, li_val.get(i), li_val.get(i + 1));
       };
     };
@@ -106,9 +98,7 @@
 
       var cap = li_tg.size;
       if(cap == 0) return li;
-      for(let i = 0; i < cap; i++) {
-        if(i % 2 != 0) continue;
-
+      for(let i = 0; i < cap; i += 2) {
         if(li_tg.get(i) == nm) li.add(li_tg.get(i + 1));
       };
 
@@ -122,9 +112,7 @@
 
       var cap = li_val.size;
       if(cap == 0) return;
-      for(let i = 0; i < cap; i++) {
-        if(i % 3 != 0) continue;
-
+      for(let i = 0; i < cap; i += 3) {
         write_2n1v(li_tg, li_val.get(i), li_val.get(i + 1), li_val.get(i + 2));
       };
     };
@@ -137,9 +125,7 @@
 
       var cap = li_tg.size;
       if(cap == 0) return li;
-      for(let i = 0; i < cap; i++) {
-        if(i % 3 != 0) continue;
-
+      for(let i = 0; i < cap; i += 3) {
         if(li_tg.get(i) == nm1 && li_tg.get(i + 1) == nm2) li.add(li_tg.get(i + 2));
       };
 
@@ -149,28 +135,54 @@
   // End
 
 
-  // Part: Handler
+  // Part: Config
+    const _config = function(blk_gn, ini) {
+      var cfg = null;
+      if(blk_gn instanceof Block) cfg = blk_gn.lastConfig;
+      if(blk_gn instanceof Building && blk_gn.config() != null) {
+        if(blk_gn.config() == ini) {
+          cfg = (blk_gn.modified ) ? ini : blk_gn.block.lastConfig;
+        } else {
+          cfg = blk_gn.config();
+        };
+      };
+
+      return (cfg == null) ? ini : cfg;
+    };
+    exports._config = _config;
+
+
     const handleConfigured = function(b, builder, val) {
       if(builder != null && builder.isPlayer()) b.lastAccessed = builder.getPlayer().coloredName();
       var val_fi = 0.0;
       var param = 0.0;
       var param1 = 0.0;
 
+      b.modified = true;
+
       if(val instanceof Vec2) {
         val_fi = val.x;
         param = val.y;
 
         return [val_fi, param, -2];
-      } else if(val instanceof Vec3) {
+      };
+
+      if(val instanceof Vec3) {
         val_fi = val.x;
         param = val.y;
         param1 = val.z;
 
         return [val_fi, param, param1];
-      } else if(val instanceof Building) {
+      };
+
+      if(val instanceof Building) {
         val_fi = val.config();
 
         if(val_fi != null && !(val_fi instanceof Building)) b.configured(builder, val_fi);
+      };
+
+      if(typeof val == "number") {
+        return [val, -2, -2];
       };
 
       return [-2, -2, -2];

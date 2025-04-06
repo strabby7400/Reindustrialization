@@ -2129,7 +2129,7 @@
     const _tradeDockFlare = function(color) {
       if(color == null) color = Color.valueOf("ffd37f");
 
-      return _flare(60.0, 2.0, 45.0, color);
+      return _flare(120.0, 3.0, 45.0, color);
     };
     exports._tradeDockFlare = _tradeDockFlare;
 

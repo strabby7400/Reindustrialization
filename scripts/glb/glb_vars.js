@@ -35,6 +35,9 @@
 
     const gas_explosionDamage = 2240.0;
     exports.gas_explosionDamage = gas_explosionDamage;
+
+    const flow_pipeDiameter = 100.0;
+    exports.flow_pipeDiameter = flow_pipeDiameter;
   // End
 
 

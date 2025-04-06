@@ -78,6 +78,16 @@
   // End
 
 
+  // Part: Timer
+    const timer_drawLightning = new Interval(1);
+
+
+    function update_drawState() {
+      exports.state_drawLightning = timer_drawLightning.get(30.0);
+    };
+  // End
+
+
   // Part: Suppressor
     var count_load = 0;
     const isSuppressed = function() {
@@ -122,6 +132,7 @@
 
     Events.run(Trigger.update, () => {
       update_noob();
+      update_drawState();
       update_suppressor();
       update_timeControl();
     });

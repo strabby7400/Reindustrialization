@@ -25,6 +25,7 @@
       },
     });
     bliqAux_fluidJunction.buildType = () => extend(LiquidJunction.LiquidJunctionBuild, bliqAux_fluidJunction, {
+      timerEffc: new Interval(1), tmpRate: 0.0,
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);

@@ -13,6 +13,14 @@
   // End
 
 
+  // Part: Sound Control
+    var muteSoundControl = false;
+    Events.run(Trigger.update, () => {
+      if(muteSoundControl) Vars.control.sound.stop();
+    });
+  // End
+
+
   // Part: Param
     const getSizePair = function(pad, cap, offW, offH) {
       if(pad == null) pad = 20.0;
@@ -240,7 +248,13 @@
 
       var tb = new Table();
 
-      tb.actions(Actions.delay(delay), Actions.run(() => song.play()), Actions.delay(time), Actions.run(() => song.stop()), Actions.remove());
+      tb.actions(Actions.delay(delay), Actions.run(() => {
+        muteSoundControl = true;
+        song.play();
+      }), Actions.delay(time), Actions.run(() => {
+        muteSoundControl = false;
+        song.stop();
+      }), Actions.remove());
       tb.pack();
       tb.act(0.1);
 

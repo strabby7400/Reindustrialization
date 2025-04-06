@@ -2,10 +2,10 @@ const gi = [
   "reind-effc-effc-vibration-screen", 0.01666667,
   "reind-liq-ore-water", 0.15,
 ];
-
 const go = [
   "reind-liq-was-waste-slurry", 0.15,
 ];
+
 
 const rc = {
   "parent": "reind-fac-mill-hammer-crusher",
@@ -60,6 +60,19 @@ const rc = {
     /* ========================================
       Section: Crushing
     ======================================== */
+
+
+    // Crude Sulfur
+    {
+      "icon": "reind-item-ore-barite",
+      "category": "crushing",
+      "inputs": new Seq([
+        "reind-item-ore-barite", 10,
+      ].concat(gi)),
+      "outputs": new Seq([
+        "reind-item-int-chunks-barite", 10,
+      ].concat(go)),
+    },
 
 
     // Crude Sulfur

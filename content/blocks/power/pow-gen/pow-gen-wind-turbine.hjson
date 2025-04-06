@@ -8,10 +8,11 @@
   # type: ThermalGenerator
   category: power
   requirements: [
-    item-chem-lead/60
-    item-chem-tin-bronze/45
-    item-chem-steel/20
-    item-ore-magnetite/30
+    item-chem-lead/160
+    item-chem-brass/120
+    item-chem-tin-bronze/100
+    item-chem-steel/80
+    item-ore-magnetite/60
   ]
   buildCostMultiplier: 2.0
 
@@ -27,7 +28,7 @@
     parent: pow-gen-core-generator
     objectives: []
   }
-  researchCostMultiplier: 0.2
+  researchCostMultiplier: 0.25
 
 
 /*
@@ -185,4 +186,4 @@
 
 
   attribute: reind-attr-env-wind
-  powerProduction: 2.0
+  powerProduction: 4.0

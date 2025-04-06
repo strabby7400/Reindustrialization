@@ -33,7 +33,8 @@
   // Part: Condition
     const includes_ex = function() {
       var nm_tg;
-      for(let i = 0; i < arguments.length; i++) {
+      var cap = arguments.length;
+      for(let i = 0; i < cap; i++) {
         if(i == 0) {
           nm_tg = arguments[i];
         } else {

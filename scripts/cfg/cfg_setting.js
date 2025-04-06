@@ -11,6 +11,7 @@
     const blk_recipeFactory = require("reind/blk/blk_recipeFactory");
     const blk_router = require("reind/blk/blk_router");
     const env_tree = require("reind/env/env_tree");
+    const rs_genericResource = require("reind/rs/rs_genericResource");
     const unit_genericUnit = require("reind/unit/unit_genericUnit");
 
     const cfg_update = require("reind/cfg/cfg_update");
@@ -34,12 +35,14 @@
 
       set_ldm(Core.settings.getBool("reind-ldm", false));
       set_p3dShadow(Core.settings.getBool("reind-p3d-shadow", true));
-      set_efficiencyUpdateInterval(Core.settings.getInt("reind-efficiency-update-interval", 4));
+      set_efficiencyUpdateInterval(Core.settings.getInt("reind-efficiency-update-interval", 3));
 
       set_coreTimeControl(Core.settings.getBool("reind-core-time-control", true));
 
       set_treeAlpha(Core.settings.getInt("reind-tree-alpha", 20));
       set_decalLifetime(Core.settings.getInt("reind-decal-lifetime", 60));
+      set_showIconTag(Core.settings.getBool("reind-show-icon-tag", true));
+      set_iconTagInterval(Core.settings.getInt("reind-icon-tag-interval", 1));
 
       set_secretCode(Core.settings.getString("reind-secret-code", "<ohno>"));
     };
@@ -82,7 +85,7 @@
 
 
     const set_efficiencyUpdateInterval = function(int) {
-      var val = int * 0.25 * 60.0;
+      var val = (int + 1) * 0.25 * 60.0;
 
       blk_impactDrill.set_efficiencyUpdateInterval(val);
       blk_recipeFactory.set_efficiencyUpdateInterval(val);
@@ -112,6 +115,22 @@
       mdl_effect.set_decalLifetime(val);
     };
     exports.set_decalLifetime = set_decalLifetime;
+
+
+    const set_showIconTag = function(bool) {
+      var val = bool;
+
+      rs_genericResource.set_showIconTag(val);
+    };
+    exports.set_showIconTag = set_showIconTag;
+
+
+    const set_iconTagInterval = function(int) {
+      var val = (int + 1) * 60.0 * 0.25;
+
+      rs_genericResource.set_iconTagInterval(val);
+    };
+    exports.set_iconTagInterval = set_iconTagInterval;
 
 
     const set_secretCode = function(str) {
