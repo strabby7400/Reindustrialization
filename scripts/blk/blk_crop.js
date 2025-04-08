@@ -38,16 +38,16 @@
           tb1.left().setColor(Pal.darkestGray);
           mdl_table.__margin(tb1);
 
-          var li = cropYield;
-          var cap = li.size;
+          var arr = cropYield;
+          var cap = arr.length;
           if(cap == 0) return;
           for(let i = 0; i < cap; i += 4) {
-            var stage = li.get(i);
-            var backTo = li.get(i + 1);
-            var batch = li.get(i + 2);
+            var stage = arr[i];
+            var backTo = arr[i + 1];
+            var batch = arr[i + 2];
 
-            tb1.add(mdl_text._statText(Core.bundle.get("term.reind-term-growth-stage.name"), stage)).left().row();
-            tb1.add(mdl_text._statText(Core.bundle.get("term.reind-term-growth-back-to.name"), backTo)).left().tooltip(Core.bundle.get("info.reind-info-growth-back-to.name")).row();
+            tb1.add(mdl_text._statText(mdl_text._term("growth-stage"), stage)).left().row();
+            tb1.add(mdl_text._statText(mdl_text._term("growth-back-to"), backTo)).left().tooltip(mdl_text._info("growth-back-to")).row();
             mdl_table.setBatchDisplay(tb1, batch);
 
             if(i != cap - 4) {
@@ -92,17 +92,17 @@
         b.needCheck = false;
       };
 
-      b.efficiency = b.growEffc;
-      b.growProg = Mathf.clamp(b.growProg + b.edelta() / b.growTime);
-      b.growStage = Mathf.floor(b.growProg * (b.growStages - 1)) + 1;
-
       if(b.timerCall.get(90.0)) {
+        b.efficiency = b.growEffc;
+        b.growProg = Mathf.clamp(b.growProg + b.edelta() / b.growTime * 90.0);
+        b.growStage = Mathf.floor(b.growProg * (b.growStages - 1)) + 1;
+
         var cap = b.stageScr.size;
         if(cap > 0) {
           for(let i = 0; i < cap; i += 2) {
-            var stage = b.stageScr.get(i);
+            var stage = b.stageScr[i];
             if(b.growStage != stage) continue;
-            var scr = b.stageScr.get(i + 1);
+            var scr = b.stageScr[i + 1];
 
             scr.call(b);
           };
@@ -132,7 +132,7 @@
 
       mdl_table.setTrigger(tb, function() {
         if(Vars.state.paused) {
-          mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-invalid-paused.name"));
+          mdl_ui.showInfoFade("invalid-paused");
         } else {
           var yieldTup = frag_faci._cropYieldTuple(b.cropYield, b.growStage);
 
@@ -140,10 +140,10 @@
             Call.tileConfig(Vars.player, b, vec2.set(1, -2));
             b.deselect();
           } else {
-            mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-crop-not-matured.name"));
+            mdl_ui.showInfoFade("crop-not-matured");
           };
         };
-      }, new TextureRegionDrawable(Core.atlas.find("reind-icon-harvest")), Core.bundle.get("info.reind-info-crop.name"), 36.0);
+      }, new TextureRegionDrawable(Core.atlas.find("reind-icon-harvest")), mdl_text._info("crop"), 36.0);
     };
 
 
@@ -162,6 +162,7 @@
         b.growEffc = 0.0;
 
         b.needCheck = true;
+        b.timerCall.reset(0, 90.0);
 
         harvestScr.call(b);
 
@@ -180,7 +181,7 @@
             mdl_unit.addItemBatch(unit_cont, batch);
             mdl_effect.itemTransfer(b, unit_cont)
           } else {
-            mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-crop-wasted.name"));
+            mdl_ui.showInfoFade("crop-wasted");
           };
         };
       };
@@ -190,7 +191,7 @@
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var t = Vars.world.tile(tx, ty);
       var growEffc = frag_faci.sumGrowthEffc(blk, t);
-      mdl_draw.drawPlaceText(blk, t, valid, Core.bundle.get("info.reind-info-growth-efficiency.name") + " " + Strings.fixed(growEffc * 100.0, 0) + "%", 1);
+      mdl_draw.drawPlaceText(blk, t, valid, mdl_text._info("growth-efficiency") + " " + Strings.fixed(growEffc * 100.0, 0) + "%", 1);
     };
 
 
@@ -213,7 +214,7 @@
       if(b.growProg < 0.9999) {
         mdl_draw.drawProgressCircle(b, b.growProg, mdl_game._radSize(b.block.size));
       } else {
-        mdl_draw.drawSelectText(b, true, Core.bundle.get("info.reind-info-crop-matured.name"), 1);
+        mdl_draw.drawSelectText(b, true, mdl_text._info("crop-matured"), 1);
       };
     };
     exports.drawSelectComp = drawSelectComp;

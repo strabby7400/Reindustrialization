@@ -17,9 +17,9 @@
 
 
   // Part: Auxiliary
-    function ax_buildStats(li_ct) {
+    function ax_buildStats(cts) {
       return function(tb) {
-        mdl_table.setContentRowDisplay(tb, li_ct, true);
+        mdl_table.setContentRowDisplay(tb, cts, true);
       };
     };
   // End
@@ -28,7 +28,10 @@
   // Part: Component
     function setStatsComp(blk) {
       blk.stats.remove(Stat.output);
-      blk.stats.add(Stat.output, ax_buildStats(blk.filter));
+
+      var arr = [];
+      blk.filter.each(i => arr.push(i));
+      blk.stats.add(Stat.output, ax_buildStats(arr));
     };
 
 

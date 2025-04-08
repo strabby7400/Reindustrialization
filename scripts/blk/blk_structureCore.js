@@ -18,6 +18,7 @@
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_table = require("reind/mdl/mdl_table");
+    const mdl_text = require("reind/mdl/mdl_text");
     const mdl_ui = require("reind/mdl/mdl_ui");
 
     const db_dialog = require("reind/db/db_dialog");
@@ -28,9 +29,9 @@
 
 
   // Part: Auxiliary
-    function ax_buildStats(li_ct) {
+    function ax_buildStats(cts) {
       return function(tb) {
-        mdl_table.setContentRowDisplay(tb, li_ct);
+        mdl_table.setContentRowDisplay(tb, cts);
       };
     };
   // End
@@ -67,11 +68,11 @@
 
       mdl_table.setTrigger(tb, function() {
         if(Vars.state.paused) {
-          mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-large-building-paused.name"));
+          mdl_ui.showInfoFade("large-building-paused");
         } else {
           if(frag_faci.isStructureComplete(b.tile, b.plan) && b.cd < 0.0001) Call.tileConfig(Vars.player, b, vec2.set(1, -2));
         };
-      }, Icon.hammer, Core.bundle.get("info.reind-info-large-building.name"), 72.0);
+      }, Icon.hammer, mdl_text._info("large-building"), 72.0);
     };
 
 
@@ -109,12 +110,12 @@
       var valid = false;
       var str = "";
       if(!cond1) {
-        str = Core.bundle.get("info.reind-info-structure-cooldown.name");
+        str = mdl_text._info("structure-cooldown");
       } else if(!cond2) {
-        str = Core.bundle.get("info.reind-info-structure-incomplete.name");
+        str = mdl_text._info("structure-incomplete");
       } else {
         valid = true;
-        str = Core.bundle.get("info.reind-info-structure-complete.name");
+        str = mdl_text._info("structure-complete");
       };
 
       mdl_draw.drawSelectText(b, valid, str);

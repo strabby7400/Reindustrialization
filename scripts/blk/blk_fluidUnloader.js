@@ -37,7 +37,7 @@
       if(liq != liq_sel) b.liquids.clear();
 
       b.moveLiquidForward(false, liq_sel);
-      var ot_f = mdl_game._tileRot("f", b.tile, b.rotation);
+      var ot_f = mdl_game._tRot("f", b.tile, b.rotation);
       if(ot_f != null) frag_fluid.transferLiquid(ot_f.build, b, liq_sel, true);
     };
 

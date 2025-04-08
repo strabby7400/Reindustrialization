@@ -54,10 +54,10 @@
       rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -133,10 +133,10 @@
       rcFi: require("reind/rc/rc_facHeat_furnaceHeater"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -221,10 +221,10 @@
       rcFi: require("reind/rc/rc_facAir_liquidRingPressurePump"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -306,10 +306,10 @@
       rcFi: require("reind/rc/rc_facFurn_carbonizationKiln"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -382,10 +382,10 @@
       rcFi: require("reind/rc/rc_facFurn_primitiveBrickKiln"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -458,10 +458,10 @@
       rcFi: require("reind/rc/rc_facFurn_electrodeMelter"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -537,10 +537,10 @@
       rcFi: require("reind/rc/rc_facFurn_kiln"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -613,10 +613,10 @@
       rcFi: require("reind/rc/rc_facFurn_bloomery"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -693,10 +693,10 @@
       rcFi: require("reind/rc/rc_facFurn_brickedBlastFurnace"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -772,10 +772,10 @@
       rcFi: require("reind/rc/rc_facFurn_primitiveSinteringFurnace"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -851,10 +851,10 @@
       rcFi: require("reind/rc/rc_facFurn_colossalKiln"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -930,10 +930,10 @@
       rcFi: require("reind/rc/rc_facFurn_primitiveCokeOven"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1015,10 +1015,10 @@
       rcFi: require("reind/rc/rc_facMill_jawCrusher"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1095,10 +1095,10 @@
       rcFi: require("reind/rc/rc_facMill_hammerCrusher"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1174,10 +1174,10 @@
       rcFi: require("reind/rc/rc_facMill_mechanicalMill"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1254,10 +1254,10 @@
       rcFi: require("reind/rc/rc_facMill_ballMill"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1339,10 +1339,10 @@
       rcFi: require("reind/rc/rc_facMix_vMixer"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1418,10 +1418,10 @@
       rcFi: require("reind/rc/rc_facMix_tankMixer"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1503,10 +1503,10 @@
       rcFi: require("reind/rc/rc_facProc_shredder"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1579,10 +1579,10 @@
       rcFi: require("reind/rc/rc_facProc_charcoalRodMaker_m"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1658,10 +1658,10 @@
       rcFi: require("reind/rc/rc_facProc_brickPress"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1743,10 +1743,10 @@
       rcFi: require("reind/rc/rc_facRmv_hotAirDryer"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1828,10 +1828,10 @@
       rcFi: require("reind/rc/rc_facSep_highPressureCycloneSeparator"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1908,10 +1908,10 @@
       rcFi: require("reind/rc/rc_facSep_largeVibrationScreen"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1998,10 +1998,10 @@
       rcFi: require("reind/rc/rc_facSep_dryMagneticSeparator"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       // Specific
       updateTile() {
         TEMPLATE.updateTile(this);
@@ -2078,10 +2078,10 @@
       rcFi: require("reind/rc/rc_facSep_mineralJig_m"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2163,10 +2163,10 @@
       rcFi: require("reind/rc/rc_facMisc_mechanicalCrank"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2243,10 +2243,10 @@
       rcFi: require("reind/rc/rc_facMisc_genericInlet"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2319,10 +2319,10 @@
       rcFi: require("reind/rc/rc_facMisc_fuelInlet"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2398,10 +2398,10 @@
       rcFi: require("reind/rc/rc_facMisc_coreCrafter"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2482,10 +2482,10 @@
       rcFi: require("reind/rc/rc_facMisc_manualCrafter"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2567,10 +2567,10 @@
       rcFi: require("reind/rc/rc_ilfacMisc_oreDictionaryConverter"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2652,10 +2652,10 @@
       rcFi: require("reind/rc/rc_ileffMisc_bitBank"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },

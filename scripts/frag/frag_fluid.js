@@ -63,17 +63,20 @@
 
 
     const update_puddleReaction = function(liq, puddle) {
+      if(Mathf.chance(0.9)) return;
+
       var t = puddle.tile;
-      mdl_game._liTileRect(t, 1).each(ot => {
+      mdl_game._tsRect(t, 1).forEach(ot => {
         var ob = ot.build;
         var op = Puddles.get(ot);
 
-        if(ob != null && ob.items != null && !(ob.block instanceof CoreBlock)) {
-          ob.items.each(itm => mdl_reaction.handleReaction(ob, itm, liq));
+        if(ob != null && !(ob.block instanceof CoreBlock)) {
+          if(ob.items != null) ob.items.each(itm => mdl_reaction.handleReaction(ob, itm, liq, 10.0));
+          if(ob.liquids != null) mdl_reaction.handleReaction(ob, ob.liquids.current(), liq, 10.0);
         };
 
         if(op != null) {
-          mdl_reaction.handleReaction(ot, op.liquid, liq);
+          mdl_reaction.handleReaction(ot, op.liquid, liq, 10.0);
         };
       });
     };
@@ -82,24 +85,24 @@
 
     const update_shortCircuit = function(liq, puddle) {
       if(cfg_update.isSuppressed()) return;
+      if(Mathf.chance(0.9)) return;
       if(liq.gas || !mdl_content.isConductive(liq)) return;
 
       var t = puddle.tile;
       var b = t.build;
-      var li_ot = mdl_game._liTileRect(t, 1);
-      li_ot.each(ot => {
+      mdl_game._tsRect(t, 1).forEach(ot => {
         var ob = ot.build;
 
         // Spread
-        if(ob != null && mdl_content.canShortCircuit(ob.block) && ob.power.status > 0.0) Puddles.deposit(ot, liq, Time.delta * 0.05);
+        if(ob != null && mdl_content.canShortCircuit(ob.block) && ob.power.status > 0.0) Puddles.deposit(ot, liq, Time.delta * 0.5);
 
         // Damage
         if(b != null && mdl_content.canShortCircuit(b.block) && b.power.status > 0.0) {
-          var dmg = Time.delta * b.maxHealth * 0.01 / 60.0;
+          var dmg = Time.delta * b.maxHealth * 0.08 / 60.0;
           b.damage(dmg);
 
-          mdl_effect.showAtP(0.005, b, db_effect._heatSmog());
-          if(Mathf.chanceDelta(0.001)) frag_attack.atk_lightning_noob(b, Team.derelict, 1, 6, 4, VAR.shortCircuit_lightningDamage, Pal.accent);
+          mdl_effect.showAtP(0.05, b, db_effect._heatSmog());
+          if(Mathf.chanceDelta(0.01)) frag_attack.atk_lightning_noob(b, Team.derelict, 1, 6, 4, VAR.shortCircuit_lightningDamage, Pal.accent);
         };
       });
     };
@@ -135,7 +138,7 @@
       if(amt_f < 0.0001) return 0.0;
 
       var cap_t = b_t.block.liquidCapacity;
-      var amt_trans = Mathf.clamp(b_f.edelta() * rate, 0.0, cap_t - amt_t);
+      var amt_trans = Math.min(Mathf.clamp(b_f.edelta() * rate, 0.0, cap_t - amt_t), amt_f);
 
       b_t.handleLiquid(b_f, liq, amt_trans);
       b_f.liquids.remove(liq, amt_trans);
@@ -145,48 +148,45 @@
     exports.transferLiquid = transferLiquid;
 
 
-    const getJunctionEnd = function(b, ob) {
+    const _transEnd = function(b, ob) {
       if(b == null || ob == null) return;
       if(!(ob.block instanceof LiquidJunction)) return ob;
 
-      var ob_fi = "pending";
+      var transEnd = "pending";
       var ot = ob.tile;
-      while(ob_fi == "pending") {
-        ob_fi = (ot == null) ? null : ot.build;
-        if(ob_fi != null && ob_fi.block instanceof LiquidJunction) {
-          ot = ob_fi.tile.nearby(b.rotation);
-          ob_fi = "pending";
+      while(transEnd == "pending") {
+        transEnd = (ot == null) ? null : ot.build;
+        if(transEnd != null && transEnd.block instanceof LiquidJunction) {
+          ot = transEnd.tile.nearby(b.rotation);
+          transEnd = "pending";
         };
       };
 
-      return ob_fi;
+      return transEnd;
     };
-    exports.getJunctionEnd = getJunctionEnd;
+    exports._transEnd = _transEnd;
 
 
     const moveLiquid_pipe = function(b, ob, liq) {
-      if(b == null || ob == null) return 0.0;
+      if(b == null || ob == null || b.liquids == null) return 0.0;
 
-      var ob_fi = getJunctionEnd(b, ob);
-      if(ob_fi == null) return 0.0;
+      if(b.timerEffc.get(6.0)) {
+        b.transEnd = _transEnd(b, ob);
+        if(b.transEnd == null || b.transEnd.liquids == null) return 0.0;
 
-      if(b.timerEffc.get(10.0)) {
-        var amt_f = b.liquids.get(liq);
-        var amt_t = mdl_content.isCond(ob_fi.block) ? ob_fi.liquids.get(liq) : 0.0;
-        var pres = (b.block.liquidPressure + ob_fi.block.liquidPressure) / 2.0;
+        var frac_f = b.liquids.get(liq) / b.block.liquidCapacity;
+        var frac_t = mdl_content.isCond(b.transEnd.block) ? b.transEnd.liquids.get(liq) / b.transEnd.block.liquidCapacity : 0.0;
+        var pres = (b.block.liquidPressure + b.transEnd.block.liquidPressure) / 2.0;
         var visc = liq.viscosity;
 
-        b.tmpRate = mdl_flow._flowRate(b, ob_fi, amt_f, amt_t, pres, visc);
+        b.tmpRate = mdl_flow._flowRate(b, b.transEnd, frac_f, frac_t, pres, visc);
       };
 
-      if(b.team == ob_fi.team && b.liquids != null && ob_fi.liquids != null && ob_fi.acceptLiquid(b, liq)) {
-        return transferLiquid(b, ob_fi, liq, b.tmpRate);
-      } else if (!ob_fi.block.consumesLiquid(liq) && ob_fi.liquids != null && ob_fi.liquids.currentAmount() / ob_fi.block.liquidCapacity > 0.1 && b.liquids != null && b.liquids.currentAmount() / b.block.liquidCapacity > 0.1) {
-        mdl_reaction.handleReaction(ob_fi, b.liquids.current(), ob_fi.liquids.current());
-      };
-
-      if(b.team == ob_fi.team && ob_fi.items != null && !(ob_fi.block instanceof CoreBlock) && !ob_fi.block.consumesLiquid(liq)) {
-        ob_fi.items.each(itm => mdl_reaction.handleReaction(ob, itm, liq));
+      if(b.transEnd == null || b.transEnd.liquids == null) return 0.0;
+      if(b.team == b.transEnd.team && b.transEnd.acceptLiquid(b, liq)) {
+        return transferLiquid(b, b.transEnd, liq, b.tmpRate);
+      } else if (!b.transEnd.block.consumesLiquid(liq) && b.transEnd.liquids.currentAmount() / b.transEnd.block.liquidCapacity > 0.1 && b.liquids.currentAmount() / b.block.liquidCapacity > 0.1) {
+        mdl_reaction.handleReaction(b.transEnd, b.liquids.current(), b.transEnd.liquids.current());
       };
 
       return 0.0;
@@ -197,7 +197,7 @@
 
   // Start: Efficiency
     const updateTile_efficiency = function(b) {
-      if(db_fluid.db["efficiency"]["whitelist"].contains(b.block.name)) return;
+      if(db_fluid.db["efficiency"]["whitelist"].includes(b.block.name)) return;
 
       var invalid = false;
       var liq = b.liquids.current();
@@ -206,7 +206,7 @@
       if(invalid) {
         b.kill();
         mdl_effect.showAt(b, db_effect._invalidPlacement(), 0.0);
-        mdl_ui.showInfoFade("@info.reind-info-efficiency.name");
+        mdl_ui.showInfoFade("efficiency");
       };
     };
     exports.updateTile_efficiency = updateTile_efficiency;
@@ -273,7 +273,7 @@
         var liq = b.liquids.current();
         var cond1 = liq.explosiveness > 0.2999 || liq.flammability > 0.2999;
         var cond2 = false;
-        if(cond1) mdl_game._liTileRect(b.tile, 1, b.block.size).each(ot => {if(Fires.get(ot.x, ot.y)) cond2 = true});
+        if(cond1) mdl_game._tsRect(b.tile, 1, b.block.size).forEach(ot => {if(Fires.get(ot.x, ot.y)) cond2 = true});
 
         if(cond1 && cond2) {
           b.kill();
@@ -314,16 +314,13 @@
   // Part: Misc
     const updateTile_overflow = function(b, liq) {
       if(!b.block.hasLiquids || b.efficiency < 0.0001) return;
-      if(!Mathf.chanceDelta(0.04)) return;
+      if(Mathf.chanceDelta(0.96)) return;
 
       var amt = b.liquids.get(liq);
       var cap = b.block.liquidCapacity;
       if(amt / cap < 0.98) return;
 
-      var li_ot = mdl_game._liTileEdgeIns(b.tile, b.block.size);
-      li_ot.each(ot => {
-        if(Mathf.chance(0.5)) Puddles.deposit(ot, liq, 8.0);
-      });
+      mdl_game._tsEdgeIns(b.tile, b.block.size).forEach(ot => {if(Mathf.chance(0.5)) Puddles.deposit(ot, liq, 8.0)});
     };
     exports.updateTile_overflow = updateTile_overflow;
   // End

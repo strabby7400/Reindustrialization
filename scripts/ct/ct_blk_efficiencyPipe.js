@@ -39,7 +39,7 @@
       },
     });
     powEcond_transmissionBox.buildType = () => extend(Conduit.ConduitBuild, powEcond_transmissionBox, {
-      timerEffc: new Interval(1), tmpRate: 0.0,
+      timerEffc: new Interval(1), tmpRate: 0.0, transEnd: null,
       // Specific
       rotatorReg: mdl_content._reg(powEcond_transmissionBox, "-rotator"),
       tprog: 0.0,

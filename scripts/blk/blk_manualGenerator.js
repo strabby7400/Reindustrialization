@@ -11,6 +11,7 @@
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_table = require("reind/mdl/mdl_table");
+    const mdl_text = require("reind/mdl/mdl_text");
     const mdl_ui = require("reind/mdl/mdl_ui");
   // End
 
@@ -39,12 +40,12 @@
 
       mdl_table.setTrigger(tb, function() {
         if(Vars.state.paused) {
-          mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-manual-generator-paused.name"));
+          mdl_ui.showInfoFade("manual-generator-paused");
         } else {
           var frac = Mathf.clamp(Mathf.lerpDelta(b.frac, 1.14514, 0.14));
           Call.tileConfig(Vars.player, b, vec2.set(frac, -2));
         };
-      }, Icon.power, Core.bundle.get("info.reind-info-manual-generator.name"), 72.0);
+      }, Icon.power, mdl_text._info("manual-generator"), 72.0);
     };
 
 

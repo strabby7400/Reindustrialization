@@ -31,7 +31,7 @@
     defProj_basicRepairProjector.buildType = () => extend(RegenProjector.RegenProjectorBuild, defProj_basicRepairProjector, {
       needCheck: true,
       r: 5,
-      prog: 0.0, builds: new Seq(), units: new Seq(), repairMap: new ObjectMap(),
+      prog: 0.0, builds: [], units: [], repairMap: new ObjectMap(),
       updateTile() {
         TEMPLATE.updateTile(this);
       },

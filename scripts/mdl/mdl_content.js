@@ -290,7 +290,7 @@
       if(ct == null || !isReind(ct)) return;
 
       var nm = ct.name;
-      const li = new Seq();
+      var arr = [];
 
       // Automatically add tags by name
       var keys = Object.keys(rsTagExc);
@@ -298,7 +298,7 @@
       for(let i = 0; i < cap; i++) {
         var tag = keys[i];
 
-        if(!rsTagExc[tag].includes(nm) && !li.contains(tag)) {
+        if(!rsTagExc[tag].includes(nm) && !arr.includes(tag)) {
           var cond = false;
 
           // This is horrible
@@ -308,7 +308,7 @@
             };
           };
 
-          if(cond) li.add(tag);
+          if(cond) arr.push(tag);
         };
       };
 
@@ -320,12 +320,12 @@
           for(let i = 0; i < cap; i++) {
             var tag = tags[i];
 
-            if(!li.contains(tag)) li.add(tag);
+            if(!arr.includes(tag)) arr.push(tag);
           };
         };
       };
 
-      return li;
+      return arr;
     };
     exports._rsTag = _rsTag;
 
@@ -337,7 +337,7 @@
       var tags = _rsTag(ct);
       var val = "";
 
-      tags.each(tag => val += "<" + tag + ">");
+      tags.forEach(tag => val += "<" + tag + ">");
 
       return (val == "") ? null : (noColor ? val : ("[gray]" + val + "[]"));
     };
@@ -370,101 +370,75 @@
       if(ct == null) return;
 
       var faction = _faction(ct);
-      return (Vars.headless || faction == null) ? null : Core.bundle.get("term.reind-term-" + faction + ".name");
+      return (Vars.headless || faction == null) ? null : mdl_text._term(faction);
     };
     exports._factionVal = _factionVal;
 
 
-    const li_80286997 = new Seq();
     const _factionMembers = function(faction, includeNoFaction) {
-      var li = li_80286997.clear();
+      var arr = [];
 
       if(faction instanceof Block || faction instanceof UnitType) faction = _faction(faction);
       if(includeNoFaction == null) includeNoFaction = false;
-      if(faction == "no-faction" && !includeNoFaction) return li;
+      if(faction == "no-faction" && !includeNoFaction) return arr;
 
-      Vars.content.blocks().each(blk => {if(!isEnv(blk) && _faction(blk) == faction && !li.contains(blk)) li.add(blk)});
-      Vars.content.units().each(utp => {if(_faction(utp) == faction && !li.contains(utp)) li.add(utp)});
+      Vars.content.blocks().each(blk => {if(!isEnv(blk) && _faction(blk) == faction && !arr.includes(blk)) arr.push(blk)});
+      Vars.content.units().each(utp => {if(_faction(utp) == faction && !arr.includes(utp)) arr.push(utp)});
 
-      return li;
+      return arr;
     };
     exports._factionMembers = _factionMembers;
 
 
-    const li_29300769 = new Seq();
     const _fami = function(ct) {
-      var li = li_29300769.clear();
+      if(ct == null) return [];
 
-      if(ct == null) return li;
-
-      var nm = ct.name;
-      if(isFactory(ct)) li.addAll(mdl_data.readLi_1n1v(db_block.db["map"]["family"], nm));
-
-      return li;
+      return isFactory(ct) ? mdl_data.readLi_1n1v(db_block.db["map"]["family"], ct.name) : [];
     };
     exports._fami = _fami;
 
 
-    const li_92008749 = new Seq();
     const _famiVal = function(ct) {
-      var li = li_92008749.clear();
-
       if(Vars.headless || ct == null) return;
 
-      var fami = _fami(ct);
-      fami.each(i => li.add(Core.bundle.get("term.reind-term-" + i + ".name")));
-
-      return mdl_text._tagText(li);
+      return mdl_text._tagText(_fami(ct).map(i => mdl_text._term(i)));
     };
     exports._famiVal = _famiVal;
 
 
-    const li_24116230 = new Seq();
     const _famiMembers = function(fami) {
-      var li = li_24116230.clear();
-      var li1 = new Seq();
+      var arr = [];
+      var arr1 = [];
 
-      if(fami instanceof Block) li.addAll(_fami(fami));
-      if(typeof fami == "string") li.add(fami);
+      if(fami instanceof Block) {arr.push.apply(_fami(fami))} else {arr.push(fami)};
 
       Vars.content.blocks().each(blk => {
         if(isFactory(blk)) {
           var cond = false;
           var tmpFami = _fami(blk);
-          li.each(i => {if(tmpFami.contains(i) && !li1.contains(i)) cond = true});
+          arr.forEach(i => {if(tmpFami.includes(i) && !arr1.includes(i)) cond = true});
 
-          if(cond) li1.add(blk);
+          if(cond) arr1.push(blk);
         };
       });
 
-      return li1;
+      return arr1;
     };
     exports._famiMembers = _famiMembers;
 
 
-    const li_99203948 = new Seq();
     const _consTg = function(ct) {
-      var li = li_99203948.clear();
+      if(ct == null) return [];
 
-      if(ct == null) return li;
-
-      li.addAll(mdl_data.readLi_1n1v(db_item.db["map"]["consumable"], ct.name));
-
-      return li;
+      return mdl_data.readLi_1n1v(db_item.db["map"]["consumable"], ct.name);
     };
     exports._consTg = _consTg;
 
 
-    const li_29300784 = new Seq();
     const _consTgVal = function(ct) {
-      var li = li_29300784.clear();
-
       if(Vars.headless || ct == null) return;
 
-      var consTg = _consTg(ct);
-      consTg.each(i => li.add(Core.bundle.get("term.reind-term-fac-" + i + ".name")));
-
-      return mdl_text._tagText(li);
+      return mdl_text._tagText(_consTg(ct).map(i => mdl_text._term("fac-" + i)));
     };
     exports._consTgVal = _consTgVal;
   // End
@@ -507,16 +481,16 @@
     exports.isVirt = isVirt;
 
 
-    const li_bit = new Seq([
+    const arr_bit = [
       "reind-item-virt-bit",
       "reind-item-virt-kilobit",
       "reind-item-virt-megabit",
       "reind-item-virt-gigabit",
-    ]);
+    ];
     const isBit = function(ct_gn) {
       var nmCt = _nmCt_gn(ct_gn);
 
-      return li_bit.contains(nmCt);
+      return arr_bit.includes(nmCt);
     };
     exports.isBit = isBit;
 
@@ -578,13 +552,13 @@
 
 
     const isAqueous = function(ct_gn) {
-      return db_fluid.db["group"]["aqueous"].contains(_nmCt_gn(ct_gn));
+      return db_fluid.db["group"]["aqueous"].includes(_nmCt_gn(ct_gn));
     };
     exports.isAqueous = isAqueous;
 
 
     const isConductive = function(ct_gn) {
-      return db_fluid.db["group"]["conductive"].contains(_nmCt_gn(ct_gn));
+      return db_fluid.db["group"]["conductive"].includes(_nmCt_gn(ct_gn));
     };
     exports.isConductive = isConductive;
 
@@ -607,7 +581,7 @@
     const isExposed = function(ct_gn) {
       var nmCt = _nmCt_gn(ct_gn);
 
-      return db_block.db["param"]["exposed"].contains(nmCt);
+      return db_block.db["param"]["exposed"].includes(nmCt);
     };
     exports.isExposed = isExposed;
 
@@ -653,7 +627,7 @@
 
 
     const cloggable = function(ct_gn) {
-      return db_block.db["durability"]["cloggable"].contains(_nmCt_gn(ct_gn));
+      return db_block.db["durability"]["cloggable"].includes(_nmCt_gn(ct_gn));
     };
     exports.cloggable = cloggable;
 
@@ -683,13 +657,13 @@
 
 
     const canShortCircuit = function(ct_gn) {
-      return db_block.db["power"]["shortCircuit"].contains(_nmCt_gn(ct_gn));
+      return db_block.db["power"]["shortCircuit"].includes(_nmCt_gn(ct_gn));
     };
     exports.canShortCircuit = canShortCircuit;
 
 
     const isMagnetic = function(ct_gn) {
-      return db_block.db["group"]["magnetic"].contains(_nmCt_gn(ct_gn));
+      return db_block.db["group"]["magnetic"].includes(_nmCt_gn(ct_gn));
     };
     exports.isMagnetic = isMagnetic;
 

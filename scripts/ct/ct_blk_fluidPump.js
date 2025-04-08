@@ -25,7 +25,7 @@
       },
     });
     bliqPump_primitiveFluidPump.buildType = () => extend(Pump.PumpBuild, bliqPump_primitiveFluidPump, {
-      timerEffc: new Interval(1), tmpRate: 0.0,
+      timerEffc: new Interval(1), tmpRate: 0.0, transEnd: null,
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);
@@ -52,7 +52,7 @@
       },
     });
     bliqPump_pistonFluidPump.buildType = () => extend(Pump.PumpBuild, bliqPump_pistonFluidPump, {
-      timerEffc: new Interval(1), tmpRate: 0.0,
+      timerEffc: new Interval(1), tmpRate: 0.0, transEnd: null,
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);

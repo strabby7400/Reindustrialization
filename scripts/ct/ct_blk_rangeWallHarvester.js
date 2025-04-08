@@ -32,7 +32,7 @@
   });
   minHarv_mycelialHarvester.buildType = () => extend(AttributeCrafter.AttributeCrafterBuild, minHarv_mycelialHarvester, {
     needUpdate: true,
-    r: 5, tiles: new Seq(),
+    r: 5, tiles: [],
     updateTile() {
       this.super$updateTile();
       TEMPLATE.updateTile(this);

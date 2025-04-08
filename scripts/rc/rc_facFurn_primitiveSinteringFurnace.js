@@ -7,7 +7,7 @@ const gi = [
 const rc = {
   "parent": "reind-fac-furn-primitive-sintering-furnace",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -22,12 +22,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-bauxite",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-bauxite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-bauxite", 20,
-      ]),
+      ],
     },
 
 
@@ -38,12 +38,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-malachite",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-malachite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-malachite", 20,
-      ]),
+      ],
     },
 
 
@@ -54,12 +54,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-hematite",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-hematite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-hematite", 20,
-      ]),
+      ],
     },
 
 
@@ -67,12 +67,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-magnetite",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-magnetite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-magnetite", 20,
-      ]),
+      ],
     },
 
 
@@ -80,12 +80,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-pyrite",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-pyrite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-pyrite", 20,
-      ]),
+      ],
     },
 
 
@@ -96,12 +96,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-galena",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-galena", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-galena", 20,
-      ]),
+      ],
     },
 
 
@@ -112,12 +112,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-psilomelane",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-psilomelane", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-psilomelane", 20,
-      ]),
+      ],
     },
 
 
@@ -125,12 +125,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-pyrolusite",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-pyrolusite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-pyrolusite", 20,
-      ]),
+      ],
     },
 
 
@@ -141,12 +141,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-ilmenite",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-ilmenite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-ilmenite", 20,
-      ]),
+      ],
     },
 
 
@@ -154,12 +154,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-p1-rutile",
       "category": "concentrate-sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-rutile", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-concentrate-rutile", 20,
-      ]),
+      ],
     },
 
 
@@ -172,12 +172,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-sand",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-sand", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-sand", 20,
-      ]),
+      ],
     },
 
 
@@ -188,12 +188,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-bauxite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-bauxite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-bauxite", 20,
-      ]),
+      ],
     },
 
 
@@ -204,12 +204,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-chromite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-chromite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-chromite", 20,
-      ]),
+      ],
     },
 
 
@@ -220,12 +220,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-azurite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-azurite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-azurite", 20,
-      ]),
+      ],
     },
 
 
@@ -233,12 +233,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-cuprite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-cuprite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-cuprite", 20,
-      ]),
+      ],
     },
 
 
@@ -246,12 +246,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-malachite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-malachite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-malachite", 20,
-      ]),
+      ],
     },
 
 
@@ -259,12 +259,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-native-copper",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-native-copper", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-native-copper", 20,
-      ]),
+      ],
     },
 
 
@@ -275,12 +275,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-hematite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-hematite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-hematite", 20,
-      ]),
+      ],
     },
 
 
@@ -288,12 +288,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-limonite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-limonite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-limonite", 20,
-      ]),
+      ],
     },
 
 
@@ -301,12 +301,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-magnetite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-magnetite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-magnetite", 20,
-      ]),
+      ],
     },
 
 
@@ -314,12 +314,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-pyrite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-pyrite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-pyrite", 20,
-      ]),
+      ],
     },
 
 
@@ -330,12 +330,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-anglesite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-anglesite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-anglesite", 20,
-      ]),
+      ],
     },
 
 
@@ -343,12 +343,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-galena",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-galena", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-galena", 20,
-      ]),
+      ],
     },
 
 
@@ -359,12 +359,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-psilomelane",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-psilomelane", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-psilomelane", 20,
-      ]),
+      ],
     },
 
 
@@ -372,12 +372,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-pyrolusite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-pyrolusite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-pyrolusite", 20,
-      ]),
+      ],
     },
 
 
@@ -388,12 +388,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-cinnabar",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-cinnabar", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-cinnabar", 20,
-      ]),
+      ],
     },
 
 
@@ -404,12 +404,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-cassiterite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-cassiterite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-cassiterite", 20,
-      ]),
+      ],
     },
 
 
@@ -420,12 +420,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-ilmenite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-ilmenite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-ilmenite", 20,
-      ]),
+      ],
     },
 
 
@@ -433,12 +433,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-rutile",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-rutile", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-rutile", 20,
-      ]),
+      ],
     },
 
 
@@ -449,12 +449,12 @@ const rc = {
     {
       "icon": "reind-item-int-dust-smithsonite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-smithsonite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-smithsonite", 20,
-      ]),
+      ],
     },
 
 
@@ -462,15 +462,15 @@ const rc = {
     {
       "icon": "reind-item-int-dust-sphalerite",
       "category": "sintering",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-sphalerite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-sphalerite", 20,
-      ]),
+      ],
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

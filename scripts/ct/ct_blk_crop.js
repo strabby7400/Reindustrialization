@@ -26,7 +26,7 @@
 
 
     const minCrop_aerthSmallShiitake = extend(Wall, "min-crop-aerth-small-shiitake", {
-      ter: new Seq(["dirt", "sand"]),
+      ter: ["dirt", "sand"],
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -47,7 +47,7 @@
     });
     minCrop_aerthSmallShiitake.buildType = () => extend(Wall.WallBuild, minCrop_aerthSmallShiitake, {
       needCheck: true,
-      growTime: 0.0, growStages: 1, cropYield: new Seq(), stageScr: new Seq(),
+      growTime: 0.0, growStages: 1, cropYield: [], stageScr: [],
       growProg: 0.0, growStage: 0, growEffc: 0.0,
       timerCall: new Interval(1),
       updateTile() {
@@ -107,7 +107,7 @@
     });
     minCrop_inkCorn.buildType = () => extend(Wall.WallBuild, minCrop_inkCorn, {
       needCheck: true,
-      growTime: 0.0, growStages: 1, cropYield: new Seq(), stageScr: new Seq(),
+      growTime: 0.0, growStages: 1, cropYield: [], stageScr: [],
       growProg: 0.0, growStage: 0, growEffc: 0.0,
       timerCall: new Interval(1),
       updateTile() {
@@ -171,7 +171,7 @@
     });
     minCrop_thoriumReactorMine.buildType = () => extend(Wall.WallBuild, minCrop_thoriumReactorMine, {
       needCheck: true,
-      growTime: 0.0, growStages: 1, cropYield: new Seq(), stageScr: new Seq(),
+      growTime: 0.0, growStages: 1, cropYield: [], stageScr: [],
       growProg: 0.0, growStage: 0, growEffc: 0.0,
       timerCall: new Interval(1),
       updateTile() {

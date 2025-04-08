@@ -39,12 +39,11 @@
       var nm = liq.name;
       var val = null;
       var obj = db_fluid.db;
-      var arr = arr_fGrp;
-      var cap = arr.length;
+      var cap = arr_fGrp.length;
 
       for(let i = 0; i < cap; i += 2) {
-        if(obj["group"][arr[i]].contains(nm)) {
-          val = arr[i];
+        if(obj["group"][arr_fGrp[i]].includes(nm)) {
+          val = arr_fGrp[i];
           break;
         };
       };
@@ -58,12 +57,11 @@
       if(Vars.headless) return;
 
       var val = null;
-      var arr = arr_fGrp;
-      var cap = arr.length;
+      var cap = arr_fGrp.length;
 
       for(let i = 0; i < cap; i += 2) {
-        if(grp == arr[i]) {
-          val = Core.bundle.get("term.reind-term-" + arr[i + 1] + ".name");
+        if(grp == arr_fGrp[i]) {
+          val = mdl_text._term(arr_fGrp[i + 1]);
           break;
         };
       };
@@ -97,12 +95,11 @@
       var nm = blk.name;
       var val = null;
       var obj = db_block.db;
-      var arr = arr_matGrp;
-      var cap = arr.length;
+      var cap = arr_matGrp.length;
 
       for(let i = 0; i < cap; i += 2) {
-        if(obj["group"][arr[i]].contains(nm)) {
-          val = arr[i];
+        if(obj["group"][arr_matGrp[i]].includes(nm)) {
+          val = arr_matGrp[i];
           break;
         };
       };
@@ -116,12 +113,11 @@
       if(Vars.headless) return;
 
       var val = null;
-      var arr = arr_matGrp;
-      var cap = arr.length;
+      var cap = arr_matGrp.length;
 
       for(let i = 0; i < cap; i += 2) {
-        if(matGrp == arr[i]) {
-          val = Core.bundle.get("term.reind-term-" + arr[i + 1] + ".name");
+        if(matGrp == arr_matGrp[i]) {
+          val = mdl_text._term(arr_matGrp[i + 1]);
           break;
         };
       };
@@ -147,25 +143,23 @@
     ];
 
 
-    const li_94077784 = new Seq();
-    const _liFTag = function(liq) {
-      var li = li_94077784.clear();
+    const _fTags = function(liq) {
+      var arr = [];
 
       var nm = liq.name;
       var obj = db_fluid.db;
-      var arr = arr_fTag;
-      var cap = arr.length;
+      var cap = arr_fTag.length;
 
       for(let i = 0; i < cap; i += 2) {
-        if(obj["fTag"][arr[i]].contains(nm)) {
-          li.add(arr[i]);
+        if(obj["fTag"][arr_fTag[i]].includes(nm)) {
+          arr.push(arr_fTag[i]);
           break;
         };
       };
 
-      return li;
+      return arr;
     };
-    exports._liFTag = _liFTag;
+    exports._fTags = _fTags;
 
 
     const _fTagVal_tag = function(tag) {
@@ -177,7 +171,7 @@
 
       for(let i = 0; i < cap; i += 2) {
         if(tag == arr[i]) {
-          val = Core.bundle.get("term.reind-term-" + arr[i + 1] + ".name");
+          val = mdl_text._term(arr[i + 1]);
           break;
         };
       };
@@ -187,13 +181,8 @@
     exports._fTagVal_tag = _fTagVal_tag;
 
 
-    const li_99387709 = new Seq();
     const _fTagVal = function(liq) {
-      var li = li_99387709.clear();
-
-      _liFTag(liq).each(tag => li.add(_fTagVal_tag(tag)));
-
-      return mdl_text._tagText(li);
+      return mdl_text._tagText(_fTags(liq).map(tag => _fTagVal_tag(tag)));
     };
     exports._fTagVal = _fTagVal;
 
@@ -228,7 +217,7 @@
       };
 
       if(matGrp != null) {
-        _liFTag(liq).each(tag => {
+        _fTags(liq).forEach(tag => {
           var tagScl = mdl_data.read_2n1v(obj["tagScale"], matGrp, tag);
           if(tagScl != null) corScl *= tagScl;
         });

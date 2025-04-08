@@ -12,7 +12,7 @@ const db = {
      * Fluid heat is used to calculate heat damage to units and conduits.
      * {temperature} will be automatically overwrought.
      */
-    "fHeat": new Seq([
+    "fHeat": [
 
       /* <---------------- liq-chem ----------------> */
 
@@ -32,7 +32,7 @@ const db = {
 
       /* <---------------- gas-int ----------------> */
 
-    ]),
+    ],
 
 
     /*
@@ -40,7 +40,7 @@ const db = {
      *
      * Well, I don't think this makes sense. Just in case needed afterwards.
      */
-    "density": new Seq([
+    "density": [
 
       /* <---------------- liq-ore ----------------> */
 
@@ -85,7 +85,7 @@ const db = {
 
       "reind-liq-int-melt-glass", 2.25,
 
-    ]),
+    ],
 
 
     /*
@@ -94,7 +94,7 @@ const db = {
      * Simply real data.
      * {viscosity} will be automatically overwrought.
      */
-    "viscosity": new Seq([
+    "viscosity": [
 
       /* <---------------- liq-ore ----------------> */
 
@@ -113,7 +113,7 @@ const db = {
       "reind-liq-chem-sulfuric-acid-conc", 21.0,
       "reind-liq-chem-sulfuric-acid-fuming", 21.0,
 
-    ]),
+    ],
 
 
   },
@@ -124,7 +124,7 @@ const db = {
   "map": {
 
 
-    "vent": new Seq([
+    "vent": [
 
       "reind-attr-vent-ammonia", "reind-gas-chem-ammonia",
       "reind-attr-vent-sour-gas", "reind-gas-ore-sour-gas",
@@ -132,7 +132,7 @@ const db = {
       "reind-attr-vent-sulfur-dioxide", "reind-gas-chem-sulfur-dioxide",
       "reind-attr-underwater-vent-hydrogen-sulfide", "reind-gas-chem-hydrogen-sulfide",
 
-    ]),
+    ],
 
 
   },
@@ -148,7 +148,7 @@ const db = {
   "group": {
 
 
-    "brine": new Seq([
+    "brine": [
 
       /* <---------------- liq-ore ----------------> */
 
@@ -159,19 +159,19 @@ const db = {
 
       "reind-liq-int-brine-purified"
 
-    ]),
+    ],
 
 
-    "basicAq": new Seq([
+    "basicAq": [
 
       /* <---------------- liq-was ----------------> */
 
       "reind-liq-was-waste-water-basic",
 
-    ]),
+    ],
 
 
-    "acidicAq": new Seq([
+    "acidicAq": [
 
       /* <---------------- liq-chem ----------------> */
 
@@ -183,56 +183,56 @@ const db = {
 
       "reind-liq-was-waste-water-acidic",
 
-    ]),
+    ],
 
 
-    "alcohol": new Seq(),
+    "alcohol": [],
 
 
-    "basicAlc": new Seq(),
+    "basicAlc": [],
 
 
-    "acidicAlc": new Seq(),
+    "acidicAlc": [],
 
 
-    "oil": new Seq([
+    "oil": [
 
       /* <---------------- liq-ore ----------------> */
 
       "reind-liq-ore-crude-oil",
 
-    ]),
+    ],
 
 
-    "basicOil": new Seq(),
+    "basicOil": [],
 
 
-    "acidicOil": new Seq(),
+    "acidicOil": [],
 
 
-    "basicSub": new Seq(),
+    "basicSub": [],
 
 
-    "acidicSub": new Seq([
+    "acidicSub": [
 
       /* <---------------- liq-chem ----------------> */
 
       "reind-liq-chem-sulfuric-acid-conc",
       "reind-liq-chem-sulfuric-acid-fuming",
 
-    ]),
+    ],
 
 
-    "basicGas": new Seq([
+    "basicGas": [
 
       /* <---------------- gas-chem ----------------> */
 
       "reind-gas-chem-ammonia",
 
-    ]),
+    ],
 
 
-    "acidicGas": new Seq([
+    "acidicGas": [
 
       /* <---------------- gas-chem ----------------> */
 
@@ -242,10 +242,10 @@ const db = {
       "reind-gas-chem-sulfur-dioxide",
       "reind-gas-chem-sulfur-trioxide",
 
-    ]),
+    ],
 
 
-    "slurry": new Seq([
+    "slurry": [
 
       /* <---------------- liq-misc ----------------> */
 
@@ -255,19 +255,19 @@ const db = {
 
       "reind-liq-was-waste-slurry",
 
-    ]),
+    ],
 
 
-    "melt": new Seq(),
+    "melt": [],
 
 
-    "stickyMelt": new Seq([
+    "stickyMelt": [
 
       /* <---------------- liq-int ----------------> */
 
       "reind-liq-int-melt-glass",
 
-    ]),
+    ],
 
 
     // NOTE: Generated results aheat.
@@ -278,7 +278,7 @@ const db = {
      *
      * Those will trigger short circuit, act like water in reactions, and feed carnage plasma.
      */
-    "aqueous": new Seq([
+    "aqueous": [
 
       /* <---------------- liq-ore ----------------> */
 
@@ -292,10 +292,10 @@ const db = {
 
       "reind-gas-misc-steam",
 
-    ]),
+    ],
 
 
-    "conductive": new Seq(),
+    "conductive": [],
 
 
   },
@@ -311,28 +311,28 @@ const db = {
   "fTag": {
 
 
-    "ammoniacal": new Seq([
+    "ammoniacal": [
 
       /* <---------------- gas-chem ----------------> */
 
       "reind-gas-chem-ammonia",
 
-    ]),
+    ],
 
 
-    "chloric": new Seq([
+    "chloric": [
 
       /* <---------------- gas-chem ----------------> */
 
       "reind-gas-chem-chlorine",
 
-    ]),
+    ],
 
 
-    "fluoric": new Seq(),
+    "fluoric": [],
 
 
-    "oxidative": new Seq([
+    "oxidative": [
 
       /* <---------------- liq-chem ----------------> */
 
@@ -345,10 +345,10 @@ const db = {
 
       "reind-gas-chem-sulfur-trioxide",
 
-    ]),
+    ],
 
 
-    "dehydrative": new Seq([
+    "dehydrative": [
 
       /* <---------------- liq-chem ----------------> */
 
@@ -359,16 +359,16 @@ const db = {
 
       "reind-gas-chem-sulfur-trioxide",
 
-    ]),
+    ],
 
 
-    "oil": new Seq([
+    "oil": [
 
       /* <---------------- liq-chem ----------------> */
 
       "reind-liq-chem-tolunene",
 
-    ]),
+    ],
 
 
   },
@@ -385,7 +385,7 @@ const db = {
      * Basic params for corrosion power.
      * These are default values for fluids in a particular fluid group.
      */
-    "base": new Seq([
+    "base": [
       "brine", 1.0,
       "basicAq", 1.35,
       "acidicAq", 1.35,
@@ -395,7 +395,7 @@ const db = {
       "acidicSub", 1.25,
       "basicGas", 1.7,
       "acidicGas", 1.7,
-    ]),
+    ],
 
 
     /*
@@ -404,7 +404,7 @@ const db = {
      * The main multiplier on final damage dealt by corrosion.
      * Format: {matGrp}, {fGrp}, {scl}.
      */
-    "scale": new Seq([
+    "scale": [
       "wood", "basicAq", 5.0,
       "wood", "acidicAq", 5.0,
       "wood", "basicOil", 7.0,
@@ -443,7 +443,7 @@ const db = {
       "rubber", "acidicGas", 2.0,
       "rubber", "basicSub", 1.5,
       "rubber", "basicGas", 2.0,
-    ]),
+    ],
 
 
     /*
@@ -452,7 +452,7 @@ const db = {
      * Extra multiplier based on fluid tags, which may turn some regular fluids corrosive, e.g. ozone.
      * Format: {matGrp}, {fTag}, {scl}.
      */
-    "tagScale": new Seq([
+    "tagScale": [
       "wood", "oxidative", 5.0,
       "wood", "dehydrative", 5.0,
 
@@ -466,7 +466,7 @@ const db = {
       "rubber", "oxidative", 4.0,
       "rubber", "fluoric", 6.0,
       "rubber", "oil", 12.0,
-    ]),
+    ],
 
 
     /*
@@ -475,7 +475,7 @@ const db = {
      * The corrosion power used for a specific fluid.
      * If assigned here, default value won't be used.
      */
-    "specific": new Seq([
+    "specific": [
 
       /* <---------------- liq-ore ----------------> */
 
@@ -496,7 +496,7 @@ const db = {
 
       "reind-gas-chem-sulfur-trioxide", 2.0,
 
-    ]),
+    ],
 
 
   },
@@ -507,13 +507,13 @@ const db = {
   "efficiency": {
 
 
-    "whitelist": new Seq([
+    "whitelist": [
 
       /* <---------------- pow-econd ----------------> */
 
       "reind-pow-econd-transmission-box",
 
-    ]),
+    ],
 
 
   },
@@ -524,14 +524,14 @@ const db = {
   "reaction": {
 
 
-    "map": new Seq([
+    "map": [
 
       /* <---------------- liq-chem[inorganic] ----------------> */
 
       "reind-liq-chem-sulfuric-acid-conc", "ANY: Water", "evaporation",
       "reind-liq-chem-sulfuric-acid-fuming", "ANY: Water", "evaporation",
 
-    ]),
+    ],
 
 
   },
@@ -541,15 +541,17 @@ const db = {
 
 };
 
-db["group"]["aqueous"]
-.addAll(db["group"]["brine"])
-.addAll(db["group"]["basicAq"])
-.addAll(db["group"]["acidicAq"])
-.addAll(db["group"]["slurry"]);
+(arr => {
+  arr.push.apply(db["group"]["brine"]);
+  arr.push.apply(db["group"]["basicAq"]);
+  arr.push.apply(db["group"]["acidicAq"]);
+  arr.push.apply(db["group"]["slurry"]);
+}) (db["group"]["aqueous"]);
 
-db["group"]["conductive"]
-.addAll(db["group"]["aqueous"])
-.addAll(db["group"]["melt"])
-.addAll(db["group"]["stickyMelt"]);
+(arr => {
+  arr.push.apply(db["group"]["aqueous"]);
+  arr.push.apply(db["group"]["melt"]);
+  arr.push.apply(db["group"]["stickyMelt"]);
+}) (db["group"]["conductive"]);
 
 exports.db = db;

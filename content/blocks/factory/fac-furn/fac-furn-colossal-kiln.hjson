@@ -8,6 +8,7 @@
   # type: GenericCrafter
   category: crafting
   requirements: [
+    item-chem-copper/100
     item-chem-graphite/120
     item-buil-brick-clay/80
   ]

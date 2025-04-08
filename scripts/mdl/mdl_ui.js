@@ -8,6 +8,7 @@
   // Part: Import
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_math = require("reind/mdl/mdl_math");
+    const mdl_text = require("reind/mdl/mdl_text");
 
     const db_dialText = require("reind/db/db_dialText");
   // End
@@ -22,61 +23,66 @@
 
 
   // Part: Param
-    const getSizePair = function(pad, cap, offW, offH) {
+    const _screenPair = function() {
+      return [Core.graphics.getWidth(), Core.graphics.getHeight()];
+    };
+    exports._screenPair = _screenPair;
+
+
+    const _sizePair = function(pad, cap, offW, offH) {
       if(pad == null) pad = 20.0;
       if(cap == null) cap = 760.0;
       if(offW == null) offW = 0.0;
       if(offH == null) offH = 0.0;
 
-      var w = Core.graphics.getWidth();
-      var h = Core.graphics.getHeight();
-      var w_fi = Math.max(Math.min(w - pad * 2.0, cap), 64.0) - offW;
-      var h_fi = Math.max(Math.min(h - pad * 2.0, cap), 64.0) - offH;
+      var pair = _screenPair();
+      var w_fi = Math.max(Math.min(pair[0] - pad * 2.0, cap), 64.0) - offW;
+      var h_fi = Math.max(Math.min(pair[1] - pad * 2.0, cap), 64.0) - offH;
 
       return [w_fi, h_fi];
     };
-    exports.getSizePair = getSizePair;
+    exports._sizePair = _sizePair;
   // End
 
 
   // Part: Info
-    const announce = function(str, time) {
+    const announce = function(bundle, time) {
       if(time == null) time = 3.0;
-      if(Vars.headless || str == null) return false;
+      if(Vars.headless || bundle == null) return false;
 
-      Vars.ui.announce(str, time);
+      Vars.ui.announce(mdl_text._info(bundle), time);
 
       return true;
     };
     exports.announce = announce;
 
 
-    const showInfoFade = function(str, time) {
+    const showInfoFade = function(bundle, time) {
       if(time == null) time = 2.0;
-      if(Vars.headless || str == null) return false;
+      if(Vars.headless || bundle == null) return false;
 
-      Vars.ui.showInfoFade(str, time);
+      Vars.ui.showInfoFade(mdl_text._info(bundle), time);
 
       return true;
     };
     exports.showInfoFade = showInfoFade;
 
 
-    const showLabel = function(pos, str, time) {
+    const showLabel = function(pos, bundle, time) {
       if(time == null) time = 3.0;
-      if(Vars.headless || str == null) return false;
+      if(Vars.headless || bundle == null) return false;
 
-      Vars.ui.showLable(str, time, pos.x, pos.y);
+      Vars.ui.showLable(mdl_text._info(bundle), time, pos.x, pos.y);
 
       return true;
     };
     exports.showLabel = showLabel;
 
 
-    const showError = function(str) {
-      if(Vars.headless || str == null) return false;
+    const showError = function(bundle) {
+      if(Vars.headless || bundle == null) return false;
 
-      Vars.ui.showErrorMessage(str);
+      Vars.ui.showErrorMessage(mdl_text._info(bundle));
 
       return true;
     };
@@ -101,7 +107,7 @@
 
 
     const _speaker = function(nm) {
-      return Core.bundle.get("term.reind-term-chara-" + nm + ".name");
+      return mdl_text._term("chara-" + nm);
     };
     exports._speaker = _speaker;
 
@@ -115,14 +121,12 @@
     const _dialCtRand = function(nm, des) {
       var i = 1;
       var str = "dial.reind-dial-" + nm + "-" + des + "-";
-      var li = new Seq();
 
       while(Core.bundle.has(str + i + ".name")) {
-        li.add(Core.bundle.get(str + i + ".name"));
         i++;
       };
 
-      return li.get(mdl_math._randInt(li.size - 1));
+      return Core.bundle.get(str + mdl_math._randInt(i - 1, 1) + ".name");
     };
     exports._dialCtRand = _dialCtRand;
 
@@ -407,7 +411,7 @@
       if(scl == null) scl = 1.0;
       if(str == null) return;
       var tb = new Table();
-      var w = getSizePair()[0];
+      var w = _sizePair()[0];
       var h = 200.0;
 
       if(path_se != null) mdl_effect.play(path_se);
@@ -429,7 +433,7 @@
           tb.table(Tex.button, tb1 => {
             tb1.top().marginTop(32.0).marginBottom(32.0);
 
-            tb1.add(str).fontScale(1.35).style(Styles.outlineLabel).labelAlign(Align.left).wrap().width(getSizePair(null, null, 90.0)[0]);
+            tb1.add(str).fontScale(1.35).style(Styles.outlineLabel).labelAlign(Align.left).wrap().width(_sizePair(null, null, 90.0)[0]);
           }).width(w).height(h).row(),
 
           needCheck = false;
@@ -449,7 +453,7 @@
       if(scl == null) scl = 1.0;
       if(str == null) return;
       var tb = new Table();
-      var w = getSizePair()[0];
+      var w = _sizePair()[0];
       var h = 200.0;
 
       if(path_se != null) mdl_effect.play(path_se);
@@ -471,7 +475,7 @@
           tb.table(Tex.bar, tb1 => {
             tb1.top().marginTop(32.0).marginBottom(32.0).setColor(Pal.darkestGray);
 
-            tb1.add(str).fontScale(1.35).style(Styles.outlineLabel).labelAlign(Align.left).wrap().width(getSizePair(null, null, 90.0)[0]);
+            tb1.add(str).fontScale(1.35).style(Styles.outlineLabel).labelAlign(Align.left).wrap().width(_sizePair(null, null, 90.0)[0]);
           }).width(w).height(h).row(),
 
           needCheck = false;

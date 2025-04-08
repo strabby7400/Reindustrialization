@@ -35,15 +35,10 @@
       if(color_gn == null) return;
       if(color_gn instanceof Color) return color_gn;
 
-      var color;
-      if(typeof color_gn == "string") {
-        color = Color.valueOf(color_gn);
-      };
-      if(typeof color_gn == "boolean") {
-        color = color_gn ? Pal.accent : Pal.remove;
-      };
+      if(typeof color_gn == "boolean") return color_gn ? Pal.accent : Pal.remove;
+      if(typeof color_gn == "string") return Color.valueOf(color_gn);
 
-      return color;
+      return Color.white;
     };
     exports._color = _color;
   // End
@@ -90,15 +85,13 @@
       if(shouldMixcol == null) shouldMixcol = false;
 
       var pos = mdl_game._pos(pos_gn);
-      var x = pos.x;
-      var y = pos.y;
       var w = reg.width * 2.0 * regScl / Vars.tilesize;
       var h = reg.height * 2.0 * regScl / Vars.tilesize;
 
       if(z != null) Draw.z(z);
       if(shouldMixcol) {Draw.mixcol(color, 1.0)} else {Draw.color(color)};
       Draw.alpha(a);
-      Draw.rect(reg, x, y, w, h, ang);
+      Draw.rect(reg, pos.x, pos.y, w, h, ang);
       Draw.reset();
     };
     exports.drawNormalRegion = drawNormalRegion;
@@ -123,20 +116,24 @@
     const drawBlurredShadow = function(pos_gn, reg, ang, a, regScl, color, z) {
       if(Vars.headless) return;
 
-      var pos = mdl_game._pos(pos_gn);
-      var flr = Vars.world.floorWorld(pos.x, pos.y);
-      if(flr == null || !flr.canShadow) return;
+      if(ldm) {
+        drawSimpleShadow(pos_gn, reg, ang, a, regScl, color, z);
+      } else {
+        var pos = mdl_game._pos(pos_gn);
+        var flr = Vars.world.floorWorld(pos.x, pos.y);
+        if(flr == null || !flr.canShadow) return;
 
-      const arr_param = [
-        0.18, 1.0,
-        0.09, 1.05,
-        0.05, 1.1,
-        0.03, 1.15,
-      ];
-      var cap = arr_param.length;
-      for(let i = 0; i < cap; i += 2) {
-        Draw.mixcol(Pal.shadow, 1.0);
-        drawNormalRegion(pos, reg, ang, a * arr_param[i], regScl * arr_param[i + 1], color, z);
+        const arr_param = [
+          0.18, 1.0,
+          0.09, 1.05,
+          0.05, 1.1,
+          0.03, 1.15,
+        ];
+        var cap = arr_param.length;
+        for(let i = 0; i < cap; i += 2) {
+          Draw.mixcol(Pal.shadow, 1.0);
+          drawNormalRegion(pos, reg, ang, a * arr_param[i], regScl * arr_param[i + 1], color, z);
+        };
       };
     };
     exports.drawBlurredShadow = drawBlurredShadow;
@@ -168,15 +165,19 @@
       var flr = Vars.world.floorWorld(x_fi, y_fi);
       var a_fi = (flr != null && flr.canShadow) ? 0.5 * a : 0.0;
 
-      var arr_pos = [0.0, 0.03, 0.06, 0.1];
-      var arr_a = [0.84, 0.36, 0.14, 0.06];
-      var arr_regScl = [1.0, 1.2, 1.4, 1.6];
-      for(let i = 0; i < 4; i++) {
-        var pos_i = Tmp.v2.set(Mathf.lerp(x_fi, x, arr_pos[i]), Mathf.lerp(y_fi, y, arr_pos[i]));
-        var a_i = arr_a[i];
-        var regScl_i = arr_regScl[i];
+      if(ldm) {
+        drawSimpleShadow(pos1, reg, ang, a_fi, regScl, color, z);
+      } else {
+        var arr_pos = [0.0, 0.03, 0.06, 0.1];
+        var arr_a = [0.84, 0.36, 0.14, 0.06];
+        var arr_regScl = [1.0, 1.2, 1.4, 1.6];
+        for(let i = 0; i < 4; i++) {
+          var pos_i = Tmp.v2.set(Mathf.lerp(x_fi, x, arr_pos[i]), Mathf.lerp(y_fi, y, arr_pos[i]));
+          var a_i = arr_a[i];
+          var regScl_i = arr_regScl[i];
 
-        drawSimpleShadow(pos_i, reg, ang, a_i, regScl_i * Mathf.lerp(1.0, 1.165, elev), color, z);
+          drawSimpleShadow(pos_i, reg, ang, a_i, regScl_i * Mathf.lerp(1.0, 1.165, elev), color, z);
+        };
       };
     };
     exports.drawPseudo3dShadow = drawPseudo3dShadow;

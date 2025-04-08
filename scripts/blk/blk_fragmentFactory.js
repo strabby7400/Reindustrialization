@@ -16,10 +16,10 @@
     function updateTileComp(b) {
       if(b.timerEffc.get(60.0)) {
         var cond = false;
-        var tmpLi = new Seq();
-        mdl_game._liTileRot(b.tile, b.block.liquidOutputDirections[0], b.block.size).each(ot => {
-          if(ot.build == null) {cond = true} else if(!tmpLi.contains(ot.build)) {tmpLi.add(ot.build)};
-          if(tmpLi.size > 1) cond = true;
+        var tmpArr = [];
+        mdl_game._tsRot(b.tile, b.block.liquidOutputDirections[0], b.block.size).forEach(ot => {
+          if(ot.build == null) {cond = true} else if(!tmpArr.includes(ot.build)) {tmpArr.push(ot.build)};
+          if(tmpArr.length > 1) cond = true;
         });
 
         b.down = cond;

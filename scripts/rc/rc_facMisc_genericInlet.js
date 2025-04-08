@@ -1,7 +1,7 @@
 const rc = {
   "parent": "reind-fac-misc-generic-inlet",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -16,12 +16,12 @@ const rc = {
     {
       "icon": "reind-effc-effc-ball-impact",
       "category": "special",
-      "randInputs": new Seq([
+      "randInputs": [
         "reind-item-cons-ball-steel", 1, 0.1,
-      ]),
-      "outputs": new Seq([
+      ],
+      "outputs": [
         "reind-effc-effc-ball-impact", 0.01666667,
-      ]),
+      ],
       "timeScale": 2.0,
       "tooltip": "using-steel-ball",
     },
@@ -34,12 +34,12 @@ const rc = {
     {
       "icon": "reind-effc-effc-gas-filter",
       "category": "special",
-      "randInputs": new Seq([
+      "randInputs": [
         "reind-item-bio-charcoal", 1, 0.5,
-      ]),
-      "outputs": new Seq([
+      ],
+      "outputs": [
         "reind-effc-effc-gas-filter", 0.01666667,
-      ]),
+      ],
       "tooltip": "using-charcoal",
     },
 
@@ -48,12 +48,12 @@ const rc = {
     {
       "icon": "reind-effc-effc-gas-filter",
       "category": "special",
-      "randInputs": new Seq([
+      "randInputs": [
         "reind-item-chem-active-carbon", 1, 0.1,
-      ]),
-      "outputs": new Seq([
+      ],
+      "outputs": [
         "reind-effc-effc-gas-filter", 0.01666667,
-      ]),
+      ],
       "tooltip": "using-active-carbon",
     },
 
@@ -65,12 +65,12 @@ const rc = {
     {
       "icon": "reind-effc-effc-packed-tower",
       "category": "special",
-      "randInputs": new Seq([
+      "randInputs": [
         "reind-item-cons-pall-ring-steel", 1, 0.2,
-      ]),
-      "outputs": new Seq([
+      ],
+      "outputs": [
         "reind-effc-effc-packed-tower", 0.01666667,
-      ]),
+      ],
       "timeScale": 2.0,
       "tooltip": "using-steel-pall-ring",
     },
@@ -80,17 +80,17 @@ const rc = {
     {
       "icon": "reind-effc-effc-packed-tower",
       "category": "special",
-      "randInputs": new Seq([
+      "randInputs": [
         "reind-item-cons-pall-ring-stainless-steel", 1, 0.1,
-      ]),
-      "outputs": new Seq([
+      ],
+      "outputs": [
         "reind-effc-effc-packed-tower", 0.01666667,
-      ]),
+      ],
       "timeScale": 2.0,
       "tooltip": "using-stainless-steel-pall-ring",
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

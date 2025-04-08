@@ -12,34 +12,34 @@
 
   // Part: Methods
     const setup_hiddenItems = function() {
-      var li_itm = new Seq();
-      var li_itmInv = new Seq();
+      var itms_reind = [];
+      var itms_other = [];
       Vars.content.items().each(itm => {
         if(mdl_content.isReind(itm)) {
-          li_itm.add(itm);
+          itms_reind.push(itm);
         } else {
-          li_itmInv.add(itm);
+          itms_other.push(itm);
         };
       });
 
-      var li_pla = new Seq();
-      var li_plaInv = new Seq();
+      var plas_reind = [];
+      var plas_other = [];
       Vars.content.planets().each(pla => {
         if(mdl_content.isReind(pla)) {
-          li_pla.add(pla);
+          plas_reind.push(pla);
         } else {
-          li_plaInv.add(pla);
+          plas_other.push(pla);
         };
       });
 
       // Hide Reind items on non-Reind planets
-      li_plaInv.each(pla => {
-        pla.hiddenItems.addAll(li_itm);
+      plas_other.forEach(pla => {
+        pla.hiddenItems.addAll(itms_reind);
       });
 
       // Hide non-Reind items on Reind planets
-      li_pla.each(pla => {
-        pla.hiddenItems.addAll(li_itmInv);
+      plas_reind.forEach(pla => {
+        pla.hiddenItems.addAll(itms_other);
       });
     };
     exports.setup_hiddenItems = setup_hiddenItems;

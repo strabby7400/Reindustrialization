@@ -15,7 +15,6 @@
   // Part: Component
     function setStatsComp(liq) {
       var li = new Seq();
-
       Vars.content.blocks().each(blk => {
         if(blk.liquidDrop == liq) li.add(blk);
       });

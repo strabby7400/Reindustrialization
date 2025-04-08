@@ -6,7 +6,7 @@ const gi = [
 const rc = {
   "parent": "reind-fac-proc-charcoal-rod-maker-m",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -18,12 +18,12 @@ const rc = {
     {
       "icon": "reind-item-int-powdered-biomass-dried",
       "category": "special",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-powdered-biomass-dried", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-charcoal-uncarbonized", 20,
-      ]),
+      ],
     },
 
 
@@ -31,15 +31,15 @@ const rc = {
     {
       "icon": "reind-item-int-sawdust-dried",
       "category": "special",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-sawdust-dried", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-charcoal-uncarbonized", 20,
-      ]),
+      ],
     },
 
 
-  ]),
+  ]
 };
 exports.rc = rc;

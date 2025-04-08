@@ -32,9 +32,9 @@
     exports._content = _content;
 
 
-    const _contentList = function(li_ct, title) {
+    const _contentList = function(cts, title) {
       return function() {
-        var col = Math.max(Math.floor(mdl_ui.getSizePair(null, null, 120.0)[0] / 32.0), 7);
+        var col = Math.max(Math.floor(mdl_ui._sizePair(null, null, 120.0)[0] / 32.0), 7);
 
         var dial = new BaseDialog(title);
         dial.title.getStyle().fontColor = Color.white;
@@ -43,12 +43,11 @@
         dial.cont.pane(pn => {
           mdl_table.__margin(pn);
 
-          var li = li_ct;
-          var cap = li.size;
+          var cap = cts.length;
           if(cap > 0) {
             for(let i = 0, j = 0; i < cap; i++) {
               (function(i) {
-                var ct = li.get(i);
+                var ct = cts[i];
 
                 var btn = pn.button(new TextureRegionDrawable(ct.uiIcon), 32.0, _content(ct)).pad(4.0).tooltip(ct.localizedName).get();
 
@@ -63,9 +62,9 @@
               j++;
             };
           } else {
-            pn.add(Core.bundle.get("info.reind-info-nothing.name")).center().row();
+            pn.add(mdl_text._info("nothing")).center().row();
           };
-        }).width(mdl_ui.getSizePair()[0]).row();
+        }).width(mdl_ui._sizePair()[0]).row();
 
         mdl_table.__breakQuad(dial.cont);
         dial.cont.table(Styles.none, btns => {
@@ -84,37 +83,37 @@
   // Part: Recipe
     const _optInput = function(rcLi) {
       return function() {
-        var dial = new BaseDialog(Core.bundle.get("info.reind-info-dial-optional-input.name"));
+        var dial = new BaseDialog(mdl_text._info("dial-optional-input"));
 
         mdl_table.__break(dial.cont);
         dial.cont.table(Tex.whiteui, tb_des => {
           tb_des.setColor(Pal.darkestGray);
           mdl_table.__margin(tb_des);
 
-          mdl_table.__wrapLine(tb_des, Core.bundle.get("info.reind-info-dial-optional-input.description"));
+          mdl_table.__wrapLine(tb_des, mdl_text._infoDes("dial-optional-input"));
         }).row();
 
         mdl_table.__break(dial.cont);
-        mdl_table.__bar(dial.cont, null, mdl_ui.getSizePair()[0]);
+        mdl_table.__bar(dial.cont, null, mdl_ui._sizePair()[0]);
 
         mdl_table.__break(dial.cont);
         dial.cont.pane(pn => {
           mdl_table.__margin(pn);
 
-          var cap = rcLi.size;
+          var cap = rcLi.length;
           for(let i = 0; i < cap; i += 4) {
-            var itm = Vars.content.item(rcLi.get(i));
+            var itm = Vars.content.item(rcLi[i]);
             if(itm == null) continue;
-            var amt = rcLi.get(i + 1);
-            var p = rcLi.get(i + 2);
-            var mtp = rcLi.get(i + 3);
+            var amt = rcLi[i + 1];
+            var p = rcLi[i + 2];
+            var mtp = rcLi[i + 3];
 
             pn.add("[" + Strings.fixed(i / 4.0 + 1.0, 0) + "]").center().color(Pal.accent).padRight(36.0);
             mdl_table.__recipeItem(pn, itm, amt, p).padRight(72.0);
-            pn.add(mdl_text._statText(Core.bundle.get("term.reind-term-efficiency-multiplier.name"), Strings.fixed(mtp * 100.0, 0) + "%")).center().padRight(6.0);
+            pn.add(mdl_text._statText(mdl_text._term("efficiency-multiplier"), Strings.fixed(mtp * 100.0, 0) + "%")).center().padRight(6.0);
             pn.row();
           };
-        }).width(mdl_ui.getSizePair()[0]).row();
+        }).width(mdl_ui._sizePair()[0]).row();
 
         mdl_table.__breakQuad(dial.cont);
         dial.cont.table(Styles.none, btns => {
@@ -136,7 +135,7 @@
         var dial = new Dialog();
 
         mdl_table.__breakHalf(dial.cont);
-        mdl_table.__wrapLine(dial.cont, Core.bundle.get("info.reind-info-dial-drama-confirm.name"), Align.center);
+        mdl_table.__wrapLine(dial.cont, mdl_text._info("dial-drama-confirm"), Align.center);
 
         mdl_table.__breakHalf(dial.cont);
         dial.cont.table(Styles.none, btns => {
@@ -144,7 +143,7 @@
             dial.hide();
 
             if(!Vars.state.isCampaign() && !secretCode.includes("<spoiler>")) {
-              mdl_ui.announce(Core.bundle.get("info.reind-info-drama-unavailable.name"));
+              mdl_ui.announce("drama-unavailable");
             } else {
               mdl_ui._call(nm);
             };
@@ -181,7 +180,7 @@
 
     const _reindManual = function() {
       return function() {
-        var dial = new BaseDialog(Core.bundle.get("info.reind-info-dial-reind-manual.name"));
+        var dial = new BaseDialog(mdl_text._info("dial-reind-manual"));
 
         mdl_table.__break(dial.cont);
         dial.cont.pane(pn => {
@@ -192,9 +191,9 @@
             var title = arr[i];
             var page = i / 2;
 
-            pn.button(Core.bundle.get("info.reind-info-dial-" + title + ".name"), _manualPage(page)).size(400.0, 50.0).center().pad(12.0).row();
+            pn.button(mdl_text._info("dial-" + title), _manualPage(page)).size(400.0, 50.0).center().pad(12.0).row();
           };
-        }).width(mdl_ui.getSizePair()[0]).row();
+        }).width(mdl_ui._sizePair()[0]).row();
 
         mdl_table.__breakQuad(dial.cont);
         dial.cont.table(Styles.none, btns => {
@@ -214,7 +213,7 @@
         var arr = arr_manualPages;
         var title = arr[page * 2];
         var arr1 = arr[page * 2 + 1];
-        var dial = new BaseDialog(Core.bundle.get("info.reind-info-dial-" + title + ".name"));
+        var dial = new BaseDialog(mdl_text._info("dial-" + title));
 
         mdl_table.__break(dial.cont);
         dial.cont.pane(pn => {
@@ -223,12 +222,12 @@
           var cap = arr1.length;
           if(cap > 0) {
             for(let i = 0; i < cap; i++) {
-              pn.button(Core.bundle.get("info.reind-info-dial-" + arr1[i] + ".name"), mdl_ui._call_f(arr1[i])).size(400.0, 50.0).center().pad(12.0).row();
+              pn.button(mdl_text._info("dial-" + arr1[i]), mdl_ui._call_f(arr1[i])).size(400.0, 50.0).center().pad(12.0).row();
             };
           } else {
-            pn.add(Core.bundle.get("info.reind-info-nothing.name")).center().row();
+            pn.add(mdl_text._info("nothing")).center().row();
           };
-        }).width(mdl_ui.getSizePair()[0]).row();
+        }).width(mdl_ui._sizePair()[0]).row();
 
         mdl_table.__breakQuad(dial.cont);
         dial.cont.table(Styles.none, btns => {
@@ -247,18 +246,18 @@
   // Part: Menu
     const _credits = function() {
       return function() {
-        var dial = new BaseDialog(Core.bundle.get("info.reind-info-dial-credits.name"));
+        var dial = new BaseDialog(mdl_text._info("dial-credits"));
 
         mdl_table.__break(dial.cont);
         dial.cont.table(Tex.whiteui, tb_des => {
           tb_des.setColor(Pal.darkestGray);
           mdl_table.__margin(tb_des);
 
-          mdl_table.__wrapLine(tb_des, Core.bundle.get("info.reind-info-dial-credits.description"));
+          mdl_table.__wrapLine(tb_des, mdl_text._infoDes("dial-credits"));
         }).row();
 
         mdl_table.__break(dial.cont);
-        mdl_table.__bar(dial.cont, null, mdl_ui.getSizePair()[0]);
+        mdl_table.__bar(dial.cont, null, mdl_ui._sizePair()[0]);
 
         mdl_table.__break(dial.cont);
         dial.cont.pane(pn => {
@@ -330,7 +329,7 @@
           mdl_table.__wrapLine(pn, "TooManyItems (Mindustry Mod) - For making players suffer less from recipe hell.", Align.left, 1, 48.0);
           mdl_table.__breakHalf(pn);
           mdl_table.__wrapLine(pn, "格雷工业 (Mindustry Mod) - For codes on tables and dialogs. I don't use the same recipe codes btw.", Align.left, 1, 48.0);
-        }).width(mdl_ui.getSizePair()[0]).row();
+        }).width(mdl_ui._sizePair()[0]).row();
 
         mdl_table.__breakQuad(dial.cont);
         dial.cont.table(Styles.none, btns => {
@@ -351,18 +350,18 @@
 
     const _updates = function() {
       return function() {
-        var dial = new BaseDialog(Core.bundle.get("info.reind-info-dial-updates.name"));
+        var dial = new BaseDialog(mdl_text._info("dial-updates"));
 
         mdl_table.__break(dial.cont);
         dial.cont.table(Tex.whiteui, tb_des => {
           tb_des.setColor(Pal.darkestGray);
           mdl_table.__margin(tb_des);
 
-          mdl_table.__wrapLine(tb_des, Core.bundle.get("info.reind-info-dial-updates.description"));
+          mdl_table.__wrapLine(tb_des, mdl_text._infoDes("dial-updates"));
         }).row();
 
         mdl_table.__break(dial.cont);
-        mdl_table.__bar(dial.cont, null, mdl_ui.getSizePair()[0]);
+        mdl_table.__bar(dial.cont, null, mdl_ui._sizePair()[0]);
 
         mdl_table.__break(dial.cont);
         dial.cont.pane(pn => {
@@ -371,7 +370,7 @@
           // NOTE: Add more buttons here.
           pn.button(arr_updates[1][0], _updatesRowDisplay(1)).size(400.0, 50.0).center().pad(12.0).row();
           pn.button(arr_updates[0][0], _updatesRowDisplay(0)).size(400.0, 50.0).center().pad(12.0).row();
-        }).width(mdl_ui.getSizePair()[0]).row();
+        }).width(mdl_ui._sizePair()[0]).row();
 
         mdl_table.__breakQuad(dial.cont);
         dial.cont.table(Styles.none, btns => {
@@ -390,7 +389,7 @@
 
       [
         "0.1.0: The Overhaul",
-        new Seq([
+        [
           "reind-env-tree-fungi-aerth-shiitake",
           "reind-fac-misc-core-crafter",
           "reind-min-dril-basic-impact-drill",
@@ -414,12 +413,12 @@
           "reind-pow-hcond-steel-heat-conductor",
           "reind-fac-furn-primitive-sintering-furnace",
           "reind-camp-aerth-002-crab-cliff",
-        ]),
+        ],
       ],
 
       [
         "0.1.1: Local Geology",
-        new Seq([
+        [
           "reind-pow-econd-transmission-box",
           "reind-min-dril-titan-impact-drill",
           "reind-sta-spec-terrorized",
@@ -443,7 +442,7 @@
           "reind-min-crop-thorium-reactor-mine",
           "reind-map-wall-occupiable-barricade",
           "reind-map-fac-ids-trade-dock-rim-builder",
-        ]),
+        ],
       ],
 
     ];
@@ -452,13 +451,13 @@
     const _updatesRowDisplay = function(id) {
       return function() {
         var verVal = arr_updates[id][0];
-        var li_ct = arr_updates[id][1];
+        var cts = arr_updates[id][1];
         var dial = new BaseDialog(verVal);
 
         mdl_table.__break(dial.cont);
         dial.cont.pane(pn => {
-          mdl_table.setContentRowDisplay(pn, li_ct, true);
-        }).width(mdl_ui.getSizePair()[0]).row();
+          mdl_table.setContentRowDisplay(pn, cts, true);
+        }).width(mdl_ui._sizePair()[0]).row();
 
         mdl_table.__breakQuad(dial.cont);
         dial.cont.table(Styles.none, btns => {
@@ -487,7 +486,7 @@
     const setSettings = function() {
       var dial = Vars.ui.settings;
 
-      dial.addCategory(Core.bundle.get("term.reind-term-reind-settings.name"), Icon.crafting, tb => {
+      dial.addCategory(mdl_text._term("reind-settings"), Icon.crafting, tb => {
         tb.checkPref("reind-beta-mode", false);
         tb.checkPref("reind-noob-mode", false, bool => {
           if(bool) {

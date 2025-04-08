@@ -73,7 +73,7 @@
       },
     });
     mdl_content.callInit(staLiq_acid, function() {
-      li_baseStatus.each(sta => this.opposite(sta));
+      arr_basic.forEach(sta => this.opposite(sta));
       this.affinity(StatusEffects.melting, (unit, result, time) => result.set(this, result.time = 600.0));
     });
     exports.staLiq_acid = staLiq_acid;
@@ -90,7 +90,7 @@
       },
     });
     mdl_content.callInit(staLiq_acidII, function() {
-      li_baseStatus.each(sta => this.opposite(sta));
+      arr_basic.forEach(sta => this.opposite(sta));
       this.affinity(StatusEffects.melting, (unit, result, time) => result.set(this, result.time = 600.0));
     });
     exports.staLiq_acidII = staLiq_acidII;
@@ -107,7 +107,7 @@
       },
     });
     mdl_content.callInit(staLiq_acidIII, function() {
-      li_baseStatus.each(sta => this.opposite(sta));
+      arr_basic.forEach(sta => this.opposite(sta));
       this.affinity(StatusEffects.melting, (unit, result, time) => result.set(this, result.time = 600.0));
     });
     exports.staLiq_acidIII = staLiq_acidIII;
@@ -124,7 +124,7 @@
       },
     });
     mdl_content.callInit(staLiq_acidIV, function() {
-      li_baseStatus.each(sta => this.opposite(sta));
+      arr_basic.forEach(sta => this.opposite(sta));
       this.affinity(StatusEffects.melting, (unit, result, time) => result.set(this, result.time = 600.0));
     });
     exports.staLiq_acidIV = staLiq_acidIV;
@@ -141,7 +141,7 @@
       },
     });
     mdl_content.callInit(staLiq_base, function() {
-      li_acidStatus.each(sta => this.opposite(sta));
+      arr_acidic.forEach(sta => this.opposite(sta));
       this.affinity(StatusEffects.melting, (unit, result, time) => result.set(this, result.time = 600.0));
     });
     exports.staLiq_base = staLiq_base;
@@ -158,7 +158,7 @@
       },
     });
     mdl_content.callInit(staLiq_baseII, function() {
-      li_acidStatus.each(sta => this.opposite(sta));
+      arr_acidic.forEach(sta => this.opposite(sta));
       this.affinity(StatusEffects.melting, (unit, result, time) => result.set(this, result.time = 600.0));
     });
     exports.staLiq_baseII = staLiq_baseII;
@@ -175,7 +175,7 @@
       },
     });
     mdl_content.callInit(staLiq_baseIII, function() {
-      li_acidStatus.each(sta => this.opposite(sta));
+      arr_acidic.forEach(sta => this.opposite(sta));
       this.affinity(StatusEffects.melting, (unit, result, time) => result.set(this, result.time = 600.0));
     });
     exports.staLiq_baseIII = staLiq_baseIII;
@@ -192,26 +192,26 @@
       },
     });
     mdl_content.callInit(staLiq_baseIV, function() {
-      li_acidStatus.each(sta => this.opposite(sta));
+      arr_acidic.forEach(sta => this.opposite(sta));
       this.affinity(StatusEffects.melting, (unit, result, time) => result.set(this, result.time = 600.0));
     });
     exports.staLiq_baseIV = staLiq_baseIV;
 
 
-    const li_acidStatus = new Seq([
+    const arr_acidic = [
       staLiq_acid,
       staLiq_acidII,
       staLiq_acidIII,
       staLiq_acidIV,
-    ]);
+    ];
 
 
-    const li_baseStatus = new Seq([
+    const arr_basic = [
       staLiq_base,
       staLiq_baseII,
       staLiq_baseIII,
       staLiq_baseIV,
-    ]);
+    ];
   // End
 
 

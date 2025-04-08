@@ -14,6 +14,7 @@
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
+    const mdl_text = require("reind/mdl/mdl_text");
   // End
 
 
@@ -28,14 +29,14 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      var tpVal = (blk.name.includes("reind-env-tree-fungi-")) ? Core.bundle.get("term.reind-term-fungi.name") : Core.bundle.get("term.reind-term-tree.name");
+      var tpVal = (blk.name.includes("reind-env-tree-fungi-")) ? mdl_text._term("fungi") : mdl_text._term("tree");
       blk.stats.add(db_stat.type, tpVal);
     };
 
 
     function drawBaseComp(blk, t) {
       if(treeAlpha < 0.0001) return;
-      
+
       // NOTE: {treeLayer} is stored in {armor}, well that sucks.
       var z = blk.armor;
       var z_sha = z - 0.0005;
@@ -88,6 +89,12 @@
       setStatsComp(blk);
     };
     exports.setStats = setStats;
+
+
+    const editorIcon = function(blk) {
+      return editorIconComp(blk);
+    };
+    exports.editorIcon = editorIcon;
 
 
     const drawBase = function(blk, t) {

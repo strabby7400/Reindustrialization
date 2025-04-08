@@ -10,10 +10,18 @@
 
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
+    const mdl_ui = require("reind/mdl/mdl_ui");
   // End
 
 
   // Part: Setting
+    var efficiencyUpdateInterval = 90.0;
+    const set_efficiencyUpdateInterval = function(val) {
+      efficiencyUpdateInterval = val;
+    };
+    exports.set_efficiencyUpdateInterval = set_efficiencyUpdateInterval;
+
+
     var secretCode = "<ohno>";
     const set_secretCode = function(val) {
       secretCode = val;
@@ -23,12 +31,28 @@
 
 
   // Part: Component
+    function updateTileComp(b) {
+      if(b.timerCall.get(efficiencyUpdateInterval)) {
+        var cond = false;
+        var count = 0;
+        mdl_game._tsEdge(b.tile, b.block.size).forEach(ot => {if(ot.block() instanceof Router) {
+          cond = true;
+          count += 1;
+        }});
+
+        b.isBackflow = cond;
+        if(count >= b.block.size * 4) {
+          b.kill();
+          mdl_ui.showInfoFade("router-kill");
+        };
+      };
+    };
+
+
     function drawComp(b) {
       if(secretCode.includes("<router>")) mdl_draw.drawNormalRegion(b, Vars.content.block("reind-eff-core-ash").region, 0.0, 1.0, b.block.size * 0.5);
 
-      mdl_game._liTileEdge(b.tile, b.block.size).each(ot => {
-        if(ot.block() instanceof Router) mdl_draw.drawTileIndicator(ot, false);
-      });
+      if(b.isBackflow) mdl_draw.drawTileIndicator(b.tile, false);
     };
   // End
 
@@ -49,6 +73,8 @@
 
     const updateTile = function(b) {
       PARENT.updateTile(b);
+
+      updateTileComp(b);
     };
     exports.updateTile = updateTile;
 

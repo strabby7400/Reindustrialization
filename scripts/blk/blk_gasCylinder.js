@@ -15,6 +15,7 @@
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
+    const mdl_text = require("reind/mdl/mdl_text");
     const mdl_ui = require("reind/mdl/mdl_ui");
 
     const db_effect = require("reind/db/db_effect");
@@ -24,7 +25,7 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      blk.stats.add(db_stat.storageType, "@term.reind-term-gas.name");
+      blk.stats.add(db_stat.storageType, mdl_text._term("gas"));
 
       blk.stats.add(db_stat.canExplode, true);
       blk.stats.add(db_stat.explosionRadius, frag_attack._gasExploRad(blk.size) / Vars.tilesize, StatUnit.blocks);
@@ -36,7 +37,7 @@
       if(liq != null && liq != Liquids.water && !mdl_content.isGas(liq)) {
         b.kill();
         mdl_effect.showAt(b, db_effect._invalidPlacement(), 0.0);
-        mdl_ui.showInfoFade("@info.reind-info-storage-type-mismatch.name");
+        mdl_ui.showInfoFade("storage-type-mismatch");
       };
     };
 

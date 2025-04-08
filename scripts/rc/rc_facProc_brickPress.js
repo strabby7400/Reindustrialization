@@ -10,7 +10,7 @@ const go = [
 const rc = {
   "parent": "reind-fac-proc-brick-press",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -22,12 +22,12 @@ const rc = {
     {
       "icon": "reind-item-int-brick-clay-unbaked",
       "category": "brick-making",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-clay", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-brick-clay-unbaked", 4,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -35,12 +35,12 @@ const rc = {
     {
       "icon": "reind-item-int-brick-high-alumina-unbaked",
       "category": "brick-making",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-blend-brick-high-alumina", 4,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-brick-high-alumina-unbaked", 4,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -48,12 +48,12 @@ const rc = {
     {
       "icon": "reind-item-int-brick-magnesia-unbaked",
       "category": "brick-making",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-blend-brick-magnesia", 4,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-brick-magnesia-unbaked", 4,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -61,12 +61,12 @@ const rc = {
     {
       "icon": "reind-item-int-brick-mullite-unbaked",
       "category": "brick-making",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-blend-brick-mullite", 4,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-brick-mullite-unbaked", 4,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -74,15 +74,15 @@ const rc = {
     {
       "icon": "reind-item-int-brick-silica-unbaked",
       "category": "brick-making",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-blend-brick-silica", 4,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-brick-silica-unbaked", 4,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

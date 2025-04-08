@@ -16,19 +16,19 @@
 
   // Part: Parse
     const _ci = function(rcFi, id_rc) {
-      var ci = new Seq();
+      var ci = [];
 
       // Input
-      var li = mdl_recipe._inputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._inputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var liq = Vars.content.liquid(li.get(i));
+          var liq = Vars.content.liquid(arr[i]);
           if(liq == null) continue;
-          var amt = li.get(i + 1);
+          var amt = arr[i + 1];
 
-          ci.add(liq);
-          ci.add(amt);
+          ci.push(liq);
+          ci.push(amt);
         };
       };
 
@@ -41,51 +41,51 @@
 
 
     const _bi = function(rcFi, id_rc) {
-      var bi = new Seq();
+      var bi = [];
 
       // Input
-      var li = mdl_recipe._inputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._inputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var itm = Vars.content.item(li.get(i));
+          var itm = Vars.content.item(arr[i]);
           if(itm == null) continue;
-          var amt = li.get(i + 1);
+          var amt = arr[i + 1];
 
-          bi.add(itm);
-          bi.add(amt);
-          bi.add(1.0);
+          bi.push(itm);
+          bi.push(amt);
+          bi.push(1.0);
         };
       };
 
       // Random Input
-      var li = mdl_recipe._randInputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._randInputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 3) {
-          var itm = Vars.content.item(li.get(i));
+          var itm = Vars.content.item(arr[i]);
           if(itm == null) continue;
-          var amt = li.get(i + 1);
-          var p = li.get(i + 2);
+          var amt = arr[i + 1];
+          var p = arr[i + 2];
 
-          bi.add(itm);
-          bi.add(amt);
-          bi.add(p);
+          bi.push(itm);
+          bi.push(amt);
+          bi.push(p);
         };
       };
 
       // Batch Fluid Input
-      var li = mdl_recipe._bfInputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._bfInputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var liq = Vars.content.liquid(li.get(i));
+          var liq = Vars.content.liquid(arr[i]);
           if(liq == null) continue;
-          var amt = li.get(i + 1);
+          var amt = arr[i + 1];
 
-          bi.add(liq);
-          bi.add(amt);
-          bi.add(1.0);
+          bi.push(liq);
+          bi.push(amt);
+          bi.push(1.0);
         };
       };
 
@@ -95,23 +95,23 @@
 
 
     const _opt = function(rcFi, id_rc) {
-      var opt = new Seq();
+      var opt = [];
 
       // Optional Input
-      var li = mdl_recipe._optInputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._optInputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 4) {
-          var itm = Vars.content.item(li.get(i));
+          var itm = Vars.content.item(arr[i]);
           if(itm == null) continue;
-          var amt = li.get(i + 1);
-          var p = li.get(i + 2);
-          var mtp = li.get(i + 3);
+          var amt = arr[i + 1];
+          var p = arr[i + 2];
+          var mtp = arr[i + 3];
 
-          opt.add(itm);
-          opt.add(amt);
-          opt.add(p);
-          opt.add(mtp);
+          opt.push(itm);
+          opt.push(amt);
+          opt.push(p);
+          opt.push(mtp);
         };
       };
 
@@ -124,14 +124,14 @@
       var optCur = null;
       var tmpMtp = 0.0;
 
-      var li = opt;
-      var cap = opt.size;
+      var arr = opt;
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 4) {
-          var ct = opt.get(i);
-          var amt = opt.get(i + 1);
-          var p = opt.get(i + 2);
-          var mtp = opt.get(i + 3);
+          var ct = arr[i];
+          var amt = arr[i + 1];
+          var p = arr[i + 2];
+          var mtp = arr[i + 3];
 
           if(b.items != null && b.items.get(ct) >= amt && mtp >= tmpMtp) {
             tmpMtp = mtp;
@@ -146,19 +146,19 @@
 
 
     const _co = function(rcFi, id_rc) {
-      var co = new Seq();
+      var co = [];
 
       // Output
-      var li = mdl_recipe._outputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._outputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var liq = Vars.content.liquid(li.get(i));
+          var liq = Vars.content.liquid(arr[i]);
           if(liq == null) continue;
-          var amt = li.get(i + 1);
+          var amt = arr[i + 1];
 
-          co.add(liq);
-          co.add(amt);
+          co.push(liq);
+          co.push(amt);
         };
       };
 
@@ -168,51 +168,51 @@
 
 
     const _bo = function(rcFi, id_rc) {
-      var bo = new Seq();
+      var bo = [];
 
       // Input
-      var li = mdl_recipe._outputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._outputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var itm = Vars.content.item(li.get(i));
+          var itm = Vars.content.item(arr[i]);
           if(itm == null) continue;
-          var amt = li.get(i + 1);
+          var amt = arr[i + 1];
 
-          bo.add(itm);
-          bo.add(amt);
-          bo.add(1.0);
+          bo.push(itm);
+          bo.push(amt);
+          bo.push(1.0);
         };
       };
 
       // Random Output
-      var li = mdl_recipe._randOutputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._randOutputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 3) {
-          var itm = Vars.content.item(li.get(i));
+          var itm = Vars.content.item(arr[i]);
           if(itm == null) continue;
-          var amt = li.get(i + 1);
-          var p = li.get(i + 2);
+          var amt = arr[i + 1];
+          var p = arr[i + 2];
 
-          bo.add(itm);
-          bo.add(amt);
-          bo.add(p);
+          bo.push(itm);
+          bo.push(amt);
+          bo.push(p);
         };
       };
 
       // Batch Fluid Output
-      var li = mdl_recipe._bfOutputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._bfOutputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var liq = Vars.content.liquid(li.get(i));
+          var liq = Vars.content.liquid(arr[i]);
           if(liq == null) continue;
-          var amt = li.get(i + 1);
+          var amt = arr[i + 1];
 
-          bo.add(liq);
-          bo.add(amt);
-          bo.add(1.0);
+          bo.push(liq);
+          bo.push(amt);
+          bo.push(1.0);
         };
       };
       return bo;
@@ -221,33 +221,47 @@
 
 
     const _fo = function(rcFi, id_rc) {
-      var fo = new Seq();
+      var fo = [];
 
       // Fail Outputs
-      var li = mdl_recipe._failOutputs(rcFi, id_rc);
-      var cap = li.size;
+      var arr = mdl_recipe._failOutputs(rcFi, id_rc);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var itm = Vars.content.item(li.get(i));
+          var itm = Vars.content.item(arr[i]);
           if(itm == null) continue;
-          var amt = li.get(i + 1);
+          var amt = arr[i + 1];
 
-          fo.add(itm);
-          fo.add(amt);
+          fo.push(itm);
+          fo.push(amt);
         };
       };
 
       return fo;
     };
     exports._fo = _fo;
+
+
+    const _dTup = function(b, bo, fo) {
+      var itms = [];
+      var liqs = [];
+      bo.forEach(i => {
+        if(b.items != null && i instanceof Item && !itms.includes(i)) itms.push(i);
+        if(b.liquids != null && i instanceof Liquid && !liqs.includes(i)) liqs.push(i);
+      });
+      fo.forEach(i => {if(b.items != null && i instanceof Item && !itms.includes(i)) itms.push(i)});
+
+      return [itms, liqs];
+    };
+    exports._dTup = _dTup
   // End
 
 
   // Part: Cond
     const outputsItem = function(bo, fo) {
       var cond = false;
-      bo.each(i => {if(i instanceof Item) cond = true});
-      if(fo.size > 0) cond = true;
+      bo.forEach(i => {if(i instanceof Item) cond = true});
+      if(fo.length > 0) cond = true;
 
       return cond;
     };
@@ -256,7 +270,7 @@
 
     const outputsLiquid = function(co) {
       var cond = false;
-      co.each(i => {if(i instanceof Liquid) cond = true});
+      co.forEach(i => {if(i instanceof Liquid) cond = true});
 
       return cond;
     };
@@ -267,9 +281,9 @@
       if(nm_ct == null) return false;
 
       var cond = false;
-      ci.each(i => {if(i instanceof Liquid && i.name == nm_ct) cond = true});
-      bi.each(i => {if((i instanceof Item && i.name == nm_ct) || (i instanceof Liquid && i.name == nm_ct)) cond = true});
-      opt.each(i => {if(i instanceof Item && i.name == nm_ct) cond = true});
+      ci.forEach(i => {if(i instanceof Liquid && i.name == nm_ct) cond = true});
+      bi.forEach(i => {if((i instanceof Item && i.name == nm_ct) || (i instanceof Liquid && i.name == nm_ct)) cond = true});
+      opt.forEach(i => {if(i instanceof Item && i.name == nm_ct) cond = true});
 
       return cond;
     };
@@ -280,9 +294,9 @@
       if(nm_ct == null) return false;
 
       var cond = false;
-      co.each(i => {if(i instanceof Liquid && i.name == nm_ct) cond = true});
-      bo.each(i => {if((i instanceof Item && i.name == nm_ct) || (i instanceof Liquid && i.name == nm_ct)) cond = true});
-      fo.each(i => {if(i instanceof Item && i.name == nm_ct) cond = true});
+      co.forEach(i => {if(i instanceof Liquid && i.name == nm_ct) cond = true});
+      bo.forEach(i => {if((i instanceof Item && i.name == nm_ct) || (i instanceof Liquid && i.name == nm_ct)) cond = true});
+      fo.forEach(i => {if(i instanceof Item && i.name == nm_ct) cond = true});
 
       return cond;
     };
@@ -293,30 +307,30 @@
       var cond = true;
 
       // CO
-      var li = co;
-      var cap = li.size;
-      if(cap > 0) {
-        var allFull = true;
-        for(let i = 0; i < cap; i += 2) {
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
+      if(b.liquids != null) {
+        var arr = co;
+        var cap = arr.length;
+        if(cap > 0) {
+          var allFull = true;
+          for(let i = 0; i < cap; i += 2) {
+            var ct = arr[i];
+            var amt = arr[i + 1];
 
-          if(b.liquids != null) {
             if(b.liquids.get(ct) < b.block.liquidCapacity) {allFull = false} else {if(!b.block.ignoreLiquidFullness && !b.block.dumpExtraLiquid) cond = false};
           };
-        };
 
-        if(allFull && outputsLiquid(co) && !b.block.ignoreLiquidFullness) cond = false;
+          if(allFull && outputsLiquid(co) && !b.block.ignoreLiquidFullness) cond = false;
+        };
       };
 
       // BO
-      var li = bo;
-      var cap = li.size;
+      var arr = bo;
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 3) {
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
-          var p = li.get(i + 2);
+          var ct = arr[i];
+          var amt = arr[i + 1];
+          var p = arr[i + 2];
 
           if(b.items != null && ct instanceof Item) {
             if(b.items.get(ct) > b.block.itemCapacity - amt * p) cond = false;
@@ -329,12 +343,12 @@
       };
 
       // FO
-      var li = fo;
-      var cap = li.size;
+      var arr = fo;
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
+          var ct = arr[i];
+          var amt = arr[i + 1];
 
           if(b.items != null) {
             if(b.items.get(ct) > b.block.itemCapacity - amt) cond = false;
@@ -355,14 +369,14 @@
       if(b.power != null) val *= b.power.status;
 
       // CI
-      var li = ci;
-      var cap = li.size;
-      if(cap > 0) {
-        for(let i = 0; i < cap; i += 2) {
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
+      if(b.liquids != null) {
+        var arr = ci;
+        var cap = arr.length;
+        if(cap > 0) {
+          for(let i = 0; i < cap; i += 2) {
+            var ct = arr[i];
+            var amt = arr[i + 1];
 
-          if(b.liquids != null) {
             mtp = b.edelta() * b.efficiencyScale() < 0.0001 ? 0.0 : Math.min(b.liquids.get(ct) / amt * b.edelta() * b.efficiencyScale(), 1.0);
             val *= mtp;
           };
@@ -370,13 +384,13 @@
       };
 
       // BI
-      var li = bi;
-      var cap = li.size;
+      var arr = bi;
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 3) {
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
-          var p = li.get(i + 2);
+          var ct = arr[i];
+          var amt = arr[i + 1];
+          var p = arr[i + 2];
 
           if(b.items != null && ct instanceof Item) {
             if(b.items.get(ct) < amt) val = 0.0;
@@ -404,13 +418,13 @@
 
     const consumeItems = function(b, bi, opt) {
       // BI
-      var li = bi;
-      var cap = li.size;
+      var arr = bi;
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 3) {
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
-          var p = li.get(i + 2);
+          var ct = arr[i];
+          var amt = arr[i + 1];
+          var p = arr[i + 2];
 
           if(b.items != null && ct instanceof Item) {
             if(p > 0.9999) {
@@ -443,18 +457,18 @@
     exports.consumeItems = consumeItems;
 
 
-    const consumeLiquids = function(b, ci, progInc, timeScale) {
+    const consumeLiquids = function(b, ci, progInc, timeScale, mtp) {
+      if(b.liquids == null) return;
+
       // CI
-      var li = ci;
-      var cap = li.size;
+      var arr = ci;
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
+          var ct = arr[i];
+          var amt = arr[i + 1];
 
-          if(b.liquids != null) {
-            b.liquids.remove(ct, Math.min(amt * progInc * timeScale, b.liquids.get(ct)));
-          };
+          b.liquids.remove(ct, Math.min(amt * progInc * timeScale * mtp, b.liquids.get(ct)));
         };
       };
     };
@@ -465,13 +479,13 @@
       var failed = Mathf.chance(failP);
 
       // BO
-      var li = bo;
-      var cap = li.size;
+      var arr = bo;
+      var cap = arr.length;
       if(!failed && cap > 0) {
         for(let i = 0; i < cap; i += 3) {
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
-          var p = li.get(i + 2);
+          var ct = arr[i];
+          var amt = arr[i + 1];
+          var p = arr[i + 2];
 
           if(b.items != null && ct instanceof Item) {
             for(let j = 0; j < amt; j++) {if(Mathf.chance(p)) b.offload(ct)};
@@ -484,15 +498,15 @@
       };
 
       // FO
-      var li = fo;
-      var cap = li.size;
+      var arr = fo;
+      var cap = arr.length;
       if(failed) {
         for(let i = 0; i < 6; i++) {mdl_effect.showAt(b, db_effect._craftBlackSmog())};
 
         if(cap > 0) {
           for(let i = 0; i < cap; i += 2) {
-            var ct = li.get(i);
-            var amt = li.get(i + 1);
+            var ct = arr[i];
+            var amt = arr[i + 1];
 
             if(b.items != null) {
               for(let j = 0; j < amt; j++) {b.offload(ct)};
@@ -504,46 +518,40 @@
     exports.addItems = addItems;
 
 
-    const addLiquids = function(b, co, progInc1, timeScale) {
+    const addLiquids = function(b, co, progInc1, timeScale, mtp) {
+      if(b.liquids == null) return;
+
       // CO
-      var li = co;
-      var cap = li.size;
+      var arr = co;
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var ct = li.get(i);
-          var amt = li.get(i + 1);
+          var ct = arr[i];
+          var amt = arr[i + 1];
 
-          if(b.liquids != null) {
-            b.handleLiquid(b, ct, Math.min(amt * progInc1 * timeScale, b.block.liquidCapacity - b.liquids.get(ct)));
-          };
+          b.handleLiquid(b, ct, Math.min(amt * progInc1 * timeScale * mtp, b.block.liquidCapacity - b.liquids.get(ct)));
         };
       };
     };
     exports.addLiquids = addLiquids;
 
 
-    const dumpResource = function(b, co, bo, fo) {
-      var li = co;
-      var cap = li.size;
-      if(cap > 0) {
-        for(let i = 0; i < cap; i += 2) {
-          var ct = li.get(i);
-          var dir = (b.block.liquidOutputDirections.length > i / 2) ? b.block.liquidOutputDirections[i / 2] : -1;
+    const dumpResource = function(b, co, dTup) {
+      if(b.liquids != null) {
+        var arr = co;
+        var cap = arr.length;
+        if(cap > 0) {
+          for(let i = 0; i < cap; i += 2) {
+            var ct = arr[i];
+            var dir = (b.block.liquidOutputDirections.length > i / 2) ? b.block.liquidOutputDirections[i / 2] : -1;
 
-          if(b.liquids != null) b.dumpLiquid(ct, 2.0, dir);
+            b.dumpLiquid(ct, 2.0, dir);
+          };
         };
       };
 
-      var li_itm = new Seq();
-      var li_liq = new Seq();
-      bo.each(i => {
-        if(i instanceof Item && !li_itm.contains(i)) li_itm.add(i);
-        if(i instanceof Liquid && !li_liq.contains(i)) li_liq.add(i);
-      });
-      fo.each(i => {if(i instanceof Item && !li_itm.contains(i)) li_itm.add(i)});
-
-      if(b.items != null) li_itm.each(itm => b.dump(itm));
-      if(b.liquids != null) li_liq.each(liq => b.dumpLiquid(liq, 2.0));
+      dTup[0].forEach(itm => b.dump(itm));
+      dTup[1].forEach(liq => b.dumpLiquid(liq, 2.0));
     };
     exports.dumpResource = dumpResource;
   // End

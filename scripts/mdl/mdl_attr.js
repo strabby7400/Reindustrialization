@@ -48,15 +48,15 @@
     exports._sumAttr = _sumAttr;
 
 
-    const _sumAttr_li = function(li_ot, attr_gn) {
+    const _sumAttr_ts = function(ts, attr_gn) {
       var attr = 0.0;
       var nmAttr = _attr(attr_gn);
 
-      li_ot.each(ot => attr += ot.floor().attributes.get(Attribute.get(nmAttr)));
+      ts.forEach(ot => attr += ot.floor().attributes.get(Attribute.get(nmAttr)));
 
       return attr;
     };
-    exports._sumAttr_li = _sumAttr_li;
+    exports._sumAttr_ts = _sumAttr_ts;
 
 
     const _sumAttr_rect = function(blk, t, attr_gn, r) {
@@ -64,7 +64,7 @@
 
       var nmAttr = _attr(attr_gn);
 
-      return _sumAttr_li(mdl_game._liTileRect(t, r, blk.size), nmAttr);
+      return _sumAttr_ts(mdl_game._tsRect(t, r, blk.size), nmAttr);
     };
     exports._sumAttr_rect = _sumAttr_rect;
   // End
@@ -92,14 +92,14 @@
      * {db_item.db["map"]["bush"]} ... attribute -> bush
      * {db_fluid.db["map"]["vent"]} ... attribute -> vent
      */
-    const _attrPair = function(map, li_ot) {
+    const _attrPair = function(map, ts) {
       var attr = 0.0;
       var nmAttr = null;
-      var cap = map.size;
+      var cap = map.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var tmpNmAttr = map.get(i);
-          var tmpAttr = _sumAttr_li(li_ot, tmpNmAttr);
+          var tmpNmAttr = map[i];
+          var tmpAttr = _sumAttr_ts(ts, tmpNmAttr);
           if(tmpAttr > attr) {
             nmAttr = tmpNmAttr;
             attr = tmpAttr;
@@ -120,22 +120,23 @@
      * Gets attribute sum for each attribute in a mapper list.
      * Returns a list of {nmAttr} and {attr}.
      */
-    const _liSumAttr = function(map, li_ot) {
-      var li = new Seq();
+    const _attrMap = function(map, ts) {
+      var arr = [];
 
-      var cap = map.size;
+      var cap = map.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var nmAttr = map.get(i);
-          var attr = sumAttr_li(li_ot, nmAttr);
+          var nmAttr = map[i];
+          var attr = sumAttr_ts(ts, nmAttr);
 
-          li.add(nmAttr, attr);
+          arr.push(nmAttr);
+          arr.push(attr);
         };
       };
 
-      return li;
+      return arr;
     };
-    exports._liSumAttr = _liSumAttr;
+    exports._attrMap = _attrMap;
   // End
 
 

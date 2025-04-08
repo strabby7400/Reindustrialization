@@ -1,12 +1,12 @@
 const gri = [
-  "reind-item-bio-charcoal", 30, 0.5,
+  "reind-item-bio-charcoal", 15, 0.5,
 ];
 
 
 const rc = {
   "parent": "reind-fac-furn-primitive-brick-kiln",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -18,13 +18,13 @@ const rc = {
     {
       "icon": "reind-item-buil-brick-clay",
       "category": "brick-baking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-brick-clay-unbaked", 10,
-      ]),
-      "randInputs": new Seq([].concat(gri)),
-      "outputs": new Seq([
+      ],
+      "randInputs": [].concat(gri),
+      "outputs": [
         "reind-item-buil-brick-clay", 10,
-      ]),
+      ],
     },
 
 
@@ -32,13 +32,13 @@ const rc = {
     {
       "icon": "reind-item-buil-brick-high-alumina",
       "category": "brick-baking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-brick-high-alumina-unbaked", 10,
-      ]),
-      "randInputs": new Seq([].concat(gri)),
-      "outputs": new Seq([
+      ],
+      "randInputs": [].concat(gri),
+      "outputs": [
         "reind-item-buil-brick-high-alumina", 10,
-      ]),
+      ],
     },
 
 
@@ -46,13 +46,13 @@ const rc = {
     {
       "icon": "reind-item-buil-brick-magnesia",
       "category": "brick-baking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-brick-magnesia-unbaked", 10,
-      ]),
-      "randInputs": new Seq([].concat(gri)),
-      "outputs": new Seq([
+      ],
+      "randInputs": [].concat(gri),
+      "outputs": [
         "reind-item-buil-brick-magnesia", 10,
-      ]),
+      ],
     },
 
 
@@ -60,13 +60,13 @@ const rc = {
     {
       "icon": "reind-item-buil-brick-mullite",
       "category": "brick-baking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-brick-mullite-unbaked", 10,
-      ]),
-      "randInputs": new Seq([].concat(gri)),
-      "outputs": new Seq([
+      ],
+      "randInputs": [].concat(gri),
+      "outputs": [
         "reind-item-buil-brick-mullite", 10,
-      ]),
+      ],
     },
 
 
@@ -74,16 +74,16 @@ const rc = {
     {
       "icon": "reind-item-buil-brick-silica",
       "category": "brick-baking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-brick-silica-unbaked", 10,
-      ]),
-      "randInputs": new Seq([].concat(gri)),
-      "outputs": new Seq([
+      ],
+      "randInputs": [].concat(gri),
+      "outputs": [
         "reind-item-buil-brick-silica", 10,
-      ]),
+      ],
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

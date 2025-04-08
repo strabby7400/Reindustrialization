@@ -15,10 +15,10 @@
     const _rc = function(rcFi, id_rc) {
       if(rcFi == null || id_rc == null) return;
 
-      var li_rc = rcFi.rc["recipes"];
-      if(id_rc >= li_rc.size) return;
+      var rcLi = rcFi.rc["recipes"];
+      if(id_rc >= rcLi.length) return;
 
-      return li_rc.get(id_rc);
+      return rcLi[id_rc];
     };
     exports._rc = _rc;
 
@@ -26,7 +26,7 @@
     const _rcSize = function(rcFi) {
       if(rcFi == null) return;
 
-      return rcFi.rc["recipes"].size;
+      return rcFi.rc["recipes"].length;
     };
     exports._rcSize = _rcSize;
 
@@ -59,49 +59,49 @@
 
     const _catVal = function(rcFi, id_rc) {
       var cat = _cat(rcFi, id_rc);
-      return (Vars.headless || cat == null) ? "UNDEFINED" : Core.bundle.get("term.reind-term-" + cat + ".name");
+      return (Vars.headless || cat == null) ? "UNDEFINED" : mdl_text._term(cat);
     };
     exports._catVal = _catVal;
 
 
     const _inputs = function(rcFi, id_rc) {
       var inputs = _rcVal(rcFi, id_rc, "inputs");
-      return (inputs == null) ? new Seq() : inputs;
+      return (inputs == null) ? [] : inputs;
     };
     exports._inputs = _inputs;
 
 
     const _outputs = function(rcFi, id_rc) {
       var outputs = _rcVal(rcFi, id_rc, "outputs");
-      return (outputs == null) ? new Seq() : outputs;
+      return (outputs == null) ? [] : outputs;
     };
     exports._outputs = _outputs;
 
 
     const _randInputs = function(rcFi, id_rc) {
       var inputs = _rcVal(rcFi, id_rc, "randInputs");
-      return (inputs == null) ? new Seq() : inputs;
+      return (inputs == null) ? [] : inputs;
     };
     exports._randInputs = _randInputs;
 
 
     const _randOutputs = function(rcFi, id_rc) {
       var outputs = _rcVal(rcFi, id_rc, "randOutputs");
-      return (outputs == null) ? new Seq() : outputs;
+      return (outputs == null) ? [] : outputs;
     };
     exports._randOutputs = _randOutputs;
 
 
     const _bfInputs = function(rcFi, id_rc) {
       var bfInputs = _rcVal(rcFi, id_rc, "bfInputs");
-      return (bfInputs == null) ? new Seq() : bfInputs;
+      return (bfInputs == null) ? [] : bfInputs;
     };
     exports._bfInputs = _bfInputs;
 
 
     const _bfOutputs = function(rcFi, id_rc) {
       var bfOutputs = _rcVal(rcFi, id_rc, "bfOutputs");
-      return (bfOutputs == null) ? new Seq() : bfOutputs;
+      return (bfOutputs == null) ? [] : bfOutputs;
     };
     exports._bfOutputs = _bfOutputs;
 
@@ -115,7 +115,7 @@
 
     const _optInputs = function(rcFi, id_rc) {
       var optInputs = _rcVal(rcFi, id_rc, "optInputs");
-      return (optInputs == null) ? new Seq() : optInputs;
+      return (optInputs == null) ? [] : optInputs;
     };
     exports._optInputs = _optInputs;
 
@@ -129,7 +129,7 @@
 
     const _failOutputs = function(rcFi, id_rc) {
       var outputs = _rcVal(rcFi, id_rc, "failOutputs");
-      return (outputs == null) ? new Seq() : outputs;
+      return (outputs == null) ? [] : outputs;
     };
     exports._failOutputs = _failOutputs;
 
@@ -149,10 +149,10 @@
       var str_ct = (ct == null) ? "-" : ct.localizedName;
 
       var failP = _failP(rcFi, id_rc);
-      var str_fail = (failP > 0.0001) ? mdl_text._statText(Core.bundle.get("term.reind-term-chance-to-fail.name"), Strings.fixed(failP * 100.0, 1) + "%") : null;
+      var str_fail = (failP > 0.0001) ? mdl_text._statText(mdl_text._term("chance-to-fail"), Strings.fixed(failP * 100.0, 1) + "%") : null;
 
       var tt = _rawTooltip(rcFi, id_rc);
-      var str_tt = (tt == null) ? null : Core.bundle.get("info.reind-info-tt-" + tt + ".name");
+      var str_tt = (tt == null) ? null : mdl_text._info("tt-" + tt);
 
       var str_fi =  "[accent]<" + str_cat + " [" + Strings.fixed(id_rc + 1.0, 0) + "]" + ">[]\n" + str_ct +
       ((str_fail == null) ? "" : ("\n\n" + str_fail)) +

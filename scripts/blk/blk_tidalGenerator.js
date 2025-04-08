@@ -13,6 +13,7 @@
     const mdl_attr = require("reind/mdl/mdl_attr");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
+    const mdl_text = require("reind/mdl/mdl_text");
 
     const db_effect = require("reind/db/db_effect");
     const db_env = require("reind/db/db_env");
@@ -38,7 +39,7 @@
 
 
     function canPlaceOnComp(blk, t, team, rot) {
-      if(!db_env.db["planet"]["type"]["tide"].contains(Vars.state.rules.planet.name)) return false;
+      if(!db_env.db["planet"]["type"]["tide"].includes(Vars.state.rules.planet.name)) return false;
       if(!frag_faci.canPlaceOn_terrain(blk, "sea", "enable", t, team, rot)) return false;
 
       return true;
@@ -46,7 +47,7 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      if(!db_env.db["planet"]["type"]["tide"].contains(Vars.state.rules.planet.name)) mdl_draw.drawPlaceText(blk, Vars.world.tile(tx, ty), false, Core.bundle.get("info.reind-info-no-tides.name"));
+      if(!db_env.db["planet"]["type"]["tide"].includes(Vars.state.rules.planet.name)) mdl_draw.drawPlaceText(blk, Vars.world.tile(tx, ty), false, mdl_text._info("no-tides"));
     };
   // End
 

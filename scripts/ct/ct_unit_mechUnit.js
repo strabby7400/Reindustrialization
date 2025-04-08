@@ -81,34 +81,6 @@
     exports.unitInf_74ka = unitInf_74ka;
 
 
-    const unitInf_psas = extend(UnitType, "unit-inf-psas", {
-      setStats() {
-        this.super$setStats();
-        TEMPLATE.setStats(this);
-      },
-      update(unit) {
-        this.super$update(unit);
-        TEMPLATE.update(this, unit);
-      },
-      init(unit) {
-        this.super$init();
-        TEMPLATE.init(this);
-      },
-      killed(unit) {
-        this.super$killed(unit);
-        TEMPLATE.killed(this, unit);
-      },
-      draw(unit) {
-        TEMPLATE.draw(this, unit);
-      },
-      drawShadow(unit) {
-        TEMPLATE.drawShadow(this, unit);
-      },
-    });
-    unitInf_psas.constructor = () => extend(MechUnit, {});
-    exports.unitInf_psas = unitInf_psas;
-
-
     const unitInf_paw = extend(UnitType, "unit-inf-paw", {
       setStats() {
         this.super$setStats();
@@ -138,6 +110,36 @@
     });
     unitInf_paw.constructor = () => extend(MechUnit, {});
     exports.unitInf_paw = unitInf_paw;
+
+
+    const unitInf_psas = extend(UnitType, "unit-inf-psas", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      update(unit) {
+        this.super$update(unit);
+        TEMPLATE.update(this, unit);
+      },
+      // Specific
+      init(unit) {
+        this.super$init();
+        TEMPLATE.init(this);
+        db_ability.__energizedChainLightning(this, 0.03333333, 240.0, 40.0, 60.0, 7, 0.75, 0.3, Pal.techBlue);
+      },
+      killed(unit) {
+        this.super$killed(unit);
+        TEMPLATE.killed(this, unit);
+      },
+      draw(unit) {
+        TEMPLATE.draw(this, unit);
+      },
+      drawShadow(unit) {
+        TEMPLATE.drawShadow(this, unit);
+      },
+    });
+    unitInf_psas.constructor = () => extend(MechUnit, {});
+    exports.unitInf_psas = unitInf_psas;
   // End
 
 

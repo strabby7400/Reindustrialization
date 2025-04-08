@@ -39,13 +39,13 @@
 
 
     const drawPlace_2side = function(blk, t, rot) {
-      mdl_game._liTileRot_2side(t, rot, blk.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
+      mdl_game._tsRot_2side(t, rot, blk.size).forEach(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
     };
     exports.drawPlace_2side = drawPlace_2side;
 
 
     const drawSelect_2side = function(b) {
-      mdl_game._liTileRot_2side(b.tile, b.rotation, b.block.size).each(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
+      mdl_game._tsRot_2side(b.tile, b.rotation, b.block.size).forEach(ot => mdl_draw.drawTileIndicator(ot, !(ot.solid() || ot.block() instanceof LiquidJunction)));
     };
     exports.drawSelect_2side = drawSelect_2side;
   // End
@@ -58,10 +58,7 @@
     exports.setStats_coreDump = setStats_coreDump;
 
 
-    const li_48512244 = new Seq();
     const dump_coreDump = function(b, itm, rad) {
-      var li = li_48512244.clear();
-
       if(rad == null) return false;
 
       var b_core = b.closestCore();
@@ -70,7 +67,7 @@
       if(mdl_game._dst(b, b_core) > rad) shouldCoreDump = false;
       if(b.power != null && b.power.status < 0.9999) shouldCoreDump = false;
 
-      return shouldCoreDump ? frag_item.dumpItem(b, li.add(b_core), itm) : b.super$dump(itm);
+      return shouldCoreDump ? frag_item.dumpItem(b, [b_core], itm) : b.super$dump(itm);
     };
     exports.dump_coreDump = dump_coreDump;
 
@@ -117,98 +114,91 @@
 
 
     const _cropTuple = function(blk) {
-      var val = null;
-      var li = db_block.db["map"]["growth"];
-      var cap = li.size;
+      var tup = null;
+      var arr = db_block.db["map"]["growth"];
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 5) {
-          var nm = li.get(i);
+          var nm = arr[i];
           if(blk.name != nm) continue;
-          var growTime = li.get(i + 1);
-          var growStages = li.get(i + 2);
-          var cropYield = li.get(i + 3);
-          var stageScr = li.get(i + 4);
+          var growTime = arr[i + 1];
+          var growStages = arr[i + 2];
+          var cropYield = arr[i + 3];
+          var stageScr = arr[i + 4];
 
-          val = [growTime, growStages, cropYield, stageScr];
+          tup = [growTime, growStages, cropYield, stageScr];
         };
       };
 
-      return val;
+      return tup;
     };
     exports._cropTuple = _cropTuple;
 
 
     const _cropYieldTuple = function(cropYield, growStage) {
-      var val = null;
-      var li = cropYield;
-      var cap = li.size;
+      var tup = null;
+      var arr = cropYield;
+      var cap = arr.length;
       if(cap == 0) return val;
       for(let i = 0; i < cap; i += 4) {
-        var stage = li.get(i);
+        var stage = arr[i];
         if(growStage != stage) continue;
-        var backTo = li.get(i + 1);
-        var batch = li.get(i + 2);
-        var harvestScr = li.get(i + 3);
+        var backTo = arr[i + 1];
+        var batch = arr[i + 2];
+        var harvestScr = arr[i + 3];
 
-        val = [backTo, batch, harvestScr];
+        tup = [backTo, batch, harvestScr];
       };
 
-      return val;
+      return tup;
     };
     exports._cropYieldTuple = _cropYieldTuple;
   // End
 
 
   // Part: Energy Point
-    const li_73097008 = new Seq();
     const _epUnitMap = function(pos_gn, rad, team, caller) {
-      var li = li_73097008.clear();
+      var arr = [];
+      if(pos_gn == null || rad == null || team == null) return arr;
 
-      if(pos_gn == null || rad == null || team == null) return li;
-
-      mdl_game._filterTeam(mdl_game._liUnit(pos_gn, rad, caller), team).each(unit => {
-        var ep = mdl_data.read_1n1v(db_unit.db["ep"]["provided"], unit.type.name);
-        if(ep != null) {
-          li.add(unit);
-          li.add(ep);
+      mdl_game._unitsAllied(pos_gn, rad, team).forEach(unit => {
+        if(unit != caller) {
+          var ep = mdl_data.read_1n1v(db_unit.db["ep"]["provided"], unit.type.name);
+          if(ep != null) {
+            arr.push(unit);
+            arr.push(ep);
+          };
         };
       });
 
-      return li;
+      return arr;
     };
     exports._epUnitMap = _epUnitMap;
 
 
-    const li_95226458 = new Seq();
-    const li_65225877 = new Seq();
-    const _epLiUnit = function(pos_gn, rad, team, caller) {
-      var li = li_95226458.clear();
-      var li1 = li_65225877.clear();
+    const _epUnits = function(pos_gn, rad, team, caller) {
+      var arr = [];
+      var map = _epUnitMap(pos_gn, rad, team, caller);
 
-      li.addAll(_epUnitMap(pos_gn, rad, team, caller));
-
-      var cap = li.size;
-      if(cap == 0) return li;
+      var cap = map.length;
+      if(cap == 0) return arr;
       for(let i = 0; i < cap; i += 2) {
-        li1.add(li.get(i));
+        arr.push(map[i]);
       };
 
-      return li1;
+      return arr;
     };
-    exports._epLiUnit = _epLiUnit;
+    exports._epUnits = _epUnits;
 
 
-    const li_22579666 = new Seq();
     const _epCount = function(pos_gn, rad, team, caller) {
-      var li = li_22579666.clear();
-
-      li.addAll(_epUnitMap(pos_gn, rad, team, caller));
+      var map = _epUnitMap(pos_gn, rad, team, caller);
 
       var ep_fi = 0.0;
-      var cap = li.size;
+      var cap = map.length;
       if(cap == 0) return ep_fi;
       for(let i = 0; i < cap; i += 2) {
-        ep_fi += li.get(i + 1);
+        ep_fi += map[i + 1];
       };
 
       return ep_fi;
@@ -217,10 +207,8 @@
 
 
     const _epFrac = function(e) {
-      var r = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.db["ep"]["range"], e.type.name) : mdl_data.read_1n1v(db_block.db["ep"]["range"], e.block.name);
-      if(r == null) return true;
-      var ep_req = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], e.type.name) : mdl_data.read_1n1v(db_block.db["ep"]["requirement"], e.block.name);
-      if(ep_req == null) return true;
+      var r = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.db["ep"]["range"], e.type.name) : mdl_data.read_1n1v(db_block.db["ep"]["range"], e.block.name, 5);
+      var ep_req = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], e.type.name) : mdl_data.read_1n1v(db_block.db["ep"]["requirement"], e.block.name, 0.0);
 
       var ep = _epCount(e, r * Vars.tilesize, e.team, (e instanceof Unit) ? e : null);
 
@@ -259,7 +247,7 @@
       var r = (e instanceof Unit) ? mdl_data.read_1n1v(db_unit.db["ep"]["range"], e.type.name) : mdl_data.read_1n1v(db_block.db["ep"]["range"], e.block.name);
       if(r == null) return;
 
-      _epLiUnit(e, r * Vars.tilesize, e.team, (e instanceof Unit) ? e : null).each(unit => {
+      _epUnits(e, r * Vars.tilesize, e.team, (e instanceof Unit) ? e : null).forEach(unit => {
         if(e instanceof Unit) {
           mdl_draw.drawFlickerLine(unit, e, Pal.techBlue, 0.5, false, 0.75, 58.88);
         } else if(cfg_update.state_drawLightning) {
@@ -282,12 +270,12 @@
     const updateTile_flammable = function(b) {
       if(Mathf.chance(0.99)) return;
 
-      var li_ot = mdl_game._liTileLinked(b.tile);
+      var ts = mdl_game._tsLinked(b.tile);
       var rheat = 0.0;
-      li_ot.each(ot => rheat += mdl_heat._rangeHeat(ot));
-      rheat /= li_ot.size;
+      ts.forEach(ot => rheat += mdl_heat._rangeHeat(ot));
+      rheat /= ts.length;
 
-      if(rheat > 6.0) Fires.create(li_ot.get(Math.round(Mathf.random(li_ot.size - 1) - 0.4999)));
+      if(rheat > 6.0) Fires.create(ts[Math.round(Mathf.random(ts.length - 1) - 0.4999)]);
     };
     exports.updateTile_flammable = updateTile_flammable;
   // End
@@ -307,7 +295,7 @@
 
       var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["magnetic"], b.block.name, 2)
       var count = 0;
-      mdl_game._liBuild(mdl_game._liTileRect(b.tile, r, b.block.size)).each(ob => {
+      mdl_game._bs(mdl_game._tsRect(b.tile, r, b.block.size)).forEach(ob => {
         if(ob != b && mdl_content.isMagnetic(ob.block) && ob.status() == BlockStatus.active) count += Math.pow(ob.block.size, 2);
       });
 
@@ -324,7 +312,7 @@
       var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["magnetic"], blk.name, 2);
       var t = Vars.world.tile(tx, ty);
       mdl_draw.drawPlaceRect(blk, t, Pal.techBlue, r, true);
-      mdl_game._liBuild(mdl_game._liTileRect(t, r, blk.size)).each(ob => {
+      mdl_game._bs(mdl_game._tsRect(t, r, blk.size)).forEach(ob => {
         if(mdl_content.isMagnetic(ob.block)) mdl_draw.drawBuildArea(ob, Pal.techBlue);
       });
     };
@@ -334,7 +322,7 @@
     const drawSelect_magnetic = function(b) {
       var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["magnetic"], b.block.name, 2);
       mdl_draw.drawSelectRect(b, r, true, Pal.techBlue);
-      mdl_game._liBuild(mdl_game._liTileRect(b.tile, r, b.block.size)).each(ob => {
+      mdl_game._bs(mdl_game._tsRect(b.tile, r, b.block.size)).forEach(ob => {
         if(ob != b && mdl_content.isMagnetic(ob.block)) mdl_draw.drawBuildArea(ob, Pal.techBlue);
       });
     };
@@ -352,7 +340,7 @@
 
     const canPlaceOn_restrict = function(blk, t, team, rot) {
       var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
-      if(mdl_game._liBuildSame(mdl_game._liTileRect(t, r, blk.size), blk.name, Vars.player.team()).size > 0) return false;
+      if(mdl_game._bsSame(mdl_game._tsRect(t, r, blk.size), blk.name, Vars.player.team()).length > 0) return false;
 
       return true;
     };
@@ -363,7 +351,7 @@
       var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
       var t = Vars.world.tile(tx, ty);
       mdl_draw.drawPlaceRect(blk, t, valid, r, true);
-      mdl_game._liBuildSame(mdl_game._liTileRect(t, r, blk.size), blk.name, Vars.player.team()).each(ob => mdl_draw.drawBuildArea(ob, valid));
+      mdl_game._bsSame(mdl_game._tsRect(t, r, blk.size), blk.name, Vars.player.team()).forEach(ob => mdl_draw.drawBuildArea(ob, valid));
     };
     exports.drawPlace_restrict = drawPlace_restrict;
 
@@ -378,50 +366,54 @@
 
   // Part: Structure
     const _structPair = function(blk) {
-      var val = null;
-      var li = db_block.db["matrix"]["multiBlock"];
-      var cap = li.size;
+      var pair = null;
+      var arr = db_block.db["matrix"]["multiBlock"];
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 3) {
-          var nm = li.get(i);
-          var nm_tg = li.get(i + 1);
-          var plan = li.get(i + 2);
-
+          var nm = arr[i];
+          if(blk.name != nm) continue;
+          var nm_tg = arr[i + 1];
           var blk_tg = Vars.content.block(nm_tg);
-          if(blk.name == nm && blk_tg != null) val = [blk_tg, plan];
+          if(blk_tg == null) continue;
+          var plan = arr[i + 2];
+
+          pair = [blk_tg, plan];
         };
       };
 
-      return val;
+      return pair;
     };
     exports._structPair = _structPair;
 
 
-    const li_77002519 = new Seq();
-    const _structLiPlan = function(plan) {
-      var li = li_77002519.clear();
+    const _structPlanReq = function(plan) {
+      var arr = [];
 
       Vars.content.blocks().each(blk => {
-        var count = plan.count(i => blk.name == i);
-        if(count > 0) li.add(blk, count);
+        var cap = plan.length;
+        var count = 0;
+        for(let i = 0; i < cap; i++) {
+          if(plan[i] == blk.name) count++;
+        };
+        if(count > 0) arr.push(blk, count);
       });
 
-      return li;
+      return arr;
     };
-    exports._structLiPlan = _structLiPlan;
+    exports._structPlanReq = _structPlanReq;
 
 
     const isStructureComplete = function(t, plan) {
       if(t == null || plan == null) return false;
 
       var cond = true;
-      var li = plan;
-      var cap = plan.size;
+      var cap = plan.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var rPos = li.get(i);
-          var nm = li.get(i + 1);
-          var ot = t.nearby(rPos);
+          var pon = plan[i];
+          var nm = plan[i + 1];
+          var ot = t.nearby(pon);
 
           if(ot == null) {
             cond = false;
@@ -439,14 +431,13 @@
     const draw_structure = function(t, plan) {
       if(t == null || plan == null) return;
 
-      var li = plan;
-      var cap = plan.size;
+      var cap = plan.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var rPos = li.get(i);
-          var nm = li.get(i + 1);
+          var pon = plan[i];
+          var nm = plan[i + 1];
           var blk = mdl_content._ct_nm(nm);
-          var ot = t.nearby(rPos);
+          var ot = t.nearby(pon);
 
           if(blk != null && ot != null) {
             var reg = mdl_content._buildReg(blk);
@@ -464,12 +455,24 @@
 
 
   // Part: Terrain
+    const arr_ter = [
+      "dirt", "dirt",
+      "salt", "salt",
+      "sand", "sand",
+      "stone", "stone",
+      "water", "water",
+      "sea", "sea",
+      "river", "river",
+      "beach", "beach",
+    ];
+
+
     const _terrain = function(t, size) {
       if(size == null) size = 1;
       if(t == null) return;
 
-      var li_ot = mdl_game._liTileRect(t, 5, size);
-      var count_t = li_ot.size;
+      var ts = mdl_game._tsRect(t, 5, size);
+      var count_t = ts.length;
       if(count_t == 0) return;
       var count_dirt = 0;
       var count_salt = 0;
@@ -477,7 +480,7 @@
       var count_stone = 0;
       var count_water = 0;
       var count_sea = 0;
-      li_ot.each(ot => {
+      ts.forEach(ot => {
         var str = ot.floor().walkSound.toString();
         if(str.includes("se-step-dirt") || str.includes("se-step-grass") || str.includes("se-step-mud")) count_dirt += 1;
         if(str.includes("se-step-salt")) count_salt += 1;
@@ -506,83 +509,59 @@
     const _terrainVal = function(ter) {
       if(Vars.headless) return "";
 
-      var terVal = "";
-
-      switch(ter) {
-        case "dirt" :
-          terVal = Core.bundle.get("term.reind-term-terrain-dirt.name");
-          break;
-        case "salt" :
-          terVal = Core.bundle.get("term.reind-term-terrain-salt.name");
-          break;
-        case "sand" :
-          terVal = Core.bundle.get("term.reind-term-terrain-sand.name");
-          break;
-        case "stone" :
-          terVal = Core.bundle.get("term.reind-term-terrain-stone.name");
-          break;
-        case "water" :
-          terVal = Core.bundle.get("term.reind-term-terrain-water.name");
-          break;
-        case "sea" :
-          terVal = Core.bundle.get("term.reind-term-terrain-sea.name");
-          break;
-        case "river" :
-          terVal = Core.bundle.get("term.reind-term-terrain-river.name");
-          break;
-        case "beach" :
-          terVal = Core.bundle.get("term.reind-term-terrain-beach.name");
-          break;
-        default :
-          terVal = Core.bundle.get("term.reind-term-terrain-transition.name");
+      var terVal = null;
+      var cap = arr_ter.length;
+      for(let i = 0; i < cap; i += 2) {
+        if(arr_ter[i] == ter) terVal = mdl_text._term(arr_ter[i + 1]);
       };
+      if(terVal == null) terVal = mdl_text._term("transition");
 
       return terVal;
     };
     exports._terrainVal = _terrainVal;
 
 
-    const _liTer = function(li_ter_gn, shouldReturnVal) {
-      var li = new Seq();
-      if(li_ter_gn == null) return li;
+    const _ters = function(ters_gn, shouldReturnVal) {
+      var arr = [];
+      if(ters_gn == null) return arr;
 
       if(shouldReturnVal == null) shouldReturnVal = false;
 
-      if(li_ter_gn instanceof Seq) {
-        li_ter_gn.each(ter => li.add(shouldReturnVal ? _terrainVal(ter) : ter));
-      } else {li.add(shouldReturnVal ? _terrainVal(li_ter_gn) : li_ter_gn)};
+      if(ters_gn instanceof Array) {
+        ters_gn.forEach(ter => arr.push(shouldReturnVal ? _terrainVal(ter) : ter));
+      } else {arr.push(shouldReturnVal ? _terrainVal(ters_gn) : ters_gn)};
 
-      return li;
+      return arr;
     };
-    exports._liTer = _liTer;
+    exports._ters = _ters;
 
 
-    const setStats_terrain = function(blk, li_ter_gn, mode) {
-      if(blk == null || li_ter_gn == null) return;
+    const setStats_terrain = function(blk, ters_gn, mode) {
+      if(blk == null || ters_gn == null) return;
       if(mode != "enable" && mode != "disable") return;
 
-      blk.stats.add((mode == "enable") ? db_stat.requiredTerrain : db_stat.disabledIn, mdl_text._tagText(_liTer(li_ter_gn, true)));
+      blk.stats.add((mode == "enable") ? db_stat.requiredTerrain : db_stat.disabledIn, mdl_text._tagText(_ters(ters_gn, true)));
     };
     exports.setStats_terrain = setStats_terrain;
 
 
-    const canPlaceOn_terrain = function(blk, li_ter_gn, mode, t, team, rot, offTy) {
+    const canPlaceOn_terrain = function(blk, ters_gn, mode, t, team, rot, offTy) {
       if(offTy == null) offTy = 0;
       if(t == null) return false;
       if(mode != "enable" && mode != "disable") return false;
 
       var ter = _terrain(t, blk.size);
       var terVal = _terrainVal(ter);
-      var li_ter = _liTer(li_ter_gn);
+      var ters = _ters(ters_gn);
       var valid = true;
       if(mode == "disable") {
-        if(ter != null && li_ter.contains(ter)) {
-          mdl_draw.drawPlaceText(blk, t, false, Core.bundle.get("info.reind-info-terrain-disabled.name") + mdl_text._space() + terVal, offTy);
+        if(ter != null && ters.includes(ter)) {
+          mdl_draw.drawPlaceText(blk, t, false, mdl_text._info("terrain-disabled") + " " + terVal, offTy);
           valid = false;
         };
       } else {
-        if(ter == null || !li_ter.contains(ter)) {
-          mdl_draw.drawPlaceText(blk, t, false, Core.bundle.get("info.reind-info-terrain-mismatched.name") + mdl_text._space() + terVal, offTy);
+        if(ter == null || !ters.includes(ter)) {
+          mdl_draw.drawPlaceText(blk, t, false, mdl_text._info("terrain-mismatched") + " " + terVal, offTy);
           valid = false;
         };
       };
@@ -640,24 +619,27 @@
 
 
   // Part: Waste
+    const arr_waste = [
+      "reind-liq-was-waste-water",
+      "reind-liq-was-waste-water-acidic",
+      "reind-liq-was-waste-water-basic",
+      "reind-liq-was-waste-slurry",
+    ];
+
+
     const setBars_was = function(blk, rcFi) {
       var cap = mdl_recipe._rcSize(rcFi);
-      var cond_water = false;
-      var cond_waterA = false;
-      var cond_waterB = false;
-      var cond_slurry = false;
+      var cap1 = arr_waste.length;
+      var arr = [];
 
       for(let i = 0; i < cap; i++) {
-        if(frag_recipe.hasOutput(rcFi, i, "reind-liq-was-waste-water")) cond_water = true;
-        if(frag_recipe.hasOutput(rcFi, i, "reind-liq-was-waste-water-acidic")) cond_waterA = true;
-        if(frag_recipe.hasOutput(rcFi, i, "reind-liq-was-waste-water-basic")) cond_waterB = true;
-        if(frag_recipe.hasOutput(rcFi, i, "reind-liq-was-waste-slurry")) cond_slurry = true;
+        for(let j = 0; j < cap1; j++) {
+          var nm = arr_waste[j];
+          if(frag_recipe.hasOutput(rcFi, i, nm) && !arr.includes(nm)) arr.push(nm);
+        };
       };
 
-      if(cond_water) blk.addLiquidBar(Vars.content.liquid("reind-liq-was-waste-water"));
-      if(cond_waterA) blk.addLiquidBar(Vars.content.liquid("reind-liq-was-waste-water-acidic"));
-      if(cond_waterB) blk.addLiquidBar(Vars.content.liquid("reind-liq-was-waste-water-basic"));
-      if(cond_slurry) blk.addLiquidBar(Vars.content.liquid("reind-liq-was-waste-slurry"));
+      arr.forEach(nm => blk.addLiquidBar(Vars.content.liquid(nm)));
     };
     exports.setBars_was = setBars_was;
   // End

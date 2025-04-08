@@ -19,7 +19,7 @@
 
       var rot_fi = mdl_game._rotDiv(b.rotation, offRot);
       var blocked = false;
-      mdl_game._liTileRot(b.tile, rot_fi, b.block.size).each(ot => {
+      mdl_game._tsRot(b.tile, rot_fi, b.block.size).forEach(ot => {
         if(ot.solid() || (ot.build != null && ot.build.block instanceof LiquidJunction)) blocked = true;
       });
       if(blocked) return;

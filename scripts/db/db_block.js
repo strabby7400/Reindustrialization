@@ -14,17 +14,17 @@ const db = {
   "param": {
 
 
-    "depthTierMultiplier": new Seq([
+    "depthTierMultiplier": [
 
       /* <---------------- min-dril ----------------> */
 
       "reind-min-dril-basic-impact-drill", 0.5,
       "reind-min-dril-titan-impact-drill", 0.7,
 
-    ]),
+    ],
 
 
-    "exposed": new Seq([
+    "exposed": [
 
       /* <---------------- dis-conv ----------------> */
 
@@ -36,13 +36,13 @@ const db = {
 
       "reind-eff-stor-crate",
 
-    ]),
+    ],
 
 
     "speed": {
 
 
-      "base": new Seq([
+      "base": [
 
         /* <---------------- dis-brd ----------------> */
 
@@ -57,7 +57,7 @@ const db = {
         "reind-bliq-pump-primitive-fluid-pump", 3.0,
         "reind-bliq-pump-piston-fluid-pump", 15.0,
 
-      ]),
+      ],
 
 
     },
@@ -72,7 +72,7 @@ const db = {
     "range": {
 
 
-      "base": new Seq([
+      "base": [
 
         /* <---------------- min-harv ----------------> */
 
@@ -101,10 +101,10 @@ const db = {
 
         "reind-def-proj-basic-repair-projector", 8,
 
-      ]),
+      ],
 
 
-      "impact": new Seq([
+      "impact": [
 
         /* <---------------- min-dril ----------------> */
 
@@ -120,10 +120,10 @@ const db = {
 
         "reind-map-fac-ids-trade-dock-rim-builder", 80.0,
 
-      ]),
+      ],
 
 
-      "magnetic": new Seq([
+      "magnetic": [
 
         /* <---------------- dis-mdr ----------------> */
 
@@ -133,7 +133,7 @@ const db = {
 
         "reind-fac-sep-dry-magnetic-separator", 2,
 
-      ])
+      ],
 
 
     },
@@ -142,14 +142,14 @@ const db = {
     "damage": {
 
 
-      "base": new Seq([
+      "base": [
 
         /* <---------------- dis-mdr ----------------> */
 
         "reind-dis-mdr-local-mass-driver", 90.0,
         "reind-dis-mdr-standard-mass-driver", 725.0,
 
-      ]),
+      ],
 
 
     },
@@ -158,7 +158,7 @@ const db = {
     "color": {
 
 
-      "base": new Seq([
+      "base": [
 
         /* <---------------- min-scan ----------------> */
 
@@ -168,7 +168,7 @@ const db = {
 
         "reind-def-proj-basic-radar", Color.valueOf("cedef3"),
 
-      ]),
+      ],
 
 
     },
@@ -177,7 +177,7 @@ const db = {
     "sound": {
 
 
-      "craft": new Seq([
+      "craft": [
 
         /* <---------------- fac-heat ----------------> */
 
@@ -203,19 +203,19 @@ const db = {
 
         "reind-map-fac-ids-trade-dock-rim-builder", "se-craft-ids-trade-dock",
 
-      ]),
+      ],
 
 
     },
 
 
-    "shake": new Seq([
+    "shake": [
 
       /* <---------------- map-fac ----------------> */
 
       "reind-map-fac-ids-trade-dock-rim-builder", 8.0,
 
-    ]),
+    ],
 
 
   },
@@ -226,7 +226,7 @@ const db = {
   "map": {
 
 
-    "faction": new Seq([
+    "faction": [
 
       /* <---------------- outpost military ----------------> */
 
@@ -262,10 +262,10 @@ const db = {
       "reind-ileff-misc-ids-engine", "enclosure",
       "reind-ileff-misc-bit-bank", "enclosure",
 
-    ]),
+    ],
 
 
-    "family": new Seq([
+    "family": [
 
       /* <---------------- absorber ----------------> */
 
@@ -398,28 +398,28 @@ const db = {
 
       "reind-fac-sep-vibration-screen", "vibration-screen",
 
-    ]),
+    ],
 
 
-    "attribute": new Seq([
+    "attribute": [
 
       /* <---------------- min-misc ----------------> */
 
       "reind-min-misc-placer-miner", "reind-attr-flr-placer",
 
-    ]),
+    ],
 
 
-    "liquid": new Seq([
+    "liquid": [
 
       /* <---------------- pow-econd ----------------> */
 
       "reind-pow-econd-transmission-box", "reind-effc-cond-torque",
 
-    ]),
+    ],
 
 
-    "diameter": new Seq([
+    "diameter": [
 
       /* <---------------- bliq-cond ----------------> */
 
@@ -427,7 +427,7 @@ const db = {
       "reind-bliq-cond-steel-fluid-pipe", 1.25,
       "reind-bliq-cond-tempered-glass-fluid-pipe", 0.75,
 
-    ]),
+    ],
 
 
     /*
@@ -443,29 +443,29 @@ const db = {
      * {stageScr} is used for customization of the block, i.e. what will happen during a stage.
      * Format: {stage}, {scr}.
      */
-    "growth": new Seq([
+    "growth": [
 
-      "reind-min-crop-aerth-small-shiitake", 23400.0, 4, new Seq([
-        3, 1, new Seq(["reind-item-bio-hypha-rod", 24, 0.5]), function() {},
-        4, 1, new Seq(["reind-item-bio-hypha-rod", 72, 0.5]), function() {},
-      ]), new Seq(),
+      "reind-min-crop-aerth-small-shiitake", 23400.0, 4, [
+        3, 1, ["reind-item-bio-hypha-rod", 24, 0.5], function() {},
+        4, 1, ["reind-item-bio-hypha-rod", 72, 0.5], function() {},
+      ], [],
 
-      "reind-min-crop-ink-corn", 28800.0, 4, new Seq([
-        3, 1, new Seq(["reind-item-bio-ink-corn", 16, 0.5]), function() {},
-        4, 1, new Seq(["reind-item-bio-ink-corn", 48, 0.5]), function() {},
-      ]), new Seq(),
+      "reind-min-crop-ink-corn", 28800.0, 4, [
+        3, 1, ["reind-item-bio-ink-corn", 16, 0.5], function() {},
+        4, 1, ["reind-item-bio-ink-corn", 48, 0.5], function() {},
+      ], [],
 
-      "reind-min-crop-thorium-reactor-mine", 1800.0, 5, new Seq([
-        5, 0, new Seq(["thorium", 200, 0.5]), function() {
+      "reind-min-crop-thorium-reactor-mine", 1800.0, 5, [
+        5, 0, ["thorium", 200, 0.5], function() {
           Events.fire(Trigger.thoriumReactorOverheat);
           Damage.damage(this.x, this.y, 19 * Vars.tilesize, 5000.0);
           Fx.reactorExplosion.at(this);
           Sounds.explosionbig.at(this);
           Effect.shake(6.0, 16.0, this);
         },
-      ]), new Seq([
+      ], [
         5, function() {
-          if(mdl_game._liUnit(this, 24.0).size > 0) {
+          if(mdl_game._units(this, 24.0).length > 0) {
             this.kill();
             Events.fire(Trigger.thoriumReactorOverheat);
             Damage.damage(this.x, this.y, 19 * Vars.tilesize, 5000.0);
@@ -474,9 +474,9 @@ const db = {
             Effect.shake(6.0, 16.0, this);
           };
         },
-      ]),
+      ],
 
-    ]),
+    ],
 
 
   },
@@ -492,7 +492,7 @@ const db = {
   "ep": {
 
 
-    "range": new Seq([
+    "range": [
 
       /* <---------------- min-dril ----------------> */
 
@@ -502,10 +502,10 @@ const db = {
 
       "reind-pow-gen-energizer-generator", 10,
 
-    ]),
+    ],
 
 
-    "requirement": new Seq([
+    "requirement": [
 
       /* <---------------- min-dril ----------------> */
 
@@ -515,7 +515,7 @@ const db = {
 
       "reind-pow-gen-energizer-generator", 5.0,
 
-    ]),
+    ],
 
 
   },
@@ -526,7 +526,7 @@ const db = {
   "power": {
 
 
-    "consumption": new Seq([
+    "consumption": [
 
       /* <---------------- pow-wire ----------------> */
 
@@ -535,10 +535,10 @@ const db = {
       "reind-pow-wire-copper-wire-relay", 25.0,
       "reind-pow-wire-copper-wire-node", 50.0,
 
-    ]),
+    ],
 
 
-    "shortCircuit": new Seq([
+    "shortCircuit": [
 
       /* <---------------- pow-wire ----------------> */
 
@@ -547,22 +547,22 @@ const db = {
       "reind-pow-wire-copper-wire-relay",
       "reind-pow-wire-copper-wire-node",
 
-    ]),
+    ],
 
 
     "tier": {
 
 
-      "hv": new Seq([
+      "hv": [
 
         /* <---------------- fac-ele ----------------> */
 
         "reind-fac-ele-basic-electrolyzer",
 
-      ]),
+      ],
 
 
-      "ehv": new Seq(),
+      "ehv": [],
 
 
     },
@@ -576,37 +576,37 @@ const db = {
   "heat": {
 
 
-    "limit": new Seq([
+    "limit": [
 
       /* <---------------- pow-hcond ----------------> */
 
       "reind-pow-hcond-copper-heat-conductor", 40.0,
       "reind-pow-hcond-steel-heat-conductor", 100.0,
 
-    ]),
+    ],
 
 
-    "loss": new Seq([
+    "loss": [
 
       /* <---------------- pow-hcond ----------------> */
 
       "reind-pow-hcond-copper-heat-conductor", 0.03,
       "reind-pow-hcond-steel-heat-conductor", 0.01,
 
-    ]),
+    ],
 
 
-    "transCoef": new Seq([
+    "transCoef": [
 
       /* <---------------- pow-hcond ----------------> */
 
       "reind-pow-hcond-copper-heat-conductor", 7.76,
       "reind-pow-hcond-steel-heat-conductor", 1.0,
 
-    ]),
+    ],
 
 
-    "fHeatCapacity": new Seq([
+    "fHeatCapacity": [
 
       /* <---------------- bliq-pump ----------------> */
 
@@ -634,7 +634,7 @@ const db = {
       "reind-bliq-stor-liquid-tank", 1000.0,
       "reind-bliq-stor-gas-cylinder", 1000.0,
 
-    ]),
+    ],
 
 
   },
@@ -645,20 +645,20 @@ const db = {
   "durability": {
 
 
-    "cloggable": new Seq([
+    "cloggable": [
 
       /* <---------------- bliq-cond ----------------> */
 
       "reind-bliq-cond-wooden-fluid-pipe",
       "reind-bliq-cond-tempered-glass-fluid-pipe",
 
-    ]),
+    ],
 
 
     "corrosion": {
 
 
-      "base": new Seq([
+      "base": [
         "wood", 1.0,
         "copper", 1.5,
         "lead", 1.5,
@@ -669,10 +669,10 @@ const db = {
         "glass", 10.0,
         "cement", 3.0,
         "rubber", 8.0,
-      ]),
+      ],
 
 
-      "specific": new Seq([
+      "specific": [
 
         /* <---------------- bliq-aux ----------------> */
 
@@ -684,13 +684,13 @@ const db = {
         "reind-bliq-stor-liquid-tank", 15.0,
         "reind-bliq-stor-gas-cylinder", 15.0,
 
-      ]),
+      ],
 
 
     },
 
 
-    "roughness": new Seq([
+    "roughness": [
       "wood", 0.7,
       "copper", 0.02,
       "lead", 0.04,
@@ -701,7 +701,7 @@ const db = {
       "glass", 0.01,
       "cement", 0.4,
       "rubber", 0.02,
-    ]),
+    ],
 
 
   },
@@ -717,16 +717,16 @@ const db = {
   "group": {
 
 
-    "wood": new Seq([
+    "wood": [
 
       /* <---------------- bliq-cond ----------------> */
 
       "reind-bliq-cond-wooden-fluid-pipe",
 
-    ]),
+    ],
 
 
-    "copper": new Seq([
+    "copper": [
 
       /* <---------------- bliq-pump ----------------> */
 
@@ -744,16 +744,16 @@ const db = {
 
       "reind-bliq-stor-liquid-cell",
 
-    ]),
+    ],
 
 
-    "lead": new Seq(),
+    "lead": [],
 
 
-    "iron": new Seq(),
+    "iron": [],
 
 
-    "steel": new Seq([
+    "steel": [
 
       /* <---------------- bliq-pump ----------------> */
 
@@ -772,31 +772,31 @@ const db = {
       "reind-bliq-stor-liquid-tank",
       "reind-bliq-stor-gas-cylinder",
 
-    ]),
+    ],
 
 
-    "galvanizedSteel": new Seq(),
+    "galvanizedSteel": [],
 
 
-    "stainlessSteel": new Seq(),
+    "stainlessSteel": [],
 
 
-    "glass": new Seq([
+    "glass": [
 
       /* <---------------- bliq-cond ----------------> */
 
       "reind-bliq-cond-tempered-glass-fluid-pipe",
 
-    ]),
+    ],
 
 
-    "cement": new Seq(),
+    "cement": [],
 
 
-    "rubber": new Seq(),
+    "rubber": [],
 
 
-    "magnetic": new Seq([
+    "magnetic": [
 
       /* <---------------- dis-mdr ----------------> */
 
@@ -817,7 +817,7 @@ const db = {
 
       "reind-fac-sep-dry-magnetic-separator",
 
-    ]),
+    ],
 
 
   },
@@ -828,7 +828,7 @@ const db = {
   "pollution": {
 
 
-    "value": new Seq([
+    "value": [
 
       /* <---------------- env_tree ----------------> */
 
@@ -905,7 +905,7 @@ const db = {
 
       "reind-dis-aux-item-incinerator", 8.0 / 4.0,
 
-    ]),
+    ],
 
 
   },
@@ -921,11 +921,11 @@ const db = {
   "matrix": {
 
 
-    "multiBlock": new Seq([
+    "multiBlock": [
 
       /* <---------------- fac-furn ----------------> */
 
-      "reind-fac-furn-bricked-blast-furnace-controller", "reind-fac-furn-bricked-blast-furnace", new Seq([
+      "reind-fac-furn-bricked-blast-furnace-controller", "reind-fac-furn-bricked-blast-furnace", [
         new Point2(-3, -3), "reind-def-wall-concrete-barricade",
         new Point2(-1, -3), "reind-def-wall-plate-wall-steel",
         new Point2(0, -3), "reind-def-wall-plate-wall-steel",
@@ -968,11 +968,11 @@ const db = {
         new Point2(-1, 3), "reind-def-wall-plate-wall-steel",
         new Point2(0, 3), "reind-def-wall-plate-wall-steel",
         new Point2(1, 3), "reind-def-wall-plate-wall-steel",
-      ]),
+      ],
 
       /* <---------------- fac-sep ----------------> */
 
-      "reind-fac-sep-high-pressure-cyclone-separator-controller", "reind-fac-sep-high-pressure-cyclone-separator", new Seq([
+      "reind-fac-sep-high-pressure-cyclone-separator-controller", "reind-fac-sep-high-pressure-cyclone-separator", [
         new Point2(-1, -1), "reind-def-wall-plate-wall-steel",
         new Point2(0, -1), "reind-def-wall-plate-wall-steel",
         new Point2(1, -1), "reind-fac-sep-cyclone-separator",
@@ -985,9 +985,9 @@ const db = {
 
         new Point2(1, 2), "reind-def-wall-plate-wall-steel",
         new Point2(2, 2), "reind-def-wall-plate-wall-steel",
-      ]),
+      ],
 
-      "reind-fac-sep-large-vibration-screen-controller", "reind-fac-sep-large-vibration-screen", new Seq([
+      "reind-fac-sep-large-vibration-screen-controller", "reind-fac-sep-large-vibration-screen", [
         new Point2(-2, -2), "reind-def-wall-plate-wall-steel",
         new Point2(-1, -2), "reind-def-wall-plate-wall-steel",
         new Point2(0, -2), "reind-fac-sep-vibration-screen",
@@ -1004,11 +1004,11 @@ const db = {
         new Point2(-2, 2), "reind-def-wall-plate-wall-steel",
         new Point2(1, 2), "reind-def-wall-plate-wall-steel",
         new Point2(2, 2), "reind-def-wall-plate-wall-steel",
-      ]),
+      ],
 
       /* <---------------- very specific zone ----------------> */
 
-      "reind-fac-misc-colossal-router-controller", "reind-fac-misc-colossal-router", new Seq([
+      "reind-fac-misc-colossal-router-controller", "reind-fac-misc-colossal-router", [
         new Point2(-2, -2), "reind-def-wall-wooden-barricade",
         new Point2(0, -2), "reind-def-wall-plate-wall-steel",
         new Point2(1, -2), "reind-def-wall-wooden-barricade",
@@ -1025,9 +1025,9 @@ const db = {
         new Point2(1, 1), "reind-def-wall-wooden-barricade",
 
         new Point2(0, 2), "reind-def-wall-plate-wall-steel",
-      ]),
+      ],
 
-    ]),
+    ],
 
 
   },

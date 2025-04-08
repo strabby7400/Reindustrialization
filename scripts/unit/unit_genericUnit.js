@@ -38,7 +38,7 @@
     function setStatsComp(utp) {
       utp.stats.remove(Stat.mineTier);
 
-      if(db_unit.db["type"]["nonRobot"].contains(utp.name)) utp.stats.add(db_stat.notRobot, true);
+      if(db_unit.db["type"]["nonRobot"].includes(utp.name)) utp.stats.add(db_stat.notRobot, true);
 
       var polTol = mdl_data.read_1n1v(db_unit.db["pollution"]["tolerance"], utp.name);
       if(polTol != null) utp.stats.add(db_stat.pollutionTolerance, polTol, db_stat.pollutionUnit);

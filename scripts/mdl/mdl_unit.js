@@ -87,12 +87,12 @@
     const addItemBatch = function(unit, batch) {
       if(unit == null || batch == null) return false;
 
-      var cap = batch.size;
+      var cap = batch.length;
       if(cap == 0) return false;
       for(let i = 0; i < cap; i += 3) {
-        var itm = mdl_content._ct_gn(batch.get(i));
-        var amt = batch.get(i + 1);
-        var p = batch.get(i + 2);
+        var itm = mdl_content._ct_gn(batch[i]);
+        var amt = batch[i + 1];
+        var p = batch[i + 2];
 
         if(unit.acceptsItem(itm)) {
           for(let j = 0; j < amt; j++) {if(unit.acceptsItem(itm) && Mathf.chance(p)) unit.addItem(itm)};

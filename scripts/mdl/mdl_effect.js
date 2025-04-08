@@ -399,6 +399,22 @@
       if(hasSound) playAt(pos_gn, Sounds.spark);
     };
     exports.chainLightning = chainLightning;
+
+
+    const chainLightning_es = function(pos_gn, es, color_gn, hasSound) {
+      if(pos_gn == null || es == null || es.length == 0) return;
+
+      var cap = es.length;
+      for(let i = 0; i < cap; i++) {
+        var tmp1 = (i == 0) ? pos_gn : es[i - 1];
+        var tmp2 = es[i];
+
+        chainLightning(tmp1, tmp2, color_gn);
+      };
+
+      if(hasSound) playAt(pos_gn, Sounds.spark);
+    };
+    exports.chainLightning_es = chainLightning_es;
   // End
 
 

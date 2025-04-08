@@ -93,7 +93,7 @@
       let i = 1.0;
       while(i < x + 0.0001) {
         val *= i;
-        i++
+        i++;
       };
 
       return val;
@@ -248,10 +248,7 @@
     /* <---------------- vec2 ----------------> */
 
 
-    const vec2_22577890 = new Vec2();
     const sumVec2 = function(vs) {
-      var vec = vec2_22577890.setZero();
-
       var valX = 0.0;
       var valY = 0.0;
       for(let v in vs) {
@@ -259,7 +256,7 @@
         valY += v.y;
       };
 
-      return vec2.set(valX, valY);
+      return new Vec2(valX, valY);
     };
     exports.sumVec2 = sumVec2;
 

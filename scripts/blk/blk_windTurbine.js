@@ -39,7 +39,7 @@
       var attr = mdl_attr._wind(t);
 
       var count = 0;
-      mdl_game._liTileEdge(t, blk.size).each(ot => {
+      mdl_game._tsEdge(t, blk.size).forEach(ot => {
         if(ot.solid()) count += 1;
       });
       attr *= 1.0 - count / blk.size / 4;
@@ -58,8 +58,7 @@
       var t = Vars.world.tile(tx, ty);
       if(t == null) return;
 
-      var li_ot = mdl_game._liTileEdge(t, blk.size);
-      li_ot.each(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
+      mdl_game._tsEdge(t, blk.size).forEach(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
 
       if(blk.displayEfficiency) {
         var str = Core.bundle.formatFloat("bar.efficiency", sumAttribute(blk, blk.attribute, tx, ty) * 100.0, 1);
@@ -71,8 +70,7 @@
     function drawSelectComp(b) {
       var t = b.tile;
 
-      var li_ot = mdl_game._liTileEdge(t, b.block.size);
-      li_ot.each(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
+      mdl_game._tsEdge(t, b.block.size).forEach(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
 
       if(b.block.displayEfficiency) {
         var str = Core.bundle.formatFloat("bar.efficiency", sumAttribute(b.block, b.block.attribute, t.x, t.y) * 100.0, 1);

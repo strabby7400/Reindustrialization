@@ -6,7 +6,7 @@ const gi = [
 const rc = {
   "parent": "reind-fac-furn-electrode-melter",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -18,12 +18,12 @@ const rc = {
     {
       "icon": "reind-item-int-electrode-copper-accumulated",
       "category": "special",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-electrode-copper-accumulated", 1,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-copper", 20,
-      ]),
+      ],
     },
 
 
@@ -31,15 +31,15 @@ const rc = {
     {
       "icon": "reind-item-int-electrode-lead-accumulated",
       "category": "special",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-electrode-lead-accumulated", 1,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-lead", 20,
-      ]),
+      ],
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

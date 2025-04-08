@@ -30,8 +30,10 @@
     function updateTileComp(b) {
       // Initialize
       if(b.needCheck) {
-        var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
-        b.r = r;
+        b.r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
+
+        b.builds.length = 0;
+        b.units.length = 0;
 
         b.needCheck = false;
       };
@@ -41,11 +43,11 @@
         b.updateTargets();
       };
 
-      b.builds.clear();
-      b.targets.each(ob => {if(ob.damaged() && !ob.isHealSuppressed() && !b.builds.contains(ob)) b.builds.add(ob)});
+      b.builds.length = 0;
+      b.units.length = 0;
 
-      b.units.clear();
-      mdl_game._liUnitAllied(b, b.r * Vars.tilesize).each(unit => {if(unit.damaged() && !b.units.contains(unit)) b.units.add(unit)});
+      b.targets.each(ob => {if(ob.damaged() && !ob.isHealSuppressed() && !b.builds.includes(ob)) b.builds.push(ob)});
+      mdl_game._unitsAllied(b, b.r * Vars.tilesize).forEach(unit => {if(unit.damaged() && !b.units.includes(unit)) b.units.push(unit)});
 
       b.warmup = Mathf.approachDelta(b.warmup, b.didRegen ? 1.0 : 0.0, 1.0 / 120.0);
       b.totalTime += b.warmup * Time.delta;
@@ -57,13 +59,12 @@
         b.prog += Time.delta * b.optionalEfficiency;
         if(b.prog - b.block.optionalUseTime > -0.0001) {
           b.consume();
-          print("consume time!")
           b.prog %= 1.0;
         };
 
         var amt = Mathf.lerp(1.0, b.block.optionalMultiplier, b.optionalEfficiency) * b.block.healPercent;
 
-        b.builds.each(ob => {
+        b.builds.forEach(ob => {
           if(ob.damaged() && !ob.isHealSuppressed()) {
             b.didRegen = true;
 
@@ -76,7 +77,7 @@
           };
         });
 
-        b.units.each(unit => {
+        b.units.forEach(unit => {
           if(unit.damaged()) {
             b.didRegen = true;
 
@@ -103,7 +104,7 @@
 
 
     function shouldConsumeComp(b) {
-      return b.enabled && (b.builds.size > 0 || b.units.size > 0);
+      return b.enabled && (b.builds.length > 0 || b.units.length > 0);
     };
 
 
@@ -116,7 +117,7 @@
     function drawComp(b) {
       if(!b.shouldConsume() || b.efficiency < 0.0001) return;
 
-      b.units.each(unit => mdl_draw.drawFlickerLine(b, unit, Pal.heal));
+      b.units.forEach(unit => mdl_draw.drawFlickerLine(b, unit, Pal.heal));
     };
 
 

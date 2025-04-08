@@ -86,7 +86,7 @@
       if(order == null) order = 0;
       if(padLeft == null) padLeft = 0.0;
 
-      tb.add(str).center().labelAlign(align).wrap().width(mdl_ui.getSizePair(null, null, order * 120.0)[0]).padLeft(padLeft).row();
+      tb.add(str).center().labelAlign(align).wrap().width(mdl_ui._sizePair(null, null, order * 120.0)[0]).padLeft(padLeft).row();
     };
     exports.__wrapLine = __wrapLine;
 
@@ -172,22 +172,22 @@
 
 
   // Part: Content
-    const setContentRowDisplay = function(tb, li_ct, showOrder) {
-      var li = new Seq();
+    const setContentRowDisplay = function(tb, cts_gn, showOrder) {
+      var arr = [];
 
       if(showOrder == null) showOrder = false;
-      if(li_ct instanceof UnlockableContent) {
-        li.add(li_ct);
+      if(cts_gn instanceof UnlockableContent) {
+        arr.push(cts_gn);
         showOrder = false;
       } else {
-        li.addAll(li_ct);
+        arr.push.apply(cts_gn);
       };
 
       var ord = 0;
 
       tb.row();
       __breakHalf(tb);
-      li.each(ct => {
+      arr.forEach(ct => {
         if(typeof ct == "string") ct = mdl_content._ct_nm(ct);
         if(ct != null) {
           tb.table(Tex.whiteui, tb1 => {
@@ -230,7 +230,7 @@
 
 
     const setBatchDisplay = function(tb, batch) {
-      var cap = batch.size;
+      var cap = batch.length;
       if(cap == 0) return;
 
       tb.row();
@@ -238,9 +238,9 @@
         __margin(tb1, 0.5);
 
         for(let i = 0; i < cap; i += 3) {
-          var itm = mdl_content._ct_gn(batch.get(i));
-          var amt = batch.get(i + 1);
-          var p = batch.get(i + 2);
+          var itm = mdl_content._ct_gn(batch[i]);
+          var amt = batch[i + 1];
+          var p = batch[i + 2];
 
           __recipeItem(tb1, itm, amt, p).padLeft(24.0).row();
         };
@@ -249,9 +249,9 @@
     exports.setBatchDisplay = setBatchDisplay;
 
 
-    const setContentSelector = function(tb, li_ct, id_sel, scr, col) {
+    const setContentSelector = function(tb, cts, id_sel, scr, col) {
       if(col == null) col = 4;
-      if(tb == null || li_ct == null || id_sel == null || scr == null || li_ct.size == 0) return;
+      if(tb == null || cts == null || id_sel == null || scr == null || cts.length == 0) return;
 
       var btnGrp = new ButtonGroup();
       btnGrp.setMinCheckCount(0);
@@ -261,12 +261,11 @@
         tb1.left();
         __margin(tb1);
 
-        var li = li_ct;
-        var cap = li.size;
+        var cap = cts.length;
         if(cap > 0) {
           for(let i = 0, j = 0; i < cap; i++) {
             (function(i) {
-              var ct = li.get(i);
+              var ct = cts[i];
               var id = ct.id;
 
               var btn = tb1.button(Styles.none, 32.0, () => {
@@ -310,7 +309,7 @@
     const setRecipeDisplay = function(tb, rcFi) {
       var cap = mdl_recipe._rcSize(rcFi);
       if(cap == 0) {
-        tb.add(Core.bundle.get("info.reind-info-no-recipe-found.name"));
+        tb.add(mdl_text._info("no-recipe-found"));
       } else {
         tb.row();
 
@@ -355,21 +354,21 @@
             }).marginRight(36.0).growY();
 
             // Input
-            var li = inputs;
-            var cap1 = li.size;
+            var arr = inputs;
+            var cap1 = arr.length;
             if(cap1 > 0) {
               tb1.table(Styles.none, tb2 => {
                 tb2.left();
                 __margin(tb2);
 
-                tb2.add("I:").left().tooltip(Core.bundle.get("term.reind-term-input.name")).row();
+                tb2.add("I:").left().tooltip(mdl_text._term("input")).row();
                 tb2.table(Styles.none, tb3 => {
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content._ct_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(arr[j]);
                     if(ct == null) continue;
-                    var amt = li.get(j + 1);
+                    var amt = arr[j + 1];
 
                     __recipeItem(tb3, ct, amt);
                   };
@@ -378,22 +377,22 @@
             };
 
             // Random Input
-            var li = randInputs;
-            var cap1 = li.size;
+            var arr = randInputs;
+            var cap1 = arr.length;
             if(cap1 > 0) {
               tb1.table(Styles.none, tb2 => {
                 tb2.left();
                 __margin(tb2);
 
-                tb2.add("RI:").left().tooltip(Core.bundle.get("term.reind-term-random-input.name")).row();
+                tb2.add("RI:").left().tooltip(mdl_text._term("random-input")).row();
                 tb2.table(Styles.none, tb3 => {
                   for(let j = 0; j < cap1; j++) {
                     if(j % 3 != 0) continue;
 
-                    var ct = mdl_content._ct_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(arr[j]);
                     if(ct == null) continue;
-                    var amt = li.get(j + 1);
-                    var p = li.get(j + 2);
+                    var amt = arr[j + 1];
+                    var p = arr[j + 2];
 
                     __recipeItem(tb3, ct, amt, p);
                   };
@@ -402,20 +401,20 @@
             };
 
             // Batch Fluid Input
-            var li = bfInputs;
-            var cap1 = li.size;
+            var arr = bfInputs;
+            var cap1 = arr.length;
             if(cap1 > 0){
               tb1.table(Styles.none, tb2 => {
                 tb2.left();
                 __margin(tb2);
 
-                tb2.add("BFI:").left().tooltip(Core.bundle.get("term.reind-term-batch-fluid-input.name")).row();
+                tb2.add("BFI:").left().tooltip(mdl_text._term("batch-fluid-input")).row();
                 tb2.table(Styles.none, tb3 => {
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content._ct_nm(li.get(j));
-                    var amt = li.get(j + 1);
+                    var ct = mdl_content._ct_nm(arr[j]);
+                    var amt = arr[j + 1];
 
                     __recipeItem(tb3, ct, amt, 1.0, true);
                   };
@@ -424,15 +423,15 @@
             };
 
             // Optional Input
-            var li = optInputs;
-            var cap1 = li.size;
+            var arr = optInputs;
+            var cap1 = arr.length;
             if(cap1 > 0) {
               tb1.table(Styles.none, tb2 => {
                 tb2.left();
                 __margin(tb2);
 
-                tb2.add("OI:").left().tooltip(Core.bundle.get("term.reind-term-optional-input.name")).row();
-                tb2.button("?", db_dialog._optInput(optInputs)).size(42.0).pad(6.0);
+                tb2.add("OI:").left().tooltip(mdl_text._term("optional-input")).row();
+                tb2.button("?", db_dialog._optInput(arr)).size(42.0).pad(6.0);
               }).marginRight(72.0);
             };
 
@@ -440,22 +439,22 @@
             tb1.table(Styles.none, tb_m => {}).width(160.0).growX().growY();
 
             // Output
-            var li = outputs;
-            var cap1 = li.size;
+            var arr = outputs;
+            var cap1 = arr.length;
             if(cap1 > 0) {
               tb1.table(Styles.none, tb2 => {
                 tb2.left()
                 __margin(tb2);
 
-                tb2.add("O:").left().tooltip(Core.bundle.get("term.reind-term-output.name")).row();
+                tb2.add("O:").left().tooltip(mdl_text._term("output")).row();
 
                 tb2.table(Styles.none, tb3 => {
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content._ct_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(arr[j]);
                     if(ct == null) continue;
-                    var amt = li.get(j + 1);
+                    var amt = arr[j + 1];
 
                     __recipeItem(tb3, ct, amt);
                   };
@@ -464,22 +463,22 @@
             };
 
             // Random Output
-            var li = randOutputs;
-            var cap1 = li.size;
+            var arr = randOutputs;
+            var cap1 = arr.length;
             if(cap1 > 0) {
               tb1.table(Styles.none, tb2 => {
                 tb2.left();
                 __margin(tb2);
 
-                tb2.add("RO:").left().tooltip(Core.bundle.get("term.reind-term-random-output.name")).row();
+                tb2.add("RO:").left().tooltip(mdl_text._term("random-output")).row();
                 tb2.table(Styles.none, tb3 => {
                   for(let j = 0; j < cap1; j++) {
                     if(j % 3 != 0) continue;
 
-                    var ct = mdl_content._ct_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(arr[j]);
                     if(ct == null) continue;
-                    var amt = li.get(j + 1);
-                    var p = li.get(j + 2);
+                    var amt = arr[j + 1];
+                    var p = arr[j + 2];
 
                     __recipeItem(tb3, ct, amt, p);
                   };
@@ -488,22 +487,22 @@
             };
 
             // Batch Fluid Output
-            var li = bfOutputs;
-            var cap1 = li.size;
+            var arr = bfOutputs;
+            var cap1 = arr.length;
             if(cap1 > 0){
               tb1.table(Styles.none, tb2 => {
                 tb2.left();
                 __margin(tb2);
 
-                tb2.add("BFO:").left().tooltip(Core.bundle.get("term.reind-term-batch-fluid-output.name")).row();
+                tb2.add("BFO:").left().tooltip(mdl_text._term("batch-fluid-output")).row();
 
                 tb2.table(Styles.none, tb3 => {
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content._ct_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(arr[j]);
                     if(ct == null) continue;
-                    var amt = li.get(j + 1);
+                    var amt = arr[j + 1];
                     __recipeItem(tb3, ct, amt, 1.0, true);
                   };
                 });
@@ -511,21 +510,21 @@
             };
 
             // Fail Output
-            var li = failOutputs;
-            var cap1 = li.size;
+            var arr = failOutputs;
+            var cap1 = arr.length;
             if(cap1 > 0) {
               tb1.table(Styles.none, tb2 => {
                 tb2.left();
                 __margin(tb2);
 
-                tb2.add("FO:").left().tooltip(Core.bundle.get("term.reind-term-failed-output.name")).row();
+                tb2.add("FO:").left().tooltip(mdl_text._term("failed-output")).row();
                 tb2.table(Styles.none, tb3 => {
                   for(let j = 0; j < cap1; j++) {
                     if(j % 2 != 0) continue;
 
-                    var ct = mdl_content._ct_nm(li.get(j));
+                    var ct = mdl_content._ct_nm(arr[j]);
                     if(ct == null) continue;
-                    var amt = li.get(j + 1);
+                    var amt = arr[j + 1];
                     __recipeItem(tb3, ct, amt);
                   };
                 });
@@ -541,18 +540,18 @@
 
               // Time Scale
               var scl = mdl_recipe._timeScale(rcFi, i);
-              if(Math.abs(scl - 1.0) > 0.01) tb2.add(mdl_text._statText(Core.bundle.get("term.reind-term-time-required.name"), Strings.fixed(scl, 1) + "x")).left().row();
+              if(Math.abs(scl - 1.0) > 0.01) tb2.add(mdl_text._statText(mdl_text._term("time-required"), Strings.fixed(scl, 1) + "x")).left().row();
 
               // Require Optional
               var reqOpt = mdl_recipe._reqOpt(rcFi, i);
-              if(reqOpt) tb2.add(mdl_text._statText(Core.bundle.get("term.reind-term-require-optional.name"), Core.bundle.get("yes"))).left().row();
+              if(reqOpt) tb2.add(mdl_text._statText(mdl_text._term("require-optional"), Core.bundle.get("yes"))).left().row();
 
               // Fail Probability
               var failP = mdl_recipe._failP(rcFi, i);
-              if(failP > 0.0001) tb2.add(mdl_text._statText(Core.bundle.get("term.reind-term-chance-to-fail.name"), Strings.fixed(failP * 100.0, 1) + "%")).left().row();
+              if(failP > 0.0001) tb2.add(mdl_text._statText(mdl_text._term("chance-to-fail"), Strings.fixed(failP * 100.0, 1) + "%")).left().row();
 
               // Tooltip: Overdriven Mode
-              if(tt == "overdriven") tb2.add(Core.bundle.get("info.reind-info-tt-overdriven.name")).left().row();
+              if(tt == "overdriven") tb2.add(mdl_text._info("tt-overdriven")).left().row();
             }).marginRight(72.0);
           }).growX().row();
         };

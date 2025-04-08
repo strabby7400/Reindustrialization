@@ -1,7 +1,7 @@
 const rc = {
   "parent": "reind-fac-proc-shredder",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -16,12 +16,12 @@ const rc = {
     {
       "icon": "reind-item-bio-hypha-rod",
       "category": "special",
-      "randInputs": new Seq([
+      "randInputs": [
         "reind-item-bio-hypha-rod", 6, 0.5,
-      ]),
-      "randOutputs": new Seq([
+      ],
+      "randOutputs": [
         "reind-item-int-powdered-biomass", 12, 0.25,
-      ]),
+      ],
     },
 
 
@@ -29,15 +29,15 @@ const rc = {
     {
       "icon": "reind-item-bio-log",
       "category": "special",
-      "randInputs": new Seq([
+      "randInputs": [
         "reind-item-bio-log", 6, 0.5,
-      ]),
-      "randOutputs": new Seq([
+      ],
+      "randOutputs": [
         "reind-item-bio-sawdust", 12, 0.25,
-      ]),
+      ],
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

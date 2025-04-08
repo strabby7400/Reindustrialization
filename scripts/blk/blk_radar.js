@@ -40,13 +40,13 @@
           b.prog %= b.thr;
 
           var rad = b.block.fogRadius * Vars.tilesize * b.progress * b.efficiency;
-          mdl_game._liUnitEnemy(b, rad, b.team).each(unit => {
+          mdl_game._unitsEnemy(b, rad, b.team).forEach(unit => {
             unit.apply(Vars.content.statusEffect("reind-sta-spec-radar-detection"), b.thr * 0.5);
 
             mdl_effect.showAt(unit, db_effect._radarDetectionApply(), 0.0);
           });
 
-          mdl_effect.showAt_ldm(b, db_effect._radarScan(rad, b.block.size, b.scanColor), 0.0);
+          mdl_effect.showAt(b, db_effect._radarScan(rad, b.block.size, b.scanColor), 0.0);
           mdl_effect.showAt(b, db_effect._craftGasLarge());
           mdl_effect.playAt(b, "se-craft-radar", 1.0, 1.0, 0.1);
         };

@@ -12,6 +12,7 @@
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_math = require("reind/mdl/mdl_math");
+    const mdl_test = require("reind/mdl/mdl_test");
 
     const db_block = require("reind/db/db_block");
     const db_fluid = require("reind/db/db_fluid");
@@ -44,8 +45,14 @@
      * Diameter param of the pipe.
      * Not related to block size. It's just set manually.
      */
+    const _pipeDmCoef = function(blk) {
+      return mdl_data.read_1n1v(db_block.db["map"]["diameter"], blk.name, 1.0);
+    };
+    exports._pipeDmCoef = _pipeDmCoef;
+
+
     const _pipeDm = function(blk) {
-      return mdl_data.read_1n1v(db_block.db["map"]["diameter"], blk.name, 1.0) * VAR.flow_pipeDiameter;
+      return _pipeDmCoef(blk) * VAR.flow_pipeDiameter;
     };
     exports._pipeDm = _pipeDm;
   // End
@@ -155,52 +162,43 @@
 
 
   // Part: Calculation
-    const condFricCoef = 0.12;
-    const _condFric = function(b_f, b_t) {
-      return ((_pipeDm(b_f.block) != _pipeDm(b_t.block)) ? condFricCoef : 0.0) / 60.0;
+    const _dmFric = function(b_f, b_t) {
+      var dmCoef_f = _pipeDmCoef(b_f.block);
+      var dmCoef_t = _pipeDmCoef(b_t.block);
+      return (dmCoef_t > dmCoef_f) ? 0.15 * (1.0 - Math.pow(dmCoef_f / dmCoef_t, 2)) : 0.75 * (1.0 - dmCoef_t / dmCoef_f);
     };
-    exports._condFric = _condFric;
+    exports._dmFric = _dmFric;
 
 
-    const cornerFricCoef = 0.07;
     const _cornerFric = function(b_f, b_t) {
-      return ((b_f.rotation != b_t.rotation) ? cornerFricCoef : 0.0) / 60.0;
+      return (b_f.rotation != b_t.rotation) ? 0.12 : 0.0;
     };
-    exports._condFric = _condFric;
+    exports._cornerFric = _cornerFric;
 
 
-    const _lineFricCoef = function(rough, pipeDm) {
-      return 0.125 * 0.5 / Math.sqrt(pipeDm * (1.74 - 2.0 * Mathf.log(10, 2.0 * rough / pipeDm)));
-    };
-    exports._lineFricCoef = _lineFricCoef;
-
-
-    const _lineFric = function(rate, rough, pipeDm) {
-      var speed = rate * 60.0;
-      var lineFricCoef = _lineFricCoef(rough, pipeDm);
-      var param1 = (1.0 - condFricCoef - cornerFricCoef) / 2.0 / lineFricCoef;
-      var param2 = Math.pow(1.0 - condFricCoef - cornerFricCoef, 2) / 4.0 / lineFricCoef;
-
-      if(speed > param1) {
-        return (speed - param1 + param2) / 60.0;
-      } else {
-        return Math.pow(speed, 2) * lineFricCoef / 60.0;
-      }
+    const _lineFric = function(rough, dmCoef) {
+      return Math.pow(1.0 / (4.0 - rough / dmCoef), 2);
     };
     exports._lineFric = _lineFric;
 
 
-    const _totalFric = function(b_f, b_t, rate) {
-      if(!mdl_content.isCond(b_f.block) || !mdl_content.isCond(b_t.block)) return 0.0;
-
-      return _condFric(b_f, b_t) + _cornerFric(b_f, b_t) + _lineFric(rate, _rough(b_t), _pipeDm(b_t.block));
+    const _totalFric = function(b_f, b_t) {
+      return Mathf.clamp(_dmFric(b_f, b_t) + _cornerFric(b_f, b_t) + _lineFric(_rough(b_t), _pipeDmCoef(b_t.block)), 0.0, 0.9);
     };
     exports._totalFric = _totalFric;
 
 
-    const _flowRate = function(b_f, b_t, amt_f, amt_t, pres, visc) {
-      var rate = Math.max((1.0 - visc) * (amt_f - amt_t) * pres, 0.0);
-      var rate_fi = Math.max(rate - _totalFric(b_f, b_t, rate), 0.0);
+    const _flowRate = function(b_f, b_t, frac_f, frac_t, pres, visc) {
+      var rate = Math.max((1.0 - visc) * 2.0 * (frac_f - frac_t) * b_f.block.liquidCapacity * pres * _pipeDmCoef(b_t.block) , 0.0);
+
+      // BETA MODE
+      var rate_fi;
+      if(mdl_test._beta()) {
+        rate_fi = rate * (1.0 - _totalFric(b_f, b_t));
+      } else {
+        rate_fi = rate;
+      }
+
       return rate_fi;
     };
     exports._flowRate = _flowRate;

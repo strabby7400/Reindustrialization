@@ -30,6 +30,7 @@
       },
     });
     disAux_router.buildType = () => extend(Router.RouterBuild, disAux_router, {
+      timerCall: new Interval(1), isBackflow: false,
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);

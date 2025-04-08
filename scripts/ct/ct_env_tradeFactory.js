@@ -47,10 +47,10 @@
       rcFi: require("reind/rc/rc_mapFac_idsTradeDock_rimBuilder"),
       id_rc: 0,
       needCheck: true, modified: false, craftSound: null, timeScale: 1.0,
-      ci: new Seq(), bi: new Seq(), opt: new Seq(),
-      co: new Seq(), bo: new Seq(), fo: new Seq(),
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
+      timerEffc: new Interval(1), timerLiq: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },

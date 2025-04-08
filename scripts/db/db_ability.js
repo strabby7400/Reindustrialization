@@ -23,6 +23,13 @@
   // End
 
 
+  // Part: Auxiliary
+    function ax_dmg(dmg, unit) {
+      return Math.max(dmg * unit.damageMultiplier, 0.1)
+    };
+  // End
+
+
   // Part: Visual
     const __shootDust = function(utp, index, radScl) {
       if(index == null) index = 0;
@@ -78,7 +85,7 @@
           tb.row();
           if(sta != StatusEffects.none) {
             tb.add(mdl_text._statText(
-              Core.bundle.get("term.reind-term-status.name"),
+              mdl_text._term("status"),
               sta.localizedName,
             ));
           };
@@ -87,7 +94,7 @@
 
         death(unit) {
           Damage.damage(unit.team, unit.x, unit.y, rad, dmg);
-          mdl_game._liUnitEnemy(unit, rad, unit.team).each(ounit => {
+          mdl_game._unitsEnemy(unit, rad, unit.team).forEach(ounit => {
             ounit.apply(sta, dur);
           });
 
@@ -106,6 +113,118 @@
       Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_deathExplosion));
     };
     exports.__deathExplosion = __deathExplosion;
+
+
+    const __energizedChainLightning = function(utp, p, rad0, rad, dmg, cap, dmgFact, bdmgMtp, color) {
+      if(p == null) p = 0.03333333;
+      if(rad0 == null) rad0 = 80.0;
+      if(rad == null) rad = 40.0;
+      if(dmg == null) dmg = 30.0;
+      if(cap == null) cap = -1;
+      if(dmgFact == null) dmgFact = 0.75;
+      if(bdmgMtp == null) bdmgMtp = 0.3;
+      if(color == null) color = Pal.techBlue;
+
+      var r = mdl_data.read_1n1v(db_unit.db["ep"]["range"], utp.name, 5);
+      var ep_req = mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], utp.name, 0.0);
+
+      var abi_energizedChainLightning = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-energized-chain-lightning.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text._statText(
+            Stat.damage.localized(),
+            Strings.autoFixed(dmg, 2),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Stat.range.localized(),
+            Strings.autoFixed(rad0 / Vars.tilesize, 2),
+            StatUnit.blocks.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            mdl_text._term("chain-range"),
+            Strings.autoFixed(rad / Vars.tilesize, 2),
+            StatUnit.blocks.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            mdl_text._term("chain-cap"),
+            cap < 0 ? mdl_text._term("infinity") : Strings.autoFixed(cap, 0),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            mdl_text._term("frequency"),
+            Strings.autoFixed(p * 60.0, 2),
+            StatUnit.perSecond.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            mdl_text._term("damage-decay"),
+            Strings.autoFixed(dmgFact * 100.0, 2) + "%",
+          ));
+          tb.row();
+          tb.add(mdl_text._statMtpText(
+            mdl_text._term("building-damage-multiplier"),
+            bdmgMtp,
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            mdl_text._term("status"),
+            StatusEffects.shocked.localizedName,
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Core.bundle.get("stat.reind-stat-ep-range.name"),
+            Strings.autoFixed(r, 2),
+            StatUnit.blocks.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Core.bundle.get("stat.reind-stat-ep-required.name"),
+            Strings.autoFixed(ep_req, 2),
+          ));
+        },
+
+
+        displayBars(unit, bars) {
+          bars.add(new Bar(
+            "term.reind-term-energy-points.name",
+            Pal.techBlue,
+            () => Math.min(frag_faci._epFrac(unit), 1.0),
+          )).row();
+        },
+
+
+        update(unit) {
+          if(frag_faci._epFrac(unit) < 0.9999) return;
+
+          var p_fi = Time.delta * p * unit.reloadMultiplier;
+          if(Mathf.chance(p_fi)) {
+            frag_attack.atk_chainLightning(unit, unit.team, 1, rad0, rad, ax_dmg(dmg, unit), cap, color, dmgFact, bdmgMtp, true);
+            mdl_effect.flashAt(unit, Color.valueOf("ffffff80"));
+          };
+        },
+
+
+        draw(unit) {
+          frag_faci.draw_ep(unit);
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-energized-chain-lightning.name");
+        },
+
+
+      });
+
+      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_energizedChainLightning));
+    };
+    exports.__energizedChainLightning = __energizedChainLightning;
 
 
     const __lightningCore = function(utp, p, r, off_r, dmg, color) {
@@ -133,13 +252,13 @@
           ));
           tb.row();
           tb.add(mdl_text._statText(
-            Core.bundle.get("term.reind-term-frequency.name"),
+            mdl_text._term("frequency"),
             Strings.autoFixed(p * 60.0, 2),
             StatUnit.perSecond.localized(),
           ));
           tb.row();
           tb.add(mdl_text._statText(
-            Core.bundle.get("term.reind-term-status.name"),
+            mdl_text._term("status"),
             StatusEffects.shocked.localizedName,
           ));
         },
@@ -149,7 +268,7 @@
           if(mdl_content.isMoving(unit)) return;
 
           var p_fi = Time.delta * p * unit.reloadMultiplier;
-          if(Mathf.chance(p % 1.0)) frag_attack.atk_lightning(unit, unit.team, Math.ceil(p_fi), r, off_r, Math.max(dmg * unit.damageMultiplier, 0.1), color, false);
+          if(Mathf.chance(p_fi % 1.0)) frag_attack.atk_lightning(unit, unit.team, Math.ceil(p_fi), r, off_r, ax_dmg(dmg, unit), color, false);
         },
 
 
@@ -181,7 +300,7 @@
           ));
           tb.row();
           tb.add(mdl_text._statText(
-            Core.bundle.get("term.reind-term-max-health-limit.name"),
+            mdl_text._term("max-health-limit"),
             Strings.autoFixed(limit, 0),
           ));
         },
@@ -190,17 +309,17 @@
         update(unit) {
           if(Mathf.chance(0.98)) return;
 
-          var li_ounit = mdl_game._liUnitEnemy(unit, rad, unit.team);
-          if(li_ounit.size > 0) {
+          var units = mdl_game._unitsEnemy(unit, rad, unit.team);
+          if(units.length > 0) {
             var count_apply = 0;
-            li_ounit.each(ounit => {
+            units.forEach(ounit => {
               if(ounit.maxHealth < limit + 0.0001) {
                 ounit.apply(Vars.content.statusEffect("reind-sta-spec-terrorized"), 300.0);
                 count_apply += 1;
               };
             });
 
-            if(count_apply > 0) mdl_effect.showAt_ldm(unit, db_effect._scanCircle(rad, 0.5, Color.valueOf("ffffff40")), 0.0);
+            if(count_apply > 0) mdl_effect.showAt(unit, db_effect._scanCircle(rad, 0.5, Color.valueOf("ffffff40")), 0.0);
           };
         },
 
@@ -231,7 +350,7 @@
           ));
           tb.row();
           tb.add(mdl_text._statText(
-            Core.bundle.get("term.reind-term-unit-count.name"),
+            mdl_text._term("unit-count"),
             Strings.autoFixed(limit, 0),
           ));
         },
@@ -241,7 +360,7 @@
           bars.add(new Bar(
             "term.reind-term-unit-count.name",
             Pal.accent,
-            () => Math.min(mdl_game._liUnitSame(unit, rad, unit.type.name, unit.team).size / limit, 1.0),
+            () => Math.min(mdl_game._unitsSame(unit, rad, unit.type.name, unit.team).length / limit, 1.0),
           )).row();
         },
 
@@ -249,7 +368,7 @@
         update(unit) {
           if(Mathf.chance(0.98)) return;
 
-          var count = mdl_game._liUnitSame(unit, rad, unit.type.name, unit.team).size;
+          var count = mdl_game._unitsSame(unit, rad, unit.type.name, unit.team).length;
           if(count >= limit) unit.apply(Vars.content.statusEffect("reind-sta-spec-morale"), 300.0);
         },
 
@@ -271,10 +390,8 @@
     const __energizedRegeneration = function(utp, hp_heal) {
       if(hp_heal == null) hp_heal = 30.0;
 
-      var r = mdl_data.read_1n1v(db_unit.db["ep"]["range"], utp.name);
-      if(r == null) r = 5;
-      var ep_req = mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], utp.name);
-      if(ep_req == null) ep_req = 0.0;
+      var r = mdl_data.read_1n1v(db_unit.db["ep"]["range"], utp.name, 5);
+      var ep_req = mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], utp.name, 0.0);
 
       var abi_energizedRegeneration = extend(Ability, {
 
@@ -285,13 +402,13 @@
           tb.add(mdl_text._statText(
             Core.bundle.get("stat.repairspeed"),
             Strings.autoFixed(hp_heal, 2),
-            Core.bundle.get("unit.persecond"),
+            StatUnit.perSecond.localized(),
           ));
           tb.row();
           tb.add(mdl_text._statText(
             Core.bundle.get("stat.reind-stat-ep-range.name"),
             Strings.autoFixed(r, 2),
-            Core.bundle.get("unit.blocks"),
+            StatUnit.blocks.localized(),
           ));
           tb.row();
           tb.add(mdl_text._statText(
@@ -349,7 +466,7 @@
           tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-energizer.description") + "[]\n\n").wrap().width(350.0);
           tb.row();
           tb.add(mdl_text._statText(
-            Core.bundle.get("term.reind-term-energy-points.name"),
+            mdl_text._term("energy-points"),
             Strings.autoFixed(ep, 2),
           ));
         },
@@ -408,7 +525,7 @@
               var t = unit.tileOn();
               this.tMap.put(unit, t);
 
-              mdl_effect.showAt_ldm(t, db_effect._oreScannerScan(r, 1, scanColor, true), 0.0);
+              mdl_effect.showAt(t, db_effect._oreScannerScan(r, 1, scanColor, true), 0.0);
               mdl_effect.playAt(t, "se-craft-ore-scanner", 1.0, 1.0, 0.1);
             };
 
@@ -428,7 +545,7 @@
 
           var a = this.aMap.get(unit);
           if(a > 0.01) {
-            mdl_game._liTileRect(this.tMap.get(unit), r, 1).each(ot => {
+            mdl_game._tsRect(this.tMap.get(unit), r, 1).forEach(ot => {
               var ov = ot.overlay();
 
               if(mdl_content.isDepthOre(ov)) env_depthOre.drawBase(ov, ot, a);

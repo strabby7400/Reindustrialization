@@ -15,11 +15,10 @@
 
   // Part: Component
     function setStatsComp(itm) {
-      var li = new Seq();
-
       itm.stats.add(db_stat.isOre, true);
       itm.stats.add(db_stat.hardness, itm.hardness);
 
+      var li = new Seq();
       Vars.content.blocks().each(blk => {
         if(blk.itemDrop == itm) li.add(blk);
       });

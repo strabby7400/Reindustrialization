@@ -8,7 +8,7 @@ const gi = [
 const rc = {
   "parent": "reind-fac-sep-dry-magnetic-separator",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -20,13 +20,13 @@ const rc = {
     {
       "icon": "reind-item-int-dust-asbestos",
       "category": "purification",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-asbestos", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-dust-p1-asbestos", 4,
         "reind-item-was-dust", 4,
-      ]),
+      ],
     },
 
 
@@ -34,13 +34,13 @@ const rc = {
     {
       "icon": "reind-item-int-dust-raw-coal",
       "category": "purification",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-raw-coal", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-coal", 4,
         "reind-item-was-gangue", 4,
-      ]),
+      ],
     },
 
 
@@ -48,13 +48,13 @@ const rc = {
     {
       "icon": "reind-item-int-dust-sand",
       "category": "purification",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-sand", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-dust-p1-sand", 4,
         "reind-item-was-dust", 4,
-      ]),
+      ],
     },
 
 
@@ -66,13 +66,13 @@ const rc = {
     {
       "icon": "reind-item-int-chunks-crude-sulfur",
       "category": "purification",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-chunks-crude-sulfur", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-sulfur", 4,
         "reind-item-was-gangue", 4,
-      ]),
+      ],
     },
 
 
@@ -83,13 +83,13 @@ const rc = {
     {
       "icon": "reind-item-int-dust-bauxite",
       "category": "purification",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-bauxite", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-dust-p1-bauxite", 4,
         "reind-item-was-gangue", 4,
-      ]),
+      ],
     },
 
 
@@ -100,16 +100,16 @@ const rc = {
     {
       "icon": "reind-item-int-dust-malachite",
       "category": "purification",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-malachite", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-dust-p1-malachite", 4,
         "reind-item-was-gangue", 4,
-      ]),
-      "randOutputs": new Seq([
+      ],
+      "randOutputs": [
         "reind-item-ore-limonite", 4, 0.5,
-      ]),
+      ],
     },
 
 
@@ -120,16 +120,16 @@ const rc = {
     {
       "icon": "reind-item-int-dust-magnetite",
       "category": "purification",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-magnetite", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-dust-p1-magnetite", 4,
         "reind-item-was-gangue", 4,
-      ]),
-      "randOutputs": new Seq([
+      ],
+      "randOutputs": [
         "reind-item-ore-raw-coal", 4, 0.5,
-      ]),
+      ],
     },
 
 
@@ -142,20 +142,20 @@ const rc = {
     {
       "icon": "reind-item-int-dust-sand",
       "category": "selection",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-sand", 8,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-was-dust", 4,
-      ]),
-      "randOutputs": new Seq([
+      ],
+      "randOutputs": [
         "reind-item-int-dust-magnetite", 4, 0.75,
         "reind-item-int-dust-pyrolusite", 4, 0.25,
-      ]),
+      ],
       "tooltip": "target-magnetite-pyrolusite",
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

@@ -4,7 +4,7 @@ const mdl_effect = require("reind/mdl/mdl_effect");
 const rc = {
   "parent": "reind-fac-sep-large-vibration-screen",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -16,9 +16,9 @@ const rc = {
     {
       "icon": "reind-effc-effc-vibration-screen",
       "category": "special",
-      "outputs": new Seq([
+      "outputs": [
         "reind-effc-effc-vibration-screen", 0.1,
-      ]),
+      ],
     },
 
 
@@ -26,9 +26,9 @@ const rc = {
     {
       "icon": "reind-effc-effc-vibration-screen",
       "category": "special",
-      "outputs": new Seq([
+      "outputs": [
         "reind-effc-effc-vibration-screen", 0.2,
-      ]),
+      ],
       "tooltip": "overdriven",
       "craftScript": function() {
         var dmg = this.maxHealth * 0.0225;
@@ -43,15 +43,15 @@ const rc = {
     {
       "icon": "reind-item-buil-asbestos-wool",
       "category": "special",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-dust-p1-asbestos", 4,
-      ]),
-      "outputs": new Seq([
+      ],
+      "outputs": [
         "reind-item-buil-asbestos-wool", 4,
-      ]),
+      ],
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

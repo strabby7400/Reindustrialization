@@ -27,14 +27,14 @@
 
       // Beneath
       if(mdl_content.isOnFloor(unit)) {
-        if(db_env.db["type"]["quicksand"].contains(t.floor().name)) unit.apply(Vars.content.statusEffect("reind-sta-spec-quicksand"), staTime);
-        if(db_env.db["type"]["parasiteFluid"].contains(t.floor().name)) /*unit.apply(Vars.content.statusEffect("reind-sta-spec-parasite"), 1800.0)*/;
+        if(db_env.db["type"]["quicksand"].includes(t.floor().name)) unit.apply(Vars.content.statusEffect("reind-sta-spec-quicksand"), staTime);
+        if(db_env.db["type"]["parasiteFluid"].includes(t.floor().name)) /*unit.apply(Vars.content.statusEffect("reind-sta-spec-parasite"), 1800.0)*/;
       };
 
       // Range
-      var li_ot = mdl_game._liTileRect(t, 5);
+      var ts = mdl_game._tsRect(t, 5);
 
-      li_ot.each(ot => {
+      ts.forEach(ot => {
         var d = mdl_game._dst(t, ot);
         var oblk = ot.block();
         var ob = ot.build;
@@ -65,7 +65,7 @@
     const update_mouse = function(utp, unit) {
       if(unit != Vars.player.unit()) return;
 
-      var ot = mdl_game._tileMouse();
+      var ot = mdl_game._tMouse();
       if(ot == null) return;
 
       var ui = new UI();
@@ -73,7 +73,7 @@
       var nm_blk = ot.block().name;
 
       if(Core.input.touched) {
-        if(nm_flr == "reind-map-misc-restriction-zone") ui.showInfoFade("@info.reind-info-restriction-zone.name", 2.0);
+        if(nm_flr == "reind-map-misc-restriction-zone") ui.showInfoFade("restriction-zone");
       };
     };
     exports.update_mouse = update_mouse;

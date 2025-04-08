@@ -6,7 +6,7 @@ const gi = [
 const rc = {
   "parent": "reind-fac-rmv-hot-air-dryer",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -21,12 +21,12 @@ const rc = {
     {
       "icon": "reind-item-int-powdered-biomass",
       "category": "drying",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-powdered-biomass", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-powdered-biomass-dried", 10,
-      ]),
+      ],
     },
 
 
@@ -34,18 +34,18 @@ const rc = {
     {
       "icon": "reind-item-bio-sawdust",
       "category": "drying",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-bio-sawdust", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-sawdust-dried", 10,
-      ]),
+      ],
     },
 
 
     /* <---------------- chemical ----------------> */
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

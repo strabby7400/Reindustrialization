@@ -11,14 +11,14 @@ const db = {
   "type": {
 
 
-    "nonRobot": new Seq([
+    "nonRobot": [
 
       /* <---------------- vanilla mindustry ----------------> */
 
       "renale",
       "latum",
 
-    ]),
+    ],
 
 
   },
@@ -29,7 +29,7 @@ const db = {
   "map": {
 
 
-    "faction": new Seq([
+    "faction": [
 
       /* <---------------- unit-core ----------------> */
 
@@ -43,7 +43,7 @@ const db = {
       "reind-unit-inf-paw", "outpost-military",
       "reind-unit-inf-psas", "outpost-military",
 
-    ]),
+    ],
 
 
   },
@@ -59,7 +59,7 @@ const db = {
   "ep": {
 
 
-    "provided": new Seq([
+    "provided": [
 
       /* <---------------- unit-core ----------------> */
 
@@ -70,25 +70,27 @@ const db = {
 
       "reind-unit-inf-tsen", 1.0,
 
-    ]),
+    ],
 
 
-    "range": new Seq([
+    "range": [
 
       /* <---------------- unit-inf ----------------> */
 
       "reind-unit-inf-74ka", 7,
+      "reind-unit-inf-psas", 7,
 
-    ]),
+    ],
 
 
-    "requirement": new Seq([
+    "requirement": [
 
       /* <---------------- unit-inf ----------------> */
 
       "reind-unit-inf-74ka", 2.0,
+      "reind-unit-inf-psas", 3.0,
 
-    ]),
+    ],
 
 
   },
@@ -104,7 +106,7 @@ const db = {
   "pollution": {
 
 
-    "tolerance": new Seq([
+    "tolerance": [
 
       /* <---------------- unit-core ----------------> */
 
@@ -118,7 +120,7 @@ const db = {
       "reind-unit-inf-paw", 600.0,
       "reind-unit-inf-psas", 900.0,
 
-    ]),
+    ],
 
 
   },
@@ -134,7 +136,7 @@ const db = {
   "status": {
 
 
-    "robotOnly": new Seq([
+    "robotOnly": [
 
       /* <---------------- sta-spec ----------------> */
 
@@ -147,16 +149,16 @@ const db = {
       "reind-sta-liq-brine-corrosion",
       "reind-sta-liq-sea-water-corrosion",
 
-    ]),
+    ],
 
 
-    "oceanic": new Seq([
+    "oceanic": [
 
       /* <---------------- sta-liq ----------------> */
 
       "reind-sta-liq-sea-water-corrosion",
 
-    ]),
+    ],
 
 
   },

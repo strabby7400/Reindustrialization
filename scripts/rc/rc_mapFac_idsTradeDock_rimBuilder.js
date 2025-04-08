@@ -6,7 +6,7 @@ const gi = [
 const rc = {
   "parent": "reind-map-fac-ids-trade-dock-rim-builder",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -21,12 +21,12 @@ const rc = {
     {
       "icon": "reind-item-ore-gypsum",
       "category": "export",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-gypsum", 1000,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-virt-bit", 78,
-      ]),
+      ],
     },
 
 
@@ -34,12 +34,12 @@ const rc = {
     {
       "icon": "reind-item-ore-pumice",
       "category": "export",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-pumice", 1000,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-virt-bit", 31,
-      ]),
+      ],
     },
 
 
@@ -55,12 +55,12 @@ const rc = {
     {
       "icon": "reind-item-ore-gypsum",
       "category": "import",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-bit", 187,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-gypsum", 1000,
-      ]),
+      ],
     },
 
 
@@ -71,12 +71,12 @@ const rc = {
     {
       "icon": "reind-item-buil-cement",
       "category": "import",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-bit", 54,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-buil-cement", 1000,
-      ]),
+      ],
     },
 
 
@@ -84,12 +84,12 @@ const rc = {
     {
       "icon": "reind-item-buil-tempered-glass",
       "category": "import",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-bit", 333,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-buil-tempered-glass", 1000,
-      ]),
+      ],
     },
 
 
@@ -100,12 +100,12 @@ const rc = {
     {
       "icon": "reind-item-chem-copper",
       "category": "import",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-bit", 783,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-copper", 1000,
-      ]),
+      ],
     },
 
 
@@ -113,12 +113,12 @@ const rc = {
     {
       "icon": "reind-item-chem-lead",
       "category": "import",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-bit", 230,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-lead", 1000,
-      ]),
+      ],
     },
 
 
@@ -129,12 +129,12 @@ const rc = {
     {
       "icon": "reind-item-chem-stainless-steel",
       "category": "import",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-bit", 540,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-stainless-steel", 1000,
-      ]),
+      ],
     },
 
 
@@ -142,12 +142,12 @@ const rc = {
     {
       "icon": "reind-item-chem-steel",
       "category": "import",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-bit", 228,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-steel", 1000,
-      ]),
+      ],
     },
 
 
@@ -158,15 +158,15 @@ const rc = {
     {
       "icon": "reind-item-chem-lime",
       "category": "import",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-bit", 117,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-lime", 1000,
-      ]),
+      ],
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

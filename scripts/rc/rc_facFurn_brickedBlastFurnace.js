@@ -13,7 +13,7 @@ const opt = [
 const rc = {
   "parent": "reind-fac-furn-bricked-blast-furnace",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -25,12 +25,12 @@ const rc = {
     {
       "icon": "reind-item-chem-pig-iron",
       "category": "steelmaking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-chem-pig-iron", 240,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-wrought-iron", 240,
-      ]),
+      ],
     },
 
 
@@ -38,21 +38,21 @@ const rc = {
     {
       "icon": "reind-item-chem-wrought-iron",
       "category": "steelmaking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-chem-wrought-iron", 240,
-      ].concat(gi)),
-      "optInputs": new Seq([
+      ].concat(gi),
+      "optInputs": [
         "reind-item-ore-limestone", 360, 0.75, 1.0,
         "reind-item-int-chunks-limestone", 360, 0.75, 1.5,
         "reind-item-chem-lime", 180, 0.75, 2.0,
-      ]),
+      ],
       "requireOptional": true,
-      "outputs": new Seq([
+      "outputs": [
         "reind-item-chem-steel", 180,
-      ]),
-      "randOutputs": new Seq([
+      ],
+      "randOutputs": [
         "reind-item-was-slag", 360, 0.5,
-      ]),
+      ],
       "timeScale": 2.0,
     },
 
@@ -81,14 +81,14 @@ const rc = {
     {
       "icon": "reind-item-int-concentrate-malachite",
       "category": "smelting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-concentrate-malachite", 90,
-      ].concat(gi)),
-      "optInputs": new Seq([].concat(opt)),
+      ].concat(gi),
+      "optInputs": [].concat(opt),
       "requireOptional": true,
-      "outputs": new Seq([
+      "outputs": [
         "reind-item-chem-copper", 195,
-      ]),
+      ],
     },
 
 
@@ -99,17 +99,17 @@ const rc = {
     {
       "icon": "reind-item-int-concentrate-hematite",
       "category": "smelting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-concentrate-hematite", 90,
-      ].concat(gi)),
-      "optInputs": new Seq([].concat(opt)),
+      ].concat(gi),
+      "optInputs": [].concat(opt),
       "requireOptional": true,
-      "outputs": new Seq([
+      "outputs": [
         "reind-item-chem-pig-iron", 195,
-      ]),
-      "randOutputs": new Seq([
+      ],
+      "randOutputs": [
         "reind-item-was-slag", 180, 0.5,
-      ]),
+      ],
     },
 
 
@@ -117,17 +117,17 @@ const rc = {
     {
       "icon": "reind-item-int-concentrate-magnetite",
       "category": "smelting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-concentrate-magnetite", 90,
-      ].concat(gi)),
-      "optInputs": new Seq([].concat(opt)),
+      ].concat(gi),
+      "optInputs": [].concat(opt),
       "requireOptional": true,
-      "outputs": new Seq([
+      "outputs": [
         "reind-item-chem-pig-iron", 195,
-      ]),
-      "randOutputs": new Seq([
+      ],
+      "randOutputs": [
         "reind-item-was-slag", 180, 0.5,
-      ]),
+      ],
     },
 
 
@@ -138,17 +138,17 @@ const rc = {
     {
       "icon": "reind-item-int-concentrate-galena",
       "category": "smelting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-concentrate-galena", 90,
-      ].concat(gi)),
-      "optInputs": new Seq([].concat(opt)),
+      ].concat(gi),
+      "optInputs": [].concat(opt),
       "requireOptional": true,
-      "outputs": new Seq([
+      "outputs": [
         "reind-item-chem-lead", 130,
-      ]),
+      ],
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

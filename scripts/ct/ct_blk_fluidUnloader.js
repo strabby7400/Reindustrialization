@@ -27,7 +27,7 @@
       },
     });
     bliqAux_fluidUnloader.buildType = () => extend(GenericCrafter.GenericCrafterBuild, bliqAux_fluidUnloader, {
-      timerEffc: new Interval(1), tmpRate: 0.0,
+      timerEffc: new Interval(1), tmpRate: 0.0, transEnd: null,
       needCheck: true, modified: false,
       id_sel: -1,
       updateTile() {

@@ -32,7 +32,7 @@
 
 
   // Part: Console
-    const li_commands = new Seq([
+    const commands = [
 
 
       /* <---------------- local ----------------> */
@@ -94,6 +94,6 @@
       },
 
 
-    ]);
-    exports.commands = li_commands;
+    ];
+    exports.commands = commands;
   // End

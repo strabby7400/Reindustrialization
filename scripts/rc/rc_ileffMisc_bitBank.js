@@ -6,7 +6,7 @@ const gi = [
 const rc = {
   "parent": "reind-ileff-misc-bit-bank",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -18,12 +18,12 @@ const rc = {
     {
       "icon": "reind-item-virt-kilobit",
       "category": "converting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-bit", 1000,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-virt-kilobit", 1,
-      ]),
+      ],
       "tooltip": "using-bit",
     },
 
@@ -32,12 +32,12 @@ const rc = {
     {
       "icon": "reind-item-virt-megabit",
       "category": "converting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-kilobit", 1000,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-virt-megabit", 1,
-      ]),
+      ],
       "tooltip": "using-kilobit",
     },
 
@@ -46,12 +46,12 @@ const rc = {
     {
       "icon": "reind-item-virt-gigabit",
       "category": "converting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-megabit", 1000,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-virt-gigabit", 1,
-      ]),
+      ],
       "tooltip": "using-megabit",
     },
 
@@ -60,12 +60,12 @@ const rc = {
     {
       "icon": "reind-item-virt-bit",
       "category": "converting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-kilobit", 1,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-virt-bit", 1000,
-      ]),
+      ],
       "tooltip": "using-kilobit",
     },
 
@@ -74,12 +74,12 @@ const rc = {
     {
       "icon": "reind-item-virt-kilobit",
       "category": "converting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-megabit", 1,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-virt-kilobit", 1000,
-      ]),
+      ],
       "tooltip": "using-megabit",
     },
 
@@ -88,16 +88,16 @@ const rc = {
     {
       "icon": "reind-item-virt-megabit",
       "category": "converting",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-virt-gigabit", 1,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-virt-megabit", 1000,
-      ]),
+      ],
       "tooltip": "using-gigabit",
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

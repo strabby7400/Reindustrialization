@@ -9,7 +9,7 @@ const gi = [
 const rc = {
   "parent": "reind-ilfac-misc-ore-dictionary-converter",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -24,12 +24,12 @@ const rc = {
     {
       "icon": "copper",
       "category": "vanilla",
-      "inputs": new Seq([
+      "inputs": [
         "copper", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-copper", 2,
-      ]),
+      ],
     },
 
 
@@ -37,12 +37,12 @@ const rc = {
     {
       "icon": "lead",
       "category": "vanilla",
-      "inputs": new Seq([
+      "inputs": [
         "lead", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-lead", 2,
-      ]),
+      ],
     },
 
 
@@ -50,12 +50,12 @@ const rc = {
     {
       "icon": "graphite",
       "category": "vanilla",
-      "inputs": new Seq([
+      "inputs": [
         "graphite", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-graphite", 2,
-      ]),
+      ],
     },
 
 
@@ -63,12 +63,12 @@ const rc = {
     {
       "icon": "coal",
       "category": "vanilla",
-      "inputs": new Seq([
+      "inputs": [
         "coal", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-coal", 2,
-      ]),
+      ],
     },
 
 
@@ -76,12 +76,12 @@ const rc = {
     {
       "icon": "sand",
       "category": "vanilla",
-      "inputs": new Seq([
+      "inputs": [
         "sand", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-sand", 2,
-      ]),
+      ],
     },
 
 
@@ -92,12 +92,12 @@ const rc = {
     {
       "icon": "water",
       "category": "vanilla",
-      "inputs": new Seq([
+      "inputs": [
         "water", 0.2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-liq-ore-water", 0.2,
-      ]),
+      ],
     },
 
 
@@ -105,12 +105,12 @@ const rc = {
     {
       "icon": "ozone",
       "category": "vanilla",
-      "inputs": new Seq([
+      "inputs": [
         "ozone", 0.2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-gas-chem-ozone", 0.2,
-      ]),
+      ],
     },
 
 
@@ -118,12 +118,12 @@ const rc = {
     {
       "icon": "hydrogen",
       "category": "vanilla",
-      "inputs": new Seq([
+      "inputs": [
         "hydrogen", 0.2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-gas-chem-hydrogen", 0.2,
-      ]),
+      ],
     },
 
 
@@ -131,21 +131,21 @@ const rc = {
     {
       "icon": "nitrogen",
       "category": "vanilla",
-      "inputs": new Seq([
+      "inputs": [
         "nitrogen", 0.2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-gas-chem-nitrogen", 0.2,
-      ]),
+      ],
     },
 
 
-  ]),
+  ],
 };
 
 
 if(lib_base.hasAsthosus) {
-  rc["recipes"].addAll(new Seq([
+  rc["recipes"].push.apply([
 
 
     /* ========================================
@@ -160,12 +160,12 @@ if(lib_base.hasAsthosus) {
     {
       "icon": "asthosus-01a-03-item-lignite",
       "category": "asthosus",
-      "inputs": new Seq([
+      "inputs": [
         "asthosus-01a-03-item-lignite", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-lignite", 2,
-      ]),
+      ],
     },
 
 
@@ -173,12 +173,12 @@ if(lib_base.hasAsthosus) {
     {
       "icon": "asthosus-01a-04-item-hardened-sand",
       "category": "asthosus",
-      "inputs": new Seq([
+      "inputs": [
         "asthosus-01a-04-item-hardened-sand", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-sandstone", 2,
-      ]),
+      ],
     },
 
 
@@ -190,12 +190,12 @@ if(lib_base.hasAsthosus) {
     {
       "icon": "asthosus-01a-06-item-lodestone",
       "category": "asthosus",
-      "inputs": new Seq([
+      "inputs": [
         "asthosus-01a-06-item-lodestone", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-magnetite", 2,
-      ]),
+      ],
     },
 
 
@@ -207,12 +207,12 @@ if(lib_base.hasAsthosus) {
     {
       "icon": "asthosus-01a-11-item-barite",
       "category": "asthosus",
-      "inputs": new Seq([
+      "inputs": [
         "asthosus-01a-11-item-barite", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-barite", 2,
-      ]),
+      ],
     },
 
 
@@ -223,12 +223,12 @@ if(lib_base.hasAsthosus) {
     {
       "icon": "asthosus-02b-02-liquid-oasis-water",
       "category": "asthosus",
-      "inputs": new Seq([
+      "inputs": [
         "asthosus-02b-02-liquid-oasis-water", 0.2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-liq-ore-sea-water", 0.2,
-      ]),
+      ],
     },
 
 
@@ -236,21 +236,21 @@ if(lib_base.hasAsthosus) {
     {
       "icon": "asthosus-02b-03-liquid-purified-oasis-water",
       "category": "asthosus",
-      "inputs": new Seq([
+      "inputs": [
         "asthosus-02b-03-liquid-purified-oasis-water", 0.2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-liq-ore-water", 0.2,
-      ]),
+      ],
     },
 
 
-  ]));
+  ]);
 };
 
 
 if(lib_base.hasSubvoyage) {
-  rc["recipes"].addAll(new Seq([
+  rc["recipes"].push.apply([
 
 
     /* ========================================
@@ -265,12 +265,12 @@ if(lib_base.hasSubvoyage) {
     {
       "icon": "subvoyage-clay",
       "category": "subvoyage",
-      "inputs": new Seq([
+      "inputs": [
         "subvoyage-clay", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-clay", 2,
-      ]),
+      ],
     },
 
 
@@ -278,12 +278,12 @@ if(lib_base.hasSubvoyage) {
     {
       "icon": "subvoyage-finesand",
       "category": "subvoyage",
-      "inputs": new Seq([
+      "inputs": [
         "subvoyage-finesand", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-ore-sand", 2,
-      ]),
+      ],
     },
 
 
@@ -291,12 +291,12 @@ if(lib_base.hasSubvoyage) {
     {
       "icon": "subvoyage-sulfur",
       "category": "subvoyage",
-      "inputs": new Seq([
+      "inputs": [
         "subvoyage-sulfur", 2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-sulfur", 2,
-      ]),
+      ],
     },
 
 
@@ -307,12 +307,12 @@ if(lib_base.hasSubvoyage) {
     {
       "icon": "subvoyage-liquid-hard-water",
       "category": "subvoyage",
-      "inputs": new Seq([
+      "inputs": [
         "subvoyage-liquid-hard-water", 0.2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-liq-ore-sea-water", 0.2,
-      ]),
+      ],
     },
 
 
@@ -332,16 +332,16 @@ if(lib_base.hasSubvoyage) {
     {
       "icon": "subvoyage-nitrogen",
       "category": "subvoyage",
-      "inputs": new Seq([
+      "inputs": [
         "subvoyage-nitrogen", 0.2,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-gas-chem-nitrogen", 0.2,
-      ]),
+      ],
     },
 
 
-  ]));
+  ]);
 };
 
 

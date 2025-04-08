@@ -113,7 +113,7 @@
       var ov = b.tile.overlay();
       if(mdl_content.isDepthOre(ov)) {
         if(b.b_sc == null) {
-          mdl_draw.drawSelectText(b, false, Core.bundle.get("info.reind-info-no-ore-scanner.name"));
+          mdl_draw.drawSelectText(b, false, mdl_text._info("no-ore-scanner"));
         } else {
           mdl_draw.drawBuildRectConnector(b, b.b_sc);
         };

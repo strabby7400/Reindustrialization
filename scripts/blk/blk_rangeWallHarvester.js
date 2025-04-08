@@ -33,7 +33,8 @@
       if(b.needUpdate) {
         b.r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
 
-        mdl_game._liTileRect(b.tile, b.r, b.block.size).each(ot => {if(ot.block().attributes.get(b.block.attribute) > 0.0) b.tiles.add(ot)});
+        b.tiles.length = 0;
+        mdl_game._tsRect(b.tile, b.r, b.block.size).forEach(ot => {if(ot.block().attributes.get(b.block.attribute) > 0.0) b.tiles.push(ot)});
 
         b.needUpdate = false;
       };
@@ -47,7 +48,7 @@
       var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5);
 
       var attr = 0.0;
-      mdl_game._liTileRect(t, r, blk.size).each(ot => {
+      mdl_game._tsRect(t, r, blk.size).forEach(ot => {
         attr += ot.block().attributes.get(attribute);
       });
 
@@ -60,7 +61,7 @@
       var t = Vars.world.tile(tx, ty);
 
       mdl_draw.drawPlaceRect(blk, t, valid, r, true);
-      mdl_game._liTileRect(t, r, blk.size).each(ot => {
+      mdl_game._tsRect(t, r, blk.size).forEach(ot => {
         if(ot.block().attributes.get(blk.attribute) > 0.0) {
           mdl_draw.drawTileIndicator(ot, true);
           mdl_draw.drawFlickerLine(mdl_game._pos(t, blk.offset), mdl_game._pos(ot, ot.block().offset), Pal.accent, 1.0, true);
@@ -71,7 +72,7 @@
 
     function drawComp(b) {
       if(b.efficiency > 0.0001) {
-        b.tiles.each(ot => {
+        b.tiles.forEach(ot => {
           mdl_draw.drawItemTransfer(mdl_game._pos(ot, ot.block().offset), b, Pal.accent, 1.0);
         });
       };
@@ -80,7 +81,7 @@
 
     function drawSelectComp(b) {
       mdl_draw.drawSelectRect(b, b.r, true);
-      b.tiles.each(ot => {
+      b.tiles.forEach(ot => {
         mdl_draw.drawTileIndicator(ot, true);
         mdl_draw.drawFlickerLine(b, mdl_game._pos(ot, ot.block().offset), Pal.accent, 1.0, true);
       });

@@ -40,12 +40,15 @@
 
 
   // Part: Handler
-    const handleReaction = function(t_gn, ct_gn1, ct_gn2) {
-      if(ct_gn2 == null) ct_gn2 = "reind-gas-misc-air";
+    const handleReaction = function(t_gn, ct_gn1, ct_gn2, pMtp) {
       if(t_gn == null || ct_gn1 == null) return;
 
-      var ct1 = mdl_content._ct_gn(ct_gn1)
-      var ct2 = mdl_content._ct_gn(ct_gn2)
+      if(ct_gn2 == null) ct_gn2 = "reind-gas-misc-air";
+      if(pMtp == null) pMtp = 1.0;
+
+      var ct1 = mdl_content._ct_gn(ct_gn1);
+      var ct2 = mdl_content._ct_gn(ct_gn2);
+      if(ct1 == ct2) return;
       var nm1 = mdl_content._nmCt_gn(ct_gn1);
       var nm2 = mdl_content._nmCt_gn(ct_gn2);
 
@@ -57,7 +60,7 @@
 
 
         case "denaturing" :
-          if(b != null && (b.block instanceof StorageBlock) && Mathf.chance(0.002)) {
+          if(b != null && (b.block instanceof StorageBlock) && Mathf.chance(0.002 * pMtp)) {
             b.items.remove(ct1, 1);
             if(Mathf.chance(0.5)) {
               var ct_tg = Vars.content.item(mdl_data.read_1n1v(db_item.db["reaction"]["denaturing"], nm1));
@@ -69,7 +72,7 @@
 
 
         case "evaporation" :
-          if(Mathf.chance(0.06)) {
+          if(Mathf.chance(0.06 * pMtp)) {
             if(b != null) b.damage(b.maxHealth * 0.025);
 
             mdl_effect.showAt(t_gn, db_effect._heatSmog());
@@ -79,7 +82,7 @@
 
 
         case "explosionI" :
-          if(Mathf.chance(0.0002)) {
+          if(Mathf.chance(0.0002 * pMtp)) {
             frag_attack.atk_explosion(t_gn, 32.0, Mathf.lerp(100.0, 300.0, ct1.explosiveness), 4.0);
           };
 
@@ -87,7 +90,7 @@
 
 
         case "explosionII" :
-          if(Mathf.chance(0.001)) {
+          if(Mathf.chance(0.001 * pMtp)) {
             frag_attack.atk_explosion(t_gn, 48.0, Mathf.lerp(300.0, 900.0, ct1.explosiveness), 8.0);
           };
 

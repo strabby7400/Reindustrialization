@@ -24,6 +24,7 @@
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_recipe = require("reind/mdl/mdl_recipe");
     const mdl_table = require("reind/mdl/mdl_table");
+    const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
     const db_effect = require("reind/db/db_effect");
@@ -46,7 +47,7 @@
     };
 
 
-    function ax_getProgressIncrease(b, time, rcFi, id_rc) {
+    function ax_getProgressIncrease(b, time) {
       var val_fi = 1.0;
 
       if(b.block.ignoreLiquidFullness) {
@@ -55,14 +56,14 @@
         var val = 1.0;
         var scl = 1.0;
         var hasLiquidOutput = false;
-        var outputs = mdl_recipe._outputs(rcFi, id_rc);
-        var cap = outputs.size;
+        var arr = b.co;
+        var cap = arr.length;
         if(b.liquids != null && cap > 0) {
           val = 0.0;
           for(let i = 0; i < cap; i += 2) {
-            var liq = Vars.content.liquid(outputs.get(i));
+            var liq = Vars.content.liquid(arr[i]);
             if(liq == null) continue;
-            var amt = outputs.get(i + 1);
+            var amt = arr[i + 1];
             var tmpVal = (b.block.liquidCapacity - b.liquids.get(liq)) / (amt * b.edelta());
             val = Math.max(val, tmpVal);
             scl = Math.min(scl, tmpVal);
@@ -127,9 +128,10 @@
       if(b.timerEffc.get(isManual ? 3.0 : efficiencyUpdateInterval)) {
         b.efficiency = frag_recipe.sumEfficiency(b, b.ci, b.bi, b.opt, mdl_recipe._reqOpt(b.rcFi, b.id_rc));
         b.tmpEffc = b.efficiency;
-        b.progInc = ax_getProgressIncrease(b, b.block.craftTime, b.rcFi, b.id_rc);
-        b.progInc1 = ax_getProgressIncrease(b, 1.0, b.rcFi, b.id_rc);
+        b.progInc = ax_getProgressIncrease(b, b.block.craftTime);
+        b.progInc1 = ax_getProgressIncrease(b, 1.0);
         b.canAdd = frag_recipe.canAddResource(b, b.co, b.bo, b.fo);
+        b.dTup = frag_recipe._dTup(b, b.bo, b.fo);
       } else {
         b.efficiency = b.tmpEffc;
       };
@@ -174,8 +176,10 @@
           };
         };
 
-        frag_recipe.addLiquids(b, b.co, b.progInc1, b.rcTimeScale);
-        frag_recipe.consumeLiquids(b, b.ci, b.progInc1, b.rcTimeScale);
+        if(b.timerLiq.get(6.0)) {
+          frag_recipe.addLiquids(b, b.co, b.progInc1, b.rcTimeScale, 6.0);
+          frag_recipe.consumeLiquids(b, b.ci, b.progInc1, b.rcTimeScale, 6.0);
+        };
 
         mdl_effect.showAroundP(b.block.updateEffectChance, b, b.block.updateEffect, b.block.size * Vars.tilesize * 0.5, 0.0);
 
@@ -184,7 +188,7 @@
 
       b.totalProgress += b.warmup * b.edelta();
 
-      frag_recipe.dumpResource(b, b.co, b.bo, b.fo);
+      frag_recipe.dumpResource(b, b.co, b.dTup);
     };
 
 
@@ -211,7 +215,7 @@
       frag_faci.setBars_was(blk, blk.rcFi);
 
       blk.addBar("reind-prog", b => new Bar(
-        "term.reind-term-recipe-progress.name",
+        mdl_text._term("recipe-progress"),
         Pal.ammo,
         () => Math.min(b.progress, 1.0),
       ));
@@ -226,12 +230,12 @@
       if(isManual) {
         mdl_table.setTrigger(tb, function() {
           if(Vars.state.paused) {
-            mdl_ui.showInfoFade(Core.bundle.get("info.reind-info-manual-generator-paused.name"));
+            mdl_ui.showInfoFade("manual-generator-paused");
           } else {
             var param = Mathf.lerpDelta(b.param, 1.0, 0.135);
             Call.tileConfig(Vars.player, b, vec2.set(-2, param));
           };
-        }, Icon.crafting, Core.bundle.get("info.reind-info-manual-crafter.name"), 72.0);
+        }, Icon.crafting, mdl_text._info("manual-crafter"), 72.0);
         mdl_table.__breakHalf(tb);
       };
 

@@ -16,7 +16,7 @@
   // Part: Component
     function canPlaceOnComp(blk, t, team, rot) {
       var valid = true;
-      mdl_game._liTileEdge(t, blk.size).each(ot => {if(ot.solid()) valid = false});
+      mdl_game._tsEdge(t, blk.size).forEach(ot => {if(ot.solid()) valid = false});
 
       return valid;
     };
@@ -29,7 +29,7 @@
 
     function statusComp(b) {
       var valid = true;
-      mdl_game._liTileEdge(b.tile, b.block.size).each(ot => {if(ot.solid()) valid = false});
+      mdl_game._tsEdge(b.tile, b.block.size).forEach(ot => {if(ot.solid()) valid = false});
       if(!valid) return BlockStatus.noInput;
 
       return b.super$status();
@@ -40,8 +40,8 @@
       var t = Vars.world.tile(tx, ty);
       if(t == null) return;
 
-      var li_ot = mdl_game._liTileEdge(t, blk.size);
-      li_ot.each(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
+      var ts = mdl_game._tsEdge(t, blk.size);
+      ts.forEach(ot => mdl_draw.drawTileIndicator(ot, !ot.solid()));
     };
 
 
@@ -49,13 +49,13 @@
       var t = b.tile;
 
       var valid = true;
-      var li_ot = mdl_game._liTileEdge(t, b.block.size);
-      li_ot.each(ot => {
+      var ts = mdl_game._tsEdge(t, b.block.size);
+      ts.forEach(ot => {
         mdl_draw.drawTileIndicator(ot, !ot.solid());
         if(ot.solid()) valid = false;
       });
 
-      if(!valid) mdl_draw.drawSelectText(b, false, Core.bundle.get("info.reind-info-turret-blocked.name"), 1);
+      if(!valid) mdl_draw.drawSelectText(b, false, mdl_text._info("turret-blocked"), 1);
     };
   // End
 

@@ -394,7 +394,7 @@
 
 
   // Part: Map
-    const map = new Seq([
+    const map = [
       "man-nov-about-dependencies", aboutDependencies,
       "man-nov-copper", copper,
       "man-nov-defense", defense,
@@ -406,6 +406,6 @@
 
       "reind-sta-file-aerth-01a", aerth_01a,
       "reind-sta-file-aerth-01b", aerth_01b,
-    ]);
+    ];
     exports.map = map;
   // End

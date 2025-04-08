@@ -73,7 +73,7 @@
 
       Damage.damage(pos.x, pos.y, rad, dmg);
 
-      mdl_effect.showAt_ldm(pos, db_effect._commonExplosion(rad), 0.0);
+      mdl_effect.showAt(pos, db_effect._commonExplosion(rad), 0.0);
       mdl_effect.shakeAt(pos, shake);
       mdl_effect.playAt(pos, "se-shot-explosion", 1.0, 1.0, 0.1);
     };
@@ -101,7 +101,7 @@
 
       var pos = mdl_game._pos(pos_gn);
 
-      mdl_game._liUnit(pos, rad).each(unit => {
+      mdl_game._units(pos, rad).forEach(unit => {
         if(!unit.flying && !unit.type.naval && !unit.hovering && unit != caller) {
           var d = mdl_game._dst(pos, unit);
           var dmg_fi = (Mathf.random(0.6) + 0.7) * Math.max(1.0 - d / rad, 0.1) * dmg + VAR.impact_minDamage * (noob ? 0.5 : 1.0);
@@ -152,6 +152,40 @@
       atk_lightning(pos_gn, team, amt, r, off_r, dmg, color, hasSound);
     };
     exports.atk_lightning_noob = atk_lightning_noob;
+
+
+    const atk_chainLightning = function(pos_gn, team, size, rad0, rad, dmg, cap, color, dmgFact, bdmgMtp, hasSound) {
+      if(pos_gn == null) return;
+
+      if(team == null) team = Team.derelict;
+      if(size == null) size = 1;
+      if(rad0 == null) rad0 = 80.0;
+      if(rad == null) rad = 40.0;
+      if(dmg == null) dmg = VAR.shortCircuit_lightningDamage;
+      if(cap == null) cap = -1;
+      if(color == null) color = Pal.techBlue;
+      if(dmgFact == null) dmgFact = 0.75;
+      if(bdmgMtp == null) bdmgMtp = 1.0;
+      if(hasSound == null) hasSound = true;
+
+      var tgs = mdl_game._targetChain(pos_gn, rad0, rad, team, size, cap);
+      var cap1 = tgs.length;
+      if(cap1 == 0) return;
+      var frac = 1.0;
+      for(let i = 0; i < cap1; i++) {
+        var tg = tgs[i];
+        var dmg_fi = Damage.applyArmor(dmg, (tg instanceof Building) ? tg.block.armor : tg.type.armor) * (tg instanceof Building ? bdmgMtp : 1.0);
+        tg.damage(dmg_fi);
+        if(tg instanceof Unit) tg.apply(StatusEffects.shocked);
+        mdl_effect.showAt(tg, Fx.hitLancer, 0.0);
+        mdl_effect.damageAt(tg, dmg_fi, team);
+
+        frac *= dmgFact;
+      };
+
+      mdl_effect.chainLightning_es(pos_gn, tgs, color, hasSound);
+    };
+    exports.atk_chainLightning = atk_chainLightning;
   // End
 
 

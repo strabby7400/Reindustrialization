@@ -32,7 +32,7 @@
       needCheck: true,
       r: 5, scanColor: Color.white,
       prog: Math.round(Mathf.random(180.0)), thr: 180,
-      a: 0.0, tiles: new Seq(),
+      a: 0.0, tiles: [],
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);

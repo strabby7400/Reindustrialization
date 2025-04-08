@@ -18,6 +18,7 @@
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_heat = require("reind/mdl/mdl_heat");
+    const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
     const db_effect = require("reind/db/db_effect");
@@ -127,7 +128,7 @@
       if(tHeat < 0.01) return;
 
       mdl_draw.drawSelectText(b, true, Core.bundle.get("bar.heat") + ": " + Strings.autoFixed(heat, 2), 1);
-      mdl_draw.drawSelectText(b, true, Core.bundle.get("term.reind-term-total-heat.name") + ": " + Strings.autoFixed(tHeat, 2), 0);
+      mdl_draw.drawSelectText(b, true, mdl_text._term("total-heat") + ": " + Strings.autoFixed(tHeat, 2), 0);
     };
     exports.drawSelect_heat = drawSelect_heat;
 
@@ -163,24 +164,25 @@
 
   // Start: Fluid Heat
     const updateTile_fluidHeat = function(b) {
+      if(Mathf.chance(0.98)) return;
+
       var fheatCap = mdl_data.read_1n1v(db_block.db["heat"]["fHeatCapacity"], b.block.name);
       if(fheatCap == null) return;
       var heat = mdl_heat._fHeat(b);
       if(heat <= fheatCap) return;
 
-      var dmg = b.edelta() * 0.04 * heat / fheatCap;
+      var dmg = b.edelta() * 2.0 * heat / fheatCap;
       b.damage(dmg);
 
-      mdl_effect.showAtP(0.06, b, db_effect._heatSmog());
+      mdl_effect.showAt(b, db_effect._heatSmog());
     };
     exports.updateTile_fluidHeat = updateTile_fluidHeat;
 
 
     const draw_fluidHeat = function(b, reg) {
-      var fheatCap = mdl_data.read_1n1v(db_block.db["heat"]["fHeatCapacity"], b.block.name);
-      if(fheatCap == null) fheatCap = 120.0;
       var heat = mdl_heat._fHeat(b);
       if(heat < 0.01) return;
+      var fheatCap = mdl_data.read_1n1v(db_block.db["heat"]["fHeatCapacity"], b.block.name, 120.0);
 
       mdl_draw.drawHeatRegion(b, Math.min(heat * 1.2 / fheatCap, 1.0), reg, b.block.size);
     };
@@ -191,7 +193,7 @@
       var heat = mdl_heat._fHeat(b);
       if(heat < 0.01) return;
 
-      mdl_draw.drawSelectText(b, true, Core.bundle.get("term.reind-term-fluid-heat.name") + ": " + Strings.autoFixed(heat, 2), 0);
+      mdl_draw.drawSelectText(b, true, mdl_text._term("fluid-heat") + ": " + Strings.autoFixed(heat, 2), 0);
     };
     exports.drawSelect_fluidHeat = drawSelect_fluidHeat;
   // End

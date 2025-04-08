@@ -41,7 +41,7 @@
         needCheck = false;
       };
 
-      if(sector != null && timerCall.get(120.0)) {
+      if(sector != null && timerCall.get(300.0)) {
         var id = sector.id;
         var pla = Vars.state.planet.name;
         var li_we = null;

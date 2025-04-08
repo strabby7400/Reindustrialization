@@ -10,7 +10,7 @@ const go = [
 const rc = {
   "parent": "reind-fac-furn-primitive-coke-oven",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -25,15 +25,15 @@ const rc = {
     {
       "icon": "reind-item-chem-coal",
       "category": "coking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-chem-coal", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-coke", 10,
-      ].concat(go)),
-      "randOutputs": new Seq([
+      ].concat(go),
+      "randOutputs": [
         "reind-item-chem-coke", 10, 0.5,
-      ]),
+      ],
     },
 
 
@@ -44,15 +44,15 @@ const rc = {
     {
       "icon": "reind-item-ore-lignite",
       "category": "coking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-lignite", 20,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-semicoke", 10,
-      ].concat(go)),
-      "randOutputs": new Seq([
+      ].concat(go),
+      "randOutputs": [
         "reind-item-chem-semicoke", 10, 0.5,
-      ]),
+      ],
     },
 
 
@@ -60,18 +60,18 @@ const rc = {
     {
       "icon": "reind-item-ore-peat",
       "category": "coking",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-peat", 40,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-chem-semicoke", 10,
-      ].concat(go)),
-      "randOutputs": new Seq([
+      ].concat(go),
+      "randOutputs": [
         "reind-item-chem-semicoke", 10, 0.5,
-      ]),
+      ],
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

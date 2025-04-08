@@ -11,6 +11,7 @@
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_math = require("reind/mdl/mdl_math");
     const mdl_table = require("reind/mdl/mdl_table");
+    const mdl_text = require("reind/mdl/mdl_text");
   // End
 
 
@@ -35,28 +36,28 @@
       var ct_sel = mdl_content._ct_id(tp_ct, id_sel);
       var str_ct = (ct_sel == null) ? "-" : ct_sel.localizedName;
 
-      mdl_table.setHeadline(tb, Core.bundle.get("term.reind-term-selected.name") + ": " + str_ct);
+      mdl_table.setHeadline(tb, mdl_text._info("selected") + " " + str_ct);
     };
     exports.__contentSelected = __contentSelected;
 
 
     const __contentSelector = function(tb, tp_ct, id_sel, scr, col) {
-      var li_ct = new Seq();
+      var cts = [];
 
       switch(tp_ct) {
         case "item" :
           Vars.content.items().each(itm => {
-            if(!itm.hidden && mdl_content.isReind(itm) && !mdl_content.isVirt(itm)) li_ct.add(itm);
+            if(!itm.hidden && mdl_content.isReind(itm) && !mdl_content.isVirt(itm)) arr.push(itm);
           });
           break;
         case "fluid" :
           Vars.content.liquids().each(liq => {
-            if(!liq.hidden && mdl_content.isReind(liq) && !mdl_content.isEffc(liq)) li_ct.add(liq);
+            if(!liq.hidden && mdl_content.isReind(liq) && !mdl_content.isEffc(liq)) arr.push(liq);
           });
           break;
       };
 
-      mdl_table.setContentSelector(tb, li_ct, id_sel, scr, col);
+      mdl_table.setContentSelector(tb, cts, id_sel, scr, col);
     };
     exports.__contentSelector = __contentSelector;
   // End
@@ -69,7 +70,7 @@
       var valMax = VAR.time_maxTimeDelta * 4.0 - 1.0;
       var valCur = Time.delta * 4.0 - 1.0;
 
-      mdl_table.setHeadline(tb, Core.bundle.get("term.reind-term-time-controller.name"));
+      mdl_table.setHeadline(tb, mdl_text._term("time-controller"));
 
       tb.table(Tex.button, tb1 => {
         var scr = function() {

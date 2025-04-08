@@ -74,7 +74,7 @@
 
     function createIconsComp(ct, packer) {
       var tags = mdl_content._rsTag(ct);
-      var cap = tags.size;
+      var cap = tags.length;
       if(cap == 0) return;
 
       var res = Core.atlas.getPixmap(ct.name);
@@ -84,9 +84,9 @@
 
       var alters = 0;
       for(let i = 0; i < cap; i++) {
-        var str_ov = "reind-tag-" + tags.get(i);
+        var str_ov = "reind-tag-" + tags[i];
         if(Core.atlas.has(str_ov)) {
-          var ov = Core.atlas.getPixmap("reind-tag-" + tags.get(i));
+          var ov = Core.atlas.getPixmap("reind-tag-" + tags[i]);
 
           var pixmap = mdl_draw._pix_stack(res, ov);
           packer.add(MultiPacker.PageType.main, ct.name + "-t" + (alters + 1), pixmap);

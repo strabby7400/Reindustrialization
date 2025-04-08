@@ -15,7 +15,7 @@
   // Part: Component
     function initComp(blk) {
       Events.run(MusicRegisterEvent, () => {
-        if(!Vars.headless) blk.localizedName = blk.itemDrop.localizedName + mdl_text._space() + Core.bundle.get("term.reind-term-wall-ore.name");
+        if(!Vars.headless) blk.localizedName = blk.itemDrop.localizedName + mdl_text._space() + "(" + mdl_text._term("wall-ore") + ")";
       });
     };
   // End

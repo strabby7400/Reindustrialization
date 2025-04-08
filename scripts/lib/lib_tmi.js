@@ -103,24 +103,22 @@
       var growStages = tup[1];
       var cropYield = tup[2];
 
-      var li = cropYield;
-      var cap = li.size;
+      var arr = cropYield;
+      var cap = arr.length;
       if(cap == 0) return;
       for(let i = 0; i < cap; i += 4) {
-        var stage = cropYield.get(i);
-        var batch = cropYield.get(i + 2);
+        var stage = arr[i];
+        var batch = arr[i + 2];
         var growTime_fi = stage / growStages * growTime;
         var rawRc = _tmiRawRc("factory", blk, growTime_fi);
 
-        var cap1 = batch.size;
+        var cap1 = batch.length;
         if(cap1 == 0) continue;
-        for(let j = 0; j < cap1; j++) {
-          if(j % 3 != 0) continue;
-
-          var itm = mdl_content._ct_gn(batch.get(j));
+        for(let j = 0; j < cap1; j += 3) {
+          var itm = mdl_content._ct_gn(batch[j]);
           if(itm == null) continue;
-          var amt = batch.get(j + 1);
-          var p = batch.get(j + 2);
+          var amt = batch[j + 1];
+          var p = batch[j + 2];
 
           addProd(rawRc, itm, amt * p);
         };
@@ -138,12 +136,12 @@
       var rawRc = _tmiRawRc("building", blk_tg, 0.0);
 
       addRaw(rawRc, blk, 1);
-      var li = frag_faci._structLiPlan(plan);
-      var cap = li.size;
+      var arr = frag_faci._structPlanReq(plan);
+      var cap = arr.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 2) {
-          var blk1 = li.get(i);
-          var amt = li.get(i + 1);
+          var blk1 = arr[i];
+          var amt = arr[i + 1];
 
           addRaw(rawRc, blk1, amt);
         };
@@ -154,12 +152,12 @@
     exports.register_structureCore = register_structureCore;
 
 
-    const li_26558541 = new Seq();
+    const tmpSeq_recipeFactory = new Seq();
     const register_recipeFactory = function(blk, rcFi) {
-      var li_ct = li_26558541;
-      if(li_ct.size == 0) {
-        Vars.content.items().each(itm => li_ct.add(itm));
-        Vars.content.liquids().each(liq => li_ct.add(liq));
+      var li = tmpSeq_recipeFactory;
+      if(li.size == 0) {
+        Vars.content.items().each(itm => li.add(itm));
+        Vars.content.liquids().each(liq => li.add(liq));
       };
 
       var cap0 = mdl_recipe._rcSize(rcFi);
@@ -175,80 +173,70 @@
         var failP = mdl_recipe._failP(rcFi, i);
         var rawRc = _tmiRawRc("factory", blk, blk.craftTime);
 
-        li_ct.each(ct0 => {
+        li.each(ct0 => {
           var amt_ci = 0.0;
           var amt_bi = 0.0;
           var amt_co = 0.0;
           var amt_bo = 0.0;
 
           // CI
-          var li = ci;
-          var cap = li.size;
+          var arr = ci;
+          var cap = arr.length;
           if(cap > 0) {
-            for(let j = 0; j < cap; j++) {
-              if(j % 2 != 0) continue;
-
-              var ct = li.get(j);
-              var amt = li.get(j + 1);
+            for(let j = 0; j < cap; j += 2) {
+              var ct = arr[j];
+              var amt = arr[j + 1];
 
               if(ct0 == ct) amt_ci += amt;
             };
           };
 
           // BI
-          var li = bi;
-          var cap = li.size;
+          var arr = bi;
+          var cap = arr.length;
           if(cap > 0) {
-            for(let j = 0; j < cap; j++) {
-              if(j % 3 != 0) continue;
-
-              var ct = li.get(j);
-              var amt = li.get(j + 1);
-              var p = li.get(j + 2);
+            for(let j = 0; j < cap; j += 3) {
+              var ct = arr[j];
+              var amt = arr[j + 1];
+              var p = arr[j + 2];
 
               if(ct0 == ct) amt_bi += amt * p;
             };
           };
 
           // Opt
-          var li = opt;
-          var cap = li.size;
+          var arr = opt;
+          var cap = arr.length;
           if(cap > 0) {
-            for(let j = 0; j < cap; j++) {
-              if(j % 4 != 0) continue;
-
-              var ct = li.get(j);
-              var amt = li.get(j + 1);
-              var p = li.get(j + 2);
+            for(let j = 0; j < cap; j += 4) {
+              var ct = arr[j];
+              var amt = arr[j + 1];
+              var p = arr[j + 2];
 
               if(ct0 == ct) amt_bi += amt * p;
             };
           };
 
           // CO
-          var li = co;
-          var cap = li.size;
+          var arr = co;
+          var cap = arr.length;
           if(cap > 0) {
-            for(let j = 0; j < cap; j++) {
-              if(j % 2 != 0) continue;
-
-              var ct = li.get(j);
-              var amt = li.get(j + 1);
+            for(let j = 0; j < cap; j += 2) {
+              var ct = arr[j];
+              var amt = arr[j + 1];
 
               if(ct0 == ct) amt_co += amt;
             };
           };
 
           // BO
-          var li = bo;
-          var cap = li.size;
+          var arr = bo;
+          var cap = arr.length;
           if(cap > 0) {
-            for(let j = 0; j < cap; j++) {
-              if(j % 3 != 0) continue;
-
-              var ct = li.get(j);
-              var amt = li.get(j + 1);
-              var p = li.get(j + 2);
+            for(let j = 0; j < cap; j += 3) {
+              var ct = arr[j];
+              var amt = arr[j + 1];
+              var p = arr[j + 2];
 
               if(ct0 == ct) amt_bo += amt * p * (1.0 - failP);
             };
@@ -256,14 +244,12 @@
 
 
           // FO
-          var li = fo;
-          var cap = li.size;
+          var arr = fo;
+          var cap = arr.length;
           if(cap > 0) {
-            for(let j = 0; j < cap; j++) {
-              if(j % 2 != 0) continue;
-
-              var ct = li.get(j);
-              var amt = li.get(j + 1);
+            for(let j = 0; j < cap; j += 2) {
+              var ct = arr[j];
+              var amt = arr[j + 1];
 
               if(ct0 == ct) amt_bo += amt * failP;
             };

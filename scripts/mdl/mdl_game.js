@@ -13,12 +13,14 @@
   // End
 
 
-  // Part: Setting
-    var beta = false;
-    const set_beta = function(val) {
-      beta = val;
-    };
-    exports.set_beta = set_beta;
+  // Part: Points
+    const pon2_offset = [
+      new Point2(0, 0),
+      new Point2(1, 0),
+      new Point2(0, 1),
+      new Point2(1, 1),
+    ];
+    exports.pon2_offset = pon2_offset;
   // End
 
 
@@ -87,8 +89,9 @@
 
 
     const _posP3d = function(pos_gn_0, elev) {
-      if(elev == null) elev = 0.0;
       if(pos_gn_0 == null) return;
+
+      if(elev == null) elev = 0.0;
 
       var vec2 = new Vec2();
       var pos_0 = _pos(pos_gn_0);
@@ -132,8 +135,9 @@
 
 
     const _rotConj = function(rot, rots) {
-      if(rots == null) rots = 4;
       if(rot == null) return;
+
+      if(rots == null) rots = 4;
 
       return Mathf.mod(rot + rots / 2, rots);
     };
@@ -141,9 +145,10 @@
 
 
     const _rotDiv = function(rot, offRot, rots) {
+      if(rot == null) return;
+
       if(offRot == null) offRot = 0;
       if(rots == null) rots = 4;
-      if(rot == null) return;
 
       return Mathf.mod(rot + offRot, rots);
     };
@@ -154,11 +159,12 @@
 
 
     const isDirBlocked = function(b, offRot) {
-      if(offRot == null) offRot = 0;
       if(b == null) return false;
 
+      if(offRot == null) offRot = 0;
+
       var count = 0;
-      _liTileRot(b.tile, _rotDiv(b.rotation, offRot), b.block.size).each(ot => {if(ot.solid() || (ot.build != null && ot.build.block instanceof LiquidJunction)) count += 1});
+      _tsRot(b.tile, _rotDiv(b.rotation, offRot), b.block.size).forEach(ot => {if(ot.solid() || (ot.build != null && ot.build.block instanceof LiquidJunction)) count += 1});
 
       return count > 0;
     };
@@ -180,20 +186,21 @@
     /* <---------------- tile ----------------> */
 
 
-    const _tilePos = function(pos_gn) {
+    const _tPos = function(pos_gn) {
       if(pos_gn == null) return;
 
       var pos = _pos(pos_gn);
 
       return Vars.world.tileWorld(pos.x, pos.y);
     };
-    exports._tilePos = _tilePos;
+    exports._tPos = _tPos;
 
 
-    const _tileRot = function(mode, t, rot) {
-      if(rot == null) rot = 0;
-      if(mode != "f" && mode != "t") return;
+    const _tRot = function(mode, t, rot) {
       if(t == null) return;
+      if(mode != "f" && mode != "t") return;
+
+      if(rot == null) rot = 0;
 
       var rot_fi = (mode == "f") ? _rotConj(rot) : rot;
       var points = Geometry.d4;
@@ -201,29 +208,29 @@
 
       return t.nearby(pos);
     };
-    exports._tileRot = _tileRot;
+    exports._tRot = _tRot;
 
 
-    const _tileRand = function(li_t, scr, cap) {
+    const _tRand = function(ts, scr, cap) {
+      if(ts == null || ts.length == 0) return;
       if(scr == null) scr = function() {return true};
-      if(cap == null) cap = li_t.size;
-      if(li_t == null || li_t.size == 0) return;
+      if(cap == null) cap = ts.length;
 
-      cap = Math.max(Math.min(cap, li_t.size), 0);
+      cap = Math.max(Math.min(cap, ts.length), 0);
 
       let i = 0;
       var t = null;
       while((i < cap && !scr.call(t)) || i == 0) {
-        t = li_t.get(mdl_math._randInt(cap - 1));
+        t = ts[mdl_math._randInt(cap - 1)];
         i++;
       };
 
       return t;
     };
-    exports._tileRand = _tileRand;
+    exports._tRand = _tRand;
 
 
-    const _tileRandGround = function(li_t, cap) {
+    const _tRandGround = function(ts, cap) {
       var scr = function() {
         var cond = true;
         if(this.solid()) cond = false;
@@ -231,12 +238,12 @@
         return cond;
       };
 
-      return _tileRand(li_t, scr, cap);
+      return _tRand(ts, scr, cap);
     };
-    exports._tileRandGround = _tileRandGround;
+    exports._tRandGround = _tRandGround;
 
 
-    const _tileRandNaval = function(li_t, cap) {
+    const _tRandNaval = function(ts, cap) {
       var scr = function() {
         var cond = true;
         if(this.solid()) cond = false;
@@ -244,192 +251,216 @@
         return cond;
       };
 
-      return _tileRand(li_t, scr, cap);
+      return _tRand(ts, scr, cap);
     };
-    exports._tileRandNaval = _tileRandNaval;
+    exports._tRandNaval = _tRandNaval;
 
 
-    const _tileRay = function(t, ang, rad) {
-      if(ang == null) ang = 0.0;
-      if(rad == null) rad = 0.0;
+    const _tRay = function(t, ang, rad) {
       if(t == null) return t;
 
+      if(ang == null) ang = 0.0;
+      if(rad == null) rad = 0.0;
+
       var pos = _posRay(t, ang, rad);
-      var ot = _tilePos(pos);
+      var ot = _tPos(pos);
 
       return ot;
     };
-    exports._tileRay = _tileRay;
+    exports._tRay = _tRay;
 
 
-    const _tileMouse = function() {
-      return _tilePos(_pos("mouse"));
+    const _tMouse = function() {
+      return _tPos(_pos("mouse"));
     };
-    exports._tileMouse = _tileMouse;
+    exports._tMouse = _tMouse;
 
 
     /* <---------------- tilePair ----------------> */
 
 
-    const _tilePairRot = function(t, rot) {
-      var ot_f = _tileRot("f", t, rot);
-      var ot_t = _tileRot("t", t, rot);
+    const _tPairRot = function(t, rot) {
+      var ot_f = _tRot("f", t, rot);
+      var ot_t = _tRot("t", t, rot);
 
       if(ot_f == null || ot_t == null) return;
 
       return [ot_f, ot_t];
     };
-    exports._tilePairRot = _tilePairRot;
+    exports._tPairRot = _tPairRot;
 
 
-    const _tilePairRot_b = function(b) {
+    const _tPairRot_b = function(b) {
       if(b == null) return;
 
-      return _tilePairRot(b.tile, b.rotation);
+      return _tPairRot(b.tile, b.rotation);
     };
-    exports._tilePairRot_b = _tilePairRot_b;
+    exports._tPairRot_b = _tPairRot_b;
 
 
     /* <---------------- liTile ----------------> */
 
 
-    const _liTileRot = function(t, rot, size) {
-      var pon2 = new Point2();
-      var li = new Seq();
+    const _tsRot = function(t, rot, size) {
+      var arr = [];
+      if(t == null) return arr;
 
       if(rot == null) rot = 0;
       if(size == null) size = 1;
-      if(t == null) return li;
 
-      var start = (size % 2 == 0) ? ((size / 2 - 1) * -1) : ((size - 1) / 2 * -1);
+      var ini = (size % 2 == 0) ? ((size / 2 - 1) * -1) : ((size - 1) / 2 * -1);
       var cap = (size % 2 == 0) ? (size / 2 + 1) : ((size - 1) / 2 + 1);
-      for(let i = start; i < cap; i++) {
-        var pos;
+      var px = 0;
+      var py = 0;
+      for(let i = ini; i < cap; i++) {
         switch(rot) {
           case 0 :
-            (size % 2 == 0) ? (pos = pon2.set(size / 2 + 1, i)) : (pos = pon2.set((size + 1) / 2, i));
+            if(size % 2 == 0) {
+              px = size / 2 + 1;
+              py = i;
+            } else {
+              px = (size + 1) / 2;
+              py = i;
+            };
             break;
           case 1 :
-            (size % 2 == 0) ? (pos = pon2.set(i, size / 2 + 1)) : (pos = pon2.set(i, (size + 1) / 2));
+            if(size % 2 == 0) {
+              px = i;
+              py = size / 2 + 1;
+            } else {
+              px = i;
+              py = (size + 1) / 2;
+            };
             break;
           case 2 :
-            (size % 2 == 0) ? (pos = pon2.set(size / 2 * -1, i)) : (pos = pon2.set((size + 1) / 2 * -1, i));
+            if(size % 2 == 0) {
+              px = size / 2 * -1;
+              py = i;
+            } else {
+              px = (size + 1) / 2 * -1;
+              py = i;
+            };
             break;
           case 3 :
-            (size % 2 == 0) ? (pos = pon2.set(i, size / 2 * -1)) : (pos = pon2.set(i, (size + 1) / 2 * -1));
+            if(size % 2 == 0) {
+              px = i;
+              py = size / 2 * -1;
+            } else {
+              px = i;
+              py = (size + 1) / 2 * -1;
+            };
             break;
         };
 
-        var ot = t.nearby(pos);
-        if(ot != null) li.add(ot);
+        var ot = t.nearby(px, py);
+        if(ot != null) arr.push(ot);
       };
 
-      return li;
+      return arr;
     };
-    exports._liTileRot = _liTileRot;
+    exports._tsRot = _tsRot;
 
 
-    const _liTileRot_2side = function(t, rot, size) {
-      var li = new Seq();
+    const _tsRot_2side = function(t, rot, size) {
+      var arr = [];
+      if(t == null) return arr;
 
       if(rot == null) rot = 0;
       if(size == null) size = 1;
-      if(t == null) return li;
 
-      li.addAll(_liTileRot(t, rot, size));
-      li.addAll(_liTileRot(t, _rotDiv(rot, 2), size));
+      arr.push.apply(_tsRot(t, rot, size));
+      arr.push.apply(_tsRot(t, _rotDiv(rot, 2), size));
 
-      return li;
+      return arr;
     };
-    exports._liTileRot_2side = _liTileRot_2side;
+    exports._tsRot_2side = _tsRot_2side;
 
 
-    const _liTileEdge = function(t, size) {
-      var li = new Seq();
+    const _tsEdge = function(t, size) {
+      var arr = [];
+      if(t == null) return arr;
 
       if(size == null) size = 1;
-      if(t == null) return li;
 
       var cap = size * 4;
-      var points = Edges.getEdges(size);
+      var pons = Edges.getEdges(size);
 
       for(let i = 0; i < cap; i++) {
-        var ot = t.nearby(points[i]);
-        if(ot != null) li.add(ot);
+        var ot = t.nearby(pons[i]);
+        if(ot != null) arr.push(ot);
       };
 
-      return li;
+      return arr;
     };
-    exports._liTileEdge = _liTileEdge;
+    exports._tsEdge = _tsEdge;
 
 
-    const _liTileEdgeIns = function(t, size) {
-      var li = new Seq();
+    const _tsEdgeIns = function(t, size) {
+      var arr = [];
+      if(t == null) return arr;
 
       if(size == null) size = 1;
-      if(t == null) return li;
 
       var cap = size * 4;
-      var points = Edges.getInsideEdges(size);
+      var pons = Edges.getInsideEdges(size);
 
       for(let i = 0; i < cap; i++) {
-        var ot = t.nearby(points[i]);
-        if(ot != null && !li.contains(ot)) li.add(ot);
+        var ot = t.nearby(pons[i]);
+        if(ot != null && !arr.includes(ot)) arr.push(ot);
       };
 
-      return li;
+      return arr;
     };
-    exports._liTileEdgeIns = _liTileEdgeIns;
+    exports._tsEdgeIns = _tsEdgeIns;
 
 
-    const _liTileLinked = function(t) {
-      var li = new Seq();
+    const _tsLinked = function(t) {
+      var arr = [];
+      if(t == null) return arr;
 
-      if(t == null) return li;
+      t.getLinkedTiles(ot => {if(ot != null) arr.push(ot)});
 
-      t.getLinkedTiles(ot => {if(ot != null) li.add(ot)});
-
-      return li;
+      return arr;
     };
-    exports._liTileLinked = _liTileLinked;
+    exports._tsLinked = _tsLinked;
 
 
-    const _liTileRect = function(t, r, size) {
-      var li = new Seq();
+    const _tsRect = function(t, r, size) {
+      var arr = [];
+      if(t == null) return arr;
 
       if(r == null) r = 0;
       if(size == null) size = 1;
-      if(t == null) return li;
 
       var left;
       var right;
       if(size % 2 != 0) {
         left = -((size - 1) / 2 + r);
-        right = -left;
+        right = -left + 1;
       } else {
         left = -(size / 2 - 1 + r);
-        right = -left + 1;
+        right = -left + 2;
       };
 
-      for(let i = left; i <= right; i++) {
-        for(let j = left; j <= right; j++) {
+      for(let i = left; i < right; i++) {
+        for(let j = left; j < right; j++) {
           var ot = t.nearby(i, j);
-          if(ot != null) li.add(ot);
+          if(ot != null) arr.push(ot);
         };
       };
 
-      return li;
+      return arr;
     };
-    exports._liTileRect = _liTileRect;
+    exports._tsRect = _tsRect;
 
 
-    const _liTileRectRot = function(t, r, rot, size) {
-      var li = new Seq();
+    const _tsRectRot = function(t, r, rot, size) {
+      var arr = [];
+      if(t == null) return arr;
 
       if(r == null) r = 0;
       if(rot == null) rot = 0;
       if(size == null) size = 1;
-      if(t == null) return li;
 
       var ctx = 0;
       var cty = 0;
@@ -456,29 +487,43 @@
           break;
       };
       var ct = t.nearby(ctx, cty);
+      if(ct != null) arr.push.apply(_tsRect(ct, r, size));
 
-      if(ct != null) li.addAll(_liTileRect(ct, r, size));
-
-      return li;
+      return arr;
     };
-    exports._liTileRectRot = _liTileRectRot;
+    exports._tsRectRot = _tsRectRot;
 
 
-    const _liTileCircle = function(t, r, size) {
-      var li = new Seq();
+
+    const _tsCircle = function(t, r, size) {
+      var arr = [];
+      if(t == null) return arr;
 
       if(r == null) r = 0;
       if(size == null) size = 1;
-      if(t == null) return li;
 
-      Geometry.circle(t.x, t.y, Vars.world.width(), Vars.world.height(), r, (tx, ty) => {
-        var ot = Vars.world.tile(tx, ty);
-        if(ot != null) li.add(ot);
-      });
+      var w = Vars.world.width();
+      var h = Vars.world.height();
+      if(size % 2 != 0) {
+        Geometry.circle(t.x, t.y, w, h, r, (tx, ty) => {
+          var ot = Vars.world.tile(tx, ty);
+          if(ot != null) arr.push(ot);
+        });
+      } else {
+        for(let i = 0; i < 4; i++) {
+          var ot0 = t.nearby(pon2_offset[i]);
+          if(ot0 == null) continue;
 
-      return li;
+          Geometry.circle(ot0.x, ot0.y, w, h, r, (tx, ty => {
+            var ot = Vars.world.tile(tx, ty);
+            if(ot != null && !arr.includes(ot)) arr.push(ot);
+          }));
+        };
+      };
+
+      return arr;
     };
-    exports._liTileCircle = _liTileCircle;
+    exports._tsCircle = _tsCircle;
 
 
   // End
@@ -493,9 +538,9 @@
     const _countSide = function(b, ob) {
       if(b == null || ob == null) return 0;
 
-      var li = b.block.rotate ? _liTileRot(b.tile, b.rotation, b.block.size) : _liTileEdge(b.tile, b.block.size);
+      var ts = b.block.rotate ? _tsRot(b.tile, b.rotation, b.block.size) : _tsEdge(b.tile, b.block.size);
       var count = 0;
-      li.each(ot => {if(ot.build == ob) count += 1});
+      ts.forEach(ot => {if(ot.build == ob) count += 1});
 
       return count;
     };
@@ -523,24 +568,16 @@
     /* <---------------- filter ----------------> */
 
 
-    const li_22777861 = new Seq();
-    const _filterScr = function(li_e, scr) {
-      var li = li_22777861.clear();
+    const _filterScr = function(es, scr) {
+      if(scr == null) return es;
 
-      if(scr == null) return li_e;
-
-      li_e.each(e => {if(scr.call(e)) li.add(e)});
-
-      return li;
+      return es.filter(e => scr.call(e));
     };
     exports._filterScr = _filterScr;
 
 
-    const li_26986145 = new Seq();
-    const _filterNm = function(li_e, nm) {
-      var li = li_26986145.clear();
-
-      if(nm == null) return li_e;
+    const _filterNm = function(es, nm) {
+      if(nm == null) return es;
 
       var scr = function() {
         if(this instanceof Building && this.block.name == nm) return true;
@@ -548,41 +585,32 @@
 
         return false;
       };
-      li.addAll(_filterScr(li_e, scr));
 
-      return li;
+      return _filterScr(es, scr);
     };
     exports._filterNm = _filterNm;
 
 
-    const li_83840097 = new Seq();
-    const _filterTeam = function(li_e, team) {
-      var li = li_83840097.clear();
-
-      if(team == null) return li_e;
+    const _filterTeam = function(es, team) {
+      if(team == null) return es;
 
       var scr = function() {
         return this.team == team;
       };
-      li.addAll(_filterScr(li_e, scr));
 
-      return li;
+      return _filterScr(es, scr);
     };
     exports._filterTeam = _filterTeam;
 
 
-    const li_70251302 = new Seq();
-    const _filterEnemy = function(li_e, team) {
-      var li = li_70251302.clear();
-
-      if(team == null || team == Team.derelict) return li_e;
+    const _filterEnemy = function(es, team) {
+      if(team == null || team == Team.derelict) return es;
 
       var scr = function() {
-        return (this.team != Team.derelict) && (this.team != team);
+        return (this.team != Team.derelict) && (this.team != team) && ((this instanceof Building) ? this.block.targetable : this.type.targetable);
       };
-      li.addAll(_filterScr(li_e, scr));
 
-      return li;
+      return _filterScr(es, scr);
     };
     exports._filterEnemy = _filterEnemy;
 
@@ -590,56 +618,65 @@
     /* <---------------- liBuild ----------------> */
 
 
-    const li_70256100 = new Seq();
-    const _liBuild = function(li_ot) {
-      var li = li_70256100.clear();
+    const _bs = function(ts) {
+      var arr = [];
 
-      li_ot.each(ot => {if(ot.build != null && !li.contains(ot.build)) li.add(ot.build)});
+      ts.forEach(ot => {if(ot.build != null && !arr.includes(ot.build)) arr.push(ot.build)});
 
-      return li;
+      return arr;
     };
-    exports._liBuild = _liBuild;
+    exports._bs = _bs;
 
 
-    const _liBuildSame = function(li_ot, nm_blk, team) {
-      return _filterTeam(_filterNm(_liBuild(li_ot), nm_blk), team);
+    const _bsAllied = function(ts, team) {
+      return _filterTeam(_bs(ts), team);
     };
-    exports._liBuildSame = _liBuildSame;
+    exports._bsAllied = _bsAllied;
+
+
+    const _bsEnemy = function(ts, team) {
+      return _filterEnemy(_bs(ts), team);
+    };
+    exports._bsEnemy = _bsEnemy;
+
+
+    const _bsSame = function(ts, nm_blk, team) {
+      return _filterTeam(_filterNm(_bs(ts), nm_blk), team);
+    };
+    exports._bsSame = _bsSame;
 
 
     /* <---------------- liUnit ----------------> */
 
 
-    const _liUnit = function(pos_gn, rad, caller) {
-      var li = new Seq();
-
-      if(pos_gn == null || rad == null) return li;
+    const _units = function(pos_gn, rad, caller) {
+      var arr = [];
+      if(pos_gn == null || rad == null) return arr;
 
       var pos = _pos(pos_gn);
+      Units.nearby(null, pos.x, pos.y, rad, unit => {if(unit != caller) arr.push(unit)});
 
-      Units.nearby(null, pos.x, pos.y, rad, unit => {if(unit != caller) li.add(unit)});
-
-      return li;
+      return arr;
     };
-    exports._liUnit = _liUnit;
+    exports._units = _units;
 
 
-    const _liUnitAllied = function(pos_gn, rad, team) {
-      return _filterTeam(_liUnit(_pos(pos_gn), rad), team);
+    const _unitsAllied = function(pos_gn, rad, team) {
+      return _filterTeam(_units(_pos(pos_gn), rad), team);
     };
-    exports._liUnitAllied = _liUnitAllied;
+    exports._unitsAllied = _unitsAllied;
 
 
-    const _liUnitEnemy = function(pos_gn, rad, team) {
-      return _filterEnemy(_liUnit(_pos(pos_gn), rad), team);
+    const _unitsEnemy = function(pos_gn, rad, team) {
+      return _filterEnemy(_units(_pos(pos_gn), rad), team);
     };
-    exports._liUnitEnemy = _liUnitEnemy;
+    exports._unitsEnemy = _unitsEnemy;
 
 
-    const _liUnitSame = function(pos_gn, rad, nm_utp, team) {
-      return _filterTeam(_filterNm(_liUnit(_pos(pos_gn), rad), nm_utp), team);
+    const _unitsSame = function(pos_gn, rad, nm_utp, team) {
+      return _filterTeam(_filterNm(_units(_pos(pos_gn), rad), nm_utp), team);
     };
-    exports._liUnitSame = _liUnitSame;
+    exports._unitsSame = _unitsSame;
   // End
 
 
@@ -717,14 +754,61 @@
     /* <---------------- entity ----------------> */
 
 
-    const _closest = function(pos_gn, rad, team) {
+    const _target = function(pos_gn, rad, team) {
       if(pos_gn == null || rad == null || team == null) return;
 
       var pos = _pos(pos_gn);
 
       return Units.closestTarget(team, pos.x, pos.y, rad);
     };
-    exports._closest = _closest;
+    exports._target = _target;
+
+
+    const _targets = function(pos_gn, rad, team, size) {
+      var arr = [];
+      if(pos_gn == null || rad == null || team == null) return arr;
+
+      if(size == null) size = 1;
+
+      arr.push.apply(_unitsEnemy(pos_gn, rad, team));
+      arr.push.apply(_bsEnemy(_tsCircle(_tPos(pos_gn), rad / Vars.tilesize, size), team));
+
+      return arr;
+    };
+    exports._targets = _targets;
+
+
+    const _targetChain = function(pos_gn, rad0, rad, team, size, cap) {
+      var arr = [];
+      if(pos_gn == null || rad0 == null) return arr;
+
+      if(rad == null) rad = 40.0;
+      if(team == null) team = Team.derelict;
+      if(size == null) size = 1;
+      if(cap == null) cap = -1;
+
+      var pos = _pos(pos_gn);
+      var seq = new Seq(_targets(pos, rad0 * 2.0, team, size));
+      var tmpTg;
+      var tmpPos = pos;
+      var isFirst = true;
+      var i = 0;
+      while(cap < 0 ? true : i < cap) {
+        tmpTg = Geometry.findClosest(tmpPos.x, tmpPos.y, seq);
+        if(tmpTg == null) break;
+        if(_dst(tmpPos, tmpTg) > (isFirst ? rad0 : rad) + 0.0001) break;
+
+        arr.push(tmpTg);
+        seq.remove(tmpTg);
+        tmpPos = _pos(tmpTg);
+
+        isFirst = false;
+        i++;
+      };
+
+      return arr;
+    };
+    exports._targetChain = _targetChain;
   // End
 
 

@@ -35,7 +35,7 @@
     facFurn_brickedBlastFurnaceController.buildType = () => extend(Wall.WallBuild, facFurn_brickedBlastFurnaceController, {
       cd: 480.0,
       needCheck: true,
-      plan: new Seq(),
+      plan: [],
       showPlan: false,
       updateTile() {
         this.super$updateTile();
@@ -79,7 +79,7 @@
     facSep_highPressureCycloneSeparatorController.buildType = () => extend(Wall.WallBuild, facSep_highPressureCycloneSeparatorController, {
       cd: 480.0,
       needCheck: true,
-      plan: new Seq(),
+      plan: [],
       showPlan: false,
       updateTile() {
         this.super$updateTile();
@@ -121,7 +121,7 @@
     facSep_largeVibrationScreenController.buildType = () => extend(Wall.WallBuild, facSep_largeVibrationScreenController, {
       cd: 480.0,
       needCheck: true,
-      plan: new Seq(),
+      plan: [],
       showPlan: false,
       updateTile() {
         this.super$updateTile();
@@ -168,7 +168,7 @@
     facMisc_colossalRouterController.buildType = () => extend(Wall.WallBuild, facMisc_colossalRouterController, {
       cd: 480.0,
       needCheck: true,
-      plan: new Seq(),
+      plan: [],
       showPlan: false,
       updateTile() {
         this.super$updateTile();

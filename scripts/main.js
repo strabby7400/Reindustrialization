@@ -20,6 +20,7 @@
 
     const mdl_math = require("reind/mdl/mdl_math");
     const mdl_table = require("reind/mdl/mdl_table");
+    const mdl_text = require("reind/mdl/mdl_text");
     const mdl_ui = require("reind/mdl/mdl_ui");
 
     /* <---------------- database ----------------> */
@@ -166,21 +167,21 @@
 
 
   // Part: Tip
-    const li_tips = new Seq();
+    const arr_tips = [];
     let id_tip = 1;
     while(Core.bundle.has("info.reind-info-tip-" + id_tip + ".name")) {
-      li_tips.add(Core.bundle.get("info.reind-info-tip-" + id_tip + ".name"));
+      arr_tips.push(mdl_text._info("tip-" + id_tip));
       id_tip++;
     };
 
 
     function getTip(id) {
-      return (id > li_tips.size - 1) ? null : li_tips.get(id);
+      return (id > arr_tips.length - 1) ? null : arr_tips[id];
     };
 
 
     function getRandomTip() {
-      return getTip(mdl_math._randInt(li_tips.size - 1));
+      return getTip(mdl_math._randInt(arr_tips.length - 1));
     };
   // End
 
@@ -194,7 +195,7 @@
       };
 
       Sounds.wave.play();
-      var dial = new BaseDialog("@info.reind-info-dial-welcome.name");
+      var dial = new BaseDialog(mdl_text._info("dial-welcome"));
 
       dial.cont.image(Core.atlas.find("reind-bg")).center().row();
 
@@ -202,11 +203,11 @@
       dial.cont.pane(pn => {
         pn.marginLeft(12.0).marginRight(12.0).marginTop(15.0).marginBottom(15.0);
 
-        mdl_table.__wrapLine(pn, Core.bundle.get("info.reind-info-dial-welcome.description"), null, 1);
-      }).width(mdl_ui.getSizePair()[0]).row();
+        mdl_table.__wrapLine(pn, mdl_text._infoDes("dial-welcome"), null, 1);
+      }).width(mdl_ui._sizePair()[0]).row();
 
       mdl_table.__break(dial.cont);
-      mdl_table.__bar(dial.cont, null, mdl_ui.getSizePair()[0]);
+      mdl_table.__bar(dial.cont, null, mdl_ui._sizePair()[0]);
 
       mdl_table.__break(dial.cont);
       mdl_table.__wrapLine(dial.cont, "[orange]" + getRandomTip() + "[]", Align.center);
@@ -224,9 +225,9 @@
           mdl_ui._dial_boxToast(0.0, mdl_ui._dialCtRand("earlan", "welcome"), mdl_ui._speaker("earlan"));
         })).size(200.0, 50.0).center().pad(12.0);
 
-        btns.button("@term.reind-term-credits.name", db_dialog._credits()).size(200.0, 50.0).center().pad(12.0);
+        btns.button(mdl_text._term("credits"), db_dialog._credits()).size(200.0, 50.0).center().pad(12.0);
 
-        btns.button("@term.reind-term-updates.name", db_dialog._updates()).size(200.0, 50.0).center().pad(12.0);
+        btns.button(mdl_text._term("updates"), db_dialog._updates()).size(200.0, 50.0).center().pad(12.0);
       }).row();
 
       dial.show();
@@ -244,15 +245,15 @@
   // Part: Event
     if(!Vars.headless) {
       const reindCmd = Vars.netServer.clientCommands;
-      const li_commands = db_event.commands;
-      var cap = li_commands.size;
+      const commands = db_event.commands;
+      var cap = commands.length;
       if(cap > 0) {
         for(let i = 0; i < cap; i += 3) {
           (function(i) {
-            var str_nm = li_commands.get(i);
-            var str_param = li_commands.get(i + 1);
-            var str_des = Vars.headless ? "" : (Core.bundle.get("info.reind-info-cmd-" + str_nm + ".name"));
-            var scr = li_commands.get(i + 2);
+            var str_nm = commands[i];
+            var str_param = commands[i + 1];
+            var str_des = Vars.headless ? "" : (mdl_text._info("cmd-" + str_nm));
+            var scr = commands[i + 2];
 
             reindCmd.register(str_nm, str_param, str_des, cons(arg => scr.call(arg)));
           }) (i);

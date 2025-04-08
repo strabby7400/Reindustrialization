@@ -57,7 +57,7 @@
 
       b.proximity.each(ob => {
         var cond = true;
-        mdl_game._liTileRot(b.tile, b.rotation, b.block.size).each(ot => {
+        mdl_game._tsRot(b.tile, b.rotation, b.block.size).forEach(ot => {
           if(ot.build == ob) cond = false;
         });
         if(cond) sHeat += _heat(ob) * mdl_game._fracSide(ob, b);
@@ -126,8 +126,7 @@
   // Part: Range Heat
     const _rangeHeat = function(t) {
       var heat = 0.0;
-      var li_ot = mdl_game._liTileRect(t, 1);
-      li_ot.each(ot => {
+      mdl_game._tsRect(t, 1).forEach(ot => {
         // Get floor heat
         heat += ot.floor().attributes.get(Attribute.get("reind-attr-env-heat")) * 16.0;
 

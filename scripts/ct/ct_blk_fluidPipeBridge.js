@@ -25,7 +25,7 @@
       },
     });
     bliqBrd_primitiveFluidPipeBridge.buildType = () => extend(LiquidBridge.LiquidBridgeBuild, bliqBrd_primitiveFluidPipeBridge, {
-      timerEffc: new Interval(1), tmpRate: 0.0,
+      timerEffc: new Interval(1), tmpRate: 0.0, transEnd: null,
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);

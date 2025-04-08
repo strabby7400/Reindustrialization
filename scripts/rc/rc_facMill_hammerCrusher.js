@@ -10,7 +10,7 @@ const go = [
 const rc = {
   "parent": "reind-fac-mill-hammer-crusher",
 
-  "recipes": new Seq ([
+  "recipes": [
 
 
     /* ========================================
@@ -22,12 +22,12 @@ const rc = {
     {
       "icon": "reind-item-int-chunks-aggregate",
       "category": "special",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-int-chunks-aggregate", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-buil-coarse-aggregate", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -35,12 +35,12 @@ const rc = {
     {
       "icon": "reind-item-buil-fine-aggregate",
       "category": "special",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-buil-coarse-aggregate", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-buil-fine-aggregate", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -48,12 +48,12 @@ const rc = {
     {
       "icon": "reind-item-ore-pumice",
       "category": "special",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-pumice", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-buil-coarse-aggregate", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -66,12 +66,12 @@ const rc = {
     {
       "icon": "reind-item-ore-barite",
       "category": "crushing",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-barite", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-chunks-barite", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -79,12 +79,12 @@ const rc = {
     {
       "icon": "reind-item-ore-crude-sulfur",
       "category": "crushing",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-crude-sulfur", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-chunks-crude-sulfur", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -92,12 +92,12 @@ const rc = {
     {
       "icon": "reind-item-ore-dolomite",
       "category": "crushing",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-dolomite", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-chunks-dolomite", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -105,12 +105,12 @@ const rc = {
     {
       "icon": "reind-item-ore-gypsum",
       "category": "crushing",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-gypsum", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-chunks-gypsum", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -118,12 +118,12 @@ const rc = {
     {
       "icon": "reind-item-ore-limestone",
       "category": "crushing",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-limestone", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-chunks-limestone", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -131,12 +131,12 @@ const rc = {
     {
       "icon": "reind-item-ore-silica-stone",
       "category": "crushing",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-silica-stone", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-chunks-silica-stone", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -147,12 +147,12 @@ const rc = {
     {
       "icon": "reind-item-ore-rock-shard-clastic",
       "category": "crushing",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-rock-shard-clastic", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-chunks-aggregate", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -160,12 +160,12 @@ const rc = {
     {
       "icon": "reind-item-ore-rock-shard-clastic-sedimentary",
       "category": "crushing",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-ore-rock-shard-clastic-sedimentary", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-int-chunks-aggregate", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
@@ -173,15 +173,15 @@ const rc = {
     {
       "icon": "reind-item-was-gangue",
       "category": "crushing",
-      "inputs": new Seq([
+      "inputs": [
         "reind-item-was-gangue", 10,
-      ].concat(gi)),
-      "outputs": new Seq([
+      ].concat(gi),
+      "outputs": [
         "reind-item-was-gangue", 10,
-      ].concat(go)),
+      ].concat(go),
     },
 
 
-  ]),
+  ],
 };
 exports.rc = rc;

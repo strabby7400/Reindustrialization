@@ -22,7 +22,6 @@
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
-    const mdl_game = require("reind/mdl/mdl_game");
 
     const db_dialog = require("reind/db/db_dialog");
   // End
@@ -30,7 +29,6 @@
 
   // Part: Methods
     const loadSettings = function() {
-      set_beta(Core.settings.getBool("reind-beta-mode", false));
       set_noob(Core.settings.getBool("reind-noob-mode", false));
 
       set_ldm(Core.settings.getBool("reind-ldm", false));
@@ -47,14 +45,6 @@
       set_secretCode(Core.settings.getString("reind-secret-code", "<ohno>"));
     };
     exports.loadSettings = loadSettings;
-
-
-    const set_beta = function(bool) {
-      var val = bool;
-
-      mdl_game.set_beta(bool);
-    };
-    exports.set_beta = set_beta;
 
 
     const set_noob = function(bool) {
@@ -89,6 +79,7 @@
 
       blk_impactDrill.set_efficiencyUpdateInterval(val);
       blk_recipeFactory.set_efficiencyUpdateInterval(val);
+      blk_router.set_efficiencyUpdateInterval(val);
     };
     exports.set_efficiencyUpdateInterval = set_efficiencyUpdateInterval;
 

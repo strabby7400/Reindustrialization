@@ -6,7 +6,7 @@ const db = {
   "map": {
 
 
-    "consumable": new Seq([
+    "consumable": [
 
       /* <---------------- ball mill ----------------> */
 
@@ -26,10 +26,10 @@ const db = {
       "reind-item-cons-pall-ring-steel", "packed-tower",
       "reind-item-cons-pall-ring-stainless-steel", "packed-tower",
 
-    ]),
+    ],
 
 
-    "rock": new Seq([
+    "rock": [
       "reind-attr-rock-clastic", "reind-item-ore-rock-shard-clastic",
       "reind-attr-rock-evaporite", "reind-item-ore-rock-shard-evaporite",
       "reind-attr-rock-hypabyssal", "reind-item-ore-rock-shard-hypabyssal",
@@ -38,10 +38,10 @@ const db = {
       "reind-attr-rock-plutonic", "reind-item-ore-rock-shard-plutonic",
       "reind-attr-rock-biological-sedimentary", "reind-item-ore-rock-shard-biological-sedimentary",
       "reind-attr-rock-clastic-sedimentary", "reind-item-ore-rock-shard-clastic-sedimentary",
-    ]),
+    ],
 
 
-    "bush": new Seq(),
+    "bush": [],
 
 
   },
@@ -52,13 +52,13 @@ const db = {
   "virtual": {
 
 
-    "whitelist": new Seq([
+    "whitelist": [
 
       /* <---------------- eff-stor ----------------> */
 
       "reind-eff-stor-bit-container",
 
-    ]),
+    ],
 
 
   },
@@ -69,7 +69,7 @@ const db = {
   "reaction": {
 
 
-    "map": new Seq([
+    "map": [
 
       /* <---------------- item-chem[elementary] ----------------> */
 
@@ -88,10 +88,10 @@ const db = {
 
       "reind-item-chem-sodium-hydroxide", "reind-gas-misc-air", "denaturing",
 
-    ]),
+    ],
 
 
-    "denaturing": new Seq([
+    "denaturing": [
 
       /* <---------------- item-chem[inorganic] ----------------> */
 
@@ -99,7 +99,7 @@ const db = {
 
       "reind-item-chem-sodium-hydroxide", "reind-item-chem-sodium-carbonate",
 
-    ]),
+    ],
 
 
   },
