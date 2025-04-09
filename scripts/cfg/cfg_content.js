@@ -294,7 +294,7 @@
 
         // Sector Icon
         secs.forEach(sec => {
-          var icon = Core.atlas.find("reind-icon-sector");
+          var icon = Core.atlas.find(sec.name + "-icon", Core.atlas.find("reind-icon-sector"));
 
           sec.fullIcon = icon;
           sec.uiIcon = icon;

@@ -57,7 +57,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -136,7 +136,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -224,7 +224,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -309,7 +309,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -385,7 +385,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -461,7 +461,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -540,7 +540,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -616,7 +616,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -696,7 +696,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -775,7 +775,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -854,7 +854,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -933,7 +933,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1018,7 +1018,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1098,7 +1098,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1177,7 +1177,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1257,7 +1257,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1342,7 +1342,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1421,7 +1421,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1506,7 +1506,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1582,7 +1582,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1661,7 +1661,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1746,7 +1746,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1831,7 +1831,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -1911,7 +1911,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2001,7 +2001,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       // Specific
       updateTile() {
         TEMPLATE.updateTile(this);
@@ -2081,7 +2081,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2166,7 +2166,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2246,7 +2246,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2322,7 +2322,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2401,7 +2401,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2485,7 +2485,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2570,7 +2570,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },
@@ -2655,7 +2655,7 @@
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1), timerLiq: new Interval(1),
+      timerEffc: new Interval(1),
       updateTile() {
         TEMPLATE.updateTile(this);
       },

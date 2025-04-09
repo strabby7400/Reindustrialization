@@ -33,12 +33,12 @@
 
       set_ldm(Core.settings.getBool("reind-ldm", false));
       set_p3dShadow(Core.settings.getBool("reind-p3d-shadow", true));
-      set_efficiencyUpdateInterval(Core.settings.getInt("reind-efficiency-update-interval", 3));
+      set_efficiencyInterval(Core.settings.getInt("reind-efficiency-interval", 3));
 
       set_coreTimeControl(Core.settings.getBool("reind-core-time-control", true));
 
       set_treeAlpha(Core.settings.getInt("reind-tree-alpha", 20));
-      set_decalLifetime(Core.settings.getInt("reind-decal-lifetime", 60));
+      set_remainsLifetime(Core.settings.getInt("reind-remains-lifetime", 12));
       set_showIconTag(Core.settings.getBool("reind-show-icon-tag", true));
       set_iconTagInterval(Core.settings.getInt("reind-icon-tag-interval", 1));
 
@@ -74,14 +74,14 @@
     exports.set_p3dShadow = set_p3dShadow;
 
 
-    const set_efficiencyUpdateInterval = function(int) {
+    const set_efficiencyInterval = function(int) {
       var val = (int + 1) * 0.25 * 60.0;
 
-      blk_impactDrill.set_efficiencyUpdateInterval(val);
-      blk_recipeFactory.set_efficiencyUpdateInterval(val);
-      blk_router.set_efficiencyUpdateInterval(val);
+      blk_impactDrill.set_efficiencyInterval(val);
+      blk_recipeFactory.set_efficiencyInterval(val);
+      blk_router.set_efficiencyInterval(val);
     };
-    exports.set_efficiencyUpdateInterval = set_efficiencyUpdateInterval;
+    exports.set_efficiencyInterval = set_efficiencyInterval;
 
 
     const set_coreTimeControl = function(bool) {
@@ -100,12 +100,12 @@
     exports.set_treeAlpha = set_treeAlpha;
 
 
-    const set_decalLifetime = function(int) {
-      var val = int * 60.0;
+    const set_remainsLifetime = function(int) {
+      var val = int * 5.0 * 60.0;
 
-      mdl_effect.set_decalLifetime(val);
+      mdl_effect.set_remainsLifetime(val);
     };
-    exports.set_decalLifetime = set_decalLifetime;
+    exports.set_remainsLifetime = set_remainsLifetime;
 
 
     const set_showIconTag = function(bool) {

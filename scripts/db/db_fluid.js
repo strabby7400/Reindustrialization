@@ -541,17 +541,15 @@ const db = {
 
 };
 
-(arr => {
-  arr.push.apply(db["group"]["brine"]);
-  arr.push.apply(db["group"]["basicAq"]);
-  arr.push.apply(db["group"]["acidicAq"]);
-  arr.push.apply(db["group"]["slurry"]);
-}) (db["group"]["aqueous"]);
+db["group"]["aqueous"]
+.pushAll(db["group"]["brine"])
+.pushAll(db["group"]["basicAq"])
+.pushAll(db["group"]["acidicAq"])
+.pushAll(db["group"]["slurry"]);
 
-(arr => {
-  arr.push.apply(db["group"]["aqueous"]);
-  arr.push.apply(db["group"]["melt"]);
-  arr.push.apply(db["group"]["stickyMelt"]);
-}) (db["group"]["conductive"]);
+db["group"]["conductive"]
+.pushAll(db["group"]["aqueous"])
+.pushAll(db["group"]["melt"])
+.pushAll(db["group"]["stickyMelt"]);
 
 exports.db = db;

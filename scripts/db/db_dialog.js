@@ -499,14 +499,14 @@
 
         tb.checkPref("reind-ldm", false);
         tb.checkPref("reind-p3d-shadow", true);
-        tb.sliderPref("reind-efficiency-update-interval", 3, 0, 11, function(val) {return Strings.fixed((val + 1) * 0.25, 2) + "s"});
+        tb.sliderPref("reind-efficiency-interval", 3, 0, 11, function(val) {return Strings.fixed((val + 1) * 0.25, 2) + "s"});
 
         tb.checkPref("reind-welcome-dialog", true);
         tb.checkPref("reind-core-time-control", true);
         tb.checkPref("reind-damage-display", true);
 
         tb.sliderPref("reind-tree-alpha", 20, 0, 20, function(val) {return Strings.fixed(val * 5.0, 0) + "%"});
-        tb.sliderPref("reind-decal-lifetime", 60, 0, 480, function(val) {return Strings.fixed(val, 0) + "s"});
+        tb.sliderPref("reind-remains-lifetime", 12, 0, 96, function(val) {return Strings.fixed(val * 5, 0) + "s"});
         tb.checkPref("reind-show-icon-tag", true);
         tb.sliderPref("reind-icon-tag-interval", 1, 0, 11, function(val) {return Strings.fixed((val + 1) * 0.25, 2) + "s"});
 

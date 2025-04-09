@@ -33,7 +33,7 @@
       if(b.needUpdate) {
         b.r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
 
-        b.tiles.length = 0;
+        b.tiles.clear();
         mdl_game._tsRect(b.tile, b.r, b.block.size).forEach(ot => {if(ot.block().attributes.get(b.block.attribute) > 0.0) b.tiles.push(ot)});
 
         b.needUpdate = false;

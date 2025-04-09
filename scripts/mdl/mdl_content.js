@@ -407,10 +407,8 @@
 
 
     const _famiMembers = function(fami) {
-      var arr = [];
+      var arr = (fami instanceof Block) ? _fami(fami) : [fami];
       var arr1 = [];
-
-      if(fami instanceof Block) {arr.push.apply(_fami(fami))} else {arr.push(fami)};
 
       Vars.content.blocks().each(blk => {
         if(isFactory(blk)) {

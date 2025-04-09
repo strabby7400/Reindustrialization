@@ -145,7 +145,7 @@ const rc = {
 
 
 if(lib_base.hasAsthosus) {
-  rc["recipes"].push.apply([
+  rc["recipes"].pushAll([
 
 
     /* ========================================
@@ -250,7 +250,7 @@ if(lib_base.hasAsthosus) {
 
 
 if(lib_base.hasSubvoyage) {
-  rc["recipes"].push.apply([
+  rc["recipes"].pushAll([
 
 
     /* ========================================

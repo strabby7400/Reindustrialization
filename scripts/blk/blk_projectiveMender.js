@@ -32,8 +32,8 @@
       if(b.needCheck) {
         b.r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
 
-        b.builds.length = 0;
-        b.units.length = 0;
+        b.builds.clear();
+        b.units.clear();
 
         b.needCheck = false;
       };
@@ -43,8 +43,8 @@
         b.updateTargets();
       };
 
-      b.builds.length = 0;
-      b.units.length = 0;
+      b.builds.clear();
+      b.units.clear();
 
       b.targets.each(ob => {if(ob.damaged() && !ob.isHealSuppressed() && !b.builds.includes(ob)) b.builds.push(ob)});
       mdl_game._unitsAllied(b, b.r * Vars.tilesize).forEach(unit => {if(unit.damaged() && !b.units.includes(unit)) b.units.push(unit)});

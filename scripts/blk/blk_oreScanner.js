@@ -34,7 +34,7 @@
         b.r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
         b.scanColor = mdl_data.read_1n1v(db_block.db["param"]["color"]["base"], b.block.name, Color.white);
 
-        b.tiles.length = 0;
+        b.tiles.clear();
         mdl_game._tsRect(b.tile, b.r, b.block.size).forEach(ot => {if(mdl_content.isDepthOre(ot.overlay())) b.tiles.push(ot)});
 
         b.needCheck = false;

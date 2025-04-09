@@ -7,6 +7,7 @@
 
   // Part: Import
     const VAR = require("reind/glb/glb_vars");
+    const ct_rs_efficiency = require("reind/ct/ct_rs_efficiency");
 
     const frag_attack = require("reind/frag/frag_attack");
 
@@ -29,8 +30,8 @@
 
   // Part: Setting
     var noob = false;
-    const set_noob = function(bool) {
-      noob = bool;
+    const set_noob = function(val) {
+      noob = val;
     };
     exports.set_noob = set_noob;
   // End
@@ -112,7 +113,7 @@
 
   // Part: Transport
     const addLiquid = function(b, liq, amt) {
-      if(b == null) return;
+      if(b == null) return 0.0;
 
       var amt_0 = b.liquids.get(liq);
       var cap = b.block.liquidCapacity;
@@ -212,11 +213,10 @@
     exports.updateTile_efficiency = updateTile_efficiency;
 
 
+    const coreEffc = ct_rs_efficiency.effcEffc_core;
     const updateTile_coreEffc = function(b, rate) {
-      var effc = Vars.content.liquid("reind-effc-effc-core");
-
-      addLiquid(b, effc, b.edelta() * rate);
-      b.dumpLiquid(effc);
+      addLiquid(b, coreEffc, b.edelta() * rate);
+      b.dumpLiquid(coreEffc);
     };
     exports.updateTile_coreEffc = updateTile_coreEffc;
   // End

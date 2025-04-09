@@ -112,14 +112,6 @@
   // End
 
 
-  // Part: Boolean
-    const _boolConj = function(bool) {
-      return bool ? false : true;
-    };
-    exports._boolConj = _boolConj;
-  // End
-
-
   // Part: Probability
     const _randInt = function(cap, base) {
       if(base == null) base = 0.0;

@@ -24,11 +24,11 @@
     exports.set_ldm = set_ldm;
 
 
-    var decalLifetime = 3600.0;
-    const set_decalLifetime = function(val) {
-      decalLifetime = val;
+    var remainsLifetime = 3600.0;
+    const set_remainsLifetime = function(val) {
+      remainsLifetime = val;
     };
-    exports.set_decalLifetime = set_decalLifetime;
+    exports.set_remainsLifetime = set_remainsLifetime;
   // End
 
 
@@ -244,7 +244,7 @@
     /*
      * NOTE:
      *
-     * Creates unit decal at {pos_gn}.
+     * Creates unit remains at {pos_gn}.
      */
     const remainsAt = function(pos_gn, unit) {
       if(Vars.headless || pos_gn == null || unit == null) return false;
@@ -256,8 +256,8 @@
       var t = Vars.world.tileWorld(x, y);
       if(t == null || !t.floor().canShadow) return false;
 
-      var decal = extend(Decal, {
-        lifetime: decalLifetime,
+      var remains = extend(Decal, {
+        lifetime: remainsLifetime,
         x: x,
         y: y,
         rotation: Mathf.random(360.0),
@@ -314,7 +314,8 @@
           showAtP_ldm(0.02, unit, db_effect._craftBlackSmog());
         },
       });
-      decal.add();
+      
+      remains.add();
     };
     exports.remainsAt = remainsAt;
 

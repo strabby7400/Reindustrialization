@@ -368,8 +368,8 @@
       if(rot == null) rot = 0;
       if(size == null) size = 1;
 
-      arr.push.apply(_tsRot(t, rot, size));
-      arr.push.apply(_tsRot(t, _rotDiv(rot, 2), size));
+      arr.pushAll(_tsRot(t, rot, size));
+      arr.pushAll(_tsRot(t, _rotDiv(rot, 2), size));
 
       return arr;
     };
@@ -455,8 +455,7 @@
 
 
     const _tsRectRot = function(t, r, rot, size) {
-      var arr = [];
-      if(t == null) return arr;
+      if(t == null) return [];
 
       if(r == null) r = 0;
       if(rot == null) rot = 0;
@@ -487,9 +486,8 @@
           break;
       };
       var ct = t.nearby(ctx, cty);
-      if(ct != null) arr.push.apply(_tsRect(ct, r, size));
 
-      return arr;
+      return (ct == null) ? [] : _tsRect(ct, r, size);
     };
     exports._tsRectRot = _tsRectRot;
 
@@ -770,8 +768,8 @@
 
       if(size == null) size = 1;
 
-      arr.push.apply(_unitsEnemy(pos_gn, rad, team));
-      arr.push.apply(_bsEnemy(_tsCircle(_tPos(pos_gn), rad / Vars.tilesize, size), team));
+      arr.pushAll(_unitsEnemy(pos_gn, rad, team));
+      arr.pushAll(_bsEnemy(_tsCircle(_tPos(pos_gn), rad / Vars.tilesize, size), team));
 
       return arr;
     };

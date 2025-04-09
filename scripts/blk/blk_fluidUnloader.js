@@ -48,7 +48,7 @@
       db_table.__contentSelected(tb, "fluid", b.id_sel);
 
       db_table.__contentSelector(tb, "fluid", b.id_sel, function() {
-        b.block.lastConfig = new Point2(this, 0).x;
+        b.block.lastConfig = this.toInt();
         Call.tileConfig(Vars.player, b, vec2.set(this, -2));
         b.deselect();
       }, 7);

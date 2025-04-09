@@ -101,11 +101,10 @@
 
   // Part: Reaction
     const updateTile_exposed = function(b) {
-      if(b.block instanceof CoreBlock) return;
+      if(b.items == null || b.block.itemCapacity == 0 || b.block instanceof CoreBlock || Mathf.chance(0.9)) return;
       if(!mdl_content.isExposed(b.block)) return;
-      if(b.items == null) return;
 
-      b.items.each(itm => mdl_reaction.handleReaction(b, itm, Vars.content.liquid("reind-gas-misc-air")));
+      b.items.each(itm => mdl_reaction.handleReaction(b, itm, Vars.content.liquid("reind-gas-misc-air"), 10.0));
     };
     exports.updateTile_exposed = updateTile_exposed;
   // End
@@ -113,7 +112,7 @@
 
   // Part: Virtual
     const updateTile_virtualItem = function(b) {
-      if(b.block instanceof CoreBlock) return;
+      if(b.block.itemCapacity == 0 || b.block instanceof CoreBlock || Mathf.chance(0.96)) return;
       if(db_item.db["virtual"]["whitelist"].includes(b.block.name)) return;
 
       var illegal = false;

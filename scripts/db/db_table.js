@@ -8,6 +8,8 @@
   // Part: Import
     const VAR = require("reind/glb/glb_vars");
 
+    const cfg_update = require("reind/cfg/cfg_update");
+
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_math = require("reind/mdl/mdl_math");
     const mdl_table = require("reind/mdl/mdl_table");
@@ -23,7 +25,7 @@
       if(icon_gn == "lock") icon = bool ? Icon.lock : Icon.lockOpen;
 
       tb.button(icon, 24.0, run(() => {
-        Call.tileConfig(Vars.player, b, new Vec2(-2, Number(mdl_math._boolConj(bool))));
+        Call.tileConfig(Vars.player, b, new Vec2(-2, Number(bool.flip())));
         b.deselect();
       })).left().row();
     };
@@ -68,14 +70,14 @@
       var vec2 = new Vec2();
 
       var valMax = VAR.time_maxTimeDelta * 4.0 - 1.0;
-      var valCur = Time.delta * 4.0 - 1.0;
+      var valCur = cfg_update.timeMtp * 4.0 - 1.0;
 
       mdl_table.setHeadline(tb, mdl_text._term("time-controller"));
 
       tb.table(Tex.button, tb1 => {
         var scr = function() {
-          var delta = (this + 1.0) * 0.25;
-          Call.tileConfig(Vars.player, b, vec2.set(delta, -2));
+          cfg_update.set_timeMtp((this + 1.0) * 0.25);
+          Call.tileConfig(Vars.player, b, vec2.set(cfg_update.timeMtp, -2));
         };
 
         mdl_table.__slider(tb1, scr, 0, valMax, 1, valCur);

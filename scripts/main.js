@@ -1,5 +1,54 @@
 /*
   ========================================
+  Section: Definition (Meta)
+  ========================================
+*/
+
+
+  // Part: Number
+    Number.prototype.toInt = function() {
+      return new Point2(Number(this), 0).x;
+    };
+
+
+    Number.prototype.toF = function() {
+      return new Vec2(Number(this), 0).x;
+    };
+  // End
+
+
+  // Part: Boolean
+    Boolean.prototype.flip = function() {
+      return this ? false : true;
+    };
+  // End
+
+
+  // Part: Array
+    Array.prototype.print = function() {
+      this.forEach(i => print(i));
+    };
+
+
+    Array.prototype.clear = function() {
+      this.length = 0;
+
+      return this;
+    };
+
+
+    Array.prototype.pushAll = function(arr_gn) {
+      if(arr_gn instanceof Array) {
+        arr_gn.forEach(i => this.push(i));
+      } else {this.push(arr_gn)};
+
+      return this;
+    };
+  // End
+
+
+/*
+  ========================================
   Section: Definition
   ========================================
 */

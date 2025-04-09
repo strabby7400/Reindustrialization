@@ -111,8 +111,22 @@
 
   // Part: Time Control
     const timer_timeControl = new Interval(1);
+    var timeMtp = 1.0;
+
+
+    const set_timeMtp = function(val) {
+      timeMtp = val;
+    };
+    exports.set_timeMtp = set_timeMtp;
+
+
     function update_timeControl() {
-      if(Vars.state.isMenu() && timer_timeControl.get(60.0)) Time.setDeltaProvider(() => Core.graphics.getDeltaTime() * 60.0 * 1.0);
+      if(Vars.state.isMenu() && timer_timeControl.get(60.0)) {
+        timeMtp = 1.0;
+        Time.setDeltaProvider(() => Core.graphics.getDeltaTime() * 60.0 * timeMtp);
+      };
+
+      exports.timeMtp = timeMtp;
     };
   // End
 

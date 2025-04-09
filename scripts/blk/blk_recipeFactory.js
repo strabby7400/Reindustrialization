@@ -33,11 +33,11 @@
 
 
   // Part: Setting
-    var efficiencyUpdateInterval = 90.0;
-    const set_efficiencyUpdateInterval = function(val) {
-      efficiencyUpdateInterval = val;
+    var efficiencyInterval = 90.0;
+    const set_efficiencyInterval = function(val) {
+      efficiencyInterval = val;
     };
-    exports.set_efficiencyUpdateInterval = set_efficiencyUpdateInterval;
+    exports.set_efficiencyInterval = set_efficiencyInterval;
   // End
 
 
@@ -77,6 +77,16 @@
 
       return val_fi;
     };
+
+
+    function ax_isManual(b) {
+      return b.tag.includes("<manual>");
+    };
+
+
+    function ax_isImpact(b) {
+      return b.tag.includes("<impact>");
+    };
   // End
 
 
@@ -90,9 +100,6 @@
 
 
     function updateTileComp(b) {
-      var isManual = b.tag.includes("<manual>");
-      var isImpact = b.tag.includes("<impact>");
-
       // Prevents invalid recipe
       if(mdl_recipe._rcSize(b.rcFi) < b.id_rc + 0.9999) {
         b.id_rc = 0;
@@ -117,7 +124,7 @@
         b.bo = frag_recipe._bo(b.rcFi, b.id_rc);
         b.fo = frag_recipe._fo(b.rcFi, b.id_rc);
 
-        if(isImpact) {
+        if(ax_isImpact(b)) {
           b.param1 = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], b.block.name, 40.0)
         };
 
@@ -125,7 +132,7 @@
       };
 
       // Update some params occasionally
-      if(b.timerEffc.get(isManual ? 3.0 : efficiencyUpdateInterval)) {
+      if(b.timerEffc.get(ax_isManual(b) ? 3.0 : efficiencyInterval)) {
         b.efficiency = frag_recipe.sumEfficiency(b, b.ci, b.bi, b.opt, mdl_recipe._reqOpt(b.rcFi, b.id_rc));
         b.tmpEffc = b.efficiency;
         b.progInc = ax_getProgressIncrease(b, b.block.craftTime);
@@ -137,7 +144,7 @@
       };
 
       // Extra: manual
-      if(isManual) {
+      if(ax_isManual(b)) {
         b.efficiency *= Mathf.clamp(b.param * 1.25);
         b.param -= Math.min(0.002, b.param);
       };
@@ -165,7 +172,7 @@
           mdl_recipe._craftScript(b.rcFi, b.id_rc).call(b);
 
           // Extra: Impact
-          if(isImpact) {
+          if(ax_isImpact(b)) {
             var size = b.block.size;
             var time = b.block.craftTime;
 
@@ -176,10 +183,8 @@
           };
         };
 
-        if(b.timerLiq.get(6.0)) {
-          frag_recipe.addLiquids(b, b.co, b.progInc1, b.rcTimeScale, 6.0);
-          frag_recipe.consumeLiquids(b, b.ci, b.progInc1, b.rcTimeScale, 6.0);
-        };
+        frag_recipe.addLiquids(b, b.co, b.progInc1, b.rcTimeScale);
+        frag_recipe.consumeLiquids(b, b.ci, b.progInc1, b.rcTimeScale);
 
         mdl_effect.showAroundP(b.block.updateEffectChance, b, b.block.updateEffect, b.block.size * Vars.tilesize * 0.5, 0.0);
 
@@ -225,9 +230,7 @@
     function buildConfigurationComp(b, tb) {
       var vec2 = new Vec2();
 
-      var isManual = b.tag.includes("<manual>");
-
-      if(isManual) {
+      if(ax_isManual(b)) {
         mdl_table.setTrigger(tb, function() {
           if(Vars.state.paused) {
             mdl_ui.showInfoFade("manual-generator-paused");
@@ -240,7 +243,7 @@
       };
 
       mdl_table.setRecipeSelector(tb, b.rcFi, b.id_rc, b, function() {
-        b.block.lastConfig = new Point2(this, 0).x;
+        b.block.lastConfig = this.toInt();
         Call.tileConfig(Vars.player, b, vec2.set(this, -2));
         b.deselect();
       }, 7);
@@ -323,23 +326,19 @@
 
 
     function drawSelectComp(b) {
-      var isImpact = b.tag.includes("<impact>");
-
       var ct = mdl_content._ct_nm(mdl_recipe._iconNm(b.rcFi, b.id_rc));
       mdl_draw.drawContentIcon(b, ct, b.block.size);
 
       var tt = mdl_recipe._rawTooltip(b.rcFi, b.id_rc);
       if(tt == "overdriven") mdl_draw.drawRectPulse(b, b.block.size * 0.5 * Vars.tilesize, Pal.remove);
 
-      if(isImpact) mdl_draw.drawCirclePulse(b, b.param1);
+      if(ax_isImpact(b)) mdl_draw.drawCirclePulse(b, b.param1);
     };
 
 
     function drawStatusComp(b) {
-      var isManual = b.tag.includes("<manual>");
-
       var color = b.status().color;
-      if(isManual && b.efficiency > 0.75) color = BlockStatus.active.color;
+      if(ax_isManual(b) && b.efficiency > 0.75) color = BlockStatus.active.color;
 
       if(b.block.enableDrawStatus) mdl_draw.drawBlockStatus(b, color);
     };

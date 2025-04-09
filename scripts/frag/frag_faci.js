@@ -512,9 +512,9 @@
       var terVal = null;
       var cap = arr_ter.length;
       for(let i = 0; i < cap; i += 2) {
-        if(arr_ter[i] == ter) terVal = mdl_text._term(arr_ter[i + 1]);
+        if(arr_ter[i] == ter) terVal = mdl_text._term("terrain-" + arr_ter[i + 1]);
       };
-      if(terVal == null) terVal = mdl_text._term("transition");
+      if(terVal == null) terVal = mdl_text._term("terrain-transition");
 
       return terVal;
     };

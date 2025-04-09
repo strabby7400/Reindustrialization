@@ -15,11 +15,11 @@
 
 
   // Part: Setting
-    var efficiencyUpdateInterval = 90.0;
-    const set_efficiencyUpdateInterval = function(val) {
-      efficiencyUpdateInterval = val;
+    var efficiencyInterval = 90.0;
+    const set_efficiencyInterval = function(val) {
+      efficiencyInterval = val;
     };
-    exports.set_efficiencyUpdateInterval = set_efficiencyUpdateInterval;
+    exports.set_efficiencyInterval = set_efficiencyInterval;
 
 
     var secretCode = "<ohno>";
@@ -32,7 +32,7 @@
 
   // Part: Component
     function updateTileComp(b) {
-      if(b.timerCall.get(efficiencyUpdateInterval)) {
+      if(b.timerCall.get(efficiencyInterval)) {
         var cond = false;
         var count = 0;
         mdl_game._tsEdge(b.tile, b.block.size).forEach(ot => {if(ot.block() instanceof Router) {

@@ -113,7 +113,8 @@
       if(p == null) p = 1.0;
       if(cancelLiq == null) cancelLiq = false;
 
-      var str = (ct instanceof Liquid && !cancelLiq) ? Strings.autoFixed(amt * 60.0, 2) + "/s" : Strings.autoFixed(amt, 0);
+      // Use {-1} as amount to hide the label
+      var str = (amt < 0) ? " " : ((ct instanceof Liquid && !cancelLiq) ? Strings.autoFixed(amt * 60.0, 2) + "/s" : Strings.autoFixed(amt, 0));
 
       return tb.table(Styles.none, tb1 => {
         tb1.left();
@@ -132,7 +133,7 @@
         }).padRight(6.0);
 
         if(Math.abs(p - 1.0) > 0.0001) tb1.add(Strings.autoFixed(p * 100.0, 2) + "%").color(Color.gray).padRight(4.0);
-      }).padRight(12.0);
+      }).left().padRight(12.0);
     };
     exports.__recipeItem = __recipeItem;
 
@@ -173,14 +174,13 @@
 
   // Part: Content
     const setContentRowDisplay = function(tb, cts_gn, showOrder) {
-      var arr = [];
-
+      var arr;
       if(showOrder == null) showOrder = false;
-      if(cts_gn instanceof UnlockableContent) {
-        arr.push(cts_gn);
-        showOrder = false;
+      if(cts_gn instanceof Array) {
+        arr = cts_gn;
       } else {
-        arr.push.apply(cts_gn);
+        arr = [cts_gn];
+        showOrder = false;
       };
 
       var ord = 0;
@@ -235,6 +235,7 @@
 
       tb.row();
       tb.table(Styles.none, tb1 => {
+        tb1.left();
         __margin(tb1, 0.5);
 
         for(let i = 0; i < cap; i += 3) {
@@ -242,7 +243,7 @@
           var amt = batch[i + 1];
           var p = batch[i + 2];
 
-          __recipeItem(tb1, itm, amt, p).padLeft(24.0).row();
+          __recipeItem(tb1, itm, amt, p).padLeft(20.0).row();
         };
       }).row();
     };

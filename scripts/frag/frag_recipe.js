@@ -518,7 +518,7 @@
     exports.addItems = addItems;
 
 
-    const addLiquids = function(b, co, progInc1, timeScale, mtp) {
+    const addLiquids = function(b, co, progInc1, timeScale) {
       if(b.liquids == null) return;
 
       // CO
@@ -529,7 +529,7 @@
           var ct = arr[i];
           var amt = arr[i + 1];
 
-          b.handleLiquid(b, ct, Math.min(amt * progInc1 * timeScale * mtp, b.block.liquidCapacity - b.liquids.get(ct)));
+          b.handleLiquid(b, ct, Math.min(amt * progInc1 * timeScale, b.block.liquidCapacity - b.liquids.get(ct)));
         };
       };
     };

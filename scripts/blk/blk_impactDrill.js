@@ -22,11 +22,11 @@
 
 
   // Part: Setting
-    var efficiencyUpdateInterval = 90.0;
-    const set_efficiencyUpdateInterval = function(val) {
-      efficiencyUpdateInterval = val;
+    var efficiencyInterval = 90.0;
+    const set_efficiencyInterval = function(val) {
+      efficiencyInterval = val;
     };
-    exports.set_efficiencyUpdateInterval = set_efficiencyUpdateInterval;
+    exports.set_efficiencyInterval = set_efficiencyInterval;
   // End
 
 
@@ -63,7 +63,7 @@
 
       if(b.down) b.progress = 0.0;
 
-      if(b.timerEffc.get(efficiencyUpdateInterval)) {
+      if(b.timerEffc.get(efficiencyInterval)) {
         var down = false;
         var b_sc_fi = null;
 

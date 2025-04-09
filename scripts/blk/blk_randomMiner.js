@@ -11,6 +11,7 @@
     const mdl_attr = require("reind/mdl/mdl_attr");
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_effect = require("reind/mdl/mdl_effect");
+    const mdl_table = require("reind/mdl/mdl_table");
 
     const db_block = require("reind/db/db_block");
     const db_effect = require("reind/db/db_effect");
@@ -18,8 +19,45 @@
   // End
 
 
+  // Part: Auxiliary
+    function ax_buildStats(results) {
+      return function(tb) {
+        tb.row();
+        tb.table(Tex.whiteui, tb1 => {
+          tb1.left().setColor(Pal.darkestGray);
+          mdl_table.__margin(tb1);
+
+          var arr = results;
+          var cap = arr.length;
+          if(cap == 0) return;
+          var batch = [];
+          var count = 0;
+
+          for(let i = 0; i < cap; i++) {
+            count += arr[i].amount;
+          };
+          for(let i = 0; i < cap; i++) {
+            var itmStk = arr[i];
+            var itm = itmStk.item;
+            var amt = itmStk.amount;
+
+            batch.push(itm);
+            batch.push(-1);
+            batch.push(amt / count);
+          };
+
+          mdl_table.setBatchDisplay(tb1, batch);
+        }).row();
+      };
+    };
+  // End
+
+
   // Part: Component
     function setStatsComp(blk) {
+      blk.stats.remove(Stat.output);
+      blk.stats.add(Stat.output, ax_buildStats(blk.results));
+
       var nmAttr = mdl_data.read_1n1v(db_block.db["map"]["attribute"], blk.name);
       if(nmAttr != null) {
         blk.stats.add(Stat.tiles, Attribute.get(nmAttr));
