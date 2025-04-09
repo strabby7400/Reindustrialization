@@ -133,7 +133,7 @@
         }).padRight(6.0);
 
         if(Math.abs(p - 1.0) > 0.0001) tb1.add(Strings.autoFixed(p * 100.0, 2) + "%").color(Color.gray).padRight(4.0);
-      }).left().padRight(12.0);
+      }).left().padRight(12.0).padTop(4.0).padBottom(4.0);
     };
     exports.__recipeItem = __recipeItem;
 

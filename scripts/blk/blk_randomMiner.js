@@ -25,7 +25,7 @@
         tb.row();
         tb.table(Tex.whiteui, tb1 => {
           tb1.left().setColor(Pal.darkestGray);
-          mdl_table.__margin(tb1);
+          mdl_table.__margin(tb1, 0.5);
 
           var arr = results;
           var cap = arr.length;

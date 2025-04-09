@@ -457,7 +457,7 @@
     exports.consumeItems = consumeItems;
 
 
-    const consumeLiquids = function(b, ci, progInc, timeScale, mtp) {
+    const consumeLiquids = function(b, ci, progInc, timeScale) {
       if(b.liquids == null) return;
 
       // CI
@@ -468,7 +468,7 @@
           var ct = arr[i];
           var amt = arr[i + 1];
 
-          b.liquids.remove(ct, Math.min(amt * progInc * timeScale * mtp, b.liquids.get(ct)));
+          b.liquids.remove(ct, Math.min(amt * progInc * timeScale, b.liquids.get(ct)));
         };
       };
     };
