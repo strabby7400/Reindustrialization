@@ -7,6 +7,7 @@
 
   // Part: Import
     const PARENT = require("reind/blk/blk_genericLiquidDistributionBlock");
+    const PARENT_A = require("reind/blk/blk_fluidPipe");
 
     const frag_fluid = require("reind/frag/frag_fluid");
 
@@ -48,7 +49,7 @@
       db_table.__contentSelected(tb, "fluid", b.id_sel);
 
       db_table.__contentSelector(tb, "fluid", b.id_sel, function() {
-        b.block.lastConfig = this.toInt();
+        b.block.lastConfig = Number(this).toInt();
         Call.tileConfig(Vars.player, b, vec2.set(this, -2));
         b.deselect();
       }, 7);
@@ -110,7 +111,7 @@
 
 
     const moveLiquid = function(b, ob, liq) {
-      return PARENT.moveLiquid(b, ob, liq);
+      return PARENT_A.moveLiquid(b, ob, liq);
     };
     exports.moveLiquid = moveLiquid;
 

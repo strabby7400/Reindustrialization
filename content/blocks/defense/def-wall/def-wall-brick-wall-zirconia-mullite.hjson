@@ -8,7 +8,9 @@
   # type: Wall
   category: defense
   requirements: [
-    item-chem-copper/30
+    item-bio-timber/10
+    item-buil-brick-zirconia-mullite/25
+    item-buil-cement/10
   ]
   buildCostMultiplier: 6.0
 
@@ -21,7 +23,7 @@
 
 
   research: {
-    parent: def-wall-brick-wall-clay
+    parent: def-wall-brick-wall-silica
     objectives: []
   }
   researchCostMultiplier: 0.5
@@ -34,14 +36,14 @@
 */
 
 
-  scaledHealth: 40.0
-  armor: 0.0
+  scaledHealth: 80.0
+  armor: 24.0
   size: 1
   hasItems: false
   itemCapacity: 20
   hasLiquids: false
   liquidCapacity: 5.0
-  hasPower: true
+  hasPower: false
 
 
 /*
@@ -62,8 +64,7 @@
 */
 
 
-  squareSprite: false
-  enableDrawStatus: false
+  squareSprite: true
   flashHit: true
   flashColor: ffffff
 
@@ -76,25 +77,11 @@
 
 
   crushDamageMultiplier: 0.75
-  conductivePower: true
-  connectedPower: false
   update: true
   lightningChance: -1.0
   lightningDamage: 20.0
   lightningLength: 17
   lightningColor: ffd37f
   lightningSound: spark
-  chanceDeflect: 5.0
+  chanceDeflect: -1.0
   deflectSound: none
-
-
-/*
-  ========================================
-  Section: I/O
-  ========================================
-*/
-
-
-  consumes: {
-    power: 0.16666667
-  }

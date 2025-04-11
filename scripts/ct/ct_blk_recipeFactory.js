@@ -30,6 +30,7 @@
 
     const facHeat_temperatureControlUnit = extend(GenericCrafter, "fac-heat-temperature-control-unit", {
       rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -109,6 +110,7 @@
 
     const facHeat_furnaceHeater = extend(GenericCrafter, "fac-heat-furnace-heater", {
       rcFi: require("reind/rc/rc_facHeat_furnaceHeater"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -197,6 +199,7 @@
 
     const facAir_liquidRingPressurePump = extend(GenericCrafter, "fac-air-liquid-ring-pressure-pump", {
       rcFi: require("reind/rc/rc_facAir_liquidRingPressurePump"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -282,6 +285,7 @@
 
     const facFurn_carbonizationKiln = extend(GenericCrafter, "fac-furn-carbonization-kiln", {
       rcFi: require("reind/rc/rc_facFurn_carbonizationKiln"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -358,6 +362,7 @@
 
     const facFurn_primitiveBrickKiln = extend(GenericCrafter, "fac-furn-primitive-brick-kiln", {
       rcFi: require("reind/rc/rc_facFurn_primitiveBrickKiln"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -434,6 +439,7 @@
 
     const facFurn_electrodeMelter = extend(GenericCrafter, "fac-furn-electrode-melter", {
       rcFi: require("reind/rc/rc_facFurn_electrodeMelter"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -513,6 +519,7 @@
 
     const facFurn_kiln = extend(GenericCrafter, "fac-furn-kiln", {
       rcFi: require("reind/rc/rc_facFurn_kiln"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -589,6 +596,7 @@
 
     const facFurn_bloomery = extend(GenericCrafter, "fac-furn-bloomery", {
       rcFi: require("reind/rc/rc_facFurn_bloomery"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -665,6 +673,7 @@
 
     const facFurn_brickedBlastFurnace = extend(GenericCrafter, "fac-furn-bricked-blast-furnace", {
       rcFi: require("reind/rc/rc_facFurn_brickedBlastFurnace"),
+      tag: "",
       // Specific
       icons: function() {
         return [Core.atlas.find(this.name + "-icon")];
@@ -748,6 +757,7 @@
 
     const facFurn_primitiveSinteringFurnace = extend(GenericCrafter, "fac-furn-primitive-sintering-furnace", {
       rcFi: require("reind/rc/rc_facFurn_primitiveSinteringFurnace"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -827,6 +837,7 @@
 
     const facFurn_colossalKiln = extend(GenericCrafter, "fac-furn-colossal-kiln", {
       rcFi: require("reind/rc/rc_facFurn_colossalKiln"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -906,6 +917,7 @@
 
     const facFurn_primitiveCokeOven = extend(GenericCrafter, "fac-furn-primitive-coke-oven", {
       rcFi: require("reind/rc/rc_facFurn_primitiveCokeOven"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -991,6 +1003,7 @@
 
     const facMill_jawCrusher = extend(GenericCrafter, "fac-mill-jaw-crusher", {
       rcFi: require("reind/rc/rc_facMill_jawCrusher"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -1067,6 +1080,7 @@
 
     const facMill_hammerCrusher = extend(GenericCrafter, "fac-mill-hammer-crusher", {
       rcFi: require("reind/rc/rc_facMill_hammerCrusher"),
+      tag: "",
       // Specific
       icons: function() {
         return [Core.atlas.find(this.name + "-icon")];
@@ -1150,6 +1164,7 @@
 
     const facMill_mechanicalMill = extend(GenericCrafter, "fac-mill-mechanical-mill", {
       rcFi: require("reind/rc/rc_facMill_mechanicalMill"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -1226,6 +1241,7 @@
 
     const facMill_ballMill = extend(GenericCrafter, "fac-mill-ball-mill", {
       rcFi: require("reind/rc/rc_facMill_ballMill"),
+      tag: "",
       // Specific
       icons: function() {
         return [Core.atlas.find(this.name + "-icon")];
@@ -1315,6 +1331,7 @@
 
     const facMix_vMixer = extend(GenericCrafter, "fac-mix-v-mixer", {
       rcFi: require("reind/rc/rc_facMix_vMixer"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -1394,6 +1411,7 @@
 
     const facMix_tankMixer = extend(GenericCrafter, "fac-mix-tank-mixer", {
       rcFi: require("reind/rc/rc_facMix_tankMixer"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -1479,6 +1497,7 @@
 
     const facProc_shredder = extend(GenericCrafter, "fac-proc-shredder", {
       rcFi: require("reind/rc/rc_facProc_shredder"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -1555,6 +1574,7 @@
 
     const facProc_charcoalRodMaker_m = extend(GenericCrafter, "fac-proc-charcoal-rod-maker-m", {
       rcFi: require("reind/rc/rc_facProc_charcoalRodMaker_m"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -1634,6 +1654,7 @@
 
     const facProc_brickPress = extend(GenericCrafter, "fac-proc-brick-press", {
       rcFi: require("reind/rc/rc_facProc_brickPress"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -1719,6 +1740,7 @@
 
     const facRmv_hotAirDryer = extend(GenericCrafter, "fac-rmv-hot-air-dryer", {
       rcFi: require("reind/rc/rc_facRmv_hotAirDryer"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -1804,6 +1826,7 @@
 
     const facSep_highPressureCycloneSeparator = extend(GenericCrafter, "fac-sep-high-pressure-cyclone-separator", {
       rcFi: require("reind/rc/rc_facSep_highPressureCycloneSeparator"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -1880,6 +1903,7 @@
 
     const facSep_largeVibrationScreen = extend(GenericCrafter, "fac-sep-large-vibration-screen", {
       rcFi: require("reind/rc/rc_facSep_largeVibrationScreen"),
+      tag: "",
       // Specific
       icons: function() {
         return [Core.atlas.find(this.name + "-icon")];
@@ -1963,6 +1987,7 @@
 
     const facSep_dryMagneticSeparator = extend(GenericCrafter, "fac-sep-dry-magnetic-separator", {
       rcFi: require("reind/rc/rc_facSep_dryMagneticSeparator"),
+      tag: "",
       // Specific
       icons: function() {
         return [Core.atlas.find(this.name + "-icon")];
@@ -2054,6 +2079,7 @@
 
     const facSep_mineralJig_m = extend(GenericCrafter, "fac-sep-mineral-jig-m", {
       rcFi: require("reind/rc/rc_facSep_mineralJig_m"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -2139,6 +2165,7 @@
 
     const facMisc_mechanicalCrank = extend(GenericCrafter, "fac-misc-mechanical-crank", {
       rcFi: require("reind/rc/rc_facMisc_mechanicalCrank"),
+      tag: "<manual>",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -2219,6 +2246,7 @@
     // NOTE: Keep this on top!
     const facMisc_genericInlet = extend(GenericCrafter, "fac-misc-generic-inlet", {
       rcFi: require("reind/rc/rc_facMisc_genericInlet"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -2295,6 +2323,7 @@
 
     const facMisc_fuelInlet = extend(GenericCrafter, "fac-misc-fuel-inlet", {
       rcFi: require("reind/rc/rc_facMisc_fuelInlet"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -2374,6 +2403,7 @@
 
     const facMisc_coreCrafter = extend(GenericCrafter, "fac-misc-core-crafter", {
       rcFi: require("reind/rc/rc_facMisc_coreCrafter"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -2450,6 +2480,7 @@
 
     const facMisc_manualCrafter = extend(GenericCrafter, "fac-misc-manual-crafter", {
       rcFi: require("reind/rc/rc_facMisc_manualCrafter"),
+      tag: "<manual>",
       // Specific
       setStats() {
         this.super$setStats();
@@ -2543,6 +2574,7 @@
 
     const ilfacMisc_oreDictionaryConverter = extend(GenericCrafter, "ilfac-misc-ore-dictionary-converter", {
       rcFi: require("reind/rc/rc_ilfacMisc_oreDictionaryConverter"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
@@ -2628,6 +2660,7 @@
 
     const ileffMisc_bitBank = extend(GenericCrafter, "ileff-misc-bit-bank", {
       rcFi: require("reind/rc/rc_ileffMisc_bitBank"),
+      tag: "",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);

@@ -165,6 +165,21 @@
     exports.defWall_brickWallSilica = defWall_brickWallSilica;
 
 
+    const defWall_brickWallZirconiaMullite = extend(Wall, "def-wall-brick-wall-zirconia-mullite", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+    });
+    defWall_brickWallZirconiaMullite.buildType = () => extend(Wall.WallBuild, defWall_brickWallZirconiaMullite, {
+      updateTile() {
+        this.super$updateTile();
+        TEMPLATE.updateTile(this);
+      },
+    });
+    exports.defWall_brickWallZirconiaMullite = defWall_brickWallZirconiaMullite;
+
+
     /* plate */
 
 
@@ -196,6 +211,36 @@
       },
     });
     exports.defWall_plateWallSteel = defWall_plateWallSteel;
+
+
+    const defWall_plateWallMangalloy = extend(Wall, "def-wall-plate-wall-mangalloy", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+    });
+    defWall_plateWallMangalloy.buildType = () => extend(Wall.WallBuild, defWall_plateWallMangalloy, {
+      updateTile() {
+        this.super$updateTile();
+        TEMPLATE.updateTile(this);
+      },
+    });
+    exports.defWall_plateWallMangalloy = defWall_plateWallMangalloy;
+
+
+    const defWall_plateWallStainlessSteel = extend(Wall, "def-wall-plate-wall-stainless-steel", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+    });
+    defWall_plateWallStainlessSteel.buildType = () => extend(Wall.WallBuild, defWall_plateWallStainlessSteel, {
+      updateTile() {
+        this.super$updateTile();
+        TEMPLATE.updateTile(this);
+      },
+    });
+    exports.defWall_plateWallStainlessSteel = defWall_plateWallStainlessSteel;
   // End
 
 

@@ -8,9 +8,10 @@
   # type: GenericCrafter
   category: crafting
   requirements: [
-    item-chem-copper/40
-    item-chem-lead/20
-    item-chem-graphite/10
+    item-chem-copper/80
+    item-chem-graphite/50
+    item-chem-tin-bronze/50
+    item-chem-steel/30
   ]
   buildCostMultiplier: 2.0
 
@@ -23,10 +24,10 @@
 
 
   research: {
-    parent: fac-misc-generic-inlet
+    parent: fac-air-air-collector
     objectives: []
   }
-  researchCostMultiplier: 0.1
+  researchCostMultiplier: 0.35
 
 
 /*
@@ -36,14 +37,14 @@
 */
 
 
-  scaledHealth: 40.0
-  armor: 0.0
-  size: 1
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 2
   hasItems: false
   itemCapacity: 20
   hasLiquids: true
-  liquidCapacity: 5.0
-  hasPower: true
+  liquidCapacity: 30.0
+  hasPower: false
 
 
 /*
@@ -80,7 +81,7 @@
         type: DrawRegion
         suffix: "-rotator"
         spinSprite: true
-        rotateSpeed: 4.0
+        rotateSpeed: 8.0
       }
 
 
@@ -90,7 +91,7 @@
         alpha: 0.3
         particles: 6
         particleLife: 60.0
-        particleRad: 4.0
+        particleRad: 8.0
         particleSize: 0.75
         rotateScl: 4.0
         reverse: true
@@ -115,7 +116,7 @@
         alpha: 0.6
         particles: 3
         particleLife: 30.0
-        particleRad: 4.0
+        particleRad: 8.0
         particleSize: 1.5
         rotateScl: 2.0
         reverse: false
@@ -128,7 +129,7 @@
   updateEffect: none
   updateEffectChance: 0.02
   ambientSound: wind
-  ambientSoundVolume: 0.1
+  ambientSoundVolume: 0.3
 
 
 /*
@@ -150,9 +151,6 @@
 
 
   craftTime: 60.0
-  consumes: {
-    power: 0.5
-  }
   outputLiquids: [
-    gas-misc-air/0.1
+    gas-misc-air/0.25
   ]

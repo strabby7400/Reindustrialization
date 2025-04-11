@@ -81,7 +81,7 @@
 
 
   // Part: Recipe
-    const _optInput = function(rcLi) {
+    const _optInput = function(opt) {
       return function() {
         var dial = new BaseDialog(mdl_text._info("dial-optional-input"));
 
@@ -100,13 +100,13 @@
         dial.cont.pane(pn => {
           mdl_table.__margin(pn);
 
-          var cap = rcLi.length;
+          var cap = opt.length;
           for(let i = 0; i < cap; i += 4) {
-            var itm = Vars.content.item(rcLi[i]);
+            var itm = Vars.content.item(opt[i]);
             if(itm == null) continue;
-            var amt = rcLi[i + 1];
-            var p = rcLi[i + 2];
-            var mtp = rcLi[i + 3];
+            var amt = opt[i + 1];
+            var p = opt[i + 2];
+            var mtp = opt[i + 3];
 
             pn.add("[" + Strings.fixed(i / 4.0 + 1.0, 0) + "]").center().color(Pal.accent).padRight(36.0);
             mdl_table.__recipeItem(pn, itm, amt, p).padRight(72.0);
@@ -442,6 +442,8 @@
           "reind-min-crop-thorium-reactor-mine",
           "reind-map-wall-occupiable-barricade",
           "reind-map-fac-ids-trade-dock-rim-builder",
+          "reind-dis-aux-primitive-junction",
+          "reind-fac-air-energized-air-collector",
         ],
       ],
 

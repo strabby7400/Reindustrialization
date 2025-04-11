@@ -70,7 +70,15 @@
         if(Vars.state.paused) {
           mdl_ui.showInfoFade("large-building-paused");
         } else {
-          if(frag_faci.isStructureComplete(b.tile, b.plan) && b.cd < 0.0001) Call.tileConfig(Vars.player, b, vec2.set(1, -2));
+          if(!frag_faci.isStructureComplete(b.tile, b.plan)) {
+            mdl_ui.showInfoFade("large-building-incomplete");
+          } else {
+            if(b.cd > 0.0) {
+              mdl_ui.showInfoFade("large-building-cooldown");
+            } else {
+              Call.tileConfig(Vars.player, b, vec2.set(1, -2));
+            };
+          };
         };
       }, Icon.hammer, mdl_text._info("large-building"), 72.0);
     };

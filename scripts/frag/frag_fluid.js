@@ -153,12 +153,13 @@
       if(b == null || ob == null) return;
       if(!(ob.block instanceof LiquidJunction)) return ob;
 
+      var rot = b.relativeTo(ob);
       var transEnd = "pending";
       var ot = ob.tile;
       while(transEnd == "pending") {
         transEnd = (ot == null) ? null : ot.build;
-        if(transEnd != null && transEnd.block instanceof LiquidJunction) {
-          ot = transEnd.tile.nearby(b.rotation);
+        if(transEnd != null && transEnd.block instanceof LiquidJunction && transEnd.team == b.team) {
+          ot = transEnd.tile.nearby(rot);
           transEnd = "pending";
         };
       };

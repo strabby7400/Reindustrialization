@@ -14,6 +14,22 @@ const rc = {
     ======================================== */
 
 
+    /* <---------------- item-bio ----------------> */
+
+
+    // Hypha Rod
+    {
+      "icon": "reind-item-bio-hypha-rod",
+      "category": "export",
+      "inputs": [
+        "reind-item-bio-hypha-rod", 1000,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-virt-bit", 25,
+      ],
+    },
+
+
     /* <---------------- item-ore ----------------> */
 
 

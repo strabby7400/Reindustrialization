@@ -30,9 +30,6 @@
         this.super$updateTile();
         TEMPLATE.updateTile(this);
       },
-      moveLiquid(next, liquid) {
-        return TEMPLATE.moveLiquid(this, next, liquid);
-      },
       draw() {
         this.super$draw();
         TEMPLATE.draw(this);
@@ -56,9 +53,6 @@
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);
-      },
-      moveLiquid(next, liquid) {
-        return TEMPLATE.moveLiquid(this, next, liquid);
       },
       draw() {
         this.super$draw();

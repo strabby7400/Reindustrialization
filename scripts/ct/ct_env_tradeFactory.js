@@ -22,6 +22,7 @@
   // Part: map-fac
     const mapFac_idsTradeDock_rimBuilder = extend(GenericCrafter, "map-fac-ids-trade-dock-rim-builder", {
       rcFi: require("reind/rc/rc_mapFac_idsTradeDock_rimBuilder"),
+      tag: "<impact>",
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);

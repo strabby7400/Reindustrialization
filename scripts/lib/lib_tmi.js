@@ -13,6 +13,8 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_recipe = require("reind/mdl/mdl_recipe");
+    const mdl_table = require("reind/mdl/mdl_table");
+    const mdl_text = require("reind/mdl/mdl_text");
   // End
 
 
@@ -89,10 +91,45 @@
     exports.addProdPersec = addProdPersec;
 
 
+    const addSubInfo = function(rawRc, str) {
+      rawRc.appendSubInfo(tb => {
+        tb.row();
+        tb.add(str).left();
+      });
+    };
+    exports.addSubInfo = addSubInfo;
+
+
     const register = function(rawRc) {
       try {Tmi.recipesManager.addRecipe(rawRc, true)} catch(err) {Tmi.recipesManager.addRecipe(rawRc)};
     };
     exports.register = register;
+
+
+    const addOptInputs = function(rawRc, opt) {
+      if(opt == null || opt.length == 0) return;
+
+      rawRc.appendSubInfo(tb => {
+        tb.row();
+
+        tb.table(Styles.none, tb1 => {
+          var cap = opt.length;
+          for(let i = 0; i < cap; i += 4) {
+            var ct = opt[i];
+            var amt = opt[i + 1];
+            var p = opt[i + 2];
+            var mtp = opt[i + 3];
+
+            tb1.add("[" + Strings.fixed(i / 4.0 + 1.0, 0) + "]").center().color(Pal.accent).padRight(36.0);
+            mdl_table.__recipeItem(tb1, ct, amt, p).padRight(72.0);
+            tb1.add(mdl_text._statText(mdl_text._term("efficiency-multiplier"), Strings.fixed(mtp * 100.0, 0) + "%")).center().padRight(6.0);
+            tb1.row();
+          };
+        }).row();
+
+        mdl_table.__break(tb);
+      });
+    };
   // End
 
 
@@ -170,7 +207,9 @@
         var co = frag_recipe._co(rcFi, i);
         var bo = frag_recipe._bo(rcFi, i);
         var fo = frag_recipe._fo(rcFi, i);
+        var reqOpt = mdl_recipe._reqOpt(rcFi, i);
         var failP = mdl_recipe._failP(rcFi, i);
+        var tt = mdl_recipe._rawTooltip(rcFi, i)
         var rawRc = _tmiRawRc("factory", blk, blk.craftTime);
 
         li.each(ct0 => {
@@ -196,19 +235,6 @@
           var cap = arr.length;
           if(cap > 0) {
             for(let j = 0; j < cap; j += 3) {
-              var ct = arr[j];
-              var amt = arr[j + 1];
-              var p = arr[j + 2];
-
-              if(ct0 == ct) amt_bi += amt * p;
-            };
-          };
-
-          // Opt
-          var arr = opt;
-          var cap = arr.length;
-          if(cap > 0) {
-            for(let j = 0; j < cap; j += 4) {
               var ct = arr[j];
               var amt = arr[j + 1];
               var p = arr[j + 2];
@@ -259,7 +285,23 @@
           if(amt_bi > 0.0) addRaw(rawRc, ct0, amt_bi);
           if(amt_co > 0.0) addProdPersec(rawRc, ct0, amt_co);
           if(amt_bo > 0.0) addProd(rawRc, ct0, amt_bo);
+
         });
+
+        // Optional Inputs
+        addOptInputs(rawRc, opt);
+
+        // Require Optional
+        if(reqOpt) addSubInfo(rawRc, mdl_text._statText(mdl_text._term("require-optional"), Core.bundle.get("yes")));
+
+        // Fail Probability
+        if(failP > 0.0) addSubInfo(rawRc, mdl_text._statText(mdl_text._term("chance-to-fail"), Strings.fixed(failP * 100.0, 1) + "%"));
+
+        // Is Manual
+        if(blk.tag.includes("<manual>")) addSubInfo(rawRc, mdl_text._statText(mdl_text._term("is-manual"), Core.bundle.get("yes")));
+
+        // Overdriven
+        if(tt == "overdriven") addSubInfo(rawRc, mdl_text._info("tt-overdriven"));
 
         register(rawRc);
       };

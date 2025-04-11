@@ -10,6 +10,7 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_game = require("reind/mdl/mdl_game");
+    const mdl_ui = require("reind/mdl/mdl_ui");
 
     const db_block = require("reind/db/db_block");
     const db_env = require("reind/db/db_env");
@@ -68,12 +69,11 @@
       var ot = mdl_game._tMouse();
       if(ot == null) return;
 
-      var ui = new UI();
       var nm_flr = ot.floor().name;
       var nm_blk = ot.block().name;
 
       if(Core.input.touched) {
-        if(nm_flr == "reind-map-misc-restriction-zone") ui.showInfoFade("restriction-zone");
+        if(nm_flr == "reind-map-misc-restriction-zone") mdl_ui.showInfoFade("restriction-zone");
       };
     };
     exports.update_mouse = update_mouse;

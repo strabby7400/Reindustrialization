@@ -6,6 +6,8 @@
 
 
   // Part: Import
+    const VAR = require("reind/glb/glb_vars");
+
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_reaction = require("reind/mdl/mdl_reaction");
@@ -96,6 +98,29 @@
       return false;
     };
     exports.dumpItem = dumpItem;
+
+
+    const _transEnd = function(b, ob, maxConsecutive) {
+      if(b == null || ob == null) return;
+      if(!ob.block.instantTransfer) return ob;
+
+      var rot = b.relativeTo(ob);
+      var transEnd = "pending";
+      var ot = ob.tile;
+      var count = 0;
+      while(transEnd == "pending") {
+        transEnd = (ot == null) ? null : ot.build;
+        if(transEnd != null && transEnd.block.instantTransfer && transEnd.team == b.team) {
+          ot = transEnd.tile.nearby(rot);
+          transEnd = "pending";
+          count++;
+        };
+      };
+
+      var limit = (maxConsecutive == null) ? VAR.transfer_junctionMaxConsecutive : maxConsecutive;
+      return (count > limit - 1) ? null : transEnd;
+    };
+    exports._transEnd = _transEnd;
   // End
 
 

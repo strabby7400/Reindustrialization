@@ -103,8 +103,11 @@
     def-wall-brick-wall-magnesia
     def-wall-brick-wall-mullite
     def-wall-brick-wall-silica
+    def-wall-brick-wall-zirconia-mullite
     def-wall-plate-wall-copper
     def-wall-plate-wall-steel
+    def-wall-plate-wall-mangalloy
+    def-wall-plate-wall-stainless-steel
     def-wall-tempered-glass-wall
 
     eff-stor-crate

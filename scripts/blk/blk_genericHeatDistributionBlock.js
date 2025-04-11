@@ -32,11 +32,6 @@
     };
 
 
-    function moveLiquidComp(b, ob, liq) {
-      return frag_heat.moveLiquid_hcond(b, ob);
-    };
-
-
     function drawComp(b) {
       frag_heat.draw_heat(b);
     };
@@ -91,12 +86,6 @@
       return true;
     };
     exports.acceptLiquid = acceptLiquid;
-
-
-    const moveLiquid = function(b, ob, liq) {
-      return moveLiquidComp(b, ob, liq);
-    };
-    exports.moveLiquid = moveLiquid;
 
 
     const draw = function(b) {

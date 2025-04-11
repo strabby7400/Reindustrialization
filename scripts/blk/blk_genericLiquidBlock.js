@@ -43,11 +43,6 @@
     };
 
 
-    function moveLiquidComp(b, ob, liq) {
-      return frag_fluid.moveLiquid_pipe(b, ob, liq);
-    };
-
-
     function drawComp(b) {
       frag_heat.draw_fluidHeat(b);
     };
@@ -81,12 +76,6 @@
       updateTileComp(b);
     };
     exports.updateTile = updateTile;
-
-
-    const moveLiquid = function(b, ob, liq) {
-      return moveLiquidComp(b, ob, liq);
-    };
-    exports.moveLiquid = moveLiquid;
 
 
     const draw = function(b) {

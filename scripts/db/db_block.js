@@ -101,6 +101,10 @@ const db = {
 
         "reind-def-proj-basic-repair-projector", 8,
 
+        /* <---------------- fac-air ----------------> */
+
+        "reind-fac-air-energized-air-collector", 3,
+
       ],
 
 
@@ -148,6 +152,21 @@ const db = {
 
         "reind-dis-mdr-local-mass-driver", 90.0,
         "reind-dis-mdr-standard-mass-driver", 725.0,
+
+      ],
+
+
+    },
+
+
+    "time": {
+
+
+      "base": [
+
+        /* <---------------- dis-aux ----------------> */
+
+        "reind-dis-aux-primitive-junction", 5.0,
 
       ],
 
@@ -249,9 +268,17 @@ const db = {
 
       "reind-min-misc-placer-miner", "emerald-tide",
 
+      "reind-fac-air-energized-air-collector", "emerald-tide",
+
       /* <---------------- rim builder ----------------> */
 
       "reind-map-fac-ids-trade-dock-rim-builder", "rim-builder",
+
+      /* <---------------- hexagram steel ----------------> */
+
+      /* <---------------- carbonic ----------------> */
+
+      /* <---------------- zeta chemistry ----------------> */
 
       /* <---------------- enclosure ----------------> */
 
@@ -268,6 +295,15 @@ const db = {
     "family": [
 
       /* <---------------- absorber ----------------> */
+
+      /* <---------------- air collector ----------------> */
+
+      "reind-fac-air-air-collector", "air-collector",
+      "reind-fac-air-energized-air-collector", "air-collector",
+
+      /* <---------------- air filter ----------------> */
+
+      "reind-fac-air-air-filter", "air-filter",
 
       /* <---------------- alloy furnace ----------------> */
 
@@ -502,6 +538,10 @@ const db = {
 
       "reind-pow-gen-energizer-generator", 10,
 
+      /* <---------------- fac-air ----------------> */
+
+      "reind-fac-air-energized-air-collector", 4,
+
     ],
 
 
@@ -513,7 +553,11 @@ const db = {
 
       /* <---------------- pow-gen ----------------> */
 
-      "reind-pow-gen-energizer-generator", 5.0,
+      "reind-pow-gen-energizer-generator", 4.0,
+
+      /* <---------------- fac-air ----------------> */
+
+      "reind-fac-air-energized-air-collector", 1.0,
 
     ],
 
@@ -868,6 +912,7 @@ const db = {
       /* <---------------- blk_genericFactory ----------------> */
 
       "reind-fac-air-air-collector", -2.0,
+      "reind-fac-air-energized-air-collector", -8.0 / 4.0,
       "reind-fac-air-air-filter", -12.0 / 4.0,
       "reind-fac-proc-sawmill", 24.0 / 16.0,
       "reind-fac-sep-vibration-screen", 4.0 / 4.0,

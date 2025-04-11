@@ -18,26 +18,7 @@
     const _heatReg = function(size) {
       if(Vars.headless) return;
 
-      var reg;
-
-      switch(size) {
-        case 1 :
-          reg = Core.atlas.find("reind-ast-generic-block-heat-1x");
-          break;
-        case 2 :
-          reg = Core.atlas.find("reind-ast-generic-block-heat-2x");
-          break;
-        case 3 :
-          reg = Core.atlas.find("reind-ast-generic-block-heat-3x");
-          break;
-        case 4 :
-          reg = Core.atlas.find("reind-ast-generic-block-heat-4x");
-          break;
-        default :
-          reg = Core.atlas.find("reind-ast-generic-block-heat-1x");
-      };
-
-      return reg;
+      return Core.atlas.find("reind-ast-generic-block-heat-" + size + "x", Core.atlas.find("reind-ast-generic-block-heat-1x"));
     };
     exports._heatReg = _heatReg;
 
@@ -87,7 +68,7 @@
 
 
     const _heatFrac = function(b) {
-      return Math.min(_tHeat(b) / _heatLimit(b.block), 1.0);
+      return Mathf.clamp(_tHeat(b) / _heatLimit(b.block));
     };
     exports._heatFrac = _heatFrac;
 
@@ -99,7 +80,7 @@
 
 
     const _transferRate = function(heat_f, heat_t, coef) {
-      return Time.delta * (heat_f - heat_t) * coef / 60.0;
+      return (heat_f - heat_t) * coef / 60.0;
     };
     exports._transferRate = _transferRate;
   // End
@@ -115,8 +96,8 @@
       if(amt < 0.01) return 0.0;
       var cap = b.block.liquidCapacity;
       var fHeat = mdl_data.read_1n1v(db_fluid.db["param"]["fHeat"], liq.name);
-
       var heat = fHeat * (amt / cap * 0.75 + 0.75) * (cap / 300.0 * 0.15 + 0.75);
+
       return heat;
     };
     exports._fHeat = _fHeat;
@@ -137,6 +118,7 @@
         if(ot.build != null) heat += _heat(ot.build) * 1.5;
       });
       heat /= 6.0;
+
       return heat;
     };
     exports._rangeHeat = _rangeHeat;

@@ -7,6 +7,15 @@
 
   // Part: Import
     const PARENT = require("reind/blk/blk_genericHeatDistributionBlock");
+
+    const frag_heat = require("reind/frag/frag_heat");
+  // End
+
+
+  // Part: Component
+    function moveLiquidComp(b, ob, liq) {
+      return frag_heat.moveLiquid_hcond(b, ob);
+    };
   // End
 
 
@@ -45,7 +54,7 @@
 
 
     const moveLiquid = function(b, ob, liq) {
-      return PARENT.moveLiquid(b, ob, liq);
+      return moveLiquidComp(b, ob, liq);
     };
     exports.moveLiquid = moveLiquid;
 

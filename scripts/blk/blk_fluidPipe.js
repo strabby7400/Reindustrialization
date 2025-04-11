@@ -8,6 +8,8 @@
   // Part: Import
     const PARENT = require("reind/blk/blk_genericLiquidDistributionBlock");
 
+    const frag_fluid = require("reind/frag/frag_fluid");
+
     const mdl_flow = require("reind/mdl/mdl_flow");
 
     const db_stat = require("reind/db/db_stat");
@@ -21,6 +23,11 @@
 
       var rough = mdl_flow._rough(blk);
       blk.stats.add(db_stat.pipeRoughness, rough);
+    };
+
+
+    function moveLiquidComp(b, ob, liq) {
+      return frag_fluid.moveLiquid_pipe(b, ob, liq);
     };
   // End
 
@@ -56,7 +63,7 @@
 
 
     const moveLiquid = function(b, ob, liq) {
-      return PARENT.moveLiquid(b, ob, liq);
+      return moveLiquidComp(b, ob, liq);
     };
     exports.moveLiquid = moveLiquid;
 

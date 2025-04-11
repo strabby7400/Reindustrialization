@@ -44,6 +44,61 @@
     exports.facAir_airCollector = facAir_airCollector;
 
 
+    const facAir_energizedAirCollector = extend(GenericCrafter, "fac-air-energized-air-collector", {
+      // Specific
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+        frag_faci.setStats_ep(this);
+        frag_faci.setStats_restrict(this);
+      },
+      // Specific
+      setBars() {
+        this.super$setBars();
+        frag_faci.setBars_ep(this);
+      },
+      // Specific
+      canPlaceOn(tile, team, rotation) {
+        if(!this.super$canPlaceOn(tile, team, rotation)) return false;
+        if(!frag_faci.canPlaceOn_restrict(this, tile, team, rotation)) return false;
+        return true;
+      },
+      // Speific
+      drawPlace(x, y, rotation, valid) {
+        this.super$drawPlace(x, y, rotation, valid);
+        frag_faci.drawPlace_restrict(this, x, y, rotation, valid);
+      },
+    });
+    facAir_energizedAirCollector.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facAir_energizedAirCollector, {
+      updateTile() {
+        this.super$updateTile();
+        TEMPLATE.updateTile(this);
+      },
+      // Specific
+      shouldConsume() {
+        if(!this.super$shouldConsume()) return false;
+        if(!frag_faci.isActive_ep(this)) return false;
+        return true;
+      },
+      // Specific
+      status() {
+        if(!frag_faci.isActive_ep(this)) return BlockStatus.noInput;
+        return this.super$status();
+      },
+      // Specific
+      draw() {
+        this.super$draw();
+        frag_faci.draw_ep(this);
+      },
+      // Specific
+      drawSelect() {
+        this.super$drawSelect();
+        frag_faci.drawSelect_restrict(this);
+      },
+    });
+    exports.facAir_energizedAirCollector = facAir_energizedAirCollector;
+
+
     const facAir_airFilter = extend(GenericCrafter, "fac-air-air-filter", {
       setStats() {
         this.super$setStats();

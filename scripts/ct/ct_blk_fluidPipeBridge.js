@@ -35,9 +35,6 @@
         if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
         return true;
       },
-      moveLiquid(next, liquid) {
-        return TEMPLATE.moveLiquid(this, next, liquid);
-      },
       draw() {
         this.super$draw();
         TEMPLATE.draw(this);

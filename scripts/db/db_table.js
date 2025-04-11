@@ -49,12 +49,12 @@
       switch(tp_ct) {
         case "item" :
           Vars.content.items().each(itm => {
-            if(!itm.hidden && mdl_content.isReind(itm) && !mdl_content.isVirt(itm)) arr.push(itm);
+            if(!itm.hidden && mdl_content.isReind(itm) && !mdl_content.isVirt(itm)) cts.push(itm);
           });
           break;
         case "fluid" :
           Vars.content.liquids().each(liq => {
-            if(!liq.hidden && mdl_content.isReind(liq) && !mdl_content.isEffc(liq)) arr.push(liq);
+            if(!liq.hidden && mdl_content.isReind(liq) && !mdl_content.isEffc(liq)) cts.push(liq);
           });
           break;
       };

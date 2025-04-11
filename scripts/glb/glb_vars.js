@@ -17,6 +17,12 @@
   // End
 
 
+  // Part: Item
+    const transfer_junctionMaxConsecutive = 6;
+    exports.transfer_junctionMaxConsecutive = transfer_junctionMaxConsecutive;
+  // End
+
+
   // Part: Fluid
     const corrosion_damageRatio = 0.0135;
     exports.corrosion_damageRatio = corrosion_damageRatio;

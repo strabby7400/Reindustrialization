@@ -243,7 +243,7 @@
       };
 
       mdl_table.setRecipeSelector(tb, b.rcFi, b.id_rc, b, function() {
-        b.block.lastConfig = this.toInt();
+        b.block.lastConfig = Number(this).toInt();
         Call.tileConfig(Vars.player, b, vec2.set(this, -2));
         b.deselect();
       }, 7);

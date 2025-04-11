@@ -50,12 +50,6 @@
     exports.acceptLiquid = acceptLiquid;
 
 
-    const moveLiquid = function(b, ob, liq) {
-      return PARENT.moveLiquid(b, ob, liq);
-    };
-    exports.moveLiquid = moveLiquid;
-
-
     const draw = function(b) {
       PARENT.draw(b);
     };

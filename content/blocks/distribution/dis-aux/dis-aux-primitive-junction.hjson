@@ -5,12 +5,14 @@
 */
 
 
-  # type: Wall
-  category: defense
+  # type: OverflowGate
+  category: distribution
   requirements: [
-    item-chem-copper/30
+    item-chem-copper/25
+    item-chem-graphite/25
+    item-chem-steel/10
   ]
-  buildCostMultiplier: 6.0
+  buildCostMultiplier: 2.0
 
 
 /*
@@ -21,10 +23,10 @@
 
 
   research: {
-    parent: def-wall-brick-wall-clay
+    parent: dis-aux-underflow-gate
     objectives: []
   }
-  researchCostMultiplier: 0.5
+  researchCostMultiplier: 0.4
 
 
 /*
@@ -34,14 +36,11 @@
 */
 
 
-  scaledHealth: 40.0
-  armor: 0.0
+  scaledHealth: 60.0
+  armor: 12.0
   size: 1
-  hasItems: false
-  itemCapacity: 20
-  hasLiquids: false
-  liquidCapacity: 5.0
-  hasPower: true
+  hasItems: true
+  hasPower: false
 
 
 /*
@@ -62,10 +61,7 @@
 */
 
 
-  squareSprite: false
-  enableDrawStatus: false
-  flashHit: true
-  flashColor: ffffff
+  squareSprite: true
 
 
 /*
@@ -75,26 +71,4 @@
 */
 
 
-  crushDamageMultiplier: 0.75
-  conductivePower: true
-  connectedPower: false
   update: true
-  lightningChance: -1.0
-  lightningDamage: 20.0
-  lightningLength: 17
-  lightningColor: ffd37f
-  lightningSound: spark
-  chanceDeflect: 5.0
-  deflectSound: none
-
-
-/*
-  ========================================
-  Section: I/O
-  ========================================
-*/
-
-
-  consumes: {
-    power: 0.16666667
-  }

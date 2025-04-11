@@ -549,7 +549,7 @@
 
               // Fail Probability
               var failP = mdl_recipe._failP(rcFi, i);
-              if(failP > 0.0001) tb2.add(mdl_text._statText(mdl_text._term("chance-to-fail"), Strings.fixed(failP * 100.0, 1) + "%")).left().row();
+              if(failP > 0.0) tb2.add(mdl_text._statText(mdl_text._term("chance-to-fail"), Strings.fixed(failP * 100.0, 1) + "%")).left().row();
 
               // Tooltip: Overdriven Mode
               if(tt == "overdriven") tb2.add(mdl_text._info("tt-overdriven")).left().row();

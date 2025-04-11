@@ -540,7 +540,11 @@
       if(blk == null || ters_gn == null) return;
       if(mode != "enable" && mode != "disable") return;
 
-      blk.stats.add((mode == "enable") ? db_stat.requiredTerrain : db_stat.disabledIn, mdl_text._tagText(_ters(ters_gn, true)));
+      if(mode == "enable") {
+        blk.stats.add(db_stat.requiredTerrain, "[green]" + mdl_text._tagText(_ters(ters_gn, true)) + "[]");
+      } else {
+        blk.stats.add(db_stat.disabledIn, "[red]" + mdl_text._tagText(_ters(ters_gn, true)) + "[]");
+      };
     };
     exports.setStats_terrain = setStats_terrain;
 

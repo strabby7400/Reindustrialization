@@ -7,19 +7,19 @@
 
   // Part: Number
     Number.prototype.toInt = function() {
-      return new Point2(Number(this), 0).x;
+      return new Point2(this, 0).x;
     };
 
 
     Number.prototype.toF = function() {
-      return new Vec2(Number(this), 0).x;
+      return new Vec2(this, 0).x;
     };
   // End
 
 
   // Part: Boolean
     Boolean.prototype.flip = function() {
-      return this ? false : true;
+      return this != true;
     };
   // End
 
@@ -117,6 +117,7 @@
     const ct_blk_conveyor = require("reind/ct/ct_blk_conveyor");
     const ct_blk_conveyorBridge = require("reind/ct/ct_blk_conveyorBridge");
     const ct_blk_genericDistributionGate = require("reind/ct/ct_blk_genericDistributionGate");
+    const ct_blk_junction = require("reind/ct/ct_blk_junction");
     const ct_blk_incinerator = require("reind/ct/ct_blk_incinerator");
     const ct_blk_massDriver = require("reind/ct/ct_blk_massDriver");
     const ct_blk_genericCore = require("reind/ct/ct_blk_genericCore");
