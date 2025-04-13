@@ -85,6 +85,19 @@
     exports.envOre_ground_azurite = envOre_ground_azurite;
 
 
+    const envOre_ground_chalcopyrite = extend(OreBlock, "env-ore-ground-chalcopyrite", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+    });
+    exports.envOre_ground_chalcopyrite = envOre_ground_chalcopyrite;
+
+
     const envOre_ground_malachite = extend(OreBlock, "env-ore-ground-malachite", {
       setStats() {
         this.super$setStats();

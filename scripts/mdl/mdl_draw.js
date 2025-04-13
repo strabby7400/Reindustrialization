@@ -400,7 +400,7 @@
     const drawPlaceRegion = function(blk, t, color_gn) {
       if(Vars.headless || blk == null || t == null) return;
 
-      var pos = mdl_game._pos(t, blk.offset);
+      var pos = mdl_game._pos(t, blk.offset, true);
       var reg = mdl_content._buildReg(blk);
 
       drawPlanRegion(pos, reg, color_gn)
@@ -526,7 +526,7 @@
 
       Draw.z(Layer.flyingUnit + 0.1);
       Draw.color(Color.lightGray, Color.white, 1.0 - flashScl + Mathf.absin(Time.time, 0.5, flashScl));
-      // V8 PENDING                 Draw.alpha(Vars.renderer.unitLaserOpacity);
+      Draw.alpha(Vars.renderer.unitLaserOpacity);
       Drawf.laser(mineLaserReg, mineLaserEndReg, x_f, y_f, x_t, y_t, 0.75);
       Lines.stroke(1.0, Pal.techBlue);
       Lines.poly(pos_t.x, pos_t.y, 4, Vars.tilesize / 2.0 * Mathf.sqrt2, Time.time);
@@ -589,7 +589,7 @@
     const drawPlaceRect = function(blk, t, color_gn, r, dashed) {
       if(Vars.headless || blk == null || t == null) return;
 
-      drawRect(mdl_game._pos(t, blk.offset), r, color_gn, blk.size, dashed);
+      drawRect(mdl_game._pos(t, blk.offset, true), r, color_gn, blk.size, dashed);
     };
     exports.drawPlaceRect = drawPlaceRect;
 
@@ -656,7 +656,7 @@
     const drawPlaceCircle = function(blk, t, color_gn, rad, dashed) {
       if(Vars.headless || blk == null || t == null) return;
 
-      drawCircle(mdl_game._pos(t, blk.offset), rad, color_gn, dashed);
+      drawCircle(mdl_game._pos(t, blk.offset, true), rad, color_gn, dashed);
     };
     exports.drawPlaceCircle = drawPlaceCircle;
 

@@ -114,6 +114,7 @@
 
         b.id_rc = mdl_data._config(b, 0);
 
+        b.changeEff = db_effect._recipeChange(b.block.size, b.team.color);
         b.craftSound = mdl_data.read_1n1v(db_block.db["param"]["sound"]["craft"], b.block.name, null);
 
         b.rcTimeScale = mdl_recipe._timeScale(b.rcFi, b.id_rc);
@@ -178,8 +179,7 @@
 
             frag_attack.atk_impact(b, b.param1, frag_attack._impactDmg(size, time), frag_attack._impactDur(time), mdl_data.read_1n1v(db_block.db["param"]["shake"], b.block.name, 0.0));
 
-            var cap = Math.pow(size, 2);
-            for(let i = 0; i < cap; i++) {mdl_effect.dustAt_ldm(b, frag_attack._impactDustRad(size))};
+            mdl_effect.dustAt_ldm(b, frag_attack._impactDustRad(size), Math.pow(size, 2));
           };
         };
 
@@ -261,7 +261,7 @@
         b.progress = 0.0;
         b.efficiency = 0.0;
 
-        mdl_effect.showAt(b, db_effect._recipeChange(b.block.size, b.team.color), 0.0);
+        mdl_effect.showAt(b, b.changeEff, 0.0);
       };
 
       if(tup[1] > -2) {

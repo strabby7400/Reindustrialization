@@ -81,6 +81,8 @@
       frag_faci.updateTile_flammable(b);
 
       if(b.needCheck) {
+        b.harvestEff = db_effect._plantCrack();
+
         b.growEffc = frag_faci.sumGrowthEffc(b.block, b.tile);
 
         var tup = frag_faci._cropTuple(b.block);
@@ -166,17 +168,17 @@
 
         harvestScr.call(b);
 
-        mdl_effect.showAt(b, db_effect._plantCrack(), 0.0);
+        mdl_effect.showAt(b, b.harvestEff, 0.0);
         mdl_effect.playAt(b, "se-step-grass", 1.0, 1.0, 0.1);
 
         var rad = VAR.crop_harvestRadius;
 
-        var b_cont = mdl_game._container(b, rad, b.team);
+        var b_cont = mdl_game._container(b, b.team, rad);
         if(b_cont != null) {
           frag_item.addItemBatch(b_cont, batch);
           mdl_effect.itemTransfer(b, b_cont)
         } else {
-          var unit_cont = mdl_game._playerContainer(b, rad, b.team);
+          var unit_cont = mdl_game._player(b, b.team, rad);
           if(unit_cont != null) {
             mdl_unit.addItemBatch(unit_cont, batch);
             mdl_effect.itemTransfer(b, unit_cont)

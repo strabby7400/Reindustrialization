@@ -20,11 +20,11 @@ const rc = {
         "reind-item-bio-charcoal", 10,
       ],
       "randOutputs": [
-        "reind-item-bio-wood-ash", 5, 0.25,
+        "reind-item-was-wood-ash", 5, 0.25,
       ],
       "failProbability": 0.1,
       "failOutputs": [
-        "reind-item-bio-wood-ash", 15,
+        "reind-item-was-wood-ash", 15,
       ],
     },
 
@@ -53,11 +53,11 @@ const rc = {
         "reind-item-bio-charcoal", 5,
       ],
       "randOutputs": [
-        "reind-item-bio-wood-ash", 5, 0.25,
+        "reind-item-was-wood-ash", 5, 0.25,
       ],
       "failProbability": 0.1,
       "failOutputs": [
-        "reind-item-bio-wood-ash", 20,
+        "reind-item-was-wood-ash", 20,
       ],
     },
 

@@ -17,6 +17,49 @@
 */
 
 
+  // Part: fac-heat
+    const facHeat_primitiveEvaporationChamberController = extend(Wall, "fac-heat-primitive-evaporation-chamber-controller", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+      drawPlace(x, y, rotation, valid) {
+        this.super$drawPlace(x, y, rotation, valid);
+        TEMPLATE.drawPlace(this, x, y, rotation, valid);
+      },
+    });
+    facHeat_primitiveEvaporationChamberController.buildType = () => extend(Wall.WallBuild, facHeat_primitiveEvaporationChamberController, {
+      needCheck: true,
+      changeEff: null,
+      cd: 0.0, showPlan: false, plan: [],
+      updateTile() {
+        this.super$updateTile();
+        TEMPLATE.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        TEMPLATE.buildConfiguration(this, table);
+      },
+      configured(builder, value) {
+        TEMPLATE.configured(this, builder, value);
+      },
+      draw() {
+        this.super$draw();
+        TEMPLATE.draw(this);
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        TEMPLATE.drawSelect(this);
+      },
+    });
+    exports.facHeat_primitiveEvaporationChamberController = facHeat_primitiveEvaporationChamberController;
+  // End
+
+
   // Part: fac-furn
     const facFurn_brickedBlastFurnaceController = extend(Wall, "fac-furn-bricked-blast-furnace-controller", {
       setStats() {
@@ -33,10 +76,9 @@
       },
     });
     facFurn_brickedBlastFurnaceController.buildType = () => extend(Wall.WallBuild, facFurn_brickedBlastFurnaceController, {
-      cd: 480.0,
       needCheck: true,
-      plan: [],
-      showPlan: false,
+      changeEff: null,
+      cd: 0.0, showPlan: false, plan: [],
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);
@@ -77,10 +119,9 @@
       },
     });
     facSep_highPressureCycloneSeparatorController.buildType = () => extend(Wall.WallBuild, facSep_highPressureCycloneSeparatorController, {
-      cd: 480.0,
       needCheck: true,
-      plan: [],
-      showPlan: false,
+      changeEff: null,
+      cd: 0.0, showPlan: false, plan: [],
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);
@@ -119,10 +160,9 @@
       },
     });
     facSep_largeVibrationScreenController.buildType = () => extend(Wall.WallBuild, facSep_largeVibrationScreenController, {
-      cd: 480.0,
       needCheck: true,
-      plan: [],
-      showPlan: false,
+      changeEff: null,
+      cd: 0.0, showPlan: false, plan: [],
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);
@@ -166,10 +206,9 @@
       },
     });
     facMisc_colossalRouterController.buildType = () => extend(Wall.WallBuild, facMisc_colossalRouterController, {
-      cd: 480.0,
       needCheck: true,
-      plan: [],
-      showPlan: false,
+      changeEff: null,
+      cd: 0.0, showPlan: false, plan: [],
       updateTile() {
         this.super$updateTile();
         TEMPLATE.updateTile(this);

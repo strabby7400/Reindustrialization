@@ -77,6 +77,21 @@ const rc = {
     /* <---------------- copper ----------------> */
 
 
+    // Copper : Concentrate (Chalcopyrite)
+    {
+      "icon": "reind-item-int-concentrate-chalcopyrite",
+      "category": "smelting",
+      "inputs": [
+        "reind-item-int-concentrate-chalcopyrite", 90,
+      ].concat(gi),
+      "optInputs": [].concat(opt),
+      "requireOptional": true,
+      "outputs": [
+        "reind-item-chem-copper", 130,
+      ],
+    },
+
+
     // Copper : Concentrate (Malachite)
     {
       "icon": "reind-item-int-concentrate-malachite",

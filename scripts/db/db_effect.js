@@ -29,7 +29,7 @@
         if(rot == null) rot = 0.0;
         if(color == null) color = Color.valueOf("ffd37f");
 
-        var eff_flare = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -73,7 +73,7 @@
 
         });
 
-        return eff_flare;
+        return eff;
       };
       exports._flare = _flare;
 
@@ -96,7 +96,7 @@
         if(top == null) top = false;
         if(hasLight == null) hasLight = false;
 
-        var eff_hoveringParticles = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -140,7 +140,7 @@
 
         });
 
-        return eff_hoveringParticles;
+        return eff;
       };
       exports._hoveringParticles = _hoveringParticles;
 
@@ -156,7 +156,7 @@
         if(color == null) color = Color.white;
         if(hasLight == null) hasLight = false;
 
-        var eff_lingeringParticles = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -200,7 +200,7 @@
 
         });
 
-        return eff_lingeringParticles;
+        return eff;
       };
       exports._lingeringParticles = _lingeringParticles;
 
@@ -217,7 +217,7 @@
         if(top == null) top = false;
         if(hasLight == null) hasLight = false;
 
-        var eff_releaseParticles = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -261,7 +261,7 @@
 
         });
 
-        return eff_releaseParticles;
+        return eff;
       };
       exports._releaseParticles = _releaseParticles;
 
@@ -280,7 +280,7 @@
         var offX = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
         var offY = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
 
-        var eff_spreadParticles = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -326,7 +326,7 @@
 
         });
 
-        return eff_spreadParticles;
+        return eff;
       };
       exports._spreadParticles = _spreadParticles;
 
@@ -346,7 +346,7 @@
         var offX = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
         var offY = (Mathf.chance(0.5) ? 1 : -1) * Mathf.random(rad);
 
-        var eff_shrinkSpreadParticles = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -392,7 +392,7 @@
 
         });
 
-        return eff_shrinkSpreadParticles;
+        return eff;
       };
       exports._fadeShrinkSpreadParticles = _fadeShrinkSpreadParticles;
 
@@ -415,7 +415,7 @@
         var color_t = color;
         color_f.a = 0.0;
 
-        var eff_fadeShrinkSpreadParticles = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -461,7 +461,7 @@
 
         });
 
-        return eff_fadeShrinkSpreadParticles;
+        return eff;
       };
       exports._fadeShrinkSpreadParticles = _fadeShrinkSpreadParticles;
 
@@ -482,7 +482,7 @@
         if(color == null) color = Color.valueOf("ffc999");
         if(hasLight == null) hasLight = true;
 
-        var eff_crack = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -526,7 +526,7 @@
 
         });
 
-        return eff_crack;
+        return eff;
       };
       exports._crack = _crack;
 
@@ -541,7 +541,7 @@
         if(color == null) color = Color.white;
         if(hasLight == null) hasLight = false;
 
-        var eff_drillCrack = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -585,7 +585,7 @@
 
         });
 
-        return eff_drillCrack;
+        return eff;
       };
       exports._drillCrack = _drillCrack;
 
@@ -597,7 +597,7 @@
         if(scl == null) scl = 1.0;
         if(amt == null) amt = 5;
 
-        var eff_crack = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -640,6 +640,8 @@
           lenTo: 0.0,
 
         });
+
+        return eff;
       };
       exports._craftCrack = _craftCrack;
 
@@ -652,7 +654,7 @@
         if(size == null) size = 1.5;
         if(color == null) color = Color.valueOf("91b692");
 
-        var eff_plantCrack = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -696,7 +698,7 @@
 
         });
 
-        return eff_plantCrack;
+        return eff;
       };
       exports._plantCrack = _plantCrack;
 
@@ -708,7 +710,7 @@
         if(scl == null) scl = 1.0;
         if(color == null) color = Color.valueOf("303030");
 
-        var eff_smoke = extend(ParticleEffect, {
+        var eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -752,7 +754,7 @@
 
         });
 
-        return eff_smoke;
+        return eff;
       };
       exports._smoke = _smoke;
 
@@ -765,7 +767,7 @@
         if(amt == null) amt = 5;
         if(color == null) color = Color.valueOf("303030");
 
-        var eff_smokeCrack = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -809,7 +811,7 @@
 
         });
 
-        return eff_smokeCrack;
+        return eff;
       };
       exports._smokeCrack = _smokeCrack;
 
@@ -821,7 +823,7 @@
         if(scl == null) scl = 1.0;
         if(color == null) color = Color.valueOf("feb380");
 
-        var eff_squareSpark = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -865,7 +867,7 @@
 
         });
 
-        return eff_squareSpark;
+        return eff;
       };
       exports._squareSpark = _squareSpark;
 
@@ -885,7 +887,7 @@
         if(amt == null) amt = 3;
         if(size == null) size = 9.0;
 
-        var eff_blackSmogRelease = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -929,7 +931,7 @@
 
         });
 
-        return eff_blackSmogRelease;
+        return eff;
       };
       exports._blackSmogRelease = _blackSmogRelease;
 
@@ -942,7 +944,7 @@
         if(amt == null) amt = 12;
         if(size == null) size = 7.0;
 
-        var eff_gasRelease = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -986,7 +988,7 @@
 
         });
 
-        return eff_gasRelease;
+        return eff;
       };
       exports._gasRelease = _gasRelease;
 
@@ -1001,7 +1003,7 @@
         if(size_f == null) size_f = 4.0;
         if(size_t == null) size_t = 12.0;
 
-        var eff_gasShootRelease = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1045,7 +1047,7 @@
 
         });
 
-        return eff_gasShootRelease;
+        return eff;
       };
       exports._gasShootRelease = _gasShootRelease;
 
@@ -1061,7 +1063,7 @@
         if(rev == null) rev = false;
 
 
-        var eff_gasSideRelease = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1105,7 +1107,7 @@
 
         });
 
-        return eff_gasSideRelease;
+        return eff;
       };
       exports._gasSideRelease = _gasSideRelease;
 
@@ -1117,7 +1119,7 @@
         if(scl == null) scl = 1.0;
         if(size == null) size = 6.0;
 
-        var eff_heatSmog = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
             /* <---------------- meta ----------------> */
 
@@ -1161,7 +1163,7 @@
 
         });
 
-        return eff_heatSmog;
+        return eff;
       };
       exports._heatSmog = _heatSmog;
 
@@ -1172,7 +1174,7 @@
         if(rad == null) rad = 54.0;
         if(scl == null) scl = 1.0;
 
-        var eff_Smog = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1216,7 +1218,7 @@
 
         });
 
-        return eff_Smog;
+        return eff;
       };
       exports._smog = _smog;
 
@@ -1233,7 +1235,7 @@
         var color_t = color.cpy();
         color_t.a = 0.0;
 
-        var eff_ventGasRelease = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1277,7 +1279,7 @@
 
         });
 
-        return eff_ventGasRelease;
+        return eff;
       };
       exports._ventGasRelase = _ventGasRelase;
 
@@ -1303,7 +1305,7 @@
         var color_t = color.cpy();
         color_t.a = 0.0;
 
-        var eff_iconFade = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1347,7 +1349,7 @@
 
         });
 
-        return eff_iconFade;
+        return eff;
       };
       exports._iconFade = _iconFade;
 
@@ -1362,7 +1364,7 @@
         var color_t = color.cpy();
         color_t.a = 0.0;
 
-        var eff_squareFade = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1406,7 +1408,7 @@
 
         });
 
-        return eff_squareFade;
+        return eff;
       };
       exports._squareFade = _squareFade;
 
@@ -1425,11 +1427,11 @@
         var color_t = color.cpy();
         color_t.a = 0.0;
 
-        var eff_trailFade = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
-          interp: rev ? Interp.pow2In : Interp.pow2Out,
+          interp: rev ? Interp.pow3In : Interp.pow3Out,
           lifetime: 90.0 * scl,
           startDelay: 0.0,
 
@@ -1459,7 +1461,7 @@
           /* <---------------- size & stroke & len ----------------> */
 
           line: false,
-          sizeInterp: rev ? Interp.pow2In : Interp.pow2Out,
+          sizeInterp: rev ? Interp.pow3In : Interp.pow3Out,
           sizeFrom: 0.0,
           sizeTo: size,
           strokeFrom: 0.0,
@@ -1469,9 +1471,115 @@
 
         });
 
-        return eff_trailFade;
+        return eff;
       };
       exports._trailFade = _trailFade;
+
+
+
+
+      const _explosionDisk = function(rad, scl, color) {
+        if(rad == null) rad = 40.0;
+        if(scl == null) scl = 1.0;
+        if(color == null) color = Pal.accent;
+
+        var color_f = color;
+        var color_t = color.cpy();
+        color_t.a = 0.0;
+
+        const eff1 = extend(ParticleEffect, {
+
+          /* <---------------- meta ----------------> */
+
+          interp: Interp.pow5In,
+          lifetime: 40.0 * scl,
+          startDelay: 0.0,
+
+          /* <---------------- visual ----------------> */
+
+          region: "reind-efr-shadow-white",
+          layer: 116.0,
+          particles: 1,
+          followParent: true,
+          rotWithParent: false,
+          useRotation: true,
+          colorFrom: color_f,
+          colorTo: color_t,
+          lightScl: 2.0,
+          lightOpacity: 0.65,
+
+          /* <---------------- angle & length ----------------> */
+
+          baseRotation: 0.0,
+          offset: 0.0,
+          cone: 180.0,
+          spin: 0.0,
+          randLength: true,
+          length: 0.0,
+          baseLength: 0.0,
+
+          /* <---------------- size & stroke & len ----------------> */
+
+          line: false,
+          sizeInterp: Interp.pow10Out,
+          sizeFrom: 0.0,
+          sizeTo: rad,
+          strokeFrom: 0.0,
+          strokeTo: 0.0,
+          lenFrom: 0.0,
+          lenTo: 0.0,
+
+        });
+        const eff2 = extend(ParticleEffect, {
+
+          /* <---------------- meta ----------------> */
+
+          interp: Interp.pow5In,
+          lifetime: 40.0 * scl,
+          startDelay: 0.0,
+
+          /* <---------------- visual ----------------> */
+
+          region: "reind-efr-shadow-white",
+          layer: 116.0001,
+          particles: 1,
+          followParent: true,
+          rotWithParent: false,
+          useRotation: true,
+          colorFrom: Color.white,
+          colorTo: Color.valueOf("ffffff00"),
+          lightScl: 2.0,
+          lightOpacity: 0.65,
+
+          /* <---------------- angle & length ----------------> */
+
+          baseRotation: 0.0,
+          offset: 0.0,
+          cone: 180.0,
+          spin: 0.0,
+          randLength: true,
+          length: 0.0,
+          baseLength: 0.0,
+
+          /* <---------------- size & stroke & len ----------------> */
+
+          line: false,
+          sizeInterp: Interp.pow10Out,
+          sizeFrom: 0.0,
+          sizeTo: rad * 0.7,
+          strokeFrom: 0.0,
+          strokeTo: 0.0,
+          lenFrom: 0.0,
+          lenTo: 0.0,
+
+        });
+
+        return new MultiEffect(
+          eff1,
+          eff2,
+        );
+      };
+      exports._explosionDisk = _explosionDisk;
 
 
 
@@ -1479,7 +1587,7 @@
       const _impact = function(rad) {
         if(rad == null) rad = 40.0;
 
-        var effect_impact1 = extend(WaveEffect, {
+        const eff1 = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1508,7 +1616,7 @@
           strokeTo: 4.0,
 
         });
-        var effect_impact2 = extend(WaveEffect, {
+        const eff2 = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1539,8 +1647,8 @@
         });
 
         return new MultiEffect(
-          effect_impact1,
-          effect_impact2,
+          eff1,
+          eff2,
         );
       };
       exports._impact = _impact;
@@ -1556,7 +1664,7 @@
 
         var hw = (size / 2 + r) * Vars.tilesize;
 
-        var eff_pulseRect1 = extend(WaveEffect, {
+        const eff1 = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1585,7 +1693,7 @@
           strokeTo: 0.0,
 
         });
-        var eff_pulseRect2 = extend(WaveEffect, {
+        const eff2 = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1616,8 +1724,8 @@
         });
 
         return new MultiEffect(
-          eff_pulseRect1,
-          eff_pulseRect2,
+          eff1,
+          eff2,
         );
       };
       exports._pulseRect = _pulseRect;
@@ -1630,7 +1738,7 @@
         if(scl == null) scl = 1.0;
         if(color == null) color = Color.white;
 
-        var eff_ripple = extend(WaveEffect, {
+        const eff = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1660,7 +1768,7 @@
 
         });
 
-        return eff_ripple;
+        return eff;
       };
       exports._ripple = _ripple;
 
@@ -1670,7 +1778,7 @@
       const _rotorWave = function(rad) {
         if(rad == null) rad = 40.0;
 
-        var effect_rotorWave = extend(WaveEffect, {
+        const eff = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1700,7 +1808,7 @@
 
         });
 
-        return effect_rotorWave;
+        return eff;
       };
       exports._rotorWave = _rotorWave;
 
@@ -1712,7 +1820,7 @@
         if(scl == null) scl = 1.0;
         if(color == null) colof = Color.valueOf("feb380");
 
-        var eff_scanCircle1 = extend(WaveEffect, {
+        const eff1 = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1741,7 +1849,7 @@
           strokeTo: 0.0,
 
         });
-        var eff_scanCircle2 = extend(WaveEffect, {
+        const eff2 = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1772,8 +1880,8 @@
         });
 
         return new MultiEffect(
-          eff_scanCircle1,
-          eff_scanCircle2,
+          eff1,
+          eff2,
         );
       };
       exports._scanCircle = _scanCircle;
@@ -1790,7 +1898,7 @@
         var color_t = color.cpy();
         color_t.a = 0.0;
 
-        var eff_scanDisk = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1834,7 +1942,7 @@
 
         });
 
-        return eff_scanDisk;
+        return eff;
       };
       exports._scanDisk = _scanDisk;
 
@@ -1849,7 +1957,7 @@
 
         var hw = (size / 2 + r) * Vars.tilesize;
 
-        var eff_scanRect1 = extend(WaveEffect, {
+        const eff1 = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1878,7 +1986,7 @@
           strokeTo: 0.0,
 
         });
-        var eff_scanRect2 = extend(WaveEffect, {
+        const eff2 = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1907,7 +2015,7 @@
           strokeTo: 0.0,
 
         });
-        var eff_scanRect3 = extend(WaveEffect, {
+        const eff3 = extend(WaveEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -1938,9 +2046,9 @@
         });
 
         return new MultiEffect(
-          eff_scanRect1,
-          eff_scanRect2,
-          eff_scanRect3,
+          eff1,
+          eff2,
+          eff3,
         );
       };
       exports._scanRect = _scanRect;
@@ -1959,7 +2067,7 @@
         var color_t = color.cpy();
         color_t.a = 0.0;
 
-        var eff_scanSquare = extend(ParticleEffect, {
+        const eff = extend(ParticleEffect, {
 
           /* <---------------- meta ----------------> */
 
@@ -2003,7 +2111,7 @@
 
         });
 
-        return eff_scanSquare;
+        return eff;
       };
       exports._scanSquare = _scanSquare;
 
@@ -2028,6 +2136,7 @@
         _impact(rad),
         _smog(rad * 1.35),
         _squareSpark(rad * 1.2, 1.0, sparkColor),
+        _explosionDisk(rad * 0.7, 1.0),
       );
     };
     exports._commonExplosion = _commonExplosion;
@@ -2078,14 +2187,18 @@
     exports._powerParticles = _powerParticles;
 
 
-    const _craftGas = function() {
-      return _gasRelease();
+    const _craftGas = function(scl) {
+      if(scl == null) scl = 1.0;
+
+      return _gasRelease(null, scl, null, null);
     };
     exports._craftGas = _craftGas;
 
 
-    const _craftGasLarge = function() {
-      return _gasRelease(64.0, 4.0, 18, 14.0);
+    const _craftGasLarge = function(scl) {
+      if(scl == null) scl = 1.0;
+
+      return _gasRelease(64.0, 4.0 * scl, 18, 14.0);
     };
     exports._craftGasLarge = _craftGasLarge;
 

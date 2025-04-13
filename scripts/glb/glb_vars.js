@@ -5,9 +5,20 @@
 */
 
 
-  // Part: Update
+  // Part: Import
+    const db_effect = require("reind/db/db_effect");
+  // End
+
+
+  // Part: Meta
     const update_suppressorTime = 300.0;
     exports.update_suppressorTime = update_suppressorTime;
+
+    const layer_bullet = 74.0;
+    exports.layer_bullet = layer_bullet;
+
+    const layer_bulletHigh = 86.0;
+    exports.layer_bulletHigh = layer_bulletHigh;
   // End
 
 
@@ -44,6 +55,9 @@
 
     const flow_pipeDiameter = 100.0;
     exports.flow_pipeDiameter = flow_pipeDiameter;
+
+    const effc_cap = 5.0;
+    exports.effc_cap = effc_cap;
   // End
 
 
@@ -71,6 +85,12 @@
   // End
 
 
+  // Part: Factory
+    const struct_cooldown = 600.0;
+    exports.struct_cooldown = struct_cooldown;
+  // End
+
+
   // Part: Attack
     const impact_minDamage = 10.0;
     exports.impact_minDamage = impact_minDamage;
@@ -83,6 +103,15 @@
   // Part: Effect
     const effect_chanceCap = 0.16;
     exports.effect_chanceCap = effect_chanceCap;
+
+    const eff_blackSmog = db_effect._craftBlackSmog();
+    exports.eff_blackSmog = eff_blackSmog;
+
+    const eff_heatSmog = db_effect._heatSmog();
+    exports.eff_heatSmog = eff_heatSmog;
+
+    const eff_invalid = db_effect._invalidPlacement();
+    exports.eff_invalid = eff_invalid;
   // End
 
 

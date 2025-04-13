@@ -18,13 +18,17 @@
 
 
   // Part: Control
-    const __toggle = function(tb, b, bool, icon_gn) {
+    const __toggle = function(tb, b, bool, icon_gn, setLastConfig) {
+      if(setLastConfig == null) setLastConfig = false;
+
       var icon;
       if(icon_gn == null) icon = Icon.cancel;
       if(icon_gn == "eye") icon = bool ? Icon.eyeOff : Icon.eye;
       if(icon_gn == "lock") icon = bool ? Icon.lock : Icon.lockOpen;
+      if(icon_gn == "invert") icon = new TextureRegionDrawable (Core.atlas.find(bool ? "reind-icon-cross" : "reind-icon-check"));
 
       tb.button(icon, 24.0, run(() => {
+        if(setLastConfig) b.block.lastConfig = bool.flip();
         Call.tileConfig(Vars.player, b, new Vec2(-2, Number(bool.flip())));
         b.deselect();
       })).left().row();

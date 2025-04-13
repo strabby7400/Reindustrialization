@@ -1,0 +1,91 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: Wall
+  category: crafting
+  requirements: [
+    item-bio-timber/160
+    item-chem-copper/120
+    item-chem-graphite/200
+    item-buil-cement/100
+    item-buil-coarse-aggregate/90
+    item-buil-fine-aggregate/90
+  ]
+  buildCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-heat-furnace-heater
+    objectives: []
+  }
+  researchCostMultiplier: 0.5
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 24.0
+  size: 2
+  hasItems: false
+  itemCapacity: 20
+  hasLiquids: false
+  liquidCapacity: 5.0
+  hasPower: false
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: true
+  flashHit: true
+  flashColor: ffffff
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  crushDamageMultiplier: 0.75
+  update: true
+  configurable: true
+  lightningChance: -1.0
+  lightningDamage: 20.0
+  lightningLength: 17
+  lightningColor: ffd37f
+  lightningSound: spark
+  chanceDeflect: -1.0
+  deflectSound: none

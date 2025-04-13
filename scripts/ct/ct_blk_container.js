@@ -37,6 +37,25 @@
       },
     });
     exports.effStor_crate = effStor_crate;
+
+
+    const effStor_reinforcedCrate = extend(StorageBlock, "eff-stor-reinforced-crate", {
+      // Specific
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+        frag_faci.setStats_flammable(this);
+      },
+    });
+    effStor_reinforcedCrate.buildType = () => extend(StorageBlock.StorageBuild, effStor_reinforcedCrate, {
+      // Specific
+      updateTile() {
+        this.super$updateTile();
+        TEMPLATE.updateTile(this);
+        frag_faci.updateTile_flammable(this);
+      },
+    });
+    exports.effStor_reinforcedCrate = effStor_reinforcedCrate;
   // End
 
 

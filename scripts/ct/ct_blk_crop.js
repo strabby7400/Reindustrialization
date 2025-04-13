@@ -47,6 +47,7 @@
     });
     minCrop_aerthSmallShiitake.buildType = () => extend(Wall.WallBuild, minCrop_aerthSmallShiitake, {
       needCheck: true,
+      harvestEff: null,
       growTime: 0.0, growStages: 1, cropYield: [], stageScr: [],
       growProg: 0.0, growStage: 0, growEffc: 0.0,
       timerCall: new Interval(1),
@@ -107,6 +108,7 @@
     });
     minCrop_inkCorn.buildType = () => extend(Wall.WallBuild, minCrop_inkCorn, {
       needCheck: true,
+      harvestEff: null,
       growTime: 0.0, growStages: 1, cropYield: [], stageScr: [],
       growProg: 0.0, growStage: 0, growEffc: 0.0,
       timerCall: new Interval(1),
@@ -171,6 +173,7 @@
     });
     minCrop_thoriumReactorMine.buildType = () => extend(Wall.WallBuild, minCrop_thoriumReactorMine, {
       needCheck: true,
+      harvestEff: null,
       growTime: 0.0, growStages: 1, cropYield: [], stageScr: [],
       growProg: 0.0, growStage: 0, growEffc: 0.0,
       timerCall: new Interval(1),

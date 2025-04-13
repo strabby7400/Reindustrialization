@@ -8,17 +8,26 @@
   // Part: Import
     const PARENT = require("reind/rs/rs_genericFluid");
 
+    const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_table = require("reind/mdl/mdl_table");
+
     const db_stat = require("reind/db/db_stat");
+  // End
+
+
+  // Part: Auxiliary
+    function ax_buildStats(cts) {
+      return function(tb) {
+        mdl_table.setContentRowDisplay(tb, cts);
+      };
+    };
   // End
 
 
   // Part: Component
     function setStatsComp(liq) {
-      var li = new Seq();
-      Vars.content.blocks().each(blk => {
-        if(blk.liquidDrop == liq) li.add(blk);
-      });
-      if(li.size > 0) liq.stats.add(db_stat.blockRelated, StatValues.content(li.sort()));
+      var blks = mdl_content._oreBlks(liq);
+      if(blks.length > 0) liq.stats.add(db_stat.blockRelated, ax_buildStats(blks));
     };
   // End
 

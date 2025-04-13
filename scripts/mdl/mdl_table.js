@@ -212,7 +212,7 @@
               tb_l.add(ct.localizedName);
             });
 
-            tb1.table(Styles.none, tb_m => {}).growX();
+            tb1.table(Styles.none, tb_m => {}).width(80.0).growX().growY();
 
             tb1.table(Styles.none, tb_r => {
               tb_r.left();

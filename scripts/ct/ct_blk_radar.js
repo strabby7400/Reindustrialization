@@ -26,7 +26,7 @@
     });
     defProj_basicRadar.buildType = () => extend(Radar.RadarBuild, defProj_basicRadar, {
       needCheck: true,
-      scanColor: Color.white,
+      scanColor: Color.white, craftEff: null, applyEff: null,
       prog: Math.round(Mathf.random(480.0)), thr: 480.0,
       updateTile() {
         this.super$updateTile();

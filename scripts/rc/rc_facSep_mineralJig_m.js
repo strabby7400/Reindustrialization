@@ -143,6 +143,26 @@ const rc = {
     },
 
 
+    // Dust (Limonite)
+    {
+      "icon": "reind-item-int-dust-limonite",
+      "category": "purification",
+      "inputs": [
+        "reind-item-int-dust-limonite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-p1-limonite", 10,
+      ].concat(go),
+      "randOutputs": [
+        "reind-item-ore-hematite", 10, 0.5,
+        "reind-item-ore-pyrite", 10, 0.5,
+        "reind-item-ore-cassiterite", 10, 0.25,
+        "reind-item-ore-silica-stone", 10, 0.25,
+        "reind-item-was-gangue", 10, 0.5,
+      ],
+    },
+
+
     // Dust (Magnetite)
     {
       "icon": "reind-item-int-dust-magnetite",

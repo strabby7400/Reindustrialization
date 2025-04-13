@@ -516,6 +516,13 @@ const db = {
     ],
 
 
+    "noCap": [
+
+      "reind-effc-cond-heat",
+
+    ],
+
+
   },
 
 

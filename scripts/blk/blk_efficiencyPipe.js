@@ -12,12 +12,15 @@
     const mdl_data = require("reind/mdl/mdl_data");
 
     const db_block = require("reind/db/db_block");
+    const db_stat = require("reind/db/db_stat");
   // End
 
 
   // Part: Component
     function setStatsComp(blk) {
       blk.stats.remove(Stat.liquidCapacity);
+      blk.stats.remove(db_stat.pipeDiameter);
+      blk.stats.remove(db_stat.pipeRoughness);
     };
 
 

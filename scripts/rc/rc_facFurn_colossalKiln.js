@@ -124,6 +124,24 @@ const rc = {
     },
 
 
+    // Concentrate (Limonite)
+    {
+      "icon": "reind-item-int-concentrate-limonite",
+      "category": "special",
+      "inputs": [
+        "reind-item-int-concentrate-limonite", 40,
+      ].concat(gi),
+      "optInputs": [].concat(opt),
+      "requireOptional": false,
+      "outputs": [
+        "reind-item-chem-pig-iron", 60,
+      ],
+      "randOutputs": [
+        "reind-item-was-slag", 80, 0.5,
+      ],
+    },
+
+
     /* ========================================
       Section: Roasting
     ======================================== */

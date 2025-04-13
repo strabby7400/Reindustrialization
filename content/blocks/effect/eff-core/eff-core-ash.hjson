@@ -25,7 +25,6 @@
   research: {
     planet: pla-ter-aerth
     root: true
-    name: Aerth
     requiresUnlock: false
   }
 

@@ -147,7 +147,7 @@
 
       if(illegal) {
         b.kill();
-        mdl_effect.showAt(b, db_effect._invalidPlacement(), 0.0);
+        mdl_effect.showAt(b, VAR.eff_invalid, 0.0);
         mdl_ui.showInfoFade("virtual-item");
       };
     };

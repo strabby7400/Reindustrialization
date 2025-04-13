@@ -8,6 +8,7 @@
   // Part: Import
     const PARENT = require("reind/blk/blk_genericPowerBlock");
 
+    const frag_fluid = require("reind/frag/frag_fluid");
     const frag_heat = require("reind/frag/frag_heat");
 
     const mdl_draw = require("reind/mdl/mdl_draw");
@@ -27,8 +28,13 @@
     };
 
 
+    function updateTileComp(b) {
+      frag_fluid.updateTile_capEffc(b);
+    };
+
+
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      if(blk.explosionDamage != null && blk.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), blk.explosionRadius * Vars.tilesize);
+      if(blk.explosionDamage != null && blk.explosionDamage > 0) mdl_draw.drawWarningDisk(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset, true), blk.explosionRadius * Vars.tilesize);
     };
 
 
@@ -61,6 +67,8 @@
 
     const updateTile = function(b) {
       PARENT.updateTile(b);
+
+      updateTileComp(b);
     };
     exports.updateTile = updateTile;
 

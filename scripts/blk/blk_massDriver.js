@@ -45,8 +45,7 @@
 
         frag_attack.atk_impact(b, b.impactRad, frag_attack._impactDmg(size, time), frag_attack._impactDur(time));
 
-        var cap = Math.pow(size, 2);
-        for(let i = 0; i < cap; i++) {mdl_effect.dustAt_ldm(b, frag_attack._impactDustRad(size))};
+        mdl_effect.dustAt_ldm(b, frag_attack._impactDustRad(size), Math.pow(size, 2));
       };
     };
 
@@ -62,7 +61,7 @@
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var impactRad = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], blk.name, 40.0);
-      mdl_draw.drawCirclePulse(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), impactRad);
+      mdl_draw.drawCirclePulse(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset, true), impactRad);
     };
 
 

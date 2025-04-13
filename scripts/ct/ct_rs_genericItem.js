@@ -88,24 +88,6 @@
       },
     });
     exports.itemBio_timber = itemBio_timber;
-
-
-    const itemBio_woodAsh = extend(Item, "item-bio-wood-ash", {
-      alters: 0,
-      setStats() {
-        this.super$setStats();
-        TEMPLATE.setStats(this);
-      },
-      loadIcon() {
-        this.super$loadIcon();
-        TEMPLATE.loadIcon(this);
-      },
-      createIcons(packer) {
-        this.super$createIcons(packer);
-        TEMPLATE.createIcons(this, packer);
-      },
-    });
-    exports.itemBio_woodAsh = itemBio_woodAsh;
   // End
 
 

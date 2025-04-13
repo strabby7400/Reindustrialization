@@ -113,12 +113,20 @@
 
 
   // Part: Probability
-    const _randInt = function(cap, base) {
+    const _randInt = function(n, base) {
       if(base == null) base = 0.0;
 
-      return Math.floor(Math.random() * (cap + 1.0 - base) + base);
+      return Math.floor(Math.random() * (n + 1.0 - base) + base);
     };
     exports._randInt = _randInt;
+
+
+    const _randFreq = function(n, p) {
+      var count = 0;
+      for(let i = 0; i < n; i++) {if(Mathf.chance(p)) count++};
+      return count;
+    };
+    exports._randFreq = _randFreq;
   // End
 
 

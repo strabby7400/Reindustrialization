@@ -1,0 +1,94 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: StackConveyor
+  category: distribution
+  requirements: [
+    item-bio-timber/15
+    item-chem-lead/10
+    item-chem-brass/7
+    item-chem-stainless-steel/5
+  ]
+  buildCostMultiplier: 3.5
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: dis-conv-multi-port-conveyor
+    objectives: []
+  }
+  researchCostMultiplier: 20.0
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 1
+  hasItems: true
+  itemCapacity: 4
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  glowColor: ffffff
+  glowAlpha: 0.0
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  conductivePower: true
+  connectedPower: false
+  rotate: true
+  speed: 0.1
+  recharge: 1.0
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  baseEfficiency: 0.0
+  consumes: {
+    power: 0.06666667
+  }

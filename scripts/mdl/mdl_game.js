@@ -8,6 +8,7 @@
   // Part: Import
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_data = require("reind/mdl/mdl_data");
+    const mdl_heat = require("reind/mdl/mdl_heat");
 
     const db_block = require("reind/db/db_block");
   // End
@@ -41,31 +42,27 @@
     /* <---------------- pos ----------------> */
 
 
-    const _pos = function(pos_gn, param) {
+    const _pos = function(pos_gn, param, useTmp) {
       if(pos_gn == null) return;
 
-      var vec2 = new Vec2();
+      if(useTmp == null) useTmp = false;
 
-      if(pos_gn instanceof Vec2) return vec2.set(pos_gn.x, pos_gn.y);
-      if(pos_gn instanceof Point2) return vec2.set(pos_gn.x, pos_gn.y);
+      if(pos_gn instanceof Vec2) return pos_gn;
+      if(pos_gn instanceof Point2) return pos_gn;
 
-      if(pos_gn instanceof Building) return vec2.set(pos_gn.x, pos_gn.y);
-      if(pos_gn instanceof Unit) return vec2.set(pos_gn.x, pos_gn.y);
+      if(pos_gn instanceof Building) return pos_gn;
+      if(pos_gn instanceof Unit) return pos_gn;
 
       if(pos_gn instanceof Tile) {
-        if(param == null) {vec2.set(pos_gn.worldx(), pos_gn.worldy())}
-        else {vec2.set(pos_gn.worldx() + param, pos_gn.worldy() + param)};
-
-        return vec2;
+        if(param == null) param = 0.0;
+        return useTmp ? Tmp.v1.set(pos_gn.worldx() + param, pos_gn.worldy() + param) : new Vec2(pos_gn.worldx() + param, pos_gn.worldy() + param);
       };
 
-      if(pos_gn instanceof Bullet) return vec2.set(pos_gn.x, pos_gn.y);
-      if(pos_gn instanceof Puddle) return vec2.set(pos_gn.x, pos_gn.y);
+      if(pos_gn instanceof Bullet) return pos_gn;
+      if(pos_gn instanceof Puddle) return pos_gn;
 
-      if(typeof pos_gn == "string") {
-        if(pos_gn == "player" && Vars.player.unit() != null) return vec2.set(Vars.player.unit().x, Vars.player.unit().y);
-        if(pos_gn == "mouse") return vec2.set(Core.input.mouseWorldX(), Core.input.mouseWorldY());
-      };
+      if(pos_gn == "player" && Vars.player.unit() != null) return Vars.player.unit();
+      if(pos_gn == "mouse") return useTmp ? Tmp.v1.set(Core.input.mouseWorldX(), Core.input.mouseWorldY()) : new Vec2(Core.input.mouseWorldX(), Core.input.mouseWorldY());
 
       return;
     };
@@ -122,7 +119,10 @@
     const _dst = function(pos_gn1, pos_gn2) {
       if(pos_gn1 == null || pos_gn2 == null) return 99999.0;
 
-      return _pos(pos_gn1).dst(_pos(pos_gn2));
+      var pos1 = _pos(pos_gn1);
+      var pos2 = _pos(pos_gn2);
+
+      return Mathf.dst(pos1.x, pos1.y, pos2.x, pos2.y);
     };
     exports._dst = _dst;
   // End
@@ -716,8 +716,10 @@
     exports._oreScanner = _oreScanner;
 
 
-    const _container = function(pos_gn, rad, team) {
-      if(pos_gn == null || rad == null || team == null) return;
+    const _container = function(pos_gn, team, rad) {
+      if(pos_gn == null || team == null) return;
+
+      if(rad == null) rad = 999999.0
 
       var pos = _pos(pos_gn);
 
@@ -726,27 +728,24 @@
     exports._container = _container;
 
 
-    const _playerContainer = function(pos_gn, rad, team) {
+    const blks_heat = [];
+    const _heatBlocks = function(pos_gn, rad, team) {
       if(pos_gn == null || rad == null || team == null) return;
 
       var pos = _pos(pos_gn);
-      var unit = null;
-      var tmpRad = rad;
-      Groups.player.each(pl => {
-        var unit_pl = pl.unit();
-        if(unit_pl.team == team) {
-          var dst = _dst(pos, _pos(unit_pl));
+      var cap = Core.settings.getInt("reind-max-heated-block-mark", 3);
+      blks_heat.clear();
 
-          if(dst < tmpRad + 0.0001) {
-            tmpRad = dst;
-            unit = unit_pl;
-          };
-        };
-      });
+      for(let i = 0; i < cap; i++) {
+        var b_heat = Vars.indexer.findTile(team, pos.x, pos.y, rad, ob => {
+          return !blks_heat.includes(ob) && (mdl_heat._fHeat(ob) * 0.05 + mdl_heat._heat(ob) * 1.5 > 5.0);
+        });
+        if(b_heat != null) {blks_heat.push(b_heat)} else break;
+      };
 
-      return unit;
+      return blks_heat;
     };
-    exports._playerContainer = _playerContainer;
+    exports._heatBlocks = _heatBlocks;
 
 
     /* <---------------- entity ----------------> */
@@ -807,6 +806,31 @@
       return arr;
     };
     exports._targetChain = _targetChain;
+
+
+    const _player = function(pos_gn, team, rad) {
+      if(pos_gn == null || team == null) return;
+
+      if(rad == null) rad = 999999.0
+
+      var pos = _pos(pos_gn);
+      var unit = null;
+      var tmpRad = rad;
+      Groups.player.each(pl => {
+        var unit_pl = pl.unit();
+        if(unit_pl != null && unit_pl.team == team) {
+          var dst = _dst(pos, _pos(unit_pl));
+
+          if(dst < tmpRad + 0.0001) {
+            tmpRad = dst;
+            unit = unit_pl;
+          };
+        };
+      });
+
+      return unit;
+    };
+    exports._player = _player;
   // End
 
 

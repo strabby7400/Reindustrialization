@@ -38,6 +38,11 @@
       if(sector == null) needCheck = true;
       if(sector != null && needCheck) {
         Groups.weather.clear();
+
+        var rules = Vars.state.rules;
+        rules.derelictRepair = false;
+        rules.coreDestroyClear = false;
+
         needCheck = false;
       };
 

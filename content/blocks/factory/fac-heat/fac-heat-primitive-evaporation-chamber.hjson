@@ -1,0 +1,172 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: GenericCrafter
+  category: crafting
+  buildVisibility: sandboxOnly
+  requirements: [
+    item-bio-timber/220
+    item-chem-copper/360
+    item-buil-tempered-glass/200
+    item-chem-graphite/200
+    item-chem-steel/100
+    item-buil-cement/220
+    item-buil-coarse-aggregate/170
+    item-buil-fine-aggregate/170
+  ]
+  buildCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: fac-heat-primitive-evaporation-chamber-controller
+    objectives: []
+  }
+  researchCostMultiplier: 0.0
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 80.0
+  armor: 24.0
+  size: 6
+  hasItems: true
+  itemCapacity: 150
+  hasLiquids: true
+  liquidCapacity: 300.0
+  hasPower: true
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 1
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: false
+  drawer: {
+    type: DrawMulti
+    drawers: [
+
+
+      {
+        type: DrawRegion
+        suffix: "-bottom"
+      }
+
+
+      {
+        type: DrawCultivator
+        plantColor: 7898ba
+        plantColorLight: 00000000
+        bottomColor: 7898ba
+        bubbles: 0
+      }
+
+
+      {
+        type: DrawBubbles
+        color: cce4ff
+        amount: 36
+        sides: 16
+        strokeMin: 0.0
+        spread: 21.0
+        timeScl: 15.0
+        recurrence: 3.0
+        radius: 3.0
+        fill: true
+      }
+
+
+      {
+        type: DrawParticles
+        color: bfbfbf
+        alpha: 0.6
+        particles: 30
+        particleLife: 60.0
+        particleRad: 22.0
+        particleSize: 2.0
+        rotateScl: 3.0
+        reverse: true
+      }
+
+
+      {
+        type: DrawDefault
+      }
+
+
+      {
+        type: DrawRegion
+        suffix: "-gloss"
+      }
+
+
+      {
+        type: DrawGlowRegion
+        color: ff3838
+        suffix: "-glow"
+      }
+
+
+    ]
+  }
+  craftEffect: none
+  updateEffect: none
+  updateEffectChance: 0.02
+  ambientSound: se-amb-bubble
+  ambientSoundVolume: 0.5
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  configurable: true
+  outputsLiquid: true
+  ignoreLiquidFullness: true
+  conductivePower: true
+  connectedPower: false
+
+
+/*
+  ========================================
+  Section: I/O
+  ========================================
+*/
+
+
+  craftTime: 600.0
+  consumes: {
+    power: 1.5
+  }

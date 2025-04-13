@@ -25,86 +25,6 @@
     // NOTE: Keep this on top!
 
 
-    /* <---------------- auxiliary ----------------> */
-
-
-    const facHeat_temperatureControlUnit = extend(GenericCrafter, "fac-heat-temperature-control-unit", {
-      rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
-      tag: "",
-      setStats() {
-        this.super$setStats();
-        TEMPLATE.setStats(this);
-      },
-      init() {
-        this.super$init();
-        TEMPLATE.init(this);
-      },
-      setBars() {
-        this.super$setBars();
-        TEMPLATE.setBars(this);
-      },
-      outputsItems() {
-        return TEMPLATE.outputsItems(this);
-      },
-      consumesLiquid(liquid) {
-        return TEMPLATE.consumesLiquid(this, liquid);
-      },
-    });
-    facHeat_temperatureControlUnit.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facHeat_temperatureControlUnit, {
-      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
-      rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
-      id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
-      ci: [], bi: [], opt: [],
-      co: [], bo: [], fo: [], dTup: [],
-      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
-      timerEffc: new Interval(1),
-      updateTile() {
-        TEMPLATE.updateTile(this);
-      },
-      buildConfiguration(table) {
-        this.super$buildConfiguration(table);
-        TEMPLATE.buildConfiguration(this, table);
-      },
-      config() {
-        return this.id_rc;
-      },
-      configured(builder, value) {
-        TEMPLATE.configured(this, builder, value);
-      },
-      acceptItem(source, item) {
-        if(!TEMPLATE.acceptItem(this, source, item)) return false;
-        return true;
-      },
-      acceptLiquid(source, liquid) {
-        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
-        return true;
-      },
-      shouldConsume() {
-        if(!TEMPLATE.shouldConsume(this)) return false;
-        return true;
-      },
-      drawSelect() {
-        this.super$drawSelect();
-        TEMPLATE.drawSelect(this);
-      },
-      drawStatus() {
-        TEMPLATE.drawStatus(this);
-      },
-      // RW
-      write(write) {
-        this.super$write(write);
-        write.f(this.id_rc);
-      },
-      // RW
-      read(read, revision) {
-        this.super$read(read, revision);
-        this.id_rc = read.f();
-      },
-    });
-    exports.facHeat_temperatureControlUnit = facHeat_temperatureControlUnit;
-
-
     /* <---------------- heater ----------------> */
 
 
@@ -134,7 +54,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facHeat_furnaceHeater"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -185,7 +105,167 @@
     exports.facHeat_furnaceHeater = facHeat_furnaceHeater;
 
 
+    /* <---------------- auxiliary ----------------> */
+
+
+    const facHeat_temperatureControlUnit = extend(GenericCrafter, "fac-heat-temperature-control-unit", {
+      rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
+      tag: "",
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+      setBars() {
+        this.super$setBars();
+        TEMPLATE.setBars(this);
+      },
+      outputsItems() {
+        return TEMPLATE.outputsItems(this);
+      },
+      consumesLiquid(liquid) {
+        return TEMPLATE.consumesLiquid(this, liquid);
+      },
+    });
+    facHeat_temperatureControlUnit.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facHeat_temperatureControlUnit, {
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
+      rcFi: require("reind/rc/rc_facHeat_temperatureControlUnit"),
+      id_rc: 0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
+      updateTile() {
+        TEMPLATE.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        TEMPLATE.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        TEMPLATE.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!TEMPLATE.shouldConsume(this)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        TEMPLATE.drawSelect(this);
+      },
+      drawStatus() {
+        TEMPLATE.drawStatus(this);
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.facHeat_temperatureControlUnit = facHeat_temperatureControlUnit;
+
+
     /* <---------------- heat exchanger ----------------> */
+
+
+    /* <---------------- evaporator ----------------> */
+
+
+    const facHeat_primitiveEvaporationChamber = extend(GenericCrafter, "fac-heat-primitive-evaporation-chamber", {
+      rcFi: require("reind/rc/rc_facHeat_primitiveEvaporationChamber"),
+      tag: "",
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+      setBars() {
+        this.super$setBars();
+        TEMPLATE.setBars(this);
+      },
+      outputsItems() {
+        return TEMPLATE.outputsItems(this);
+      },
+      consumesLiquid(liquid) {
+        return TEMPLATE.consumesLiquid(this, liquid);
+      },
+    });
+    facHeat_primitiveEvaporationChamber.buildType = () => extend(GenericCrafter.GenericCrafterBuild, facHeat_primitiveEvaporationChamber, {
+      tag: "", param: 0.0, param1: 0.0, param2: 0.0,
+      rcFi: require("reind/rc/rc_facHeat_primitiveEvaporationChamber"),
+      id_rc: 0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
+      ci: [], bi: [], opt: [],
+      co: [], bo: [], fo: [], dTup: [],
+      tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
+      timerEffc: new Interval(1),
+      updateTile() {
+        TEMPLATE.updateTile(this);
+      },
+      buildConfiguration(table) {
+        this.super$buildConfiguration(table);
+        TEMPLATE.buildConfiguration(this, table);
+      },
+      config() {
+        return this.id_rc;
+      },
+      configured(builder, value) {
+        TEMPLATE.configured(this, builder, value);
+      },
+      acceptItem(source, item) {
+        if(!TEMPLATE.acceptItem(this, source, item)) return false;
+        return true;
+      },
+      acceptLiquid(source, liquid) {
+        if(!TEMPLATE.acceptLiquid(this, source, liquid)) return false;
+        return true;
+      },
+      shouldConsume() {
+        if(!TEMPLATE.shouldConsume(this)) return false;
+        return true;
+      },
+      drawSelect() {
+        this.super$drawSelect();
+        TEMPLATE.drawSelect(this);
+      },
+      drawStatus() {
+        TEMPLATE.drawStatus(this);
+      },
+      // RW
+      write(write) {
+        this.super$write(write);
+        write.f(this.id_rc);
+      },
+      // RW
+      read(read, revision) {
+        this.super$read(read, revision);
+        this.id_rc = read.f();
+      },
+    });
+    exports.facHeat_primitiveEvaporationChamber = facHeat_primitiveEvaporationChamber;
 
 
   // End
@@ -223,7 +303,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facAir_liquidRingPressurePump"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -309,7 +389,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_carbonizationKiln"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -386,7 +466,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveBrickKiln"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -463,7 +543,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_electrodeMelter"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -543,7 +623,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_kiln"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -620,7 +700,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_bloomery"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -701,7 +781,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_brickedBlastFurnace"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -781,7 +861,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveSinteringFurnace"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -861,7 +941,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_colossalKiln"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -941,7 +1021,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facFurn_primitiveCokeOven"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1027,7 +1107,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_jawCrusher"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1108,7 +1188,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_hammerCrusher"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1188,7 +1268,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_mechanicalMill"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1269,7 +1349,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMill_ballMill"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1355,7 +1435,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMix_vMixer"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1435,7 +1515,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMix_tankMixer"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1521,7 +1601,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facProc_shredder"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1598,7 +1678,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facProc_charcoalRodMaker_m"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1678,7 +1758,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facProc_brickPress"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1764,7 +1844,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facRmv_hotAirDryer"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1850,7 +1930,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_highPressureCycloneSeparator"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -1931,7 +2011,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_largeVibrationScreen"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2022,7 +2102,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_dryMagneticSeparator"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2103,7 +2183,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facSep_mineralJig_m"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2189,7 +2269,7 @@
       tag: "<manual>", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_mechanicalCrank"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2270,7 +2350,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_genericInlet"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2347,7 +2427,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_fuelInlet"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2427,7 +2507,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_coreCrafter"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2512,7 +2592,7 @@
       tag: "<manual>", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_facMisc_manualCrafter"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2598,7 +2678,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_ilfacMisc_oreDictionaryConverter"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,
@@ -2684,7 +2764,7 @@
       tag: "", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_ileffMisc_bitBank"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, rcTimeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, rcTimeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,

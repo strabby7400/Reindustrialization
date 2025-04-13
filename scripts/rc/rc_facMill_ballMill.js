@@ -211,6 +211,22 @@ const rc = {
     },
 
 
+    /* <---------------- cobalt ----------------> */
+
+
+    // Linnaeite
+    {
+      "icon": "reind-item-ore-linnaeite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-linnaeite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-linnaeite", 20,
+      ],
+    },
+
+
     /* <---------------- copper ----------------> */
 
 
@@ -223,6 +239,19 @@ const rc = {
       ].concat(gi),
       "outputs": [
         "reind-item-int-dust-azurite", 20,
+      ],
+    },
+
+
+    // Chalcopyrite
+    {
+      "icon": "reind-item-ore-chalcopyrite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-chalcopyrite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-chalcopyrite", 20,
       ],
     },
 

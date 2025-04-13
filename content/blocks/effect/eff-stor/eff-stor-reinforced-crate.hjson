@@ -1,0 +1,77 @@
+/*
+  ========================================
+  Section: Meta
+  ========================================
+*/
+
+
+  # type: StorageBlock
+  category: effect
+  requirements: [
+    item-bio-timber/180
+    item-chem-graphite/80
+    item-chem-stainless-steel/60
+  ]
+  buildCostMultiplier: 1.0
+
+
+/*
+  ========================================
+  Section: Tech Tree
+  ========================================
+*/
+
+
+  research: {
+    parent: eff-stor-crate
+    objectives: []
+  }
+  researchCostMultiplier: 0.4
+
+
+/*
+  ========================================
+  Section: Properties
+  ========================================
+*/
+
+
+  scaledHealth: 60.0
+  armor: 12.0
+  size: 3
+  hasItems: true
+  itemCapacity: 1250
+  hasLiquids: false
+  liquidCapacity: 5.0
+
+
+/*
+  ========================================
+  Section: Env
+  ========================================
+*/
+
+
+  envRequired: 0
+  envDisabled: 22
+
+
+/*
+  ========================================
+  Section: Visual
+  ========================================
+*/
+
+
+  squareSprite: true
+
+
+/*
+  ========================================
+  Section: Specific
+  ========================================
+*/
+
+
+  update: true
+  coreMerge: false

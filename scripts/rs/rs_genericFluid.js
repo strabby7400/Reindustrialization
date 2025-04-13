@@ -51,7 +51,7 @@
       var tagVal = mdl_corrosion._fTagVal(liq);
       if(tagVal != null) liq.stats.add(db_stat.fluidTags, tagVal);
 
-      if(liq.effect != StatusEffects.none) liq.stats.add(db_stat.fluidStatus, liq.effect.localizedName);
+      if(liq.effect != StatusEffects.none) liq.stats.add(db_stat.fluidStatus, StatValues.content(new Seq([liq.effect])));
 
       var fHeat = mdl_data.read_1n1v(db_fluid.db["param"]["fHeat"], liq.name);
       if(fHeat != null) liq.stats.add(db_stat.fluidHeat, fHeat);

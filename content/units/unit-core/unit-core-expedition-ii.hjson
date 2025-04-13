@@ -29,8 +29,8 @@
 */
 
 
-  health: 1120.0
-  armor: 26.0
+  health: 1200.0
+  armor: 16.0
   hitSize: 20.0
   speed: 4.22
   rotateSpeed: 1.95
@@ -437,116 +437,7 @@
 
       /* <---------------- bullet ----------------> */
 
-      bullet: {
-
-        # Mark: expeditionIIBullet
-
-        /* <---------------- meta ----------------> */
-
-        type: BasicBulletType
-        despawnHit: true
-
-        /* <---------------- properties ----------------> */
-
-        lifetime: 30.4
-        speed: 10.0
-        damage: 26.0
-        buildingDamageMultiplier: 0.3
-        hitSize: 4.0
-        collides: true
-        collidesAir: true
-        collidesGround: true
-        collideTerrain: true
-
-        /* <---------------- visual ----------------> */
-
-        sprite: reind-bul-bullet1
-        layer: 74.0
-        frontColor: ffffff
-        backColor: 8ca9e8
-        hitColor: 8ca9e8
-        width: 4.0
-        height: 8.0
-        lightRadius: -1.0
-        lightOpacity: 0.0
-        hitShake: 0.0
-        despawnShake: 0.0
-        shootEffect: {
-          type: MultiEffect
-          effects: [
-
-
-            shootSmallColor
-
-
-            {
-
-              # Template: _gunSmog
-
-              /* <---------------- meta ----------------> */
-
-              type: ParticleEffect
-              interp: pow10Out
-              lifetime: 180.0
-              startDelay: 0.0
-
-              /* <---------------- visual ----------------> */
-
-              region: reind-efr-shadow-white
-              layer: 86.0
-              particles: 8
-              followParent: false
-              rotWithParent: false
-              useRotation: true
-              colorFrom: ffffff60
-              colorTo: ffffff00
-              lightScl: 2.0
-              lightOpacity: 0.0
-
-              /* <---------------- angle & length ----------------> */
-
-              baseRotation: 0.0
-              offset: 0.0
-              cone: 30.0
-              spin: 0.0
-              randLength: true
-              length: 16.0
-              baseLength: 0.0
-
-              /* <---------------- size & stroke & len ----------------> */
-
-              line: false
-              sizeInterp: pow2Out
-              sizeFrom: 2.0
-              sizeTo: 6.0
-              strokeFrom: 0.0
-              strokeTo: 0.0
-              lenFrom: 0.0
-              lenTo: 0.0
-
-            }
-
-
-          ]
-        }
-        smokeEffect: none
-        chargeEffect: none
-        hitEffect: hitBulletColor
-        despawnEffect: none
-        trailColor: ffffff20
-        trailLength: 6
-        trailWidth: 2.0
-        hitSound: none
-        despawnSound: none
-
-        /* <---------------- specific (pierce) ----------------> */
-
-        pierce: true
-        pierceBuilding: false
-        pierceCap: 3
-        pierceDamageFactor: 0.0
-
-      }
+      # bullet: placeholder
 
     }
 

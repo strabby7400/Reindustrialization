@@ -44,6 +44,18 @@
 
 
   // Part: item-ore[copper]
+    const envOre_depth_chalcopyrite = extend(OverlayFloor, "env-ore-depth-chalcopyrite", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      drawBase(tile) {
+        TEMPLATE.drawBase(this, tile);
+      },
+    });
+    exports.envOre_depth_chalcopyrite = envOre_depth_chalcopyrite;
+
+
     const envOre_depth_nativeCopper = extend(OverlayFloor, "env-ore-depth-native-copper", {
       setStats() {
         this.super$setStats();

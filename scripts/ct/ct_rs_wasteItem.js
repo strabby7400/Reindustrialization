@@ -106,6 +106,24 @@
       },
     });
     exports.itemWas_slag = itemWas_slag;
+
+
+    const itemWas_woodAsh = extend(Item, "item-was-wood-ash", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemWas_woodAsh = itemWas_woodAsh;
   // End
 
 

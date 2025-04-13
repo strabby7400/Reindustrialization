@@ -34,6 +34,19 @@ const rc = {
     /* <---------------- copper ----------------> */
 
 
+    // Dust (P1 : Chalcopyrite)
+    {
+      "icon": "reind-item-int-dust-p1-chalcopyrite",
+      "category": "concentrate-sintering",
+      "inputs": [
+        "reind-item-int-dust-p1-chalcopyrite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-concentrate-chalcopyrite", 20,
+      ],
+    },
+
+
     // Dust (P1 : Malachite)
     {
       "icon": "reind-item-int-dust-p1-malachite",
@@ -47,7 +60,7 @@ const rc = {
     },
 
 
-    /* <---------------- pyrite ----------------> */
+    /* <---------------- iron ----------------> */
 
 
     // Dust (P1 : Hematite)
@@ -59,6 +72,19 @@ const rc = {
       ].concat(gi),
       "outputs": [
         "reind-item-int-concentrate-hematite", 20,
+      ],
+    },
+
+
+    // Dust (P1 : Limonite)
+    {
+      "icon": "reind-item-int-dust-p1-limonite",
+      "category": "concentrate-sintering",
+      "inputs": [
+        "reind-item-int-dust-p1-limonite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-concentrate-limonite", 20,
       ],
     },
 
@@ -213,6 +239,22 @@ const rc = {
     },
 
 
+    /* <---------------- cobalt ----------------> */
+
+
+    // Linnaeite
+    {
+      "icon": "reind-item-int-dust-linnaeite",
+      "category": "sintering",
+      "inputs": [
+        "reind-item-int-dust-linnaeite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-ore-linnaeite", 20,
+      ],
+    },
+
+
     /* <---------------- copper ----------------> */
 
 
@@ -225,6 +267,19 @@ const rc = {
       ].concat(gi),
       "outputs": [
         "reind-item-ore-azurite", 20,
+      ],
+    },
+
+
+    // Azurite
+    {
+      "icon": "reind-item-int-dust-chalcopyrite",
+      "category": "sintering",
+      "inputs": [
+        "reind-item-int-dust-chalcopyrite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-ore-chalcopyrite", 20,
       ],
     },
 

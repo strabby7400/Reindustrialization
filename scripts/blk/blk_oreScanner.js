@@ -32,7 +32,7 @@
       // Initialize
       if(b.needCheck) {
         b.r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], b.block.name, 5);
-        b.scanColor = mdl_data.read_1n1v(db_block.db["param"]["color"]["base"], b.block.name, Color.white);
+        b.scanEff = db_effect._oreScannerScan(b.r, b.block.size, mdl_data.read_1n1v(db_block.db["param"]["color"]["base"], b.block.name, Color.white));
 
         b.tiles.clear();
         mdl_game._tsRect(b.tile, b.r, b.block.size).forEach(ot => {if(mdl_content.isDepthOre(ot.overlay())) b.tiles.push(ot)});
@@ -48,7 +48,7 @@
 
           b.a = 1.0;
 
-          mdl_effect.showAt(b, db_effect._oreScannerScan(b.r, b.block.size, b.scanColor), 0.0);
+          mdl_effect.showAt(b, b.scanEff, 0.0);
           mdl_effect.playAt(b, "se-craft-ore-scanner", 1.0, 1.0, 0.1);
         };
       };

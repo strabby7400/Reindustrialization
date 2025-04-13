@@ -69,7 +69,7 @@
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var r = mdl_data.read_1n1v(db_block.db["param"]["range"]["base"], blk.name, 5)
-      mdl_draw.drawWarningDisk(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), r * Vars.tilesize);
+      mdl_draw.drawWarningDisk(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset, true), r * Vars.tilesize);
     };
 
 

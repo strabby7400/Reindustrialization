@@ -130,6 +130,26 @@
   // End
 
 
+  // Part: item-ore[cobalt]
+    const itemOre_linnaeite = extend(Item, "item-ore-linnaeite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemOre_linnaeite = itemOre_linnaeite;
+  // End
+
+
   // Part: item-ore[copper]
     const itemOre_azurite = extend(Item, "item-ore-azurite", {
       alters: 0,
@@ -147,6 +167,24 @@
       },
     });
     exports.itemOre_azurite = itemOre_azurite;
+
+
+    const itemOre_chalcopyrite = extend(Item, "item-ore-chalcopyrite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemOre_chalcopyrite = itemOre_chalcopyrite;
 
 
     const itemOre_cuprite = extend(Item, "item-ore-cuprite", {

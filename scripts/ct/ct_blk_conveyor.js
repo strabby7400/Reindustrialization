@@ -8,6 +8,8 @@
   // Part: Import
     const TEMPLATE = require("reind/blk/blk_conveyor");
     const TEMPLATE_A = require("reind/blk/blk_stackConveyor");
+
+    const mdl_content = require("reind/mdl/mdl_content");
   // End
 
 
@@ -68,6 +70,31 @@
       },
     });
     exports.disConv_multiPortConveyor = disConv_multiPortConveyor;
+
+
+    const disConv_quadrupletConveyor = extend(StackConveyor, "dis-conv-quadruplet-conveyor", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE_A.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE_A.init(this);
+      },
+    });
+    disConv_quadrupletConveyor.buildType = () => extend(StackConveyor.StackConveyorBuild, disConv_quadrupletConveyor, {
+      updateTile() {
+        this.super$updateTile();
+        TEMPLATE_A.updateTile(this);
+      },
+      // Specific
+      acceptItem(source, item) {
+        if(!this.super$acceptItem(source, item)) return false;
+        if(!mdl_content.isItemJunction(source.block)) return false;
+        return true;
+      },
+    });
+    exports.disConv_quadrupletConveyor = disConv_quadrupletConveyor;
   // End
 
 

@@ -24,6 +24,11 @@
 
 
   // Part: Auxiliary
+    function ax_setAbility(utp, abi) {
+      Events.run(ClientLoadEvent, () => utp.abilities.add(abi));
+    };
+
+
     function ax_dmg(dmg, unit) {
       return Math.max(dmg * unit.damageMultiplier, 0.1)
     };
@@ -31,11 +36,11 @@
 
 
   // Part: Visual
-    const __shootDust = function(utp, index, radScl) {
-      if(index == null) index = 0;
+    const __shootDust = function(utp, id, radScl) {
+      if(id == null) id = 0;
       if(radScl == null) radScl = 1.0;
 
-      var abi_shootDust = extend(Ability, {
+      const abi = extend(Ability, {
 
 
         display: false,
@@ -43,30 +48,31 @@
 
         update(unit) {
           var mounts = unit.mounts;
-          if(index < mounts.length - 0.9999 && mounts[index].recoil > 0.9999) {
+          if(id < mounts.length - 0.9999 && mounts[id].recoil > 0.9999) {
             var rad = unit.hitSize * radScl;
             var cap = Mathf.round(Math.PI * Math.pow(rad, 2) * 0.01);
-            for(let i = 0; i < cap; i++) {mdl_effect.dustAt_ldm(unit, rad)};
+            mdl_effect.dustAt_ldm(unit, rad, cap);
           };
         },
 
 
       });
 
-      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_shootDust));
+      ax_setAbility(utp, abi);
     };
     exports.__shootDust = __shootDust;
   // End
 
 
   // Part: Attack
-    const __deathExplosion = function(utp, dmg, rad, sta, dur) {
+    const __deathExplosion = function(utp, dmg, rad, sta, dur, sound_gn) {
       if(dmg == null) dmg = 160.0;
       if(rad == null) rad = 40.0;
       if(sta == null) sta = StatusEffects.none;
       if(dur == null) dur = 120.0;
+      if(sound_gn == null) sound_gn = "se-shot-explosion";
 
-      var abi_deathExplosion = extend(Ability, {
+      const abi = extend(Ability, {
 
 
         addStats(tb) {
@@ -98,8 +104,8 @@
             ounit.apply(sta, dur);
           });
 
-          var eff = db_effect._commonExplosion(rad);
-          mdl_effect.showAt(unit, eff, 0.0);
+          mdl_effect.showAt(unit, db_effect._commonExplosion(rad), 0.0);
+          mdl_effect.playAt(unit, sound_gn);
         },
 
 
@@ -110,7 +116,7 @@
 
       });
 
-      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_deathExplosion));
+      ax_setAbility(utp, abi);
     };
     exports.__deathExplosion = __deathExplosion;
 
@@ -128,7 +134,7 @@
       var r = mdl_data.read_1n1v(db_unit.db["ep"]["range"], utp.name, 5);
       var ep_req = mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], utp.name, 0.0);
 
-      var abi_energizedChainLightning = extend(Ability, {
+      const abi = extend(Ability, {
 
 
         addStats(tb) {
@@ -222,7 +228,7 @@
 
       });
 
-      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_energizedChainLightning));
+      ax_setAbility(utp, abi);
     };
     exports.__energizedChainLightning = __energizedChainLightning;
 
@@ -234,7 +240,7 @@
       if(dmg == null) dmg = 20.0;
       if(color == null) color = Pal.techBlue;
 
-      var abi_lightningCore = extend(Ability, {
+      const abi = extend(Ability, {
 
 
         addStats(tb) {
@@ -279,7 +285,7 @@
 
       });
 
-      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_lightningCore));
+      ax_setAbility(utp, abi);
     };
     exports.__lightningCore = __lightningCore;
   // End
@@ -287,7 +293,7 @@
 
   // Part: Status
     const __deterrence = function(utp, limit, rad) {
-      var abi_deterrence = extend(Ability, {
+      const abi = extend(Ability, {
 
 
         addStats(tb) {
@@ -331,13 +337,13 @@
 
       });
 
-      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_deterrence));
+      ax_setAbility(utp, abi);
     };
     exports.__deterrence = __deterrence;
 
 
     const __legion = function(utp, limit, rad) {
-      var abi_legion = extend(Ability, {
+      const abi = extend(Ability, {
 
 
         addStats(tb) {
@@ -380,7 +386,7 @@
 
       });
 
-      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_legion));
+      ax_setAbility(utp, abi);
     };
     exports.__legion = __legion;
   // End
@@ -393,7 +399,7 @@
       var r = mdl_data.read_1n1v(db_unit.db["ep"]["range"], utp.name, 5);
       var ep_req = mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], utp.name, 0.0);
 
-      var abi_energizedRegeneration = extend(Ability, {
+      const abi = extend(Ability, {
 
 
         addStats(tb) {
@@ -450,7 +456,7 @@
 
       });
 
-      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_energizedRegeneration));
+      ax_setAbility(utp, abi);
     };
     exports.__energizedRegeneration = __energizedRegeneration;
 
@@ -459,7 +465,7 @@
       var ep = mdl_data.read_1n1v(db_unit.db["ep"]["provided"], utp.name);
       if(ep == null) ep = 0.0;
 
-      var abi_energizer = extend(Ability, {
+      const abi = extend(Ability, {
 
 
         addStats(tb) {
@@ -479,7 +485,7 @@
 
       });
 
-      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_energizer));
+      ax_setAbility(utp, abi);
     };
     exports.__energizer = __energizer;
 
@@ -489,7 +495,7 @@
       if(thr == null) thr = 180.0;
       if(scanColor == null) scanColor = Color.valueOf("cedef3");
 
-      var abi_portableOreScanner = extend(Ability, {
+      const abi = extend(Ability, {
 
 
         progMap: new ObjectMap(), aMap: new ObjectMap(), tMap: new ObjectMap(),
@@ -561,7 +567,7 @@
 
       });
 
-      Events.run(ClientLoadEvent, () => utp.abilities.addAll(abi_portableOreScanner));
+      ax_setAbility(utp, abi);
     };
     exports.__portableOreScanner = __portableOreScanner;
   // End

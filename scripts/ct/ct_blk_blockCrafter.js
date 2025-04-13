@@ -21,6 +21,8 @@
 
   // Part: pay-fac
     const payFac_basicAssemblier = extend(Constructor, "pay-fac-basic-assemblier", {
+      needCheck: true,
+      changeEff: null,
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);

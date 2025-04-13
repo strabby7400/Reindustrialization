@@ -36,7 +36,7 @@
       var liq = b.liquids.current();
       if(liq != null && liq != Liquids.water && !mdl_content.isGas(liq)) {
         b.kill();
-        mdl_effect.showAt(b, db_effect._invalidPlacement(), 0.0);
+        mdl_effect.showAt(b, VAR.eff_invalid, 0.0);
         mdl_ui.showInfoFade("storage-type-mismatch");
       };
     };
@@ -50,7 +50,7 @@
 
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
-      mdl_draw.drawWarningDisk(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), frag_attack._gasExploRad(blk.size));
+      mdl_draw.drawWarningDisk(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset, true), frag_attack._gasExploRad(blk.size));
     };
 
 

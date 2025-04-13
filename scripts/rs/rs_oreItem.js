@@ -8,8 +8,19 @@
   // Part: Import
     const PARENT = require("reind/rs/rs_genericItem");
 
+    const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_table = require("reind/mdl/mdl_table");
+
     const db_stat = require("reind/db/db_stat");
-    const db_table = require("reind/db/db_table");
+  // End
+
+
+  // Part: Auxiliary
+    function ax_buildStats(cts) {
+      return function(tb) {
+        mdl_table.setContentRowDisplay(tb, cts);
+      };
+    };
   // End
 
 
@@ -18,11 +29,8 @@
       itm.stats.add(db_stat.isOre, true);
       itm.stats.add(db_stat.hardness, itm.hardness);
 
-      var li = new Seq();
-      Vars.content.blocks().each(blk => {
-        if(blk.itemDrop == itm) li.add(blk);
-      });
-      if(li.size > 0) itm.stats.add(db_stat.blockRelated, StatValues.content(li.sort()));
+      var blks = mdl_content._oreBlks(itm);
+      if(blks.length > 0) itm.stats.add(db_stat.blockRelated, ax_buildStats(blks));
     };
   // End
 

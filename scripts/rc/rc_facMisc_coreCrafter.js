@@ -33,7 +33,7 @@ const rc = {
       ],
       "failProbability": 0.2,
       "failOutputs": [
-        "reind-item-bio-wood-ash", 10,
+        "reind-item-was-wood-ash", 10,
       ],
     },
 

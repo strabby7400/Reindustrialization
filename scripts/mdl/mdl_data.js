@@ -93,8 +93,6 @@
       var param = 0.0;
       var param1 = 0.0;
 
-      b.modified = true;
-
       if(val instanceof Vec2) {
         val_fi = val.x;
         param = val.y;
@@ -118,6 +116,14 @@
 
       if(typeof val == "number") {
         return [val, -2, -2];
+      };
+
+      if(typeof val == "boolean") {
+        return [-2, Number(val), -2];
+      };
+
+      if(typeof val == "string") {
+        return val;
       };
 
       return [-2, -2, -2];

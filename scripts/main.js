@@ -118,6 +118,7 @@
     const ct_blk_conveyorBridge = require("reind/ct/ct_blk_conveyorBridge");
     const ct_blk_genericDistributionGate = require("reind/ct/ct_blk_genericDistributionGate");
     const ct_blk_junction = require("reind/ct/ct_blk_junction");
+    const ct_blk_scriptFilterGate = require("reind/ct/ct_blk_scriptFilterGate");
     const ct_blk_incinerator = require("reind/ct/ct_blk_incinerator");
     const ct_blk_massDriver = require("reind/ct/ct_blk_massDriver");
     const ct_blk_genericCore = require("reind/ct/ct_blk_genericCore");
@@ -293,6 +294,23 @@
 
 
   // Part: Event
+    // Set node root names
+    if(!Vars.headless) {
+      Events.run(ClientLoadEvent, () => {
+        TechTree.roots.each(rt => {
+          switch(rt.name) {
+
+            case "reind-eff-core-ash" :
+              rt.name = Vars.content.planet("reind-pla-ter-aerth").localizedName + " (Reind)";
+              break;
+
+          };
+        });
+      });
+    };
+
+
+    // Register commands
     if(!Vars.headless) {
       const reindCmd = Vars.netServer.clientCommands;
       const commands = db_event.commands;
@@ -317,7 +335,7 @@
       db_dialog.setReindManual();
       db_dialog.setSettings();
       setDialog_welcome();
-      cfg_hidden.setup_hiddenItems();
+      cfg_hidden.setup_hidden();
       cfg_content.setup_content();
 
       // To completely hide world processors

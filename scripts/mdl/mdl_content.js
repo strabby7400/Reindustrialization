@@ -6,6 +6,8 @@
 
 
   // Part: Import
+    const frag_heat = require("reind/frag/frag_heat");
+
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_test = require("reind/mdl/mdl_test");
     const mdl_text = require("reind/mdl/mdl_text");
@@ -131,7 +133,7 @@
           ct = Vars.content.statusEffects().get(id);
           break;
         case "weather" :
-          // V8 PENDING         ct = Vars.content.weathers().get(id);
+          ct = Vars.content.weathers().get(id);
           break;
         case "sector" :
           ct = Vars.content.sectors().get(id);
@@ -171,7 +173,7 @@
           ct = Vars.content.statusEffect(nm);
           break;
         case "weather" :
-          // V8 PENDING         ct = Vars.content.weather(nm);
+          ct = Vars.content.weather(nm);
           break;
         case "sector" :
           ct = Vars.content.sector(nm);
@@ -187,7 +189,7 @@
       if(ct == null) ct = Vars.content.block(nm);
       if(ct == null) ct = Vars.content.unit(nm);
       if(ct == null) ct = Vars.content.statusEffect(nm);
-      // V8 PENDING         if(ct == null) ct = Vars.content.weather(nm);
+      if(ct == null) ct = Vars.content.weather(nm);
       if(ct == null) ct = Vars.content.sector(nm);
       if(ct == null) ct = Vars.content.planet(nm);
 
@@ -439,6 +441,22 @@
       return mdl_text._tagText(_consTg(ct).map(i => mdl_text._term("fac-" + i)));
     };
     exports._consTgVal = _consTgVal;
+
+
+    const _oreBlks = function(rs) {
+      const li_blk = Vars.content.blocks();
+      const blks = [];
+
+      if(rs == null) return blks;
+      if(rs instanceof Item) {
+        li_blk.each(blk => {if(blk.itemDrop == rs) blks.push(blk)});
+      } else if(rs instanceof Liquid) {
+        li_blk.each(blk => {if(blk.liquidDrop == rs) blks.push(blk)});
+      };
+
+      return blks;
+    };
+    exports._oreBlks = _oreBlks;
   // End
 
 
@@ -464,6 +482,12 @@
       );
     };
     exports.isEffc = isEffc;
+
+
+    const isNoCapEffc = function(ct_gn) {
+      return db_fluid.db["efficiency"]["noCap"].includes(_nmCt_gn(ct_gn));
+    };
+    exports.isNoCapEffc = isNoCapEffc;
 
 
     const isVirt = function(ct_gn) {
@@ -533,6 +557,20 @@
     exports.isIntermediate = isIntermediate;
 
 
+    const isWaste = function(ct_gn) {
+      var nmCt = _nmCt_gn(ct_gn);
+
+      return mdl_text.includes_ex(
+        nmCt,
+        "reind-item-was-",
+        "reind-liq-was-",
+        "reind-ilitem-was-",
+        "reind-illiq-was-",
+      );
+    };
+    exports.isWaste = isWaste;
+
+
     const isOre = function(ct_gn) {
       var nmCt = _nmCt_gn(ct_gn);
 
@@ -582,6 +620,14 @@
       return db_block.db["param"]["exposed"].includes(nmCt);
     };
     exports.isExposed = isExposed;
+
+
+    const isItemJunction = function(ct_gn) {
+      var nmCt = _nmCt_gn(ct_gn);
+
+      return db_block.db["group"]["itemJunction"].includes(nmCt);
+    };
+    exports.isItemJunction = isItemJunction;
 
 
     const isCore = function(ct_gn) {
@@ -760,7 +806,8 @@
       if(btp == null) return true;
       if(btp instanceof ContinuousBulletType) return true;
       if(btp instanceof LaserBulletType || btp instanceof ShrapnelBulletType) return true;
-      if(btp instanceof PointBulletType || btp instanceof RailBulletType || btp instanceof PointLaserBulletType) return true;
+      if(btp instanceof PointBulletType || btp instanceof RailBulletType || btp instanceof PointLaserBulletType || btp instanceof SapBulletType) return true;
+      if(btp instanceof InterceptorBulletType) return true;
 
       return false;
     };
@@ -788,6 +835,15 @@
       return true;
     };
     exports.isEnemy = isEnemy;
+
+
+    const isAiReady = function(unit) {
+      if(unit == null) return false;
+      if(unit.dead || unit.isPlayer()) return false;
+
+      return true;
+    };
+    exports.isAiReady = isAiReady;
 
 
     const isOnFloor = function(unit) {
@@ -863,6 +919,7 @@
     const isHot = function(unit) {
       if(unit == null) return false;
       if(unit.hasEffect(StatusEffects.burning) || unit.hasEffect(StatusEffects.melting)) return true;
+      if(frag_heat._meltTime(unit) > 0.0) return true;
 
       return false;
     };

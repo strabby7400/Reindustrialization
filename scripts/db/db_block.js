@@ -31,10 +31,12 @@ const db = {
       "reind-dis-conv-primitive-conveyor",
       "reind-dis-conv-improved-conveyor",
       "reind-dis-conv-multi-port-conveyor",
+      "reind-dis-conv-quadruplet-conveyor",
 
       /* <---------------- eff-stor ----------------> */
 
       "reind-eff-stor-crate",
+      "reind-eff-stor-reinforced-crate",
 
     ],
 
@@ -350,6 +352,10 @@ const db = {
       "reind-fac-sep-high-pressure-cyclone-separator", "dust-remover",
 
       /* <---------------- electrolyzer ----------------> */
+
+      /* <---------------- evaporator ----------------> */
+
+      "reind-fac-heat-primitive-evaporation-chamber", "evaporator",
 
       /* <---------------- fluid dryer ----------------> */
 
@@ -864,6 +870,13 @@ const db = {
     ],
 
 
+    "itemJunction": [
+
+      "reind-dis-aux-primitive-junction",
+
+    ],
+
+
   },
 
 
@@ -967,6 +980,36 @@ const db = {
 
 
     "multiBlock": [
+
+      /* <---------------- fac-heat ----------------> */
+
+      "reind-fac-heat-primitive-evaporation-chamber-controller", "reind-fac-heat-primitive-evaporation-chamber", [
+        new Point2(-2, -2), "reind-def-wall-concrete-barricade",
+        new Point2(0, -2), "reind-def-wall-plate-wall-copper",
+        new Point2(1, -2), "reind-def-wall-plate-wall-copper",
+        new Point2(2, -2), "reind-def-wall-concrete-barricade",
+
+        new Point2(0, -1), "reind-def-wall-tempered-glass-wall",
+        new Point2(1, -1), "reind-def-wall-tempered-glass-wall",
+
+        new Point2(-2, 0), "reind-def-wall-plate-wall-copper",
+        new Point2(-1, 0), "reind-def-wall-tempered-glass-wall",
+        new Point2(2, 0), "reind-def-wall-tempered-glass-wall",
+        new Point2(3, 0), "reind-def-wall-plate-wall-copper",
+
+        new Point2(-2, 1), "reind-def-wall-plate-wall-copper",
+        new Point2(-1, 1), "reind-def-wall-tempered-glass-wall",
+        new Point2(2, 1), "reind-def-wall-tempered-glass-wall",
+        new Point2(3, 1), "reind-def-wall-plate-wall-copper",
+
+        new Point2(-2, 2), "reind-def-wall-concrete-barricade",
+        new Point2(0, 2), "reind-def-wall-tempered-glass-wall",
+        new Point2(1, 2), "reind-def-wall-tempered-glass-wall",
+        new Point2(2, 2), "reind-def-wall-concrete-barricade",
+
+        new Point2(0, 3), "reind-def-wall-plate-wall-copper",
+        new Point2(1, 3), "reind-def-wall-plate-wall-copper",
+      ],
 
       /* <---------------- fac-furn ----------------> */
 

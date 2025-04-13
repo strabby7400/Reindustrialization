@@ -38,6 +38,7 @@
       set_coreTimeControl(Core.settings.getBool("reind-core-time-control", true));
 
       set_treeAlpha(Core.settings.getInt("reind-tree-alpha", 20));
+      set_treeTransparentization(Core.settings.getBool("reind-tree-transparentization", true));
       set_remainsLifetime(Core.settings.getInt("reind-remains-lifetime", 12));
       set_showIconTag(Core.settings.getBool("reind-show-icon-tag", true));
       set_iconTagInterval(Core.settings.getInt("reind-icon-tag-interval", 1));
@@ -98,6 +99,14 @@
       env_tree.set_treeAlpha(val);
     };
     exports.set_treeAlpha = set_treeAlpha;
+
+
+    const set_treeTransparentization = function(bool) {
+      var val = bool;
+
+      env_tree.set_treeTransparentization(val);
+    };
+    exports.set_treeTransparentization = set_treeTransparentization;
 
 
     const set_remainsLifetime = function(int) {

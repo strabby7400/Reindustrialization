@@ -9,6 +9,7 @@
     const TEMPLATE = require("reind/unit/unit_mechUnit");
 
     const db_ability = require("reind/db/db_ability");
+    const db_bullet = require("reind/db/db_bullet");
   // End
 
 
@@ -33,6 +34,7 @@
       init(unit) {
         this.super$init();
         TEMPLATE.init(this);
+        db_bullet.__basic(this, [0, 1], 48.0, 0.3, 168.0, 10.0, "reind-bul-bullet1", Pal.techBlue, 1.0, 0.0);
         db_ability.__legion(this, 5, 40.0);
         db_ability.__energizer(this);
       },
@@ -64,6 +66,9 @@
       init(unit) {
         this.super$init();
         TEMPLATE.init(this);
+        db_bullet.__basic(this, 0, 42.0, 0.3, 264.0, 10.0, "reind-bul-bullet2", Pal.techBlue, 1.5, 0.0, 3, false, 0.5, 0.0);
+        db_bullet.__grenade(this, 1, 400.0, 40.0, 0.3, 264.0, 4.0, "reind-bul-bullet5", Pal.techBlue, 1.0, 8.0, 2.0, StatusEffects.blasted);
+        db_ability.__shootDust(this, 1);
         db_ability.__energizedRegeneration(this, 30.0);
       },
       killed(unit) {
@@ -94,6 +99,10 @@
       init(unit) {
         this.super$init();
         TEMPLATE.init(this);
+        db_bullet.__sniper(
+          this, 0, 422.0, 0.3, 496.0, 20.0, "reind-bul-bullet4", Pal.techBlue, 1.0, 8.0, 7, false, 3.0, 1.5,
+          3, 110.0, 80.0, 10.0, 0.2, "reind-bul-bullet5", 2, false,
+        );
         db_ability.__shootDust(this, 0);
         db_ability.__deterrence(this, 800.0, 192.0);
       },
@@ -125,7 +134,7 @@
       init(unit) {
         this.super$init();
         TEMPLATE.init(this);
-        db_ability.__energizedChainLightning(this, 0.03333333, 240.0, 40.0, 60.0, 7, 0.75, 0.3, Pal.techBlue);
+        db_ability.__energizedChainLightning(this, 0.03333333, 240.0, 40.0, 70.0, 7, 0.75, 0.3, Pal.techBlue);
       },
       killed(unit) {
         this.super$killed(unit);

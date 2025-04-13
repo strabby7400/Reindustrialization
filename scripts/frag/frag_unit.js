@@ -9,6 +9,7 @@
     const VAR = require("reind/glb/glb_vars");
 
     const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_ui = require("reind/mdl/mdl_ui");
 
@@ -63,20 +64,30 @@
 
 
   // Part: Player
-    const update_mouse = function(utp, unit) {
+    const update_player = function(utp, unit) {
       if(unit != Vars.player.unit()) return;
 
+      // Mouse
       var ot = mdl_game._tMouse();
-      if(ot == null) return;
+      if(ot != null) {
+        var nm_flr = ot.floor().name;
+        var nm_blk = ot.block().name;
 
-      var nm_flr = ot.floor().name;
-      var nm_blk = ot.block().name;
-
-      if(Core.input.touched) {
-        if(nm_flr == "reind-map-misc-restriction-zone") mdl_ui.showInfoFade("restriction-zone");
+        if(Core.input.touched) {
+          if(nm_flr == "reind-map-misc-restriction-zone") mdl_ui.showInfoFade("restriction-zone");
+        };
       };
     };
-    exports.update_mouse = update_mouse;
+    exports.update_player = update_player;
+
+
+    const draw_player = function(utp, unit) {
+      if(unit != Vars.player.unit()) return;
+
+      // Heat
+      if(Core.settings.getBool("reind-mark-heated-block", false)) mdl_game._heatBlocks(unit, 120.0, unit.team).forEach(b => {mdl_draw.drawBuildArea(b, Pal.lightOrange, 0.3)});
+    };
+    exports.draw_player = draw_player;
   // End
 
 

@@ -29,6 +29,8 @@
       // Initialize
       if(b.needCheck) {
         b.scanColor = mdl_data.read_1n1v(db_block.db["param"]["color"]["base"], b.block.name, Color.white);
+        b.craftEff = db_effect._craftGasLarge();
+        b.applyEff = db_effect._radarDetectionApply();
 
         b.needCheck = false;
       };
@@ -43,11 +45,11 @@
           mdl_game._unitsEnemy(b, rad, b.team).forEach(unit => {
             unit.apply(Vars.content.statusEffect("reind-sta-spec-radar-detection"), b.thr * 0.5);
 
-            mdl_effect.showAt(unit, db_effect._radarDetectionApply(), 0.0);
+            mdl_effect.showAt(unit, b.applyEff, 0.0);
           });
 
           mdl_effect.showAt(b, db_effect._radarScan(rad, b.block.size, b.scanColor), 0.0);
-          mdl_effect.showAt(b, db_effect._craftGasLarge());
+          mdl_effect.showAt(b, b.craftEff);
           mdl_effect.playAt(b, "se-craft-radar", 1.0, 1.0, 0.1);
         };
       };

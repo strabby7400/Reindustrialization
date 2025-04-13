@@ -272,7 +272,7 @@
           mdl_table.__breakHalf(pn);
           mdl_table.__wrapLine(pn, "MaboroshiX - Most of the work.", Align.left, 1, 48.0);
           mdl_table.__breakHalf(pn);
-          mdl_table.__wrapLine(pn, "Starshine - Shredder.", Align.left, 1, 48.0);
+          mdl_table.__wrapLine(pn, "Starshine - Shredder, Chalcopyrite (Ground).", Align.left, 1, 48.0);
 
           mdl_table.__break(pn);
           pn.add("Code:").left().color(Pal.accent).row();
@@ -444,6 +444,9 @@
           "reind-map-fac-ids-trade-dock-rim-builder",
           "reind-dis-aux-primitive-junction",
           "reind-fac-air-energized-air-collector",
+          "reind-dis-aux-waste-filter-gate",
+          "reind-dis-aux-intermediate-filter-gate",
+          "reind-dis-conv-quadruplet-conveyor",
         ],
       ],
 
@@ -508,9 +511,13 @@
         tb.checkPref("reind-damage-display", true);
 
         tb.sliderPref("reind-tree-alpha", 20, 0, 20, function(val) {return Strings.fixed(val * 5.0, 0) + "%"});
+        tb.checkPref("reind-tree-transparentization", true);
         tb.sliderPref("reind-remains-lifetime", 12, 0, 96, function(val) {return Strings.fixed(val * 5, 0) + "s"});
         tb.checkPref("reind-show-icon-tag", true);
         tb.sliderPref("reind-icon-tag-interval", 1, 0, 11, function(val) {return Strings.fixed((val + 1) * 0.25, 2) + "s"});
+
+        tb.checkPref("reind-mark-heated-block", false);
+        tb.sliderPref("reind-max-heated-block-mark", 3, 1, 50, function(val) {return Strings.fixed(val, 0)});
 
         tb.textPref("reind-secret-code", "<ohno>");
       });

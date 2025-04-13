@@ -51,15 +51,13 @@
 
       if(sound_gn instanceof Sound) {
         sound_gn.play();
-        return true;
       } else {
-        var path = "sounds/" + sound_gn + ".ogg";
+        var sound = Vars.tree.loadSound(sound_gn);
+        if(sound == null) sound = Vars.tree.loadSound(sound_gn);
+        if(sound != null) sound.play();
+      };
 
-        if(Core.assets.isLoaded(path)) {
-          Core.assets.get(path).play();
-          return true;
-        } else return false;
-      }
+      return true;
     };
     exports.play = play;
 
@@ -81,15 +79,13 @@
 
       if(sound_gn instanceof Sound) {
         sound_gn.at(x, y, pitch_fi, vol);
-        return true;
       } else {
-        var path = "sounds/" + sound_gn + ".ogg";
-
-        if(Core.assets.isLoaded(path)) {
-          Core.assets.get(path).at(x, y, pitch_fi, vol);
-          return true;
-        } else return false;
+        var sound = Vars.tree.loadSound(sound_gn);
+        if(sound == null) sound = Vars.tree.loadSound(sound_gn);
+        if(sound != null) sound.at(x, y, pitch_fi, vol);
       };
+
+      return true;
     };
     exports.playAt = playAt;
   // End
@@ -217,26 +213,32 @@
      *
      * Creates land dust effect at {pos_gn}.
      */
-    const dustAt = function(pos_gn, rad) {
-      if(rad == null) rad = 8.0;
+    const dustAt = function(pos_gn, rad, repeat) {
       if(Vars.headless || Vars.state.isPaused() || pos_gn == null) return false;
+
+      if(rad == null) rad = 8.0;
+      if(repeat == null) repeat = 1;
 
       var pos = mdl_game._pos(pos_gn);
       if(pos == null) return false;
-      var x = pos.x + Mathf.random(rad) * (Mathf.chance(0.5) ? 1 : -1);
-      var y = pos.y + Mathf.random(rad) * (Mathf.chance(0.5) ? 1 : -1);
+      var x;
+      var y;
 
-      Effect.floorDust(x, y, 8.0);
+      for(let i = 0; i < repeat; i++) {
+        x = pos.x + Mathf.random(rad) * (Mathf.chance(0.5) ? 1 : -1);
+        y = pos.y + Mathf.random(rad) * (Mathf.chance(0.5) ? 1 : -1);
+        Effect.floorDust(x, y, 8.0);
+      };
 
       return true;
     };
     exports.dustAt = dustAt;
 
 
-    const dustAt_ldm = function(pos_gn, rad) {
+    const dustAt_ldm = function(pos_gn, rad, repeat) {
       if(Vars.headless || ldm) return false;
 
-      return dustAt(pos_gn, rad);
+      return dustAt(pos_gn, rad, repeat);
     };
     exports.dustAt_ldm = dustAt_ldm;
 
@@ -256,6 +258,8 @@
       var t = Vars.world.tileWorld(x, y);
       if(t == null || !t.floor().canShadow) return false;
 
+      var isHot = mdl_content.isHot(unit);
+
       var remains = extend(Decal, {
         lifetime: remainsLifetime,
         x: x,
@@ -263,8 +267,8 @@
         rotation: Mathf.random(360.0),
         color: Color.valueOf("606060"),
         region: Core.atlas.find(unit.type.name + "-icon", unit.type.region),
+        cellRegion: unit.type.cellRegion,
         offTime: Mathf.random(1200.0),
-        isHot: mdl_content.isHot(unit),
         draw() {
           var x = this.x;
           var y = this.y;
@@ -293,15 +297,18 @@
 
           Draw.z(z);
           if(tintColor != null) {Draw.tint(this.color, tintColor, 0.5)} else {
-            if(!this.isHot) {Draw.color(this.color)} else {
+            if(!isHot) {Draw.color(this.color)} else {
               Draw.color(Tmp.c1.set(Color.valueOf("ea8878")).lerp(this.color, Interp.pow2Out.apply(this.fin())));
             };
           };
 
           Draw.alpha(a - Mathf.curve(this.fin(), 0.98) * a);
           Draw.rect(this.region, x, y, this.rotation);
+          Draw.color(Tmp.c2.set(this.color).mul(unit.team.color));
+          Draw.rect(this.cellRegion, x, y, this.rotation);
+          Draw.color();
 
-          if(this.isHot) {
+          if(isHot) {
             Draw.blend(Blending.additive);
             Draw.mixcol(Color.valueOf("ff3838"), 1.0);
             Draw.alpha((0.5 + Mathf.absin(10.0, 0.5)) * (0.5 - Interp.pow2Out.apply(this.fin()) * 0.5));
@@ -314,7 +321,7 @@
           showAtP_ldm(0.02, unit, db_effect._craftBlackSmog());
         },
       });
-      
+
       remains.add();
     };
     exports.remainsAt = remainsAt;

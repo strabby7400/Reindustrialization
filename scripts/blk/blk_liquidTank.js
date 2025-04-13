@@ -7,6 +7,7 @@
 
   // Part: Import
     const PARENT = require("reind/blk/blk_genericLiquidStorageBlock");
+    const VAR = require("reind/glb/glb_vars");
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_effect = require("reind/mdl/mdl_effect");
@@ -28,7 +29,7 @@
       var liq = b.liquids.current();
       if(liq != null && liq != Liquids.water && !mdl_content.isLiq(liq)) {
         b.kill();
-        mdl_effect.showAt(b, db_effect._invalidPlacement(), 0.0);
+        mdl_effect.showAt(b, VAR.eff_invalid, 0.0);
         mdl_ui.showInfoFade("storage-type-mismatch");
       };
     };

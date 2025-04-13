@@ -7,143 +7,194 @@
 
   // Part: Import
     const mdl_content = require("reind/mdl/mdl_content");
+    const mdl_math = require("reind/mdl/mdl_math");
     const mdl_game = require("reind/mdl/mdl_game");
   // End
 
 
   // Part: Param
     const _elev = function(unit) {
-      if(unit == null) return 0.0;
-
-      return Mathf.clamp(unit.elevation, unit.type.shadowElevation, 1.0) * unit.type.shadowElevationScl * (1.0 - unit.drownTime);
+      return (unit == null) ? 0.0 : Mathf.clamp(unit.elevation, unit.type.shadowElevation, 1.0) * unit.type.shadowElevationScl * (1.0 - unit.drownTime);
     };
     exports._elev = _elev;
+
+
+    const _ctrl = function(unit) {
+      var ctrl = null;
+      try {ctrl = unit.controller()} catch(err) {ctrl = unit.controller};
+
+      return ctrl;
+    };
+    exports._ctrl = _ctrl;
   // End
 
 
   // Part: Move
-    const moveTo = function(unit, pos_in, len, smooth, keepDst) {
-      if(len == null) len = 0.0;
-      if(smooth == null) smooth = 20.0;
-      if(keepDst == null) keepDst = true;
-      if(unit == null || pos_in == null) return;
-      if(unit.isPlayer()) return;
+    /*
+     * NOTE:
+     *
+     * The unit will directly move to the target position.
+     */
+    const moveTo = function(unit, posi, len, smooth, keepDst) {
+      if(posi == null || !mdl_content.isAiReady(unit)) return;
 
-      unit.controller().moveTo(pos_in, len, smooth, keepDst, null);
+      if(len == null) len = 0.0;
+      if(smooth == null) smooth = unit.flying ? 30.0 : 2.0;
+      if(keepDst == null) keepDst = true;
+
+      _ctrl(unit).moveTo(posi, len, smooth, keepDst, null);
     };
     exports.moveTo = moveTo;
 
 
-    const lookAt = function(unit, pos_gn) {
-      if(unit == null || pos_gn == null) return;
+    /*
+     * NOTE:
+     *
+     * The unit will circle around the target position.
+     */
+    const circle = function(unit, posi, rad) {
+      if(posi == null || !mdl_content.isAiReady(unit)) return;
+
+      if(rad == null) rad = 0.0;
+
+      _ctrl(unit).circle(posi, len);
+    };
+    exports.circle = circle;
+
+
+    /*
+     * NOTE:
+     *
+     * The unit will turn toward the target position.
+     */
+    const lookAt = function(unit, pos_gn, shouldAim) {
+      if(pos_gn == null || !mdl_content.isAiReady(unit)) return;
+
+      if(shouldAim == null) shouldAim = false;
 
       var pos = mdl_game._pos(pos_gn);
 
-      unit.lookAt(pos.x, pos.y);
+      if(!shouldAim) {
+        unit.lookAt(pos.x, pos.y);
+      } else {
+        unit.aimLook(pos.x, pos.y);
+      };
     };
     exports.lookAt = lookAt;
-
-
-    const aimAt = function(unit, pos_gn) {
-      if(unit == null || pos_gn == null) return;
-
-      var pos = mdl_game._pos(pos_gn);
-
-      unit.aimLook(pos.x, pos.y);
-    };
-    exports.aimAt = aimAt;
   // End
 
 
-  // Part: Interact
-    const selectItem = function(unit, itm) {
-      if(unit == null || itm == null) return false;
+  // Part: Item
+    /*
+     * NOTE:
+     *
+     * The unit will discard its current item if not matching.
+     */
+    const filterItem = function(unit, itm_gn) {
+      if(unit == null) return;
 
-      if(unit.item() != itm) {
-        unit.clearItem()
-        return true;
+      var itm = mdl_content._ct_gn(itm_gn);
+      if(itm == null || !(itm instanceof Item)) return;
+
+      if(unit.item() != null && unit.item() != itm) {
+        unit.clearItem();
       };
-
-      return false;
     };
-    exports.selectItem = selectItem;
+    exports.filterItem = filterItem;
 
 
-    const addItem = function(unit, itm, amt) {
+    const checkFull = function(unit, itm_gn, b) {
+      if(unit == null) return true;
+
+      if(itm_gn == null) itm_gn = unit.item();
+      var itm = mdl_content._ct_gn(itm_gn);
+      if(itm == null || !(itm instanceof Item)) return false;
+
+      if(b == null) b = unit.closestCore();
+      if(b == null || b.items == null) return true;
+
+      return b.acceptStack(itm, 1, unit) == 0;
+    };
+    exports.checkFull = checkFull;
+
+
+    /*
+     * NOTE:
+     *
+     * The unit will gain some items.
+     * If not matching, the previous item will be removed.
+     */
+    const addItem = function(unit, itm_gn, amt) {
+      if(unit == null) return;;
+
+      var itm = mdl_content._ct_gn(itm_gn);
+      if(itm == null || !(itm instanceof Item)) return;
       if(amt == null) amt = 1;
-      if(unit == null || itm == null) return false;
 
-      var amt_trans = Math.min(amt, unit.type.itemCapacity - unit.stack.amount);
-      if(amt_trans > 0) {
-        unit.stack.addItem(itm, amt_trans);
-        return true;
-      };
-
-      return false;
+      unit.addItem(itm, amt);
     };
     exports.addItem = addItem;
 
 
     const addItemBatch = function(unit, batch) {
-      if(unit == null || batch == null) return false;
+      if(batch == null || unit == null) return;
 
       var cap = batch.length;
-      if(cap == 0) return false;
+      if(cap == 0) return;
       for(let i = 0; i < cap; i += 3) {
         var itm = mdl_content._ct_gn(batch[i]);
+        if(itm == null || !(itm instanceof Item)) return;
         var amt = batch[i + 1];
         var p = batch[i + 2];
 
-        if(unit.acceptsItem(itm)) {
-          for(let j = 0; j < amt; j++) {if(unit.acceptsItem(itm) && Mathf.chance(p)) unit.addItem(itm)};
-
-          return true;
-        };
+        if(unit.acceptsItem(itm)) unit.addItem(itm, mdl_math._randFreq(amt, p));
       };
-
-      return false;
     };
     exports.addItemBatch = addItemBatch;
 
 
-    const transferItem = function(b, unit, mode, itm, rad, amt) {
+    /*
+     * NOTE:
+     *
+     * The unit will fetch or dump selected item to a building.
+     */
+    const transferItem = function(unit, b, mode, itm_gn, amt, rad) {
+      if(b == null || b.items == null || unit == null) return;
+      if(b.acceptStack(unit.item(), unit.stack.amount, unit) < 1) return;
+      if(mode != "t" && mode != "p") return;
+
+      var itm = mdl_content._ct_gn(itm_gn);
+      if(itm == null || !(itm instanceof Item)) return;
+      if(amt == null) amt = unit.type.itemCapacity;
       if(rad == null) rad = 999999.0;
-      if(amt == null) amt = 999999;
-      if(b == null || b.items == null || unit == null) return 0;
-      if(mode != "take" && mode != "put") return 0;
+      if(!unit.within(b, rad)) return;
 
-      if(itm == null) itm = b.items.first();
-      if(itm == null) return 0;
-
-      if(!unit.within(b, rad)) return 0;
-
-      var amt_trans = 0;
-      if(mode == "take" && (!unit.hasItem() || unit.item() == itm)) {
-        amt_trans = Math.min(amt, b.items.get(itm), unit.type.itemCapacity - unit.stack.amount);
+      if(mode == "t") {
+        var amt_trans = Math.max(Math.min(amt, b.items.get(itm), unit.type.itemCapacity - unit.stack.amount), 0);
         Call.takeItems(b, itm, amt_trans, unit);
+      } else {
+        var amt_trans = Math.max(Math.min(amt, unit.stack.amount), 0);
+        Call.transferItemTo(unit, itm, amt_trans, unit.x, unit.y, b);
       };
-      if(mode == "put" && unit.hasItem() && unit.item() == itm) {
-        amt_trans = Math.max(Math.min(amt, unit.stack.amount), 0);
-        Call.transferItemTo(unit, unit.item(), amt_trans, unit.x, unit.y, b);
-      };
-
-      return amt_trans;
     };
     exports.transferItem = transferItem;
 
 
-    const takeItem = function(b, unit, itm, rad, amt) {
-      selectItem(unit, itm);
-      return transferItem(b, unit, "take", itm, rad, amt);
-    };
-    exports.takeItem = takeItem;
+    /*
+     * NOTE:
+     *
+     * The unit will dump current item to a building, if {itm_gn} is not assigned.
+     * If it fails to dump all the items, the rest will be cleared.
+     */
+    const dumpItem = function(unit, b, itm_gn, amt, rad) {
+      if(b == null || b.items == null || unit == null) return;
 
+      if(itm_gn == null) itm_gn = unit.item();
 
-    const putItem = function(b, unit, itm, rad, amt) {
-      selectItem(unit, itm);
-      return transferItem(b, unit, "put", itm, rad, amt);
+      transferItem(unit, b, "p", itm_gn, amt, rad);
+      unit.clearItem();
     };
-    exports.putItem = putItem;
+    exports.dumpItem = dumpItem;
   // End
 
 

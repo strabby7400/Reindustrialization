@@ -47,7 +47,7 @@
       tag: "<impact>", param: 0.0, param1: 0.0, param2: 0.0,
       rcFi: require("reind/rc/rc_mapFac_idsTradeDock_rimBuilder"),
       id_rc: 0,
-      needCheck: true, modified: false, craftSound: null, timeScale: 1.0,
+      needCheck: true, changeEff: null, craftSound: null, timeScale: 1.0,
       ci: [], bi: [], opt: [],
       co: [], bo: [], fo: [], dTup: [],
       tmpEffc: 0.0, progInc: 0.0, progInc1: 0.0, canAdd: false,

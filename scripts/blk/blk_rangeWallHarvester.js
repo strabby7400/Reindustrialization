@@ -64,7 +64,6 @@
       mdl_game._tsRect(t, r, blk.size).forEach(ot => {
         if(ot.block().attributes.get(blk.attribute) > 0.0) {
           mdl_draw.drawTileIndicator(ot, true);
-          mdl_draw.drawFlickerLine(mdl_game._pos(t, blk.offset), mdl_game._pos(ot, ot.block().offset), Pal.accent, 1.0, true);
         };
       });
     };
@@ -73,7 +72,7 @@
     function drawComp(b) {
       if(b.efficiency > 0.0001) {
         b.tiles.forEach(ot => {
-          mdl_draw.drawItemTransfer(mdl_game._pos(ot, ot.block().offset), b, Pal.accent, 1.0);
+          mdl_draw.drawItemTransfer(mdl_game._pos(ot, ot.block().offset, true), b, Pal.accent, 1.0);
         });
       };
     };
@@ -83,7 +82,7 @@
       mdl_draw.drawSelectRect(b, b.r, true);
       b.tiles.forEach(ot => {
         mdl_draw.drawTileIndicator(ot, true);
-        mdl_draw.drawFlickerLine(b, mdl_game._pos(ot, ot.block().offset), Pal.accent, 1.0, true);
+        mdl_draw.drawFlickerLine(b, mdl_game._pos(ot, ot.block().offset, true), Pal.accent, 1.0, true);
       });
     };
   // End

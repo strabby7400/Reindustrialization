@@ -94,7 +94,7 @@
   }
   craftEffect: none
   updateEffect: none
-  updateEffectChance: 0.01
+  updateEffectChance: 0.02
   ambientSound: wind
   ambientSoundVolume: 0.5
 

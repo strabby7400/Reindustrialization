@@ -7,7 +7,7 @@
   <li> Trees that hide your units (and yield logs). </li>
   <li> Production equipments and routes based on processes in real life. </li>
   <li> Multi-crafters with random I/O and more scripts. </li>
-  <li> TMI compatability (you will need it). </li>
+  <li> TMI compatibility (you will need it). </li>
   <li> Underground ores and scanners. </li>
   <li> Pipe corrosion base on properties of the fluid and block material. </li>
   <li> Crops that can be harvested. </li>

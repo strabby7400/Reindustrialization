@@ -30,7 +30,7 @@
     });
     minScan_pulseOreScanner.buildType = () => extend(GenericCrafter.GenericCrafterBuild, minScan_pulseOreScanner, {
       needCheck: true,
-      r: 5, scanColor: Color.white,
+      r: 5, scanEff: null,
       prog: Math.round(Mathf.random(180.0)), thr: 180,
       a: 0.0, tiles: [],
       updateTile() {

@@ -15,6 +15,7 @@
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_unit = require("reind/mdl/mdl_unit");
 
+    const db_ai = require("reind/db/db_ai");
     const db_stat = require("reind/db/db_stat");
     const db_unit = require("reind/db/db_unit");
   // End
@@ -48,7 +49,14 @@
     function updateComp(utp, unit) {
       frag_heat.update_unitHeat(utp, unit);
       frag_unit.update_surrounding(utp, unit);
-      frag_unit.update_mouse(utp, unit);
+      frag_unit.update_player(utp, unit);
+    };
+
+
+    function initComp(utp) {
+      utp.commands.addAll(
+        db_ai.ucmd_follow,
+      );
     };
 
 
@@ -61,18 +69,20 @@
       if(unit.inFogTo(Vars.player.team())) return;
 
       var isPayload = !unit.isAdded();
-      var z = isPayload ? Draw.z() : (unit.elevation > 0.5 ? 90.0 : utp.groundLayer) + Mathf.clamp(utp.hitSize / 4000.0, 0, 0.01);                 // V8 PENDING: Set {90.0} to {utp.flyingLayer}.
+      var z;
+      if(isPayload) {z = Draw.z()} else {
+        if(unit.elevation > 0.5 || (unit.flying && unit.dead)) {z = utp.flyingLayer} else {
+          if(unit instanceof Segmentc) {z = utp.groundLayer + unit.segmentIndex() / 4000.0 + Mathf.sign(utp.segmentLayerOrder) + (!utp.segmentLayerOrder ? 0.01 : 0.0)} else {
+            z = utp.groundLayer + Mathf.clamp(utp.hitSize / 4000.0, 0.0, 0.01);
+          };
+        };
+      };
 
       // Building
-      try {unit.drawBuilding()} catch(err) {};
+      if(utp.buildSpeed > 0.0) unit.drawBuilding();
 
       // Mining
       if(unit.mining()) mdl_draw.drawMiningBeam(unit, unit.mineTile, unit.rotation, utp.hitSize / 2.0);
-
-      // Control
-      var ctrl = null;
-      try {ctrl = unit.controller()} catch(err) {try {ctrl = unit.controller} catch(err) {ctrl = null}};
-      if(ctrl != null && ctrl.isBeingControlled(Vars.player.unit())) utp.drawControl(unit);
 
       // Shadow
       if(!isPayload && (unit.isFlying() || utp.shadowElevation > 0.0)) {
@@ -109,7 +119,13 @@
       };
 
       // Soft Shadow
-      utp.drawSoftShadow(unit);
+      if(utp.drawSoftShadow) {
+        Draw.color(0.0, 0.0, 0.0, 0.4);
+        const rad = 1.6;
+        const size = Math.max(utp.region.width, utp.region.height) * utp.region.scl() * utp.softShadowScl;
+        Draw.rect(utp.softShadowRegion, unit.x, unit.y, size * rad * Draw.xscl, size * rad * Draw.yscl, unit.rotation - 90.0);
+        Draw.color();
+      };
 
       Draw.z(z);
 
@@ -260,6 +276,8 @@
       if(unit instanceof Mechc) unit.trns(-aux_legOffset.x, -aux_legOffset.y);
 
       Draw.reset();
+
+      frag_unit.draw_player(utp, unit);
     };
 
 
@@ -299,7 +317,7 @@
 
 
     const init = function(utp) {
-
+      initComp(utp);
     };
     exports.init = init;
 

@@ -413,6 +413,24 @@
     /* copper */
 
 
+    const itemInt_concentrate_chalcopyrite = extend(Item, "item-int-concentrate-chalcopyrite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_concentrate_chalcopyrite = itemInt_concentrate_chalcopyrite;
+
+
     const itemInt_concentrate_malachite = extend(Item, "item-int-concentrate-malachite", {
       alters: 0,
       setStats() {
@@ -450,6 +468,24 @@
       },
     });
     exports.itemInt_concentrate_hematite = itemInt_concentrate_hematite;
+
+
+    const itemInt_concentrate_limonite = extend(Item, "item-int-concentrate-limonite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_concentrate_limonite = itemInt_concentrate_limonite;
 
 
     const itemInt_concentrate_magnetite = extend(Item, "item-int-concentrate-magnetite", {
@@ -795,6 +831,27 @@
     exports.itemInt_dust_chromite = itemInt_dust_chromite;
 
 
+    /* cobalt */
+
+
+    const itemInt_dust_linnaeite = extend(Item, "item-int-dust-linnaeite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_dust_linnaeite = itemInt_dust_linnaeite;
+
+
     /* copper */
 
 
@@ -814,6 +871,42 @@
       },
     });
     exports.itemInt_dust_azurite = itemInt_dust_azurite;
+
+
+    const itemInt_dust_chalcopyrite = extend(Item, "item-int-dust-chalcopyrite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_dust_chalcopyrite = itemInt_dust_chalcopyrite;
+
+
+    const itemInt_dust_p1Chalcopyrite = extend(Item, "item-int-dust-p1-chalcopyrite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_dust_p1Chalcopyrite = itemInt_dust_p1Chalcopyrite;
 
 
     const itemInt_dust_cuprite = extend(Item, "item-int-dust-cuprite", {
@@ -943,6 +1036,24 @@
       },
     });
     exports.itemInt_dust_limonite = itemInt_dust_limonite;
+
+
+    const itemInt_dust_p1Limonite = extend(Item, "item-int-dust-p1-limonite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_dust_p1Limonite = itemInt_dust_p1Limonite;
 
 
     const itemInt_dust_magnetite = extend(Item, "item-int-dust-magnetite", {

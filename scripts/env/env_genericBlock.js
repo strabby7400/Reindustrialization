@@ -8,21 +8,29 @@
   // Part: Import
     const mdl_data = require("reind/mdl/mdl_data");
 
-    const db_env = require("reind/db/db_env");
+    const mdl_table = require("reind/mdl/mdl_table");
+
     const db_stat = require("reind/db/db_stat");
+  // End
+
+
+  // Part: Auxiliary
+    function ax_buildStats(cts) {
+      return function(tb) {
+        mdl_table.setContentRowDisplay(tb, cts);
+      };
+    };
   // End
 
 
   // Part: Component
     function setStatsComp(blk) {
       if(blk.itemDrop != null) {
-        var li_itm = new Seq([blk.itemDrop]);
-        blk.stats.add(db_stat.resourceRelated, StatValues.content(li_itm));
+        blk.stats.add(db_stat.resourceRelated, ax_buildStats(blk.itemDrop));
       };
 
       if(blk.liquidDrop != null) {
-        var li_liq = new Seq([blk.liquidDrop]);
-        blk.stats.add(db_stat.resourceRelated, StatValues.content(li_liq));
+        blk.stats.add(db_stat.resourceRelated, ax_buildStats(blk.liquidDrop));
       };
     };
   // End

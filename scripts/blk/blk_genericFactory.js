@@ -16,6 +16,7 @@
 
   // Part: Component
     function updateTileComp(b) {
+      frag_fluid.updateTile_capEffc(b);
       frag_fluid.updateTile_flammableContent(b);
       frag_fluid.updateTile_pressured(b);
     };

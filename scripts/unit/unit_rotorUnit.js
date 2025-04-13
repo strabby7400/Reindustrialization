@@ -18,6 +18,12 @@
 
   // Part: Component
     function updateComp(utp, unit) {
+      if(utp.needCheck) {
+        utp.rotorEff = db_effect._rotorWave(utp.hitSize * 2.0);
+
+        utp.needCheck = false;
+      };
+
       var cap = utp.weapons.size;
       for(let i = 0; i < cap; i++) {
         var mt = unit.mounts[i];
@@ -32,7 +38,7 @@
         var flr = Vars.world.floorWorld(pos_p3d.x, pos_p3d.y);
 
         if(flr != null) {
-          if(flr.canShadow) mdl_effect.showAt_ldm(pos_p3d, db_effect._rotorWave(utp.hitSize * 2.0), 0.0);
+          if(flr.canShadow) mdl_effect.showAt_ldm(pos_p3d, utp.rotorEff, 0.0);
           if(flr.isLiquid && utp.lowAltitude && Mathf.chance(0.7)) mdl_effect.dustAt_ldm(pos_p3d, 8.0);
         };
       };

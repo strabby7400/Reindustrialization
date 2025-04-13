@@ -26,6 +26,8 @@
     function updateTileComp(b) {
       // Initialize
       if(b.needCheck) {
+        b.changeEff = db_effect._recipeChange(b.block.size, b.team.color);
+
         b.id_sel = mdl_data._config(b, -1);
 
         b.needCheck = false;
@@ -64,7 +66,7 @@
       if(tup[0] > -2) {
         b.id_sel = tup[0];
 
-        mdl_effect.showAt(b, db_effect._recipeChange(b.block.size, b.team.color), 0.0);
+        mdl_effect.showAt(b, b.changeEff, 0.0);
       };
     };
 

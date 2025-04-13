@@ -10,6 +10,7 @@
     const lib_tmi = lib_base.hasTmi ? require("reind/lib/lib_tmi") : null;
 
     const PARENT = require("reind/blk/blk_genericFactory");
+    const VAR = require("reind/glb/glb_vars");
 
     const frag_faci = require("reind/frag/frag_faci");
 
@@ -45,6 +46,9 @@
 
     function updateComp(b) {
       if(b.needCheck) {
+        b.changeEff = db_effect._recipeChange(frag_faci._structPair(b.block)[0].size, b.team.color);
+
+        b.cd = VAR.struct_cooldown;
         b.plan = frag_faci._structPair(b.block)[1];
 
         b.needCheck = false;
@@ -62,8 +66,6 @@
 
 
     function buildConfigurationComp(b, tb) {
-      var vec2 = new Vec2();
-
       db_table.__toggle(tb, b, b.showPlan, "eye");
 
       mdl_table.setTrigger(tb, function() {
@@ -76,7 +78,7 @@
             if(b.cd > 0.0) {
               mdl_ui.showInfoFade("large-building-cooldown");
             } else {
-              Call.tileConfig(Vars.player, b, vec2.set(1, -2));
+              Call.tileConfig(Vars.player, b, new Vec2(1, -2));
             };
           };
         };
@@ -91,7 +93,7 @@
 
       if(tup[0] > -2) {
         var blk_tg = frag_faci._structPair(b.block)[0];
-        mdl_effect.showAt(mdl_game._pos(b.tile, blk_tg.offset), db_effect._recipeChange(blk_tg.size, b.team.color), 0.0);
+        mdl_effect.showAt(mdl_game._pos(b.tile, blk_tg.offset, true), b.changeEff, 0.0);
         b.tile.setBlock(blk_tg, b.team);
       };
 

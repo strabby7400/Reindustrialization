@@ -6,6 +6,8 @@
 
 
   // Part: Import
+    const VAR = require("reind/glb/glb_vars");
+
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_recipe = require("reind/mdl/mdl_recipe");
@@ -501,7 +503,7 @@
       var arr = fo;
       var cap = arr.length;
       if(failed) {
-        for(let i = 0; i < 6; i++) {mdl_effect.showAt(b, db_effect._craftBlackSmog())};
+        for(let i = 0; i < 6; i++) {mdl_effect.showAt(b, VAR.eff_blackSmog)};
 
         if(cap > 0) {
           for(let i = 0; i < cap; i += 2) {

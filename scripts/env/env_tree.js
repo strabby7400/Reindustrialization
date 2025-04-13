@@ -24,6 +24,13 @@
       treeAlpha = val;
     };
     exports.set_treeAlpha = set_treeAlpha;
+
+
+    var treeTransparentization = true;
+    const set_treeTransparentization = function(val) {
+      treeTransparentization = val;
+    };
+    exports.set_treeTransparentization = set_treeTransparentization;
   // End
 
 
@@ -41,7 +48,7 @@
       var z = blk.armor;
       var z_sha = z - 0.0005;
 
-      var pos_sha = mdl_game._pos(t, blk.shadowOffset);
+      var pos_sha = mdl_game._pos(t, blk.shadowOffset, true);
       var reg = blk.region;
       var ang = Mathf.randomSeed(t.pos(), 0, 4) * 90.0;
 
@@ -61,7 +68,8 @@
 
       var a = (Groups.player.size() > 1) ? 1.0 : treeAlpha;
       if(a < 0.0001) return;
-      if(mdl_content.isCoverable(Vars.player.unit())) {
+
+      if(treeTransparentization && mdl_content.isCoverable(Vars.player.unit())) {
         var pos_pl = mdl_game._pos("player");
         if(pos_pl != null) {
           var d = mdl_game._dst(t, pos_pl);

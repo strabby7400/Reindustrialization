@@ -15,6 +15,7 @@
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
+    const mdl_text = require("reind/mdl/mdl_text");
 
     const db_block = require("reind/db/db_block");
     const db_stat = require("reind/db/db_stat");
@@ -57,8 +58,7 @@
       if(b.invertTime > 0.9999) {
         frag_attack.atk_impact(b, b.impactRad, frag_attack._impactDmg(size, time), frag_attack._impactDur(time));
 
-        var cap = Math.pow(size, 2);
-        for(let i = 0; i < cap; i++) {mdl_effect.dustAt_ldm(b, frag_attack._impactDustRad(size))};
+        mdl_effect.dustAt_ldm(b, frag_attack._impactDustRad(size), Math.pow(size, 2));
       };
 
       if(b.down) b.progress = 0.0;
@@ -103,7 +103,7 @@
 
     function drawPlaceComp(blk, tx, ty, rot, valid) {
       var impactRad = mdl_data.read_1n1v(db_block.db["param"]["range"]["impact"], blk.name, 40.0);
-      mdl_draw.drawCirclePulse(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset), impactRad);
+      mdl_draw.drawCirclePulse(mdl_game._pos(Vars.world.tile(tx, ty), blk.offset, true), impactRad);
     };
 
 

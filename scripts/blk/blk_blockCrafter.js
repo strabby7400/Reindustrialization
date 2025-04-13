@@ -36,6 +36,12 @@
 
 
     function updateTileComp(b) {
+      if(b.needCheck) {
+        b.changeEff = db_effect._recipeChange(b.block.size, b.team.color);
+
+        b.needCheck = false;
+      };
+
       if(b.payload != null) b.payload.update(null, b);
 
       var shouldProduce = b.recipe != null && b.efficiency > 0.0 && b.payload == null;
@@ -62,7 +68,7 @@
 
 
     function configuredComp(b, builder, val) {
-      mdl_effect.showAt(mdl_game._pos(b.tile, b.block.offset), db_effect._recipeChange(b.block.size, b.team.color), 0.0);
+      mdl_effect.showAt(mdl_game._pos(b.tile, b.block.offset, true), b.changeEff, 0.0);
     };
   // End
 

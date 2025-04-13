@@ -174,7 +174,7 @@
       var frac = 1.0;
       for(let i = 0; i < cap1; i++) {
         var tg = tgs[i];
-        var dmg_fi = Damage.applyArmor(dmg, (tg instanceof Building) ? tg.block.armor : tg.type.armor) * (tg instanceof Building ? bdmgMtp : 1.0);
+        var dmg_fi = Damage.applyArmor(dmg * frac * (tg instanceof Building ? bdmgMtp : 1.0), (tg instanceof Building) ? tg.block.armor : tg.type.armor);
         tg.damage(dmg_fi);
         if(tg instanceof Unit) tg.apply(StatusEffects.shocked);
         mdl_effect.showAt(tg, Fx.hitLancer, 0.0);

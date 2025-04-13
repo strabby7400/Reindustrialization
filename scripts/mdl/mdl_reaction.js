@@ -6,6 +6,8 @@
 
 
   // Part: Import
+    const VAR = require("reind/glb/glb_vars");
+
     const frag_attack = require("reind/frag/frag_attack");
 
     const mdl_content = require("reind/mdl/mdl_content");
@@ -75,7 +77,7 @@
           if(Mathf.chance(0.06 * pMtp)) {
             if(b != null) b.damage(b.maxHealth * 0.025);
 
-            mdl_effect.showAt(t_gn, db_effect._heatSmog());
+            mdl_effect.showAt(t_gn, VAR.eff_heatSmog);
           };
 
           break;

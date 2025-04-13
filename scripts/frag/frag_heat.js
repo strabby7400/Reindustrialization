@@ -97,7 +97,7 @@
           var dmg_fi = Math.min(dmg, 6.0);
           b.damage(dmg_fi);
 
-          mdl_effect.showAtP(0.5, b, db_effect._heatSmog());
+          mdl_effect.showAtP(0.5, b, VAR.eff_heatSmog);
         };
       };
 
@@ -174,7 +174,7 @@
       var dmg = b.edelta() * 2.0 * heat / fheatCap;
       b.damage(dmg);
 
-      mdl_effect.showAt(b, db_effect._heatSmog());
+      mdl_effect.showAt(b, VAR.eff_heatSmog);
     };
     exports.updateTile_fluidHeat = updateTile_fluidHeat;
 
@@ -200,30 +200,35 @@
 
 
   // Part: Unit Heat
+    const _meltTime = function(unit, rHeat) {
+      var rHeat_fi = (rHeat != null) ? rHeat : mdl_heat._rangeHeat(unit.tileOn());
+      var thr = unit.maxHealth / 350.0 + 10.0;
+      return (rHeat_fi < thr) ? 0.0 : Math.min(((rHeat - thr) / thr * 8.0 + 2.5) * 60.0, 600.0);
+    };
+    exports._meltTime = _meltTime;
+
+
     const update_unitHeat = function(utp, unit) {
+      if(Mathf.chance(0.9)) return;
       if(!mdl_content.isHeatDamageable(unit)) return;
 
       var t = unit.tileOn();
       if(t == null) return;
-      var heat = mdl_heat._rangeHeat(t);
-      if(heat < 10.0) return;
+      var rHeat = mdl_heat._rangeHeat(t);
+      if(rHeat < 10.0) return;
 
-      var dmg = Time.delta * (75.0 + unit.maxHealth * 0.03 / 60.0) * heat / 60.0;
+      var meltTime = _meltTime(unit, rHeat);
+      if(meltTime > 0.0) {
+        unit.apply(StatusEffects.melting, meltTime);
+        mdl_effect.showAt(unit, VAR.eff_heatSmog);
+      };
+
+      var dmg = Time.delta * (75.0 + unit.maxHealth * 0.03 / 60.0) * rHeat * 0.15;
       var dmgScl = 1.0;
       if(unit instanceof Legsc || utp.hovering) dmgScl *= VAR.unitHeat_hoveringMultiplier;
       var dmg_fi = dmg * dmgScl;
-
       unit.damagePierce(dmg_fi, false);
       mdl_effect.damageAt(unit, dmg_fi);
-
-      var meltThr = unit.maxHealth / 200.0 + 10.0;
-      if(heat > meltThr) {
-        var sta = StatusEffects.melting;
-        var staTime = Math.min(((heat - meltThr) / meltThr * 8.0 + 2.5) * 60.0, 600.0);
-        unit.apply(sta, staTime);
-
-        mdl_effect.showAtP(0.08, unit, db_effect._heatSmog());
-      };
     };
     exports.update_unitHeat = update_unitHeat;
   // End
