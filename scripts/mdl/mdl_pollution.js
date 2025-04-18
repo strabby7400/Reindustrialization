@@ -5,7 +5,7 @@
 */
 
 
-  // Part: Sum
+  // Part: Param
     const _polLocal = function(t, r) {
       // TODO: Add calculation
     };

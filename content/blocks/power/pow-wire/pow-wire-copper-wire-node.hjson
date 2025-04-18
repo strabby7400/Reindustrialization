@@ -85,6 +85,6 @@
   solid: true
   underBullets: false
   schematicPriority: -15
-  laserRange: 14.0
+  laserRange: 16
   maxNodes: 4
   autolink: false

@@ -9,6 +9,7 @@
     const frag_heat = require("reind/frag/frag_heat");
 
     const mdl_data = require("reind/mdl/mdl_data");
+    const mdl_file = require("reind/mdl/mdl_file");
     const mdl_test = require("reind/mdl/mdl_test");
     const mdl_text = require("reind/mdl/mdl_text");
 
@@ -464,7 +465,7 @@
     const isReind = function(ct_gn) {
       var nmCt = _nmCt_gn(ct_gn);
 
-      return nmCt.includes("reind-");
+      return mdl_file.isReindName(nmCt);
     };
     exports.isReind = isReind;
 
@@ -706,6 +707,34 @@
     exports.canShortCircuit = canShortCircuit;
 
 
+    const isPowerUnit = function(ct_gn) {
+      var nmCt = _nmCt_gn(ct_gn);
+
+      return mdl_text.includes_ex(
+        nmCt,
+        "-wire-node",
+        "-wire-relay",
+      );
+    };
+    exports.isPowerUnit = isPowerUnit;
+
+
+    const isPowerNode = function(ct_gn) {
+      var nmCt = _nmCt_gn(ct_gn);
+
+      return nmCt != null && nmCt.includes("-wire-node") && !nmCt.includes("-remote-wire-node");
+    };
+    exports.isPowerNode = isPowerNode;
+
+
+    const isRemotePowerNode = function(ct_gn) {
+      var nmCt = _nmCt_gn(ct_gn);
+
+      return nmCt != null && nmCt.includes("-remote-wire-node");
+    };
+    exports.isRemotePowerNode = isRemotePowerNode;
+
+
     const isMagnetic = function(ct_gn) {
       return db_block.db["group"]["magnetic"].includes(_nmCt_gn(ct_gn));
     };
@@ -786,6 +815,14 @@
 
 
     /* unit */
+
+
+    const isNonRobot = function(ct_gn) {
+      var nmCt = _nmCt_gn(ct_gn);
+
+      return db_unit.db["type"]["nonRobot"].includes(nmCt);
+    };
+    exports.isNonRobot = isNonRobot;
 
 
     const isCoreUnit = function(ct_gn) {
@@ -879,7 +916,7 @@
     const isHighAir = function(unit) {
       if(unit == null) return false;
       if(!unit.flying) return false;
-      if(unit.lowAltitude) return false;
+      if(unit.type.lowAltitude) return false;
 
       return true;
     };
@@ -916,6 +953,15 @@
     exports.isIdle = isIdle;
 
 
+    const isCovered = function(unit) {
+      if(unit == null) return false;
+      if(unit.hasEffect(Vars.content.statusEffect("reind-sta-spec-hidden-well"))) return true;
+
+      return false;
+    };
+    exports.isCovered = isCovered;
+
+
     const isHot = function(unit) {
       if(unit == null) return false;
       if(unit.hasEffect(StatusEffects.burning) || unit.hasEffect(StatusEffects.melting)) return true;
@@ -924,6 +970,15 @@
       return false;
     };
     exports.isHot = isHot;
+
+
+    const isDamaged = function(unit) {
+      if(unit == null) return false;
+      if(unit.hasEffect(Vars.content.effect("reind-sta-spec-damaged")) || unit.hasEffect(Vars.content.effect("reind-sta-spec-severely-damaged"))) return true;
+
+      return false;
+    };
+    exports.isDamaged = isDamaged;
   // End
 
 

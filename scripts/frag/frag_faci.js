@@ -162,7 +162,7 @@
       if(pos_gn == null || rad == null || team == null) return arr;
 
       mdl_game._unitsAllied(pos_gn, rad, team).forEach(unit => {
-        if(unit != caller) {
+        if(unit != caller && !mdl_game.ray_insulated(pos_gn, unit)) {
           var ep = mdl_data.read_1n1v(db_unit.db["ep"]["provided"], unit.type.name);
           if(ep != null) {
             arr.push(unit);
@@ -272,7 +272,7 @@
 
       var ts = mdl_game._tsLinked(b.tile);
       var rheat = 0.0;
-      ts.forEach(ot => rheat += mdl_heat._rangeHeat(ot));
+      ts.forEach(ot => rheat += mdl_heat._rHeat(ot));
       rheat /= ts.length;
 
       if(rheat > 6.0) Fires.create(ts[Math.round(Mathf.random(ts.length - 1) - 0.4999)]);

@@ -7,6 +7,8 @@
 
   // Part: Import
     const TEMPLATE = require("reind/env/env_genericFloor");
+
+    const mdl_draw = require("reind/mdl/mdl_draw");
   // End
 
 
@@ -138,9 +140,21 @@
 
   // Part: env-flr[terrain]
     const envFlr_dirt = extend(Floor, "env-flr-dirt", {
+      // Specific
+      randomRegs: [],
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
+      },
+      // Specific
+      init() {
+        this.super$init();
+        this.randomRegs.pushAll(mdl_draw._randOv_rock());
+      },
+      // Specific
+      drawBase(tile) {
+        this.super$drawBase(tile);
+        mdl_draw.drawRandomOverlay(tile, this.randomRegs);
       },
     });
     exports.envFlr_dirt = envFlr_dirt;
@@ -165,18 +179,42 @@
 
 
     const envFlr_grass = extend(Floor, "env-flr-grass", {
+      // Specific
+      randomRegs: [],
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
+      },
+      // Specific
+      init() {
+        this.super$init();
+        this.randomRegs.pushAll(mdl_draw._randOv_rock());
+      },
+      // Specific
+      drawBase(tile) {
+        this.super$drawBase(tile);
+        mdl_draw.drawRandomOverlay(tile, this.randomRegs);
       },
     });
     exports.envFlr_grass = envFlr_grass;
 
 
     const envFlr_mud = extend(Floor, "env-flr-mud", {
+      // Specific
+      randomRegs: [],
       setStats() {
         this.super$setStats();
         TEMPLATE.setStats(this);
+      },
+      // Specific
+      init() {
+        this.super$init();
+        this.randomRegs.pushAll(mdl_draw._randOv_rock());
+      },
+      // Specific
+      drawBase(tile) {
+        this.super$drawBase(tile);
+        mdl_draw.drawRandomOverlay(tile, this.randomRegs);
       },
     });
     exports.envFlr_mud = envFlr_mud;

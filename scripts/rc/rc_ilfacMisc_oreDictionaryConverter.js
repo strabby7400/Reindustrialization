@@ -183,7 +183,16 @@ if(lib_base.hasAsthosus) {
 
 
     // Red Sand
-    // TODO
+    {
+      "icon": "asthosus-01a-05-item-red-sand",
+      "category": "asthosus",
+      "inputs": [
+        "asthosus-01a-05-item-red-sand", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-ore-sand", 2,
+      ],
+    },
 
 
     // Lodestone

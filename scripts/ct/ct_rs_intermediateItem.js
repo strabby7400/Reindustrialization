@@ -243,60 +243,6 @@
     exports.itemInt_chunks_aggregate = itemInt_chunks_aggregate;
 
 
-    const itemInt_chunks_barite = extend(Item, "item-int-chunks-barite", {
-      alters: 0,
-      setStats() {
-        this.super$setStats();
-        TEMPLATE.setStats(this);
-      },
-      loadIcon() {
-        this.super$loadIcon();
-        TEMPLATE.loadIcon(this);
-      },
-      createIcons(packer) {
-        this.super$createIcons(packer);
-        TEMPLATE.createIcons(this, packer);
-      },
-    });
-    exports.itemInt_chunks_barite = itemInt_chunks_barite;
-
-
-    const itemInt_chunks_p1Barite = extend(Item, "item-int-chunks-p1-barite", {
-      alters: 0,
-      setStats() {
-        this.super$setStats();
-        TEMPLATE.setStats(this);
-      },
-      loadIcon() {
-        this.super$loadIcon();
-        TEMPLATE.loadIcon(this);
-      },
-      createIcons(packer) {
-        this.super$createIcons(packer);
-        TEMPLATE.createIcons(this, packer);
-      },
-    });
-    exports.itemInt_chunks_p1Barite = itemInt_chunks_p1Barite;
-
-
-    const itemInt_chunks_crudeSulfur = extend(Item, "item-int-chunks-crude-sulfur", {
-      alters: 0,
-      setStats() {
-        this.super$setStats();
-        TEMPLATE.setStats(this);
-      },
-      loadIcon() {
-        this.super$loadIcon();
-        TEMPLATE.loadIcon(this);
-      },
-      createIcons(packer) {
-        this.super$createIcons(packer);
-        TEMPLATE.createIcons(this, packer);
-      },
-    });
-    exports.itemInt_chunks_crudeSulfur = itemInt_chunks_crudeSulfur;
-
-
     const itemInt_chunks_dolomite = extend(Item, "item-int-chunks-dolomite", {
       alters: 0,
       setStats() {
@@ -351,6 +297,69 @@
     exports.itemInt_chunks_limestone = itemInt_chunks_limestone;
 
 
+    /* barium */
+
+
+    const itemInt_chunks_barite = extend(Item, "item-int-chunks-barite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_chunks_barite = itemInt_chunks_barite;
+
+
+    const itemInt_chunks_p1Barite = extend(Item, "item-int-chunks-p1-barite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_chunks_p1Barite = itemInt_chunks_p1Barite;
+
+
+    /* phosphorus */
+
+
+    const itemInt_chunks_fluorapatite = extend(Item, "item-int-chunks-fluorapatite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_chunks_fluorapatite = itemInt_chunks_fluorapatite;
+
+
+    /* silicon */
+
+
     const itemInt_chunks_silicaStone = extend(Item, "item-int-chunks-silica-stone", {
       alters: 0,
       setStats() {
@@ -367,6 +376,30 @@
       },
     });
     exports.itemInt_chunks_silicaStone = itemInt_chunks_silicaStone;
+
+
+    /* sulfur */
+
+
+    const itemInt_chunks_crudeSulfur = extend(Item, "item-int-chunks-crude-sulfur", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_chunks_crudeSulfur = itemInt_chunks_crudeSulfur;
+
+
+    /* zirconium */
 
 
     const itemInt_chunks_zircon = extend(Item, "item-int-chunks-zircon", {
@@ -621,6 +654,27 @@
       },
     });
     exports.itemInt_concentrate_rutile = itemInt_concentrate_rutile;
+
+
+    /* zinc */
+
+
+    const itemInt_concentrate_sphalerite = extend(Item, "item-int-concentrate-sphalerite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_concentrate_sphalerite = itemInt_concentrate_sphalerite;
   // End
 
 
@@ -979,6 +1033,27 @@
       },
     });
     exports.itemInt_dust_nativeCopper = itemInt_dust_nativeCopper;
+
+
+    /* fluorine */
+
+
+    const itemInt_dust_fluorite = extend(Item, "item-int-dust-fluorite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_dust_fluorite = itemInt_dust_fluorite;
 
 
     /* iron */
@@ -1414,6 +1489,24 @@
       },
     });
     exports.itemInt_dust_sphalerite = itemInt_dust_sphalerite;
+
+
+    const itemInt_dust_p1Sphalerite = extend(Item, "item-int-dust-p1-sphalerite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemInt_dust_p1Sphalerite = itemInt_dust_p1Sphalerite;
 
 
     /* rock */

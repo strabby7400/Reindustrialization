@@ -69,10 +69,12 @@
     exports._pos = _pos;
 
 
-    const _posRay = function(pos_gn_0, ang, rad) {
+    const _posRay = function(pos_gn_0, ang, rad, useTmp) {
       if(pos_gn_0 == null || angle == null || rad == null) return;
 
-      var vec2 = new Vec2();
+      if(useTmp == null) useTmp = false;
+
+      var vec2 = useTmp ? Tmp.v2 : new Vec2();
       var pos_0 = _pos(pos_gn_0);
 
       var x = pos_0.x;
@@ -85,12 +87,13 @@
     exports._posRay = _posRay;
 
 
-    const _posP3d = function(pos_gn_0, elev) {
+    const _posP3d = function(pos_gn_0, elev, useTmp) {
       if(pos_gn_0 == null) return;
 
       if(elev == null) elev = 0.0;
+      if(useTmp == null) useTmp = false;
 
-      var vec2 = new Vec2();
+      var vec2 = useTmp ? Tmp.v2 : new Vec2();
       var pos_0 = _pos(pos_gn_0);
 
       var x = pos_0.x;
@@ -125,10 +128,12 @@
       return Mathf.dst(pos1.x, pos1.y, pos2.x, pos2.y);
     };
     exports._dst = _dst;
+
+
   // End
 
 
-  // Part: Rotation
+  // Part: Rotation & Raycast
 
 
     /* <---------------- rot ----------------> */
@@ -177,6 +182,39 @@
       return count_sides(b, ob) > 0;
     };
     exports.isFacing = isFacing;
+
+
+    /* <---------------- raycast ----------------> */
+
+
+    const ray_insulated = function(pos_gn1, pos_gn2) {
+      if(pos_gn1 == null || pos_gn2 == null) return false;
+
+      var t1 = _tPos(pos_gn1);
+      var t2 = _tPos(pos_gn2);
+
+      return World.raycast(t1.x, t1.y, t2.x, t2.y, (x, y) => {
+        var ob = Vars.world.build(x, y);
+        return ob != null && ob.isInsulated();
+      });
+    };
+    exports.ray_insulated = ray_insulated;
+
+
+    const ray_solid = function(pos_gn1, pos_gn2) {
+      if(pos_gn1 == null || pos_gn2 == null) return false;
+
+      var t1 = _tPos(pos_gn1);
+      var t2 = _tPos(pos_gn2);
+
+      return World.raycast(t1.x, t1.y, t2.x, t2.y, (x, y) => {
+        var ot = Vars.world.tile(x, y);
+        return ot != null && ot.solid();
+      });
+    };
+    exports.ray_solid = ray_solid;
+
+
   // End
 
 
@@ -613,7 +651,7 @@
     exports._filterEnemy = _filterEnemy;
 
 
-    /* <---------------- liBuild ----------------> */
+    /* <---------------- building ----------------> */
 
 
     const _bs = function(ts) {
@@ -644,7 +682,7 @@
     exports._bsSame = _bsSame;
 
 
-    /* <---------------- liUnit ----------------> */
+    /* <---------------- unit ----------------> */
 
 
     const _units = function(pos_gn, rad, caller) {
@@ -659,22 +697,71 @@
     exports._units = _units;
 
 
-    const _unitsAllied = function(pos_gn, rad, team) {
-      return _filterTeam(_units(_pos(pos_gn), rad), team);
+    const _unitsAllied = function(pos_gn, rad, team, caller) {
+      return _filterTeam(_units(_pos(pos_gn), rad, caller), team);
     };
     exports._unitsAllied = _unitsAllied;
 
 
-    const _unitsEnemy = function(pos_gn, rad, team) {
-      return _filterEnemy(_units(_pos(pos_gn), rad), team);
+    const _unitsEnemy = function(pos_gn, rad, team, caller) {
+      return _filterEnemy(_units(_pos(pos_gn), rad, caller), team);
     };
     exports._unitsEnemy = _unitsEnemy;
 
 
-    const _unitsSame = function(pos_gn, rad, nm_utp, team) {
-      return _filterTeam(_filterNm(_units(_pos(pos_gn), rad), nm_utp), team);
+    const _unitsSame = function(pos_gn, rad, nm_utp, team, caller) {
+      return _filterTeam(_filterNm(_units(_pos(pos_gn), rad, caller), nm_utp), team);
     };
     exports._unitsSame = _unitsSame;
+
+
+    /* <---------------- bullet ----------------> */
+
+
+    const _buls = function(pos_gn, rad, caller) {
+      var arr = [];
+      if(pos_gn == null || rad == null) return arr;
+
+      var pos = _pos(pos_gn);
+      Groups.bullet.intersect(pos.x - rad, pos.y - rad, rad * 2.0, rad * 2.0).each(bul => {if(bul != caller) arr.push(bul)});
+
+      return arr;
+    };
+    exports._buls = _buls;
+
+
+    const _bulsAllied = function(pos_gn, rad, team, caller) {
+      return _filterTeam(_buls(_pos(pos_gn), rad, caller), team);
+    };
+    exports._bulsAllied = _bulsAllied;
+
+
+    const _bulsEnemy = function(pos_gn, rad, team, caller) {
+      return _filterEnemy(_buls(_pos(pos_gn), rad, caller), team);
+    };
+    exports._bulsEnemy = _bulsEnemy;
+
+
+    const _bulTg = function(posi, rad, team, shouldHittable, caller) {
+      if(posi == null || rad == null || team == null) return;
+
+      if(shouldHittable == null) shouldHittable = true;
+
+      var tmpDst = 999999.0;
+      var bulTg = null;
+      Groups.bullet.intersect(posi.x - rad, posi.y - rad, rad * 2.0, rad * 2.0).select(
+        bul => (bul.team != team) && (shouldHittable ? bul.type.hittable : true) && (bul != caller),
+      ).each(bul => {
+        var dst = bul.dst2(posi);
+        if(dst < tmpDst) {
+          tmpDst = dst;
+          bulTg = bul;
+        };
+      });
+
+      return bulTg;
+    };
+    exports._bulTg = _bulTg;
   // End
 
 
@@ -738,7 +825,7 @@
 
       for(let i = 0; i < cap; i++) {
         var b_heat = Vars.indexer.findTile(team, pos.x, pos.y, rad, ob => {
-          return !blks_heat.includes(ob) && (mdl_heat._fHeat(ob) * 0.05 + mdl_heat._heat(ob) * 1.5 > 5.0);
+          return !blks_heat.includes(ob) && (mdl_heat._fHeat(ob) * 0.05 + mdl_heat._heat(ob) * 1.5 + mdl_heat._wHeat(ob) > 9.9999);
         });
         if(b_heat != null) {blks_heat.push(b_heat)} else break;
       };
@@ -794,6 +881,7 @@
         tmpTg = Geometry.findClosest(tmpPos.x, tmpPos.y, seq);
         if(tmpTg == null) break;
         if(_dst(tmpPos, tmpTg) > (isFirst ? rad0 : rad) + 0.0001) break;
+        if(ray_insulated(tmpPos, tmpTg)) break;
 
         arr.push(tmpTg);
         seq.remove(tmpTg);

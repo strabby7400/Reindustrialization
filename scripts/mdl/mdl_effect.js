@@ -29,6 +29,13 @@
       remainsLifetime = val;
     };
     exports.set_remainsLifetime = set_remainsLifetime;
+
+
+    var damageDisplay = true;
+    const set_damageDisplay = function(val) {
+      damageDisplay = val;
+    };
+    exports.set_damageDisplay = set_damageDisplay;
   // End
 
 
@@ -267,7 +274,7 @@
         rotation: Mathf.random(360.0),
         color: Color.valueOf("606060"),
         region: Core.atlas.find(unit.type.name + "-icon", unit.type.region),
-        cellRegion: unit.type.cellRegion,
+        cellRegion: Core.atlas.find(unit.type.name + "-cell-icon", unit.type.cellRegion),
         offTime: Mathf.random(1200.0),
         draw() {
           var x = this.x;
@@ -342,7 +349,7 @@
         ang = e.rotation - 90.0;
       };
 
-      mdl_draw.drawNormalRegion(e, reg, ang, a, 1.0, color, Layer.effect + 0.44, true);
+      mdl_draw.drawNormalRegion(e, reg, ang, a, 1.0, color, 128.88, true);
     });
 
 
@@ -371,9 +378,10 @@
 
 
     const damageAt = function(pos_gn, dmg, team, isHeal) {
+      if(Vars.headless || !damageDisplay || pos_gn == null || dmg == null) return;
+
       if(team == null) team = Team.derelict;
       if(isHeal == null) isHeal = false;
-      if(Vars.headless || !Core.settings.get("reind-damage-display", true) || pos_gn == null || dmg == null) return;
 
       showAround(pos_gn, eff_showDmg, 14.0, 0.0, isHeal ? Pal.heal : (team == Team.derelict ? Color.white : team.color), dmg);
     };
@@ -386,8 +394,9 @@
      * Creates item transfer effect from {pos_gn_f} to {pos_gn_t}.
      */
     const itemTransfer = function(pos_gn_f, pos_gn_t, color_gn, repeat) {
-      if(repeat == null) repeat = 3;
       if(pos_gn_f == null || pos_gn_t == null) return;
+
+      if(repeat == null) repeat = 3;
 
       var color = (color_gn == null) ? null : mdl_draw._color(color_gn);
 
@@ -396,10 +405,48 @@
     exports.itemTransfer = itemTransfer;
 
 
+    const eff_pointLaserBeam = new Effect(30.0, 300.0, eff => {
+      var pos = eff.data;
+
+      Draw.color(eff.color, eff.fout());
+      Lines.stroke(2.0);
+      Lines.line(eff.x, eff.y, pos.x, pos.y);
+      Drawf.light(eff.x, eff.y, pos.x, pos.y, 20.0, eff.color, 0.65 * eff.fout());
+    });
+
+
+    const eff_pointLaserEnd = new Effect(30.0, eff => {
+      var pos = eff.data;
+
+      Draw.color(eff.color, eff.fout());
+      Fill.circle(pos.x, pos.y, 2.0 + eff.fout());
+    });
+
+
+    const pointLaser = function(pos_gn, e, color_gn, hasSound, shouldFollow) {
+      if(pos_gn == null || e == null) return;
+
+      if(color_gn == null) color_gn = Pal.remove;
+      if(hasSound == null) hasSound = false;
+      if(shouldFollow == null) shouldFollow = false;
+
+      var pos = mdl_game._pos(pos_gn);
+      var color = mdl_draw._color(color_gn);
+
+      showAt(shouldFollow ? e : new Vec2(e.x, e.y), eff_pointLaserBeam, 0.0, color, shouldFollow ? pos : new Vec2(pos.x, pos.y));
+      showAt(shouldFollow ? e : new Vec2(e.x, e.y), eff_pointLaserEnd, 0.0, color, shouldFollow ? pos : new Vec2(pos.x, pos.y));
+      showAt(shouldFollow ? e : new Vec2(e.x, e.y), eff_pointLaserEnd, 0.0, color, shouldFollow ? e : new Vec2(e.x, e.y));
+
+      if(hasSound) playAt(pos, "se-shot-laser-defense", 1.0, 1.0, 0.05);
+    };
+    exports.pointLaser = pointLaser;
+
+
     const chainLightning = function(pos_gn, e, color_gn, hasSound) {
+      if(pos_gn == null || e == null) return;
+
       if(color_gn == null) color_gn = Pal.accent;
       if(hasSound == null) hasSound = false;
-      if(pos_gn == null || e == null) return;
 
       var color = mdl_draw._color(color_gn);
 

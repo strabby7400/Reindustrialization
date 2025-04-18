@@ -44,6 +44,18 @@
     exports.we_weaDeco_steamFlow = we_weaDeco_steamFlow;
 
 
+    const weaDeco_sandstorm = extend(ParticleWeather, "wea-deco-sandstorm", {
+      update(state) {
+        this.super$update(state);
+        TEMPLATE.update(this, state);
+      },
+    });
+    const we_weaDeco_sandstorm = new Weather.WeatherEntry(weaDeco_sandstorm);
+    we_weaDeco_sandstorm.always = true;
+    exports.weaDeco_sandstorm = weaDeco_sandstorm;
+    exports.we_weaDeco_sandstorm = we_weaDeco_sandstorm;
+
+
     const weaDeco_flyingLeaves = extend(ParticleWeather, "wea-deco-flying-leaves", {
       update(state) {
         this.super$update(state);
@@ -54,6 +66,18 @@
     we_weaDeco_flyingLeaves.always = true;
     exports.weaDeco_flyingLeaves = weaDeco_flyingLeaves;
     exports.we_weaDeco_flyingLeaves = we_weaDeco_flyingLeaves;
+
+
+    const weaDeco_flyingSand = extend(ParticleWeather, "wea-deco-flying-sand", {
+      update(state) {
+        this.super$update(state);
+        TEMPLATE.update(this, state);
+      },
+    });
+    const we_weaDeco_flyingSand = new Weather.WeatherEntry(weaDeco_flyingSand);
+    we_weaDeco_flyingSand.always = true;
+    exports.weaDeco_flyingSand = weaDeco_flyingSand;
+    exports.we_weaDeco_flyingSand = we_weaDeco_flyingSand;
 
 
     const weaDeco_carnageStorm = extend(ParticleWeather, "wea-deco-carnage-storm", {

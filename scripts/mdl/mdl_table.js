@@ -229,6 +229,43 @@
     exports.setContentRowDisplay = setContentRowDisplay;
 
 
+    const setContentListDisplay = function(tb, cts_gn, sizeScl, col) {
+      if(sizeScl == null) sizeScl = 1.0;
+      if(col == null) col = mdl_ui._col(sizeScl);
+
+      var arr;
+      if(cts_gn instanceof Array) {
+        arr = cts_gn;
+      } else {
+        arr = [cts_gn];
+      };
+
+      tb.row();
+      tb.table(Tex.whiteui, tb1 => {
+        tb1.left().setColor(Pal.darkestGray);
+        __margin(tb1);
+
+        var cap = arr.length;
+        for(let i = 0, j = 0; i < cap; i++) {
+          (function(i) {
+            var ct = arr[i];
+            var btn = tb1.button(new TextureRegionDrawable(ct.uiIcon), 32.0 * sizeScl, db_dialog._content(ct)).pad(4.0).tooltip(ct.localizedName).get();
+
+            btn.margin(0.0);
+            var btnStyle = btn.getStyle();
+            btnStyle.up = Styles.none;
+            btnStyle.down = Styles.none;
+            btnStyle.over = Styles.flatOver;
+          })(i);
+
+          if(j % col == col - 1) tb1.row();
+          j++;
+        };
+      }).row();
+    };
+    exports.setContentListDisplay = setContentListDisplay;
+
+
     const setBatchDisplay = function(tb, batch) {
       var cap = batch.length;
       if(cap == 0) return;

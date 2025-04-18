@@ -5,7 +5,7 @@
 */
 
 
-  # type: OreBlock
+  # type: OverlayFloor
 
 
 /*
@@ -38,3 +38,4 @@
 
 
   itemDrop: item-ore-psilomelane
+  playerUnmineable: true

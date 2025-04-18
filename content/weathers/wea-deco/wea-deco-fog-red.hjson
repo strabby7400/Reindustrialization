@@ -27,8 +27,8 @@
 
 
   drawParticles: true
-  particleRegion: reind-efr-shadow-red
-  color: ffffff
+  particleRegion: reind-efr-shadow
+  color: ff0000
   minAlpha: 0.01
   maxAlpha: 0.08
   density: 16000.0

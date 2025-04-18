@@ -24,6 +24,13 @@
     exports.set_noob = set_noob;
 
 
+    var damageDisplay = true;
+    const set_damageDisplay = function(val) {
+      damageDisplay = val;
+    };
+    exports.set_damageDisplay = set_damageDisplay;
+
+
     var secretCode = "<ohno>";
     const set_secretCode = function(val) {
       secretCode = val;
@@ -153,7 +160,7 @@
 
 
     Events.on(EventType.BuildDamageEvent, ev => {
-      if(Core.settings.get("reind-damage-display", true)) {
+      if(damageDisplay) {
         var bul = ev.source;
         var b = ev.build;
 
@@ -166,7 +173,7 @@
 
 
     Events.on(EventType.UnitDamageEvent, ev => {
-      if(Core.settings.get("reind-damage-display", true)) {
+      if(damageDisplay) {
         var bul = ev.bullet;
         var unit = ev.unit;
 

@@ -225,7 +225,7 @@
   configurable: true
   rotate: true
   outputsLiquid: true
-  ignoreLiquidFullness: false
+  ignoreLiquidFullness: true
   liquidOutputDirections: [0]
 
 

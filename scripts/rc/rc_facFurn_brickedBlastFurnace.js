@@ -4,9 +4,9 @@ const gi = [
   "reind-gas-misc-air", 0.4,
 ];
 const opt = [
-  "reind-item-chem-coal", 150, 0.5, 1.0,
-  "reind-item-chem-semicoke", 90, 0.5, 1.0,
-  "reind-item-chem-coke", 60, 0.5, 1.0,
+  "reind-item-chem-coal", 90, 0.5, 1.0,
+  "reind-item-chem-semicoke", 105, 0.5, 1.5,
+  "reind-item-chem-coke", 120, 0.5, 2.0,
 ]
 
 
@@ -160,6 +160,24 @@ const rc = {
       "requireOptional": true,
       "outputs": [
         "reind-item-chem-lead", 130,
+      ],
+    },
+
+
+    /* <---------------- zinc ----------------> */
+
+
+    // Lead : Concentrate (Sphalerite)
+    {
+      "icon": "reind-item-int-concentrate-sphalerite",
+      "category": "smelting",
+      "inputs": [
+        "reind-item-int-concentrate-sphalerite", 90,
+      ].concat(gi),
+      "optInputs": [].concat(opt),
+      "requireOptional": true,
+      "outputs": [
+        "reind-item-chem-zinc", 130,
       ],
     },
 

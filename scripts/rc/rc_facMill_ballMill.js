@@ -179,6 +179,113 @@ const rc = {
     },
 
 
+    /* <---------------- rock ----------------> */
+
+
+    // Clastic
+    {
+      "icon": "reind-item-ore-rock-shard-clastic",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-rock-shard-clastic", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-rock-clastic", 20,
+      ],
+    },
+
+
+    // Evaporite
+    {
+      "icon": "reind-item-ore-rock-shard-evaporite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-rock-shard-evaporite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-rock-evaporite", 20,
+      ],
+    },
+
+
+    // Hypabyssal
+    {
+      "icon": "reind-item-ore-rock-shard-hypabyssal",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-rock-shard-hypabyssal", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-rock-hypabyssal", 20,
+      ],
+    },
+
+
+    // Lava
+    {
+      "icon": "reind-item-ore-rock-shard-lava",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-rock-shard-lava", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-rock-lava", 20,
+      ],
+    },
+
+
+    // Metamorphic
+    {
+      "icon": "reind-item-ore-rock-shard-metamorphic",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-rock-shard-metamorphic", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-rock-metamorphic", 20,
+      ],
+    },
+
+
+    // Plutonic
+    {
+      "icon": "reind-item-ore-rock-shard-plutonic",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-rock-shard-plutonic", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-rock-plutonic", 20,
+      ],
+    },
+
+
+    // Biological Sedimentary
+    {
+      "icon": "reind-item-ore-rock-shard-biological-sedimentary",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-rock-shard-biological-sedimentary", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-rock-biological-sedimentary", 20,
+      ],
+    },
+
+
+    // Clastic Sedimentary
+    {
+      "icon": "reind-item-ore-rock-shard-clastic-sedimentary",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-rock-shard-clastic-sedimentary", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-rock-clastic-sedimentary", 20,
+      ],
+    },
+
+
     /* <---------------- aluminum ----------------> */
 
 
@@ -291,6 +398,22 @@ const rc = {
       ].concat(gi),
       "outputs": [
         "reind-item-int-dust-native-copper", 20,
+      ],
+    },
+
+
+    /* <---------------- fluorine ----------------> */
+
+
+    // Hematite
+    {
+      "icon": "reind-item-ore-fluorite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-fluorite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-fluorite", 20,
       ],
     },
 
@@ -494,113 +617,6 @@ const rc = {
       ].concat(gi),
       "outputs": [
         "reind-item-int-dust-sphalerite", 20,
-      ],
-    },
-
-
-    /* <---------------- rock ----------------> */
-
-
-    // Clastic
-    {
-      "icon": "reind-item-ore-rock-shard-clastic",
-      "category": "pulverization",
-      "inputs": [
-        "reind-item-ore-rock-shard-clastic", 20,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-dust-rock-clastic", 20,
-      ],
-    },
-
-
-    // Evaporite
-    {
-      "icon": "reind-item-ore-rock-shard-evaporite",
-      "category": "pulverization",
-      "inputs": [
-        "reind-item-ore-rock-shard-evaporite", 20,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-dust-rock-evaporite", 20,
-      ],
-    },
-
-
-    // Hypabyssal
-    {
-      "icon": "reind-item-ore-rock-shard-hypabyssal",
-      "category": "pulverization",
-      "inputs": [
-        "reind-item-ore-rock-shard-hypabyssal", 20,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-dust-rock-hypabyssal", 20,
-      ],
-    },
-
-
-    // Lava
-    {
-      "icon": "reind-item-ore-rock-shard-lava",
-      "category": "pulverization",
-      "inputs": [
-        "reind-item-ore-rock-shard-lava", 20,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-dust-rock-lava", 20,
-      ],
-    },
-
-
-    // Metamorphic
-    {
-      "icon": "reind-item-ore-rock-shard-metamorphic",
-      "category": "pulverization",
-      "inputs": [
-        "reind-item-ore-rock-shard-metamorphic", 20,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-dust-rock-metamorphic", 20,
-      ],
-    },
-
-
-    // Plutonic
-    {
-      "icon": "reind-item-ore-rock-shard-plutonic",
-      "category": "pulverization",
-      "inputs": [
-        "reind-item-ore-rock-shard-plutonic", 20,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-dust-rock-plutonic", 20,
-      ],
-    },
-
-
-    // Biological Sedimentary
-    {
-      "icon": "reind-item-ore-rock-shard-biological-sedimentary",
-      "category": "pulverization",
-      "inputs": [
-        "reind-item-ore-rock-shard-biological-sedimentary", 20,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-dust-rock-biological-sedimentary", 20,
-      ],
-    },
-
-
-    // Clastic Sedimentary
-    {
-      "icon": "reind-item-ore-rock-shard-clastic-sedimentary",
-      "category": "pulverization",
-      "inputs": [
-        "reind-item-ore-rock-shard-clastic-sedimentary", 20,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-dust-rock-clastic-sedimentary", 20,
       ],
     },
 

@@ -31,6 +31,9 @@
       const stat_spreadLiquid = new Stat("reind-stat-spread-liquid.name", StatCat.function);
       exports.spreadLiquid = stat_spreadLiquid;
 
+      const stat_minRange = new Stat("reind-stat-min-range.name", StatCat.function);
+      exports.minRange = stat_minRange;
+
       const stat_impactRange = new Stat("reind-stat-impact-range.name", StatCat.function);
       exports.impactRange = stat_impactRange;
 
@@ -127,6 +130,9 @@
 
       const stat_heatLimit = new Stat("reind-stat-heat-limit.name", StatCat.function);
       exports.heatLimit = stat_heatLimit;
+
+      const stat_workingHeat = new Stat("reind-stat-working-heat.name", StatCat.function);
+      exports.workingHeat = stat_workingHeat;
     // End
 
 

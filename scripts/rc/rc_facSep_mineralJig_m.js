@@ -57,6 +57,8 @@ const rc = {
       "randOutputs": [
         "reind-item-ore-galena", 10, 0.5,
         "reind-item-ore-sphalerite", 10, 0.5,
+        "reind-item-ore-hematite", 10, 0.25,
+        "reind-item-ore-fluorite", 10, 0.25,
         "reind-item-ore-silica-stone", 10, 0.25,
         "reind-item-was-gangue", 10, 0.5,
       ],
@@ -95,13 +97,34 @@ const rc = {
         "reind-item-int-dust-p1-bauxite", 10,
       ].concat(go),
       "randOutputs": [
+        "reind-item-ore-limonite", 10, 0.5,
         "reind-item-ore-clay", 10, 0.25,
+        "reind-item-ore-crude-graphite", 10, 0.25,
         "reind-item-was-gangue", 10, 0.5,
       ],
     },
 
 
     /* <---------------- copper ----------------> */
+
+
+    // Dust (Chalcopyrite)
+    {
+      "icon": "reind-item-int-dust-chalcopyrite",
+      "category": "purification",
+      "inputs": [
+        "reind-item-int-dust-chalcopyrite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-p1-chalcopyrite", 10,
+      ].concat(go),
+      "randOutputs": [
+        "reind-item-ore-linnaeite", 10, 0.25,
+        "reind-item-ore-pyrite", 10, 0.25,
+        "reind-item-ore-stannite", 10, 0.25,
+        "reind-item-was-gangue", 10, 0.5,
+      ],
+    },
 
 
     // Dust (Malachite)
@@ -117,6 +140,7 @@ const rc = {
       "randOutputs": [
         "reind-item-ore-azurite", 10, 0.25,
         "reind-item-ore-limonite", 10, 0.25,
+        "reind-item-ore-cuprite", 10, 0.125,
         "reind-item-was-gangue", 10, 0.5,
       ],
     },
@@ -192,8 +216,11 @@ const rc = {
         "reind-item-int-dust-p1-pyrite", 10,
       ].concat(go),
       "randOutputs": [
-        "reind-item-ore-chalcopyrite", 10, 0.25,
-        "reind-item-ore-raw-coal", 10, 0.25,
+        "reind-item-ore-chalcopyrite", 10, 0.5,
+        "reind-item-ore-galena", 10, 0.5,
+        "reind-item-ore-fluorite", 10, 0.25,
+        "reind-item-ore-limonite", 10, 0.25,
+        "reind-item-ore-arsenopyrite", 10, 0.125,
         "reind-item-was-gangue", 10, 0.5,
       ],
     },
@@ -214,7 +241,10 @@ const rc = {
       ].concat(go),
       "randOutputs": [
         "reind-item-ore-sphalerite", 10, 0.5,
+        "reind-item-ore-barite", 10, 0.25,
+        "reind-item-ore-chalcopyrite", 10, 0.25,
         "reind-item-ore-pyrite", 10, 0.25,
+        "reind-item-ore-anglesite", 10, 0.125,
         "reind-item-was-gangue", 10, 0.5,
       ],
     },
@@ -276,6 +306,7 @@ const rc = {
         "reind-item-ore-rutile", 10, 0.5,
         "reind-item-ore-hematite", 10, 0.25,
         "reind-item-ore-pyrolusite", 10, 0.25,
+        "reind-item-ore-fluorapatite", 10, 0.125,
         "reind-item-was-gangue", 10, 0.5,
       ],
     },
@@ -294,6 +325,29 @@ const rc = {
       "randOutputs": [
         "reind-item-ore-hematite", 10, 0.5,
         "reind-item-ore-zircon", 10, 0.25,
+        "reind-item-was-gangue", 10, 0.5,
+      ],
+    },
+
+
+    /* <---------------- zinc ----------------> */
+
+
+    // Dust (Sphalerite)
+    {
+      "icon": "reind-item-int-dust-sphalerite",
+      "category": "purification",
+      "inputs": [
+        "reind-item-int-dust-sphalerite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-p1-sphalerite", 10,
+      ].concat(go),
+      "randOutputs": [
+        "reind-item-ore-galena", 10, 0.5,
+        "reind-item-ore-fluorite", 10, 0.5,
+        "reind-item-ore-limonite", 10, 0.25,
+        "reind-item-ore-smithsonite", 10, 0.125,
         "reind-item-was-gangue", 10, 0.5,
       ],
     },
@@ -335,6 +389,7 @@ const rc = {
         "reind-item-ore-talcum", 10, 0.5,
         "reind-item-ore-asbestos", 10, 0.5,
         "reind-item-ore-pyrite", 10, 0.25,
+        "reind-item-ore-chalcopyrite", 10, 0.25,
         "reind-item-was-gangue", 10, 0.75,
       ],
       "tooltip": "target-talcum-asbestos",
@@ -370,6 +425,7 @@ const rc = {
       "outputs": [].concat(go),
       "randOutputs": [
         "reind-item-ore-gypsum", 10, 0.5,
+        "reind-item-ore-fluorite", 10, 0.25,
         "reind-item-ore-clay", 10, 0.25,
         "reind-item-ore-native-copper", 10, 0.125,
         "reind-item-was-gangue", 10, 0.75,
@@ -389,7 +445,9 @@ const rc = {
       "randOutputs": [
         "reind-item-ore-dolomite", 10, 0.5,
         "reind-item-ore-limestone", 10, 0.5,
-        "reind-item-ore-gypsum", 10, 0.125,
+        "reind-item-ore-gypsum", 10, 0.25,
+        "reind-item-ore-chalcopyrite", 10, 0.125,
+        "reind-item-ore-cinnabar", 10, 0.125,
         "reind-item-was-gangue", 10, 0.75,
       ],
       "tooltip": "target-dolomite-limestone",

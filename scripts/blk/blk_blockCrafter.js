@@ -19,7 +19,7 @@
   // Part: Auxiliary
     function ax_buildStats(cts) {
       return function(tb) {
-        mdl_table.setContentRowDisplay(tb, cts, true);
+        mdl_table.setContentListDisplay(tb, cts, 1.5);
       };
     };
   // End
@@ -49,7 +49,7 @@
       if(shouldProduce) {
         b.progress += b.block.buildSpeed * b.edelta();
 
-        if(b.progress - b.recipe.buildCost > -0.0001) {
+        if(b.progress - b.recipe.buildTime > -0.0001) {
           b.consume();
           b.payload = new BuildPayload(b.recipe, b.team);
           b.payVector.setZero();

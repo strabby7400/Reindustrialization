@@ -99,7 +99,7 @@
         b.growProg = Mathf.clamp(b.growProg + b.edelta() / b.growTime * 90.0);
         b.growStage = Mathf.floor(b.growProg * (b.growStages - 1)) + 1;
 
-        var cap = b.stageScr.size;
+        var cap = b.stageScr.length;
         if(cap > 0) {
           for(let i = 0; i < cap; i += 2) {
             var stage = b.stageScr[i];
@@ -174,12 +174,12 @@
         var rad = VAR.crop_harvestRadius;
 
         var b_cont = mdl_game._container(b, b.team, rad);
-        if(b_cont != null) {
-          frag_item.addItemBatch(b_cont, batch);
+        if(b_cont != null && frag_item.acceptItemBatch(b_cont, b, batch)) {
+          frag_item.addItemBatch(b_cont, b, batch);
           mdl_effect.itemTransfer(b, b_cont)
         } else {
           var unit_cont = mdl_game._player(b, b.team, rad);
-          if(unit_cont != null) {
+          if(unit_cont != null && mdl_unit.acceptItemBatch(unit_cont, batch)) {
             mdl_unit.addItemBatch(unit_cont, batch);
             mdl_effect.itemTransfer(b, unit_cont)
           } else {

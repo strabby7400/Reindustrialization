@@ -36,7 +36,11 @@
 
   // Part: Component
     function setStatsComp(blk) {
-      var tpVal = (blk.name.includes("reind-env-tree-fungi-")) ? mdl_text._term("fungi") : mdl_text._term("tree");
+      var tpVal = mdl_text._term("tree");
+      var nm = blk.name;
+      if(nm.includes("reind-env-tree-bush-")) tpVal = mdl_text._term("bush");
+      if(nm.includes("reind-env-tree-fungi-")) tpVal = mdl_text._term("fungi");
+      if(nm.includes("reind-env-tree-static-")) tpVal = mdl_text._term("static");
       blk.stats.add(db_stat.type, tpVal);
     };
 
@@ -64,6 +68,11 @@
         scl = 3.0;
         mag = 0.4;
         wobScl = 0.3;
+      };
+      if(blk.name.includes("reind-env-tree-static-")) {
+        scl = 6.0;
+        mag = 0.4;
+        wobScl = 0.2;
       };
 
       var a = (Groups.player.size() > 1) ? 1.0 : treeAlpha;

@@ -34,7 +34,7 @@
 
     const _contentList = function(cts, title) {
       return function() {
-        var col = Math.max(Math.floor(mdl_ui._sizePair(null, null, 120.0)[0] / 32.0), 7);
+        var col = mdl_ui._col();
 
         var dial = new BaseDialog(title);
         dial.title.getStyle().fontColor = Color.white;
@@ -310,9 +310,11 @@
           mdl_table.__wrapLine(pn, "WIP.", Align.left, 1, 48.0);
 
           mdl_table.__break(pn);
-          pn.add("Acknowledgement:").left().color(Pal.accent).row();
+          pn.add("Acknowledgement & Dedication:").left().color(Pal.accent).row();
           mdl_table.__breakHalf(pn);
           mdl_table.__wrapLine(pn, "Pixabay (Website) - For sound effects, most of which have been modified to fit in.", Align.left, 1, 48.0);
+          mdl_table.__breakHalf(pn);
+          mdl_table.__wrapLine(pn, "Rusted Warfare (Video Game) - For miscellaneous RTS ideas.", Align.left, 1, 48.0);
           mdl_table.__breakHalf(pn);
           mdl_table.__wrapLine(pn, "Greg's Tech: New Horizon (Minecraft Modpack) - For ideas about some factories and mechanics, and the incubation of the idea for Reind.", Align.left, 1, 48.0);
           mdl_table.__breakHalf(pn);
@@ -447,6 +449,8 @@
           "reind-dis-aux-waste-filter-gate",
           "reind-dis-aux-intermediate-filter-gate",
           "reind-dis-conv-quadruplet-conveyor",
+          "reind-unit-inf-suppressor",
+          "reind-pow-wire-copper-remote-wire-node",
         ],
       ],
 
@@ -508,7 +512,6 @@
 
         tb.checkPref("reind-welcome-dialog", true);
         tb.checkPref("reind-core-time-control", true);
-        tb.checkPref("reind-damage-display", true);
 
         tb.sliderPref("reind-tree-alpha", 20, 0, 20, function(val) {return Strings.fixed(val * 5.0, 0) + "%"});
         tb.checkPref("reind-tree-transparentization", true);
@@ -516,6 +519,8 @@
         tb.checkPref("reind-show-icon-tag", true);
         tb.sliderPref("reind-icon-tag-interval", 1, 0, 11, function(val) {return Strings.fixed((val + 1) * 0.25, 2) + "s"});
 
+        tb.checkPref("reind-damage-display", true);
+        tb.checkPref("reind-show-unit-health", true);
         tb.checkPref("reind-mark-heated-block", false);
         tb.sliderPref("reind-max-heated-block-mark", 3, 1, 50, function(val) {return Strings.fixed(val, 0)});
 

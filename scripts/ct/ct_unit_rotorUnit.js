@@ -38,6 +38,7 @@
         TEMPLATE.init(this);
         db_bullet.__basic(this, 4, 27.0, 0.3, 304.0, 10.0, "reind-bul-bullet1", Pal.techBlue, 0.8, 0.0, 2, false);
         db_ability.__deathExplosion(this, 300.0, 64.0, StatusEffects.blasted);
+        db_ability.__laserDefense(this, 1600.0, 1440.0, 80.0);
         db_ability.__energizer(this);
         db_ability.__portableOreScanner(this);
       },

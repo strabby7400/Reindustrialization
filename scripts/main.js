@@ -56,6 +56,10 @@
 
   // Part: Import
 
+    /* <---------------- global ----------------> */
+
+    const glb_vars = require("reind/glb/glb_vars");
+
     /* <---------------- config ----------------> */
 
     const cfg_attr = require("reind/cfg/cfg_attr");
@@ -76,8 +80,6 @@
 
     const db_dialog = require("reind/db/db_dialog");
     const db_event = require("reind/db/db_event");
-
-    /* <---------------- global ----------------> */
 
     /* <---------------- item ----------------> */
 

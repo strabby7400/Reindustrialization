@@ -16,3 +16,5 @@
 
 
   solid: false
+  floating: true
+  placeableLiquid: true

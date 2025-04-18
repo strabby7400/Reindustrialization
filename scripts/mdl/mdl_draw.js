@@ -18,6 +18,13 @@
       ldm = val;
     };
     exports.set_ldm = set_ldm;
+
+
+    var showUnitHealth = false;
+    const set_showUnitHealth = function(val) {
+      showUnitHealth = val;
+    };
+    exports.set_showUnitHealth = set_showUnitHealth;
   // End
 
 
@@ -41,6 +48,22 @@
       return Color.white;
     };
     exports._color = _color;
+
+
+    const _randOv_rock = function() {
+      return [
+        Core.atlas.find("reind-ov-rand-rock1"),
+        Core.atlas.find("reind-ov-rand-rock2"),
+        Core.atlas.find("reind-ov-rand-rock3"),
+        Core.atlas.find("reind-ov-rand-rock4"),
+        Core.atlas.find("reind-ov-rand-rock5"),
+        Core.atlas.find("reind-ov-rand-rock6"),
+        Core.atlas.find("reind-ov-rand-rock7"),
+        Core.atlas.find("reind-ov-rand-rock8"),
+        Core.atlas.find("reind-ov-rand-rock9"),
+      ];
+    };
+    exports._randOv_rock = _randOv_rock;
   // End
 
 
@@ -66,6 +89,20 @@
       return pixmap;
     };
     exports._pix_stack = _pix_stack;
+  // End
+
+
+  // Part: Base
+    const baseDraw_buildingComp = function(b) {
+      if(b.block.variants == 0 || b.block.variantRegions == null) {
+        Draw.rect(b.block.region, b.x, b.y, b.drawrot());
+      } else {
+        Draw.rect(b.block.variantRegions[Mathf.randomSeed(b.tile.pos(), 0, Math.max(0, b.block.variantRegions.length - 1))], b.x, b.y, b.drawRot());
+      };
+
+      b.drawTeamTop();
+    };
+    exports.baseDraw_buildingComp = baseDraw_buildingComp;
   // End
 
 
@@ -95,6 +132,23 @@
       Draw.reset();
     };
     exports.drawNormalRegion = drawNormalRegion;
+
+
+    const drawRandomOverlay = function(t, regs, cap) {
+      if(ldm) return;
+      if(Vars.headless || t == null || regs == null || regs.length == 0) return;
+      if(!(t.block() instanceof AirBlock) || !(t.overlay() instanceof AirBlock)) return;
+
+      if(cap == null) cap = 80;
+
+      var shouldDraw = Math.floor(Mathf.randomSeed(t.pos(), 0, cap)) == 0;
+      if(shouldDraw) {
+        var regIndex = Math.floor(Mathf.randomSeed(t.pos() + 114514, 0, regs.length));
+
+        drawNormalRegion(t, regs[regIndex], 0.0, 1.0, 1.0, Color.white, 1.02);
+      };
+    };
+    exports.drawRandomOverlay = drawRandomOverlay;
 
 
     /* <---------------- drawShadowRegion ----------------> */
@@ -158,7 +212,7 @@
       var y = pos.y;
       var w = reg.width * 2.0 * regScl / Vars.tilesize;
       var h = reg.height * 2.0 * regScl / Vars.tilesize;
-      var pos1 = mdl_game._posP3d(pos, elev);
+      var pos1 = mdl_game._posP3d(pos, elev, true);
       var x_fi = pos1.x;
       var y_fi = pos1.y;
 
@@ -172,7 +226,7 @@
         var arr_a = [0.84, 0.36, 0.14, 0.06];
         var arr_regScl = [1.0, 1.2, 1.4, 1.6];
         for(let i = 0; i < 4; i++) {
-          var pos_i = Tmp.v2.set(Mathf.lerp(x_fi, x, arr_pos[i]), Mathf.lerp(y_fi, y, arr_pos[i]));
+          var pos_i = Tmp.v3.set(Mathf.lerp(x_fi, x, arr_pos[i]), Mathf.lerp(y_fi, y, arr_pos[i]));
           var a_i = arr_a[i];
           var regScl_i = arr_regScl[i];
 
@@ -474,10 +528,11 @@
     /* <---------------- drawLaser ----------------> */
 
 
-    const drawLaser = function(pos_gn1, pos_gn2, color_gn, hasLight) {
+    const drawLaser = function(pos_gn1, pos_gn2, color_gn, strokeScl, z, hasLight) {
       if(Vars.headless || pos_gn1 == null || pos_gn2 == null) return;
 
       if(color_gn == null) color_gn = Pal.accent;
+      if(strokeScl == null) strokeScl = 1.0;
       if(hasLight == null) hasLight = false;
 
       var pos1 = mdl_game._pos(pos_gn1);
@@ -488,14 +543,16 @@
       var x2 = pos2.x;
       var y2 = pos2.y;
 
-      var scl = 1.0 + Math.sin(Time.time / 15.0) * 0.3;
+      var scl = (1.0 + Math.sin(Time.time / 15.0) * 0.3) * strokeScl;
 
-      Draw.z(Layer.effect + 6.1);
+      Draw.z((z == null) ? (Layer.effect + 6.1) : z);
       Lines.stroke(3.0 * scl, color);
+      Draw.alpha(Vars.renderer.laserOpacity);
       Lines.line(x1, y1, x2, y2);
       Fill.circle(x1, y1, 8.0 * scl * 0.3);
       Fill.circle(x2, y2, 8.0 * scl * 0.3);
-      Lines.stroke(1.0, Color.white);
+      Lines.stroke(1.0 * scl, Color.white);
+      Draw.alpha(Vars.renderer.laserOpacity);
       Fill.circle(x1, y1, 4.0 * scl * 0.3);
       Fill.circle(x2, y2, 4.0 * scl * 0.3);
       Lines.line(x1, y1, x2, y2);
@@ -927,6 +984,103 @@
       Draw.reset();
     };
     exports.drawProgressCircle = drawProgressCircle;
+
+
+    /* <---------------- drawUnitBar ----------------> */
+
+
+    const drawUnitHealth = function(unit, frac, color_gn, size, armor, shield, offW, offTy, segScl) {
+      if(!showUnitHealth || Vars.headless || unit == null || frac == null) return;
+      if(mdl_content.isCovered(unit)) return;
+
+      if(color_gn == null) color_gn = Pal.accent;
+      if(size == null) size = 1;
+      if(offW == null) offW = 0.0;
+      if(offTy == null) offTy = 0.0;
+      if(segScl == null) segScl = 1.0;
+
+      var frac_fi = Mathf.clamp(frac);
+      var color = _color(color_gn);
+      var x = unit.x;
+      var y = unit.y;
+      var w = (size + 1) * Vars.tilesize + offW;
+      var offY = (offTy + size * 0.5 + 1.5) * Vars.tilesize;
+      var seg = Math.ceil(w / 4.0 / segScl);
+
+      Draw.z(Layer.effect + 6.1);
+      Lines.stroke(5.0, Pal.gray);
+      Draw.alpha(0.7);
+      Lines.line(x - w * 0.5, y + offY, x + w * 0.5, y + offY);
+      Lines.stroke(3.0, color);
+      Draw.alpha(0.2);
+      Lines.line(x - w * 0.5, y + offY, x + w * 0.5, y + offY);
+      Draw.alpha(0.7);
+      Lines.line(x - w * 0.5, y + offY, Mathf.lerp(x - w * 0.5, x + w * 0.5, frac_fi), y + offY);
+
+      Lines.stroke(1.0, Pal.gray);
+      Draw.alpha(0.7);
+      var segW = (w + 5.0) / (seg + 1);
+      for(let i = 0; i < seg; i++) {
+        var x_i = x - w * 0.5 - 2.5 + segW * (i + 1);
+        var y1_i = y + offY + 2.0;
+        var y2_i = y + offY - 2.0;
+
+        Lines.line(x_i, y1_i, x_i, y2_i);
+      };
+
+      if(armor != null) drawText(unit, Strings.autoFixed(armor, 0), Color.gray, 1.2, Align.right, -w * 0.5 - 4.0, offY + 2.0);
+      if(shield != null && shield > 0.0) drawText(unit, Strings.autoFixed(shield, 0), Pal.accent, 1.2, Align.left, w * 0.5 + 4.0, offY + 2.0);
+
+      Draw.reset();
+    };
+    exports.drawUnitHealth = drawUnitHealth;
+
+
+    const drawUnitReload = function(unit, ids_gn, offW, offTy, frac, color_gn) {
+      if(!showUnitHealth || Vars.headless || unit == null) return;
+      if(mdl_content.isCovered(unit)) return;
+
+      if(offW == null) offW = 0.0;
+      if(offTy == null) offTy = 0.0;
+
+      var frac_fi = 0.0;
+      if(frac != null) {frac_fi = frac} else {
+        if(ids_gn == null) return;
+
+        var ids = (ids_gn instanceof Array) ? ids_gn : [ids_gn];
+        var reload = 0.0;
+        var maxReload = 0.0;
+        ids.forEach(id => {
+          var mt = unit.mounts[id];
+          if(mt != null) {
+            reload += mt.reload;
+            maxReload += mt.weapon.reload;
+          };
+        });
+        if(maxReload < 0.0001) return;
+
+        frac_fi = Mathf.clamp(1.0 - reload / maxReload);
+      };
+      if(frac_fi > 0.9999) return;
+
+      var color = (frac == null) ? Pal.techBlue : ((color_gn == null) ? Color.white : _color(color_gn));
+      var x = unit.x;
+      var y = unit.y;
+      var w = (unit.type.hitSize + 8.0 + offW) * 1.7;
+      var offY = unit.type.hitSize * 0.5 + 4.0 + (offTy + 1.25) * Vars.tilesize;
+
+      Draw.z(Layer.effect + 0.1);
+      Lines.stroke(5.0, Pal.gray);
+      Draw.alpha(0.35);
+      Lines.line(x - w * 0.5, y - offY, x + w * 0.5, y - offY);
+      Lines.stroke(3.0, color);
+      Draw.alpha(0.1);
+      Lines.line(x - w * 0.5, y - offY, x + w * 0.5, y - offY);
+      Draw.alpha(0.35);
+      Lines.line(x - w * 0.5, y - offY, Mathf.lerp(x - w * 0.5, x + w * 0.5, frac_fi), y - offY);
+      Draw.reset();
+    };
+    exports.drawUnitReload = drawUnitReload;
 
 
   // End

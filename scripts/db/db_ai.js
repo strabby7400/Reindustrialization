@@ -31,7 +31,7 @@
             var len = unit_pl.type.hitSize * 2.0;
 
             mdl_unit.moveTo(unit, unit_pl, len);
-            if(Core.input.touched) {
+            if(Core.input.touched && Groups.player.size() < 2) {
               var t = mdl_game._tMouse();
               if(t != null) mdl_unit.lookAt(unit, t, true);
             } else if(!unit.within(unit_pl, len * 1.25)) {

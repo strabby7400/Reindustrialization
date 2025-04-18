@@ -384,6 +384,8 @@
 
 
     const buildConfiguration = function(b, tb) {
+      if(cfg_update.isSuppressed()) return;
+
       buildConfigurationComp(b, tb);
     };
     exports.buildConfiguration = buildConfiguration;
@@ -432,6 +434,8 @@
 
 
     const drawSelect = function(b) {
+      if(cfg_update.isSuppressed()) return;
+      
       drawSelectComp(b);
     };
     exports.drawSelect = drawSelect;

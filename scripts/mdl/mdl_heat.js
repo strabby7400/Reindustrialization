@@ -49,8 +49,10 @@
     exports._sHeat = _sHeat;
 
 
-    const _tHeat = function(b) {
-      return _heat(b) + _sHeat(b);
+    const _tHeat = function(b, isVisual) {
+      if(isVisual == null) isVisual = false;
+
+      return _heat(b) + _sHeat(b) + (isVisual ? _wHeat(b) : 0.0);
     };
     exports._tHeat = _tHeat;
 
@@ -67,8 +69,10 @@
     exports._heatLoss = _heatLoss;
 
 
-    const _heatFrac = function(b) {
-      return Mathf.clamp(_tHeat(b) / _heatLimit(b.block));
+    const _heatFrac = function(b, isVisual) {
+      if(isVisual == null) isVisual = false;
+
+      return Mathf.clamp(_tHeat(b, isVisual) / _heatLimit(b.block));
     };
     exports._heatFrac = _heatFrac;
 
@@ -105,23 +109,37 @@
 
 
   // Part: Range Heat
-    const _rangeHeat = function(t) {
+    const _wHeat = function(b) {
+      if(b.status() != BlockStatus.active) return 0.0;
+
+      return mdl_data.read_1n1v(db_block.db["heat"]["wHeat"], b.block.name, 0.0) * b.efficiency;
+    };
+    exports._wHeat = _wHeat;
+
+
+    const _rHeat = function(t) {
       var heat = 0.0;
       mdl_game._tsRect(t, 1).forEach(ot => {
         // Get floor heat
         heat += ot.floor().attributes.get(Attribute.get("reind-attr-env-heat")) * 16.0;
 
-        // Get fluid heat
-        if(ot.build != null) heat += _fHeat(ot.build) * 0.05;
+        var ob = ot.build;
+        if(ob != null) {
+          // Get fluid heat
+          heat += _fHeat(ob) * 0.05;
 
-        // Get block heat
-        if(ot.build != null) heat += _heat(ot.build) * 1.5;
+          // Get block heat
+          heat += _heat(ob) * 1.5;
+
+          // Get working heat
+          heat += _wHeat(ob);
+        };
       });
       heat /= 6.0;
 
       return heat;
     };
-    exports._rangeHeat = _rangeHeat;
+    exports._rHeat = _rHeat;
   // End
 
 

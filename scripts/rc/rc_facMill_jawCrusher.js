@@ -64,32 +64,6 @@ const rc = {
 
     // Dolomite
     {
-      "icon": "reind-item-ore-barite",
-      "category": "crushing",
-      "inputs": [
-        "reind-item-ore-barite", 3,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-chunks-barite", 3,
-      ].concat(go),
-    },
-
-
-    // Crude Sulfur
-    {
-      "icon": "reind-item-ore-crude-sulfur",
-      "category": "crushing",
-      "inputs": [
-        "reind-item-ore-crude-sulfur", 3,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-chunks-crude-sulfur", 3,
-      ].concat(go),
-    },
-
-
-    // Dolomite
-    {
       "icon": "reind-item-ore-dolomite",
       "category": "crushing",
       "inputs": [
@@ -123,32 +97,6 @@ const rc = {
       ].concat(gi),
       "outputs": [
         "reind-item-int-chunks-limestone", 3,
-      ].concat(go),
-    },
-
-
-    // Silica Stone
-    {
-      "icon": "reind-item-ore-silica-stone",
-      "category": "crushing",
-      "inputs": [
-        "reind-item-ore-silica-stone", 3,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-chunks-silica-stone", 3,
-      ].concat(go),
-    },
-
-
-    // Zircon
-    {
-      "icon": "reind-item-ore-zircon",
-      "category": "crushing",
-      "inputs": [
-        "reind-item-ore-zircon", 3,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-chunks-zircon", 3,
       ].concat(go),
     },
 
@@ -230,6 +178,86 @@ const rc = {
       ].concat(gi),
       "outputs": [
         "reind-item-int-chunks-aggregate", 3,
+      ].concat(go),
+    },
+
+
+    /* <---------------- barium ----------------> */
+
+
+    // Barite
+    {
+      "icon": "reind-item-ore-barite",
+      "category": "crushing",
+      "inputs": [
+        "reind-item-ore-barite", 3,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-chunks-barite", 3,
+      ].concat(go),
+    },
+
+
+    /* <---------------- phosphorus ----------------> */
+
+
+    // Fluorapatite
+    {
+      "icon": "reind-item-ore-fluorapatite",
+      "category": "crushing",
+      "inputs": [
+        "reind-item-ore-fluorapatite", 3,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-chunks-fluorapatite", 3,
+      ].concat(go),
+    },
+
+
+    /* <---------------- silicon ----------------> */
+
+
+    // Silica Stone
+    {
+      "icon": "reind-item-ore-silica-stone",
+      "category": "crushing",
+      "inputs": [
+        "reind-item-ore-silica-stone", 3,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-chunks-silica-stone", 3,
+      ].concat(go),
+    },
+
+
+    /* <---------------- sulfur ----------------> */
+
+
+    // Crude Sulfur
+    {
+      "icon": "reind-item-ore-crude-sulfur",
+      "category": "crushing",
+      "inputs": [
+        "reind-item-ore-crude-sulfur", 3,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-chunks-crude-sulfur", 3,
+      ].concat(go),
+    },
+
+
+    /* <---------------- zirconium ----------------> */
+
+
+    // Zircon
+    {
+      "icon": "reind-item-ore-zircon",
+      "category": "crushing",
+      "inputs": [
+        "reind-item-ore-zircon", 3,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-chunks-zircon", 3,
       ].concat(go),
     },
 

@@ -13,6 +13,8 @@
     const env_tree = require("reind/env/env_tree");
     const rs_genericResource = require("reind/rs/rs_genericResource");
     const unit_genericUnit = require("reind/unit/unit_genericUnit");
+    const unit_mechUnit = require("reind/unit/unit_mechUnit");
+    const unit_rotorUnit = require("reind/unit/unit_rotorUnit");
 
     const cfg_update = require("reind/cfg/cfg_update");
 
@@ -23,6 +25,7 @@
     const mdl_draw = require("reind/mdl/mdl_draw");
     const mdl_effect = require("reind/mdl/mdl_effect");
 
+    const db_ability = require("reind/db/db_ability");
     const db_dialog = require("reind/db/db_dialog");
   // End
 
@@ -43,6 +46,9 @@
       set_showIconTag(Core.settings.getBool("reind-show-icon-tag", true));
       set_iconTagInterval(Core.settings.getInt("reind-icon-tag-interval", 1));
 
+      set_damageDisplay(Core.settings.getBool("reind-damage-display", true));
+      set_showUnitHealth(Core.settings.getBool("reind-show-unit-health", true));
+
       set_secretCode(Core.settings.getString("reind-secret-code", "<ohno>"));
     };
     exports.loadSettings = loadSettings;
@@ -61,6 +67,8 @@
     const set_ldm = function(bool) {
       var val = bool;
 
+      unit_mechUnit.set_ldm(val);
+      unit_rotorUnit.set_ldm(val);
       mdl_draw.set_ldm(val);
       mdl_effect.set_ldm(val);
     };
@@ -131,6 +139,24 @@
       rs_genericResource.set_iconTagInterval(val);
     };
     exports.set_iconTagInterval = set_iconTagInterval;
+
+
+    const set_damageDisplay = function(bool) {
+      var val = bool;
+
+      cfg_update.set_damageDisplay(val);
+      mdl_effect.set_damageDisplay(val);
+    };
+    exports.set_damageDisplay = set_damageDisplay;
+
+
+    const set_showUnitHealth = function(bool) {
+      var val = bool;
+
+      mdl_draw.set_showUnitHealth(val);
+      db_ability.set_showUnitHealth(val);
+    };
+    exports.set_showUnitHealth = set_showUnitHealth;
 
 
     const set_secretCode = function(str) {

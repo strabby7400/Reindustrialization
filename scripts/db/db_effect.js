@@ -2203,8 +2203,8 @@
     exports._craftGasLarge = _craftGasLarge;
 
 
-    const _craftBlackSmog = function() {
-      return _blackSmogRelease();
+    const _craftBlackSmog = function(scl) {
+      return _blackSmogRelease(null, scl, null, null);
     };
     exports._craftBlackSmog = _craftBlackSmog;
 

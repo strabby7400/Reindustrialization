@@ -10,6 +10,7 @@
 
     const mdl_content = require("reind/mdl/mdl_content");
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
+    const mdl_data = require("reind/mdl/mdl_data");
     const mdl_flow = require("reind/mdl/mdl_flow");
     const mdl_table = require("reind/mdl/mdl_table");
     const mdl_text = require("reind/mdl/mdl_text");
@@ -231,7 +232,21 @@
 
 
       /* ========================================
-        Section: Power
+        Section: Heat
+      ======================================== */
+
+
+      // Heat
+      if(!Vars.headless) {
+        blks.forEach(blk => {
+          var wHeat = mdl_data.read_1n1v(db_block.db["heat"]["wHeat"], blk.name);
+          if(wHeat != null) blk.stats.add(db_stat.workingHeat, wHeat);
+        });
+      };
+
+
+      /* ========================================
+        Section: Magnetic
       ======================================== */
 
 

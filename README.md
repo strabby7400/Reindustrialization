@@ -9,7 +9,7 @@
   <li> Multi-crafters with random I/O and more scripts. </li>
   <li> TMI compatibility (you will need it). </li>
   <li> Underground ores and scanners. </li>
-  <li> Pipe corrosion base on properties of the fluid and block material. </li>
+  <li> Pipe corrosion based on properties of the fluid and block material. </li>
   <li> Crops that can be harvested. </li>
 </ul>
 <p> See the credits in game! </p>

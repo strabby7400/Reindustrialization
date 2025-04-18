@@ -125,6 +125,21 @@
   // End
 
 
+  // Part: item-ore[fluorine]
+    const envOre_ground_fluorite = extend(OreBlock, "env-ore-ground-fluorite", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      init() {
+        this.super$init();
+        TEMPLATE.init(this);
+      },
+    });
+    exports.envOre_ground_fluorite = envOre_ground_fluorite;
+  // End
+
+
   // Part: item-ore[iron]
     const envOre_ground_hematite = extend(OreBlock, "env-ore-ground-hematite", {
       setStats() {
@@ -182,19 +197,6 @@
 
 
   // Part: item-ore[manganese]
-    const envOre_ground_psilomelane = extend(OreBlock, "env-ore-ground-psilomelane", {
-      setStats() {
-        this.super$setStats();
-        TEMPLATE.setStats(this);
-      },
-      init() {
-        this.super$init();
-        TEMPLATE.init(this);
-      },
-    });
-    exports.envOre_ground_psilomelane = envOre_ground_psilomelane;
-
-
     const envOre_ground_pyrolusite = extend(OreBlock, "env-ore-ground-pyrolusite", {
       setStats() {
         this.super$setStats();

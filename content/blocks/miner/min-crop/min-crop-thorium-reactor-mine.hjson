@@ -111,6 +111,7 @@
     lenTo: 0.0
   }
   destroySound: se-step-grass
+  drawTeamOverlay: false
   flashHit: false
   flashColor: ffffff
 

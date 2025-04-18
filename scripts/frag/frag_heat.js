@@ -116,7 +116,7 @@
 
 
     const draw_heat = function(b, reg) {
-      var frac = mdl_heat._heatFrac(b);
+      var frac = mdl_heat._heatFrac(b, true);
       mdl_draw.drawHeatRegion(b, frac, reg, b.block.size);
     };
     exports.draw_heat = draw_heat;
@@ -201,7 +201,7 @@
 
   // Part: Unit Heat
     const _meltTime = function(unit, rHeat) {
-      var rHeat_fi = (rHeat != null) ? rHeat : mdl_heat._rangeHeat(unit.tileOn());
+      var rHeat_fi = (rHeat != null) ? rHeat : mdl_heat._rHeat(unit.tileOn());
       var thr = unit.maxHealth / 350.0 + 10.0;
       return (rHeat_fi < thr) ? 0.0 : Math.min(((rHeat - thr) / thr * 8.0 + 2.5) * 60.0, 600.0);
     };
@@ -214,7 +214,7 @@
 
       var t = unit.tileOn();
       if(t == null) return;
-      var rHeat = mdl_heat._rangeHeat(t);
+      var rHeat = mdl_heat._rHeat(t);
       if(rHeat < 10.0) return;
 
       var meltTime = _meltTime(unit, rHeat);

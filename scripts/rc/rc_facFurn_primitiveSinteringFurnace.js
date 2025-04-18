@@ -189,6 +189,22 @@ const rc = {
     },
 
 
+    /* <---------------- zinc ----------------> */
+
+
+    // Dust (P1 : Sphalerite)
+    {
+      "icon": "reind-item-int-dust-p1-sphalerite",
+      "category": "concentrate-sintering",
+      "inputs": [
+        "reind-item-int-dust-p1-sphalerite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-concentrate-sphalerite", 20,
+      ],
+    },
+
+
     /* ========================================
       Section: Sintering
     ======================================== */
@@ -319,6 +335,22 @@ const rc = {
       ].concat(gi),
       "outputs": [
         "reind-item-ore-native-copper", 20,
+      ],
+    },
+
+
+    /* <---------------- fluorine ----------------> */
+
+
+    // Fluorite
+    {
+      "icon": "reind-item-int-dust-fluorite",
+      "category": "sintering",
+      "inputs": [
+        "reind-item-int-dust-fluorite", 20,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-ore-fluorite", 20,
       ],
     },
 

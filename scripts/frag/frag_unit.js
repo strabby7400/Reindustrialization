@@ -18,7 +18,33 @@
   // End
 
 
-  // Part: Surrounding
+  // Part: Status
+    const update_health = function(utp, unit) {
+      if(unit.dead || Mathf.chance(0.9)) return;
+
+      var frac = Mathf.clamp(unit.health / unit.maxHealth);
+
+      if(mdl_content.isNonRobot(utp)) {
+        // TODO: Non-robot behavior
+      } else {
+        var sta_d = Vars.content.statusEffect("reind-sta-spec-damaged");
+        var sta_sd = Vars.content.statusEffect("reind-sta-spec-severely-damaged");
+        var staTime = 60.0;
+        if(frac < 0.25) {
+          unit.apply(sta_sd, staTime);
+          unit.unapply(sta_d);
+        } else if(frac < 0.5) {
+          unit.apply(sta_d, staTime);
+          unit.unapply(sta_sd);
+        } else {
+          unit.unapply(sta_d);
+          unit.unapply(sta_sd);
+        };
+      };
+    };
+    exports.update_health = update_health;
+
+
     const update_surrounding = function(utp, unit) {
       if(Mathf.chance(0.96)) return;
       var t = unit.tileOn();

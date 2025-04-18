@@ -43,6 +43,8 @@ const db = {
       "reind-unit-inf-paw", "outpost-military",
       "reind-unit-inf-psas", "outpost-military",
 
+      "reind-unit-inf-suppressor", "outpost-military",
+
     ],
 
 
@@ -119,6 +121,8 @@ const db = {
       "reind-unit-inf-74ka", 1200.0,
       "reind-unit-inf-paw", 600.0,
       "reind-unit-inf-psas", 900.0,
+
+      "reind-unit-inf-suppressor", 600.0,
 
     ],
 

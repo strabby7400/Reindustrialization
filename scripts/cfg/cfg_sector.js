@@ -26,6 +26,13 @@
       ct_wea_decorativeWeather.we_weaDeco_steamFlow,
       ct_wea_decorativeWeather.we_weaDeco_fogBlack,
     ]);
+
+    const wp_aerthSandstorm = new Seq([
+      //ct_wea_ambientWeather.we_weaAmb_aerthSands,
+      ct_wea_decorativeWeather.we_weaDeco_flyingSand,
+      ct_wea_decorativeWeather.we_weaDeco_sandstorm,
+      ct_wea_decorativeWeather.we_weaDeco_fogBlack,
+    ]);
   // End
 
 

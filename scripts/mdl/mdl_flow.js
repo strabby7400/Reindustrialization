@@ -12,7 +12,6 @@
     const mdl_corrosion = require("reind/mdl/mdl_corrosion");
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_math = require("reind/mdl/mdl_math");
-    const mdl_test = require("reind/mdl/mdl_test");
 
     const db_block = require("reind/db/db_block");
     const db_fluid = require("reind/db/db_fluid");
@@ -73,6 +72,15 @@
           break;
         case "acidicAq" :
           dens = 1.0;
+          break;
+        case "alcohol" :
+          dens = 0.95;
+          break;
+        case "basicAlc" :
+          dense = 0.95;
+          break;
+        case "acidicAlc" :
+          dense = 0.95;
           break;
         case "oil" :
           dens = 0.7;
@@ -183,6 +191,8 @@
 
 
     const _totalFric = function(b_f, b_t) {
+      if(!mdl_content.isCond(b_t.block)) return 0.0;
+      
       return Mathf.clamp(_dmFric(b_f, b_t) + _cornerFric(b_f, b_t) + _lineFric(_rough(b_t), _pipeDmCoef(b_t.block)), 0.0, 0.9);
     };
     exports._totalFric = _totalFric;
@@ -190,14 +200,7 @@
 
     const _flowRate = function(b_f, b_t, frac_f, frac_t, pres, visc) {
       var rate = Math.max((1.0 - visc) * 2.0 * (frac_f - frac_t) * b_f.block.liquidCapacity * pres * _pipeDmCoef(b_t.block) , 0.0);
-
-      // BETA MODE
-      var rate_fi;
-      if(mdl_test._beta()) {
-        rate_fi = rate * (1.0 - _totalFric(b_f, b_t));
-      } else {
-        rate_fi = rate;
-      }
+      var rate_fi = rate * (1.0 - _totalFric(b_f, b_t));
 
       return rate_fi;
     };

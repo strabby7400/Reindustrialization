@@ -15,9 +15,18 @@
   // End
 
 
+  // Part: Setting
+    var ldm = false;
+    const set_ldm = function(val) {
+      ldm = val;
+    };
+    exports.set_ldm = set_ldm;
+  // End
+
+
   // Part: Component
     function updateComp(utp, unit) {
-      if(!Vars.headless && unit.elevation > 0.5 && Mathf.chance(0.25)) {
+      if(!ldm && !Vars.headless && unit.elevation > 0.5 && Mathf.chance(0.25)) {
         var cond = false;
         var rad = Math.max(utp.hitSize / 1.5 - 2.0, 2.0);
         var elev = mdl_unit._elev(unit);
@@ -25,7 +34,7 @@
         if(mdl_content.isMoving(unit)) cond = true;
         if(!cond && Mathf.chance(0.4)) cond = true;
 
-        if(cond) mdl_effect.dustAt_ldm(mdl_game._posP3d(unit, elev), rad);
+        if(cond) mdl_effect.dustAt(mdl_game._posP3d(unit, elev), rad);
       };
     };
   // End

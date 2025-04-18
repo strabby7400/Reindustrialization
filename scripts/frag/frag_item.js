@@ -33,8 +33,29 @@
     exports.addItem = addItem;
 
 
-    const addItemBatch = function(b, batch) {
-      if(b == null || batch == null) return false;
+    const acceptItemBatch = function(b, ob, batch) {
+      if(b == null || b.items == null || ob == null || batch == null) return false;
+
+      var cond = false;
+
+      var cap = batch.length;
+      if(cap == 0) return false;
+      for(let i = 0; i < cap; i += 3) {
+        var itm = mdl_content._ct_gn(batch[i]);
+        if(itm == null || !(itm instanceof Item)) continue;
+
+        if(b.acceptItem(ob, itm)) cond = true;
+      };
+
+      return cond;
+    };
+    exports.acceptItemBatch = acceptItemBatch;
+
+
+    const addItemBatch = function(b, ob, batch) {
+      if(b == null || b.items == null || batch == null) return false;
+
+      var b_f = (ob == null) ? b : ob;
 
       var cap = batch.length;
       if(cap == 0) return false;
@@ -44,7 +65,7 @@
         var p = batch[i + 2];
 
         if(b.items != null && itm instanceof Item) {
-          for(let j = 0; j < amt; j++) {if(b.acceptItem(b, itm) && Mathf.chance(p)) b.items.add(itm, 1)};
+          for(let j = 0; j < amt; j++) {if(b.acceptItem(b_f, itm) && Mathf.chance(p)) b.items.add(itm, 1)};
         };
       };
 

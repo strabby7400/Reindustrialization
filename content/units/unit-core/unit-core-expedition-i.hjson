@@ -298,7 +298,7 @@
 
       top: false
       mirror: false
-      alternate: true
+      alternate: false
       x: 0.0
       y: 0.0
       rotate: false

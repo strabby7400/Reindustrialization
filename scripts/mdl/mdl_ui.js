@@ -8,6 +8,7 @@
   // Part: Import
     const mdl_data = require("reind/mdl/mdl_data");
     const mdl_math = require("reind/mdl/mdl_math");
+    const mdl_test = require("reind/mdl/mdl_test");
     const mdl_text = require("reind/mdl/mdl_text");
 
     const db_dialText = require("reind/db/db_dialText");
@@ -42,6 +43,14 @@
       return [w_fi, h_fi];
     };
     exports._sizePair = _sizePair;
+
+
+    const _col = function(sizeScl) {
+      if(sizeScl == null) sizeScl = 1.0;
+
+      return Math.max(Math.floor(_sizePair(null, null, 120.0)[0] / 32.0 / sizeScl), 7);
+    };
+    exports._col = _col;
   // End
 
 
@@ -268,6 +277,10 @@
 
 
     const _te = function(delay, nm, fracX, dark, time, mode, param1, param2) {
+      // BETA MODE
+      // NOTE: Unfinished character art, so skip this.
+      if(!mdl_test._beta()) return;
+
       if(dark == null) dark = false;
       if(time == null) time = 5.0;
 

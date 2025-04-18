@@ -50,6 +50,32 @@
     exports.staSpec_coreOverdrive = staSpec_coreOverdrive;
 
 
+    const staSpec_damaged = extend(StatusEffect, "sta-spec-damaged", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      update(unit, time) {
+        this.super$update(unit, time);
+        TEMPLATE.update(this, unit, time);
+      },
+    });
+    exports.staSpec_damaged = staSpec_damaged;
+
+
+    const staSpec_severelyDamaged = extend(StatusEffect, "sta-spec-severely-damaged", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      update(unit, time) {
+        this.super$update(unit, time);
+        TEMPLATE.update(this, unit, time);
+      },
+    });
+    exports.staSpec_severelyDamaged = staSpec_severelyDamaged;
+
+
     const staSpec_earsesMark = extend(StatusEffect, "sta-spec-earses-mark", {
       setStats() {
         this.super$setStats();

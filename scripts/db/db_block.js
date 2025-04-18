@@ -99,6 +99,10 @@ const db = {
 
         "reind-pow-boil-steam-boiler", 8,
 
+        /* <---------------- pow-wire ----------------> */
+
+        "reind-pow-wire-copper-remote-wire-node", 18,
+
         /* <---------------- def-proj ----------------> */
 
         "reind-def-proj-basic-repair-projector", 8,
@@ -208,7 +212,7 @@ const db = {
 
         "reind-fac-furn-carbonization-kiln", "se-craft-gas-release",
         "reind-fac-furn-primitive-brick-kiln", "se-craft-gas-release",
-        "reind-fac-furn-electrode-smelter", "se-craft-gas-release",
+        "reind-fac-furn-electrode-melter", "se-craft-gas-release",
         "reind-fac-furn-kiln", "se-craft-gas-release",
         "reind-fac-furn-bloomery", "se-craft-gas-release",
         "reind-fac-furn-bricked-blast-furnace", "se-craft-gas-release",
@@ -580,10 +584,11 @@ const db = {
 
       /* <---------------- pow-wire ----------------> */
 
-      "reind-pow-wire-copper-cable", 2.25,
+      "reind-pow-wire-copper-cable", 1.5,
       "reind-pow-wire-power-alarm", 30.0,
-      "reind-pow-wire-copper-wire-relay", 25.0,
-      "reind-pow-wire-copper-wire-node", 50.0,
+      "reind-pow-wire-copper-wire-relay", 20.0,
+      "reind-pow-wire-copper-wire-node", 52.5,
+      "reind-pow-wire-copper-remote-wire-node", 45.0,
 
     ],
 
@@ -683,6 +688,42 @@ const db = {
       "reind-bliq-stor-liquid-cell", 800.0,
       "reind-bliq-stor-liquid-tank", 1000.0,
       "reind-bliq-stor-gas-cylinder", 1000.0,
+
+    ],
+
+
+    "wHeat": [
+
+      /* <---------------- pow-boil ----------------> */
+
+      "reind-pow-boil-steam-boiler", 15.0,
+
+      /* <---------------- pow-gen ----------------> */
+
+      "reind-pow-gen-energizer-generator", 12.0,
+      "reind-pow-gen-vent-generator", 6.0,
+
+      /* <---------------- fac-heat ----------------> */
+
+      "reind-fac-heat-furnace-heater", 6.0,
+      "reind-fac-heat-temperature-control-unit", 6.0,
+
+      /* <---------------- fac-furn ----------------> */
+
+      "reind-fac-furn-bloomery", 10.0,
+      "reind-fac-furn-bricked-blast-furnace", 15.0,
+      "reind-fac-furn-carbonization-kiln", 4.0,
+      "reind-fac-furn-colossal-kiln", 12.0,
+      "reind-fac-furn-electrode-melter", 12.0,
+      "reind-fac-furn-kiln", 6.0,
+      "reind-fac-furn-primitive-brick-kiln", 10.0,
+      "reind-fac-furn-primitive-coke-oven", 4.0,
+      "reind-fac-furn-primitive-glass-kiln", 12.0,
+      "reind-fac-furn-primitive-sintering-furnace", 10.0,
+
+      /* <---------------- fac-rmv ----------------> */
+
+      "reind-fac-rmv-hot-air-dryer", 2.0,
 
     ],
 

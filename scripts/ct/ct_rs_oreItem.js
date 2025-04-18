@@ -242,6 +242,26 @@
   // End
 
 
+  // Part: item-ore[fluorine]
+    const itemOre_fluorite = extend(Item, "item-ore-fluorite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemOre_fluorite = itemOre_fluorite;
+  // End
+
+
   // Part: item-ore[iron]
     const itemOre_hematite = extend(Item, "item-ore-hematite", {
       alters: 0,
@@ -409,6 +429,26 @@
       },
     });
     exports.itemOre_cinnabar = itemOre_cinnabar;
+  // End
+
+
+  // Part: item-ore[phosphorus]
+    const itemOre_fluorapatite = extend(Item, "item-ore-fluorapatite", {
+      alters: 0,
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      loadIcon() {
+        this.super$loadIcon();
+        TEMPLATE.loadIcon(this);
+      },
+      createIcons(packer) {
+        this.super$createIcons(packer);
+        TEMPLATE.createIcons(this, packer);
+      },
+    });
+    exports.itemOre_fluorapatite = itemOre_fluorapatite;
   // End
 
 
@@ -617,24 +657,6 @@
       },
     });
     exports.itemOre_crudeSulfur = itemOre_crudeSulfur;
-
-
-    const itemOre_fluorapatite = extend(Item, "item-ore-fluorapatite", {
-      alters: 0,
-      setStats() {
-        this.super$setStats();
-        TEMPLATE.setStats(this);
-      },
-      loadIcon() {
-        this.super$loadIcon();
-        TEMPLATE.loadIcon(this);
-      },
-      createIcons(packer) {
-        this.super$createIcons(packer);
-        TEMPLATE.createIcons(this, packer);
-      },
-    });
-    exports.itemOre_fluorapatite = itemOre_fluorapatite;
 
 
     const itemOre_gypsum = extend(Item, "item-ore-gypsum", {

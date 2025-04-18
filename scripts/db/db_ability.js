@@ -17,9 +17,19 @@
     const mdl_effect = require("reind/mdl/mdl_effect");
     const mdl_game = require("reind/mdl/mdl_game");
     const mdl_text = require("reind/mdl/mdl_text");
+    const mdl_unit = require("reind/mdl/mdl_unit");
 
     const db_effect = require("reind/db/db_effect");
     const db_unit = require("reind/db/db_unit");
+  // End
+
+
+  // Part: Setting
+    var showUnitHealth = false;
+    const set_showUnitHealth = function(val) {
+      showUnitHealth = val;
+    };
+    exports.set_showUnitHealth = set_showUnitHealth;
   // End
 
 
@@ -65,6 +75,43 @@
 
 
   // Part: Attack
+    const __aim = function(utp) {
+      const abi = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-aim.description") + "[]\n\n").wrap().width(350.0);
+        },
+
+
+        update(unit) {
+          if(Mathf.chance(0.9)) return;
+
+          if(unit.team == Vars.state.rules.waveTeam) {
+            var arr = unit.mounts;
+            var cap = arr.length;
+            if(cap == 0) return;
+            for(let i = 0; i < cap; i++) {
+              if(arr[i].reload > 0.0) unit.apply(StatusEffects.unmoving, 60.0);
+            };
+          } else {
+            if(mdl_content.isMoving(unit)) unit.apply(Vars.content.statusEffect("reind-sta-spec-attack-suppression"), 60.0);
+          }
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-aim.name");
+        },
+
+
+      });
+
+      ax_setAbility(utp, abi);
+    };
+    exports.__aim = __aim;
+
+
     const __deathExplosion = function(utp, dmg, rad, sta, dur, sound_gn) {
       if(dmg == null) dmg = 160.0;
       if(rad == null) rad = 40.0;
@@ -271,6 +318,7 @@
 
 
         update(unit) {
+          if(Vars.state.isEditor()) return;
           if(mdl_content.isMoving(unit)) return;
 
           var p_fi = Time.delta * p * unit.reloadMultiplier;
@@ -288,6 +336,206 @@
       ax_setAbility(utp, abi);
     };
     exports.__lightningCore = __lightningCore;
+  // End
+
+
+  // Part: Defense
+    const __energizedRegeneration = function(utp, regen) {
+      if(regen == null) regen = 30.0;
+
+      var r = mdl_data.read_1n1v(db_unit.db["ep"]["range"], utp.name, 5);
+      var ep_req = mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], utp.name, 0.0);
+
+      const abi = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-energized-regeneration.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text._statText(
+            Stat.repairSpeed.localized(),
+            Strings.autoFixed(regen, 2),
+            StatUnit.perSecond.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Core.bundle.get("stat.reind-stat-ep-range.name"),
+            Strings.autoFixed(r, 2),
+            StatUnit.blocks.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Core.bundle.get("stat.reind-stat-ep-required.name"),
+            Strings.autoFixed(ep_req, 2),
+          ));
+        },
+
+
+        displayBars(unit, bars) {
+          bars.add(new Bar(
+            "term.reind-term-energy-points.name",
+            Pal.techBlue,
+            () => Math.min(frag_faci._epFrac(unit), 1.0),
+          )).row();
+        },
+
+
+        update(unit) {
+          if(!unit.damaged()) return;
+          if(Mathf.chance(0.98)) return;
+          if(frag_faci._epFrac(unit) < 0.9999) return;
+
+          unit.heal(regen * 1.2);
+
+          mdl_effect.showAt(unit, Fx.heal, 0.0);
+        },
+
+
+        draw(unit) {
+          frag_faci.draw_ep(unit);
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-energized-regeneration.name");
+        },
+
+
+      });
+
+      ax_setAbility(utp, abi);
+    };
+    exports.__energizedRegeneration = __energizedRegeneration;
+
+
+    const __laserDefense = function(utp, dmg, thr, rad) {
+      if(dmg == null) dmg = 60.0;
+      if(thr == null) thr = 180.0;
+      if(rad == null) rad = 80.0;
+
+      const abi = extend(Ability, {
+
+
+        progMap: new ObjectMap(), overloadedMap: new ObjectMap(),
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-laser-defense.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text._statText(
+            Stat.damage.localized(),
+            Strings.autoFixed(dmg, 2),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Stat.reload.localized(),
+            Strings.autoFixed(thr / 60.0, 2),
+            StatUnit.seconds.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Stat.range.localized(),
+            Strings.autoFixed(rad / Vars.tilesize, 2),
+            StatUnit.blocks.localized(),
+          ));
+        },
+
+
+        update(unit) {
+          if(Mathf.chance(0.8)) return;
+
+          // Initialize
+          if(!this.progMap.containsKey(unit)) this.progMap.put(unit, thr);
+          if(!this.overloadedMap.containsKey(unit)) this.overloadedMap.put(unit, false);
+
+          var prog = Math.min(this.progMap.get(unit) + Time.delta * 5.0, thr);
+          var overloaded = this.overloadedMap.get(unit);
+          if(prog > 0.0001 && !overloaded) {
+            var bul = mdl_game._bulTg(unit, rad, unit.team, true);
+            if(bul != null) {
+              prog = Math.max(prog - Math.max((bul.damage + bul.type.splashDamage) / dmg, 0.03) * thr, 0.0);
+              mdl_effect.pointLaser(unit, bul, Pal.remove, true);
+              mdl_unit.damageBullet(bul, dmg);
+            };
+          };
+
+          if(prog < 0.0001) {
+            this.overloadedMap.put(unit, true);
+          };
+
+          if(prog > thr - 0.0001 && overloaded) {
+            this.overloadedMap.put(unit, false);
+          };
+
+          this.progMap.put(unit, prog);
+        },
+
+
+        draw(unit) {
+          if(!showUnitHealth) return;
+
+          var frac = Mathf.clamp(this.progMap.get(unit) / thr);
+          var overloaded = this.overloadedMap.get(unit);
+
+          mdl_draw.drawUnitReload(unit, null, 0.0, 1, frac, overloaded ? Color.white : Pal.remove);
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-laser-defense.name");
+        },
+
+
+      });
+
+      ax_setAbility(utp, abi);
+    };
+    exports.__laserDefense = __laserDefense;
+
+
+    const __shieldCore = function(utp, max, regen) {
+      if(max == null) max = 300.0;
+      if(regen == null) regen = 20.0;
+
+      const abi = extend(Ability, {
+
+
+        addStats(tb) {
+          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-shield-core.description") + "[]\n\n").wrap().width(350.0);
+          tb.row();
+          tb.add(mdl_text._statText(
+            Stat.repairSpeed.localized(),
+            Strings.autoFixed(regen, 2),
+            StatUnit.perSecond.localized(),
+          ));
+          tb.row();
+          tb.add(mdl_text._statText(
+            Core.bundle.get("stat.reind-stat-shield-capacity.name"),
+            Strings.autoFixed(max, 2),
+          ));
+        },
+
+
+        update(unit) {
+          if(Mathf.chance(0.98)) return;
+
+          if(unit.shield < max) {
+            unit.shield = Math.min(unit.shield + regen * 1.2, max);
+            unit.shieldAlpha = 1.0;
+          };
+        },
+
+
+        localized() {
+          return Core.bundle.get("ability.reind-abi-shield-core.name");
+        },
+
+
+      });
+
+      ax_setAbility(utp, abi);
+    };
+    exports.__shieldCore = __shieldCore;
   // End
 
 
@@ -393,74 +641,6 @@
 
 
   // Part: Misc
-    const __energizedRegeneration = function(utp, hp_heal) {
-      if(hp_heal == null) hp_heal = 30.0;
-
-      var r = mdl_data.read_1n1v(db_unit.db["ep"]["range"], utp.name, 5);
-      var ep_req = mdl_data.read_1n1v(db_unit.db["ep"]["requirement"], utp.name, 0.0);
-
-      const abi = extend(Ability, {
-
-
-        addStats(tb) {
-          tb.add("\n\n[gray]" + Core.bundle.get("ability.reind-abi-energized-regeneration.description") + "[]\n\n").wrap().width(350.0);
-          tb.row();
-          tb.add(mdl_text._statText(
-            Core.bundle.get("stat.repairspeed"),
-            Strings.autoFixed(hp_heal, 2),
-            StatUnit.perSecond.localized(),
-          ));
-          tb.row();
-          tb.add(mdl_text._statText(
-            Core.bundle.get("stat.reind-stat-ep-range.name"),
-            Strings.autoFixed(r, 2),
-            StatUnit.blocks.localized(),
-          ));
-          tb.row();
-          tb.add(mdl_text._statText(
-            Core.bundle.get("stat.reind-stat-ep-required.name"),
-            Strings.autoFixed(ep_req, 2),
-          ));
-        },
-
-
-        displayBars(unit, bars) {
-          bars.add(new Bar(
-            "term.reind-term-energy-points.name",
-            Pal.techBlue,
-            () => Math.min(frag_faci._epFrac(unit), 1.0),
-          )).row();
-        },
-
-
-        update(unit) {
-          if(!unit.damaged()) return;
-          if(Mathf.chance(0.98)) return;
-          if(frag_faci._epFrac(unit) < 0.9999) return;
-
-          unit.heal(hp_heal * 1.2);
-
-          mdl_effect.showAt(unit, Fx.heal, 0.0);
-        },
-
-
-        draw(unit) {
-          frag_faci.draw_ep(unit);
-        },
-
-
-        localized() {
-          return Core.bundle.get("ability.reind-abi-energized-regeneration.name");
-        },
-
-
-      });
-
-      ax_setAbility(utp, abi);
-    };
-    exports.__energizedRegeneration = __energizedRegeneration;
-
-
     const __energizer = function(utp) {
       var ep = mdl_data.read_1n1v(db_unit.db["ep"]["provided"], utp.name);
       if(ep == null) ep = 0.0;
@@ -513,6 +693,8 @@
 
 
         update(unit) {
+          if(Vars.state.isEditor()) return;
+
           // Initialize
           if(!this.progMap.containsKey(unit)) this.progMap.put(unit, Mathf.random(thr));
           if(!this.aMap.containsKey(unit)) this.aMap.put(unit, 0.0);

@@ -16,6 +16,15 @@
   // End
 
 
+  // Part: Setting
+    var ldm = false;
+    const set_ldm = function(val) {
+      ldm = val;
+    };
+    exports.set_ldm = set_ldm;
+  // End
+
+
   // Part: Component
     function updateComp(utp, unit) {
       if(utp.needCheck) {
@@ -32,14 +41,14 @@
         };
       };
 
-      if(!Vars.headless && Mathf.chance(0.25)) {
+      if(!ldm && !Vars.headless && Mathf.chance(0.25)) {
         var elev = mdl_unit._elev(unit);
         var pos_p3d = mdl_game._posP3d(unit, elev);
         var flr = Vars.world.floorWorld(pos_p3d.x, pos_p3d.y);
 
         if(flr != null) {
-          if(flr.canShadow) mdl_effect.showAt_ldm(pos_p3d, utp.rotorEff, 0.0);
-          if(flr.isLiquid && utp.lowAltitude && Mathf.chance(0.7)) mdl_effect.dustAt_ldm(pos_p3d, 8.0);
+          if(flr.canShadow) mdl_effect.showAt(pos_p3d, utp.rotorEff, 0.0);
+          if(flr.isLiquid && utp.lowAltitude && Mathf.chance(0.7)) mdl_effect.dustAt(pos_p3d, 8.0);
         };
       };
     };

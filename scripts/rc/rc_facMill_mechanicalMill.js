@@ -91,22 +91,6 @@ const rc = {
     },
 
 
-    /* <---------------- aluminum ----------------> */
-
-
-    // Bauxite
-    {
-      "icon": "reind-item-ore-bauxite",
-      "category": "pulverization",
-      "inputs": [
-        "reind-item-ore-bauxite", 2,
-      ].concat(gi),
-      "outputs": [
-        "reind-item-int-dust-bauxite", 2,
-      ].concat(go),
-    },
-
-
     /* <---------------- rock ----------------> */
 
 
@@ -158,6 +142,196 @@ const rc = {
       ].concat(gi),
       "outputs": [
         "reind-item-int-dust-rock-clastic-sedimentary", 2,
+      ].concat(go),
+    },
+
+
+    /* <---------------- aluminum ----------------> */
+
+
+    // Bauxite
+    {
+      "icon": "reind-item-ore-bauxite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-bauxite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-bauxite", 2,
+      ].concat(go),
+    },
+
+
+    /* <---------------- copper ----------------> */
+
+
+    // Azurite
+    {
+      "icon": "reind-item-ore-azurite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-azurite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-azurite", 2,
+      ].concat(go),
+    },
+
+
+    // Chalcopyrite
+    {
+      "icon": "reind-item-ore-chalcopyrite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-chalcopyrite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-chalcopyrite", 2,
+      ].concat(go),
+    },
+
+
+    // Cuprite
+    {
+      "icon": "reind-item-ore-cuprite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-cuprite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-cuprite", 2,
+      ].concat(go),
+    },
+
+
+    // Malachite
+    {
+      "icon": "reind-item-ore-malachite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-malachite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-malachite", 2,
+      ].concat(go),
+    },
+
+
+    // Native Copper
+    {
+      "icon": "reind-item-ore-native-copper",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-native-copper", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-native-copper", 2,
+      ].concat(go),
+    },
+
+
+    /* <---------------- iron ----------------> */
+
+
+    // Limonite
+    {
+      "icon": "reind-item-ore-limonite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-limonite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-limonite", 2,
+      ].concat(go),
+    },
+
+
+    /* <---------------- lead ----------------> */
+
+
+    // Anglesite
+    {
+      "icon": "reind-item-ore-anglesite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-anglesite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-anglesite", 2,
+      ].concat(go),
+    },
+
+
+    // Galena
+    {
+      "icon": "reind-item-ore-galena",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-galena", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-galena", 2,
+      ].concat(go),
+    },
+
+
+    /* <---------------- manganese ----------------> */
+
+
+    // Galena
+    {
+      "icon": "reind-item-ore-pyrolusite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-pyrolusite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-pyrolusite", 2,
+      ].concat(go),
+    },
+
+
+    /* <---------------- mercury ----------------> */
+
+
+    // Cinnabar
+    {
+      "icon": "reind-item-ore-cinnabar",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-cinnabar", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-cinnabar", 2,
+      ].concat(go),
+    },
+
+
+    /* <---------------- zinc ----------------> */
+
+
+    // Smithsonite
+    {
+      "icon": "reind-item-ore-smithsonite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-smithsonite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-smithsonite", 2,
+      ].concat(go),
+    },
+
+
+    // Sphalerite
+    {
+      "icon": "reind-item-ore-sphalerite",
+      "category": "pulverization",
+      "inputs": [
+        "reind-item-ore-sphalerite", 2,
+      ].concat(gi),
+      "outputs": [
+        "reind-item-int-dust-sphalerite", 2,
       ].concat(go),
     },
 

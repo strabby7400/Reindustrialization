@@ -109,6 +109,20 @@
   // End
 
 
+  // Part: item-ore[manganese]
+    const envOre_depth_psilomelane = extend(OverlayFloor, "env-ore-depth-psilomelane", {
+      setStats() {
+        this.super$setStats();
+        TEMPLATE.setStats(this);
+      },
+      drawBase(tile) {
+        TEMPLATE.drawBase(this, tile);
+      },
+    });
+    exports.envOre_depth_psilomelane = envOre_depth_psilomelane;
+  // End
+
+
   // Part: item-ore[tin]
     const envOre_depth_cassiterite = extend(OverlayFloor, "env-ore-depth-cassiterite", {
       setStats() {

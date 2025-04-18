@@ -42,15 +42,24 @@
       },
     });
     minMisc_placerMiner.results = ItemStack.with(
-      ct_rs_oreItem.itemOre_clay, 8,
-      ct_rs_oreItem.itemOre_sand, 52,
-      ct_rs_oreItem.itemOre_nativeCopper, 8,
-      ct_rs_oreItem.itemOre_limonite, 24,
-      ct_rs_oreItem.itemOre_magnetite, 16,
-      ct_rs_oreItem.itemOre_rutile, 12,
-      ct_rs_oreItem.itemOre_rockShard_clastic, 16,
-      ct_rs_oreItem.itemOre_rockShard_clasticSedimentary, 16,
-      ct_rs_wasteItem.itemWas_scrapSteel, 4,
+      ct_rs_oreItem.itemOre_clay, 32,
+      ct_rs_oreItem.itemOre_sand, 216,
+
+      ct_rs_oreItem.itemOre_cassiterite, 24,
+      ct_rs_oreItem.itemOre_chromite, 16,
+      ct_rs_oreItem.itemOre_ilmenite, 88,
+      ct_rs_oreItem.itemOre_limonite, 32,
+      ct_rs_oreItem.itemOre_magnetite, 64,
+      ct_rs_oreItem.itemOre_nativeCopper, 32,
+      ct_rs_oreItem.itemOre_rutile, 48,
+      ct_rs_oreItem.itemOre_zircon, 32,
+
+      ct_rs_oreItem.itemOre_rockShard_clastic, 64,
+      ct_rs_oreItem.itemOre_rockShard_clasticSedimentary, 64,
+
+      ct_rs_wasteItem.itemWas_scrapSteel, 24,
+
+      ct_rs_genericItem.ilitemMisc_idsExciterRod, 1,
     );
     exports.minMisc_placerMiner = minMisc_placerMiner;
   // End

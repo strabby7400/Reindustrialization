@@ -48,6 +48,7 @@
 
     function updateComp(utp, unit) {
       frag_heat.update_unitHeat(utp, unit);
+      frag_unit.update_health(utp, unit);
       frag_unit.update_surrounding(utp, unit);
       frag_unit.update_player(utp, unit);
     };
@@ -176,6 +177,8 @@
           var param2 = (Vars.itemSize + param1) * unit.itemTime;
           var param3 = ((param1 + 3.0) * unit.itemTime + 0.5) * 2.0;
 
+          var z1 = Draw.z();
+          Draw.z(z1 + 0.5);
           Draw.mixcol(Pal.accent, param1 * 0.1);
           Draw.rect(
             unit.item().fullIcon,
@@ -208,6 +211,7 @@
             );
           };
 
+          Draw.z(z1);
           Draw.reset();
         };
       };
@@ -276,6 +280,8 @@
       if(unit instanceof Mechc) unit.trns(-aux_legOffset.x, -aux_legOffset.y);
 
       Draw.reset();
+
+      mdl_draw.drawUnitHealth(unit, unit.health / unit.maxHealth, unit.team.color, utp.hitSize / Vars.tilesize, (unit.armorOverride < 0 ? unit.armor : unit.armorOverride), unit.shield);
 
       frag_unit.draw_player(utp, unit);
     };
