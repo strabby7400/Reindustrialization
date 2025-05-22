@@ -5,7 +5,7 @@ subtitle: "0.1.1: Local Geology (Test)"
 
 author: MaboroshiX (and more...)
 repo: HuanXefh/Reindustrialization
-minGameVersion: 147
+minGameVersion: 146
 dependencies: []
 softDependencies: [
   tmi
